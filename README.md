@@ -31,7 +31,7 @@ pnpm preview
 
 ## 可体验史实：张骞归途
 
-`pnpm dev` 后打开首页，按六个节点体验元朔元年（前128年）张骞归汉时的南缘绕行。点击节点或“下一站”查看场景、叙述和对应来源；可切换路线总览与 1.7 米人尺度视角。历史依据与非比例场景的边界见 [docs/zhangqian-return.md](docs/zhangqian-return.md)。
+`pnpm dev` 后打开首页，按六个节点体验元朔元年（前128年）张骞归汉时的南缘绕行。点击节点或“下一站”查看场景、叙述和对应来源；可切换路线总览与 1.7 米人尺度视角。历史依据与非比例场景的边界见 [docs/zhangqian-return.md](docs/zhangqian-return.md)。下一轮聚焦南缘绕行的一个精细场景，分工与验收见 [docs/zhangqian-one-scene-plan.md](docs/zhangqian-one-scene-plan.md)。
 
 三层交接仍可通过 [技术验收案例](/cases) 检查：来源缺失、模型失败、真实 GLB 候选等放在该入口。操作步骤见 [docs/testing-cases.md](docs/testing-cases.md)。
 
