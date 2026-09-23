@@ -21,6 +21,7 @@ export type SceneData = {
   units: string
   up_axis: string
   origin: string
+  spawn: { position_m: Vec3; look_at_m: Vec3 }
   placements: Placement[]
   story_points: { id: string; entity_id: string; text: string }[]
 }

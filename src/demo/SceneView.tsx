@@ -335,14 +335,13 @@ export function SceneView({
       view === 'top'
         ? [0, model ? 12 : 34, 0.1]
         : view === 'human'
-          ? model
-            ? [0, 1.7, 5]
-            : [-12, 1.7, 0]
+          ? pack.scene.spawn.position_m
           : model
             ? [7, 5, 8]
             : [22, 17, 22]
     camera.position.set(...position)
-    controls.target.set(0, view === 'human' ? 1 : 0.5, 0)
+    if (view === 'human') controls.target.fromArray(pack.scene.spawn.look_at_m)
+    else controls.target.set(0, 0.5, 0)
     controls.update()
   }, [view, reset, pack, localModel])
   useEffect(() => {
