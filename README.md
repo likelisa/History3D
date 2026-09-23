@@ -38,4 +38,4 @@ python3 processing/pipeline.py validate processing/sample
 python3 -m unittest discover -s processing/tests -v
 ```
 
-生成需要在本机设置 `TRIPO_API_KEY`。接入说明见 [processing/README.md](processing/README.md)，分层约定见 [docs/layer-handoff.md](docs/layer-handoff.md)，完成度与待办见 [processing/REVIEW.md](processing/REVIEW.md)。当前 Three.js 页面尚未读取处理层场景。
+生成需要在本机设置 `TRIPO_API_KEY`。接入说明见 [processing/README.md](processing/README.md)，分层约定见 [docs/layer-handoff.md](docs/layer-handoff.md)，完成度与待办见 [processing/REVIEW.md](processing/REVIEW.md)。首页现在提供四个可交互的三层验收案例，实际读取场景 JSON，支持视角切换、物件来源检查、故障降级与本地 GLB 预览。测试步骤见 [docs/testing-cases.md](docs/testing-cases.md)。

@@ -10,3 +10,6 @@ coverage
 !.env.example
 .npm-debug.log*
 .pnpm-debug.log*
+
+public/cases/tripo/assets/*.glb
+public/local-assets/

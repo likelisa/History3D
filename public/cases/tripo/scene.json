@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "story_id": "demo_ferry",
+  "units": "meters",
+  "up_axis": "Y",
+  "origin": "model_bottom_center",
+  "spawn": {
+    "position_m": [
+      -10,
+      1.7,
+      6
+    ],
+    "look_at_m": [
+      0,
+      1,
+      0
+    ]
+  },
+  "bounds_m": {
+    "min": [
+      -16,
+      -2,
+      -12
+    ],
+    "max": [
+      16,
+      8,
+      12
+    ]
+  },
+  "placements": [
+    {
+      "entity_id": "tripo-object",
+      "position_m": [
+        0,
+        0,
+        0
+      ],
+      "rotation_rad": [
+        0,
+        0,
+        0
+      ],
+      "asset": null,
+      "candidate_asset": "assets/tripo-candidate.glb"
+    }
+  ],
+  "story_points": []
+}

@@ -3,11 +3,13 @@ on:
   pull_request:
     paths:
       - 'processing/**'
+      - 'public/cases/**'
       - '.github/workflows/processing.yml'
   push:
     branches: [main]
     paths:
       - 'processing/**'
+      - 'public/cases/**'
       - '.github/workflows/processing.yml'
 permissions:
   contents: read
