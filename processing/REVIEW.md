@@ -48,3 +48,7 @@
 ## 张骞归途主体验补充
 
 首页现以张骞元朔元年归途为第一段史实体验。六个有来源的故事点通过 `public/story/zhangqian-return/` 交接，前端按 `scene.json` 顺序加载节点；提供路线总览、人尺度与节点来源查看。该示意场景不是历史地图或考古复原，参考资料与未知项见 `docs/zhangqian-return.md`。原先虚构渡口移至 `/cases`，仅用于技术故障验收。
+
+## 南缘路段空间重做进展
+
+2026-09-23：已按单场景计划新增 `public/story/south-detour/` 和实际加载它的首页。程序地形按山体、山前砾坡、路面与散石分层；三处有来源的讲述点和 1.7 米行走模式已可用。一笔 Tripo text-to-model 生成岩体，优化为 802,548 字节 GLB 并以候选身份保存。具体质量、史料边界和剩余风险见 `docs/zhangqian-south-detour-research.md` 与 `docs/zhangqian-south-detour-qa.md`。早期表格只记录第一版能力快照，不代表最新场景已完成全部验收。

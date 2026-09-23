@@ -29,11 +29,13 @@ pnpm preview
 
 使用前需要在仓库 Secrets 中配置 `OPENAI_API_KEY`，值填写 AI Ping 平台的 API Key。默认使用 `glm-5.3-flash` 和 `https://aiping.cn/api/v1`，也可以通过仓库 Variables 修改 `AI_API_BASE_URL` 和 `AI_MODEL`。如果审查结果包含 `critical` 或 `blocking` 级别的问题，CI 会输出 warning，并要求人工确认后再合并。
 
-## 可体验史实：张骞归途
+## 可体验史实：张骞南缘归途单场景
 
-`pnpm dev` 后打开首页，按六个节点体验元朔元年（前128年）张骞归汉时的南缘绕行。点击节点或“下一站”查看场景、叙述和对应来源；可切换路线总览与 1.7 米人尺度视角。历史依据与非比例场景的边界见 [docs/zhangqian-return.md](docs/zhangqian-return.md)。下一轮聚焦南缘绕行的一个精细场景，分工与验收见 [docs/zhangqian-one-scene-plan.md](docs/zhangqian-one-scene-plan.md)。
+`pnpm dev` 后打开首页，进入一段山前路。可以在总览中看远山与砾坡，也可以切到 1.7 米视角，用 W/A/S/D 或屏幕方向键沿路移动；右侧依次讲归途、沿南山绕行、后来再次被俘，并提供《史记》《汉书》的来源链接。
 
-三层交接仍可通过 [技术验收案例](/cases) 检查：来源缺失、模型失败、真实 GLB 候选等放在该入口。操作步骤见 [docs/testing-cases.md](docs/testing-cases.md)。
+这个路段的长度、地形、人物和天气是概念表达，不是古道测绘或考古复原；再次被俘地点没有定位。[研究与表达边界](docs/zhangqian-south-detour-research.md)和[资产/场景验收记录](docs/zhangqian-south-detour-qa.md)说明每项判断。优化后的 Tripo 岩体作为 0.8 MB **候选**纳入场景包，未自动成为正式历史资产。
+
+[六站路线索引](/journey)保留前一轮的内容顺序原型；[技术验收案例](/cases)可独立检查来源缺失、模型失败等交接问题。单场景分工与门槛见 [制作计划](docs/zhangqian-one-scene-plan.md)。
 
 ## 历史处理层
 

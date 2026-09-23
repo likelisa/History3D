@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "story_id": "zhangqian_south_detour",
+  "units": "meters",
+  "up_axis": "Y",
+  "origin": "model_bottom_center",
+  "spawn": {
+    "position_m": [
+      0,
+      1.7,
+      18
+    ],
+    "look_at_m": [
+      0,
+      1,
+      -15
+    ]
+  },
+  "bounds_m": {
+    "min": [
+      -32,
+      -2,
+      -37
+    ],
+    "max": [
+      32,
+      10,
+      37
+    ]
+  },
+  "placements": [
+    {
+      "entity_id": "foothill_terrain",
+      "position_m": [
+        0,
+        0,
+        0
+      ],
+      "rotation_rad": [
+        0,
+        0,
+        0
+      ],
+      "asset": null,
+      "candidate_asset": null
+    },
+    {
+      "entity_id": "traveler_scale",
+      "position_m": [
+        1,
+        0,
+        14
+      ],
+      "rotation_rad": [
+        0,
+        0,
+        0
+      ],
+      "asset": null,
+      "candidate_asset": null
+    },
+    {
+      "entity_id": "foothill_boulder_01",
+      "position_m": [
+        6,
+        0,
+        -2
+      ],
+      "rotation_rad": [
+        0,
+        0,
+        0
+      ],
+      "asset": null,
+      "candidate_asset": "assets/foothill-boulder-demo.glb"
+    }
+  ],
+  "story_points": [
+    {
+      "id": "return",
+      "entity_id": "foothill_terrain",
+      "title": "人在归途",
+      "position_m": [
+        0,
+        1,
+        15
+      ],
+      "evidence": "recorded",
+      "source_ids": [
+        "shiji123",
+        "hanshu61"
+      ],
+      "text": "张骞从西域返汉。我们站在一段示意的山前路上，先看到要走的路；这段路的长度与形状没有古代测量依据。"
+    },
+    {
+      "id": "detour",
+      "entity_id": "foothill_terrain",
+      "title": "沿南山绕行",
+      "position_m": [
+        0,
+        1,
+        0
+      ],
+      "evidence": "recorded",
+      "source_ids": [
+        "shiji123",
+        "hanshu61"
+      ],
+      "text": "史书说他“并南山，欲从羌中归”。这条路的选择与避开匈奴有关；画面中的坡地、石块和弯曲路径是体验示意。"
+    },
+    {
+      "id": "outcome",
+      "entity_id": "foothill_terrain",
+      "title": "后来再次被俘",
+      "position_m": [
+        0,
+        1,
+        -17
+      ],
+      "evidence": "recorded",
+      "source_ids": [
+        "shiji123",
+        "hanshu61"
+      ],
+      "text": "史书接着记载他又被匈奴俘获。这里不演出袭击，也不把路的末端当作被俘地点。"
+    }
+  ]
+}

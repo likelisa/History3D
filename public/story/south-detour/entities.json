@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "story_id": "zhangqian_south_detour",
+  "entities": [
+    {
+      "id": "foothill_terrain",
+      "name": "山前砾坡与路面",
+      "kind": "terrain",
+      "evidence": "inferred",
+      "source_ids": [
+        "tarim-geo"
+      ],
+      "dimensions_m": [
+        64,
+        7,
+        74
+      ],
+      "dimensions_basis": "Demo 体验空间尺寸，不是古道路宽或真实山体尺度",
+      "render_kind": "procedural_terrain"
+    },
+    {
+      "id": "traveler_scale",
+      "name": "归途旅人的人尺度剪影",
+      "kind": "person_reference",
+      "evidence": "demo",
+      "source_ids": [
+        "shiji123"
+      ],
+      "dimensions_m": [
+        0.6,
+        1.7,
+        0.6
+      ],
+      "dimensions_basis": "视觉参照取1.7米，仅用于人尺度；无服饰或相貌考据",
+      "render_kind": "neutral_silhouette"
+    },
+    {
+      "id": "foothill_boulder_01",
+      "name": "山前岩体候选",
+      "kind": "environment_asset",
+      "evidence": "inferred",
+      "source_ids": [
+        "tarim-geo"
+      ],
+      "dimensions_m": [
+        2.6,
+        1.55,
+        1.8
+      ],
+      "dimensions_basis": "演示摆放尺寸，不是历史岩体测量",
+      "render_kind": "tripo_candidate"
+    }
+  ]
+}
