@@ -7,6 +7,8 @@ import {
   DEFAULT_TIMEOUT_MS,
   buildComment,
   buildUnavailableComment,
+  describeModelMatch,
+  findModelMatch,
   parseReviewContent,
   truncateDiff,
 } from './ai-review-lib.mjs'
@@ -16,9 +18,12 @@ const MAX_DIFF_BUFFER_BYTES = 64 * 1024 * 1024
 
 const apiKey = process.env.OPENAI_API_KEY
 const apiBaseUrl = (process.env.AI_API_BASE_URL || 'https://aiping.cn/api/v1').replace(/\/+$/, '')
-const model = process.env.AI_MODEL || 'glm-5.3-flash'
+// 注意大小写：该网关的模型 id 是 GLM-5.3-Flash，写错会被预检拦下。
+const model = process.env.AI_MODEL || 'GLM-5.3-Flash'
 const maxDiffChars = readPositiveInt(process.env.AI_MAX_DIFF_CHARS, DEFAULT_MAX_DIFF_CHARS)
 const timeoutMs = readPositiveInt(process.env.AI_TIMEOUT_MS, DEFAULT_TIMEOUT_MS)
+const PREFLIGHT_TIMEOUT_MS = 15_000
+const preflightEnabled = !['0', 'false', 'no'].includes(String(process.env.AI_PREFLIGHT || '').toLowerCase())
 /** 默认不让外部服务的不稳定把 PR 卡红；需要硬失败时设 AI_REVIEW_STRICT=1。 */
 const strict = ['1', 'true', 'yes'].includes(String(process.env.AI_REVIEW_STRICT || '').toLowerCase())
 
@@ -60,6 +65,45 @@ function readDiff() {
   }
 
   throw new Error(`Unable to read the pull request diff.\n${errors.join('\n')}`)
+}
+
+/** 配置错误要硬失败：这不是上游抽风，改配置才能解决。 */
+class ModelConfigError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'ModelConfigError'
+  }
+}
+
+/**
+ * 用 /models 预先校验模型名。网关对不存在的模型 id 往往不报错、直接挂住，
+ * 要等满整个超时才失败；这里几秒钟就能给出准确原因。
+ */
+async function preflightModel() {
+  if (!preflightEnabled) return
+
+  const endpoint = `${apiBaseUrl}/models`
+  let ids
+  try {
+    const response = await fetch(endpoint, {
+      headers: { Authorization: `Bearer ${apiKey}` },
+      signal: AbortSignal.timeout(PREFLIGHT_TIMEOUT_MS),
+    })
+    if (!response.ok) throw new Error(`status ${response.status}`)
+    const payload = await response.json()
+    ids = (payload?.data ?? []).map((entry) => entry?.id).filter(Boolean)
+  } catch (error) {
+    // 预检本身失败不该拦住审查，退回到直接调用。
+    console.log(`::warning title=AI review::模型预检失败（${error?.message || error}），跳过模型名校验。`)
+    return
+  }
+
+  if (ids.length === 0) return
+
+  const match = findModelMatch(ids, model)
+  if (match.status === 'exact') return
+
+  throw new ModelConfigError(describeModelMatch(match, model, endpoint))
 }
 
 const systemPrompt = [
@@ -129,6 +173,8 @@ async function main() {
   try {
     if (!apiKey) throw new Error('OPENAI_API_KEY is not configured.')
 
+    await preflightModel()
+
     const { diff, ref: diffRef } = readDiff()
     ref = diffRef
     const truncated = truncateDiff(diff, maxDiffChars)
@@ -167,6 +213,10 @@ async function main() {
 
     // ::warning 让问题在 Actions 摘要里显眼，但不改变 job 结论。
     console.log(`::warning title=AI review::AI 审查未产出结果：${reason.split('\n')[0]}`)
+    // 配置错误是「改一下就好的事」，按 error 标注，方便在 Actions 摘要里一眼看到。
+    if (error instanceof ModelConfigError) {
+      console.log(`::error title=AI review::${reason.split('\n')[0]}`)
+    }
     return strict ? 1 : 0
   }
 }

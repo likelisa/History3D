@@ -124,3 +124,38 @@ export function buildUnavailableComment(reason, context = {}) {
     '重跑方式：在该 PR 的 Actions 页面重新运行 `AI PR Review`。',
   ].join('\n')
 }
+
+/**
+ * 网关的模型 id 区分大小写，而写错时它往往既不报错也不返回，直接挂住。
+ * 这里先拿 /models 对一遍，把「配错模型名」变成一条能立刻看懂的错误。
+ */
+export function findModelMatch(models, wanted) {
+  const target = String(wanted ?? '').trim()
+  const ids = (Array.isArray(models) ? models : []).filter((id) => typeof id === 'string' && id.length > 0)
+
+  if (!target) return { status: 'missing', caseInsensitive: [], suggestions: [] }
+  if (ids.includes(target)) return { status: 'exact', caseInsensitive: [], suggestions: [] }
+
+  const caseInsensitive = ids.filter((id) => id.toLowerCase() === target.toLowerCase())
+  if (caseInsensitive.length > 0) return { status: 'case-mismatch', caseInsensitive, suggestions: [] }
+
+  const normalize = (value) => value.toLowerCase().replace(/[^a-z0-9]/g, '')
+  const wantedNorm = normalize(target)
+  const suggestions = ids
+    .filter((id) => {
+      const candidate = normalize(id)
+      return candidate.includes(wantedNorm) || wantedNorm.includes(candidate)
+    })
+    .slice(0, 5)
+
+  return { status: 'missing', caseInsensitive: [], suggestions }
+}
+
+export function describeModelMatch(match, model, modelsEndpoint) {
+  const quoted = match.caseInsensitive.map((id) => `\`${id}\``).join(' 或 ')
+  if (match.status === 'case-mismatch') {
+    return `AI_MODEL 配置为 "${model}"，但该网关的模型 id 大小写不同。请改成 ${quoted}。`
+  }
+  const hint = match.suggestions.length > 0 ? `相近的候选：${match.suggestions.join(', ')}。` : ''
+  return `AI_MODEL 配置为 "${model}"，但该网关的模型列表里没有它。${hint}完整列表见 ${modelsEndpoint}。`
+}
