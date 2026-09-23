@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-label="区域路线示意（技术占位）">
+  <rect width="960" height="540" fill="#0f172a"/>
+  <g fill="none" stroke="#1f2937" stroke-width="1">
+    <path d="M0 90H960M0 180H960M0 270H960M0 360H960M0 450H960"/>
+    <path d="M120 0V540M240 0V540M360 0V540M480 0V540M600 0V540M720 0V540M840 0V540"/>
+  </g>
+  <path d="M120 470 C 260 430, 300 330, 430 300 S 700 220, 840 90"
+        fill="none" stroke="#38bdf8" stroke-width="5" stroke-dasharray="14 10" stroke-linecap="round"/>
+  <g font-family="PingFang SC, Microsoft YaHei, sans-serif" fill="#e2e8f0">
+    <circle cx="120" cy="470" r="10" fill="#facc15"/>
+    <text x="140" y="500" font-size="22">本地现场（60 × 60 米营地）</text>
+    <circle cx="840" cy="90" r="10" fill="#f87171"/>
+    <text x="700" y="70" font-size="22">远处目的地</text>
+    <text x="330" y="270" font-size="20" fill="#94a3b8">区域示意，仅表达方向与相对距离</text>
+  </g>
+  <g font-family="PingFang SC, Microsoft YaHei, sans-serif">
+    <rect x="24" y="24" width="470" height="86" rx="10" fill="#7f1d1d" opacity="0.85"/>
+    <text x="44" y="62" font-size="22" fill="#fee2e2">技术占位素材：不是真实历史地图</text>
+    <text x="44" y="94" font-size="18" fill="#fecaca">不可据此测量历史里程。待采集层替换为可追溯来源后重出。</text>
+  </g>
+</svg>

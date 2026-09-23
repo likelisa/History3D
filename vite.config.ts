@@ -1,6 +1,18 @@
+import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+
+const repoRoot = fileURLToPath(new URL('.', import.meta.url))
 
 export default defineConfig({
-  plugins: [react()],
+  root: fileURLToPath(new URL('./viewer', import.meta.url)),
+  publicDir: 'public',
+  build: {
+    outDir: fileURLToPath(new URL('./dist', import.meta.url)),
+    emptyOutDir: true,
+  },
+  server: {
+    fs: {
+      allow: [repoRoot],
+    },
+  },
 })

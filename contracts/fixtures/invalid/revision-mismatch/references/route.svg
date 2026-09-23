@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180" role="img" aria-label="最小样例路线示意">
+  <rect width="320" height="180" fill="#0f172a"/>
+  <path d="M30 150 L150 90 L290 30" fill="none" stroke="#38bdf8" stroke-width="4" stroke-dasharray="10 8"/>
+  <text x="20" y="30" font-family="sans-serif" font-size="14" fill="#e2e8f0">区域示意，不可据此测量历史里程</text>
+</svg>

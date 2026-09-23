@@ -1,0 +1,5 @@
+﻿attemptId,inputType,inputPath,tool,toolVersion,paramsDigest,elapsedMin,manualFixMin,costActual,outputPath,fileSizeBytes,triangles,textureSize,failureReason,adopted
+exp-001,脚本生成占位体,scripts/make-fixture-glb.mjs,node 脚本（非 Tripo）,Node 20.18.0,"box 1x1x1, 底部中心原点, Y 向上",1,0,0,packages/silk-road-demo/assets/unit-cube.glb,1628,12,无贴图,,是
+exp-002,脚本生成占位体,scripts/make-fixture-glb.mjs,node 脚本（非 Tripo）,Node 20.18.0,"box 1.2x0.8x0.6, 底部中心原点, Y 向上",1,0,0,packages/silk-road-demo/assets/pack-bundle.glb,1632,12,无贴图,,是
+exp-003,场景配置改动（复用性实验）,packages/silk-road-demo/scene.json,手工编辑 JSON，无代码改动,n/a,"obj-crate position [1.8,0,2.2]->[-8,0,10], rotation [0,0,0]->[0,0.9,0]",5,0,0,packages/silk-road-demo/scene.json,6774,n/a,无贴图,,是
+exp-004,Tripo 生成主资产,未执行,未执行,未执行,未执行,,,,,,,,本轮不含生成层 generator/，Demo B 未验证,否

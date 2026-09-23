@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "0.1.0",
+  "storyId": "silk-road-demo",
+  "contentRevision": 1,
+  "sceneRevision": 1,
+  "storyPath": "story.json",
+  "sourcesPath": "sources.json",
+  "units": "m",
+  "upAxis": "Y",
+  "handedness": "right",
+  "ground": { "type": "plane", "y": 0 },
+  "assets": [
+    {
+      "id": "asset-pack-bundle",
+      "path": "assets/pack-bundle.glb",
+      "dimensionsM": [1.2, 0.8, 0.6],
+      "format": "glb",
+      "rights": "由仓库内 fixture 脚本生成，仅用于本轮技术联调"
+    },
+    {
+      "id": "asset-unit-cube",
+      "path": "assets/unit-cube.glb",
+      "dimensionsM": [1, 1, 1],
+      "format": "glb",
+      "rights": "由仓库内 fixture 脚本生成，仅用于本轮技术联调"
+    }
+  ],
+  "objects": [
+    {
+      "id": "obj-beast",
+      "briefId": "brief-beast",
+      "label": "驮兽（占位）",
+      "render": { "type": "primitive", "shape": "box", "color": "#6b7280" },
+      "position": [0, 0, 2],
+      "rotation": [0, 0, 0],
+      "scale": [1, 1, 1],
+      "dimensionsM": [2.2, 2.0, 0.9],
+      "evidence": {
+        "dimensions": ["claim-beast-dimensions"],
+        "appearance": ["claim-beast-appearance"],
+        "placement": ["claim-beast-layout"],
+        "quantity": ["claim-beast-count"]
+      }
+    },
+    {
+      "id": "obj-pack-a",
+      "briefId": "brief-pack",
+      "label": "行囊 A",
+      "render": { "type": "asset", "assetId": "asset-pack-bundle" },
+      "position": [-1.6, 0, 2.6],
+      "rotation": [0, 0.35, 0],
+      "scale": [1, 1, 1],
+      "dimensionsM": [1.2, 0.8, 0.6],
+      "evidence": {
+        "dimensions": ["claim-pack-dimensions"],
+        "appearance": ["claim-pack-appearance"],
+        "placement": ["claim-pack-layout"],
+        "quantity": ["claim-pack-count"]
+      }
+    },
+    {
+      "id": "obj-pack-b",
+      "briefId": "brief-pack",
+      "label": "行囊 B",
+      "render": { "type": "asset", "assetId": "asset-pack-bundle" },
+      "position": [-1.7, 0, 3.6],
+      "rotation": [0, -0.2, 0],
+      "scale": [1, 1, 1],
+      "dimensionsM": [1.2, 0.8, 0.6],
+      "evidence": {
+        "dimensions": ["claim-pack-dimensions"],
+        "appearance": ["claim-pack-appearance"],
+        "placement": ["claim-pack-layout"],
+        "quantity": ["claim-pack-count"]
+      }
+    },
+    {
+      "id": "obj-crate",
+      "briefId": "brief-crate",
+      "label": "货箱",
+      "render": { "type": "primitive", "shape": "box", "color": "#a1662f" },
+      "position": [1.8, 0, 2.2],
+      "rotation": [0, 0, 0],
+      "scale": [1, 1, 1],
+      "dimensionsM": [0.9, 0.7, 0.9],
+      "evidence": {
+        "dimensions": ["claim-crate-dimensions"],
+        "appearance": ["claim-crate-appearance"],
+        "placement": ["claim-crate-layout"],
+        "quantity": ["claim-crate-count"]
+      }
+    },
+    {
+      "id": "obj-human-scale",
+      "briefId": "brief-human-scale",
+      "label": "人尺度基准（1.7 米）",
+      "render": { "type": "primitive", "shape": "box", "color": "#e5e7eb" },
+      "position": [-3, 0, 16],
+      "rotation": [0, 0, 0],
+      "scale": [1, 1, 1],
+      "dimensionsM": [0.4, 1.7, 0.4],
+      "evidence": {
+        "dimensions": ["claim-human-scale-dimensions"],
+        "appearance": ["claim-human-scale-appearance"],
+        "placement": ["claim-human-scale-layout"],
+        "quantity": ["claim-human-scale-count"]
+      }
+    },
+    {
+      "id": "obj-unit-cube",
+      "briefId": "brief-unit-cube",
+      "label": "米制基准立方体（GLB）",
+      "render": { "type": "asset", "assetId": "asset-unit-cube" },
+      "position": [3, 0, 16],
+      "rotation": [0, 0, 0],
+      "scale": [1, 1, 1],
+      "dimensionsM": [1, 1, 1],
+      "evidence": {
+        "dimensions": ["claim-unit-cube-dimensions"],
+        "appearance": ["claim-unit-cube-appearance"],
+        "placement": ["claim-unit-cube-layout"],
+        "quantity": ["claim-unit-cube-count"]
+      }
+    },
+    {
+      "id": "obj-meter-graybox",
+      "briefId": "brief-meter-graybox",
+      "label": "米制基准（灰盒）",
+      "render": { "type": "primitive", "shape": "box", "color": "#f59e0b" },
+      "position": [4.4, 0, 16],
+      "rotation": [0, 0, 0],
+      "scale": [1, 1, 1],
+      "dimensionsM": [1, 1, 1],
+      "evidence": {
+        "dimensions": ["claim-meter-graybox-dimensions"],
+        "appearance": ["claim-meter-graybox-appearance"],
+        "placement": ["claim-meter-graybox-layout"],
+        "quantity": ["claim-meter-graybox-count"]
+      }
+    },
+    {
+      "id": "obj-supply-boundary",
+      "briefId": "brief-supply-boundary",
+      "label": "补给点边界",
+      "render": { "type": "primitive", "shape": "box", "color": "#facc15" },
+      "position": [0, 0, 8],
+      "rotation": [0, 0, 0],
+      "scale": [1, 1, 1],
+      "dimensionsM": [12, 0.1, 0.3],
+      "evidence": {
+        "dimensions": ["claim-supply-boundary-dimensions"],
+        "appearance": ["claim-supply-boundary-appearance"],
+        "placement": ["claim-supply-boundary-layout"],
+        "quantity": ["claim-supply-boundary-count"]
+      }
+    },
+    {
+      "id": "obj-road-ahead",
+      "briefId": "brief-road-ahead",
+      "label": "前路示意（不可进入）",
+      "render": { "type": "primitive", "shape": "box", "color": "#9ca3af" },
+      "position": [0, 0, -14],
+      "rotation": [0, 0, 0],
+      "scale": [1, 1, 1],
+      "dimensionsM": [5, 0.15, 24],
+      "evidence": {
+        "dimensions": ["claim-road-ahead-dimensions"],
+        "appearance": ["claim-road-ahead-appearance"],
+        "placement": ["claim-road-ahead-layout"],
+        "quantity": ["claim-road-ahead-count"]
+      }
+    }
+  ],
+  "hotspotBindings": [
+    {
+      "hotspotId": "hotspot-departure",
+      "anchor": { "type": "object", "objectId": "obj-beast", "offset": [0, 1.4, 0] }
+    },
+    {
+      "hotspotId": "hotspot-load",
+      "anchor": { "type": "object", "objectId": "obj-pack-a", "offset": [0, 0.9, 0] }
+    },
+    {
+      "hotspotId": "hotspot-road",
+      "anchor": { "type": "world", "position": [0, 1.7, -6] }
+    }
+  ],
+  "cameras": {
+    "firstPerson": {
+      "spawnFeet": [0, 0, 18],
+      "eyeHeightM": 1.7,
+      "yawRad": 0,
+      "pitchRad": 0,
+      "moveSpeedMps": 2,
+      "radiusM": 0.3
+    },
+    "overview": {
+      "position": [0, 34, 10],
+      "target": [0, 0, 0],
+      "up": [0, 1, 0]
+    }
+  },
+  "walkableBounds": {
+    "min": [-26, -26],
+    "max": [26, 26]
+  },
+  "blockers": [
+    { "id": "blk-camp", "min": [-2.4, 1.5], "max": [2.4, 4.0] },
+    { "id": "blk-human-scale", "min": [-3.3, 15.7], "max": [-2.7, 16.3] },
+    { "id": "blk-unit-cube", "min": [2.5, 15.5], "max": [3.5, 16.5] },
+    { "id": "blk-meter-graybox", "min": [3.9, 15.5], "max": [4.9, 16.5] },
+    { "id": "blk-road-ahead", "min": [-2.5, -26], "max": [2.5, -2] }
+  ]
+}
