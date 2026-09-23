@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "story_id": "story_placeholder",
+  "entities": [
+    {
+      "id": "object_01",
+      "name": "待定主物件",
+      "kind": "object",
+      "evidence": "demo",
+      "source_ids": [],
+      "dimensions_m": [2, 2, 2],
+      "dimensions_basis": "演示占位，待采集器提供依据",
+      "generation_prompt": "A single freestanding historical prop, neutral unmarked wooden structure, clean silhouette, isolated object, full 3D model"
+    }
+  ]
+}
