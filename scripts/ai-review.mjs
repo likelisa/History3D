@@ -6,8 +6,8 @@ const MAX_DIFF_CHARS = 100_000
 const OUTPUT_DIR = process.env.RUNNER_TEMP || '.'
 
 const apiKey = process.env.OPENAI_API_KEY
-const apiBaseUrl = (process.env.AI_API_BASE_URL || 'https://api.openai.com/v1').replace(/\/+$/, '')
-const model = process.env.AI_MODEL || process.env.OPENAI_MODEL || 'gpt-4o-mini'
+const apiBaseUrl = (process.env.AI_API_BASE_URL || 'https://aiping.cn/api/v1').replace(/\/+$/, '')
+const model = process.env.AI_MODEL || 'glm-5.3-flash'
 if (!apiKey) {
   console.error('OPENAI_API_KEY is not configured.')
   process.exit(1)
@@ -62,7 +62,7 @@ async function requestReview() {
 
   if (!response.ok) {
     const body = await response.text()
-    console.error(`OpenAI API request failed with status ${response.status}.`)
+    console.error(`AI Ping API request failed with status ${response.status}.`)
     console.error(body)
     process.exit(1)
   }
@@ -70,14 +70,14 @@ async function requestReview() {
   const payload = await response.json()
   const content = payload.choices?.[0]?.message?.content
   if (!content) {
-    console.error('OpenAI returned an empty review response.')
+    console.error('AI Ping returned an empty review response.')
     process.exit(1)
   }
 
   try {
     return JSON.parse(content)
   } catch {
-    console.error('OpenAI returned an invalid JSON review response.')
+    console.error('AI Ping returned an invalid JSON review response.')
     console.error(content)
     process.exit(1)
   }
