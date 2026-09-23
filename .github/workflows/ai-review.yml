@@ -9,6 +9,7 @@ permissions:
 jobs:
   review:
     runs-on: ubuntu-latest
+    timeout-minutes: 6
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -20,11 +21,17 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Test review error handling
+        run: node --test scripts/ai-review.test.mjs
+
       - name: Generate AI review
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           AI_API_BASE_URL: ${{ vars.AI_API_BASE_URL }}
           AI_MODEL: ${{ vars.AI_MODEL }}
+          AI_REVIEW_TIMEOUT_MS: 120000
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: node scripts/ai-review.mjs
 
       - name: Post AI review comment
@@ -32,12 +39,17 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ github.event.number }}
         if: always()
-        run: gh pr comment "$PR_NUMBER" --body-file "$RUNNER_TEMP/ai-review.md"
+        run: |
+          if [ -f "$RUNNER_TEMP/ai-review.md" ]; then
+            gh pr comment "$PR_NUMBER" --body-file "$RUNNER_TEMP/ai-review.md"
+          else
+            echo "::warning::AI review report was not created; see earlier step failures."
+          fi
         shell: bash
       - name: Mark blocking issues
         if: always()
         run: |
-          if jq -e 'any(.issues[]?; ((.severity // "") | ascii_downcase) == "critical" or ((.severity // "") | ascii_downcase) == "blocking")' "$RUNNER_TEMP/ai-review.json" >/dev/null; then
+          if [ -f "$RUNNER_TEMP/ai-review.json" ] && jq -e 'any(.issues[]?; ((.severity // "") | ascii_downcase) == "critical" or ((.severity // "") | ascii_downcase) == "blocking")' "$RUNNER_TEMP/ai-review.json" >/dev/null; then
             echo "::warning title=AI review::AI found critical or blocking issues. Manual confirmation is required."
           fi
         shell: bash
