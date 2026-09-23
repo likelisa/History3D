@@ -3,6 +3,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import type { ScenePackage } from './data'
+import { createActors, poseActors } from './SceneActors'
 
 export type CameraMode = 'overview' | 'walk'
 export type StepDirection = 'forward' | 'back' | 'left' | 'right'
@@ -15,6 +16,8 @@ type Props = {
   onBeat: (index: number) => void
   onStatus: (status: string, fps: number, progress: number) => void
   onError: (message: string) => void
+  playing: boolean
+  onPlaybackEnd: () => void
 }
 const routeX = (z: number) =>
   Math.sin(z * 0.085) * 0.75 + Math.cos(z * 0.18) * 0.34
@@ -234,90 +237,6 @@ function boulder() {
   })
   return g
 }
-function traveler() {
-  const g = new THREE.Group()
-  const cloth = new THREE.MeshStandardMaterial({
-    color: '#34443f',
-    roughness: 1,
-    side: THREE.DoubleSide,
-  })
-  const lower = new THREE.Mesh(
-    new THREE.LatheGeometry(
-      [
-        new THREE.Vector2(0.35, 0),
-        new THREE.Vector2(0.47, 0.08),
-        new THREE.Vector2(0.44, 0.3),
-        new THREE.Vector2(0.38, 0.58),
-        new THREE.Vector2(0.32, 0.83),
-      ],
-      16,
-    ),
-    new THREE.MeshStandardMaterial({
-      color: '#4b5b52',
-      roughness: 1,
-      side: THREE.DoubleSide,
-    }),
-  )
-  lower.castShadow = true
-  g.add(lower)
-  const torso = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.29, 0.32, 0.55, 16),
-    cloth,
-  )
-  torso.position.y = 1.1
-  torso.castShadow = true
-  g.add(torso)
-  const collar = new THREE.Mesh(
-    new THREE.TorusGeometry(0.18, 0.045, 6, 20),
-    new THREE.MeshStandardMaterial({ color: '#8a7963', roughness: 1 }),
-  )
-  collar.rotation.x = Math.PI / 2
-  collar.position.y = 1.4
-  g.add(collar)
-  const belt = new THREE.Mesh(
-    new THREE.TorusGeometry(0.31, 0.025, 6, 24),
-    new THREE.MeshStandardMaterial({ color: '#998e74', roughness: 1 }),
-  )
-  belt.rotation.x = Math.PI / 2
-  belt.position.y = 0.84
-  g.add(belt)
-  for (const side of [-1, 1]) {
-    const sleeve = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.13, 0.18, 0.6, 10),
-      cloth,
-    )
-    sleeve.position.set(side * 0.39, 1.08, 0.02)
-    sleeve.rotation.z = side * 0.15
-    sleeve.castShadow = true
-    g.add(sleeve)
-    const shoe = new THREE.Mesh(
-      new THREE.BoxGeometry(0.2, 0.1, 0.35),
-      new THREE.MeshStandardMaterial({ color: '#393631', roughness: 1 }),
-    )
-    shoe.position.set(side * 0.15, 0.045, -0.04)
-    g.add(shoe)
-  }
-  for (let i = 0; i < 11; i++) {
-    const a = (i * Math.PI * 2) / 11
-    const fold = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.012, 0.025, 0.52, 5),
-      new THREE.MeshStandardMaterial({
-        color: i % 2 ? '#56675c' : '#3f5147',
-        roughness: 1,
-      }),
-    )
-    fold.position.set(Math.sin(a) * 0.42, 0.37, Math.cos(a) * 0.42)
-    fold.rotation.z = Math.sin(a) * 0.12
-    g.add(fold)
-  }
-  const head = new THREE.Mesh(
-    new THREE.SphereGeometry(0.15, 20, 16),
-    new THREE.MeshStandardMaterial({ color: '#a18b75', roughness: 1 }),
-  )
-  head.position.y = 1.53
-  g.add(head)
-  return g
-}
 function marker(index: number) {
   const group = new THREE.Group()
   group.userData.beatIndex = index
@@ -362,12 +281,16 @@ export function TerrainWorld({
   onBeat,
   onStatus,
   onError,
+  playing,
+  onPlaybackEnd,
 }: Props) {
   const host = useRef<HTMLDivElement>(null)
   const sceneRef = useRef<THREE.Scene | null>(null),
     cameraRef = useRef<THREE.PerspectiveCamera | null>(null),
     controlsRef = useRef<OrbitControls | null>(null)
   const modeRef = useRef(mode),
+    playingRef = useRef(playing),
+    timeRef = useRef(0),
     walk = useRef({ x: routeX(18), z: 18, yaw: 0, pitch: -0.05 }),
     keys = useRef(new Set<string>()),
     markers = useRef<THREE.Group[]>([]),
@@ -440,9 +363,7 @@ export function TerrainWorld({
       ridge('#746b69', 22, 91, 9),
     )
     scatter(scene)
-    const figure = traveler()
-    figure.position.set(routeX(6) + 0.75, heightAt(routeX(6) + 0.75, 6), 6)
-    scene.add(figure)
+    const actors = createActors(story.props, scene)
     markers.current = story.beats.map((point, index) => {
       const group = marker(index)
       group.position.set(
@@ -572,6 +493,19 @@ export function TerrainWorld({
       lastFps = 0
     renderer.setAnimationLoop(() => {
       const dt = Math.min(clock.getDelta(), 0.05)
+      if (playingRef.current) {
+        timeRef.current = Math.min(story.performance.duration, timeRef.current + dt)
+        const nextBeat = story.performance.times.reduce((result, start, index) => timeRef.current >= start ? index : result, 0)
+        if (nextBeat !== currentBeat.current) {
+          currentBeat.current = nextBeat
+          onBeat(nextBeat)
+        }
+        if (timeRef.current >= story.performance.duration) {
+          playingRef.current = false
+          onPlaybackEnd()
+        }
+      }
+      poseActors(actors, timeRef.current, currentBeat.current)
       frames++
       if (modeRef.current === 'walk') {
         const pos = walk.current,
@@ -592,14 +526,6 @@ export function TerrainWorld({
         )
         camera.position.set(pos.x, heightAt(pos.x, pos.z) + 1.7, pos.z)
         camera.rotation.set(pos.pitch, pos.yaw, 0, 'YXZ')
-        figure.position.set(
-          routeX(Math.max(pos.z - 5, -24)) + 0.7,
-          heightAt(
-            routeX(Math.max(pos.z - 5, -24)) + 0.7,
-            Math.max(pos.z - 5, -24),
-          ),
-          Math.max(pos.z - 5, -24),
-        )
       } else controls.update()
       renderer.render(scene, camera)
       const now = performance.now()
@@ -637,7 +563,13 @@ export function TerrainWorld({
       markers.current = []
       keys.current.clear()
     }
-  }, [story, onBeat, onStatus, onError])
+  }, [story, onBeat, onStatus, onError, onPlaybackEnd])
+  useEffect(() => { playingRef.current = playing }, [playing])
+  const currentBeat = useRef(beat)
+  useEffect(() => {
+    currentBeat.current = beat
+    if (!playingRef.current) timeRef.current = story.performance.times[beat] ?? 0
+  }, [beat, story])
   useEffect(() => {
     modeRef.current = mode
     markers.current.forEach((item) => {
@@ -662,9 +594,17 @@ export function TerrainWorld({
     markers.current.forEach((item, index) =>
       item.scale.setScalar(index === beat ? 1.28 : 1),
     )
+    if (modeRef.current === 'overview' && cameraRef.current && controlsRef.current) {
+      const focusZ = beat === 0 ? 8 : beat === 1 ? -2 : -7
+      cameraRef.current.position.set(11, 7.5, focusZ + 12)
+      controlsRef.current.target.set(0, .8, focusZ)
+      controlsRef.current.update()
+    }
   }, [beat, story])
   useEffect(() => {
     if (reset === 0) return
+    timeRef.current = 0
+    currentBeat.current = 0
     walk.current = { x: routeX(18), z: 18, yaw: 0, pitch: -0.05 }
     if (modeRef.current === 'walk' && cameraRef.current) {
       const p = walk.current

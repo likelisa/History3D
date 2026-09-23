@@ -73,6 +73,126 @@
       ],
       "asset": null,
       "candidate_asset": "assets/foothill-boulder-demo.glb"
+    },
+    {
+      "entity_id": "lead_traveler",
+      "position_m": [
+        0.9,
+        0,
+        9
+      ],
+      "rotation_rad": [
+        0,
+        0,
+        0
+      ],
+      "asset": null,
+      "candidate_asset": null
+    },
+    {
+      "entity_id": "companion",
+      "position_m": [
+        -0.9,
+        0,
+        11
+      ],
+      "rotation_rad": [
+        0,
+        0,
+        0
+      ],
+      "asset": null,
+      "candidate_asset": null
+    },
+    {
+      "entity_id": "pack_animal",
+      "position_m": [
+        1.25,
+        0,
+        12
+      ],
+      "rotation_rad": [
+        0,
+        0,
+        0
+      ],
+      "asset": null,
+      "candidate_asset": null
+    },
+    {
+      "entity_id": "goods",
+      "position_m": [
+        1.25,
+        0,
+        12
+      ],
+      "rotation_rad": [
+        0,
+        0,
+        0
+      ],
+      "asset": null,
+      "candidate_asset": null
+    },
+    {
+      "entity_id": "watch_fire",
+      "position_m": [
+        -5,
+        0,
+        -2
+      ],
+      "rotation_rad": [
+        0,
+        0,
+        0
+      ],
+      "asset": null,
+      "candidate_asset": null
+    },
+    {
+      "entity_id": "waystone",
+      "position_m": [
+        -4,
+        0,
+        4
+      ],
+      "rotation_rad": [
+        0,
+        0,
+        0
+      ],
+      "asset": null,
+      "candidate_asset": null
+    },
+    {
+      "entity_id": "pursuer_a",
+      "position_m": [
+        3.0,
+        0,
+        -14
+      ],
+      "rotation_rad": [
+        0,
+        0,
+        0
+      ],
+      "asset": null,
+      "candidate_asset": null
+    },
+    {
+      "entity_id": "pursuer_b",
+      "position_m": [
+        -2.8,
+        0,
+        -16
+      ],
+      "rotation_rad": [
+        0,
+        0,
+        0
+      ],
+      "asset": null,
+      "candidate_asset": null
     }
   ],
   "story_points": [
@@ -124,5 +244,34 @@
       ],
       "text": "史书接着记载他又被匈奴俘获。这里不演出袭击，也不把路的末端当作被俘地点。"
     }
-  ]
+  ],
+  "performance": {
+    "version": 1,
+    "duration_s": 28,
+    "beats": [
+      {
+        "id": "return",
+        "at_s": 0,
+        "action": "travel",
+        "note": "旅人与驮载沿路前行，货包轻晃；演示动作"
+      },
+      {
+        "id": "detour",
+        "at_s": 9,
+        "action": "pause",
+        "note": "同行者停在路标与火堆旁，观察山前地形；演示动作"
+      },
+      {
+        "id": "outcome",
+        "at_s": 19,
+        "action": "confrontation",
+        "note": "远处追兵剪影接近，旅人停步；象征再次被俘，不表示真实地点、人数或过程"
+      }
+    ]
+  },
+  "atmosphere": {
+    "music": "procedural_ambient",
+    "mood": "苍茫、克制",
+    "historical_instrument_claim": false
+  }
 }

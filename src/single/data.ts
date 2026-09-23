@@ -19,7 +19,10 @@ export type ScenePackage = {
   beats: Beat[]
   sources: Source[]
   rockAsset: string | null
+  props: SceneProp[]
+  performance: { duration: number; times: number[] }
 }
+export type SceneProp = { id: string; kind: string; position: Vec3 }
 
 export async function loadSouthDetour(
   signal: AbortSignal,
@@ -37,7 +40,7 @@ export async function loadSouthDetour(
     !scene.story_id ||
     scene.story_id !== entities.story_id ||
     scene.story_id !== sources.story_id ||
-    !Array.isArray(scene.story_points)
+    !Array.isArray(scene.story_points) || !Array.isArray(scene.placements)
   )
     throw new Error('场景交接文件不一致')
   const beats = scene.story_points.map(
@@ -75,5 +78,15 @@ export async function loadSouthDetour(
         (item: { entity_id: string }) =>
           item.entity_id === 'foothill_boulder_01',
       )?.candidate_asset ?? null,
+    props: scene.placements.flatMap((item: { entity_id: string; position_m: Vec3 }) => {
+      const entity = entities.entities.find((candidate: { id: string }) => candidate.id === item.entity_id)
+      const kind = entity?.render_kind?.replace('procedural_', '')
+      return ['traveler', 'pursuer', 'animal', 'cargo', 'fire', 'stone'].includes(kind)
+        ? [{ id: item.entity_id, kind, position: item.position_m }] : []
+    }),
+    performance: {
+      duration: scene.performance?.duration_s ?? 28,
+      times: scene.performance?.beats?.map((item: { at_s: number }) => item.at_s) ?? [0, 9, 19],
+    },
   }
 }

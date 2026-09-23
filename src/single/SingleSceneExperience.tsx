@@ -6,6 +6,7 @@ import {
 } from './TerrainWorld'
 import { loadSouthDetour, type ScenePackage } from './data'
 import './single.css'
+import { useAmbientScore } from './useAmbientScore'
 
 const inspection = [
   {
@@ -39,7 +40,10 @@ export default function SingleSceneExperience() {
   const [fps, setFps] = useState(0)
   const [progress, setProgress] = useState(0)
   const [showProcess, setShowProcess] = useState(false)
+  const [playing, setPlaying] = useState(false)
+  const score = useAmbientScore()
   const onBeat = useCallback((index: number) => setBeat(index), [])
+  const onPlaybackEnd = useCallback(() => setPlaying(false), [])
   const onError = useCallback((message: string) => setLoadError(message), [])
   const onStatus = useCallback(
     (message: string, value: number, walked: number) => {
@@ -68,6 +72,7 @@ export default function SingleSceneExperience() {
       .map((id) => story!.sources.find((source) => source.id === id))
       .filter((source) => source != null) ?? []
   const next = () => setBeat((index) => Math.min(index + 1, 2))
+  const selectBeat = (index: number) => { setPlaying(false); setBeat(index) }
   return (
     <main className="single-page">
       <header className="single-nav">
@@ -124,7 +129,7 @@ export default function SingleSceneExperience() {
             <span className="single-eyebrow">
               ONE HISTORICAL MOMENT · THREE BEATS
             </span>
-            <h2>走一段归途，看一个转折</h2>
+          <h2>看人物、货包与山路如何走向转折</h2>
           </div>
           <div className="single-marker">
             {String(beat + 1).padStart(2, '0')} <small>/ 03</small>
@@ -144,6 +149,8 @@ export default function SingleSceneExperience() {
                 reset={reset}
                 command={command}
                 onBeat={onBeat}
+                playing={playing}
+                onPlaybackEnd={onPlaybackEnd}
                 onStatus={onStatus}
                 onError={onError}
               />
@@ -158,6 +165,10 @@ export default function SingleSceneExperience() {
               </div>
             )}
             <div className="single-world-bottom">
+              <div className="scene-playback" role="group" aria-label="场景演出与声音">
+                <button aria-pressed={playing} onClick={() => { if (!playing && beat === 2) { setBeat(0); setReset(v => v + 1) } setPlaying(!playing) }}>{playing ? 'Ⅱ 暂停演出' : '▶ 播放三幕演出'}</button>
+                <button aria-pressed={score.enabled} onClick={score.toggle}>{score.enabled ? '♪ 关闭氛围音乐' : '♪ 开启氛围音乐'}</button>
+              </div>
               <div role="group" aria-label="体验视角">
                 <button
                   aria-pressed={mode === 'overview'}
@@ -248,7 +259,7 @@ export default function SingleSceneExperience() {
                   key={point.id}
                   aria-current={beat === index ? 'step' : undefined}
                   className={beat === index ? 'active' : ''}
-                  onClick={() => setBeat(index)}
+                  onClick={() => selectBeat(index)}
                 >
                   <i>{String(index + 1).padStart(2, '0')}</i>
                   <span>{point.title}</span>
@@ -278,17 +289,18 @@ export default function SingleSceneExperience() {
             </div>
             <div className="single-story-footer">
               <button
-                onClick={() => setBeat((index) => Math.max(0, index - 1))}
+                onClick={() => selectBeat(Math.max(0, beat - 1))}
                 disabled={beat === 0}
               >
                 ← 上一步
               </button>
-              <button onClick={next} disabled={beat === 2}>
+              <button onClick={() => { setPlaying(false); next() }} disabled={beat === 2}>
                 下一步 →
               </button>
             </div>
           </aside>
         </div>
+        <p className="scene-disclaimer">人物、驮载、货包、火堆和远处对峙均为叙事演示；史料仅支持绕行与后来再次被俘，未确认该地点、在场人数、货物或冲突过程。音乐为本地合成氛围音，不宣称复原古代乐器。</p>
         <div className="single-proof">
           <article>
             <strong>当前视角</strong>

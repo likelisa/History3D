@@ -667,3 +667,8 @@
   border-bottom: 1px solid #7ea493;
   padding-bottom: 2px;
 }
+.scene-playback { display: flex; gap: 5px; align-items: center; }
+.single-world-bottom .scene-playback button { background: #382f2b; color: #f7e9d0; border: 1px solid #a98f70; }
+.single-world-bottom .scene-playback button[aria-pressed='true'] { background: #78523c; }
+.scene-disclaimer { max-width: 1100px; margin: 16px auto 0; font-size: 11px; line-height: 1.75; color: #6c716b; }
+@media(max-width: 720px) { .scene-playback { width: 100%; flex-wrap: wrap; } .scene-disclaimer { padding: 0 10px; } }
