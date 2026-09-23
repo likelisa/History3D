@@ -4,12 +4,14 @@ on:
     paths:
       - 'processing/**'
       - 'public/cases/**'
+      - 'public/story/**'
       - '.github/workflows/processing.yml'
   push:
     branches: [main]
     paths:
       - 'processing/**'
       - 'public/cases/**'
+      - 'public/story/**'
       - '.github/workflows/processing.yml'
 permissions:
   contents: read

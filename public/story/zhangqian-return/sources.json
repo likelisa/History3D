@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "story_id": "zhangqian_return_128",
+  "sources": [
+    {
+      "id": "shiji123",
+      "title": "《史记·大宛列传》张骞段",
+      "url": "https://zh.wikisource.org/wiki/史記/卷123",
+      "excerpt": "张骞在大夏一带停留岁余后返回，沿南山希望经羌地归汉，途中再次被匈奴所得。"
+    },
+    {
+      "id": "wiki-zhangqian",
+      "title": "维基百科《张骞》·第一次出使西域",
+      "url": "https://zh.wikipedia.org/wiki/張騫",
+      "excerpt": "词条整理：前128年归途从葱岭、昆仑山北麓绕行，经莎车、于阗、楼兰，再被匈奴扣留一年。"
+    }
+  ]
+}
