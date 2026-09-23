@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "0.1.0",
+  "storyId": "minimal-fixture",
+  "contentRevision": 1,
+  "title": "最小有效样例（技术占位）",
+  "status": "draft",
+  "historicalScope": {
+    "period": null,
+    "place": null,
+    "scopeNote": "仅用于验证校验器与查看器的最小结构，不代表任何史实。"
+  },
+  "experienceQuestion": "最小样例能否被加载与校验？",
+  "claims": [
+    {
+      "id": "claim-cube-dimensions",
+      "subjectId": "brief-cube",
+      "property": "dimensions",
+      "statement": "样例方块为 1 × 1 × 1 米。",
+      "value": [
+        1,
+        1,
+        1
+      ],
+      "unit": "m",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示尺寸。"
+    },
+    {
+      "id": "claim-cube-appearance",
+      "subjectId": "brief-cube",
+      "property": "appearance",
+      "statement": "样例方块使用基准 GLB。",
+      "value": "基准 GLB。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示设定。"
+    },
+    {
+      "id": "claim-cube-count",
+      "subjectId": "brief-cube",
+      "property": "count",
+      "statement": "放置 1 个样例方块。",
+      "value": 1,
+      "unit": "count",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示数量。"
+    },
+    {
+      "id": "claim-cube-layout",
+      "subjectId": "brief-cube",
+      "property": "layout",
+      "statement": "样例方块位于出生点正前方。",
+      "value": "位于出生点正前方。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示布局。"
+    }
+  ],
+  "objectBriefs": [
+    {
+      "id": "brief-cube",
+      "label": "样例方块",
+      "purpose": "验证最小加载链路。",
+      "claimIds": [
+        "claim-cube-dimensions",
+        "claim-cube-appearance",
+        "claim-cube-count",
+        "claim-cube-layout"
+      ],
+      "referenceSourceIds": []
+    }
+  ],
+  "hotspots": [
+    {
+      "id": "hotspot-min-1",
+      "title": "样例故事点一",
+      "body": "技术占位正文。",
+      "claimIds": [
+        "claim-cube-dimensions"
+      ]
+    },
+    {
+      "id": "hotspot-min-2",
+      "title": "样例故事点二",
+      "body": "技术占位正文。",
+      "claimIds": [
+        "claim-cube-count"
+      ]
+    },
+    {
+      "id": "hotspot-min-3",
+      "title": "样例故事点三",
+      "body": "技术占位正文。",
+      "claimIds": [
+        "claim-cube-layout"
+      ]
+    }
+  ],
+  "routeOverview": {
+    "kind": "schematic",
+    "imagePath": "references/route.svg"
+  },
+  "draftNotes": "这一字段在 v0.1 中是未声明的。"
+}

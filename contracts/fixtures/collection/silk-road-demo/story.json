@@ -1,0 +1,546 @@
+{
+  "schemaVersion": "0.1.0",
+  "storyId": "silk-road-demo",
+  "contentRevision": 1,
+  "title": "丝路商队出发前（技术占位）",
+  "status": "draft",
+  "historicalScope": {
+    "period": null,
+    "place": null,
+    "scopeNote": "技术占位样例：时期与地点尚未锁定。全部尺寸、造型与布局都是演示设定，只用于验证工具链路，不能作为历史结论。待采集层补入可追溯依据后整体替换。"
+  },
+  "experienceQuestion": "站在出发前的营地上，你能看出这支队伍有多大、行囊有多重，以及前面的路还有多远吗？",
+  "claims": [
+    {
+      "id": "claim-story-context",
+      "subjectId": "silk-road-demo",
+      "property": "narrative",
+      "statement": "丝绸之路是连接东亚与地中海世界的通道网络，商队是陆路运输的主要组织形式之一。",
+      "value": "丝绸之路是连接东亚与地中海世界的通道网络，商队是陆路运输的主要组织形式之一。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "documented",
+      "sourceIds": ["src-001"],
+      "note": "整理摘要，不是直接引用。仅用于验证来源绑定链路，未做馆藏级核验。"
+    },
+    {
+      "id": "claim-beast-dimensions",
+      "subjectId": "brief-beast",
+      "property": "dimensions",
+      "statement": "驮兽占位体的体量为 2.2 × 2.0 × 0.9 米。",
+      "value": [2.2, 2.0, 0.9],
+      "unit": "m",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示尺寸：仅用于提供可站立对比的体量，未取用任何史料数据。"
+    },
+    {
+      "id": "claim-beast-dimensions-real",
+      "subjectId": "brief-beast",
+      "property": "dimensions",
+      "statement": "本轮没有可用于驮兽体量的史料尺寸。",
+      "value": null,
+      "unit": null,
+      "valueStatus": "unknown",
+      "evidenceType": null,
+      "sourceIds": [],
+      "note": "保留未知，等待采集层补充可追溯依据；不得用演示值顶替。"
+    },
+    {
+      "id": "claim-beast-appearance",
+      "subjectId": "brief-beast",
+      "property": "appearance",
+      "statement": "驮兽以方盒占位呈现，只表达体量与遮挡关系。",
+      "value": "方盒占位，不代表驮兽造型。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示设定：造型未做任何复原。"
+    },
+    {
+      "id": "claim-beast-count",
+      "subjectId": "brief-beast",
+      "property": "count",
+      "statement": "营地中放置 1 个驮兽占位体。",
+      "value": 1,
+      "unit": "count",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示数量：用于验证数量一致性校验，不代表真实队伍规模。"
+    },
+    {
+      "id": "claim-beast-layout",
+      "subjectId": "brief-beast",
+      "property": "layout",
+      "statement": "驮兽位于营地中央，面朝 +Z。",
+      "value": "位于营地中央，面朝 +Z。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示布局：仅为了让用户能走到主资产旁边形成尺度对比。"
+    },
+    {
+      "id": "claim-pack-dimensions",
+      "subjectId": "brief-pack",
+      "property": "dimensions",
+      "statement": "单个行囊占位体为 1.2 × 0.8 × 0.6 米。",
+      "value": [1.2, 0.8, 0.6],
+      "unit": "m",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示尺寸：体积接近一个人能背起的上限，用于形成人尺度对比。"
+    },
+    {
+      "id": "claim-pack-appearance",
+      "subjectId": "brief-pack",
+      "property": "appearance",
+      "statement": "行囊以长方盒资产占位，只表达体积。",
+      "value": "长方盒占位资产，只表达体积。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示设定：外形未做复原。"
+    },
+    {
+      "id": "claim-pack-count",
+      "subjectId": "brief-pack",
+      "property": "count",
+      "statement": "营地中放置 2 个行囊占位体。",
+      "value": 2,
+      "unit": "count",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示数量：用于验证同一资产多次实例化的数量校验。"
+    },
+    {
+      "id": "claim-pack-layout",
+      "subjectId": "brief-pack",
+      "property": "layout",
+      "statement": "行囊集中堆放在驮兽左侧。",
+      "value": "集中堆放在驮兽左侧。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示布局。"
+    },
+    {
+      "id": "claim-crate-dimensions",
+      "subjectId": "brief-crate",
+      "property": "dimensions",
+      "statement": "货箱占位体为 0.9 × 0.7 × 0.9 米。",
+      "value": [0.9, 0.7, 0.9],
+      "unit": "m",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示尺寸。"
+    },
+    {
+      "id": "claim-crate-appearance",
+      "subjectId": "brief-crate",
+      "property": "appearance",
+      "statement": "货箱以方盒占位，只表达体积。",
+      "value": "方盒占位，只表达体积。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示设定。"
+    },
+    {
+      "id": "claim-crate-count",
+      "subjectId": "brief-crate",
+      "property": "count",
+      "statement": "营地中放置 1 个货箱占位体。",
+      "value": 1,
+      "unit": "count",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示数量。"
+    },
+    {
+      "id": "claim-crate-layout",
+      "subjectId": "brief-crate",
+      "property": "layout",
+      "statement": "货箱放在驮兽右侧地面。",
+      "value": "放在驮兽右侧地面。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示布局。"
+    },
+    {
+      "id": "claim-human-scale-dimensions",
+      "subjectId": "brief-human-scale",
+      "property": "dimensions",
+      "statement": "人尺度基准体为 0.4 × 1.7 × 0.4 米。",
+      "value": [0.4, 1.7, 0.4],
+      "unit": "m",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示尺寸：1.7 米是体验基准，不是某个具体人物的身高数据。"
+    },
+    {
+      "id": "claim-human-scale-appearance",
+      "subjectId": "brief-human-scale",
+      "property": "appearance",
+      "statement": "人尺度基准以细长方柱占位，用来对照视线高度。",
+      "value": "细长方柱占位，用来对照视线高度。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示设定。"
+    },
+    {
+      "id": "claim-human-scale-count",
+      "subjectId": "brief-human-scale",
+      "property": "count",
+      "statement": "出生点旁放置 1 个高度基准体。",
+      "value": 1,
+      "unit": "count",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示数量。"
+    },
+    {
+      "id": "claim-human-scale-layout",
+      "subjectId": "brief-human-scale",
+      "property": "layout",
+      "statement": "高度基准体位于出生点左侧 3 米处。",
+      "value": "位于出生点左侧 3 米处。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示布局。"
+    },
+    {
+      "id": "claim-unit-cube-dimensions",
+      "subjectId": "brief-unit-cube",
+      "property": "dimensions",
+      "statement": "GLB 米制基准立方体为 1 × 1 × 1 米。",
+      "value": [1, 1, 1],
+      "unit": "m",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "验收基准：GLB 三轴包围盒必须实测为 1 米。"
+    },
+    {
+      "id": "claim-unit-cube-appearance",
+      "subjectId": "brief-unit-cube",
+      "property": "appearance",
+      "statement": "基准立方体使用脚本生成的纯色 GLB。",
+      "value": "脚本生成的纯色 GLB。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示设定：用于验证 GLB 加载分支。"
+    },
+    {
+      "id": "claim-unit-cube-count",
+      "subjectId": "brief-unit-cube",
+      "property": "count",
+      "statement": "放置 1 个 GLB 基准立方体。",
+      "value": 1,
+      "unit": "count",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示数量。"
+    },
+    {
+      "id": "claim-unit-cube-layout",
+      "subjectId": "brief-unit-cube",
+      "property": "layout",
+      "statement": "基准立方体位于出生点右侧 3 米处。",
+      "value": "位于出生点右侧 3 米处。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示布局。"
+    },
+    {
+      "id": "claim-meter-graybox-dimensions",
+      "subjectId": "brief-meter-graybox",
+      "property": "dimensions",
+      "statement": "灰盒对照体为 1 × 1 × 1 米。",
+      "value": [1, 1, 1],
+      "unit": "m",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "验收基准：与 GLB 基准立方体并排，两者应等大且同时接地。"
+    },
+    {
+      "id": "claim-meter-graybox-appearance",
+      "subjectId": "brief-meter-graybox",
+      "property": "appearance",
+      "statement": "灰盒对照体为纯色方盒。",
+      "value": "纯色方盒。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示设定。"
+    },
+    {
+      "id": "claim-meter-graybox-count",
+      "subjectId": "brief-meter-graybox",
+      "property": "count",
+      "statement": "放置 1 个灰盒对照体。",
+      "value": 1,
+      "unit": "count",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示数量。"
+    },
+    {
+      "id": "claim-meter-graybox-layout",
+      "subjectId": "brief-meter-graybox",
+      "property": "layout",
+      "statement": "灰盒对照体紧邻 GLB 基准立方体，位于其 +X 方向。",
+      "value": "紧邻 GLB 基准立方体，位于其 +X 方向。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示布局。"
+    },
+    {
+      "id": "claim-supply-boundary-dimensions",
+      "subjectId": "brief-supply-boundary",
+      "property": "dimensions",
+      "statement": "补给点边界标记为 12 × 0.1 × 0.3 米。",
+      "value": [12, 0.1, 0.3],
+      "unit": "m",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示尺寸：仅表示“补给点到此为止”的示意线，不是考古遗迹。"
+    },
+    {
+      "id": "claim-supply-boundary-appearance",
+      "subjectId": "brief-supply-boundary",
+      "property": "appearance",
+      "statement": "补给点边界以扁平长条占位。",
+      "value": "扁平长条占位。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示设定。"
+    },
+    {
+      "id": "claim-supply-boundary-count",
+      "subjectId": "brief-supply-boundary",
+      "property": "count",
+      "statement": "放置 1 条补给点边界。",
+      "value": 1,
+      "unit": "count",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示数量。"
+    },
+    {
+      "id": "claim-supply-boundary-layout",
+      "subjectId": "brief-supply-boundary",
+      "property": "layout",
+      "statement": "补给点边界横在营地与前方道路之间。",
+      "value": "横在营地与前方道路之间。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示布局。"
+    },
+    {
+      "id": "claim-road-ahead-dimensions",
+      "subjectId": "brief-road-ahead",
+      "property": "dimensions",
+      "statement": "前路示意带为 5 × 0.15 × 24 米。",
+      "value": [5, 0.15, 24],
+      "unit": "m",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示尺寸：只表达“路向远处延伸”，不代表真实里程或坡度。"
+    },
+    {
+      "id": "claim-road-ahead-appearance",
+      "subjectId": "brief-road-ahead",
+      "property": "appearance",
+      "statement": "前路以扁平长条占位，不可进入。",
+      "value": "扁平长条占位，不可进入。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示设定：本轮行走面为水平面，起伏地形不在协议内。"
+    },
+    {
+      "id": "claim-road-ahead-count",
+      "subjectId": "brief-road-ahead",
+      "property": "count",
+      "statement": "放置 1 段前路示意。",
+      "value": 1,
+      "unit": "count",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示数量。"
+    },
+    {
+      "id": "claim-road-ahead-layout",
+      "subjectId": "brief-road-ahead",
+      "property": "layout",
+      "statement": "前路示意带从补给点边界向前延伸 24 米。",
+      "value": "从补给点边界向前延伸 24 米。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "演示布局。"
+    }
+  ],
+  "objectBriefs": [
+    {
+      "id": "brief-beast",
+      "label": "驮兽（占位）",
+      "purpose": "给出队伍主力体量，让用户能站在旁边形成尺度对比。",
+      "claimIds": [
+        "claim-beast-dimensions",
+        "claim-beast-dimensions-real",
+        "claim-beast-appearance",
+        "claim-beast-count",
+        "claim-beast-layout"
+      ],
+      "referenceSourceIds": []
+    },
+    {
+      "id": "brief-pack",
+      "label": "行囊",
+      "purpose": "形成“一个人能背多少”的体积对比。",
+      "claimIds": [
+        "claim-pack-dimensions",
+        "claim-pack-appearance",
+        "claim-pack-count",
+        "claim-pack-layout"
+      ],
+      "referenceSourceIds": []
+    },
+    {
+      "id": "brief-crate",
+      "label": "货箱",
+      "purpose": "补充营地中其他货物的体量关系。",
+      "claimIds": [
+        "claim-crate-dimensions",
+        "claim-crate-appearance",
+        "claim-crate-count",
+        "claim-crate-layout"
+      ],
+      "referenceSourceIds": []
+    },
+    {
+      "id": "brief-human-scale",
+      "label": "人尺度基准",
+      "purpose": "验收眼高 1.7 米时使用的站立对照。",
+      "claimIds": [
+        "claim-human-scale-dimensions",
+        "claim-human-scale-appearance",
+        "claim-human-scale-count",
+        "claim-human-scale-layout"
+      ],
+      "referenceSourceIds": []
+    },
+    {
+      "id": "brief-unit-cube",
+      "label": "米制基准立方体（GLB）",
+      "purpose": "验收米制、底部原点与 GLB 渲染分支。",
+      "claimIds": [
+        "claim-unit-cube-dimensions",
+        "claim-unit-cube-appearance",
+        "claim-unit-cube-count",
+        "claim-unit-cube-layout"
+      ],
+      "referenceSourceIds": []
+    },
+    {
+      "id": "brief-meter-graybox",
+      "label": "米制基准（灰盒）",
+      "purpose": "与 GLB 基准立方体并排，确认灰盒与模型尺寸一致。",
+      "claimIds": [
+        "claim-meter-graybox-dimensions",
+        "claim-meter-graybox-appearance",
+        "claim-meter-graybox-count",
+        "claim-meter-graybox-layout"
+      ],
+      "referenceSourceIds": []
+    },
+    {
+      "id": "brief-supply-boundary",
+      "label": "补给点边界",
+      "purpose": "把“补给点到哪里为止”变成可见的空间关系。",
+      "claimIds": [
+        "claim-supply-boundary-dimensions",
+        "claim-supply-boundary-appearance",
+        "claim-supply-boundary-count",
+        "claim-supply-boundary-layout"
+      ],
+      "referenceSourceIds": []
+    },
+    {
+      "id": "brief-road-ahead",
+      "label": "前路示意",
+      "purpose": "表达队伍将要进入的方向与距离感，本轮不可进入。",
+      "claimIds": [
+        "claim-road-ahead-dimensions",
+        "claim-road-ahead-appearance",
+        "claim-road-ahead-count",
+        "claim-road-ahead-layout"
+      ],
+      "referenceSourceIds": []
+    }
+  ],
+  "hotspots": [
+    {
+      "id": "hotspot-departure",
+      "title": "出发前的营地",
+      "body": "先站在驮兽旁边。它的体量决定了这支队伍能带走多少东西，也决定了它在营地中央占掉多大一块地方。",
+      "claimIds": ["claim-beast-dimensions", "claim-beast-appearance", "claim-beast-count"]
+    },
+    {
+      "id": "hotspot-load",
+      "title": "一个人能背多少",
+      "body": "走到行囊堆和高度基准体之间，比较一下：一个人背得动的体积，和队伍需要带走的体积，差了多少。",
+      "claimIds": ["claim-pack-dimensions", "claim-human-scale-dimensions"]
+    },
+    {
+      "id": "hotspot-road",
+      "title": "前路有多远",
+      "body": "从补给点边界向前看。示意带只有 24 米，已经远到你不想走着数完；真实的这段路比它长得多。",
+      "claimIds": ["claim-road-ahead-dimensions", "claim-story-context"]
+    }
+  ],
+  "routeOverview": {
+    "kind": "schematic",
+    "imagePath": "references/route-overview.svg"
+  }
+}

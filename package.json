@@ -4,21 +4,27 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "prepare:assets": "node scripts/prepare-assets.mjs",
+    "validate:collection": "node --import tsx scripts/validate-collection.ts",
+    "validate:package": "node --import tsx scripts/validate-package.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "check": "npm run validate:collection && npm run validate:package && npm run typecheck && npm run test",
+    "dev": "npm run prepare:assets && vite",
+    "build": "npm run validate:collection && npm run validate:package && npm run prepare:assets && tsc --noEmit && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "three": "^0.171.0"
   },
   "devDependencies": {
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
+    "@types/node": "^22.10.2",
     "@types/three": "^0.171.0",
-    "@vitejs/plugin-react": "^4.3.4",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "tsx": "^4.19.2",
     "typescript": "~5.6.2",
     "vite": "^6.0.5",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "vitest": "^3.0.5"
   }
 }

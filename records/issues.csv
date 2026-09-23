@@ -1,0 +1,12 @@
+﻿issueId,openedAt,source,summary,layer,severity,status,owner,evidence,resolution
+iss-001,2026-09-23,浏览器实测,styles.css 的 .overlay{display:grid} 覆盖了 hidden 属性，遮罩层永不消失：既压暗画面，又吞掉画布上的全部点击，导致测距模式点不出任何一个点,C,blocking,closed,C,viewer/src/styles.css,在样式表最前加 [hidden]{display:none !important} 并注释原因
+iss-002,2026-09-23,浏览器实测,进入测距或打开面板时，上一轮留下的「已暂停」卡片仍挡在视口中央；syncPausedState 在这些分支直接 return，没有主动收卡片,C,major,closed,C,viewer/src/app.ts,新增 pauseOverlayShown 标记与 hidePauseOverlay()，三个分支与 openPanel/hideOverlay 都重置标记
+iss-003,2026-09-23,浏览器实测,"测距拾取用了缓存的 this.pointer：没有真实 mousemove 时该值恒为 (0,0)，点击画布任意位置都只在屏幕中心取点",C,blocking,closed,C,viewer/src/app.ts,改为从 click 事件坐标实时换算 NDC（updatePointerFromEvent）
+iss-004,2026-09-23,代码审阅,Measurer.pick 里 if (points.length===0) push(point) else push(point) 两个分支完全相同，属冗余写法，容易让人误以为存在两种行为,C,minor,closed,C,viewer/src/measure.ts,合并为「满两点先清空、再 push」，并补注释说明第三次点击语义
+iss-005,2026-09-23,验收缺口,测距点击协议（A→B→重设 A、未命中不改状态、raycastIgnore 排除）没有任何自动覆盖，原设计只靠浏览器手测,C,major,closed,C,tests/measure.test.ts,新增 8 项测试，用真实 THREE 射线求交驱动 Measurer.pick，断言独立手算的 2.0412414523 米
+iss-006,2026-09-23,自动化限制,测距的鼠标双点拾取无法在自动化环境中验证：计算机操作只能做 AX 元素点击，画布坐标点击不生效,C,major,open,人工,records/acceptance.md 第 5 节,待人工手测；数值与状态机已由 iss-005 覆盖
+iss-007,2026-09-23,自动化限制,第一人称 WASD 行走与 Pointer Lock 无法自动化验证（需要按住按键持续移动 + 真实鼠标移动）,C,major,open,人工,records/acceptance.md 第 5 节,待人工手测；移动与碰撞数学已由 tests/geometry.test.ts 覆盖
+iss-008,2026-09-23,构建输出,vite build 报 JS chunk 758 KB 超过 500 KB 警告，主要是 three.js 本体,C,minor,open,C,dist/assets/index-*.js,本地加载未受影响；若公网部署再考虑 manualChunks 或按需引入
+iss-009,2026-09-23,验收缺口,Demo A 要求的三位非制作人观察记录与 30 秒录屏未执行,集成,blocking,open,集成负责人,records/acceptance.md 第 2 节,需真人参与，制作者自评无效
+iss-010,2026-09-23,验收缺口,Demo B 资产链路无任何生成实验记录；包内 GLB 是脚本生成的几何占位体，不代表生成链路可用,B,blocking,open,B,records/experiments.csv,待 B 交付合规 GLB 后重跑 Demo B
+iss-011,2026-09-23,协作流程,gh CLI 凭据已失效（gh auth status 报 invalid），无法从本机创建 PR 走审阅流程,集成,major,open,集成负责人,gh auth status,需重新 gh auth login 后再建 PR；本轮改动只能先留在本地提交

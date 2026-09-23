@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://history3d.local/schemas/story.schema.json",
+  "title": "story.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "storyId",
+    "contentRevision",
+    "title",
+    "status",
+    "historicalScope",
+    "experienceQuestion",
+    "claims",
+    "objectBriefs",
+    "hotspots",
+    "routeOverview"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "0.1.0" },
+    "storyId": { "$ref": "#/$defs/storyId" },
+    "contentRevision": { "type": "integer", "minimum": 1 },
+    "title": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["draft", "reviewed"] },
+    "historicalScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["period", "place", "scopeNote"],
+      "properties": {
+        "period": { "type": ["string", "null"] },
+        "place": { "type": ["string", "null"] },
+        "scopeNote": { "type": "string", "minLength": 1 }
+      }
+    },
+    "experienceQuestion": { "type": "string", "minLength": 1 },
+    "claims": { "type": "array", "items": { "$ref": "#/$defs/claim" } },
+    "objectBriefs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/objectBrief" }
+    },
+    "hotspots": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/hotspot" }
+    },
+    "routeOverview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "imagePath"],
+      "properties": {
+        "kind": { "const": "schematic" },
+        "imagePath": { "$ref": "#/$defs/relativePath" }
+      }
+    }
+  },
+  "$defs": {
+    "storyId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$" },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?![A-Za-z][A-Za-z0-9+.-]*://)(?!/)(?!.*\\.\\.)(?!.*\\\\)[^/\\\\].*$"
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "subjectId",
+        "property",
+        "statement",
+        "value",
+        "unit",
+        "valueStatus",
+        "evidenceType",
+        "sourceIds",
+        "note"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "subjectId": { "$ref": "#/$defs/id" },
+        "property": {
+          "enum": ["dimensions", "appearance", "layout", "count", "narrative", "route"]
+        },
+        "statement": { "type": "string", "minLength": 1 },
+        "value": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "string" },
+            { "type": "integer" },
+            { "type": "array" }
+          ]
+        },
+        "unit": { "enum": ["m", "count", null] },
+        "valueStatus": { "enum": ["known", "unknown"] },
+        "evidenceType": {
+          "enum": ["documented", "inferred", "illustrative", null]
+        },
+        "sourceIds": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "note": { "type": "string", "minLength": 1 }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": ["property"],
+            "properties": { "property": { "const": "dimensions" } }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "anyOf": [
+                  { "type": "null" },
+                  {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "items": { "type": "number", "exclusiveMinimum": 0 }
+                  }
+                ]
+              },
+              "unit": { "enum": ["m", null] }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": ["property"],
+            "properties": { "property": { "const": "count" } }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "anyOf": [{ "type": "null" }, { "type": "integer", "minimum": 1 }]
+              },
+              "unit": { "enum": ["count", null] }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": ["property"],
+            "properties": {
+              "property": { "enum": ["appearance", "layout", "narrative", "route"] }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": { "anyOf": [{ "type": "null" }, { "type": "string" }] },
+              "unit": { "type": "null" }
+            }
+          }
+        }
+      ]
+    },
+    "objectBrief": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "purpose", "claimIds", "referenceSourceIds"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "label": { "type": "string", "minLength": 1 },
+        "purpose": { "type": "string", "minLength": 1 },
+        "claimIds": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "referenceSourceIds": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/id" }
+        }
+      }
+    },
+    "hotspot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "body", "claimIds"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1 },
+        "body": { "type": "string", "minLength": 1 },
+        "claimIds": { "type": "array", "items": { "$ref": "#/$defs/id" } }
+      }
+    }
+  }
+}

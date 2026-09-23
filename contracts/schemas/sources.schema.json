@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://history3d.local/schemas/sources.schema.json",
+  "title": "sources.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "storyId", "contentRevision", "sources"],
+  "properties": {
+    "schemaVersion": { "const": "0.1.0" },
+    "storyId": { "$ref": "#/$defs/storyId" },
+    "contentRevision": { "type": "integer", "minimum": 1 },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "type",
+          "locator",
+          "citation",
+          "location",
+          "excerpt",
+          "rights",
+          "accessedAt"
+        ],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "title": { "type": "string", "minLength": 1 },
+          "type": {
+            "enum": ["book", "paper", "museum", "map", "image", "website", "other"]
+          },
+          "locator": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["url", "localPath"],
+            "properties": {
+              "url": {
+                "anyOf": [
+                  { "type": "null" },
+                  { "type": "string", "pattern": "^https?://" }
+                ]
+              },
+              "localPath": {
+                "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/relativePath" }]
+              }
+            },
+            "anyOf": [
+              { "properties": { "url": { "type": "string" } } },
+              { "properties": { "localPath": { "type": "string" } } }
+            ]
+          },
+          "citation": { "type": "string", "minLength": 1 },
+          "location": { "type": "string", "minLength": 1 },
+          "excerpt": { "type": "string", "minLength": 1 },
+          "rights": { "type": "string", "minLength": 1 },
+          "accessedAt": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "storyId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$" },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?![A-Za-z][A-Za-z0-9+.-]*://)(?!/)(?!.*\\.\\.)(?!.*\\\\)[^/\\\\].*$"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "0.1.0",
+  "storyId": "silk-road-demo",
+  "contentRevision": 1,
+  "sources": [
+    {
+      "id": "src-001",
+      "title": "Silk Road（维基百科条目）",
+      "type": "website",
+      "locator": {
+        "url": "https://en.wikipedia.org/wiki/Silk_Road",
+        "localPath": null
+      },
+      "citation": "Wikipedia contributors，Wikimedia Foundation（技术样例，未做馆藏级核验）",
+      "location": "条目导言与 Routes 章节",
+      "excerpt": "整理摘要，非直接引用：丝绸之路是连接东亚与地中海世界的陆上与海上通道网络，商队是陆路运输的主要组织形式之一。",
+      "rights": "待确认。本轮只用于验证来源绑定链路，不作为对外发布素材。",
+      "accessedAt": "2026-09-23"
+    }
+  ]
+}

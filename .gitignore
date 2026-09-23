@@ -10,3 +10,6 @@ coverage
 !.env.example
 .npm-debug.log*
 .pnpm-debug.log*
+
+# 生成物：由 npm run prepare:assets 从 packages/ 复制而来
+viewer/public/packages

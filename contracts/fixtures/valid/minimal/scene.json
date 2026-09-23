@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "0.1.0",
+  "storyId": "minimal-fixture",
+  "contentRevision": 1,
+  "sceneRevision": 1,
+  "storyPath": "story.json",
+  "sourcesPath": "sources.json",
+  "units": "m",
+  "upAxis": "Y",
+  "handedness": "right",
+  "ground": { "type": "plane", "y": 0 },
+  "assets": [
+    {
+      "id": "asset-unit-cube",
+      "path": "assets/unit-cube.glb",
+      "dimensionsM": [1, 1, 1],
+      "format": "glb",
+      "rights": "由仓库内 fixture 脚本生成"
+    }
+  ],
+  "objects": [
+    {
+      "id": "obj-cube",
+      "briefId": "brief-cube",
+      "label": "样例方块",
+      "render": { "type": "asset", "assetId": "asset-unit-cube" },
+      "position": [0, 0, 2],
+      "rotation": [0, 0, 0],
+      "scale": [1, 1, 1],
+      "dimensionsM": [1, 1, 1],
+      "evidence": {
+        "dimensions": ["claim-cube-dimensions"],
+        "appearance": ["claim-cube-appearance"],
+        "placement": ["claim-cube-layout"],
+        "quantity": ["claim-cube-count"]
+      }
+    }
+  ],
+  "hotspotBindings": [
+    { "hotspotId": "hotspot-min-1", "anchor": { "type": "world", "position": [0, 1.7, 0] } },
+    { "hotspotId": "hotspot-min-2", "anchor": { "type": "object", "objectId": "obj-cube", "offset": [0, 1.2, 0] } },
+    { "hotspotId": "hotspot-min-3", "anchor": { "type": "world", "position": [0, 1.7, -2] } }
+  ],
+  "cameras": {
+    "firstPerson": {
+      "spawnFeet": [0, 0, 6],
+      "eyeHeightM": 1.7,
+      "yawRad": 0,
+      "pitchRad": 0,
+      "moveSpeedMps": 2,
+      "radiusM": 0.3
+    },
+    "overview": { "position": [0, 12, 6], "target": [0, 0, 2], "up": [0, 1, 0] }
+  },
+  "walkableBounds": { "min": [-10, -10], "max": [10, 10] },
+  "blockers": []
+}
