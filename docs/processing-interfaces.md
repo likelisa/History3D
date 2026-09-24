@@ -38,7 +38,7 @@ curl --noproxy '*' -H 'Content-Type: application/json' --data-binary @/absolute/
 
 `POST /worlds/{storyId}/feedback` 保存 C 的逐项问题和 GLB 候选。候选须先经 `/bundles` 上传，再用 `baseAssetRevision` 和 `baseSha256` 指向固定 release 的 `asset-lineage.json`；过期基底返回该候选的 `ASSET_REVISION_CONFLICT`，候选原件仍保留。`accepted` 只记录 C 对该版本的页面意见，不自动采用 GLB、不切换 `currentReleaseId`。`GET /feedback/{feedbackId}` 可取回处理回执。`GET /worlds/{storyId}/releases` 列版本与当前指针；未经 B/C 门槛，当前指针为 null。
 
-补丁整合的本机锁先在临时目录写入 PID/随机 token，再原子移动到锁路径；遇活锁会短暂重试并报 `ASSET_LOCKED`。死进程锁过 30 秒可恢复；即使 PID 被复用，2 分钟后也按年龄过期。每次整合通常远短于该阈值，超长人工修整不应持有此锁。异常退出留下的 pending 决策会按固定输入重试，不覆盖已定稿 release。
+补丁整合的本机锁先在临时目录写入 PID/随机 token，再原子移动到锁路径；遇活锁会短暂重试并报 `ASSET_LOCKED`。死进程锁过 30 秒可恢复；即使 PID 被复用，2 分钟后也按年龄过期。恢复锁本身若因进程中断遗留，2 分钟后清除。每次整合通常远短于该阈值，超长人工修整不应持有此锁。异常退出留下的 pending 决策会按固定输入重试，不覆盖已定稿 release。
 
 B 可用 `npm run processing -- review-patch /absolute/path/to/decision.json` 裁定一个 C 候选。决策文件至少写 `decisionId`、`action: integrate/reject`、`operator`、`reason`、`storyId`、`feedbackId`、`assetId`、`candidateHash`、`baseReleaseId`、`baseAssetRevision`、`baseSha256`。`integrate` 只接受底部原点和三轴尺寸与父资产兼容的 GLB，产生新的不可变 `needs_review` release 和递增的候选资产 revision；原包、旧 release 与当前指针不变。新 release 必须重新做 asset/world review 和 C 页面验收。另一个候选若仍指向同一旧父版本，B 再整合会得到 `ASSET_REVISION_CONFLICT`，二进制不会自动合并。
 
@@ -58,7 +58,7 @@ Blender 的一般网格/绑定/UV 修整与外部生成执行适配尚未接通�
 
 ### 固定版本发布与回退闸门
 
-`npm run processing -- audit-release <storyId> <releaseId>` 只读检查不可变文件哈希、组装和包错误、B 真实外部生成记录、每个输入资产的固定快照审核、当前 release 的世界审核，以及三方验收证据。它返回 `ready` 和具体未满足的 gate。技术 fixture 会因缺真实生成/审核/验收保持 `ready:false`。
+`npm run processing -- audit-release <storyId> <releaseId>` 只读检查不可变文件哈希、组装和包错误、B 真实外部生成记录、每个输入资产的固定快照审核、当前 release 的世界审核，以及三方验收证据。外部生成记录需列 `realProviderTasks[]`，含 provider、taskId、提示词 SHA-256、输出 SHA-256、费用及是否采用；采用的输出必须与 release 资产链哈希一致。它返回 `ready` 和具体未满足的 gate。技术 fixture 会因缺真实生成/审核/验收保持 `ready:false`。
 
 完成实际验收后，B 在 `.processing-data/registry/<storyId>/acceptance/<releaseId>.json` 保存 `ReleaseAcceptance`：固定 release hash、操作者、傅老师史实确认记录、靳老师同版 `viewerFeedbackId`/`viewerBuild`、1440×900 演示机 GPU/浏览器/DPR、三次冷加载、90 秒 FPS、连续播放、音乐听感及截图引用。类型见 `processing/src/release-registry.ts`。验收记录必须来自真实联调，不能用 fixture 填写。该文件位于 release 外，不改不可变包。
 

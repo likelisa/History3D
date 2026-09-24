@@ -59,7 +59,7 @@ export async function auditRelease(storyId: string, releaseId: string, dataDir: 
     const content = await readFile(cursor).catch(() => null)
     if (!content || content.length !== file.bytes || sha(content) !== file.sha256) fail('FILE_HASH', file.path)
   }
-  for (const required of ['scene.json', 'story.json', 'sources.json', 'quality-report.json', 'provenance.json', 'generation-report.json'])
+  for (const required of ['scene.json', 'story.json', 'sources.json', 'quality-report.json', 'provenance.json', 'generation-report.json', 'asset-lineage.json'])
     if (!listed.has(required)) fail('MANIFEST', `missing ${required}`)
   if (gates.some((gate) => ['IDENTITY', 'FILE_HASH', 'MANIFEST'].includes(gate.code)))
     return { storyId, releaseId, snapshotHash, ready: false, gates }
@@ -67,8 +67,13 @@ export async function auditRelease(storyId: string, releaseId: string, dataDir: 
   const quality = await json<{ diagnostics?: Array<{ severity: string }>; unresolved?: string[]; relationChecks?: Array<{ pass: boolean; required: boolean }> }>(path.join(root, 'quality-report.json'))
   if ((quality.unresolved ?? []).length || (quality.diagnostics ?? []).some((item) => item.severity === 'error') || (quality.relationChecks ?? []).some((item) => item.required && !item.pass))
     fail('QUALITY', 'unresolved issue, package error or required assembly failure')
-  const generation = await json<{ realProviderGenerationPerformed?: boolean }>(path.join(root, 'generation-report.json'))
-  if (generation.realProviderGenerationPerformed !== true) fail('GENERATION', 'B real provider generation not evidenced')
+  const generation = await json<{ realProviderGenerationPerformed?: boolean; realProviderTasks?: Array<{
+    provider: string; taskId: string; promptSha256: string; assetId: string; outputSha256: string; costUsd: number; adopted: boolean
+  }> }>(path.join(root, 'generation-report.json'))
+  const lineage = await json<{ assets: Array<{ assetId: string; sha256: string }> }>(path.join(root, 'asset-lineage.json'))
+  const providerTasks = generation.realProviderTasks ?? []
+  if (generation.realProviderGenerationPerformed !== true || !providerTasks.some((task) => task.adopted && task.provider && task.taskId && /^[a-f0-9]{64}$/.test(task.promptSha256) && /^[a-f0-9]{64}$/.test(task.outputSha256) && Number.isFinite(task.costUsd) && task.costUsd >= 0 && lineage.assets.some((asset) => asset.assetId === task.assetId && asset.sha256 === task.outputSha256)))
+    fail('GENERATION', 'no adopted B provider task with task ID, prompt hash, cost and matching release asset')
   const provenance = await json<{ inputImportId?: string }>(path.join(root, 'provenance.json'))
   if (!provenance.inputImportId) fail('INPUT', 'source import missing')
   else {
@@ -81,7 +86,7 @@ export async function auditRelease(storyId: string, releaseId: string, dataDir: 
       const reviewDir = path.join(importDir, 'reviews', reviewId)
       const job = await readOptional<{ status: string }>(path.join(reviewDir, 'job.json'))
       const report = await readOptional<ReviewReport>(path.join(reviewDir, 'report.json'))
-      if (job?.status !== 'pass' || report?.decision !== 'pass' || report.snapshotHash !== receipt.snapshotHash)
+      if (job?.status !== 'pass' || report?.scope !== 'input' || report.decision !== 'pass' || report.snapshotHash !== receipt.snapshotHash || report.modelRecord?.requestedModel !== 'deepseek-flash' || !report.modelRecord.requestId || report.coverage?.some((item) => item.status !== 'assessed'))
         fail('INPUT_REVIEW', asset.assetId)
     }
   }
@@ -91,7 +96,7 @@ export async function auditRelease(storyId: string, releaseId: string, dataDir: 
     if (!/^world-review-[a-f0-9]{20}$/.test(entry)) continue
     const job = await readOptional<{ status: string }>(path.join(reviewRoot, entry, 'job.json'))
     const report = await readOptional<ReviewReport>(path.join(reviewRoot, entry, 'report.json'))
-    if (job?.status === 'pass' && report?.decision === 'pass' && report.snapshotHash === snapshotHash && Array.isArray(report.unassessed) && !report.unassessed.length) worldPassed = true
+    if (job?.status === 'pass' && report?.scope === 'world' && report.decision === 'pass' && report.snapshotHash === snapshotHash && report.modelRecord?.requestedModel === 'deepseek-flash' && report.modelRecord.requestId && Array.isArray(report.coverage) && report.coverage.every((item) => item.status === 'assessed') && Array.isArray(report.unassessed) && !report.unassessed.length) worldPassed = true
   }
   if (!worldPassed) fail('WORLD_REVIEW', 'no passing DeepSeek world review for this release snapshot')
 
@@ -100,7 +105,7 @@ export async function auditRelease(storyId: string, releaseId: string, dataDir: 
     fail('ACCEPTANCE', 'fixed-environment performance, music, historical and continuous-play evidence missing')
   else {
     const record = await readOptional<{ input: WorldFeedback }>(path.join(dataDir, 'viewer-feedback', storyId, acceptance.viewerFeedbackId, 'record.json'))
-    if (record?.input.releaseId !== releaseId || record.input.sceneRevision !== release.sceneRevision || record.input.viewerBuild !== acceptance.viewerBuild || record.input.measurements.viewport[0] !== 1440 || record.input.measurements.viewport[1] !== 900 || record.input.result !== 'accepted' || record.input.issues.some((issue) => issue.severity === 'blocking'))
+    if (record?.input?.releaseId !== releaseId || record.input.sceneRevision !== release.sceneRevision || record.input.viewerBuild !== acceptance.viewerBuild || record.input.measurements?.viewport?.[0] !== 1440 || record.input.measurements?.viewport?.[1] !== 900 || record.input.result !== 'accepted' || !Array.isArray(record.input.issues) || record.input.issues.some((issue) => issue.severity === 'blocking'))
       fail('VIEWER_ACCEPTANCE', 'C feedback does not accept this exact release without blockers')
   }
   return { storyId, releaseId, snapshotHash, ready: gates.length === 0, gates }

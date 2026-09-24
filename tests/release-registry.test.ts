@@ -46,6 +46,9 @@ describe('release registry', () => {
     const generationPath = path.join(release.path, 'generation-report.json')
     const generation = JSON.parse(await readFile(generationPath, 'utf8'))
     generation.realProviderGenerationPerformed = true
+    const lineage = JSON.parse(await readFile(path.join(release.path, 'asset-lineage.json'), 'utf8'))
+    generation.realProviderTasks = [{ provider: 'synthetic', taskId: 'synthetic-task', promptSha256: 'a'.repeat(64),
+      assetId: lineage.assets[0].assetId, outputSha256: lineage.assets[0].sha256, costUsd: 0, adopted: true }]
     await put(generationPath, generation)
     const manifestPath = path.join(release.path, 'release.json')
     const manifest = JSON.parse(await readFile(manifestPath, 'utf8'))
@@ -56,10 +59,12 @@ describe('release registry', () => {
     const assetId = 'asset-pack-bundle'
     const inputReview = path.join(data, 'imports', imported.importId, 'reviews', `review-${receipt.snapshotHash.slice(0, 20)}-${assetId}`)
     await put(path.join(inputReview, 'job.json'), { status: 'pass' })
-    await put(path.join(inputReview, 'report.json'), { decision: 'pass', snapshotHash: receipt.snapshotHash })
+    await put(path.join(inputReview, 'report.json'), { scope: 'input', decision: 'pass', snapshotHash: receipt.snapshotHash,
+      modelRecord: { requestedModel: 'deepseek-flash', requestId: 'synthetic-input-request' }, coverage: [{ status: 'assessed' }] })
     const worldReview = path.join(data, 'world-reviews', release.storyId, release.releaseId, `world-review-${snapshotHash.slice(0, 20)}`)
     await put(path.join(worldReview, 'job.json'), { status: 'pass' })
-    await put(path.join(worldReview, 'report.json'), { decision: 'pass', snapshotHash, unassessed: [] })
+    await put(path.join(worldReview, 'report.json'), { scope: 'world', decision: 'pass', snapshotHash, unassessed: [],
+      modelRecord: { requestedModel: 'deepseek-flash', requestId: 'synthetic-world-request' }, coverage: [{ status: 'assessed' }] })
     const viewerFeedbackId = 'synthetic-accepted-001'
     await put(path.join(data, 'viewer-feedback', release.storyId, viewerFeedbackId, 'record.json'), { input: {
       releaseId: release.releaseId, sceneRevision: manifest.sceneRevision, result: 'accepted', viewerBuild: 'synthetic-viewer',

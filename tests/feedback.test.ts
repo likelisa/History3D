@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest'
 import { spawnSync } from 'node:child_process'
-import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
+import { mkdir, mkdtemp, readFile, rm, utimes, writeFile } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 import { storeBundle } from '../processing/src/bundles.ts'
@@ -78,6 +78,15 @@ describe('viewer feedback', () => {
     await rm(staleLock, { recursive: true })
     await mkdir(staleLock, { recursive: true })
     await writeFile(path.join(staleLock, 'owner.json'), JSON.stringify({ pid: 999999, startedAt: Date.now() - 60_000 }))
+    const staleRecovery = `${staleLock}.recovery`
+    await mkdir(staleRecovery)
+    const oldTime = new Date(Date.now() - 180_000)
+    await utimes(staleRecovery, oldTime, oldTime)
+    const selectedPath = path.join(data, 'registry', base.storyId, 'selected-assets', 'asset-pack-bundle.json')
+    await mkdir(path.dirname(selectedPath), { recursive: true })
+    await writeFile(selectedPath, '{bad json')
+    await expect(reviewViewerPatch(decision, data)).rejects.toThrow()
+    await rm(selectedPath)
     const selected = await reviewViewerPatch(decision, data)
     expect(selected.status).toBe('integrated_candidate')
     expect(selected.assetRevision).toBe(2)

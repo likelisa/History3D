@@ -68,27 +68,32 @@ async function unpack(zipPath: string, outputDir: string, options: BundleOptions
     const child = spawn(options.pythonPath ?? process.env.PROCESSING_PYTHON ?? '/usr/bin/python3', [script, zipPath, outputDir], { stdio: ['ignore', 'pipe', 'pipe'] })
     let stdout = ''
     let stderr = ''
-    let timedOut = false
-    let truncated = false
-    const timeout = setTimeout(() => { timedOut = true; child.kill('SIGTERM') }, options.timeoutMs ?? 120_000)
-    if (!child.stdout || !child.stderr) { reject(new Error('BUNDLE_INVALID: extractor streams unavailable')); return }
+    let settled = false
+    let timeout: NodeJS.Timeout | null = null
+    const finish = (error: Error | null, value?: { files: FileDigest[]; uncompressedBytes: number }): void => {
+      if (settled) return
+      settled = true
+      if (timeout) clearTimeout(timeout)
+      if (error) reject(error)
+      else resolve(value!)
+    }
+    if (!child.stdout || !child.stderr) { child.kill('SIGKILL'); finish(new Error('BUNDLE_INVALID: extractor streams unavailable')); return }
+    timeout = setTimeout(() => { child.kill('SIGKILL'); finish(new Error('BUNDLE_TIMEOUT: extractor exceeded time limit')) }, options.timeoutMs ?? 120_000)
     child.stdout.setEncoding('utf8').on('data', (chunk: string) => {
-      if (stdout.length + chunk.length > 2_000_000) { truncated = true; child.kill('SIGTERM'); return }
+      if (stdout.length + chunk.length > 2_000_000) { child.kill('SIGKILL'); finish(new Error('BUNDLE_INVALID: extractor output exceeded limit')); return }
       stdout += chunk
     })
     child.stderr.setEncoding('utf8').on('data', (chunk: string) => { stderr += chunk.slice(0, Math.max(0, 2_000 - stderr.length)) })
-    child.on('error', (error) => { clearTimeout(timeout); reject(error) })
+    child.on('error', (error) => finish(error))
     child.on('exit', (code) => {
-      clearTimeout(timeout)
-      if (timedOut) { reject(new Error('BUNDLE_TIMEOUT: extractor exceeded time limit')); return }
-      if (truncated) { reject(new Error('BUNDLE_INVALID: extractor output exceeded limit')); return }
-      if (code !== 0) { reject(new Error(`BUNDLE_INVALID: ${stderr.trim() || `extractor exit ${code}`}`)); return }
+      if (settled) return
+      if (code !== 0) { finish(new Error(`BUNDLE_INVALID: ${stderr.trim() || `extractor exit ${code}`}`)); return }
       try {
         const parsed = JSON.parse(stdout) as { files?: unknown; uncompressedBytes?: unknown }
         if (!Array.isArray(parsed.files) || typeof parsed.uncompressedBytes !== 'number' || !Number.isSafeInteger(parsed.uncompressedBytes) || parsed.uncompressedBytes < 0 || parsed.files.some((file) => !file || typeof file.path !== 'string' || !Number.isSafeInteger(file.bytes) || !/^[a-f0-9]{64}$/.test(file.sha256))) throw new Error('invalid extractor shape')
-        resolve(parsed as { files: FileDigest[]; uncompressedBytes: number })
+        finish(null, parsed as { files: FileDigest[]; uncompressedBytes: number })
       }
-      catch { reject(new Error('BUNDLE_INVALID: extractor result invalid')) }
+      catch { finish(new Error('BUNDLE_INVALID: extractor result invalid')) }
     })
   })
 }

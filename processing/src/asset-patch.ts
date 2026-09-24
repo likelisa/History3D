@@ -18,6 +18,11 @@ const digest = (value: Buffer | string): string => createHash('sha256').update(v
 const json = async <T>(file: string): Promise<T> => JSON.parse(await readFile(file, 'utf8')) as T
 const putJson = async (file: string, value: unknown): Promise<void> => { await mkdir(path.dirname(file), { recursive: true }); const temp = `${file}.${randomUUID()}.tmp`; await writeFile(temp, JSON.stringify(value, null, 2) + '\n'); await rename(temp, file) }
 const validId = (value: string): boolean => /^[A-Za-z0-9][A-Za-z0-9._-]{0,99}$/.test(value)
+const safeRelative = (value: string): boolean => Boolean(value) && !path.isAbsolute(value) && !value.includes('\\') && value.split('/').every((part) => part && part !== '.' && part !== '..')
+const missingOnly = (error: unknown): null => {
+  if ((error as NodeJS.ErrnoException).code === 'ENOENT') return null
+  throw error
+}
 
 export async function reviewViewerPatch(decision: PatchDecision, dataDir: string): Promise<PatchDecisionResult> {
   if (!validId(decision.decisionId) || !validId(decision.operator) || !decision.reason?.trim() || !validId(decision.feedbackId) || !validId(decision.assetId) || !/^[a-z0-9][a-z0-9-]{0,63}$/.test(decision.storyId) || !/^release-[a-f0-9]{20}$/.test(decision.baseReleaseId) || !/^[a-f0-9]{64}$/.test(decision.candidateHash) || !/^[a-f0-9]{64}$/.test(decision.baseSha256) || !Number.isSafeInteger(decision.baseAssetRevision) || decision.baseAssetRevision < 1 || !['integrate', 'reject'].includes(decision.action)) throw new Error('PATCH_DECISION_INVALID')
@@ -44,6 +49,7 @@ export async function reviewViewerPatch(decision: PatchDecision, dataDir: string
   const baseLineage = await json<{ assets: Array<{ assetId: string; adoptedRevision: number; sha256: string; path: string }> }>(path.join(baseDir, 'asset-lineage.json'))
   const parent = baseLineage.assets.find((item) => item.assetId === decision.assetId)
   if (!parent || parent.adoptedRevision !== decision.baseAssetRevision || parent.sha256 !== decision.baseSha256) throw new Error('ASSET_REVISION_CONFLICT')
+  if (!safeRelative(patchResult.candidatePath)) throw new Error('PATCH_CANDIDATE_PATH_INVALID')
   const candidate = await readFile(path.join(recordDir, patchResult.candidatePath))
   if (digest(candidate) !== decision.candidateHash) throw new Error('PATCH_CANDIDATE_CHANGED')
   const candidateBounds = readGlbBounds(candidate.buffer.slice(candidate.byteOffset, candidate.byteOffset + candidate.byteLength) as ArrayBuffer)
@@ -51,6 +57,7 @@ export async function reviewViewerPatch(decision: PatchDecision, dataDir: string
   const scene = await json<SceneFile>(path.join(baseDir, 'scene.json'))
   const asset = scene.assets.find((item) => item.id === decision.assetId)
   if (!asset) throw new Error('ASSET_NOT_FOUND')
+  if (!safeRelative(asset.path) || parent.path !== asset.path) throw new Error('ASSET_PATH_INVALID')
   if (!patch.preservesDimensions || candidateBounds.dimensions.some((value, axis) => Math.abs(value - asset.dimensionsM[axis]) > sizeTolerance(asset.dimensionsM[axis])) || Math.abs(candidateBounds.min[1]) > 0.05) throw new Error('PATCH_DIMENSION_REVIEW_REQUIRED')
 
   const lockDir = path.join(dataDir, 'locks', `${decision.storyId}-${decision.assetId}.lock`)
@@ -58,7 +65,7 @@ export async function reviewViewerPatch(decision: PatchDecision, dataDir: string
   const lockToken = await acquireAssetLock(lockDir)
   try {
     const selectedPath = path.join(dataDir, 'registry', decision.storyId, 'selected-assets', `${decision.assetId}.json`)
-    const selected = await json<{ baseSha256: string; candidateHash: string; assetRevision: number; decisionId: string; releaseId: string }>(selectedPath).catch(() => null)
+    const selected = await json<{ baseSha256: string; candidateHash: string; assetRevision: number; decisionId: string; releaseId: string }>(selectedPath).catch(missingOnly)
     if (selected && selected.baseSha256 !== decision.baseSha256) throw new Error('ASSET_REVISION_CONFLICT')
     if (selected && selected.candidateHash !== decision.candidateHash) throw new Error('ASSET_REVISION_CONFLICT')
     if (selected) {
@@ -88,7 +95,7 @@ export async function reviewViewerPatch(decision: PatchDecision, dataDir: string
       scene.sceneRevision += 1
       await putJson(path.join(stage, 'scene.json'), scene)
       const experiencePath = path.join(stage, 'experience.json')
-      const experience = await json<{ sceneRevision: number }>(experiencePath).catch(() => null)
+      const experience = await json<{ sceneRevision: number }>(experiencePath).catch(missingOnly)
       if (experience) { experience.sceneRevision = scene.sceneRevision; await putJson(experiencePath, experience) }
       const lineage = structuredClone(baseLineage)
       const updated = lineage.assets.find((item) => item.assetId === decision.assetId)!
@@ -144,7 +151,16 @@ async function acquireAssetLock(lockDir: string): Promise<string> {
       if (!['EEXIST', 'ENOTEMPTY'].includes((error as NodeJS.ErrnoException).code ?? '')) throw error
       const recoveryLock = `${lockDir}.recovery`
       try { await mkdir(recoveryLock) }
-      catch { await new Promise((resolve) => setTimeout(resolve, 40)); continue }
+      catch (recoveryError) {
+        if ((recoveryError as NodeJS.ErrnoException).code !== 'EEXIST') throw recoveryError
+        const info = await stat(recoveryLock).catch(missingOnly)
+        if (info && Date.now() - info.mtimeMs >= 120_000) {
+          const staleRecovery = `${recoveryLock}.stale-${randomUUID()}`
+          await rename(recoveryLock, staleRecovery).catch((renameError) => { if ((renameError as NodeJS.ErrnoException).code !== 'ENOENT') throw renameError })
+          await rm(staleRecovery, { recursive: true, force: true })
+        }
+        await new Promise((resolve) => setTimeout(resolve, 40)); continue
+      }
       try {
         const lockInfo = await stat(lockDir).catch(() => null)
         if (lockInfo) {

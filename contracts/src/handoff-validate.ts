@@ -20,11 +20,6 @@ const schemas = { 'handoff.json': ajv.compile(handoffSchema), 'plan.json': ajv.c
 
 export async function validateCollectionHandoff(reader: PackageReader): Promise<HandoffProblem[]> {
   const problems: HandoffProblem[] = []
-  const binaries = new Map<string, ArrayBuffer | null>()
-  const readBinary = async (file: string): Promise<ArrayBuffer | null> => {
-    if (!binaries.has(file)) binaries.set(file, await reader.readBinary(file))
-    return binaries.get(file) ?? null
-  }
   async function json<T>(path: keyof typeof schemas): Promise<T | null> {
     const value = await reader.readText(path)
     if (value === null) { problems.push({ path, message: 'required file missing' }); return null }
@@ -49,7 +44,7 @@ export async function validateCollectionHandoff(reader: PackageReader): Promise<
   for (const file of handoff.files) {
     if (!safePath(file.path) || listed.has(file.path) || !hexHash(file.sha256) || !Number.isSafeInteger(file.bytes) || file.bytes < 0) { problems.push({ path: 'handoff.json', message: `invalid file entry: ${file.path}` }); continue }
     listed.add(file.path)
-    const binary = await readBinary(file.path)
+    const binary = await reader.readBinary(file.path)
     if (!binary) { problems.push({ path: file.path, message: 'listed file missing' }); continue }
     const bytes = Buffer.from(binary)
     if (bytes.length !== file.bytes || createHash('sha256').update(bytes).digest('hex') !== file.sha256) problems.push({ path: file.path, message: 'file digest mismatch' })
@@ -68,7 +63,7 @@ export async function validateCollectionHandoff(reader: PackageReader): Promise<
     if (asset.scaleStatus === 'unknown' && asset.dimensionsM !== null) problems.push({ path: asset.path, message: 'unknown scale must have null dimensions' })
     if (asset.scaleStatus === 'known' && (!asset.dimensionsM || asset.dimensionsM.some((value) => !Number.isFinite(value) || value <= 0))) problems.push({ path: asset.path, message: 'known scale needs positive dimensions' })
     if (asset.scaleStatus === 'known' && (asset.inputUnits !== 'm' || asset.upAxis !== 'Y')) problems.push({ path: asset.path, message: 'known GLB must be normalized to meter units and Y-up' })
-    const binary = safePath(asset.path) ? await readBinary(asset.path) : null
+    const binary = safePath(asset.path) ? await reader.readBinary(asset.path) : null
     const bounds = binary ? readGlbBounds(binary) : null
     if (binary && !bounds) problems.push({ path: asset.path, message: 'invalid GLB geometry' })
     if (bounds && asset.scaleStatus === 'known' && asset.dimensionsM && bounds.dimensions.some((measured, axis) => Math.abs(measured - asset.dimensionsM![axis]) > sizeTolerance(asset.dimensionsM![axis]))) problems.push({ path: asset.path, message: 'known dimensions do not match GLB bounds' })
@@ -79,6 +74,9 @@ export async function validateCollectionHandoff(reader: PackageReader): Promise<
   }
   for (const requiredBriefId of plan.requiredBriefIds) if (!assets.assets.some((asset) => asset.briefId === requiredBriefId)) problems.push({ path: 'plan.json', message: `required asset missing: ${requiredBriefId}` })
   for (const id of plan.requiredBriefIds) if (!briefs.has(id)) problems.push({ path: 'plan.json', message: `unknown required brief: ${id}` })
+  for (const id of plan.optionalBriefIds) if (!briefs.has(id)) problems.push({ path: 'plan.json', message: `unknown optional brief: ${id}` })
+  if (plan.focusBriefId !== null && !briefs.has(plan.focusBriefId)) problems.push({ path: 'plan.json', message: `unknown focus brief: ${plan.focusBriefId}` })
+  for (const beat of plan.beats) for (const id of beat.briefIds) if (!briefs.has(id)) problems.push({ path: 'plan.json', message: `unknown beat brief: ${beat.id}/${id}` })
   for (const relation of plan.relations) if (!briefs.has(relation.parentBriefId) || !briefs.has(relation.childBriefId)) problems.push({ path: 'plan.json', message: `unknown relation brief: ${relation.id}` })
   return problems
 }

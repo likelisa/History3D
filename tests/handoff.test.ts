@@ -62,4 +62,17 @@ describe('collection handoff', () => {
     expect(problems.some((problem) => problem.path === 'sources.json')).toBe(true)
     expect(problems.some((problem) => problem.message.includes('unknown brief'))).toBe(false)
   })
+
+  it('checks optional, focus and beat brief references', async () => {
+    const reader = createNodeReader(root)
+    const plan = JSON.parse((await reader.readText('plan.json'))!)
+    plan.optionalBriefIds = ['missing-optional']
+    plan.focusBriefId = 'missing-focus'
+    plan.beats[0].briefIds = ['missing-beat']
+    const altered = { ...reader, readText: async (relPath: string) => relPath === 'plan.json' ? JSON.stringify(plan) : reader.readText(relPath) }
+    const messages = (await validateCollectionHandoff(altered)).map((problem) => problem.message)
+    expect(messages).toContain('unknown optional brief: missing-optional')
+    expect(messages).toContain('unknown focus brief: missing-focus')
+    expect(messages).toContain(`unknown beat brief: ${plan.beats[0].id}/missing-beat`)
+  })
 })
