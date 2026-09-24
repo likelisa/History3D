@@ -13,3 +13,8 @@ coverage
 
 # 生成物：由 npm run prepare:assets 从 packages/ 复制而来
 viewer/public/packages
+
+processing/demo/node_modules/
+processing/demo/dist/
+processing/demo/*.tsbuildinfo
+processing/demo/public/cases/tripo/assets/*.glb

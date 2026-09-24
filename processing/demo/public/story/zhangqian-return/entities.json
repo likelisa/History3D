@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "story_id": "zhangqian_return_128",
+  "entities": [
+    {
+      "id": "depart",
+      "name": "启程回国",
+      "kind": "event",
+      "evidence": "recorded",
+      "source_ids": [
+        "wiki-zhangqian"
+      ],
+      "dimensions_m": [
+        1.4,
+        1.8,
+        1.4
+      ],
+      "dimensions_basis": "仅用于路线节点的统一可视化标记，不代表历史建筑、人物或地理尺度",
+      "render_kind": "route_marker"
+    },
+    {
+      "id": "detour",
+      "name": "改走南缘",
+      "kind": "place",
+      "evidence": "recorded",
+      "source_ids": [
+        "wiki-zhangqian"
+      ],
+      "dimensions_m": [
+        1.4,
+        1.8,
+        1.4
+      ],
+      "dimensions_basis": "仅用于路线节点的统一可视化标记，不代表历史建筑、人物或地理尺度",
+      "render_kind": "route_marker"
+    },
+    {
+      "id": "shache",
+      "name": "莎车",
+      "kind": "place",
+      "evidence": "recorded",
+      "source_ids": [
+        "wiki-zhangqian"
+      ],
+      "dimensions_m": [
+        1.4,
+        1.8,
+        1.4
+      ],
+      "dimensions_basis": "仅用于路线节点的统一可视化标记，不代表历史建筑、人物或地理尺度",
+      "render_kind": "route_marker"
+    },
+    {
+      "id": "yutian",
+      "name": "于阗",
+      "kind": "place",
+      "evidence": "recorded",
+      "source_ids": [
+        "wiki-zhangqian"
+      ],
+      "dimensions_m": [
+        1.4,
+        1.8,
+        1.4
+      ],
+      "dimensions_basis": "仅用于路线节点的统一可视化标记，不代表历史建筑、人物或地理尺度",
+      "render_kind": "route_marker"
+    },
+    {
+      "id": "loulan",
+      "name": "楼兰",
+      "kind": "place",
+      "evidence": "recorded",
+      "source_ids": [
+        "wiki-zhangqian"
+      ],
+      "dimensions_m": [
+        1.4,
+        1.8,
+        1.4
+      ],
+      "dimensions_basis": "仅用于路线节点的统一可视化标记，不代表历史建筑、人物或地理尺度",
+      "render_kind": "route_marker"
+    },
+    {
+      "id": "recapture",
+      "name": "再次被俘",
+      "kind": "event",
+      "evidence": "recorded",
+      "source_ids": [
+        "shiji123"
+      ],
+      "dimensions_m": [
+        1.4,
+        1.8,
+        1.4
+      ],
+      "dimensions_basis": "仅用于路线节点的统一可视化标记，不代表历史建筑、人物或地理尺度",
+      "render_kind": "route_marker"
+    }
+  ]
+}

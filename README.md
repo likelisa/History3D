@@ -9,6 +9,10 @@
 > 当前场景包 `status = draft`，全部尺寸与布局都是 `illustrative`（演示设定）。
 > 页面会持续显示「技术占位，未经历史核验」。它验证的是工具链路，不是历史结论。
 
+## 团队分支与处理层演示
+
+后续开发以 `dev` 为集成基线：从 `dev` 拉取功能分支，验证后合回 `dev`。`main` 暂不改动。处理层 Python 管线位于 [`processing/`](processing/README.md)，张骞三幕交互演示位于 `processing/demo/`，可独立运行；根目录 `npm run dev` 仍运行展示层 C 的正式 `viewer/`。演示包使用旧格式，不应当作 `packages/` v0.1 正式协议包。
+
 ## 运行环境
 
 本仓库在以下版本实测通过（演示机为 macOS + Chrome）：

@@ -1,0 +1,26 @@
+name: Processing tests
+on:
+  pull_request:
+    paths:
+      - 'processing/**'
+      - '.github/workflows/processing.yml'
+  push:
+    branches: [dev]
+    paths:
+      - 'processing/**'
+      - '.github/workflows/processing.yml'
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: python -m unittest discover -s processing/tests -v
+      - run: python processing/pipeline.py validate processing/sample

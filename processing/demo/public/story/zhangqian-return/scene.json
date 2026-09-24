@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "story_id": "zhangqian_return_128",
+  "units": "meters",
+  "up_axis": "Y",
+  "origin": "model_bottom_center",
+  "spawn": {
+    "position_m": [
+      -14,
+      1.7,
+      4
+    ],
+    "look_at_m": [
+      -9,
+      1,
+      -3
+    ]
+  },
+  "bounds_m": {
+    "min": [
+      -22,
+      -2,
+      -15
+    ],
+    "max": [
+      22,
+      8,
+      14
+    ]
+  },
+  "placements": [
+    {
+      "entity_id": "depart",
+      "position_m": [
+        -14,
+        0,
+        1
+      ],
+      "rotation_rad": [
+        0,
+        0,
+        0
+      ],
+      "asset": null,
+      "candidate_asset": null
+    },
+    {
+      "entity_id": "detour",
+      "position_m": [
+        -9,
+        0,
+        -3
+      ],
+      "rotation_rad": [
+        0,
+        0,
+        0
+      ],
+      "asset": null,
+      "candidate_asset": null
+    },
+    {
+      "entity_id": "shache",
+      "position_m": [
+        -3,
+        0,
+        -3.3
+      ],
+      "rotation_rad": [
+        0,
+        0,
+        0
+      ],
+      "asset": null,
+      "candidate_asset": null
+    },
+    {
+      "entity_id": "yutian",
+      "position_m": [
+        3,
+        0,
+        -1
+      ],
+      "rotation_rad": [
+        0,
+        0,
+        0
+      ],
+      "asset": null,
+      "candidate_asset": null
+    },
+    {
+      "entity_id": "loulan",
+      "position_m": [
+        9,
+        0,
+        1.4
+      ],
+      "rotation_rad": [
+        0,
+        0,
+        0
+      ],
+      "asset": null,
+      "candidate_asset": null
+    },
+    {
+      "entity_id": "recapture",
+      "position_m": [
+        14,
+        0,
+        3.5
+      ],
+      "rotation_rad": [
+        0,
+        0,
+        0
+      ],
+      "asset": null,
+      "candidate_asset": null
+    }
+  ],
+  "story_points": [
+    {
+      "id": "point_depart",
+      "entity_id": "depart",
+      "position_m": [
+        -14,
+        1,
+        1
+      ],
+      "evidence": "recorded",
+      "source_ids": [
+        "wiki-zhangqian"
+      ],
+      "text": "张骞结束在西域的访察，开始归汉。这段行程的目标是带回大宛、大夏、康居等地的见闻。",
+      "eyebrow": "元朔元年 · 前128年"
+    },
+    {
+      "id": "point_detour",
+      "entity_id": "detour",
+      "position_m": [
+        -9,
+        1,
+        -3
+      ],
+      "evidence": "recorded",
+      "source_ids": [
+        "wiki-zhangqian"
+      ],
+      "text": "他没有原路直返，而是绕经葱岭，沿昆仑山北麓行进。这里展示的是“改变归途”的选择。",
+      "eyebrow": "避免再遭俘获"
+    },
+    {
+      "id": "point_shache",
+      "entity_id": "shache",
+      "position_m": [
+        -3,
+        1,
+        -3.3
+      ],
+      "evidence": "recorded",
+      "source_ids": [
+        "wiki-zhangqian"
+      ],
+      "text": "这段二手整理把莎车列为南缘绕行中的一站。我们能知道顺序，不能据此确定停留时长和当时所见的街景。",
+      "eyebrow": "归途节点 01"
+    },
+    {
+      "id": "point_yutian",
+      "entity_id": "yutian",
+      "position_m": [
+        3,
+        1,
+        -1
+      ],
+      "evidence": "recorded",
+      "source_ids": [
+        "wiki-zhangqian"
+      ],
+      "text": "继续东行，词条记载经过于阗。场景里的绿地只是帮助辨认节点，不是于阗城或绿洲面貌的历史复原。",
+      "eyebrow": "归途节点 02"
+    },
+    {
+      "id": "point_loulan",
+      "entity_id": "loulan",
+      "position_m": [
+        9,
+        1,
+        1.4
+      ],
+      "evidence": "recorded",
+      "source_ids": [
+        "wiki-zhangqian"
+      ],
+      "text": "路线继续经过楼兰。这里的模型只表示“抵达路线中的下一个地名”，不代表楼兰遗址的形态或精确位置。",
+      "eyebrow": "归途节点 03"
+    },
+    {
+      "id": "point_recapture",
+      "entity_id": "recapture",
+      "position_m": [
+        14,
+        1,
+        3.5
+      ],
+      "evidence": "recorded",
+      "source_ids": [
+        "shiji123"
+      ],
+      "text": "《史记》明确记载张骞归途中再次为匈奴所得，并被扣留岁余；这段材料没有给出被俘的精确地点。",
+      "eyebrow": "归途在这里中断"
+    }
+  ]
+}

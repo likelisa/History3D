@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "story_id": "zhangqian_south_detour",
+  "entities": [
+    {
+      "id": "foothill_terrain",
+      "name": "山前砾坡与路面",
+      "kind": "terrain",
+      "evidence": "inferred",
+      "source_ids": [
+        "tarim-geo"
+      ],
+      "dimensions_m": [
+        64,
+        7,
+        74
+      ],
+      "dimensions_basis": "Demo 体验空间尺寸，不是古道路宽或真实山体尺度",
+      "render_kind": "procedural_terrain"
+    },
+    {
+      "id": "traveler_scale",
+      "name": "归途旅人的人尺度剪影",
+      "kind": "person_reference",
+      "evidence": "demo",
+      "source_ids": [
+        "shiji123"
+      ],
+      "dimensions_m": [
+        0.6,
+        1.7,
+        0.6
+      ],
+      "dimensions_basis": "视觉参照取1.7米，仅用于人尺度；无服饰或相貌考据",
+      "render_kind": "neutral_silhouette"
+    },
+    {
+      "id": "foothill_boulder_01",
+      "name": "山前岩体候选",
+      "kind": "environment_asset",
+      "evidence": "inferred",
+      "source_ids": [
+        "tarim-geo"
+      ],
+      "dimensions_m": [
+        2.6,
+        1.55,
+        1.8
+      ],
+      "dimensions_basis": "演示摆放尺寸，不是历史岩体测量",
+      "render_kind": "tripo_candidate"
+    },
+    {
+      "id": "lead_traveler",
+      "name": "旅人",
+      "kind": "traveler",
+      "evidence": "demo",
+      "source_ids": [
+        "shiji123"
+      ],
+      "dimensions_m": [
+        1,
+        1.7,
+        1
+      ],
+      "dimensions_basis": "概念演示的视觉比例；人物身份、数量、服饰、货物形制及冲突过程未获史料支持",
+      "render_kind": "procedural_traveler"
+    },
+    {
+      "id": "companion",
+      "name": "同行者",
+      "kind": "traveler",
+      "evidence": "demo",
+      "source_ids": [
+        "shiji123"
+      ],
+      "dimensions_m": [
+        1,
+        1.7,
+        1
+      ],
+      "dimensions_basis": "概念演示的视觉比例；人物身份、数量、服饰、货物形制及冲突过程未获史料支持",
+      "render_kind": "procedural_traveler"
+    },
+    {
+      "id": "pack_animal",
+      "name": "驮载剪影",
+      "kind": "animal",
+      "evidence": "demo",
+      "source_ids": [
+        "tarim-geo"
+      ],
+      "dimensions_m": [
+        1,
+        1.7,
+        1
+      ],
+      "dimensions_basis": "概念演示的视觉比例；人物身份、数量、服饰、货物形制及冲突过程未获史料支持",
+      "render_kind": "procedural_animal"
+    },
+    {
+      "id": "goods",
+      "name": "旅途货包",
+      "kind": "cargo",
+      "evidence": "demo",
+      "source_ids": [
+        "tarim-geo"
+      ],
+      "dimensions_m": [
+        1,
+        1.7,
+        1
+      ],
+      "dimensions_basis": "概念演示的视觉比例；人物身份、数量、服饰、货物形制及冲突过程未获史料支持",
+      "render_kind": "procedural_cargo"
+    },
+    {
+      "id": "watch_fire",
+      "name": "歇脚火堆",
+      "kind": "fire",
+      "evidence": "demo",
+      "source_ids": [
+        "tarim-geo"
+      ],
+      "dimensions_m": [
+        1,
+        1.7,
+        1
+      ],
+      "dimensions_basis": "概念演示的视觉比例；人物身份、数量、服饰、货物形制及冲突过程未获史料支持",
+      "render_kind": "procedural_fire"
+    },
+    {
+      "id": "waystone",
+      "name": "路旁界石",
+      "kind": "stone",
+      "evidence": "demo",
+      "source_ids": [
+        "tarim-geo"
+      ],
+      "dimensions_m": [
+        1,
+        1.7,
+        1
+      ],
+      "dimensions_basis": "概念演示的视觉比例；人物身份、数量、服饰、货物形制及冲突过程未获史料支持",
+      "render_kind": "procedural_stone"
+    },
+    {
+      "id": "pursuer_a",
+      "name": "追兵剪影甲",
+      "kind": "pursuer",
+      "evidence": "demo",
+      "source_ids": [
+        "shiji123"
+      ],
+      "dimensions_m": [
+        1,
+        1.7,
+        1
+      ],
+      "dimensions_basis": "概念演示的视觉比例；人物身份、数量、服饰、货物形制及冲突过程未获史料支持",
+      "render_kind": "procedural_pursuer"
+    },
+    {
+      "id": "pursuer_b",
+      "name": "追兵剪影乙",
+      "kind": "pursuer",
+      "evidence": "demo",
+      "source_ids": [
+        "shiji123"
+      ],
+      "dimensions_m": [
+        1,
+        1.7,
+        1
+      ],
+      "dimensions_basis": "概念演示的视觉比例；人物身份、数量、服饰、货物形制及冲突过程未获史料支持",
+      "render_kind": "procedural_pursuer"
+    }
+  ]
+}

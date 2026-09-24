@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "story_id": "zhangqian_south_detour",
+  "sources": [
+    {
+      "id": "shiji123",
+      "title": "《史记·大宛列传》张骞段",
+      "url": "https://zh.wikisource.org/wiki/史記/卷123",
+      "excerpt": "大夏停留岁余后返回，沿南山欲从羌中归，再次为匈奴所得。",
+      "evidence": "recorded"
+    },
+    {
+      "id": "hanshu61",
+      "title": "《汉书·张骞李广利传》",
+      "url": "https://zh.wikisource.org/wiki/漢書/卷061",
+      "excerpt": "同样记载沿南山归汉及再次被俘；后述南路险、北路受匈奴威胁。",
+      "evidence": "recorded"
+    },
+    {
+      "id": "wiki-zhangqian",
+      "title": "《张骞》词条·第一次出使西域",
+      "url": "https://zh.wikipedia.org/wiki/張騫",
+      "excerpt": "提供前128年及南缘诸地的现代整理叙述。",
+      "evidence": "recorded"
+    },
+    {
+      "id": "tarim-geo",
+      "title": "《塔里木盆地》现代地貌",
+      "url": "https://zh.wikipedia.org/wiki/塔里木盆地",
+      "excerpt": "盆地边缘可见山地、山前砾质洪积带、冲积平原带与沙漠。用作视觉方向，并非古道证据。",
+      "evidence": "inferred"
+    }
+  ]
+}

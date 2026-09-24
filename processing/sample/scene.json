@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "story_id": "story_placeholder",
+  "units": "meters",
+  "up_axis": "Y",
+  "origin": "model_bottom_center",
+  "spawn": {
+    "position_m": [
+      0,
+      1.7,
+      5
+    ],
+    "look_at_m": [
+      0,
+      1,
+      0
+    ]
+  },
+  "bounds_m": {
+    "min": [
+      -10,
+      0,
+      -10
+    ],
+    "max": [
+      10,
+      5,
+      10
+    ]
+  },
+  "placements": [
+    {
+      "entity_id": "object_01",
+      "position_m": [
+        0,
+        0,
+        0
+      ],
+      "rotation_rad": [
+        0,
+        0,
+        0
+      ],
+      "asset": null,
+      "candidate_asset": null
+    }
+  ],
+  "story_points": []
+}
