@@ -131,9 +131,16 @@ export interface AssetStrategy {
 }
 
 export interface StrategyPolicy {
+  policyVersion: '1.0.0'
   maxPaidAttempts: number
   maxCostUsd: number
+  maxAttemptsPerAsset: number
+  maxReviewCycles: number
+  maxWallTimeSeconds: number
+  candidateCount: number
   allowedStrategyIds: string[]
+  preferredOrder: string[]
+  autoAdoptRules: string[]
   requireAssetReview: boolean
   requireWorldReview: boolean
 }

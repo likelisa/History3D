@@ -62,10 +62,14 @@ describe('experience sampler', () => {
     satchel.position = [8, 0, 8]
     scene.objects.push(satchel)
     experience.tracks.push({ id: 'satchel-on-tool', type: 'attachment', childObjectId: 'obj-satchel', parentObjectId: 'obj-tool', localPosition: [0.1, 0, 0], localYawRad: 0, startSeconds: 5, endSeconds: 25, evidenceType: 'illustrative' })
+    experience.tracks.push({ id: 'human-visible', type: 'visibility', objectId: 'obj-human-scale', evidenceType: 'illustrative', keyframes: [{ timeSeconds: 0, visible: true }, { timeSeconds: 20, visible: false }, { timeSeconds: 30, visible: false }] })
     expect(sampleExperience(scene, experience, 0).objects['obj-satchel'].position).toEqual([8, 0, 8])
     const middle = sampleExperience(scene, experience, 10)
     expect(middle.objects['obj-satchel'].position[0]).toBeCloseTo(middle.objects['obj-tool'].position[0])
     expect(middle.objects['obj-satchel'].position[2]).toBeCloseTo(middle.objects['obj-tool'].position[2] - 0.1)
+    const hidden = sampleExperience(scene, experience, 25)
+    expect(hidden.objects['obj-tool'].visible).toBe(false)
+    expect(hidden.objects['obj-satchel'].visible).toBe(false)
     expect(sampleExperience(scene, experience, 30).objects['obj-satchel'].position).toEqual([8, 0, 8])
   })
 
@@ -73,5 +77,7 @@ describe('experience sampler', () => {
     const { scene, experience } = fixture()
     experience.audio.push({ id: 'bad-audio', path: '../outside.mp3', startSeconds: 0, endSeconds: 10, loop: false, volume: 0.5, defaultEnabled: false, rights: 'test' })
     expect(validateExperience(scene, experience).some((item) => item.includes('EXPERIENCE_SCHEMA_INVALID') || item.includes('AUDIO_INVALID'))).toBe(true)
+    experience.audio[0].path = 'media/track..1.mp3'
+    expect(validateExperience(scene, experience)).toEqual([])
   })
 })

@@ -6,6 +6,8 @@ import { storeBundle } from './bundles.ts'
 import { submitWorldFeedback, type WorldFeedback } from './feedback.ts'
 import { ImportError, importCollection } from './intake.ts'
 import { runInputReview } from './review/orchestrator.ts'
+import { listStrategies, loadStrategyPolicy } from './strategies/registry.ts'
+import { proposeAssetTask } from './strategies/tasks.ts'
 
 const PREFIX = '/api/processing/v1'
 const MAX_JSON = 1_000_000
@@ -90,7 +92,18 @@ export function createProcessingServer(options: ServerOptions): Server {
         respond(res, 200, { handoffVersion: '1.0.0', transport: 'multipart ZIP', maxUploadBytes: MAX_UPLOAD, maxFiles: 500, maxGlbBytes: 128 * 1024 * 1024, instance: 'loopback-single', reviewModel: 'deepseek-flash', reviewAvailable: Boolean(options.reviewApiKey === undefined ? process.env.DEEPSEEK_API_KEY : options.reviewApiKey) }); return
       }
       if (req.method === 'GET' && parts[0] === 'strategies' && parts.length === 1) {
-        respond(res, 200, { strategies: [{ id: 'procedural-import', kind: 'procedural', available: true }, { id: 'blender-refine', kind: 'blender', available: false, reason: 'adapter not integrated' }, { id: 'tripo-generate', kind: 'generate', available: false, reason: 'budgeted service adapter not integrated' }] }); return
+        const policy = await loadStrategyPolicy(process.cwd())
+        respond(res, 200, { policy, strategies: listStrategies(policy, Boolean(process.env.TRIPO_API_KEY)) }); return
+      }
+      if (req.method === 'POST' && parts[0] === 'asset-tasks' && parts.length === 1) {
+        const request = await jsonBody<Parameters<typeof proposeAssetTask>[0]>(req)
+        const policy = await loadStrategyPolicy(process.cwd())
+        respond(res, 202, await proposeAssetTask(request, String(req.headers['idempotency-key'] ?? ''), dataDir, policy, Boolean(process.env.TRIPO_API_KEY)))
+        return
+      }
+      if (req.method === 'GET' && parts[0] === 'asset-tasks' && parts.length === 2 && /^task-[a-f0-9]{20}$/.test(parts[1])) {
+        respond(res, 200, await readJson<Record<string, unknown>>(path.join(dataDir, 'asset-tasks', parts[1], 'task.json')))
+        return
       }
       if (req.method === 'POST' && parts[0] === 'bundles' && parts.length === 1) {
         const type = String(req.headers['content-type'] ?? '')
@@ -183,7 +196,7 @@ export function createProcessingServer(options: ServerOptions): Server {
         : typed.code === 'ENOENT' ? 404
         : message === 'BUNDLE_SIZE_INVALID' || message === 'BUNDLE_TOO_LARGE' ? 413
         : message.includes('CONFLICT') ? 409
-        : /^(BUNDLE_INVALID|WORLD_FEEDBACK_INVALID|WORLD_FEEDBACK_ISSUE_INVALID|WORLD_PATCH_INVALID|WORLD_PATCH_HASH_MISMATCH|PATCH_BUNDLE_REQUIRED|RELEASE_REVISION_CONFLICT)/.test(message) ? 422
+        : /^(BUNDLE_INVALID|WORLD_FEEDBACK_INVALID|WORLD_FEEDBACK_ISSUE_INVALID|WORLD_PATCH_INVALID|WORLD_PATCH_HASH_MISMATCH|PATCH_BUNDLE_REQUIRED|ASSET_TASK_INVALID|STRATEGY_UNKNOWN|STRATEGY_POLICY_INVALID)/.test(message) ? 422
         : error instanceof TypeError ? 400 : 500
       )
       const inferredCode = message.split(':')[0]

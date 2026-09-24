@@ -46,6 +46,16 @@ describe('processing HTTP API', () => {
       expect(glb.status).toBe(200)
       expect((await glb.arrayBuffer()).byteLength).toBe(1632)
       const release = await buildWorldRelease(importReceipt.importId, path.resolve('processing/fixtures/silk-road-world-plan.json'), dataDir, path.resolve('.'))
+      const strategies = await (await fetch(`${base}/strategies`)).json() as { policy: { maxCostUsd: number }; strategies: Array<{ id: string; available: boolean }> }
+      expect(strategies.policy.maxCostUsd).toBe(0)
+      expect(strategies.strategies.find((item) => item.id === 'generate-3d')?.available).toBe(false)
+      const lineage = JSON.parse(await readFile(path.join(release.path, 'asset-lineage.json'), 'utf8'))
+      const cargo = lineage.assets.find((item: { assetId: string }) => item.assetId === 'asset-pack-bundle')
+      const tasked = await fetch(`${base}/asset-tasks`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Idempotency-Key': 'task-http-001' }, body: JSON.stringify({ strategyId: 'generate-3d', storyId: release.storyId, releaseId: release.releaseId, assetId: 'asset-pack-bundle', expectedBaseSha256: cargo.sha256, issueIds: [], repairGoal: 'repair cargo', parameters: {}, maxCostUsd: 1 }) })
+      expect(tasked.status).toBe(202)
+      const proposed = await tasked.json() as { taskId: string; status: string }
+      expect(proposed.status).toBe('needs_budget')
+      expect((await fetch(`${base}/asset-tasks/${proposed.taskId}`)).status).toBe(200)
       const released = await fetch(`${base}/worlds/${release.storyId}/releases/${release.releaseId}`)
       expect(released.status).toBe(200)
       const releaseBody = await released.json() as { packageBaseUrl: string; qualityStatus: string }

@@ -55,13 +55,14 @@ export async function reviewViewerPatch(decision: PatchDecision, dataDir: string
 
   const lockDir = path.join(dataDir, 'locks', `${decision.storyId}-${decision.assetId}.lock`)
   await putJson(decisionPath, { decisionHash, decision, status: 'pending' })
-  await acquireAssetLock(lockDir)
+  const lockToken = await acquireAssetLock(lockDir)
   try {
     const selectedPath = path.join(dataDir, 'registry', decision.storyId, 'selected-assets', `${decision.assetId}.json`)
     const selected = await json<{ baseSha256: string; candidateHash: string; assetRevision: number; decisionId: string; releaseId: string }>(selectedPath).catch(() => null)
     if (selected && selected.baseSha256 !== decision.baseSha256) throw new Error('ASSET_REVISION_CONFLICT')
     if (selected && selected.candidateHash !== decision.candidateHash) throw new Error('ASSET_REVISION_CONFLICT')
     if (selected) {
+      await verifyExistingRelease(path.join(dataDir, 'releases', decision.storyId, selected.releaseId))
       const result: PatchDecisionResult = { decisionId: decision.decisionId, status: 'integrated_candidate', releaseId: selected.releaseId, assetRevision: selected.assetRevision }
       await putJson(decisionPath, { decisionHash, decision, result })
       return result
@@ -71,6 +72,7 @@ export async function reviewViewerPatch(decision: PatchDecision, dataDir: string
     const finalDir = path.join(dataDir, 'releases', decision.storyId, releaseId)
     const existingRelease = await json<{ releaseId: string }>(path.join(finalDir, 'release.json')).catch((error) => { if ((error as NodeJS.ErrnoException).code === 'ENOENT') return null; throw error })
     if (existingRelease) {
+      await verifyExistingRelease(finalDir)
       const existingLineage = await json<{ assets: Array<{ assetId: string; adoptedRevision: number; sha256: string }> }>(path.join(finalDir, 'asset-lineage.json'))
       const existingAsset = existingLineage.assets.find((item) => item.assetId === decision.assetId)
       if (existingRelease.releaseId !== releaseId || existingAsset?.sha256 !== decision.candidateHash || existingAsset.adoptedRevision !== nextRevision) throw new Error('RELEASE_CONFLICT')
@@ -121,31 +123,57 @@ export async function reviewViewerPatch(decision: PatchDecision, dataDir: string
       await putJson(decisionPath, { decisionHash, decision, result })
       return result
     } catch (error) { await rm(stage, { recursive: true, force: true }); throw error }
-  } finally { await rm(lockDir, { recursive: true, force: true }) }
+  } finally {
+    const owner = await json<{ token: string }>(path.join(lockDir, 'owner.json')).catch(() => null)
+    if (owner?.token === lockToken) await rm(lockDir, { recursive: true, force: true })
+  }
 }
 
-async function acquireAssetLock(lockDir: string): Promise<void> {
+async function acquireAssetLock(lockDir: string): Promise<string> {
   await mkdir(path.dirname(lockDir), { recursive: true })
   for (let attempt = 0; attempt < 2; attempt++) {
+    const token = randomUUID()
+    const prepared = `${lockDir}.pending-${token}`
+    await mkdir(prepared)
+    await putJson(path.join(prepared, 'owner.json'), { pid: process.pid, startedAt: Date.now(), token })
     try {
-      await mkdir(lockDir)
-      await putJson(path.join(lockDir, 'owner.json'), { pid: process.pid, startedAt: Date.now() })
-      return
+      await rename(prepared, lockDir)
+      return token
     } catch (error) {
-      if ((error as NodeJS.ErrnoException).code !== 'EEXIST') throw error
-      const owner = await json<{ pid: number; startedAt: number }>(path.join(lockDir, 'owner.json')).catch(() => null)
-      const age = Date.now() - (owner?.startedAt ?? (await stat(lockDir)).mtimeMs)
-      let alive = false
-      if (owner && Number.isSafeInteger(owner.pid)) {
-        try { process.kill(owner.pid, 0); alive = true }
-        catch (probe) { alive = (probe as NodeJS.ErrnoException).code !== 'ESRCH' }
-      }
-      if (age < 30_000 && (alive || !owner)) throw new Error('ASSET_LOCKED')
-      if (alive && age < 10 * 60_000) throw new Error('ASSET_LOCKED')
-      const stale = `${lockDir}.stale-${randomUUID()}`
-      try { await rename(lockDir, stale); await rm(stale, { recursive: true, force: true }) }
-      catch { throw new Error('ASSET_LOCKED') }
+      await rm(prepared, { recursive: true, force: true })
+      if (!['EEXIST', 'ENOTEMPTY'].includes((error as NodeJS.ErrnoException).code ?? '')) throw error
+      const recoveryLock = `${lockDir}.recovery`
+      try { await mkdir(recoveryLock) } catch { throw new Error('ASSET_LOCKED') }
+      try {
+        const owner = await json<{ pid: number; startedAt: number }>(path.join(lockDir, 'owner.json')).catch(() => null)
+        const age = Date.now() - (owner?.startedAt ?? (await stat(lockDir)).mtimeMs)
+        if (age < 30_000) throw new Error('ASSET_LOCKED')
+        let alive = false
+        if (owner && Number.isSafeInteger(owner.pid)) {
+          try { process.kill(owner.pid, 0); alive = true }
+          catch (probe) { alive = (probe as NodeJS.ErrnoException).code !== 'ESRCH' }
+        }
+        if (alive && age < 10 * 60_000) throw new Error('ASSET_LOCKED')
+        const stale = `${lockDir}.stale-${randomUUID()}`
+        await rename(lockDir, stale)
+        await rm(stale, { recursive: true, force: true })
+      } finally { await rm(recoveryLock, { recursive: true, force: true }) }
     }
   }
   throw new Error('ASSET_LOCKED')
+}
+
+async function verifyExistingRelease(root: string): Promise<void> {
+  const release = await json<{ files: Array<{ path: string; sha256: string; bytes: number }>; sceneRevision: number }>(path.join(root, 'release.json'))
+  const listed = new Set(release.files.map((file) => file.path))
+  for (const required of ['scene.json', 'story.json', 'sources.json', 'asset-lineage.json', 'quality-report.json', 'patch-decision.json']) if (!listed.has(required)) throw new Error('RELEASE_CONFLICT')
+  for (const file of release.files) {
+    if (!file.path || path.isAbsolute(file.path) || file.path.includes('\\') || file.path.split('/').some((part) => !part || part === '.' || part === '..')) throw new Error('RELEASE_CONFLICT')
+    const bytes = await readFile(path.join(root, file.path))
+    if (bytes.length !== file.bytes || digest(bytes) !== file.sha256) throw new Error('RELEASE_CONFLICT')
+  }
+  const packageCheck = await validateScenePackage(createNodeReader(root), { checkGlbBounds: true })
+  if (packageCheck.diagnostics.some((item) => item.severity === 'error')) throw new Error('RELEASE_CONFLICT')
+  const experience = await json<{ sceneRevision: number }>(path.join(root, 'experience.json')).catch((error) => { if ((error as NodeJS.ErrnoException).code === 'ENOENT') return null; throw error })
+  if (experience && experience.sceneRevision !== release.sceneRevision) throw new Error('RELEASE_CONFLICT')
 }

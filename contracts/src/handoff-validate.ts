@@ -61,10 +61,12 @@ export async function validateCollectionHandoff(reader: PackageReader): Promise<
     if (!briefs.has(asset.briefId) || asset.sourceIds.some((id) => !sources.has(id)) || asset.claimIds.some((id) => !claims.has(id))) problems.push({ path: asset.path, message: 'unknown brief, source, or claim' })
     if (asset.scaleStatus === 'unknown' && asset.dimensionsM !== null) problems.push({ path: asset.path, message: 'unknown scale must have null dimensions' })
     if (asset.scaleStatus === 'known' && (!asset.dimensionsM || asset.dimensionsM.some((value) => !Number.isFinite(value) || value <= 0))) problems.push({ path: asset.path, message: 'known scale needs positive dimensions' })
+    if (asset.scaleStatus === 'known' && (asset.inputUnits !== 'm' || asset.upAxis !== 'Y')) problems.push({ path: asset.path, message: 'known GLB must be normalized to meter units and Y-up' })
     const binary = safePath(asset.path) ? await reader.readBinary(asset.path) : null
     const bounds = binary ? readGlbBounds(binary) : null
     if (binary && !bounds) problems.push({ path: asset.path, message: 'invalid GLB geometry' })
     if (bounds && asset.scaleStatus === 'known' && asset.dimensionsM && bounds.dimensions.some((measured, axis) => Math.abs(measured - asset.dimensionsM![axis]) > sizeTolerance(asset.dimensionsM![axis]))) problems.push({ path: asset.path, message: 'known dimensions do not match GLB bounds' })
+    if (bounds && asset.pivot === 'bottom-center' && (Math.abs(bounds.min[1]) > 0.05 || Math.abs(bounds.min[0] + bounds.max[0]) > 0.1 || Math.abs(bounds.min[2] + bounds.max[2]) > 0.1)) problems.push({ path: asset.path, message: 'declared bottom-center pivot disagrees with GLB bounds' })
   }
   for (const requiredBriefId of plan.requiredBriefIds) if (!assets.assets.some((asset) => asset.briefId === requiredBriefId)) problems.push({ path: 'plan.json', message: `required asset missing: ${requiredBriefId}` })
   for (const id of plan.requiredBriefIds) if (!briefs.has(id)) problems.push({ path: 'plan.json', message: `unknown required brief: ${id}` })

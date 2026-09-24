@@ -14,20 +14,21 @@ const readJson = async <T>(file: string): Promise<T> => JSON.parse(await readFil
 export async function storeBundle(zipPath: string, dataDir: string): Promise<BundleReceipt> {
   const info = await stat(zipPath)
   if (!info.isFile() || info.size <= 0 || info.size > MAX_ZIP_BYTES) throw new Error('BUNDLE_SIZE_INVALID')
-  const hasher = createHash('sha256')
-  for await (const chunk of createReadStream(zipPath)) hasher.update(chunk)
-  const sha256 = hasher.digest('hex')
-  const bundleId = `bundle-${sha256.slice(0, 20)}`
-  const finalDir = path.join(dataDir, 'bundles', bundleId)
-  try {
-    const prior = await readJson<BundleReceipt>(path.join(finalDir, 'bundle.json'))
-    if (prior.sha256 !== sha256) throw new Error('BUNDLE_ID_CONFLICT')
-    return prior
-  } catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error }
-  const stage = `${finalDir}.${randomUUID()}.tmp`
+  const stage = path.join(dataDir, 'bundle-stage', randomUUID())
   await mkdir(path.join(stage, 'files'), { recursive: true })
   try {
     await copyFile(zipPath, path.join(stage, 'bundle.zip'))
+    const stagedZip = path.join(stage, 'bundle.zip')
+    const stagedInfo = await stat(stagedZip)
+    if (stagedInfo.size <= 0 || stagedInfo.size > MAX_ZIP_BYTES) throw new Error('BUNDLE_SIZE_INVALID')
+    const sha256 = await fileHash(stagedZip)
+    const bundleId = `bundle-${sha256.slice(0, 20)}`
+    const finalDir = path.join(dataDir, 'bundles', bundleId)
+    try {
+      const prior = await readJson<BundleReceipt>(path.join(finalDir, 'bundle.json'))
+      if (prior.sha256 !== sha256) throw new Error('BUNDLE_ID_CONFLICT')
+      return prior
+    } catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error }
     const unpacked = await unpack(path.join(stage, 'bundle.zip'), path.join(stage, 'files'))
     if (!Number.isSafeInteger(unpacked.uncompressedBytes) || unpacked.uncompressedBytes > MAX_UNCOMPRESSED_BYTES || unpacked.files.length > 500) throw new Error('BUNDLE_TOO_LARGE')
     let actualBytes = 0
@@ -35,19 +36,29 @@ export async function storeBundle(zipPath: string, dataDir: string): Promise<Bun
       if (!file.path || path.isAbsolute(file.path) || file.path.includes('\\') || file.path.split('/').some((part) => !part || part === '.' || part === '..')) throw new Error('BUNDLE_INVALID: unsafe extractor path')
       const inspected = await lstat(path.join(stage, 'files', file.path))
       if (!inspected.isFile() || inspected.size !== file.bytes || (file.path.toLowerCase().endsWith('.glb') && inspected.size > MAX_GLB_BYTES)) throw new Error('BUNDLE_INVALID: extracted file size mismatch')
+      if (await fileHash(path.join(stage, 'files', file.path)) !== file.sha256) throw new Error('BUNDLE_INVALID: extracted file digest mismatch')
       actualBytes += inspected.size
       if (actualBytes > MAX_UNCOMPRESSED_BYTES) throw new Error('BUNDLE_TOO_LARGE')
     }
     if (actualBytes !== unpacked.uncompressedBytes) throw new Error('BUNDLE_INVALID: uncompressed total mismatch')
-    const receipt: BundleReceipt = { bundleId, sha256, bytes: info.size, files: unpacked.files, uncompressedBytes: unpacked.uncompressedBytes }
+    const receipt: BundleReceipt = { bundleId, sha256, bytes: stagedInfo.size, files: unpacked.files, uncompressedBytes: unpacked.uncompressedBytes }
     await writeFile(path.join(stage, 'bundle.json'), JSON.stringify(receipt, null, 2) + '\n')
     await mkdir(path.dirname(finalDir), { recursive: true })
-    try { await rename(stage, finalDir) } catch (error) {
+    try { await rename(stage, finalDir) }
+    catch (error) {
       if ((error as NodeJS.ErrnoException).code !== 'EEXIST' && (error as NodeJS.ErrnoException).code !== 'ENOTEMPTY') throw error
-      await rm(stage, { recursive: true, force: true })
+      const prior = await readJson<BundleReceipt>(path.join(finalDir, 'bundle.json'))
+      if (prior.sha256 !== sha256) throw new Error('BUNDLE_ID_CONFLICT')
+      return prior
     }
     return receipt
-  } catch (error) { await rm(stage, { recursive: true, force: true }); throw error }
+  } finally { await rm(stage, { recursive: true, force: true }) }
+}
+
+async function fileHash(file: string): Promise<string> {
+  const hasher = createHash('sha256')
+  for await (const chunk of createReadStream(file)) hasher.update(chunk)
+  return hasher.digest('hex')
 }
 
 async function unpack(zipPath: string, outputDir: string): Promise<{ files: FileDigest[]; uncompressedBytes: number }> {

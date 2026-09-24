@@ -39,3 +39,8 @@
 - 正式 viewer 经 API 打开新 release 的第二幕剧情镜头，页面显示“可体验”，人物、手杖、载体和修改后货包都加载。此步骤证明候选回流与再加载机制，**不算真实 C 往返、asset_review 或最终采用**。
 - 并行旧基底测试：另一份不同材质候选同样可以先被保存，但 B 尝试在已选择第一份候选后整合它时返回 `ASSET_REVISION_CONFLICT`；两个候选均保留，没有覆盖。
 - PR #7 的 Python 3.9/3.12 与构建检查通过；AI Review workflow 绿色，但评论明确称模型输出无效 JSON、自动审查未运行。该评论指出的中间目录 symlink 与 TS 解压体积复核问题已在后续分支修复并加测，待推送后重新检查。
+
+## 2026-09-25 策略预算闸门
+
+- 生效政策位于 `processing/config/strategy-policy.json`：每资产最多两次尝试、世界最多三轮审核、候选数 2；本轮付费生成上限 0 美元、0 次。没有来自用户的正预算与 Tripo 凭据位置时，`generate-3d` 和 `prompt-variants` 不可执行。
+- `/strategies` 明确列可用/不可用原因；`POST /asset-tasks` 在固定 release 与父资产 hash 上保存修复提案，随后可按 taskId 取回。技术 fixture 的生成任务返回 `needs_budget`、`attemptCount=0`、无产物；没有实际 Tripo 提交。该接口仍未提供付费执行或 Blender 通用修整适配。

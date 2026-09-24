@@ -40,6 +40,7 @@ describe('collection handoff', () => {
       const assetFile = path.join(temp, 'assets/asset-manifest.json')
       const assetManifest = JSON.parse(await readFile(assetFile, 'utf8'))
       assetManifest.assets[0].dimensionsM = [9, 0.8, 0.6]
+      assetManifest.assets[0].upAxis = 'Z'
       await writeFile(assetFile, JSON.stringify(assetManifest))
       const handoffFile = path.join(temp, 'handoff.json')
       const handoff = JSON.parse(await readFile(handoffFile, 'utf8'))
@@ -48,7 +49,9 @@ describe('collection handoff', () => {
       listed.bytes = bytes.length
       listed.sha256 = createHash('sha256').update(bytes).digest('hex')
       await writeFile(handoffFile, JSON.stringify(handoff))
-      expect((await validateCollectionHandoff(createNodeReader(temp))).some((problem) => problem.message.includes('known dimensions do not match'))).toBe(true)
+      const problems = await validateCollectionHandoff(createNodeReader(temp))
+      expect(problems.some((problem) => problem.message.includes('known dimensions do not match'))).toBe(true)
+      expect(problems.some((problem) => problem.message.includes('Y-up'))).toBe(true)
     } finally { await rm(temp, { recursive: true, force: true }) }
   })
 
