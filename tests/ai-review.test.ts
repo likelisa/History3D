@@ -97,6 +97,16 @@ describe('parseSseLine：解析网关的流式分片', () => {
     expect(parseSseLine('event: ping')).toBeNull()
     expect(parseSseLine('data: {不是 json')).toBeNull()
   })
+
+  // 网关的结束分片里可能只有 finish_reason，没有 delta 字段。
+  // AI 审查曾把这里报成「delta 为 null 时会抛 TypeError」，实际有 ?? {} 兜底。
+  it('缺 delta 字段时不抛错，只取可用信息', () => {
+    expect(() => parseSseLine('data: {"choices":[{"finish_reason":"stop"}]}')).not.toThrow()
+    expect(parseSseLine('data: {"choices":[{"finish_reason":"stop"}]}')?.finishReason).toBe('stop')
+    expect(parseSseLine('data: {"choices":[{"delta":null}]}')?.content).toBe('')
+    expect(parseSseLine('data: {"choices":[]}')?.content).toBe('')
+    expect(parseSseLine('data: {}')?.content).toBe('')
+  })
 })
 
 describe('readReviewResponse：非流式响应的判定依据', () => {
