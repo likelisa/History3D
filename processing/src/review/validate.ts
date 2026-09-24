@@ -34,6 +34,7 @@ export function validateReviewOutput(raw: unknown, evidence: ReviewEvidenceBundl
     }
     if (!Array.isArray(item.evidenceRefs) || !item.evidenceRefs.length || item.evidenceRefs.some((ref) => !evidenceRefs.has(ref))) throw new Error('REVIEW_OUTPUT_INVALID: unknown evidence reference')
     for (const field of ['observation', 'expected', 'impact', 'acceptanceCheck']) if (!nonempty(item[field])) throw new Error(`REVIEW_OUTPUT_INVALID: ${field} missing`)
+    for (const field of ['requestedInformation', 'repairGoal']) if (item[field] === undefined) { item[field] = null; normalizationNotes.push(`${item.findingId}: omitted ${field} normalized to null`) }
     if (!(item.requestedInformation === null || nonempty(item.requestedInformation)) || !(item.repairGoal === null || nonempty(item.repairGoal))) throw new Error('REVIEW_OUTPUT_INVALID: remedy missing')
     findings.push(item as unknown as ReviewFinding)
   }
@@ -44,7 +45,8 @@ export function validateReviewOutput(raw: unknown, evidence: ReviewEvidenceBundl
     const subjectsValid = Array.isArray(item.subjectRefs) && item.subjectRefs.every((ref) => subjects.has(ref))
     const oldShape = nonempty(item.item) && nonempty(item.reason) && nonempty(item.requiredEvidence) && subjectsValid
     const newShape = nonempty(item.aspect) && nonempty(item.reason) && nonempty(item.neededEvidence) && subjectsValid && Array.isArray(item.evidenceRefs) && item.evidenceRefs.every((ref) => evidenceRefs.has(ref))
-    if (!oldShape && !newShape) throw new Error('REVIEW_OUTPUT_INVALID: invalid unassessed item')
+    const singularShape = nonempty(item.subjectRef) && subjects.has(item.subjectRef) && nonempty(item.item) && nonempty(item.reason) && nonempty(item.neededEvidence) && Array.isArray(item.evidenceRefs) && item.evidenceRefs.every((ref) => evidenceRefs.has(ref))
+    if (!oldShape && !newShape && !singularShape) throw new Error('REVIEW_OUTPUT_INVALID: invalid unassessed item')
   }
   for (const entry of value.suggestedStrategies) {
     if (nonempty(entry)) continue
@@ -52,7 +54,8 @@ export function validateReviewOutput(raw: unknown, evidence: ReviewEvidenceBundl
     const item = entry as Record<string, unknown>
     const oldShape = nonempty(item.strategyId) && nonempty(item.action) && nonempty(item.rationale) && Array.isArray(item.targetFindingIds) && item.targetFindingIds.every((id) => ids.has(id))
     const newShape = nonempty(item.strategy) && nonempty(item.targetRef) && (subjects.has(item.targetRef) || evidenceRefs.has(item.targetRef)) && owners.has(String(item.suggestedOwner)) && nonempty(item.repairGoal) && nonempty(item.acceptanceCheck) && nonempty(item.priority)
-    if (!oldShape && !newShape) throw new Error('REVIEW_OUTPUT_INVALID: invalid strategy item')
+    const findingShape = nonempty(item.findingId) && ids.has(item.findingId) && nonempty(item.strategy)
+    if (!oldShape && !newShape && !findingShape) throw new Error('REVIEW_OUTPUT_INVALID: invalid strategy item')
   }
   const decision = value.decision as ReviewReport['decision']
   if (decision === 'pass' && (findings.some((item) => item.severity === 'blocking') || value.unassessed.length || evidence.coverage.some((item) => item.status === 'unassessed'))) throw new Error('REVIEW_OUTPUT_INVALID: cannot pass with blockers or missing coverage')

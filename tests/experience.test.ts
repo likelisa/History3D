@@ -80,4 +80,13 @@ describe('experience sampler', () => {
     experience.audio[0].path = 'media/track..1.mp3'
     expect(validateExperience(scene, experience)).toEqual([])
   })
+
+  it('rejects attachment anchors that do not meet at the declared grip point', () => {
+    const { scene, experience } = fixture()
+    const staff = experience.tracks.find((track) => track.type === 'attachment' && track.id === 'tool-with-human')
+    if (!staff || staff.type !== 'attachment') throw new Error('fixture missing tool track')
+    staff.parentAnchorM = [0.5, 1.6, 0]
+    staff.childAnchorM = [0, 1, 0]
+    expect(validateExperience(scene, experience).some((item) => item.includes('ATTACHMENT_ANCHOR_MISMATCH'))).toBe(true)
+  })
 })

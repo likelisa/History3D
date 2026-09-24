@@ -8,6 +8,13 @@
     { "objectId": "obj-pack-a", "position": [0, 2, 2], "rotationY": 0 },
     { "objectId": "obj-road-ahead", "position": [0, 0, -4], "rotationY": 0 }
   ],
+  "blockerOverrides": [
+    { "id": "blk-camp", "min": [-2.4, 1.5], "max": [3.5, 4.5] },
+    { "id": "blk-road-ahead", "min": [-2.5, -16], "max": [2.5, 8] }
+  ],
+  "hotspotOverrides": [
+    { "hotspotId": "hotspot-departure", "anchor": { "type": "object", "objectId": "obj-beast", "offset": [-1.4, 2.2, 0] } }
+  ],
   "claimChanges": [{
     "claimId": "claim-pack-layout",
     "statement": "一件货包放在驮兽背部，另一件置于驮兽左侧。",
@@ -38,7 +45,7 @@
   ],
   "relations": [
     { "relationId": "relation-load", "parentObjectId": "obj-beast", "childObjectId": "obj-pack-a", "kind": "attachment", "toleranceM": 0.05, "required": true },
-    { "relationId": "relation-hand-tool", "parentObjectId": "obj-traveler", "childObjectId": "obj-staff", "kind": "handheld", "expectedOffset": [0.35, 0, 0], "toleranceM": 0.05, "required": true }
+    { "relationId": "relation-hand-tool", "parentObjectId": "obj-traveler", "childObjectId": "obj-staff", "kind": "handheld", "parentAnchorM": [0.35, 1.05, 0], "childAnchorM": [0, 1.05, 0], "toleranceM": 0.05, "required": true }
   ],
   "experienceSourcePath": "processing/fixtures/silk-road-experience.json",
   "requiredCapabilities": ["static-glb-v1", "transform-tracks-v1", "attachment-tracks-v1", "visibility-tracks-v1", "environment-v1", "camera-cues-v1"],

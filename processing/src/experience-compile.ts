@@ -29,6 +29,15 @@ export function validateExperience(scene: SceneFile, experience: ExperienceFile)
       if (!objectIds.has(track.childObjectId) || !objectIds.has(track.parentObjectId) || track.childObjectId === track.parentObjectId) errors.push(`ATTACHMENT_OBJECT_INVALID: ${track.id}`)
       if (!validTime(track.startSeconds, experience.durationSeconds) || !validTime(track.endSeconds, experience.durationSeconds) || track.startSeconds >= track.endSeconds) errors.push(`ATTACHMENT_RANGE_INVALID: ${track.id}`)
       if (!vec3Valid(track.localPosition) || !Number.isFinite(track.localYawRad)) errors.push(`ATTACHMENT_TRANSFORM_INVALID: ${track.id}`)
+      if (Boolean(track.parentAnchorM) !== Boolean(track.childAnchorM)) errors.push(`ATTACHMENT_ANCHOR_INCOMPLETE: ${track.id}`)
+      if (track.parentAnchorM && track.childAnchorM) {
+        if (!vec3Valid(track.parentAnchorM) || !vec3Valid(track.childAnchorM)) errors.push(`ATTACHMENT_ANCHOR_INVALID: ${track.id}`)
+        else {
+          const childAnchor = rotateYaw(track.childAnchorM, track.localYawRad)
+          const gap = Math.hypot(...track.parentAnchorM.map((value, axis) => value - track.localPosition[axis] - childAnchor[axis]))
+          if (gap > 0.05) errors.push(`ATTACHMENT_ANCHOR_MISMATCH: ${track.id}`)
+        }
+      }
       if (attachments.has(track.childObjectId)) errors.push(`ATTACHMENT_CONFLICT: ${track.childObjectId}`)
       attachments.set(track.childObjectId, track.parentObjectId)
       continue

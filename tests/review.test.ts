@@ -59,6 +59,21 @@ describe('AI review gate', () => {
     expect(() => validateReviewOutput(response, evidence)).toThrow('invalid strategy')
   })
 
+  it('records an omitted optional remedy as null without inventing a request', () => {
+    const finding = { findingId: 'f1', category: 'runtime', subjectRefs: ['asset@1:hash'], observation: 'stills only', expected: 'video', impact: 'unassessed', evidenceRefs: ['front'], certainty: 'insufficient_evidence', severity: 'warning', suggestedOwner: 'viewer', repairGoal: 'capture video', acceptanceCheck: 'continuous review' }
+    const checked = validateReviewOutput({ decision: 'needs_revision', findings: [finding], unassessed: ['motion'], suggestedStrategies: [] }, evidence)
+    expect(checked.findings[0].requestedInformation).toBeNull()
+    expect(checked.normalizationNotes[0]).toContain('requestedInformation')
+  })
+
+  it('checks singular world gaps and finding-linked strategies', () => {
+    const finding = { findingId: 'w1', category: 'assembly', subjectRefs: ['asset@1:hash'], observation: 'still only', expected: 'continuous relation', impact: 'unverified', evidenceRefs: ['front'], certainty: 'insufficient_evidence', severity: 'warning', suggestedOwner: 'processor', requestedInformation: null, repairGoal: 'capture continuity', acceptanceCheck: 'watch motion' }
+    const output = { decision: 'needs_revision', findings: [finding], unassessed: [{ subjectRef: 'asset@1:hash', item: 'motion', reason: 'no video', evidenceRefs: ['front'], neededEvidence: 'video' }], suggestedStrategies: [{ findingId: 'w1', strategy: 'capture video' }] }
+    expect(validateReviewOutput(output, evidence).suggestedStrategies).toHaveLength(1)
+    output.suggestedStrategies[0].findingId = 'invented'
+    expect(() => validateReviewOutput(output, evidence)).toThrow('invalid strategy')
+  })
+
   it('rejects truncated and empty model output', async () => {
     const fakeFetch = (reason: string, content: string) => (async () => ({ ok: true, json: async () => ({ choices: [{ finish_reason: reason, message: { content } }] }) })) as unknown as typeof fetch
     await expect(reviewWithDeepSeek(evidence, { apiKey: 'test', fetchImpl: fakeFetch('length', '{}') })).rejects.toThrow('REVIEW_OUTPUT_INVALID')

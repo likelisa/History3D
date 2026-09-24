@@ -60,6 +60,7 @@ export class ViewerApp {
   private readonly experienceBar = el('div', { className: 'experience-bar', hidden: true })
   private readonly experiencePlay = el('button', { className: 'experience-action', text: '播放', onClick: () => this.toggleExperiencePlayback() })
   private readonly experienceTimeLabel = el('span', { className: 'experience-time', text: '0:00 / 0:00' })
+  private readonly captureStatus = el('span', { className: 'experience-time', text: '' })
   private readonly experienceSlider = document.createElement('input')
   private readonly buttonByAction = new Map<string, HTMLButtonElement>()
 
@@ -73,6 +74,8 @@ export class ViewerApp {
   private storyId: string
   private candidateReleaseId: string | null
   private apiReleaseId: string | null
+  private captureEnabled: boolean
+  private viewerBuild: string
   private readonly benchEnabled: boolean
   private readonly benchSeconds: number
   private bench: BenchRecorder | null = null
@@ -103,10 +106,12 @@ export class ViewerApp {
       query.get('story') || import.meta.env.VITE_DEFAULT_STORY_ID || 'silk-road-demo'
     this.candidateReleaseId = query.get('candidate')
     this.apiReleaseId = query.get('release')
+    this.captureEnabled = query.get('capture') === '1' && Boolean(this.apiReleaseId)
+    this.viewerBuild = query.get('viewerBuild') || import.meta.env.VITE_VIEWER_BUILD || 'unversioned-local'
     this.benchEnabled = query.get('bench') === '1'
     this.benchSeconds = Number(query.get('benchSeconds') ?? '90') || 90
 
-    this.renderer = new THREE.WebGLRenderer({ antialias: true })
+    this.renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: this.captureEnabled })
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     this.renderer.shadowMap.enabled = true
     this.scene3d.background = new THREE.Color(0x16233a)
@@ -164,6 +169,19 @@ export class ViewerApp {
       el('button', { className: 'experience-action', text: '剧情镜头', onClick: () => this.activateStoryCamera() }),
       this.experienceSlider,
       this.experienceTimeLabel,
+    )
+    if (this.captureEnabled) this.experienceBar.append(
+      el('button', { className: 'experience-action', text: '存主镜头', onClick: () => { void this.captureReviewFrame('formal-viewer-main') } }),
+      el('button', { className: 'experience-action', text: '存当前幕', onClick: () => {
+        const beatIndex = this.experienceFile?.beats.findIndex((beat) => this.experienceTime >= beat.startSeconds && this.experienceTime < beat.endSeconds) ?? -1
+        if (beatIndex < 0) { this.captureStatus.textContent = '先跳到一幕内'; return }
+        void this.captureReviewFrame(`beat-${beatIndex + 1}`)
+      } }),
+      el('button', { className: 'experience-action', text: '存动作采样', onClick: () => {
+        const viewId = this.experienceTime < 10 ? 'motion-before' : this.experienceTime < 20 ? 'motion-mid' : 'motion-after'
+        void this.captureReviewFrame(viewId)
+      } }),
+      this.captureStatus,
     )
     this.root.append(
       el('div', { className: 'app-shell' }, [
@@ -648,6 +666,22 @@ export class ViewerApp {
     this.experienceSlider.value = String(this.experienceTime)
     const format = (value: number) => `${Math.floor(value / 60)}:${String(Math.floor(value % 60)).padStart(2, '0')}`
     this.experienceTimeLabel.textContent = `${format(this.experienceTime)} / ${format(this.experienceFile.durationSeconds)}`
+  }
+
+  private async captureReviewFrame(viewId: string): Promise<void> {
+    if (!this.captureEnabled || !this.apiReleaseId || this.stage !== 'ready') return
+    this.captureStatus.textContent = `保存 ${viewId}…`
+    try {
+      this.renderer.render(this.scene3d, this.camera)
+      const png = await new Promise<Blob | null>((resolve) => this.renderer.domElement.toBlob(resolve, 'image/png'))
+      if (!png) throw new Error('canvas PNG unavailable')
+      const response = await fetch(`/api/processing/v1/worlds/${this.storyId}/releases/${this.apiReleaseId}/evidence/${viewId}`, {
+        method: 'POST', body: png,
+        headers: { 'Content-Type': 'image/png', 'X-Viewer-Build': this.viewerBuild, 'X-Time-Seconds': String(this.experienceTime), 'X-Viewport': `${this.viewport.clientWidth},${this.viewport.clientHeight}`, 'X-Dpr': String(this.renderer.getPixelRatio()) },
+      })
+      if (!response.ok) throw new Error(`HTTP ${response.status}`)
+      this.captureStatus.textContent = `已存 ${viewId}`
+    } catch (error) { this.captureStatus.textContent = `保存失败：${error instanceof Error ? error.message : String(error)}` }
   }
 
   private openStoryList(): void {

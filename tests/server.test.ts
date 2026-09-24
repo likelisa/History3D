@@ -8,6 +8,7 @@ import os from 'node:os'
 import path from 'node:path'
 import { createProcessingServer } from '../processing/src/server.ts'
 import { buildWorldRelease } from '../processing/src/world-compile.ts'
+import { makePng } from './png-fixture.ts'
 
 const tempDirs: string[] = []
 async function temp() { const dir = await mkdtemp(path.join(os.tmpdir(), 'history3d-server-')); tempDirs.push(dir); return dir }
@@ -48,6 +49,13 @@ describe('processing HTTP API', () => {
       expect(glb.status).toBe(200)
       expect((await glb.arrayBuffer()).byteLength).toBe(1632)
       const release = await buildWorldRelease(importReceipt.importId, path.resolve('processing/fixtures/silk-road-world-plan.json'), dataDir, path.resolve('.'))
+      const testFrame = makePng()
+      const frameWidth = testFrame.readUInt32BE(16)
+      const frameHeight = testFrame.readUInt32BE(20)
+      const frameResponse = await fetch(`${base}/worlds/${release.storyId}/releases/${release.releaseId}/evidence/beat-1`, { method: 'POST', headers: { 'Content-Type': 'image/png', 'X-Viewer-Build': 'test-viewer', 'X-Time-Seconds': '0', 'X-Viewport': `${frameWidth},${frameHeight}`, 'X-Dpr': '1' }, body: testFrame })
+      expect(frameResponse.status).toBe(201)
+      expect((await fetch(`${base}/worlds/${release.storyId}/releases/${release.releaseId}/evidence`)).status).toBe(200)
+      expect((await fetch(`${base}/worlds/${release.storyId}/releases/${release.releaseId}/evidence/beat-1.png`)).status).toBe(200)
       const worldHash = createHash('sha256').update(await readFile(path.join(release.path, 'release.json'))).digest('hex')
       const requestedReview = await fetch(`${base}/reviews`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ scope: 'world', storyId: release.storyId, releaseId: release.releaseId, snapshotHash: worldHash, rubricVersion: 'world-v1' }) })
       expect(requestedReview.status).toBe(202)

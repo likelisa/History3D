@@ -13,13 +13,13 @@ const dataDir = path.resolve(process.env.PROCESSING_DATA_DIR ?? '.processing-dat
 const [command, ...args] = process.argv.slice(2)
 const arity: Record<string, number> = {
   import: 2, 'review-input': 1, 'revalidate-review': 3,
-  'build-release': 2, 'preview-release': 2, 'review-world': 3,
+  'build-release': 2, 'preview-release': 2, 'review-world': 2,
   'revalidate-world': 4, 'review-patch': 1,
   'review-asset': 1,
   'revalidate-asset': 3,
   'decide-asset-task': 1,
 }
-const usage = 'usage: npm run processing -- import <collection-dir> <idempotency-key> | review-input <importId> | review-asset <taskId> | revalidate-asset <taskId> <reviewId> <attempt> | decide-asset-task <decision.json> | revalidate-review <importId> <assetId> <attempt> | build-release <importId> <world-plan.json> | preview-release <storyId> <releaseId> | review-world <storyId> <releaseId> <world-plan.json> | revalidate-world <storyId> <releaseId> <reviewId> <attempt> | review-patch <decision.json>'
+const usage = 'usage: npm run processing -- import <collection-dir> <idempotency-key> | review-input <importId> | review-asset <taskId> | revalidate-asset <taskId> <reviewId> <attempt> | decide-asset-task <decision.json> | revalidate-review <importId> <assetId> <attempt> | build-release <importId> <world-plan.json> | preview-release <storyId> <releaseId> | review-world <storyId> <releaseId> [world-plan.json] | revalidate-world <storyId> <releaseId> <reviewId> <attempt> | review-patch <decision.json>'
 
 function positiveAttempt(value: string): number {
   const attempt = Number(value)
@@ -32,7 +32,7 @@ async function existingFile(value: string): Promise<string> {
   return file
 }
 
-if (!command || arity[command] !== args.length) {
+if (!command || (arity[command] !== args.length && !(command === 'review-world' && args.length === 3))) {
   console.error(usage)
   process.exitCode = 2
 } else {
@@ -50,7 +50,7 @@ if (!command || arity[command] !== args.length) {
       case 'revalidate-review': output = await revalidateSavedInputReview(args[0], args[1], dataDir, positiveAttempt(args[2])); break
       case 'build-release': output = await buildWorldRelease(args[0], await existingFile(args[1]), dataDir, process.cwd()); break
       case 'preview-release': output = await prepareReleasePreview(args[0], args[1], dataDir, process.cwd()); break
-      case 'review-world': output = await runWorldReview(args[0], args[1], await existingFile(args[2]), dataDir); break
+      case 'review-world': output = await runWorldReview(args[0], args[1], args[2] ? await existingFile(args[2]) : null, dataDir); break
       case 'revalidate-world': output = await revalidateSavedWorldReview(args[0], args[1], args[2], dataDir, positiveAttempt(args[3])); break
       case 'review-patch': output = await reviewViewerPatch(JSON.parse(await readFile(await existingFile(args[0]), 'utf8')), dataDir); break
       case 'decide-asset-task': {

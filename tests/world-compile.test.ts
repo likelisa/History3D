@@ -24,6 +24,8 @@ describe('world release compiler', () => {
     expect(validated.diagnostics.filter((item) => item.severity === 'error')).toEqual([])
     expect(validated.scene?.objects.find((item) => item.id === 'obj-pack-a')?.position).toEqual([0, 2, 2])
     expect(validated.scene?.objects.find((item) => item.id === 'obj-road-ahead')?.position).toEqual([0, 0, -4])
+    expect(validated.scene?.blockers.find((item) => item.id === 'blk-road-ahead')?.max[1]).toBe(8)
+    expect(validated.scene?.hotspotBindings.find((item) => item.hotspotId === 'hotspot-departure')?.anchor).toMatchObject({ offset: [-1.4, 2.2, 0] })
     expect(validated.story?.contentRevision).toBe(2)
     expect(validated.story?.claims.find((item) => item.id === 'claim-pack-layout')?.statement).toContain('背部')
     expect(validated.scene?.objects.some((item) => item.id === 'obj-traveler')).toBe(true)
@@ -37,6 +39,9 @@ describe('world release compiler', () => {
     expect(lineage.assets.find((item: { assetId: string }) => item.assetId === 'asset-pack-bundle').adoptedRevision).toBe(1)
     const quality = JSON.parse(await readFile(path.join(release.path, 'quality-report.json'), 'utf8'))
     expect(quality.relationChecks[0].pass).toBe(true)
+    expect(quality.relationChecks.find((item: { relationId: string }) => item.relationId === 'relation-hand-tool').verticalGapM).toBeCloseTo(0)
+    const provenance = JSON.parse(await readFile(path.join(release.path, 'provenance.json'), 'utf8'))
+    expect(provenance.assetSources).toHaveLength(validated.scene!.assets.length)
     expect((await buildWorldRelease(receipt.importId, planFixture, data, repoRoot)).releaseId).toBe(release.releaseId)
   })
 

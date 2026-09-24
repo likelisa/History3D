@@ -10,6 +10,7 @@ import { blenderAvailable, listStrategies, loadStrategyPolicy } from './strategi
 import { proposeAssetTask } from './strategies/tasks.ts'
 import { executeBlenderRefine } from './strategies/blender-refine.ts'
 import { createReviewRequest, getReviewReport, processReviewRequest, reviewRequestPath, type ReviewRequestInput } from './review/requests.ts'
+import { captureBrowserFrame, listBrowserFrames, type BrowserFrameMeta } from './review/browser-evidence.ts'
 
 const PREFIX = '/api/processing/v1'
 const MAX_JSON = 1_000_000
@@ -112,7 +113,7 @@ export function createProcessingServer(options: ServerOptions): Server {
       if (!['127.0.0.1', 'localhost'].includes(hostName)) { apiError(res, 403, 'HOST_FORBIDDEN', 'loopback host required'); return }
       if (req.headers.origin && req.headers.origin !== 'http://127.0.0.1:5173') { apiError(res, 403, 'ORIGIN_FORBIDDEN', 'origin not allowed'); return }
       if (req.headers.origin === 'http://127.0.0.1:5173') res.setHeader('Access-Control-Allow-Origin', req.headers.origin)
-      if (req.method === 'OPTIONS') { res.writeHead(204, { 'Access-Control-Allow-Methods': 'GET,HEAD,POST,OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type,Idempotency-Key' }); res.end(); return }
+      if (req.method === 'OPTIONS') { res.writeHead(204, { 'Access-Control-Allow-Methods': 'GET,HEAD,POST,OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type,Idempotency-Key,X-Viewer-Build,X-Time-Seconds,X-Viewport,X-Dpr' }); res.end(); return }
       const rawPath = (req.url ?? '/').split('?')[0]
       if (/%2e|%2f|%5c/i.test(rawPath) || rawPath.split('/').some((part) => part === '..')) { apiError(res, 400, 'ARTIFACT_PATH_INVALID', 'unsafe encoded path'); return }
       const url = new URL(req.url ?? '/', `http://${req.headers.host ?? '127.0.0.1'}`)
@@ -194,6 +195,32 @@ export function createProcessingServer(options: ServerOptions): Server {
         const feedback = await readJson<Record<string, unknown>>(path.join(dataDir, 'imports', parts[1], 'feedback', 'feedback.json'))
         respond(res, 200, { ...feedback, packageBaseUrl: `${PREFIX}/artifacts/${parts[1]}/feedback`, feedbackMarkdownUrl: `${PREFIX}/artifacts/${parts[1]}/feedback/feedback.md`, revisedPlanUrl: `${PREFIX}/artifacts/${parts[1]}/feedback/revised-plan.md` }); return
       }
+      if (parts[0] === 'worlds' && parts[2] === 'releases' && parts[4] === 'evidence' && parts.length === 5 && req.method === 'GET') {
+        const frames = await listBrowserFrames(parts[1], parts[3], dataDir)
+        respond(res, 200, { storyId: parts[1], releaseId: parts[3], frames: frames.map(({ path: _path, ...frame }) => ({ ...frame, imageUrl: `${PREFIX}/worlds/${parts[1]}/releases/${parts[3]}/evidence/${frame.viewId}.png` })) })
+        return
+      }
+      if (parts[0] === 'worlds' && parts[2] === 'releases' && parts[4] === 'evidence' && parts.length === 6 && req.method === 'POST') {
+        if (req.headers['content-type'] !== 'image/png') { apiError(res, 400, 'CONTENT_TYPE_INVALID', 'image/png required'); return }
+        const viewport = String(req.headers['x-viewport'] ?? '').split(',').map(Number)
+        const meta: BrowserFrameMeta = { viewerBuild: String(req.headers['x-viewer-build'] ?? ''), timeSeconds: Number(req.headers['x-time-seconds']), viewport: viewport as [number, number], dpr: Number(req.headers['x-dpr']), userAgent: String(req.headers['user-agent'] ?? '') }
+        const frame = await captureBrowserFrame(parts[1], parts[3], parts[5], await body(req, 5 * 1024 * 1024), meta, dataDir)
+        const { path: _path, ...publicFrame } = frame
+        respond(res, 201, { ...publicFrame, imageUrl: `${PREFIX}/worlds/${parts[1]}/releases/${parts[3]}/evidence/${frame.viewId}.png` })
+        return
+      }
+      if (parts[0] === 'worlds' && parts[2] === 'releases' && parts[4] === 'evidence' && parts.length === 6 && req.method === 'GET' && parts[5].endsWith('.png')) {
+        const viewId = parts[5].slice(0, -4)
+        const frame = (await listBrowserFrames(parts[1], parts[3], dataDir)).find((item) => item.viewId === viewId)
+        if (!frame) { apiError(res, 404, 'FRAME_NOT_FOUND', 'frame not found'); return }
+        const frameRoot = path.resolve(dataDir, 'world-reviews', parts[1], parts[3], 'browser-evidence')
+        if (!path.resolve(frame.path).startsWith(frameRoot + path.sep)) throw new Error('FRAME_PATH_INVALID')
+        const png = await readFile(frame.path)
+        if (createHash('sha256').update(png).digest('hex') !== frame.imageSha256) throw new Error('FRAME_HASH_MISMATCH')
+        res.writeHead(200, { 'Content-Type': 'image/png', 'Content-Length': png.length, 'Cache-Control': 'no-store' })
+        res.end(png)
+        return
+      }
       if (req.method === 'GET' && parts[0] === 'worlds' && parts.length === 4 && parts[2] === 'releases' && /^[a-z0-9][a-z0-9-]{0,63}$/.test(parts[1]) && /^release-[a-f0-9]{20}$/.test(parts[3])) {
         const bytes = await readFile(path.join(dataDir, 'releases', parts[1], parts[3], 'release.json'))
         const release = JSON.parse(bytes.toString('utf8')) as Record<string, unknown>
@@ -244,7 +271,7 @@ export function createProcessingServer(options: ServerOptions): Server {
         : typed.code === 'ENOENT' ? 404
         : message === 'BUNDLE_SIZE_INVALID' || message === 'BUNDLE_TOO_LARGE' ? 413
         : message.includes('CONFLICT') || message === 'REVIEW_STALE' ? 409
-        : /^(BUNDLE_INVALID|WORLD_FEEDBACK_INVALID|WORLD_FEEDBACK_ISSUE_INVALID|WORLD_PATCH_INVALID|WORLD_PATCH_HASH_MISMATCH|PATCH_BUNDLE_REQUIRED|ASSET_TASK_INVALID|STRATEGY_UNKNOWN|STRATEGY_POLICY_INVALID|REVIEW_REQUEST_INVALID|REVIEW_ID_INVALID)/.test(message) ? 422
+        : /^(BUNDLE_INVALID|WORLD_FEEDBACK_INVALID|WORLD_FEEDBACK_ISSUE_INVALID|WORLD_PATCH_INVALID|WORLD_PATCH_HASH_MISMATCH|PATCH_BUNDLE_REQUIRED|ASSET_TASK_INVALID|STRATEGY_UNKNOWN|STRATEGY_POLICY_INVALID|REVIEW_REQUEST_INVALID|REVIEW_ID_INVALID|FRAME_ID_INVALID|FRAME_PNG_INVALID|FRAME_METADATA_INVALID|FRAME_VIEWPORT_MISMATCH|FRAME_TIME_INVALID|FRAME_BEAT_MISMATCH)/.test(message) ? 422
         : error instanceof TypeError ? 400 : 500
       )
       const inferredCode = message.split(':')[0]

@@ -3,7 +3,7 @@ import { cp, mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { createNodeReader } from '../../contracts/src/node-reader.ts'
 import { validateScenePackage } from '../../contracts/src/validate.ts'
-import type { Claim, ObjectBrief, SceneAsset, SceneFile, SceneObject, StoryFile, Vec3 } from '../../contracts/src/types.ts'
+import type { Claim, HotspotBinding, ObjectBrief, SceneAsset, SceneFile, SceneObject, StoryFile, Vec2, Vec3 } from '../../contracts/src/types.ts'
 import type { CollectionAsset, FileDigest, HandoffManifest, ProcessingFeedback } from '../../contracts/src/handoff-types.ts'
 import type { ExperienceFile } from '../../contracts/src/experience.ts'
 import { validateExperience } from './experience-compile.ts'
@@ -12,6 +12,8 @@ export interface WorldPlan {
   planVersion: '1.0.0'; storyId: string; templateScenePath: string; profileId: string
   assetBindings: Array<{ assetId: string; collectionAssetId: string }>
   placements: Array<{ objectId: string; position: Vec3; rotationY: number }>
+  blockerOverrides?: Array<{ id: string; min: Vec2; max: Vec2 }>
+  hotspotOverrides?: HotspotBinding[]
   claimChanges?: Array<{ claimId: string; statement: string; value: string; reason: string }>
   newClaims?: Claim[]
   newBriefs?: ObjectBrief[]
@@ -19,7 +21,7 @@ export interface WorldPlan {
   newObjects?: SceneObject[]
   assetRevisions?: Record<string, number>
   experienceSourcePath?: string
-  relations: Array<{ relationId: string; parentObjectId: string; childObjectId: string; kind: 'attachment' | 'handheld'; expectedOffset?: Vec3; toleranceM: number; required: boolean }>
+  relations: Array<{ relationId: string; parentObjectId: string; childObjectId: string; kind: 'attachment' | 'handheld'; expectedOffset?: Vec3; parentAnchorM?: Vec3; childAnchorM?: Vec3; toleranceM: number; required: boolean }>
   requiredCapabilities: string[]; optionalCapabilities: string[]; unresolved: string[]
 }
 
@@ -85,6 +87,17 @@ export async function buildWorldRelease(importId: string, planPath: string, data
     object.position = placement.position
     object.rotation = [0, placement.rotationY, 0]
   }
+  for (const override of plan.blockerOverrides ?? []) {
+    const blocker = scene.blockers.find((item) => item.id === override.id)
+    if (!blocker || override.min.length !== 2 || override.max.length !== 2 || override.min.some((value, axis) => !Number.isFinite(value) || value >= override.max[axis])) throw new Error(`BLOCKER_OVERRIDE_INVALID: ${override.id}`)
+    blocker.min = override.min
+    blocker.max = override.max
+  }
+  for (const override of plan.hotspotOverrides ?? []) {
+    const index = scene.hotspotBindings.findIndex((item) => item.hotspotId === override.hotspotId)
+    if (index < 0) throw new Error(`HOTSPOT_OVERRIDE_INVALID: ${override.hotspotId}`)
+    scene.hotspotBindings[index] = override
+  }
   const bound = new Map(plan.assetBindings.map((item) => [item.assetId, item.collectionAssetId]))
   const assetById = new Map(assetManifest.assets.map((item) => [item.assetId, item]))
   for (const [sceneAssetId, collectionAssetId] of bound) {
@@ -108,7 +121,7 @@ export async function buildWorldRelease(importId: string, planPath: string, data
   const templateDir = path.dirname(path.join(repoRoot, plan.templateScenePath))
   const newAssetPaths = new Map((plan.newAssets ?? []).map((item) => [item.id, item.sourcePath]))
   const templateAssetHashes = await Promise.all(scene.assets.filter((item) => !bound.has(item.id)).map(async (item) => digest(await readFile(path.join(repoRoot, newAssetPaths.get(item.id) ?? path.relative(repoRoot, path.join(templateDir, item.path)))))))
-  const releaseId = `release-${digest(JSON.stringify(['world-compile-v3', receipt.snapshotHash, digest(planBytes), digest(JSON.stringify(scene)), templateAssetHashes, experienceBytes ? digest(experienceBytes) : null])).slice(0, 20)}`
+  const releaseId = `release-${digest(JSON.stringify(['world-compile-v4', receipt.snapshotHash, digest(planBytes), digest(JSON.stringify(scene)), templateAssetHashes, experienceBytes ? digest(experienceBytes) : null])).slice(0, 20)}`
   const finalDir = path.join(dataDir, 'releases', story.storyId, releaseId)
   const stage = `${finalDir}.${randomUUID()}.tmp`
   await mkdir(stage, { recursive: true })
@@ -143,7 +156,13 @@ export async function buildWorldRelease(importId: string, planPath: string, data
     if (errors.length) throw new Error(`WORLD_VALIDATION_FAILED: ${errors.map((item) => `${item.file}:${item.field} ${item.message}`).join('; ')}`)
     const quality = { status: 'needs_review', diagnostics: validation.diagnostics, relationChecks, unresolved: plan.unresolved, requiredReviews: ['input_review', 'asset_review', 'world_review', 'release_review'], viewerAcceptance: null }
     await putJson(path.join(stage, 'quality-report.json'), quality)
-    await putJson(path.join(stage, 'provenance.json'), { inputImportId: importId, inputSubmissionId: handoff.submissionId, inputSnapshotHash: receipt.snapshotHash, sourceContentRevision: handoff.sourceContentRevision, compiledContentRevision: compiledStory.contentRevision, planHash: digest(planBytes), sceneTemplate: plan.templateScenePath, assetBindings: plan.assetBindings, placements: plan.placements, claimChanges: plan.claimChanges ?? [], newClaimIds: (plan.newClaims ?? []).map((item) => item.id), newAssetSources: (plan.newAssets ?? []).map((item) => ({ assetId: item.id, sourcePath: item.sourcePath })), reviewRefs: feedback.reviewRefs })
+    const assetSources = await Promise.all(scene.assets.map(async (asset) => ({
+      assetId: asset.id,
+      kind: bound.has(asset.id) ? 'collection' : newAssetPaths.has(asset.id) ? 'B-procedural' : 'template-fixture',
+      sourcePath: bound.has(asset.id) ? `imports/${importId}/source/${assetById.get(bound.get(asset.id)!)?.path}` : newAssetPaths.get(asset.id) ?? path.relative(repoRoot, path.join(templateDir, asset.path)),
+      sha256: digest(await readFile(path.join(stage, asset.path))),
+    })))
+    await putJson(path.join(stage, 'provenance.json'), { inputImportId: importId, inputSubmissionId: handoff.submissionId, inputSnapshotHash: receipt.snapshotHash, sourceContentRevision: handoff.sourceContentRevision, compiledContentRevision: compiledStory.contentRevision, planHash: digest(planBytes), sceneTemplate: plan.templateScenePath, assetBindings: plan.assetBindings, placements: plan.placements, blockerOverrides: plan.blockerOverrides ?? [], hotspotOverrides: plan.hotspotOverrides ?? [], claimChanges: plan.claimChanges ?? [], newClaimIds: (plan.newClaims ?? []).map((item) => item.id), assetSources, reviewRefs: feedback.reviewRefs })
     await putJson(path.join(stage, 'generation-report.json'), {
       strategies: await Promise.all((plan.newAssets ?? []).map(async (asset) => ({
         strategy: 'procedural-import', assetId: asset.id, sourcePath: asset.sourcePath,
@@ -172,6 +191,13 @@ function checkAttachment(relation: WorldPlan['relations'][number], objects: Map<
   if (!parent || !child) return { relationId: relation.relationId, required: relation.required, pass: false, verticalGapM: null, horizontalOverlap: false }
   const verticalGapM = child.position[1] - (parent.position[1] + parent.dimensionsM[1])
   if (relation.kind === 'handheld') {
+    if (relation.parentAnchorM && relation.childAnchorM) {
+      const parentLocal = rotateYaw(relation.parentAnchorM, parent.rotation[1])
+      const childLocal = rotateYaw(relation.childAnchorM, child.rotation[1])
+      const delta: Vec3 = [0, 1, 2].map((axis) => child.position[axis] + childLocal[axis] - parent.position[axis] - parentLocal[axis]) as Vec3
+      const distance = Math.hypot(...delta)
+      return { relationId: relation.relationId, required: relation.required, pass: distance <= relation.toleranceM, verticalGapM: delta[1], horizontalOverlap: Math.hypot(delta[0], delta[2]) <= relation.toleranceM }
+    }
     if (!relation.expectedOffset) return { relationId: relation.relationId, required: relation.required, pass: false, verticalGapM, horizontalOverlap: false }
     const offset = [child.position[0] - parent.position[0], child.position[1] - parent.position[1], child.position[2] - parent.position[2]]
     const distance = Math.hypot(...offset.map((item, index) => item - relation.expectedOffset![index]))
@@ -180,6 +206,12 @@ function checkAttachment(relation: WorldPlan['relations'][number], objects: Map<
   const xOverlap = Math.abs(parent.position[0] - child.position[0]) <= (parent.dimensionsM[0] + child.dimensionsM[0]) / 2
   const zOverlap = Math.abs(parent.position[2] - child.position[2]) <= (parent.dimensionsM[2] + child.dimensionsM[2]) / 2
   return { relationId: relation.relationId, required: relation.required, pass: Math.abs(verticalGapM) <= relation.toleranceM && xOverlap && zOverlap, verticalGapM, horizontalOverlap: xOverlap && zOverlap }
+}
+
+function rotateYaw([x, y, z]: Vec3, yaw: number): Vec3 {
+  const cosine = Math.cos(yaw)
+  const sine = Math.sin(yaw)
+  return [x * cosine + z * sine, y, z * cosine - x * sine]
 }
 
 async function digestFiles(root: string, paths: string[]): Promise<FileDigest[]> {

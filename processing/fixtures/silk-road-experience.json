@@ -15,14 +15,14 @@
       { "timeSeconds": 20, "position": [0, 0, 0], "yawRad": 0.35 },
       { "timeSeconds": 30, "position": [0, 0, -3], "yawRad": 0.35 }
     ] },
-    { "id": "cargo-on-carrier", "type": "attachment", "childObjectId": "obj-pack-a", "parentObjectId": "obj-beast", "localPosition": [0, 2, 0], "localYawRad": 0, "startSeconds": 0, "endSeconds": 30, "evidenceType": "illustrative" },
+    { "id": "cargo-on-carrier", "type": "attachment", "childObjectId": "obj-pack-a", "parentObjectId": "obj-beast", "localPosition": [0, 2, 0], "localYawRad": 0, "parentAnchorM": [0, 2, 0], "childAnchorM": [0, 0, 0], "startSeconds": 0, "endSeconds": 30, "evidenceType": "illustrative" },
     { "id": "traveler-route", "type": "transform", "objectId": "obj-traveler", "evidenceType": "illustrative", "keyframes": [
       { "timeSeconds": 0, "position": [2.8, 0, 4], "yawRad": 0 },
       { "timeSeconds": 10, "position": [2.8, 0, 4], "yawRad": 0 },
       { "timeSeconds": 20, "position": [1.8, 0, 2.4], "yawRad": -0.4 },
       { "timeSeconds": 30, "position": [1.8, 0, 2.4], "yawRad": -0.4 }
     ] },
-    { "id": "staff-with-traveler", "type": "attachment", "childObjectId": "obj-staff", "parentObjectId": "obj-traveler", "localPosition": [0.35, 0, 0], "localYawRad": 0, "startSeconds": 0, "endSeconds": 30, "evidenceType": "illustrative" },
+    { "id": "staff-with-traveler", "type": "attachment", "childObjectId": "obj-staff", "parentObjectId": "obj-traveler", "localPosition": [0.35, 0, 0], "localYawRad": 0, "parentAnchorM": [0.35, 1.05, 0], "childAnchorM": [0, 1.05, 0], "startSeconds": 0, "endSeconds": 30, "evidenceType": "illustrative" },
     { "id": "crate-state", "type": "visibility", "objectId": "obj-crate", "evidenceType": "illustrative", "keyframes": [
       { "timeSeconds": 0, "visible": true }, { "timeSeconds": 20, "visible": false }, { "timeSeconds": 30, "visible": false }
     ] }

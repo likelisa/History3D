@@ -7,6 +7,8 @@ import { buildWorldEvidence } from './evidence.ts'
 import { reviewWithDeepSeek, ReviewOutputError, type ReviewCallOptions } from './deepseek.ts'
 import { reviewCacheKey, type ReviewJob } from './orchestrator.ts'
 import { validateReviewOutput } from './validate.ts'
+import { listBrowserFrames } from './browser-evidence.ts'
+import { readGlbBounds } from '../../../contracts/src/glb.ts'
 
 const readJson = async <T>(file: string): Promise<T> => JSON.parse(await readFile(file, 'utf8')) as T
 const putJson = async (file: string, value: unknown): Promise<void> => { const temp = `${file}.${randomUUID()}.tmp`; await writeFile(temp, JSON.stringify(value, null, 2) + '\n'); await rename(temp, file) }
@@ -43,26 +45,48 @@ export async function runWorldReview(storyId: string, releaseId: string, planPat
     await renderWorld(options.blenderPath ?? process.env.BLENDER_BIN ?? '/Applications/Blender.app/Contents/MacOS/Blender', releaseDir, imageDir)
     const provenance = await readJson<{ inputImportId: string }>(path.join(releaseDir, 'provenance.json'))
     const originalPlanPath = path.join(dataDir, 'imports', provenance.inputImportId, 'source', 'plan.md')
-    const [sceneText, storyText, sourcesText, qualityText, worldPlanText, originalPlanText] = await Promise.all([
-      readFile(path.join(releaseDir, 'scene.json'), 'utf8'), readFile(path.join(releaseDir, 'story.json'), 'utf8'), readFile(path.join(releaseDir, 'sources.json'), 'utf8'), readFile(path.join(releaseDir, 'quality-report.json'), 'utf8'), readFile(fixedPlanPath, 'utf8'), readFile(originalPlanPath, 'utf8'),
+    const [sceneText, storyText, sourcesText, qualityText, worldPlanText, originalPlanText, provenanceText, generationText, experienceText] = await Promise.all([
+      readFile(path.join(releaseDir, 'scene.json'), 'utf8'), readFile(path.join(releaseDir, 'story.json'), 'utf8'), readFile(path.join(releaseDir, 'sources.json'), 'utf8'), readFile(path.join(releaseDir, 'quality-report.json'), 'utf8'), readFile(fixedPlanPath, 'utf8'), readFile(originalPlanPath, 'utf8'), readFile(path.join(releaseDir, 'provenance.json'), 'utf8'), readFile(path.join(releaseDir, 'generation-report.json'), 'utf8'), readFile(path.join(releaseDir, 'experience.json'), 'utf8').catch(() => ''),
     ])
-    const scene = JSON.parse(sceneText) as { objects: unknown[]; assets: unknown[] }
+    const scene = JSON.parse(sceneText) as { objects: unknown[]; assets: Array<{ id: string; path: string }> }
     const quality = JSON.parse(qualityText) as { relationChecks: Array<{ pass: boolean }> }
+    const assetInspection = await Promise.all(scene.assets.map(async (asset) => {
+      const bytes = await readFile(path.join(releaseDir, asset.path))
+      const buffer = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength) as ArrayBuffer
+      const bounds = readGlbBounds(buffer)
+      if (!bounds) throw new Error(`ASSET_INVALID: ${asset.id}`)
+      return { assetId: asset.id, sha256: sha(bytes), bytes: bytes.length, boundsMinM: bounds.min, boundsMaxM: bounds.max, dimensionsM: bounds.dimensions, positionSamples: bounds.nodeCount }
+    }))
+    const assetInspectionText = JSON.stringify(assetInspection)
     const subjectRef = `world:${releaseId}`
+    const browserFrames = (await listBrowserFrames(storyId, releaseId, dataDir)).filter((frame) => frame.releaseSnapshotHash === snapshotHash)
+    for (const frame of browserFrames) {
+      const root = path.join(baseDir, 'browser-evidence')
+      if (!path.resolve(frame.path).startsWith(path.resolve(root) + path.sep) || sha(await readFile(frame.path)) !== frame.imageSha256) throw new Error(`FRAME_HASH_MISMATCH: ${frame.viewId}`)
+    }
+    const browserMetadata = JSON.stringify(browserFrames.map(({ path: _path, ...frame }) => frame))
     const evidence: ReviewEvidenceBundle = await buildWorldEvidence({
       scope: 'world', snapshotHash, rubricVersion: 'world-v1', subjectRef,
-      images: ['overview', 'main', 'human-scale'].map((viewId) => ({ viewId, subjectRef, path: path.join(imageDir, `${viewId}.png`), camera: `blender-offline-${viewId}-v1` })),
+      images: [
+        ...['overview', 'main', 'human-scale'].map((viewId) => ({ viewId, subjectRef, path: path.join(imageDir, `${viewId}.png`), camera: `blender-offline-${viewId}-v1` })),
+        ...browserFrames.map((frame) => ({ viewId: frame.viewId, subjectRef, path: frame.path, camera: `formal-viewer-${frame.meta.viewerBuild}-t${frame.meta.timeSeconds}` })),
+      ],
       texts: [
         { refId: 'scene.json', text: sceneText }, { refId: 'story.json', text: storyText }, { refId: 'sources.json', text: sourcesText },
         { refId: 'world-plan.json', text: worldPlanText }, { refId: 'plan.md', text: originalPlanText }, { refId: 'quality-report.json', text: qualityText },
-        { refId: 'coverage-limitations', text: 'Only three offline Blender stills supplied. Formal viewer screenshots, three story beat frames, motion continuity, audio and performance are not supplied; mark them unassessed.' },
+        { refId: 'provenance.json', text: provenanceText }, { refId: 'generation-report.json', text: generationText },
+        ...(experienceText ? [{ refId: 'experience.json', text: experienceText }] : []),
+        { refId: 'asset-inspection.json', text: assetInspectionText },
+        { refId: 'viewer-frame-metadata', text: browserMetadata },
+        { refId: 'coverage-limitations', text: 'Offline Blender stills, formal viewer frames and experience track data are supplied. Discrete before/mid/after frames plus a sampler test cannot by themselves prove continuous runtime motion; 90-second performance, audio and music audition remain unassessed until separate evidence is attached.' },
       ],
       metrics: [
         { subjectRef, name: 'objectCount', value: scene.objects.length, unit: 'count' },
         { subjectRef, name: 'assetCount', value: scene.assets.length, unit: 'count' },
         { subjectRef, name: 'attachmentChecksPassed', value: quality.relationChecks.filter((item) => item.pass).length, unit: 'count' },
+        { subjectRef, name: 'measuredGlbCount', value: assetInspection.length, unit: 'count' },
       ],
-      requiredViewIds: ['overview', 'main', 'human-scale', 'formal-viewer-main', 'beat-1', 'beat-2', 'beat-3'],
+      requiredViewIds: ['overview', 'main', 'human-scale', 'formal-viewer-main', 'beat-1', 'beat-2', 'beat-3', 'motion-before', 'motion-mid', 'motion-after', 'motion-continuity-video', 'performance-90s', 'music-audition'],
     })
     reviewId = `world-review-${reviewCacheKey(evidence).slice(0, 20)}`
     reviewDir = path.join(baseDir, reviewId)
@@ -76,7 +100,9 @@ export async function runWorldReview(storyId: string, releaseId: string, planPat
     const finalImageDir = path.join(reviewDir, 'views')
     await rm(finalImageDir, { recursive: true, force: true })
     await rename(imageDir, finalImageDir)
-    for (const image of evidence.images) image.path = path.join(finalImageDir, path.basename(image.path))
+    for (const image of evidence.images) {
+      if (['overview', 'main', 'human-scale'].includes(image.viewId)) image.path = path.join(finalImageDir, path.basename(image.path))
+    }
     await rm(stageDir, { recursive: true, force: true })
     await putJson(path.join(reviewDir, 'evidence.json'), evidence)
     const { report, responseBody } = await reviewWithDeepSeek(evidence, options)

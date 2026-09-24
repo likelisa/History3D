@@ -32,6 +32,8 @@ export interface AttachmentTrack {
   parentObjectId: string
   localPosition: Vec3
   localYawRad: number
+  parentAnchorM?: Vec3
+  childAnchorM?: Vec3
   startSeconds: number
   endSeconds: number
   evidenceType: 'documented' | 'inferred' | 'illustrative'

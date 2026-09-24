@@ -56,3 +56,10 @@
 
 - 新 release `release-66bb03f28024e5f620e6` 将 `world-plan.json` 封进不可变文件清单，正式包校验 0 错误、1 条载物悬置警告。正式 viewer 从本机 API 打开后显示“可体验”，原三幕控件仍在。
 - `/reviews` 用该 release 的服务端 `snapshotHash` 提交 world_review，返回 `job-review-05c134310410109ed5e8`。本机 API 进程没有配置 DeepSeek Key，因此该 job 明确结束为 failed/review unavailable、无报告 URL；没有把缺模型推理当成 world pass。自动化测试还证明旧 snapshotHash 返回 409，asset task 的补审完成后可通过 reviewId 索引读取报告。
+
+## 2026-09-25 正式 viewer 关键帧与复审修订
+
+- 对 `release-66bb03f28024e5f620e6` 在本机 viewer 的 `capture=1` 模式存了主镜头、三幕和动作 0/15/25 秒，共 7 个 PNG。图片为 2560×1440，画布视口 1280×720、DPR 2；逐帧存 SHA-256 与 release SHA。`viewerBuild=uncommitted-local-7cd64aa` 明确表示采集时前端仍有未提交编辑，不能冒充固定 C 构建验收。第二幕图已人工查看，人物、手杖、载体、货包与前路均显示。
+- 世界审核首次因 B 在搬移 Blender 图时误改正式图路径而在本地失败，未调用模型；修复并加回归测试后，真实 `deepseek-flash` 调用请求 ID `e6f41760-f7fb-4709-b278-0fc877941c4f`，输入 25,557 token、输出 19,539 token。完整响应有两类结构化未评估项/策略和一处省略的可选补料字段，先被拒绝；校验器验证 ID 后只重验已保存响应，没有再次调用。
+- 报告 `world-review-477885ccf19287a99675` 判 `needs_revision`，12 条发现、7 项未评估；正式关键帧并没有消除史实、连续动作、音乐和性能缺口。报告指出手杖的“手持”关系原只校验并排位置、前路/行者 blocker 与几何不对齐、出发故事点落在载体体内，以及模型缺资产实测和来源信息。
+- B 将手杖改为“行者手部锚点 ↔ 手杖握点”接触校验，`relation-hand-tool.verticalGapM` 从 -1.89 m 改为 0 m；前路/营地 blocker 扩到实际对象范围，出发故事点移到载体外。新候选 `release-ecc3c4f76d1c05b29360` 的两条组装关系均 pass，正式包校验 0 错误、1 条预期的载物悬置警告。provenance 列明四件 GLB 的来源与哈希；新的世界复审证据另包含实测包围盒与 `experience.json`。该新候选尚未经过真实模型重审或 C 的正式构建验收。

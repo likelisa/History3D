@@ -69,6 +69,8 @@ npm run dev -- --host 127.0.0.1
 
 世界复审命令：`npm run processing -- review-world <storyId> <releaseId> <world-plan.json>`。它核对不可变 release 的所有文件哈希，以 Blender 从正式 `scene.json` 渲染全景、主镜头和尺度参照，连同原规划、修订规划、质量指标交给 DeepSeek。正式 viewer 截图、三幕关键帧和连续动作未提供时，证据覆盖标为 `unassessed`，报告不可判 pass。每次输入图、文本、模型参数形成审查缓存键；图像改变会留下新报告，不覆盖旧报告。
 
+世界包已内置 `world-plan.json`，通常直接运行 `npm run processing -- review-world <storyId> <releaseId>`。需要采集正式页面关键帧时，在本机 API 固定版 URL 后加 `&capture=1&viewerBuild=<准确构建SHA或明确标注的本机版本>`。处理层验收栏的“存主镜头”“存当前幕”“存动作采样”分别保存正式 Three.js canvas 的主镜头、三幕和动作前/中/后 PNG。POST `/worlds/{storyId}/releases/{releaseId}/evidence/{viewId}` 会把图片 SHA-256、固定 release SHA、播放时间、画布像素、视口/DPR 与 viewerBuild 存在不可变 release 之外的 sidecar；GET 同一路径加 `.png` 可只读取图。世界复审把这些正式图和 Blender 图、实际 GLB 哈希/包围盒、provenance、experience 轨道一并送模型。离散帧仍不能替代连续录屏、90 秒性能与音乐听感，报告必须保留未评估范围。
+
 动态候选另带 `experience.json`（版本 `1.0.0`），三幕、对象变换、显隐、父子挂接、镜头提示和环境关键帧均是独立数据。`sampleExperience(scene, experience, timeSeconds)` 可直接计算任意时刻的完整对象状态，跳章不需要先从头播放。正式 viewer 以同一个采样器驱动播放、暂停、跳章、归零和剧情镜头；用户切回第一人称或俯视后，跳章不会抢回镜头。候选的 `requiredCapabilities` 明确要求对应动态能力，不支持的查看器必须拒绝完整体验。
 
 `processing/fixtures/assets/` 的行者与手杖由 B 的 Blender 脚本程序化生成，已标为技术演示和 `illustrative`；这证明 GLB 制作、装配与页面往返，不计入计划所要求的外部 3D 服务真实生成或历史素材验收。当前 `audio` 为空，未交付音乐。
