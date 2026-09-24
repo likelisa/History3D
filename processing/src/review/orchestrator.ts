@@ -4,14 +4,14 @@ import { mkdir, readFile, rename, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import type { CollectionAsset, HandoffManifest, ProcessingFeedback, ReviewEvidenceBundle, ReviewReport } from '../../../contracts/src/handoff-types.ts'
 import { buildAssetEvidence } from './evidence.ts'
-import { reviewWithDeepSeek, ReviewOutputError, REVIEW_MAX_TOKENS, type ReviewCallOptions } from './deepseek.ts'
+import { reviewWithDeepSeek, ReviewOutputError, REVIEW_MAX_TOKENS, uncertainReviewFailure, type ReviewCallOptions } from './deepseek.ts'
 import { validateReviewOutput } from './validate.ts'
 
 const fileJson = async <T>(file: string): Promise<T> => JSON.parse(await readFile(file, 'utf8')) as T
 const hash = (value: string): string => createHash('sha256').update(value).digest('hex')
 const writeJson = async (file: string, value: unknown): Promise<void> => { const temporary = `${file}.${randomUUID()}.tmp`; await writeFile(temporary, JSON.stringify(value, null, 2) + '\n'); await rename(temporary, file) }
 
-export interface ReviewJob { reviewId: string; status: 'pass' | 'needs_revision' | 'needs_information' | 'inconclusive' | 'failed' | 'stale' | 'unavailable'; reportPath: string | null; error: string | null; attempts: number }
+export interface ReviewJob { reviewId: string; status: 'pass' | 'needs_revision' | 'needs_information' | 'inconclusive' | 'failed' | 'call_unknown' | 'stale' | 'unavailable'; reportPath: string | null; error: string | null; attempts: number }
 
 export async function runInputReview(importId: string, dataDir: string, options: ReviewCallOptions & { blenderPath?: string } = {}): Promise<ReviewJob[]> {
   if (!/^import-[a-f0-9]{20}$/.test(importId)) throw new Error('INVALID_IMPORT_ID')
@@ -60,7 +60,7 @@ export async function runInputReview(importId: string, dataDir: string, options:
       jobs.push(job)
     } catch (error) {
       if (error instanceof ReviewOutputError) await writeJson(path.join(dir, `failed-response-${attempts + 1}.json`), error.responseBody)
-      const job: ReviewJob = { reviewId, status: 'failed', reportPath: null, error: error instanceof Error ? error.message : String(error), attempts: attempts + 1 }
+      const job: ReviewJob = { reviewId, status: uncertainReviewFailure(error) ? 'call_unknown' : 'failed', reportPath: null, error: error instanceof Error ? error.message : String(error), attempts: attempts + 1 }
       await writeJson(jobFile, job)
       jobs.push(job)
     }

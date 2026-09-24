@@ -1,10 +1,10 @@
 import { spawn } from 'node:child_process'
 import { createHash, randomUUID } from 'node:crypto'
-import { mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises'
+import { mkdir, readFile, readdir, rename, rm, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import type { ReviewEvidenceBundle, ReviewReport } from '../../../contracts/src/handoff-types.ts'
 import { buildWorldEvidence } from './evidence.ts'
-import { reviewWithDeepSeek, ReviewOutputError, type ReviewCallOptions } from './deepseek.ts'
+import { reviewWithDeepSeek, ReviewOutputError, REVIEW_MAX_TOKENS, uncertainReviewFailure, type ReviewCallOptions } from './deepseek.ts'
 import { reviewCacheKey, type ReviewJob } from './orchestrator.ts'
 import { validateReviewOutput } from './validate.ts'
 import { listBrowserFrames } from './browser-evidence.ts'
@@ -29,6 +29,19 @@ export async function runWorldReview(storyId: string, releaseId: string, planPat
   const snapshotHash = sha(releaseBytes)
   const baseDir = path.join(dataDir, 'world-reviews', storyId, releaseId)
   await mkdir(baseDir, { recursive: true })
+  for (const entry of await readdir(baseDir)) {
+    if (!/^world-review-[a-f0-9]{20}$/.test(entry)) continue
+    const jobFile = path.join(baseDir, entry, 'job.json')
+    const prior = await readJson<ReviewJob>(jobFile).catch(() => null)
+    if (!prior) continue
+    if (prior.status === 'failed' && prior.error && uncertainReviewFailure(new Error(prior.error))) {
+      prior.status = 'call_unknown'
+      await putJson(jobFile, prior)
+      const evidence = await readJson<ReviewEvidenceBundle>(path.join(baseDir, entry, 'evidence.json')).catch(() => null)
+      await putJson(path.join(baseDir, entry, `attempt-${prior.attempts}.json`), { attempt: prior.attempts, status: 'outcome_unknown', startedAt: null, classifiedAt: new Date().toISOString(), provider: 'deepseek-official', model: 'deepseek-flash', snapshotHash: evidence?.snapshotHash ?? snapshotHash, evidenceKey: evidence ? reviewCacheKey(evidence) : null, error: prior.error, requestId: null, tokens: null, costUsd: null })
+    }
+    if (prior.status === 'call_unknown') return prior
+  }
   if (!(options.apiKey ?? process.env.DEEPSEEK_API_KEY)) {
     const reviewId = `world-review-${snapshotHash.slice(0, 20)}-unavailable`
     const job: ReviewJob = { reviewId, status: 'unavailable', reportPath: null, error: 'DEEPSEEK_API_KEY missing', attempts: 0 }
@@ -41,6 +54,8 @@ export async function runWorldReview(storyId: string, releaseId: string, planPat
   let reviewId = `world-review-${snapshotHash.slice(0, 20)}-evidence-error`
   let reviewDir = path.join(baseDir, reviewId)
   let attempts = 0
+  let callAttemptFile: string | null = null
+  let callStartedAt: string | null = null
   try {
     await renderWorld(options.blenderPath ?? process.env.BLENDER_BIN ?? '/Applications/Blender.app/Contents/MacOS/Blender', releaseDir, imageDir)
     const provenance = await readJson<{ inputImportId: string }>(path.join(releaseDir, 'provenance.json'))
@@ -94,6 +109,12 @@ export async function runWorldReview(storyId: string, releaseId: string, planPat
     try {
       const prior = await readJson<ReviewJob>(jobFile)
       attempts = prior.attempts
+      if (prior.status === 'failed' && prior.error && uncertainReviewFailure(new Error(prior.error))) {
+        prior.status = 'call_unknown'
+        await putJson(jobFile, prior)
+        await rm(stageDir, { recursive: true, force: true })
+        return prior
+      }
       if (!['failed', 'stale', 'unavailable'].includes(prior.status) || attempts >= 2) { await rm(stageDir, { recursive: true, force: true }); return prior }
     } catch { /* new evidence key */ }
     await mkdir(reviewDir, { recursive: true })
@@ -105,9 +126,13 @@ export async function runWorldReview(storyId: string, releaseId: string, planPat
     }
     await rm(stageDir, { recursive: true, force: true })
     await putJson(path.join(reviewDir, 'evidence.json'), evidence)
+    callAttemptFile = path.join(reviewDir, `attempt-${attempts + 1}.json`)
+    callStartedAt = new Date().toISOString()
+    await putJson(callAttemptFile, { attempt: attempts + 1, status: 'submitting', startedAt: callStartedAt, provider: 'deepseek-official', model: 'deepseek-flash', snapshotHash, evidenceKey: reviewCacheKey(evidence), maxTokens: REVIEW_MAX_TOKENS, timeoutMs: options.timeoutMs ?? 120_000, requestId: null, tokens: null, costUsd: null })
     const { report, responseBody } = await reviewWithDeepSeek(evidence, options)
     report.reviewId = reviewId
     await putJson(path.join(reviewDir, 'response.json'), responseBody)
+    await putJson(callAttemptFile, { attempt: attempts + 1, status: 'response_received', startedAt: callStartedAt, finishedAt: new Date().toISOString(), provider: 'deepseek-official', model: 'deepseek-flash', snapshotHash, evidenceKey: reviewCacheKey(evidence), maxTokens: REVIEW_MAX_TOKENS, timeoutMs: options.timeoutMs ?? 120_000, requestId: report.modelRecord.requestId, tokens: report.modelRecord.tokens, costUsd: null })
     await putJson(path.join(reviewDir, 'report.json'), report)
     const currentHash = sha(await readFile(path.join(releaseDir, 'release.json')))
     const job: ReviewJob = { reviewId, status: currentHash === snapshotHash ? report.decision : 'stale', reportPath: `world-reviews/${storyId}/${releaseId}/${reviewId}/report.json`, error: currentHash === snapshotHash ? null : 'release manifest changed while reviewing', attempts: attempts + 1 }
@@ -116,8 +141,9 @@ export async function runWorldReview(storyId: string, releaseId: string, planPat
   } catch (error) {
     await rm(stageDir, { recursive: true, force: true })
     await mkdir(reviewDir, { recursive: true })
+    if (callAttemptFile) await putJson(callAttemptFile, { attempt: attempts + 1, status: uncertainReviewFailure(error) ? 'outcome_unknown' : 'failed', startedAt: callStartedAt, finishedAt: new Date().toISOString(), provider: 'deepseek-official', model: 'deepseek-flash', snapshotHash, error: error instanceof Error ? error.message : String(error), requestId: null, tokens: null, costUsd: null })
     if (error instanceof ReviewOutputError) await putJson(path.join(reviewDir, `failed-response-${attempts + 1}.json`), error.responseBody)
-    const job: ReviewJob = { reviewId, status: 'failed', reportPath: null, error: error instanceof Error ? error.message : String(error), attempts: attempts + 1 }
+    const job: ReviewJob = { reviewId, status: uncertainReviewFailure(error) ? 'call_unknown' : 'failed', reportPath: null, error: error instanceof Error ? error.message : String(error), attempts: attempts + 1 }
     await putJson(path.join(reviewDir, 'job.json'), job)
     return job
   }

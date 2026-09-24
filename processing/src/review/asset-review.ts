@@ -3,7 +3,7 @@ import { mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import type { ReviewEvidenceBundle, ReviewReport } from '../../../contracts/src/handoff-types.ts'
 import { buildAssetEvidence, REQUIRED_ASSET_VIEWS } from './evidence.ts'
-import { reviewWithDeepSeek, ReviewOutputError, type ReviewCallOptions } from './deepseek.ts'
+import { reviewWithDeepSeek, ReviewOutputError, uncertainReviewFailure, type ReviewCallOptions } from './deepseek.ts'
 import { renderAsset, reviewCacheKey, type ReviewJob } from './orchestrator.ts'
 import { DEFAULT_BLENDER_PATH } from '../strategies/registry.ts'
 import type { AssetTaskRecord } from '../strategies/tasks.ts'
@@ -89,7 +89,7 @@ export async function runAssetReview(taskId: string, dataDir: string, options: R
   } catch (error) {
     await mkdir(reviewDir, { recursive: true })
     if (error instanceof ReviewOutputError) await putJson(path.join(reviewDir, `failed-response-${attempts + 1}.json`), error.responseBody)
-    const job: ReviewJob = { reviewId, status: 'failed', reportPath: null, error: error instanceof Error ? error.message : String(error), attempts: attempts + 1 }
+    const job: ReviewJob = { reviewId, status: uncertainReviewFailure(error) ? 'call_unknown' : 'failed', reportPath: null, error: error instanceof Error ? error.message : String(error), attempts: attempts + 1 }
     await putJson(path.join(reviewDir, 'job.json'), job)
     const latest = await json<AssetTaskRecord>(taskFile)
     if (latest.result) { latest.result.reviewStatus = 'failed'; await putJson(taskFile, latest) }

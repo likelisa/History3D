@@ -7,6 +7,12 @@ export interface ReviewCallResult { report: ReviewReport; responseBody: unknown 
 export interface ReviewCallOptions { apiKey?: string; endpoint?: string; timeoutMs?: number; fetchImpl?: typeof fetch; promptVersion?: string }
 export class ReviewOutputError extends Error { constructor(message: string, public responseBody: unknown) { super(message) } }
 export const REVIEW_MAX_TOKENS = 32768
+export function uncertainReviewFailure(error: unknown): boolean {
+  if (error instanceof ReviewOutputError) return false
+  const name = error instanceof Error ? error.name : ''
+  const message = error instanceof Error ? error.message : String(error)
+  return name === 'TimeoutError' || name === 'AbortError' || /timeout|aborted|fetch failed|network|socket hang up/i.test(message)
+}
 
 export async function reviewWithDeepSeek(evidence: ReviewEvidenceBundle, options: ReviewCallOptions = {}): Promise<ReviewCallResult> {
   const apiKey = options.apiKey ?? process.env.DEEPSEEK_API_KEY

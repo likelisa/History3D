@@ -48,6 +48,8 @@ B 可用 `npm run processing -- review-patch /absolute/path/to/decision.json` �
 
 `POST /reviews` 已支持 `scope:input/asset/world` 的固定快照补审，分别提交 importId、taskId 或 storyId+releaseId，并附从导入回执、asset task 的 `result.reviewSnapshotHash` 或 release 元数据读取的 `snapshotHash`，以及 `rubricVersion:input-v1/asset-v1/world-v1`。返回 202 与 jobId；`GET /reviews/<jobId>` 或 `/jobs/<jobId>` 查询审核状态，完成后以 `GET /reviews/<reviewId>` 读取报告。快照不符返回 409；模型不可用或输出无效时 job 为 failed，不能提升 release。world release 自带 `world-plan.json`，世界补审不依赖调用方提供 B 机器的规划路径。`release_review` 的正式页面截图/录屏入口仍待接入。
 
+模型请求如果在网络/超时阶段失去结果，审核 job 标为 `call_unknown`：证据、请求参数、错误和费用未知状态持久保存，同一 release 不自动付费重试。收到完整但结构无效的响应则保存原文并标 `failed`，校验器修复后可重验已保存响应。`call_unknown` 需要先核账或人工裁定是否重新调用；它不能作为 pass。
+
 B 用 `npm run processing -- decide-asset-task <decision.json>` 记录一个 asset task 的拒绝决定，决策写明 `decisionId`、`taskId`、`reviewId`、`snapshotHash`、`operator`、`reason`、`action:"reject"`。它必须引用已完成资产报告和未被篡改的候选 GLB；任务转为 `rejected`，文件和报告仍可复查。蓝灰货包技术候选已因对比度与装配证据不足被 B 拒绝。通过审核后的 B 候选整合仍待实现。
 
 Blender 的一般网格/绑定/UV 修整与外部生成执行适配尚未接通，`/strategies` 列出限制或 unavailable。付费资产任务执行/恢复、B 候选整合、候选提升为 current 的发布/回退命令仍待实现。本服务没有跨机器身份认证，只用于本机联调。Python 解包解释器默认 `/usr/bin/python3`，可通过 `PROCESSING_PYTHON` 指定团队机器上的解释器。

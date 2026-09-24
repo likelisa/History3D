@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import type { ReviewEvidenceBundle } from '../contracts/src/handoff-types.ts'
 import { validateReviewOutput } from '../processing/src/review/validate.ts'
-import { reviewWithDeepSeek } from '../processing/src/review/deepseek.ts'
+import { reviewWithDeepSeek, uncertainReviewFailure, ReviewOutputError } from '../processing/src/review/deepseek.ts'
 import { reviewCacheKey } from '../processing/src/review/orchestrator.ts'
 import path from 'node:path'
 
@@ -14,6 +14,10 @@ const evidence: ReviewEvidenceBundle = {
 }
 
 describe('AI review gate', () => {
+  it('marks uncertain network timeouts separately from known invalid model output', () => {
+    expect(uncertainReviewFailure(new Error('The operation was aborted due to timeout'))).toBe(true)
+    expect(uncertainReviewFailure(new ReviewOutputError('invalid JSON', {}))).toBe(false)
+  })
   it('invalidates review reuse when a rendered view changes', () => {
     const changed = { ...evidence, images: evidence.images.map((item) => ({ ...item, sha256: 'd'.repeat(64) })) }
     expect(reviewCacheKey(changed)).not.toBe(reviewCacheKey(evidence))

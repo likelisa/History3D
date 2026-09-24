@@ -63,3 +63,5 @@
 - 世界审核首次因 B 在搬移 Blender 图时误改正式图路径而在本地失败，未调用模型；修复并加回归测试后，真实 `deepseek-flash` 调用请求 ID `e6f41760-f7fb-4709-b278-0fc877941c4f`，输入 25,557 token、输出 19,539 token。完整响应有两类结构化未评估项/策略和一处省略的可选补料字段，先被拒绝；校验器验证 ID 后只重验已保存响应，没有再次调用。
 - 报告 `world-review-477885ccf19287a99675` 判 `needs_revision`，12 条发现、7 项未评估；正式关键帧并没有消除史实、连续动作、音乐和性能缺口。报告指出手杖的“手持”关系原只校验并排位置、前路/行者 blocker 与几何不对齐、出发故事点落在载体体内，以及模型缺资产实测和来源信息。
 - B 将手杖改为“行者手部锚点 ↔ 手杖握点”接触校验，`relation-hand-tool.verticalGapM` 从 -1.89 m 改为 0 m；前路/营地 blocker 扩到实际对象范围，出发故事点移到载体外。新候选 `release-ecc3c4f76d1c05b29360` 的两条组装关系均 pass，正式包校验 0 错误、1 条预期的载物悬置警告。provenance 列明四件 GLB 的来源与哈希；新的世界复审证据另包含实测包围盒与 `experience.json`。该新候选尚未经过真实模型重审或 C 的正式构建验收。
+- 提交 `57f9ebdad6dec8d88a129ef197f179f7a8903e91` 后，在上述新候选重采主镜头、三幕与动作 0/15/25 秒七张正式 viewer PNG；各帧都带准确提交 SHA、release SHA、时间、视口 1280×720 与 DPR 2。第二幕图已人工查看。离散帧仍不证明连续动作或性能。
+- 用这七张正式图、三张 Blender 图、四件 GLB 的实测哈希/包围盒、规划/来源/provenance/experience 发起新的真实 DeepSeek 世界复审。该请求在 120 秒网络超时，未收到 request ID、正文或 token 用量；是否计费未知。审核 `world-review-0f703a38b6b47b9a7a38` 从 failed 归类为 `call_unknown`，保存请求快照和错误并禁止自动重试。此 release 没有有效的新世界审核报告，仍为 `needs_review`。

@@ -72,7 +72,7 @@ export async function processReviewRequest(jobId: string, dataDir: string, optio
     }
     record.reviewRefs = reviews.map((review) => ({ reviewId: review.reviewId, status: review.status, reportUrl: review.reportPath ? `/api/processing/v1/reviews/${review.reviewId}` : null }))
     record.diagnostics = reviews.flatMap((review) => review.error ? [`${review.reviewId}: ${review.error}`] : [])
-    record.status = reviews.some((review) => ['failed', 'unavailable', 'stale'].includes(review.status)) ? 'failed' : 'complete'
+    record.status = reviews.some((review) => ['failed', 'call_unknown', 'unavailable', 'stale'].includes(review.status)) ? 'failed' : 'complete'
     for (const review of reviews) {
       if (!review.reportPath) continue
       const reportPath = `${reportPrefix}${review.reportPath}`
