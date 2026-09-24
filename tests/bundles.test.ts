@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest'
 import { spawnSync } from 'node:child_process'
-import { mkdtemp, rm } from 'node:fs/promises'
+import { chmod, mkdtemp, rm, writeFile } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 import { storeBundle } from '../processing/src/bundles.ts'
@@ -23,5 +23,9 @@ describe('ZIP transport', () => {
     expect((await storeBundle(zipPath, dataDir)).bundleId).toBe(bundle.bundleId)
     const imported = await importCollection(path.join(dataDir, 'bundles', bundle.bundleId, 'files'), dataDir, 'http-fixture-key')
     expect(imported.status).toBe('needs_input')
+    const fakeExtractor = path.join(dataDir, 'slow-extractor.sh')
+    await writeFile(fakeExtractor, '#!/bin/sh\nsleep 2\n')
+    await chmod(fakeExtractor, 0o700)
+    await expect(storeBundle(zipPath, path.join(dataDir, 'timeout-case'), { pythonPath: fakeExtractor, timeoutMs: 100 })).rejects.toThrow('BUNDLE_TIMEOUT')
   })
 })

@@ -34,9 +34,11 @@ curl --noproxy '*' -H 'Content-Type: application/json' --data-binary @/absolute/
   http://127.0.0.1:8798/api/processing/v1/worlds/<storyId>/feedback
 ```
 
-`/bundles` 只接 multipart `file` ZIP；检查越界路径、重复项、符号链接、超大解压和外部 GLB 引用。`POST /imports` 只引用已上传的 bundleId，不接受本机任意绝对路径；202 回执与 `/jobs` 是接收/处理状态，绝不代表 ready。`GET /imports/{importId}/feedback` 返回反馈内容、markdown/修订规划和原始 GLB 的只读 artifact URL。`GET /worlds/{storyId}/releases/{releaseId}` 返回固定包的 `packageBaseUrl`；正式页面可用 `http://127.0.0.1:5173/?story=<storyId>&release=<releaseId>` 直接从 API 加载，无需物化到 `viewer/public/candidates`。
+`/bundles` 只接 multipart `file` ZIP；检查越界路径、重复项、符号链接、超大解压和外部 GLB 引用，解包子进程 120 秒超时、输出上限 2 MiB，Node 会复核提取文件的大小与 SHA-256。`POST /imports` 只引用已上传的 bundleId，不接受本机任意绝对路径；202 回执与 `/jobs` 是接收/处理状态，绝不代表 ready。`GET /imports/{importId}/feedback` 返回反馈内容、markdown/修订规划和原始 GLB 的只读 artifact URL。`GET /worlds/{storyId}/releases/{releaseId}` 返回固定包的 `packageBaseUrl`；正式页面可用 `http://127.0.0.1:5173/?story=<storyId>&release=<releaseId>` 直接从 API 加载，无需物化到 `viewer/public/candidates`。
 
 `POST /worlds/{storyId}/feedback` 保存 C 的逐项问题和 GLB 候选。候选须先经 `/bundles` 上传，再用 `baseAssetRevision` 和 `baseSha256` 指向固定 release 的 `asset-lineage.json`；过期基底返回该候选的 `ASSET_REVISION_CONFLICT`，候选原件仍保留。`accepted` 只记录 C 对该版本的页面意见，不自动采用 GLB、不切换 `currentReleaseId`。`GET /feedback/{feedbackId}` 可取回处理回执。`GET /worlds/{storyId}/releases` 列版本与当前指针；未经 B/C 门槛，当前指针为 null。
+
+补丁整合的本机锁先在临时目录写入 PID/随机 token，再原子移动到锁路径；遇活锁会短暂重试并报 `ASSET_LOCKED`。死进程锁过 30 秒可恢复；即使 PID 被复用，2 分钟后也按年龄过期。每次整合通常远短于该阈值，超长人工修整不应持有此锁。异常退出留下的 pending 决策会按固定输入重试，不覆盖已定稿 release。
 
 B 可用 `npm run processing -- review-patch /absolute/path/to/decision.json` 裁定一个 C 候选。决策文件至少写 `decisionId`、`action: integrate/reject`、`operator`、`reason`、`storyId`、`feedbackId`、`assetId`、`candidateHash`、`baseReleaseId`、`baseAssetRevision`、`baseSha256`。`integrate` 只接受底部原点和三轴尺寸与父资产兼容的 GLB，产生新的不可变 `needs_review` release 和递增的候选资产 revision；原包、旧 release 与当前指针不变。新 release 必须重新做 asset/world review 和 C 页面验收。另一个候选若仍指向同一旧父版本，B 再整合会得到 `ASSET_REVISION_CONFLICT`，二进制不会自动合并。
 

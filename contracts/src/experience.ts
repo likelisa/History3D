@@ -32,7 +32,9 @@ export interface AttachmentTrack {
   parentObjectId: string
   localPosition: Vec3
   localYawRad: number
+  /** Parent-local contact point. Must equal localPosition + rotateYaw(childAnchorM, localYawRad). */
   parentAnchorM?: Vec3
+  /** Child-local contact point; the child origin may stay on the ground while its grip meets the parent's hand. */
   childAnchorM?: Vec3
   startSeconds: number
   endSeconds: number

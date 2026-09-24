@@ -73,6 +73,10 @@ describe('viewer feedback', () => {
     const decision = { decisionId: 'b-adopt-001', action: 'integrate' as const, operator: 'processing-test', reason: 'material-only candidate for formal recheck', storyId: base.storyId, feedbackId: feedback.feedbackId, assetId: 'asset-pack-bundle', candidateHash: receipt.patchResults[0].candidateHash!, baseReleaseId: base.releaseId, baseAssetRevision: 1, baseSha256: parent.sha256 }
     const staleLock = path.join(data, 'locks', `${base.storyId}-asset-pack-bundle.lock`)
     await mkdir(staleLock, { recursive: true })
+    await writeFile(path.join(staleLock, 'owner.json'), JSON.stringify({ pid: process.pid, startedAt: Date.now() }))
+    await expect(reviewViewerPatch(decision, data)).rejects.toThrow('ASSET_LOCKED')
+    await rm(staleLock, { recursive: true })
+    await mkdir(staleLock, { recursive: true })
     await writeFile(path.join(staleLock, 'owner.json'), JSON.stringify({ pid: 999999, startedAt: Date.now() - 60_000 }))
     const selected = await reviewViewerPatch(decision, data)
     expect(selected.status).toBe('integrated_candidate')

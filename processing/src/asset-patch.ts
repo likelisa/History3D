@@ -131,7 +131,7 @@ export async function reviewViewerPatch(decision: PatchDecision, dataDir: string
 
 async function acquireAssetLock(lockDir: string): Promise<string> {
   await mkdir(path.dirname(lockDir), { recursive: true })
-  for (let attempt = 0; attempt < 2; attempt++) {
+  for (let attempt = 0; attempt < 5; attempt++) {
     const token = randomUUID()
     const prepared = `${lockDir}.pending-${token}`
     await mkdir(prepared)
@@ -143,21 +143,27 @@ async function acquireAssetLock(lockDir: string): Promise<string> {
       await rm(prepared, { recursive: true, force: true })
       if (!['EEXIST', 'ENOTEMPTY'].includes((error as NodeJS.ErrnoException).code ?? '')) throw error
       const recoveryLock = `${lockDir}.recovery`
-      try { await mkdir(recoveryLock) } catch { throw new Error('ASSET_LOCKED') }
+      try { await mkdir(recoveryLock) }
+      catch { await new Promise((resolve) => setTimeout(resolve, 40)); continue }
       try {
-        const owner = await json<{ pid: number; startedAt: number }>(path.join(lockDir, 'owner.json')).catch(() => null)
-        const age = Date.now() - (owner?.startedAt ?? (await stat(lockDir)).mtimeMs)
-        if (age < 30_000) throw new Error('ASSET_LOCKED')
-        let alive = false
-        if (owner && Number.isSafeInteger(owner.pid)) {
-          try { process.kill(owner.pid, 0); alive = true }
-          catch (probe) { alive = (probe as NodeJS.ErrnoException).code !== 'ESRCH' }
+        const lockInfo = await stat(lockDir).catch(() => null)
+        if (lockInfo) {
+          const owner = await json<{ pid: number; startedAt: number }>(path.join(lockDir, 'owner.json')).catch(() => null)
+          const age = Date.now() - (owner?.startedAt ?? lockInfo.mtimeMs)
+          let alive = false
+          if (owner && Number.isSafeInteger(owner.pid)) {
+            try { process.kill(owner.pid, 0); alive = true }
+            catch (probe) { alive = (probe as NodeJS.ErrnoException).code !== 'ESRCH' }
+          }
+          // A dead owner can be recovered after 30 s. PID reuse cannot block longer than 2 min.
+          if (age >= 30_000 && (!alive || age >= 2 * 60_000)) {
+            const stale = `${lockDir}.stale-${randomUUID()}`
+            await rename(lockDir, stale).catch((renameError) => { if ((renameError as NodeJS.ErrnoException).code !== 'ENOENT') throw renameError })
+            await rm(stale, { recursive: true, force: true })
+          }
         }
-        if (alive && age < 10 * 60_000) throw new Error('ASSET_LOCKED')
-        const stale = `${lockDir}.stale-${randomUUID()}`
-        await rename(lockDir, stale)
-        await rm(stale, { recursive: true, force: true })
       } finally { await rm(recoveryLock, { recursive: true, force: true }) }
+      await new Promise((resolve) => setTimeout(resolve, 40))
     }
   }
   throw new Error('ASSET_LOCKED')

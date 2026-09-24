@@ -76,7 +76,10 @@ describe('experience sampler', () => {
   it('rejects audio paths that leave the release package', () => {
     const { scene, experience } = fixture()
     experience.audio.push({ id: 'bad-audio', path: '../outside.mp3', startSeconds: 0, endSeconds: 10, loop: false, volume: 0.5, defaultEnabled: false, rights: 'test' })
-    expect(validateExperience(scene, experience).some((item) => item.includes('EXPERIENCE_SCHEMA_INVALID') || item.includes('AUDIO_INVALID'))).toBe(true)
+    for (const unsafe of ['../outside.mp3', '/private/audio.mp3', 'media\\track.mp3', 'https://example.com/a.mp3', 'media//track.mp3']) {
+      experience.audio[0].path = unsafe
+      expect(validateExperience(scene, experience).some((item) => item.includes('AUDIO_INVALID'))).toBe(true)
+    }
     experience.audio[0].path = 'media/track..1.mp3'
     expect(validateExperience(scene, experience)).toEqual([])
   })

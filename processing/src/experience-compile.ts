@@ -33,6 +33,7 @@ export function validateExperience(scene: SceneFile, experience: ExperienceFile)
       if (track.parentAnchorM && track.childAnchorM) {
         if (!vec3Valid(track.parentAnchorM) || !vec3Valid(track.childAnchorM)) errors.push(`ATTACHMENT_ANCHOR_INVALID: ${track.id}`)
         else {
+          // All three vectors below are in parent-local space after rotating the child grip by localYawRad.
           const childAnchor = rotateYaw(track.childAnchorM, track.localYawRad)
           const gap = Math.hypot(...track.parentAnchorM.map((value, axis) => value - track.localPosition[axis] - childAnchor[axis]))
           if (gap > 0.05) errors.push(`ATTACHMENT_ANCHOR_MISMATCH: ${track.id}`)

@@ -9,9 +9,10 @@ const MAX_ZIP_BYTES = 256 * 1024 * 1024
 const MAX_UNCOMPRESSED_BYTES = 256 * 1024 * 1024
 const MAX_GLB_BYTES = 128 * 1024 * 1024
 export interface BundleReceipt { bundleId: string; sha256: string; bytes: number; files: FileDigest[]; uncompressedBytes: number }
+export interface BundleOptions { pythonPath?: string; timeoutMs?: number }
 const readJson = async <T>(file: string): Promise<T> => JSON.parse(await readFile(file, 'utf8')) as T
 
-export async function storeBundle(zipPath: string, dataDir: string): Promise<BundleReceipt> {
+export async function storeBundle(zipPath: string, dataDir: string, options: BundleOptions = {}): Promise<BundleReceipt> {
   const info = await stat(zipPath)
   if (!info.isFile() || info.size <= 0 || info.size > MAX_ZIP_BYTES) throw new Error('BUNDLE_SIZE_INVALID')
   const stage = path.join(dataDir, 'bundle-stage', randomUUID())
@@ -29,7 +30,7 @@ export async function storeBundle(zipPath: string, dataDir: string): Promise<Bun
       if (prior.sha256 !== sha256) throw new Error('BUNDLE_ID_CONFLICT')
       return prior
     } catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error }
-    const unpacked = await unpack(path.join(stage, 'bundle.zip'), path.join(stage, 'files'))
+    const unpacked = await unpack(path.join(stage, 'bundle.zip'), path.join(stage, 'files'), options)
     if (!Number.isSafeInteger(unpacked.uncompressedBytes) || unpacked.uncompressedBytes > MAX_UNCOMPRESSED_BYTES || unpacked.files.length > 500) throw new Error('BUNDLE_TOO_LARGE')
     let actualBytes = 0
     for (const file of unpacked.files) {
@@ -61,17 +62,26 @@ async function fileHash(file: string): Promise<string> {
   return hasher.digest('hex')
 }
 
-async function unpack(zipPath: string, outputDir: string): Promise<{ files: FileDigest[]; uncompressedBytes: number }> {
+async function unpack(zipPath: string, outputDir: string, options: BundleOptions): Promise<{ files: FileDigest[]; uncompressedBytes: number }> {
   const script = path.resolve('processing/tools/unpack_bundle.py')
   return new Promise((resolve, reject) => {
-    const child = spawn(process.env.PROCESSING_PYTHON ?? '/usr/bin/python3', [script, zipPath, outputDir], { stdio: ['ignore', 'pipe', 'pipe'] })
+    const child = spawn(options.pythonPath ?? process.env.PROCESSING_PYTHON ?? '/usr/bin/python3', [script, zipPath, outputDir], { stdio: ['ignore', 'pipe', 'pipe'] })
     let stdout = ''
     let stderr = ''
+    let timedOut = false
+    let truncated = false
+    const timeout = setTimeout(() => { timedOut = true; child.kill('SIGTERM') }, options.timeoutMs ?? 120_000)
     if (!child.stdout || !child.stderr) { reject(new Error('BUNDLE_INVALID: extractor streams unavailable')); return }
-    child.stdout.setEncoding('utf8').on('data', (chunk: string) => { stdout += chunk.slice(0, Math.max(0, 2_000_000 - stdout.length)) })
+    child.stdout.setEncoding('utf8').on('data', (chunk: string) => {
+      if (stdout.length + chunk.length > 2_000_000) { truncated = true; child.kill('SIGTERM'); return }
+      stdout += chunk
+    })
     child.stderr.setEncoding('utf8').on('data', (chunk: string) => { stderr += chunk.slice(0, Math.max(0, 2_000 - stderr.length)) })
-    child.on('error', reject)
+    child.on('error', (error) => { clearTimeout(timeout); reject(error) })
     child.on('exit', (code) => {
+      clearTimeout(timeout)
+      if (timedOut) { reject(new Error('BUNDLE_TIMEOUT: extractor exceeded time limit')); return }
+      if (truncated) { reject(new Error('BUNDLE_INVALID: extractor output exceeded limit')); return }
       if (code !== 0) { reject(new Error(`BUNDLE_INVALID: ${stderr.trim() || `extractor exit ${code}`}`)); return }
       try {
         const parsed = JSON.parse(stdout) as { files?: unknown; uncompressedBytes?: unknown }
