@@ -61,15 +61,18 @@ export async function reviewViewerPatch(decision: PatchDecision, dataDir: string
   if (!patch.preservesDimensions || candidateBounds.dimensions.some((value, axis) => Math.abs(value - asset.dimensionsM[axis]) > sizeTolerance(asset.dimensionsM[axis])) || Math.abs(candidateBounds.min[1]) > 0.05) throw new Error('PATCH_DIMENSION_REVIEW_REQUIRED')
 
   const lockDir = path.join(dataDir, 'locks', `${decision.storyId}-${decision.assetId}.lock`)
-  await putJson(decisionPath, { decisionHash, decision, status: 'pending' })
   const lockToken = await acquireAssetLock(lockDir)
   try {
+    await putJson(decisionPath, { decisionHash, decision, status: 'pending' })
     const selectedPath = path.join(dataDir, 'registry', decision.storyId, 'selected-assets', `${decision.assetId}.json`)
-    const selected = await json<{ baseSha256: string; candidateHash: string; assetRevision: number; decisionId: string; releaseId: string }>(selectedPath).catch(missingOnly)
+    const selected = await json<{ baseSha256: string; baseReleaseId: string; candidateHash: string; assetRevision: number; decisionId: string; releaseId: string }>(selectedPath).catch(missingOnly)
     if (selected && selected.baseSha256 !== decision.baseSha256) throw new Error('ASSET_REVISION_CONFLICT')
     if (selected && selected.candidateHash !== decision.candidateHash) throw new Error('ASSET_REVISION_CONFLICT')
+    if (selected && (selected.baseReleaseId !== decision.baseReleaseId || selected.assetRevision !== parent.adoptedRevision + 1 || selected.decisionId !== decision.decisionId)) throw new Error('ASSET_REVISION_CONFLICT')
     if (selected) {
       await verifyExistingRelease(path.join(dataDir, 'releases', decision.storyId, selected.releaseId))
+      const selectedLineage = await json<{ assets: Array<{ assetId: string; adoptedRevision: number; sha256: string }> }>(path.join(dataDir, 'releases', decision.storyId, selected.releaseId, 'asset-lineage.json'))
+      if (!selectedLineage.assets.some((item) => item.assetId === decision.assetId && item.adoptedRevision === selected.assetRevision && item.sha256 === decision.candidateHash)) throw new Error('RELEASE_CONFLICT')
       const result: PatchDecisionResult = { decisionId: decision.decisionId, status: 'integrated_candidate', releaseId: selected.releaseId, assetRevision: selected.assetRevision }
       await putJson(decisionPath, { decisionHash, decision, result })
       return result
@@ -84,7 +87,7 @@ export async function reviewViewerPatch(decision: PatchDecision, dataDir: string
       const existingAsset = existingLineage.assets.find((item) => item.assetId === decision.assetId)
       if (existingRelease.releaseId !== releaseId || existingAsset?.sha256 !== decision.candidateHash || existingAsset.adoptedRevision !== nextRevision) throw new Error('RELEASE_CONFLICT')
       const result: PatchDecisionResult = { decisionId: decision.decisionId, status: 'integrated_candidate', releaseId, assetRevision: nextRevision }
-      await putJson(selectedPath, { baseSha256: decision.baseSha256, candidateHash: decision.candidateHash, assetRevision: nextRevision, decisionId: decision.decisionId, releaseId })
+      await putJson(selectedPath, { baseSha256: decision.baseSha256, baseReleaseId: decision.baseReleaseId, candidateHash: decision.candidateHash, assetRevision: nextRevision, decisionId: decision.decisionId, releaseId })
       await putJson(decisionPath, { decisionHash, decision, result })
       return result
     }
@@ -126,7 +129,7 @@ export async function reviewViewerPatch(decision: PatchDecision, dataDir: string
       await mkdir(path.dirname(finalDir), { recursive: true })
       await rename(stage, finalDir)
       const result: PatchDecisionResult = { decisionId: decision.decisionId, status: 'integrated_candidate', releaseId, assetRevision: nextRevision }
-      await putJson(selectedPath, { baseSha256: decision.baseSha256, candidateHash: decision.candidateHash, assetRevision: nextRevision, decisionId: decision.decisionId, releaseId })
+      await putJson(selectedPath, { baseSha256: decision.baseSha256, baseReleaseId: decision.baseReleaseId, candidateHash: decision.candidateHash, assetRevision: nextRevision, decisionId: decision.decisionId, releaseId })
       await putJson(decisionPath, { decisionHash, decision, result })
       return result
     } catch (error) { await rm(stage, { recursive: true, force: true }); throw error }

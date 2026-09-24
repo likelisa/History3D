@@ -63,8 +63,8 @@ export async function adoptAssetTask(input: AdoptionDecision, dataDir: string): 
   const lockToken = await acquireAssetLock(lockDir)
   try {
     const selectedPath = path.join(dataDir, 'registry', task.storyId, 'selected-assets', `${task.assetId}.json`)
-    const selected = await json<{ baseSha256: string; candidateHash: string; decisionId: string; releaseId: string }>(selectedPath).catch(missingOnly)
-    if (selected && (selected.baseSha256 !== parent.sha256 || selected.candidateHash !== task.result.outputSha256 || selected.decisionId !== input.decisionId)) throw new Error('ASSET_REVISION_CONFLICT')
+    const selected = await json<{ baseSha256: string; baseReleaseId: string; candidateHash: string; decisionId: string; releaseId: string }>(selectedPath).catch(missingOnly)
+    if (selected && (selected.baseSha256 !== parent.sha256 || selected.baseReleaseId !== task.releaseId || selected.candidateHash !== task.result.outputSha256 || selected.decisionId !== input.decisionId)) throw new Error('ASSET_REVISION_CONFLICT')
     const releaseId = selected?.releaseId ?? `release-${digest(JSON.stringify(['B-task-adopt-v1', task.releaseId, input.decisionId, task.result.outputSha256])).slice(0, 20)}`
     const outputDir = path.join(dataDir, 'releases', task.storyId, releaseId)
     const existing = await json<{ releaseId: string }>(path.join(outputDir, 'release.json')).catch(missingOnly)
@@ -113,7 +113,7 @@ export async function adoptAssetTask(input: AdoptionDecision, dataDir: string): 
     if (!adoptedLineage.assets.some((item) => item.assetId === task.assetId && item.adoptedRevision === nextRevision && item.sha256 === task.result!.outputSha256)) throw new Error('RELEASE_CONFLICT')
     const releaseDecision = await json<AdoptionDecision>(path.join(outputDir, 'asset-task-decision.json'))
     if (digest(JSON.stringify(releaseDecision)) !== decisionHash) throw new Error('RELEASE_CONFLICT')
-    await putJson(selectedPath, { baseSha256: parent.sha256, candidateHash: task.result.outputSha256, assetRevision: nextRevision, decisionId: input.decisionId, releaseId })
+    await putJson(selectedPath, { baseSha256: parent.sha256, baseReleaseId: task.releaseId, candidateHash: task.result.outputSha256, assetRevision: nextRevision, decisionId: input.decisionId, releaseId })
     task.status = 'adopted'; task.result.adopted = true
     task.decision = { decisionId: input.decisionId, action: 'adopt', operator: input.operator, reason: input.reason, reviewId: input.reviewId, snapshotHash: input.snapshotHash, releaseId }
     await putJson(decisionFile, { hash: decisionHash, decision: input })

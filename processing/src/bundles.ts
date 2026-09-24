@@ -1,7 +1,7 @@
 import { spawn } from 'node:child_process'
 import { createHash, randomUUID } from 'node:crypto'
 import { createReadStream } from 'node:fs'
-import { copyFile, lstat, mkdir, readFile, rename, rm, stat, writeFile } from 'node:fs/promises'
+import { copyFile, lstat, mkdir, readFile, readdir, rename, rm, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import type { FileDigest } from '../../contracts/src/handoff-types.ts'
 
@@ -28,6 +28,7 @@ export async function storeBundle(zipPath: string, dataDir: string, options: Bun
     try {
       const prior = await readJson<BundleReceipt>(path.join(finalDir, 'bundle.json'))
       if (prior.sha256 !== sha256) throw new Error('BUNDLE_ID_CONFLICT')
+      await verifyStoredBundle(finalDir, prior)
       return prior
     } catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error }
     const unpacked = await unpack(path.join(stage, 'bundle.zip'), path.join(stage, 'files'), options)
@@ -42,6 +43,9 @@ export async function storeBundle(zipPath: string, dataDir: string, options: Bun
       if (actualBytes > MAX_UNCOMPRESSED_BYTES) throw new Error('BUNDLE_TOO_LARGE')
     }
     if (actualBytes !== unpacked.uncompressedBytes) throw new Error('BUNDLE_INVALID: uncompressed total mismatch')
+    const extracted = await listRegularFiles(path.join(stage, 'files'))
+    const reported = new Set(unpacked.files.map((file) => file.path))
+    if (extracted.length !== reported.size || extracted.some((file) => !reported.has(file))) throw new Error('BUNDLE_INVALID: extractor file list incomplete')
     const receipt: BundleReceipt = { bundleId, sha256, bytes: stagedInfo.size, files: unpacked.files, uncompressedBytes: unpacked.uncompressedBytes }
     await writeFile(path.join(stage, 'bundle.json'), JSON.stringify(receipt, null, 2) + '\n')
     await mkdir(path.dirname(finalDir), { recursive: true })
@@ -50,10 +54,39 @@ export async function storeBundle(zipPath: string, dataDir: string, options: Bun
       if ((error as NodeJS.ErrnoException).code !== 'EEXIST' && (error as NodeJS.ErrnoException).code !== 'ENOTEMPTY') throw error
       const prior = await readJson<BundleReceipt>(path.join(finalDir, 'bundle.json'))
       if (prior.sha256 !== sha256) throw new Error('BUNDLE_ID_CONFLICT')
+      await verifyStoredBundle(finalDir, prior)
       return prior
     }
     return receipt
   } finally { await rm(stage, { recursive: true, force: true }) }
+}
+
+async function listRegularFiles(root: string): Promise<string[]> {
+  const paths: string[] = []
+  const walk = async (dir: string): Promise<void> => {
+    for (const item of await readdir(path.join(root, dir), { withFileTypes: true })) {
+      const rel = path.posix.join(dir, item.name)
+      if (item.isDirectory()) await walk(rel)
+      else if (item.isFile()) paths.push(rel)
+      else throw new Error(`BUNDLE_INVALID: non-regular extraction entry ${rel}`)
+    }
+  }
+  await walk('')
+  return paths
+}
+
+async function verifyStoredBundle(root: string, receipt: BundleReceipt): Promise<void> {
+  const files = await listRegularFiles(path.join(root, 'files')).catch(() => { throw new Error('BUNDLE_STORED_CORRUPT') })
+  if (files.length !== receipt.files.length || files.some((file) => !receipt.files.some((item) => item.path === file))) throw new Error('BUNDLE_STORED_CORRUPT')
+  let total = 0
+  for (const file of receipt.files) {
+    if (!file.path || path.isAbsolute(file.path) || file.path.includes('\\') || file.path.split('/').some((part) => !part || part === '.' || part === '..')) throw new Error('BUNDLE_STORED_CORRUPT')
+    const target = path.join(root, 'files', file.path)
+    const info = await lstat(target).catch(() => null)
+    if (!info?.isFile() || info.size !== file.bytes || await fileHash(target) !== file.sha256) throw new Error('BUNDLE_STORED_CORRUPT')
+    total += info.size
+  }
+  if (total !== receipt.uncompressedBytes || await fileHash(path.join(root, 'bundle.zip')).catch(() => null) !== receipt.sha256) throw new Error('BUNDLE_STORED_CORRUPT')
 }
 
 async function fileHash(file: string): Promise<string> {

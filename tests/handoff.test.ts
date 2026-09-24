@@ -75,4 +75,13 @@ describe('collection handoff', () => {
     expect(messages).toContain('unknown focus brief: missing-focus')
     expect(messages).toContain(`unknown beat brief: ${plan.beats[0].id}/missing-beat`)
   })
+
+  it('rejects files present in the package but absent from the signed list', async () => {
+    const temp = await mkdtemp(path.join(os.tmpdir(), 'history3d-handoff-extra-'))
+    try {
+      await cp(root, temp, { recursive: true })
+      await writeFile(path.join(temp, 'surprise.txt'), 'unlisted')
+      expect(await validateCollectionHandoff(createNodeReader(temp))).toContainEqual({ path: 'surprise.txt', message: 'file not listed in handoff' })
+    } finally { await rm(temp, { recursive: true, force: true }) }
+  })
 })

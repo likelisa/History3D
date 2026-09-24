@@ -21,6 +21,7 @@ export interface PackageReader {
   readText(relPath: string): Promise<string | null>
   exists(relPath: string): Promise<boolean>
   readBinary(relPath: string): Promise<ArrayBuffer | null>
+  listFiles?(): Promise<string[]>
 }
 
 export interface CollectionResult {

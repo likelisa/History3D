@@ -50,6 +50,11 @@ export async function validateCollectionHandoff(reader: PackageReader): Promise<
     if (bytes.length !== file.bytes || createHash('sha256').update(bytes).digest('hex') !== file.sha256) problems.push({ path: file.path, message: 'file digest mismatch' })
   }
   for (const required of REQUIRED_COLLECTION_FILES) if (!listed.has(required)) problems.push({ path: required, message: 'required file not listed' })
+  if (reader.listFiles) {
+    try {
+      for (const file of await reader.listFiles()) if (file !== 'handoff.json' && !listed.has(file)) problems.push({ path: file, message: 'file not listed in handoff' })
+    } catch (error) { problems.push({ path: 'handoff.json', message: error instanceof Error ? error.message : 'package enumeration failed' }) }
+  }
   if (collectionErrors.length || !collection.story || !collection.sources) return problems
   const briefs = new Set(collection.story?.objectBriefs.map((item) => item.id))
   const sources = new Set(collection.sources?.sources.map((item) => item.id))
