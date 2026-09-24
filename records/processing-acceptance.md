@@ -15,3 +15,13 @@
 - 改进离线渲染材质节点与尺度参照镜头后，第二次请求在 16,384 输出 token 截断，被拒绝；提高输出上限后响应完整。经扩展结构化 `unassessed`/`suggestedStrategies` 校验并复核已保存响应，报告 `world-review-1c3df38c2e314aa4ba58` 判 `needs_revision`，14 条发现、8 个未评估范围、5 条策略建议。该次请求 ID `506f926f-9e0a-46a1-bb79-611b18e0fd3e`，输入 12,659 token、输出 22,367 token；原调用耗时在失败路径未保存。AI 建议尚未自动派单。
 - B 根据报告修复 `illustrative` 的 `claim-pack-layout` 与实际摆放冲突，原 A 输入保持不变；编译后的 story/sources/scene `contentRevision` 同升为 2，provenance 记录修改原因。前路示意带调整为从补给点边界向前延伸。新的固定候选是 `release-b80cdc125e3893a14a69`，`scene.json` SHA-256 `b20ddc7e6c8a08ad13f880e191a3a197f29912df84f6af1fe46a667be3034ef8`，`qualityStatus=needs_review`。包校验 0 错误、1 条货包悬置警告。
 - 新候选在正式 viewer 打开显示“可体验”，主镜头能看见货包置于载体顶部，前路示意带接到边界。这只验证静态修订；新候选尚未重新做完整世界复审或动态验收。
+
+## 2026-09-25 动态候选本机验收
+
+- B 使用 Blender 5.2 制作行者与手杖两个原创技术 GLB，实测包围盒分别约 `[0.72,1.89,0.5]` 与 `[0.11,1.47,0.11]` 米。六视角渲染并人工查看行者三分之四视角。两件均是 `illustrative`，不视为历史人物或器物复原，也不算外部生成服务实测。
+- `experience.json` 三幕 0—30 秒分别驱动载体/货物、行者/手杖、环境与物件显隐。纯采样器能任意跳转并拒绝重复轨道、挂接环；正式 viewer 使用同一逻辑。`generation-report.json` 记录程序化资产来源与零 API 成本，明确 `realProviderGenerationPerformed=false`。
+- 固定候选 `release-ade1e111435e28dd95d3`，`scene.json` SHA-256 `d784a1d070c49a585fee9e27e0fa7687a86cdf14f63b74fbe1d6edfb36a61427`。`requiredCapabilities` 包含静态 GLB、变换、挂接、显隐和环境。包校验 0 错误、1 条货包位于载体顶部而非地面的预期警告。
+- 正式 viewer 本机入口：`http://127.0.0.1:5173/?story=silk-road-demo&candidate=release-ade1e111435e28dd95d3`。在浏览器实际完成播放/暂停、直接跳第二幕和第三幕、拉到 30 秒后归零。画面中货包随载体移动，手杖随行者移动；剧情镜头切到第二幕近景，用户切回第一人称后再跳第三幕未夺回镜头。旧静态候选也复测可加载；修复了 Vite 缺失 `experience.json` 返回 HTML 的回退误判。
+- 仍缺：C 本人的页面验收、三幕录屏与可共享截图、90 秒性能实测、音乐文件/听感、真实 A 素材和外部生成服务。此候选仍为 `needs_review`，不能提升为 current。
+- 对同一 release 的 `requiredCapabilities` 明确要求变换、挂接、显隐和环境；正式 viewer 加载为“可体验”。另用独立、已清理的测试副本声明 `gltf-clips-v1`，页面实际显示“查看器不支持：gltf-clips-v1”并拒绝进入。该能力目前确实未接入，不在本次已通过范围。
+- 在正式 viewer 增加剧情镜头及第一人称接管后，最终本机动态候选更新为 `release-0a7a5bf517c0e98df79a`，scene SHA-256 仍为 `d784a1d070c49a585fee9e27e0fa7687a86cdf14f63b74fbe1d6edfb36a61427`。新增必需能力 `camera-cues-v1`，页面已按该固定 ID 加载到“可体验”。正式包校验仍为 0 错误、1 条载物悬置警告；世界 AI 复审尚未针对这个新固定快照重跑。

@@ -33,6 +33,10 @@ npm run dev -- --host 127.0.0.1
 
 世界复审命令：`npm run processing -- review-world <storyId> <releaseId> <world-plan.json>`。它核对不可变 release 的所有文件哈希，以 Blender 从正式 `scene.json` 渲染全景、主镜头和尺度参照，连同原规划、修订规划、质量指标交给 DeepSeek。正式 viewer 截图、三幕关键帧和连续动作未提供时，证据覆盖标为 `unassessed`，报告不可判 pass。每次输入图、文本、模型参数形成审查缓存键；图像改变会留下新报告，不覆盖旧报告。
 
+动态候选另带 `experience.json`（版本 `1.0.0`），三幕、对象变换、显隐、父子挂接、镜头提示和环境关键帧均是独立数据。`sampleExperience(scene, experience, timeSeconds)` 可直接计算任意时刻的完整对象状态，跳章不需要先从头播放。正式 viewer 以同一个采样器驱动播放、暂停、跳章、归零和剧情镜头；用户切回第一人称或俯视后，跳章不会抢回镜头。候选的 `requiredCapabilities` 明确要求对应动态能力，不支持的查看器必须拒绝完整体验。
+
+`processing/fixtures/assets/` 的行者与手杖由 B 的 Blender 脚本程序化生成，已标为技术演示和 `illustrative`；这证明 GLB 制作、装配与页面往返，不计入计划所要求的外部 3D 服务真实生成或历史素材验收。当前 `audio` 为空，未交付音乐。
+
 ### 对接待办
 
 - 傅老师：给一个真实 `storyId` 的来源、主 GLB、资产对应关系和原规划；对 fixture 中的历史未知项补证据或明确演示设定。

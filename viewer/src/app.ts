@@ -8,6 +8,7 @@ import {
 import type { Diagnostic, DiagnosticCode } from '../../contracts/src/diagnostics.ts'
 import { formatMeters } from '../../contracts/src/geometry.ts'
 import type { Claim, SceneFile, SourceEntry, SourcesFile, StoryFile } from '../../contracts/src/types.ts'
+import type { ExperienceFile } from '../../contracts/src/experience.ts'
 import { validateScenePackage } from '../../contracts/src/validate.ts'
 import { BenchRecorder } from './bench.ts'
 import type { BenchReport } from './bench.ts'
@@ -19,6 +20,7 @@ import { clear, claimGroupNode, diagnosticsNode, el, hotspotNode, sourceDetailNo
 import { Walker } from './walker.ts'
 import { buildWorld, WorldBuildError } from './world.ts'
 import type { World } from './world.ts'
+import { ExperiencePlayer } from './experience-player.ts'
 
 declare global {
   interface Window {
@@ -27,7 +29,7 @@ declare global {
 }
 
 type Stage = 'idle' | 'loading_manifest' | 'validating' | 'loading_assets' | 'ready' | 'error'
-type CameraMode = 'first-person' | 'overview'
+type CameraMode = 'first-person' | 'overview' | 'story'
 
 const STAGE_LABELS: Record<Stage, string> = {
   idle: '等待开始',
@@ -55,6 +57,10 @@ export class ViewerApp {
   })
   private readonly overlay = el('div', { className: 'overlay' })
   private readonly benchCard = el('pre', { className: 'bench-card', hidden: true })
+  private readonly experienceBar = el('div', { className: 'experience-bar', hidden: true })
+  private readonly experiencePlay = el('button', { className: 'experience-action', text: '播放', onClick: () => this.toggleExperiencePlayback() })
+  private readonly experienceTimeLabel = el('span', { className: 'experience-time', text: '0:00 / 0:00' })
+  private readonly experienceSlider = document.createElement('input')
   private readonly buttonByAction = new Map<string, HTMLButtonElement>()
 
   private readonly renderer: THREE.WebGLRenderer
@@ -85,6 +91,10 @@ export class ViewerApp {
   private panelOpen = false
   private pauseOverlayShown = false
   private loadStartMs = performance.now()
+  private experienceFile: ExperienceFile | null = null
+  private experiencePlayer: ExperiencePlayer | null = null
+  private experienceTime = 0
+  private experiencePlaying = false
 
   constructor(private readonly root: HTMLElement) {
     const query = new URLSearchParams(location.search)
@@ -138,6 +148,21 @@ export class ViewerApp {
     ])
 
     this.panel.append(this.panelClose, this.panelTitle, this.panelBody)
+    this.experienceSlider.type = 'range'
+    this.experienceSlider.min = '0'
+    this.experienceSlider.max = '0'
+    this.experienceSlider.step = '0.1'
+    this.experienceSlider.value = '0'
+    this.experienceSlider.setAttribute('aria-label', '演示时间')
+    this.experienceSlider.addEventListener('input', () => this.seekExperience(Number(this.experienceSlider.value)))
+    this.experienceBar.append(
+      el('span', { className: 'experience-heading', text: '演示动作' }),
+      this.experiencePlay,
+      el('button', { className: 'experience-action', text: '归零', onClick: () => this.seekExperience(0) }),
+      el('button', { className: 'experience-action', text: '剧情镜头', onClick: () => this.activateStoryCamera() }),
+      this.experienceSlider,
+      this.experienceTimeLabel,
+    )
     this.root.append(
       el('div', { className: 'app-shell' }, [
         this.viewport,
@@ -148,6 +173,7 @@ export class ViewerApp {
         this.panel,
         this.overlay,
         this.benchCard,
+        this.experienceBar,
       ]),
     )
     this.viewport.append(this.renderer.domElement)
@@ -208,6 +234,22 @@ export class ViewerApp {
       this.failWith(result.diagnostics)
       return
     }
+    const releaseText = await reader.readText('release.json')
+    if (releaseText) {
+      try {
+        const release = JSON.parse(releaseText) as { requiredCapabilities?: string[] }
+        const supported = new Set(['static-glb-v1', 'transform-tracks-v1', 'attachment-tracks-v1', 'visibility-tracks-v1', 'environment-v1', 'camera-cues-v1'])
+        const missing = (release.requiredCapabilities ?? []).filter((item) => !supported.has(item))
+        if (missing.length) {
+          this.failWith([errorDiagnostic('VALIDATION_FAILED', 'release.json', 'requiredCapabilities', `查看器不支持：${missing.join(', ')}`)])
+          return
+        }
+      } catch (error) {
+        if (this.stage === 'error') return
+        this.failWith([errorDiagnostic('VALIDATION_FAILED', 'release.json', '', `release.json 无法读取：${String(error)}`)])
+        return
+      }
+    }
 
     this.sceneFile = result.scene
     this.story = result.story
@@ -229,6 +271,19 @@ export class ViewerApp {
       this.world = world
       this.diagnostics.push(...world.diagnostics)
       this.setupWorld(world, result.scene, result.story)
+      const experienceText = await reader.readText('experience.json')
+      if (experienceText) {
+        const experience = JSON.parse(experienceText) as ExperienceFile
+        if (experience.audio.length) throw new Error('audio-v1 未接入；候选不能声称已播放音乐')
+        this.experiencePlayer = new ExperiencePlayer(result.scene, experience, world, this.scene3d, this.markers)
+        this.experienceFile = experience
+        this.experienceSlider.max = String(experience.durationSeconds)
+        this.experienceBar.hidden = false
+        for (const beat of experience.beats) {
+          this.experienceBar.append(el('button', { className: 'experience-beat', text: beat.label, onClick: () => this.seekExperience(beat.startSeconds) }))
+        }
+        this.seekExperience(0)
+      }
     } catch (error) {
       if (error instanceof WorldBuildError) {
         this.diagnostics.push(
@@ -301,6 +356,16 @@ export class ViewerApp {
 
   private tick(): void {
     const delta = Math.min(this.clock.getDelta(), 0.1)
+    if (this.experiencePlaying && this.experiencePlayer) {
+      this.experienceTime = Math.min(this.experiencePlayer.durationSeconds, this.experienceTime + delta)
+      this.experiencePlayer.apply(this.experienceTime)
+      if (this.cameraMode === 'story') this.applyStoryCamera()
+      this.syncExperienceControls()
+      if (this.experienceTime >= this.experiencePlayer.durationSeconds) {
+        this.experiencePlaying = false
+        this.syncExperienceControls()
+      }
+    }
     if (this.walker) {
       this.walker.update(delta)
       if (this.cameraMode === 'first-person') this.walker.applyTo(this.camera)
@@ -327,7 +392,9 @@ export class ViewerApp {
   private applyCameraMode(): void {
     const scene = this.sceneFile
     if (!scene) return
-    if (this.cameraMode === 'overview') {
+    if (this.cameraMode === 'story') {
+      this.applyStoryCamera()
+    } else if (this.cameraMode === 'overview') {
       const overview = scene.cameras.overview
       this.camera.up.set(overview.up[0], overview.up[1], overview.up[2])
       this.camera.position.set(overview.position[0], overview.position[1], overview.position[2])
@@ -338,6 +405,26 @@ export class ViewerApp {
       this.camera.up.set(0, 1, 0)
       this.walker?.applyTo(this.camera)
     }
+  }
+
+  private applyStoryCamera(): void {
+    const cues = this.experienceFile?.cameraCues ?? []
+    const cue = [...cues].reverse().find((item) => item.timeSeconds <= this.experienceTime)
+    if (!cue) return
+    this.camera.up.set(0, 1, 0)
+    this.camera.position.set(...cue.position)
+    this.camera.lookAt(...cue.target)
+  }
+
+  private activateStoryCamera(): void {
+    if (!this.experienceFile || this.stage !== 'ready') return
+    this.cameraMode = 'story'
+    this.applyStoryCamera()
+    const button = this.buttonByAction.get('camera')
+    if (button) button.textContent = '第一人称'
+    if (document.pointerLockElement === this.viewport) document.exitPointerLock()
+    this.closePanel()
+    this.syncPausedState()
   }
 
   private updatePointerFromEvent(event: MouseEvent): void {
@@ -514,8 +601,34 @@ export class ViewerApp {
     const measureButton = this.buttonByAction.get('measure')
     if (measureButton) measureButton.textContent = '测距'
     this.closePanel()
+    if (this.experiencePlayer) this.seekExperience(0)
     this.applyCameraMode()
     if (this.experienceActive) void this.requestLock()
+  }
+
+  private toggleExperiencePlayback(): void {
+    if (!this.experiencePlayer || this.stage !== 'ready') return
+    if (this.experienceTime >= this.experiencePlayer.durationSeconds) this.experienceTime = 0
+    this.experiencePlaying = !this.experiencePlaying
+    this.experiencePlayer.apply(this.experienceTime)
+    this.syncExperienceControls()
+  }
+
+  private seekExperience(timeSeconds: number): void {
+    if (!this.experiencePlayer) return
+    this.experiencePlaying = false
+    this.experienceTime = Math.max(0, Math.min(this.experiencePlayer.durationSeconds, timeSeconds))
+    this.experiencePlayer.apply(this.experienceTime)
+    if (this.cameraMode === 'story') this.applyStoryCamera()
+    this.syncExperienceControls()
+  }
+
+  private syncExperienceControls(): void {
+    if (!this.experienceFile) return
+    this.experiencePlay.textContent = this.experiencePlaying ? '暂停' : '播放'
+    this.experienceSlider.value = String(this.experienceTime)
+    const format = (value: number) => `${Math.floor(value / 60)}:${String(Math.floor(value % 60)).padStart(2, '0')}`
+    this.experienceTimeLabel.textContent = `${format(this.experienceTime)} / ${format(this.experienceFile.durationSeconds)}`
   }
 
   private openStoryList(): void {

@@ -15,6 +15,7 @@ export function createFetchReader(baseUrl: string): PackageReader {
       try {
         const response = await fetch(joinUrl(baseUrl, relPath))
         if (!response.ok) return null
+        if (relPath.endsWith('.json') && response.headers.get('content-type')?.includes('text/html')) return null
         return await response.text()
       } catch {
         return null

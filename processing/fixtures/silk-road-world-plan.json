@@ -14,8 +14,34 @@
     "value": "一件在驮兽背部，另一件在左侧。",
     "reason": "B 为演示载体与货物的组装关系调整摆放；仅修改演示设定，不提升为史实"
   }],
-  "relations": [{ "relationId": "relation-load", "parentObjectId": "obj-beast", "childObjectId": "obj-pack-a", "kind": "attachment", "toleranceM": 0.05, "required": true }],
-  "requiredCapabilities": ["static-glb-v1"],
+  "newClaims": [
+    { "id": "claim-traveler-dimensions", "subjectId": "brief-traveler", "property": "dimensions", "statement": "演示行者模型占位体量为 0.72 × 1.89 × 0.5 米。", "value": [0.72, 1.89, 0.5], "unit": "m", "valueStatus": "known", "evidenceType": "illustrative", "sourceIds": [], "note": "B 自制低模技术资产；不代表历史人物服饰或体量。" },
+    { "id": "claim-traveler-appearance", "subjectId": "brief-traveler", "property": "appearance", "statement": "演示行者是简化低模人物。", "value": "简化低模人物", "unit": null, "valueStatus": "known", "evidenceType": "illustrative", "sourceIds": [], "note": "只验证人—道具挂接。" },
+    { "id": "claim-traveler-layout", "subjectId": "brief-traveler", "property": "layout", "statement": "演示行者站在载体右后方。", "value": "载体右后方", "unit": null, "valueStatus": "known", "evidenceType": "illustrative", "sourceIds": [], "note": "B 场景布局。" },
+    { "id": "claim-traveler-count", "subjectId": "brief-traveler", "property": "count", "statement": "演示行者一人。", "value": 1, "unit": "count", "valueStatus": "known", "evidenceType": "illustrative", "sourceIds": [], "note": "技术样例。" },
+    { "id": "claim-staff-dimensions", "subjectId": "brief-staff", "property": "dimensions", "statement": "演示手杖占位体量为 0.11 × 1.47 × 0.11 米。", "value": [0.11, 1.47, 0.11], "unit": "m", "valueStatus": "known", "evidenceType": "illustrative", "sourceIds": [], "note": "B 自制低模技术资产；非历史器物复原。" },
+    { "id": "claim-staff-appearance", "subjectId": "brief-staff", "property": "appearance", "statement": "演示手杖为细木杆。", "value": "简化木杆", "unit": null, "valueStatus": "known", "evidenceType": "illustrative", "sourceIds": [], "note": "只验证人—道具挂接。" },
+    { "id": "claim-staff-layout", "subjectId": "brief-staff", "property": "layout", "statement": "手杖置于演示行者右侧。", "value": "行者右侧", "unit": null, "valueStatus": "known", "evidenceType": "illustrative", "sourceIds": [], "note": "B 场景布局。" },
+    { "id": "claim-staff-count", "subjectId": "brief-staff", "property": "count", "statement": "演示手杖一件。", "value": 1, "unit": "count", "valueStatus": "known", "evidenceType": "illustrative", "sourceIds": [], "note": "技术样例。" }
+  ],
+  "newBriefs": [
+    { "id": "brief-traveler", "label": "演示行者", "purpose": "验证人物与道具的动态关系", "claimIds": ["claim-traveler-dimensions", "claim-traveler-appearance", "claim-traveler-layout", "claim-traveler-count"], "referenceSourceIds": [] },
+    { "id": "brief-staff", "label": "演示手杖", "purpose": "验证人物与道具的动态关系", "claimIds": ["claim-staff-dimensions", "claim-staff-appearance", "claim-staff-layout", "claim-staff-count"], "referenceSourceIds": [] }
+  ],
+  "newAssets": [
+    { "id": "asset-traveler-demo", "path": "assets/traveler-demo.glb", "sourcePath": "processing/fixtures/assets/traveler-demo.glb", "dimensionsM": [0.72, 1.89, 0.5], "format": "glb", "rights": "B 原创程序几何技术样例" },
+    { "id": "asset-staff-demo", "path": "assets/staff-demo.glb", "sourcePath": "processing/fixtures/assets/staff-demo.glb", "dimensionsM": [0.11, 1.47, 0.11], "format": "glb", "rights": "B 原创程序几何技术样例" }
+  ],
+  "newObjects": [
+    { "id": "obj-traveler", "briefId": "brief-traveler", "label": "演示行者", "render": { "type": "asset", "assetId": "asset-traveler-demo" }, "position": [2.8, 0, 4], "rotation": [0, 0, 0], "scale": [1, 1, 1], "dimensionsM": [0.72, 1.89, 0.5], "evidence": { "dimensions": ["claim-traveler-dimensions"], "appearance": ["claim-traveler-appearance"], "placement": ["claim-traveler-layout"], "quantity": ["claim-traveler-count"] } },
+    { "id": "obj-staff", "briefId": "brief-staff", "label": "演示手杖", "render": { "type": "asset", "assetId": "asset-staff-demo" }, "position": [3.15, 0, 4], "rotation": [0, 0, 0], "scale": [1, 1, 1], "dimensionsM": [0.11, 1.47, 0.11], "evidence": { "dimensions": ["claim-staff-dimensions"], "appearance": ["claim-staff-appearance"], "placement": ["claim-staff-layout"], "quantity": ["claim-staff-count"] } }
+  ],
+  "relations": [
+    { "relationId": "relation-load", "parentObjectId": "obj-beast", "childObjectId": "obj-pack-a", "kind": "attachment", "toleranceM": 0.05, "required": true },
+    { "relationId": "relation-hand-tool", "parentObjectId": "obj-traveler", "childObjectId": "obj-staff", "kind": "handheld", "expectedOffset": [0.35, 0, 0], "toleranceM": 0.05, "required": true }
+  ],
+  "experienceSourcePath": "processing/fixtures/silk-road-experience.json",
+  "requiredCapabilities": ["static-glb-v1", "transform-tracks-v1", "attachment-tracks-v1", "visibility-tracks-v1", "environment-v1", "camera-cues-v1"],
   "optionalCapabilities": [],
-  "unresolved": ["驮兽仍为技术灰盒；货包与载体的历史固定方式未获采集层确认", "动态挂接尚未接入正式 viewer"]
+  "unresolved": ["驮兽仍为技术灰盒；货包与载体的历史固定方式未获采集层确认", "动态已在 B 本机正式 viewer 运行，仍待靳老师确认页面与性能"]
 }
