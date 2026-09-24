@@ -14,7 +14,7 @@ export interface AssetTaskRecord {
   strategyId: string; storyId: string; releaseId: string; assetId: string
   snapshotHash: string; reason: string; maxCostUsd: number; estimatedCostUsd: null
   attemptCount: number; artifactRefs: string[]; policy: StrategyPolicy; request: AssetTaskRequest
-  result?: { inputSha256: string; outputSha256: string; outputPath: string; beforeDimensionsM: [number, number, number]; afterDimensionsM: [number, number, number]; tool: string; toolVersion: string; materialsEdited: number; costUsd: 0; adopted: false; reviewStatus: 'pending' }
+  result?: { inputSha256: string; outputSha256: string; outputPath: string; beforeDimensionsM: [number, number, number]; afterDimensionsM: [number, number, number]; tool: string; toolVersion: string; materialsEdited: number; costUsd: 0; adopted: false; reviewStatus: 'pending' | 'pass' | 'needs_revision' | 'needs_information' | 'inconclusive' | 'failed' }
 }
 const digest = (value: string): string => createHash('sha256').update(value).digest('hex')
 const json = async <T>(file: string): Promise<T> => JSON.parse(await readFile(file, 'utf8')) as T

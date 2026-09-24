@@ -118,8 +118,8 @@ export interface ReviewReport {
   coverage: ReviewEvidenceBundle['coverage']
   decision: 'pass' | 'needs_revision' | 'needs_information' | 'inconclusive'
   findings: ReviewFinding[]
-  unassessed: Array<string | { item: string; reason: string; requiredEvidence: string; subjectRefs: string[] }>
-  suggestedStrategies: Array<string | { strategyId: string; targetFindingIds: string[]; action: string; rationale: string }>
+  unassessed: Array<string | { item: string; reason: string; requiredEvidence: string; subjectRefs: string[] } | { aspect: string; reason: string; neededEvidence: string; subjectRefs: string[]; evidenceRefs: string[] }>
+  suggestedStrategies: Array<string | { strategyId: string; targetFindingIds: string[]; action: string; rationale: string } | { strategy: string; targetRef: string; suggestedOwner: IssueOwner; repairGoal: string; acceptanceCheck: string; priority: string }>
   normalizationNotes: string[]
 }
 

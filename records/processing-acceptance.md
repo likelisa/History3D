@@ -45,3 +45,8 @@
 - 生效政策位于 `processing/config/strategy-policy.json`：每资产最多两次尝试、世界最多三轮审核、候选数 2；本轮付费生成上限 0 美元、0 次。没有来自用户的正预算与 Tripo 凭据位置时，`generate-3d` 和 `prompt-variants` 不可执行。
 - `/strategies` 明确列可用/不可用原因；`POST /asset-tasks` 在固定 release 与父资产 hash 上保存修复提案，随后可按 taskId 取回。技术 fixture 的生成任务返回 `needs_budget`、`attemptCount=0`、无产物；没有实际 Tripo 提交。该接口仍未提供付费执行或 Blender 通用修整适配。
 - 后续已接入 Blender **仅材质改色**适配，并在 Mac Blender 5.2.0 LTS 实测：货包任务 `task-22a6e73658eceb9e0993` 用 `#49748f` 输出 SHA-256 `12f512c694d7aa3d901607157488b04841835611bf46396d3f61e9e2cf2eb371` 的候选 GLB；前后包围盒相同，1 次尝试、API 成本 0，artifact HTTP 200。状态是 `candidate_ready`、`reviewStatus=pending`、`adopted=false`；尚未将它接进正式世界或完成资产 AI review。
+
+## 2026-09-25 资产候选 DeepSeek 复审
+
+- 对 `task-22a6e73658eceb9e0993` 的原版和蓝色 Blender 候选各取六张固定视角，连同几何指标、规划与修整记录发给真实 `deepseek-flash`。请求 ID `b443ffe4-2833-44da-b377-842fa53f472d`，输入 13,904 token、输出 12,899 token。首次完整响应的 `unassessed`/`suggestedStrategies` 使用了带引用的另一种结构，先被校验器拒绝；校验器核对其 subject/evidence 引用后，只重验已保存响应，没有第二次模型调用。
+- 报告 `asset-review-2e2c2901c1cd7b9f55e7` 判 `needs_information`：5 条发现、4 项未评估范围。它确认 GLB 尺寸和底部原点不变；也指出蓝灰货包在侧视图里可能更接近中性灰背景，当前证据不足以证明材质对比改善，且没有载体组装/运行画面。B 暂不采用该候选，`reviewStatus=needs_information`、`adopted=false`，旧固定 release 与当前采用指针不变。模型调用费用未知，不从 token 数推算成已核实美元成本。

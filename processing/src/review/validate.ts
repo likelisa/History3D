@@ -41,13 +41,18 @@ export function validateReviewOutput(raw: unknown, evidence: ReviewEvidenceBundl
     if (nonempty(entry)) continue
     if (!entry || typeof entry !== 'object') throw new Error('REVIEW_OUTPUT_INVALID: invalid unassessed item')
     const item = entry as Record<string, unknown>
-    if (!nonempty(item.item) || !nonempty(item.reason) || !nonempty(item.requiredEvidence) || !Array.isArray(item.subjectRefs) || item.subjectRefs.some((ref) => !subjects.has(ref))) throw new Error('REVIEW_OUTPUT_INVALID: invalid unassessed item')
+    const subjectsValid = Array.isArray(item.subjectRefs) && item.subjectRefs.every((ref) => subjects.has(ref))
+    const oldShape = nonempty(item.item) && nonempty(item.reason) && nonempty(item.requiredEvidence) && subjectsValid
+    const newShape = nonempty(item.aspect) && nonempty(item.reason) && nonempty(item.neededEvidence) && subjectsValid && Array.isArray(item.evidenceRefs) && item.evidenceRefs.every((ref) => evidenceRefs.has(ref))
+    if (!oldShape && !newShape) throw new Error('REVIEW_OUTPUT_INVALID: invalid unassessed item')
   }
   for (const entry of value.suggestedStrategies) {
     if (nonempty(entry)) continue
     if (!entry || typeof entry !== 'object') throw new Error('REVIEW_OUTPUT_INVALID: invalid strategy item')
     const item = entry as Record<string, unknown>
-    if (!nonempty(item.strategyId) || !nonempty(item.action) || !nonempty(item.rationale) || !Array.isArray(item.targetFindingIds) || item.targetFindingIds.some((id) => !ids.has(id))) throw new Error('REVIEW_OUTPUT_INVALID: invalid strategy item')
+    const oldShape = nonempty(item.strategyId) && nonempty(item.action) && nonempty(item.rationale) && Array.isArray(item.targetFindingIds) && item.targetFindingIds.every((id) => ids.has(id))
+    const newShape = nonempty(item.strategy) && nonempty(item.targetRef) && (subjects.has(item.targetRef) || evidenceRefs.has(item.targetRef)) && owners.has(String(item.suggestedOwner)) && nonempty(item.repairGoal) && nonempty(item.acceptanceCheck) && nonempty(item.priority)
+    if (!oldShape && !newShape) throw new Error('REVIEW_OUTPUT_INVALID: invalid strategy item')
   }
   const decision = value.decision as ReviewReport['decision']
   if (decision === 'pass' && (findings.some((item) => item.severity === 'blocking') || value.unassessed.length || evidence.coverage.some((item) => item.status === 'unassessed'))) throw new Error('REVIEW_OUTPUT_INVALID: cannot pass with blockers or missing coverage')

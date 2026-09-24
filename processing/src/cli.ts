@@ -6,6 +6,7 @@ import { buildWorldRelease } from './world-compile.ts'
 import { prepareReleasePreview } from './preview.ts'
 import { reviewViewerPatch } from './asset-patch.ts'
 import { revalidateSavedWorldReview, runWorldReview } from './review/world-review.ts'
+import { revalidateSavedAssetReview, runAssetReview } from './review/asset-review.ts'
 
 const dataDir = path.resolve(process.env.PROCESSING_DATA_DIR ?? '.processing-data')
 const [command, ...args] = process.argv.slice(2)
@@ -13,8 +14,10 @@ const arity: Record<string, number> = {
   import: 2, 'review-input': 1, 'revalidate-review': 3,
   'build-release': 2, 'preview-release': 2, 'review-world': 3,
   'revalidate-world': 4, 'review-patch': 1,
+  'review-asset': 1,
+  'revalidate-asset': 3,
 }
-const usage = 'usage: npm run processing -- import <collection-dir> <idempotency-key> | review-input <importId> | revalidate-review <importId> <assetId> <attempt> | build-release <importId> <world-plan.json> | preview-release <storyId> <releaseId> | review-world <storyId> <releaseId> <world-plan.json> | revalidate-world <storyId> <releaseId> <reviewId> <attempt> | review-patch <decision.json>'
+const usage = 'usage: npm run processing -- import <collection-dir> <idempotency-key> | review-input <importId> | review-asset <taskId> | revalidate-asset <taskId> <reviewId> <attempt> | revalidate-review <importId> <assetId> <attempt> | build-release <importId> <world-plan.json> | preview-release <storyId> <releaseId> | review-world <storyId> <releaseId> <world-plan.json> | revalidate-world <storyId> <releaseId> <reviewId> <attempt> | review-patch <decision.json>'
 
 function positiveAttempt(value: string): number {
   const attempt = Number(value)
@@ -40,6 +43,8 @@ if (!command || arity[command] !== args.length) {
         break
       }
       case 'review-input': output = await runInputReview(args[0], dataDir); break
+      case 'review-asset': output = await runAssetReview(args[0], dataDir); break
+      case 'revalidate-asset': output = await revalidateSavedAssetReview(args[0], args[1], dataDir, positiveAttempt(args[2])); break
       case 'revalidate-review': output = await revalidateSavedInputReview(args[0], args[1], dataDir, positiveAttempt(args[2])); break
       case 'build-release': output = await buildWorldRelease(args[0], await existingFile(args[1]), dataDir, process.cwd()); break
       case 'preview-release': output = await prepareReleasePreview(args[0], args[1], dataDir, process.cwd()); break

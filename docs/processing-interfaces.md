@@ -44,6 +44,8 @@ B 可用 `npm run processing -- review-patch /absolute/path/to/decision.json` �
 
 本机有 Blender 时，`strategyId:"blender-refine"` 支持一个受控操作：`parameters:{"operation":"material_tint","color":"#49748f"}`。HTTP task 从 `queued` 经 Blender GLB 导入/材质修整/导出到 `candidate_ready`；结果保留输入/输出 SHA-256、前后尺寸、工具版本和 0 美元 API 成本。候选通过 `/artifacts/<taskId>/<outputPath>` 读取；动画 GLB 不在该适配器支持范围。`candidate_ready` 仍是待 AI 资产复审的候选，**没有采用或切换 current**。
 
+`npm run processing -- review-asset <taskId>` 对 task 中固定输入/输出 GLB 各渲染六视角，附规划、来源、几何指标与修整参数，执行必需的 `asset_review`。报告和原始模型响应保存在该 task 的 `reviews/`；失败或无效输出不会变成 pass。已保存的完整响应可用 `revalidate-asset <taskId> <reviewId> <attempt>` 在修正校验器后重新核验，不重复付费调用。模型结论是 B 裁定依据，`needs_information` 或未评估范围不能自动采用资产。
+
 Blender 的一般网格/绑定/UV 修整与外部生成执行适配尚未接通，`/strategies` 列出限制或 unavailable。`POST /reviews`、付费资产任务执行/恢复、候选提升为 current 的发布/回退命令仍待实现。本服务没有跨机器身份认证，只用于本机联调。Python 解包解释器默认 `/usr/bin/python3`，可通过 `PROCESSING_PYTHON` 指定团队机器上的解释器。
 
 ## B→C 静态候选

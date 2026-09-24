@@ -47,6 +47,18 @@ describe('AI review gate', () => {
     expect(() => validateReviewOutput(response, evidence)).toThrow('invalid strategy')
   })
 
+  it('accepts asset comparison gaps with checked evidence and subject IDs', () => {
+    const response = { decision: 'needs_information', findings: [], unassessed: [{ aspect: 'assembly', reason: 'only asset images', neededEvidence: 'world frame', subjectRefs: ['asset@1:hash'], evidenceRefs: ['front', 'plan.md'] }], suggestedStrategies: [{ strategy: 'contrast-probe', targetRef: 'asset@1:hash', suggestedOwner: 'processor', repairGoal: 'compare contrast', acceptanceCheck: 'readable silhouette', priority: 'medium' }] }
+    expect(validateReviewOutput(response, evidence).unassessed).toHaveLength(1)
+    response.unassessed[0].evidenceRefs = ['fabricated-view']
+    expect(() => validateReviewOutput(response, evidence)).toThrow('invalid unassessed')
+    response.unassessed[0].evidenceRefs = ['front']
+    response.suggestedStrategies[0].targetRef = 'plan.md'
+    expect(validateReviewOutput(response, evidence).suggestedStrategies).toHaveLength(1)
+    response.suggestedStrategies[0].targetRef = 'fabricated-target'
+    expect(() => validateReviewOutput(response, evidence)).toThrow('invalid strategy')
+  })
+
   it('rejects truncated and empty model output', async () => {
     const fakeFetch = (reason: string, content: string) => (async () => ({ ok: true, json: async () => ({ choices: [{ finish_reason: reason, message: { content } }] }) })) as unknown as typeof fetch
     await expect(reviewWithDeepSeek(evidence, { apiKey: 'test', fetchImpl: fakeFetch('length', '{}') })).rejects.toThrow('REVIEW_OUTPUT_INVALID')
