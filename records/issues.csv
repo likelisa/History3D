@@ -10,3 +10,4 @@ iss-008,2026-09-23,构建输出,vite build 报 JS chunk 758 KB 超过 500 KB 警
 iss-009,2026-09-23,验收缺口,Demo A 要求的三位非制作人观察记录与 30 秒录屏未执行,集成,blocking,open,集成负责人,records/acceptance.md 第 2 节,需真人参与，制作者自评无效
 iss-010,2026-09-23,验收缺口,Demo B 资产链路无任何生成实验记录；包内 GLB 是脚本生成的几何占位体，不代表生成链路可用,B,blocking,open,B,records/experiments.csv,待 B 交付合规 GLB 后重跑 Demo B
 iss-011,2026-09-23,协作流程,gh CLI 凭据已失效（gh auth status 报 invalid），无法从本机创建 PR 走审阅流程,集成,major,open,集成负责人,gh auth status,需重新 gh auth login 后再建 PR；本轮改动只能先留在本地提交
+iss-012,2026-09-24,运行日志,"AI PR 审查自加入以来从未产出过任何审查意见，工作流只显示「未运行」。根因是模型选型：GLM-5.3-Flash 是推理模型，token 全花在 reasoning_content 上——对最小分块（9932 字符）就产出 28058 字思考，撞上 max_tokens 上限仍写不出正文，5 块全部失败",集成,blocking,closed,集成负责人,actions run 35881692387 与本机 scripts/ai-review.mjs 实测,改为流式 + 按文件边界分块 + max_tokens 上限 + 总预算 + 覆盖范围如实标注；模型改用 Qwen3.5-Flash（同一 diff 5/5 块完成、产出 13 条判断）

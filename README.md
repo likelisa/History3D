@@ -134,12 +134,38 @@ http://localhost:4173/?bench=1&benchSeconds=90
 
 ## AI PR 审查
 
-每个 Pull Request 都会运行 `.github/workflows/ai-review.yml`。工作流用 PR 的 base sha（`git diff <base>...HEAD`）获取本次变更——不是 `HEAD~1`，否则多提交的 PR 只会审到最后一个提交——并通过 AI Ping 的 OpenAI-compatible API 生成审查意见，再自动评论到 PR 中。
+每个 Pull Request 都会运行 `.github/workflows/ai-review.yml`。工作流用 PR 的 base sha
+（`git diff <base>...HEAD`）获取本次变更——不是 `HEAD~1`，否则多提交的 PR 只会审到最后一个提交。
 
-使用前需要在仓库 Secrets 中配置 `OPENAI_API_KEY`，值填写 AI Ping 平台的 API Key。默认使用 `GLM-5.3-Flash` 和 `https://aiping.cn/api/v1`，也可以通过仓库 Variables 修改 `AI_API_BASE_URL` 和 `AI_MODEL`。**模型 id 区分大小写**：写错时网关通常既不报错也不返回，会一直挂到超时；脚本会先用 `/models` 预检并直接指出正确写法。
+审查按**文件边界分块**（`AI_CHUNK_CHARS`，默认 25000 字符）逐块请求，每块都是一份能独立看懂的完整改动；
+每个分块用**流式**请求，网关几秒内就回响应头，于是「上游很慢」和「连接已死」能被区分开；
+`AI_MAX_TOKENS` 给「思考 + 正文」一个硬上限，`AI_TOTAL_TIMEOUT_MS` 给所有分块一个总预算。
+某一块失败不会丢掉其它块的结果：评论里会写明「本次审查覆盖 N/M 块」，以及未审查的分块和原因。
 
-可选仓库 Variables（都有默认值，不配也能跑）：`AI_TIMEOUT_MS`（默认 180000）、`AI_MAX_DIFF_CHARS`（默认 100000，按字符数截断并注明丢弃量）、`AI_PREFLIGHT`（设 `0` 关闭模型预检）、`AI_REVIEW_STRICT`（设 `1` 时审查失败会让 job 变红）。
+使用前需要在仓库 Secrets 中配置 `OPENAI_API_KEY`，值填写 AI Ping 平台的 API Key；
+默认使用 `Qwen3.5-Flash` 和 `https://aiping.cn/api/v1`，可通过仓库 Variables 覆盖。
 
-如果审查结果包含 `critical` 或 `blocking` 级别的问题，工作流会输出 warning，并要求人工确认后再合并。上游超时或返回异常时，脚本会评论一份「AI Review 未运行」的说明并输出 warning，但**不会**让 PR 变红——外部服务的不稳定不应该拦住代码合并。
+> **模型选型直接决定这个工作流能不能用。** 推理模型把 token 花在思考上，输出上限一到就只剩思考、
+> 没有正文。实测 `GLM-5.3-Flash` 对一份 9932 字符的分块产出 28058 字思考后仍写不出结果，
+> 5 块全部失败；换成 `Qwen3.5-Flash` 后同一份 diff 5/5 块完成、产出 13 条判断。
+> 遇到这种情况脚本会直接写出来，而不是含糊地报「超时」。
+
+**模型 id 区分大小写**：写错时网关通常既不报错也不返回，会一直挂到超时；脚本会先用 `/models` 预检并指出正确写法。
+
+可选仓库 Variables（都有默认值，不配也能跑）：
+
+| 变量 | 默认值 | 说明 |
+| --- | --- | --- |
+| `AI_CHUNK_CHARS` | `25000` | 单次请求的 diff 预算；调小可缩短推理、降低单块失败概率 |
+| `AI_MAX_TOKENS` | `8000` | 单次请求的输出上限（含推理模型的思考内容） |
+| `AI_TIMEOUT_MS` | `180000` | 单个分块的超时 |
+| `AI_TOTAL_TIMEOUT_MS` | `480000` | 所有分块的总预算，超出后剩余分块标记为未审查 |
+| `AI_MAX_DIFF_CHARS` | `100000` | diff 总量上限，按行边界截断并注明丢弃量 |
+| `AI_PREFLIGHT` | 开 | 设 `0` 关闭模型名预检 |
+| `AI_REVIEW_STRICT` | 关 | 设 `1` 时审查失败会让 job 变红 |
+
+如果审查结果包含 `critical` 或 `blocking` 级别的问题，工作流会输出 warning，并要求人工确认后再合并。
+上游超时或返回异常时，脚本会评论一份「AI Review 未运行」的说明并输出 warning，但**不会**让 PR 变红——
+外部服务的不稳定不应该拦住代码合并。
 
 另有 `.github/workflows/ci.yml` 负责 `npm ci` + `npm run check` + `npm run build`。

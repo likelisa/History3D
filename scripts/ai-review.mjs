@@ -3,25 +3,38 @@ import { mkdir, writeFile } from 'node:fs/promises'
 import process from 'node:process'
 
 import {
+  DEFAULT_CHUNK_CHARS,
   DEFAULT_MAX_DIFF_CHARS,
+  DEFAULT_MAX_TOKENS,
   DEFAULT_TIMEOUT_MS,
+  DEFAULT_TOTAL_TIMEOUT_MS,
   buildComment,
   buildUnavailableComment,
+  chunkDiff,
+  describeEmptyReview,
   describeModelMatch,
   findModelMatch,
+  mergeIssues,
   parseReviewContent,
+  parseSseLine,
   truncateDiff,
 } from './ai-review-lib.mjs'
 
 const OUTPUT_DIR = process.env.RUNNER_TEMP || '.'
 const MAX_DIFF_BUFFER_BYTES = 64 * 1024 * 1024
+const SUMMARY_MAX_CHARS = 1200
 
 const apiKey = process.env.OPENAI_API_KEY
 const apiBaseUrl = (process.env.AI_API_BASE_URL || 'https://aiping.cn/api/v1').replace(/\/+$/, '')
-// 注意大小写：该网关的模型 id 是 GLM-5.3-Flash，写错会被预检拦下。
-const model = process.env.AI_MODEL || 'GLM-5.3-Flash'
+// 默认值是可用的兜底，CI 实际用仓库 Variable AI_MODEL。
+// 这里特意不用 GLM-5.3-Flash：它会把 token 全花在思考上，实测对一份 1 万字符的
+// 分块就能产出 2.8 万字思考却写不出正文，永远等不到结果。模型 id 区分大小写。
+const model = process.env.AI_MODEL || 'Qwen3.5-Flash'
 const maxDiffChars = readPositiveInt(process.env.AI_MAX_DIFF_CHARS, DEFAULT_MAX_DIFF_CHARS)
+const chunkChars = readPositiveInt(process.env.AI_CHUNK_CHARS, DEFAULT_CHUNK_CHARS)
+const maxTokens = readPositiveInt(process.env.AI_MAX_TOKENS, DEFAULT_MAX_TOKENS)
 const timeoutMs = readPositiveInt(process.env.AI_TIMEOUT_MS, DEFAULT_TIMEOUT_MS)
+const totalTimeoutMs = readPositiveInt(process.env.AI_TOTAL_TIMEOUT_MS, DEFAULT_TOTAL_TIMEOUT_MS)
 const PREFLIGHT_TIMEOUT_MS = 15_000
 const preflightEnabled = !['0', 'false', 'no'].includes(String(process.env.AI_PREFLIGHT || '').toLowerCase())
 /** 默认不让外部服务的不稳定把 PR 卡红；需要硬失败时设 AI_REVIEW_STRICT=1。 */
@@ -109,13 +122,46 @@ async function preflightModel() {
 const systemPrompt = [
   'You are a senior code reviewer for the History3D project.',
   'Review the provided git diff for correctness, security issues, performance problems, accessibility regressions, and maintainability risks.',
+  'The diff may be one slice of a larger pull request; review what is shown and do not report the omitted parts as a problem.',
   'Focus only on changes introduced by this diff; do not report unrelated repository issues.',
   'Return a JSON object with this exact shape:',
   '{"summary":"short overall assessment","issues":[{"severity":"critical|blocking|warning|info","file":"relative/path","line":1,"description":"specific issue","suggestion":"concrete fix"}]}',
   'Use an empty issues array when there are no findings. Do not include Markdown code fences.',
 ].join('\n')
 
-async function requestReview(userPrompt) {
+function buildChunkPrompt(chunk) {
+  return [
+    `Review this pull request diff. It is part ${chunk.index + 1} of ${chunk.totalChunks}.`,
+    'Files touched in this part:',
+    chunk.files.length > 0 ? chunk.files.join('\n') : '(path not parsed)',
+    '',
+    '```diff',
+    chunk.text,
+    '```',
+  ].join('\n')
+}
+
+function toRequestError(error, ms, extra = {}) {
+  const name = error?.name || 'Error'
+  if (name === 'TimeoutError' || name === 'AbortError') {
+    const thought = extra.reasoningChars > 0 ? `；中止前已产出 ${extra.reasoningChars} 字思考内容` : ''
+    return new Error(`AI provider did not respond within ${ms} ms (model: ${model})${thought}.`)
+  }
+  return new Error(`Unable to reach the AI provider at ${apiBaseUrl}: ${error?.message || error}`)
+}
+
+/**
+ * 单个分块的审查请求。
+ *
+ * 这里必须用流式：非流式时网关要等整段生成完才回响应头，于是「上游很慢」和
+ * 「连接已死」在客户端看起来一模一样，只能靠一个总超时兜底——一超时全部结果作废。
+ * 流式下响应头几秒就回来，我们还能顺带看到模型是否一直在思考而没有产出正文。
+ */
+async function reviewChunk(chunk, { timeoutMs: chunkTimeoutMs }) {
+  const controller = new AbortController()
+  const timer = setTimeout(() => controller.abort(), chunkTimeoutMs)
+  const startedAt = Date.now()
+
   let response
   try {
     response = await fetch(`${apiBaseUrl}/chat/completions`, {
@@ -124,41 +170,86 @@ async function requestReview(userPrompt) {
         Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
-      // 没有超时的话，上游不回响应头就会一直挂着，最后抛 undici 的
-      // HeadersTimeoutError，把整个 job 打红却看不出原因。
-      signal: AbortSignal.timeout(timeoutMs),
+      signal: controller.signal,
       body: JSON.stringify({
         model,
         temperature: 0,
+        stream: true,
+        // 不设上限时，推理模型在复杂 diff 上会一直「想」下去，请求可以几分钟不返回。
+        max_tokens: maxTokens,
         response_format: { type: 'json_object' },
         messages: [
           { role: 'system', content: systemPrompt },
-          { role: 'user', content: userPrompt },
+          { role: 'user', content: buildChunkPrompt(chunk) },
         ],
       }),
     })
   } catch (error) {
-    const name = error?.name || 'Error'
-    if (name === 'TimeoutError' || name === 'AbortError') {
-      throw new Error(`AI provider did not respond within ${timeoutMs} ms (model: ${model}).`)
-    }
-    throw new Error(`Unable to reach the AI provider at ${apiBaseUrl}: ${error?.message || error}`)
+    clearTimeout(timer)
+    throw toRequestError(error, chunkTimeoutMs)
   }
 
   if (!response.ok) {
-    const body = await response.text()
+    clearTimeout(timer)
+    const body = await response.text().catch(() => '')
     throw new Error(`AI provider returned status ${response.status}.\n${body.slice(0, 2000)}`)
   }
 
-  const payload = await response.json()
-  const content = payload?.choices?.[0]?.message?.content
-  if (!content) throw new Error('AI provider returned an empty review response.')
+  let pending = ''
+  let content = ''
+  let reasoningChars = 0
+  let finishReason = null
+  let completionTokens = null
 
   try {
-    return parseReviewContent(content)
-  } catch {
-    throw new Error(`AI provider returned invalid JSON.\n${String(content).slice(0, 2000)}`)
+    for await (const part of response.body) {
+      pending += Buffer.from(part).toString('utf8')
+      let cut
+      // 一个 SSE 事件可能被拆在多个网络分片里，先按行缓冲再解析。
+      while ((cut = pending.indexOf('\n')) >= 0) {
+        const event = parseSseLine(pending.slice(0, cut))
+        pending = pending.slice(cut + 1)
+        if (!event) continue
+        content += event.content
+        reasoningChars += event.reasoning.length
+        if (event.finishReason) finishReason = event.finishReason
+        if (event.completionTokens !== null) completionTokens = event.completionTokens
+      }
+    }
+  } catch (error) {
+    throw toRequestError(error, chunkTimeoutMs, { reasoningChars })
+  } finally {
+    clearTimeout(timer)
   }
+
+  if (content.trim() === '') {
+    throw new Error(describeEmptyReview({ reasoningChars, finishReason }))
+  }
+
+  let review
+  try {
+    review = parseReviewContent(content)
+  } catch {
+    throw new Error(`AI provider returned invalid JSON.\n${content.slice(0, 2000)}`)
+  }
+
+  return {
+    review,
+    issues: Array.isArray(review?.issues) ? review.issues : [],
+    elapsedMs: Date.now() - startedAt,
+    reasoningChars,
+    completionTokens,
+    finishReason,
+  }
+}
+
+function buildSummary(summaries) {
+  const text = summaries
+    .map((summary) => String(summary ?? '').trim())
+    .filter(Boolean)
+    .join(' ')
+  if (text === '') return 'The AI reviewer did not provide a summary.'
+  return text.length > SUMMARY_MAX_CHARS ? `${text.slice(0, SUMMARY_MAX_CHARS)}…` : text
 }
 
 async function writeOutputs(comment, payload) {
@@ -178,6 +269,8 @@ async function main() {
     const { diff, ref: diffRef } = readDiff()
     ref = diffRef
     const truncated = truncateDiff(diff, maxDiffChars)
+    const chunks = chunkDiff(truncated.text, chunkChars)
+
     const context = {
       base: process.env.GITHUB_BASE_SHA,
       head: process.env.GITHUB_HEAD_SHA,
@@ -187,13 +280,54 @@ async function main() {
     }
 
     console.log(
-      `Reviewing ${truncated.keptChars} of ${truncated.totalChars} diff characters ` +
-        `(${diffRef}, model: ${model}, timeout: ${timeoutMs} ms).`,
+      `Reviewing ${truncated.keptChars} of ${truncated.totalChars} diff characters in ${chunks.length} chunk(s) ` +
+        `(${diffRef}, model: ${model}, chunk: ${chunkChars} chars, max_tokens: ${maxTokens}, ` +
+        `per-chunk timeout: ${timeoutMs} ms, total budget: ${totalTimeoutMs} ms).`,
     )
 
-    const review = await requestReview(`Review this pull request diff:\n\n\`\`\`diff\n${truncated.text}\n\`\`\``)
-    const issues = Array.isArray(review?.issues) ? review.issues : []
-    const comment = buildComment(review, issues, context)
+    const summaries = []
+    const issueGroups = []
+    const failedChunks = []
+    const deadline = Date.now() + totalTimeoutMs
+
+    for (const chunk of chunks) {
+      const remaining = deadline - Date.now()
+      if (remaining <= 0) {
+        failedChunks.push({
+          index: chunk.index,
+          files: chunk.files,
+          reason: `总时间预算 ${totalTimeoutMs} ms 已用完，未提交这一块`,
+        })
+        continue
+      }
+
+      process.stdout.write(`  · chunk ${chunk.index + 1}/${chunk.totalChunks} (${chunk.chars} chars) … `)
+      try {
+        const result = await reviewChunk(chunk, { timeoutMs: Math.min(timeoutMs, remaining) })
+        issueGroups.push(result.issues)
+        summaries.push(result.review?.summary)
+        console.log(`${(result.elapsedMs / 1000).toFixed(1)}s, ${result.issues.length} issue(s)`)
+      } catch (error) {
+        const reason = error?.message || String(error)
+        failedChunks.push({ index: chunk.index, files: chunk.files, reason })
+        console.log(`failed: ${reason.split('\n')[0]}`)
+      }
+    }
+
+    // 一块都没成就当作「审查没跑」处理；有成功块时如实标注覆盖范围再出评论。
+    if (issueGroups.length === 0) {
+      throw new Error(
+        `所有 ${chunks.length} 块都没有产出结果。\n` +
+          failedChunks.map((failure) => `- chunk ${failure.index + 1}: ${failure.reason}`).join('\n'),
+      )
+    }
+
+    const issues = mergeIssues(issueGroups)
+    const review = { summary: buildSummary(summaries), issues }
+    const comment = buildComment(review, issues, {
+      ...context,
+      coverage: { totalChunks: chunks.length, reviewedChunks: issueGroups.length, failedChunks },
+    })
 
     await writeOutputs(comment, { ...review, issues })
     console.log(comment)
