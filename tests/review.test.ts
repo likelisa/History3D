@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import type { ReviewEvidenceBundle } from '../contracts/src/handoff-types.ts'
 import { validateReviewOutput } from '../processing/src/review/validate.ts'
 import { reviewWithDeepSeek } from '../processing/src/review/deepseek.ts'
+import { reviewCacheKey } from '../processing/src/review/orchestrator.ts'
 import path from 'node:path'
 
 const evidence: ReviewEvidenceBundle = {
@@ -13,6 +14,10 @@ const evidence: ReviewEvidenceBundle = {
 }
 
 describe('AI review gate', () => {
+  it('invalidates review reuse when a rendered view changes', () => {
+    const changed = { ...evidence, images: evidence.images.map((item) => ({ ...item, sha256: 'd'.repeat(64) })) }
+    expect(reviewCacheKey(changed)).not.toBe(reviewCacheKey(evidence))
+  })
   it('rejects invented subjects and citations', () => {
     const finding = { findingId: 'f1', category: 'geometry', subjectRefs: ['fake'], observation: 'bad', expected: 'good', impact: 'blocked', evidenceRefs: ['front'], certainty: 'observed', severity: 'blocking', suggestedOwner: 'processor', requestedInformation: null, repairGoal: 'repair', acceptanceCheck: 'inspect again' }
     expect(() => validateReviewOutput({ decision: 'needs_revision', findings: [finding], unassessed: [], suggestedStrategies: [] }, evidence)).toThrow('unknown subject')
@@ -32,6 +37,14 @@ describe('AI review gate', () => {
     const result = validateReviewOutput({ decision: 'needs_information', findings: [finding], unassessed: [], suggestedStrategies: [] }, withStory)
     expect(result.findings[0].subjectRefs).toEqual(['fixture-story'])
     expect(result.normalizationNotes).toHaveLength(1)
+  })
+
+  it('accepts structured gaps and strategies only with known references', () => {
+    const finding = { findingId: 'f1', category: 'assembly', subjectRefs: ['asset@1:hash'], observation: 'gap', expected: 'attach', impact: 'visible', evidenceRefs: ['front'], certainty: 'observed', severity: 'warning', suggestedOwner: 'processor', requestedInformation: null, repairGoal: 'attach', acceptanceCheck: 'inspect again' }
+    const response = { decision: 'needs_revision', findings: [finding], unassessed: [{ item: 'motion', reason: 'still image', requiredEvidence: 'video', subjectRefs: ['asset@1:hash'] }], suggestedStrategies: [{ strategyId: 's1', targetFindingIds: ['f1'], action: 'repair', rationale: 'attachment gap' }] }
+    expect(validateReviewOutput(response, evidence).suggestedStrategies).toHaveLength(1)
+    response.suggestedStrategies[0].targetFindingIds = ['invented']
+    expect(() => validateReviewOutput(response, evidence)).toThrow('invalid strategy')
   })
 
   it('rejects truncated and empty model output', async () => {

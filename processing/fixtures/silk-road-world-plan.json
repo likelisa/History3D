@@ -4,7 +4,16 @@
   "templateScenePath": "packages/silk-road-demo/scene.json",
   "profileId": "desktop-demo-v1",
   "assetBindings": [{ "assetId": "asset-pack-bundle", "collectionAssetId": "asset-pack-bundle" }],
-  "placements": [{ "objectId": "obj-pack-a", "position": [0, 2, 2], "rotationY": 0 }],
+  "placements": [
+    { "objectId": "obj-pack-a", "position": [0, 2, 2], "rotationY": 0 },
+    { "objectId": "obj-road-ahead", "position": [0, 0, -4], "rotationY": 0 }
+  ],
+  "claimChanges": [{
+    "claimId": "claim-pack-layout",
+    "statement": "一件货包放在驮兽背部，另一件置于驮兽左侧。",
+    "value": "一件在驮兽背部，另一件在左侧。",
+    "reason": "B 为演示载体与货物的组装关系调整摆放；仅修改演示设定，不提升为史实"
+  }],
   "relations": [{ "relationId": "relation-load", "parentObjectId": "obj-beast", "childObjectId": "obj-pack-a", "kind": "attachment", "toleranceM": 0.05, "required": true }],
   "requiredCapabilities": ["static-glb-v1"],
   "optionalCapabilities": [],

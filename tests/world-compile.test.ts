@@ -23,6 +23,9 @@ describe('world release compiler', () => {
     const validated = await validateScenePackage(createNodeReader(release.path), { checkGlbBounds: true })
     expect(validated.diagnostics.filter((item) => item.severity === 'error')).toEqual([])
     expect(validated.scene?.objects.find((item) => item.id === 'obj-pack-a')?.position).toEqual([0, 2, 2])
+    expect(validated.scene?.objects.find((item) => item.id === 'obj-road-ahead')?.position).toEqual([0, 0, -4])
+    expect(validated.story?.contentRevision).toBe(2)
+    expect(validated.story?.claims.find((item) => item.id === 'claim-pack-layout')?.statement).toContain('背部')
     const quality = JSON.parse(await readFile(path.join(release.path, 'quality-report.json'), 'utf8'))
     expect(quality.relationChecks[0].pass).toBe(true)
     expect((await buildWorldRelease(receipt.importId, planFixture, data, repoRoot)).releaseId).toBe(release.releaseId)
@@ -38,5 +41,16 @@ describe('world release compiler', () => {
     plan.placements[0].position = [4, 0, 4]
     await writeFile(planPath, JSON.stringify(plan))
     await expect(buildWorldRelease(receipt.importId, planPath, data, repoRoot)).rejects.toThrow('ASSEMBLY_INVALID')
+  })
+
+  it('does not let B rewrite a documented historical claim', async () => {
+    const data = await temp()
+    const receipt = await importCollection(fixture, data, 'build-three')
+    const planDir = await temp()
+    const planPath = path.join(planDir, 'plan.json')
+    const plan = JSON.parse(await readFile(planFixture, 'utf8'))
+    plan.claimChanges[0].claimId = 'claim-story-context'
+    await writeFile(planPath, JSON.stringify(plan))
+    await expect(buildWorldRelease(receipt.importId, planPath, data, repoRoot)).rejects.toThrow('CLAIM_CHANGE_REQUIRES_COLLECTOR_REVIEW')
   })
 })

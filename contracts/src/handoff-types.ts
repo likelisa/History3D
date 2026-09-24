@@ -112,13 +112,14 @@ export interface ReviewReport {
   modelRecord: {
     provider: string; requestedModel: string; responseModel: string | null
     requestId: string | null; promptVersion: string; latencyMs: number | null
+    parameters?: { maxTokens: number; temperature: number }
     tokens: { input: number; output: number } | null
   }
   coverage: ReviewEvidenceBundle['coverage']
   decision: 'pass' | 'needs_revision' | 'needs_information' | 'inconclusive'
   findings: ReviewFinding[]
-  unassessed: string[]
-  suggestedStrategies: string[]
+  unassessed: Array<string | { item: string; reason: string; requiredEvidence: string; subjectRefs: string[] }>
+  suggestedStrategies: Array<string | { strategyId: string; targetFindingIds: string[]; action: string; rationale: string }>
   normalizationNotes: string[]
 }
 

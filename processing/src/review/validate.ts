@@ -37,8 +37,19 @@ export function validateReviewOutput(raw: unknown, evidence: ReviewEvidenceBundl
     if (!(item.requestedInformation === null || nonempty(item.requestedInformation)) || !(item.repairGoal === null || nonempty(item.repairGoal))) throw new Error('REVIEW_OUTPUT_INVALID: remedy missing')
     findings.push(item as unknown as ReviewFinding)
   }
-  if (value.unassessed.some((item: unknown) => !nonempty(item)) || value.suggestedStrategies.some((item: unknown) => !nonempty(item))) throw new Error('REVIEW_OUTPUT_INVALID: invalid list item')
+  for (const entry of value.unassessed) {
+    if (nonempty(entry)) continue
+    if (!entry || typeof entry !== 'object') throw new Error('REVIEW_OUTPUT_INVALID: invalid unassessed item')
+    const item = entry as Record<string, unknown>
+    if (!nonempty(item.item) || !nonempty(item.reason) || !nonempty(item.requiredEvidence) || !Array.isArray(item.subjectRefs) || item.subjectRefs.some((ref) => !subjects.has(ref))) throw new Error('REVIEW_OUTPUT_INVALID: invalid unassessed item')
+  }
+  for (const entry of value.suggestedStrategies) {
+    if (nonempty(entry)) continue
+    if (!entry || typeof entry !== 'object') throw new Error('REVIEW_OUTPUT_INVALID: invalid strategy item')
+    const item = entry as Record<string, unknown>
+    if (!nonempty(item.strategyId) || !nonempty(item.action) || !nonempty(item.rationale) || !Array.isArray(item.targetFindingIds) || item.targetFindingIds.some((id) => !ids.has(id))) throw new Error('REVIEW_OUTPUT_INVALID: invalid strategy item')
+  }
   const decision = value.decision as ReviewReport['decision']
   if (decision === 'pass' && (findings.some((item) => item.severity === 'blocking') || value.unassessed.length || evidence.coverage.some((item) => item.status === 'unassessed'))) throw new Error('REVIEW_OUTPUT_INVALID: cannot pass with blockers or missing coverage')
-  return { decision, findings, unassessed: value.unassessed as string[], suggestedStrategies: value.suggestedStrategies as string[], normalizationNotes }
+  return { decision, findings, unassessed: value.unassessed as ReviewReport['unassessed'], suggestedStrategies: value.suggestedStrategies as ReviewReport['suggestedStrategies'], normalizationNotes }
 }

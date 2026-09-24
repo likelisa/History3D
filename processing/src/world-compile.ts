@@ -10,6 +10,7 @@ export interface WorldPlan {
   planVersion: '1.0.0'; storyId: string; templateScenePath: string; profileId: string
   assetBindings: Array<{ assetId: string; collectionAssetId: string }>
   placements: Array<{ objectId: string; position: Vec3; rotationY: number }>
+  claimChanges?: Array<{ claimId: string; statement: string; value: string; reason: string }>
   relations: Array<{ relationId: string; parentObjectId: string; childObjectId: string; kind: 'attachment'; toleranceM: number; required: boolean }>
   requiredCapabilities: string[]; optionalCapabilities: string[]; unresolved: string[]
 }
@@ -38,6 +39,20 @@ export async function buildWorldRelease(importId: string, planPath: string, data
   if (template.storyId !== story.storyId || template.contentRevision !== story.contentRevision) throw new Error('TEMPLATE_REVISION_MISMATCH')
   const scene: SceneFile = structuredClone(template)
   scene.sceneRevision = template.sceneRevision + 1
+  const compiledStory: StoryFile = structuredClone(story)
+  const compiledSources = await json<{ contentRevision: number; [key: string]: unknown }>(path.join(source, 'sources.json'))
+  for (const change of plan.claimChanges ?? []) {
+    const claim = compiledStory.claims.find((item) => item.id === change.claimId)
+    if (!claim || claim.evidenceType !== 'illustrative' || !change.reason.trim() || !change.statement.trim() || !change.value.trim()) throw new Error(`CLAIM_CHANGE_REQUIRES_COLLECTOR_REVIEW: ${change.claimId}`)
+    claim.statement = change.statement
+    claim.value = change.value
+    claim.note = `${claim.note} B 编译修订：${change.reason}`
+  }
+  if (plan.claimChanges?.length) {
+    compiledStory.contentRevision += 1
+    compiledSources.contentRevision = compiledStory.contentRevision
+    scene.contentRevision = compiledStory.contentRevision
+  }
   const objectById = new Map(scene.objects.map((item) => [item.id, item]))
   for (const placement of plan.placements) {
     const object = objectById.get(placement.objectId)
@@ -65,8 +80,8 @@ export async function buildWorldRelease(importId: string, planPath: string, data
   const stage = `${finalDir}.${randomUUID()}.tmp`
   await mkdir(stage, { recursive: true })
   try {
-    await cp(path.join(source, 'story.json'), path.join(stage, 'story.json'))
-    await cp(path.join(source, 'sources.json'), path.join(stage, 'sources.json'))
+    await putJson(path.join(stage, 'story.json'), compiledStory)
+    await putJson(path.join(stage, 'sources.json'), compiledSources)
     for (const file of handoff.files.filter((item) => item.path.startsWith('references/'))) {
       if (!isSafeRelative(file.path)) throw new Error('REFERENCE_PATH_INVALID')
       await mkdir(path.dirname(path.join(stage, file.path)), { recursive: true })
@@ -86,11 +101,11 @@ export async function buildWorldRelease(importId: string, planPath: string, data
     if (errors.length) throw new Error(`WORLD_VALIDATION_FAILED: ${errors.map((item) => `${item.file}:${item.field} ${item.message}`).join('; ')}`)
     const quality = { status: 'needs_review', diagnostics: validation.diagnostics, relationChecks, unresolved: plan.unresolved, requiredReviews: ['input_review', 'asset_review', 'world_review', 'release_review'], viewerAcceptance: null }
     await putJson(path.join(stage, 'quality-report.json'), quality)
-    await putJson(path.join(stage, 'provenance.json'), { inputImportId: importId, inputSubmissionId: handoff.submissionId, inputSnapshotHash: receipt.snapshotHash, planHash: digest(planBytes), sceneTemplate: plan.templateScenePath, assetBindings: plan.assetBindings, placements: plan.placements, reviewRefs: feedback.reviewRefs })
+    await putJson(path.join(stage, 'provenance.json'), { inputImportId: importId, inputSubmissionId: handoff.submissionId, inputSnapshotHash: receipt.snapshotHash, sourceContentRevision: handoff.sourceContentRevision, compiledContentRevision: compiledStory.contentRevision, planHash: digest(planBytes), sceneTemplate: plan.templateScenePath, assetBindings: plan.assetBindings, placements: plan.placements, claimChanges: plan.claimChanges ?? [], reviewRefs: feedback.reviewRefs })
     await putJson(path.join(stage, 'generation-report.json'), { strategies: [], realGenerationPerformed: false, note: 'This candidate reuses the A fixture GLB; B generation remains pending.' })
     await writeFile(path.join(stage, 'handoff.md'), `# ${story.title}\n\n固定候选 ${releaseId}。入口 scene.json；需要 ${plan.requiredCapabilities.join(', ')}。未完成世界 AI 复审与 C 页面验收，不得提升为 current。\n`)
     const files = await digestFiles(stage, ['scene.json', 'story.json', 'sources.json', 'quality-report.json', 'provenance.json', 'generation-report.json', 'handoff.md', ...scene.assets.map((item) => item.path), ...handoff.files.filter((item) => item.path.startsWith('references/')).map((item) => item.path)])
-    await putJson(path.join(stage, 'release.json'), { handoffVersion: '1.0.0', storyId: story.storyId, releaseId, contentRevision: story.contentRevision, sceneRevision: scene.sceneRevision, inputSubmissionIds: [handoff.submissionId], entrypoint: 'scene.json', files, requiredCapabilities: plan.requiredCapabilities, optionalCapabilities: plan.optionalCapabilities, qualityStatus: 'needs_review', knownLimitations: plan.unresolved })
+    await putJson(path.join(stage, 'release.json'), { handoffVersion: '1.0.0', storyId: story.storyId, releaseId, contentRevision: compiledStory.contentRevision, sceneRevision: scene.sceneRevision, inputSubmissionIds: [handoff.submissionId], entrypoint: 'scene.json', files, requiredCapabilities: plan.requiredCapabilities, optionalCapabilities: plan.optionalCapabilities, qualityStatus: 'needs_review', knownLimitations: plan.unresolved })
     await mkdir(path.dirname(finalDir), { recursive: true })
     try { await rename(stage, finalDir) } catch (error) {
       if ((error as NodeJS.ErrnoException).code !== 'ENOTEMPTY' && (error as NodeJS.ErrnoException).code !== 'EEXIST') throw error

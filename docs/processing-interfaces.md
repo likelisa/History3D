@@ -31,6 +31,8 @@ npm run dev -- --host 127.0.0.1
 
 当前编译器要求 B 给出兼容现有 v0.1 `scene.json` 的布局模板、资产绑定、摆放和组装关系。它检查父子对象存在、垂直接触和水平投影重叠；静态接触检查不等于运动挂接。候选状态始终 `needs_review`，世界 AI 审核、动态能力及 C 的正式验收未完成时不能提升为 current。
 
+世界复审命令：`npm run processing -- review-world <storyId> <releaseId> <world-plan.json>`。它核对不可变 release 的所有文件哈希，以 Blender 从正式 `scene.json` 渲染全景、主镜头和尺度参照，连同原规划、修订规划、质量指标交给 DeepSeek。正式 viewer 截图、三幕关键帧和连续动作未提供时，证据覆盖标为 `unassessed`，报告不可判 pass。每次输入图、文本、模型参数形成审查缓存键；图像改变会留下新报告，不覆盖旧报告。
+
 ### 对接待办
 
 - 傅老师：给一个真实 `storyId` 的来源、主 GLB、资产对应关系和原规划；对 fixture 中的历史未知项补证据或明确演示设定。

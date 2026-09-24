@@ -4,7 +4,7 @@ import { mkdir, readFile, rename, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import type { CollectionAsset, HandoffManifest, ProcessingFeedback, ReviewEvidenceBundle, ReviewReport } from '../../../contracts/src/handoff-types.ts'
 import { buildAssetEvidence } from './evidence.ts'
-import { reviewWithDeepSeek, ReviewOutputError, type ReviewCallOptions } from './deepseek.ts'
+import { reviewWithDeepSeek, ReviewOutputError, REVIEW_MAX_TOKENS, type ReviewCallOptions } from './deepseek.ts'
 import { validateReviewOutput } from './validate.ts'
 
 const fileJson = async <T>(file: string): Promise<T> => JSON.parse(await readFile(file, 'utf8')) as T
@@ -88,7 +88,7 @@ async function attachReport(root: string, report: ReviewReport, handoff: Handoff
 }
 
 export function reviewCacheKey(evidence: ReviewEvidenceBundle, model = 'deepseek-flash', promptVersion = 'history3d-review-v1'): string {
-  return hash(JSON.stringify({ model, promptVersion, scope: evidence.scope, snapshot: evidence.snapshotHash, rubric: evidence.rubricVersion, images: evidence.images.map((item) => item.sha256), texts: evidence.texts.map((item) => item.sha256), metrics: evidence.metrics }))
+  return hash(JSON.stringify({ model, promptVersion, maxTokens: REVIEW_MAX_TOKENS, temperature: 0, scope: evidence.scope, snapshot: evidence.snapshotHash, rubric: evidence.rubricVersion, images: evidence.images.map((item) => item.sha256), texts: evidence.texts.map((item) => item.sha256), metrics: evidence.metrics }))
 }
 
 export async function revalidateSavedInputReview(importId: string, assetId: string, dataDir: string, attempt: number): Promise<ReviewJob> {
