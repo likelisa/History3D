@@ -14,7 +14,7 @@ import type { BenchReport } from './bench.ts'
 import { createHotspotMarkers } from './hotspots.ts'
 import type { HotspotMarker } from './hotspots.ts'
 import { Measurer } from './measure.ts'
-import { createFetchReader, packageBaseUrl, packageUrl } from './reader.ts'
+import { candidateBaseUrl, createFetchReader, packageBaseUrl, packageUrl } from './reader.ts'
 import { clear, claimGroupNode, diagnosticsNode, el, hotspotNode, sourceDetailNode } from './ui.ts'
 import { Walker } from './walker.ts'
 import { buildWorld, WorldBuildError } from './world.ts'
@@ -65,6 +65,7 @@ export class ViewerApp {
   private readonly raycaster = new THREE.Raycaster()
 
   private storyId: string
+  private candidateReleaseId: string | null
   private readonly benchEnabled: boolean
   private readonly benchSeconds: number
   private bench: BenchRecorder | null = null
@@ -89,6 +90,7 @@ export class ViewerApp {
     const query = new URLSearchParams(location.search)
     this.storyId =
       query.get('story') || import.meta.env.VITE_DEFAULT_STORY_ID || 'silk-road-demo'
+    this.candidateReleaseId = query.get('candidate')
     this.benchEnabled = query.get('bench') === '1'
     this.benchSeconds = Number(query.get('benchSeconds') ?? '90') || 90
 
@@ -183,7 +185,13 @@ export class ViewerApp {
   }
 
   private async loadPackage(): Promise<void> {
-    const baseUrl = packageBaseUrl(this.storyId)
+    const baseUrl = this.candidateReleaseId
+      ? candidateBaseUrl(this.storyId, this.candidateReleaseId)
+      : packageBaseUrl(this.storyId)
+    if (!baseUrl) {
+      this.failWith([errorDiagnostic('VALIDATION_FAILED', 'release.json', 'releaseId', '候选版本 ID 不合法')])
+      return
+    }
     const reader = createFetchReader(baseUrl)
     this.setStage('loading_manifest')
     this.showOverlay('正在读取场景包', `位置：${baseUrl}/scene.json`)

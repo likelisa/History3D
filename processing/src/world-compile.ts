@@ -1,0 +1,116 @@
+import { createHash, randomUUID } from 'node:crypto'
+import { cp, mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises'
+import path from 'node:path'
+import { createNodeReader } from '../../contracts/src/node-reader.ts'
+import { validateScenePackage } from '../../contracts/src/validate.ts'
+import type { SceneFile, SceneObject, StoryFile, Vec3 } from '../../contracts/src/types.ts'
+import type { CollectionAsset, FileDigest, HandoffManifest, ProcessingFeedback } from '../../contracts/src/handoff-types.ts'
+
+export interface WorldPlan {
+  planVersion: '1.0.0'; storyId: string; templateScenePath: string; profileId: string
+  assetBindings: Array<{ assetId: string; collectionAssetId: string }>
+  placements: Array<{ objectId: string; position: Vec3; rotationY: number }>
+  relations: Array<{ relationId: string; parentObjectId: string; childObjectId: string; kind: 'attachment'; toleranceM: number; required: boolean }>
+  requiredCapabilities: string[]; optionalCapabilities: string[]; unresolved: string[]
+}
+
+export interface ReleaseReceipt { storyId: string; releaseId: string; status: 'needs_review'; path: string; sceneHash: string }
+const digest = (value: Buffer | string): string => createHash('sha256').update(value).digest('hex')
+const json = async <T>(file: string): Promise<T> => JSON.parse(await readFile(file, 'utf8')) as T
+const putJson = async (file: string, value: unknown): Promise<void> => { await writeFile(file, JSON.stringify(value, null, 2) + '\n') }
+const isSafeRelative = (value: string): boolean => Boolean(value) && !path.isAbsolute(value) && !value.includes('\\') && !value.split('/').some((part) => !part || part === '.' || part === '..')
+
+export async function buildWorldRelease(importId: string, planPath: string, dataDir: string, repoRoot: string): Promise<ReleaseReceipt> {
+  if (!/^import-[a-f0-9]{20}$/.test(importId)) throw new Error('INVALID_IMPORT_ID')
+  const importRoot = path.join(dataDir, 'imports', importId)
+  const source = path.join(importRoot, 'source')
+  const [receipt, handoff, feedback, plan, assetManifest] = await Promise.all([
+    json<{ snapshotHash: string }>(path.join(importRoot, 'receipt.json')),
+    json<HandoffManifest>(path.join(source, 'handoff.json')),
+    json<ProcessingFeedback>(path.join(importRoot, 'feedback', 'feedback.json')),
+    json<WorldPlan>(planPath),
+    json<{ assets: CollectionAsset[] }>(path.join(source, 'assets', 'asset-manifest.json')),
+  ])
+  if (plan.planVersion !== '1.0.0' || plan.storyId !== handoff.storyId || feedback.basedOnSnapshotHash !== receipt.snapshotHash) throw new Error('WORLD_PLAN_MISMATCH')
+  if (!isSafeRelative(plan.templateScenePath)) throw new Error('WORLD_PLAN_PATH_INVALID')
+  const template = await json<SceneFile>(path.join(repoRoot, plan.templateScenePath))
+  const story = await json<StoryFile>(path.join(source, 'story.json'))
+  if (template.storyId !== story.storyId || template.contentRevision !== story.contentRevision) throw new Error('TEMPLATE_REVISION_MISMATCH')
+  const scene: SceneFile = structuredClone(template)
+  scene.sceneRevision = template.sceneRevision + 1
+  const objectById = new Map(scene.objects.map((item) => [item.id, item]))
+  for (const placement of plan.placements) {
+    const object = objectById.get(placement.objectId)
+    if (!object || placement.position.length !== 3 || placement.position.some((value) => !Number.isFinite(value)) || !Number.isFinite(placement.rotationY)) throw new Error(`WORLD_PLACEMENT_INVALID: ${placement.objectId}`)
+    object.position = placement.position
+    object.rotation = [0, placement.rotationY, 0]
+  }
+  const bound = new Map(plan.assetBindings.map((item) => [item.assetId, item.collectionAssetId]))
+  const assetById = new Map(assetManifest.assets.map((item) => [item.assetId, item]))
+  for (const [sceneAssetId, collectionAssetId] of bound) {
+    const sceneAsset = scene.assets.find((item) => item.id === sceneAssetId)
+    const inputAsset = assetById.get(collectionAssetId)
+    if (!sceneAsset || !inputAsset || inputAsset.briefId !== scene.objects.find((item) => item.render.type === 'asset' && item.render.assetId === sceneAssetId)?.briefId) throw new Error(`WORLD_ASSET_BINDING_INVALID: ${sceneAssetId}`)
+    if (inputAsset.scaleStatus !== 'known' || !inputAsset.dimensionsM) throw new Error(`SCALE_UNRESOLVED: ${collectionAssetId}`)
+    sceneAsset.dimensionsM = inputAsset.dimensionsM
+    sceneAsset.rights = inputAsset.rights
+  }
+  const relationChecks = plan.relations.map((relation) => checkAttachment(relation, objectById))
+  if (relationChecks.some((item) => item.required && !item.pass)) throw new Error(`ASSEMBLY_INVALID: ${relationChecks.filter((item) => !item.pass).map((item) => item.relationId).join(', ')}`)
+  const planBytes = await readFile(planPath)
+  const templateDir = path.dirname(path.join(repoRoot, plan.templateScenePath))
+  const templateAssetHashes = await Promise.all(scene.assets.filter((item) => !bound.has(item.id)).map(async (item) => digest(await readFile(path.join(templateDir, item.path)))))
+  const releaseId = `release-${digest(JSON.stringify([receipt.snapshotHash, digest(planBytes), digest(JSON.stringify(scene)), templateAssetHashes])).slice(0, 20)}`
+  const finalDir = path.join(dataDir, 'releases', story.storyId, releaseId)
+  const stage = `${finalDir}.${randomUUID()}.tmp`
+  await mkdir(stage, { recursive: true })
+  try {
+    await cp(path.join(source, 'story.json'), path.join(stage, 'story.json'))
+    await cp(path.join(source, 'sources.json'), path.join(stage, 'sources.json'))
+    for (const file of handoff.files.filter((item) => item.path.startsWith('references/'))) {
+      if (!isSafeRelative(file.path)) throw new Error('REFERENCE_PATH_INVALID')
+      await mkdir(path.dirname(path.join(stage, file.path)), { recursive: true })
+      await cp(path.join(source, file.path), path.join(stage, file.path))
+    }
+    for (const asset of scene.assets) {
+      if (!isSafeRelative(asset.path)) throw new Error('ASSET_PATH_INVALID')
+      const inputId = bound.get(asset.id)
+      const input = inputId ? assetById.get(inputId) : null
+      const from = input ? path.join(source, input.path) : path.join(templateDir, asset.path)
+      await mkdir(path.dirname(path.join(stage, asset.path)), { recursive: true })
+      await cp(from, path.join(stage, asset.path))
+    }
+    await putJson(path.join(stage, 'scene.json'), scene)
+    const validation = await validateScenePackage(createNodeReader(stage), { checkGlbBounds: true })
+    const errors = validation.diagnostics.filter((item) => item.severity === 'error')
+    if (errors.length) throw new Error(`WORLD_VALIDATION_FAILED: ${errors.map((item) => `${item.file}:${item.field} ${item.message}`).join('; ')}`)
+    const quality = { status: 'needs_review', diagnostics: validation.diagnostics, relationChecks, unresolved: plan.unresolved, requiredReviews: ['input_review', 'asset_review', 'world_review', 'release_review'], viewerAcceptance: null }
+    await putJson(path.join(stage, 'quality-report.json'), quality)
+    await putJson(path.join(stage, 'provenance.json'), { inputImportId: importId, inputSubmissionId: handoff.submissionId, inputSnapshotHash: receipt.snapshotHash, planHash: digest(planBytes), sceneTemplate: plan.templateScenePath, assetBindings: plan.assetBindings, placements: plan.placements, reviewRefs: feedback.reviewRefs })
+    await putJson(path.join(stage, 'generation-report.json'), { strategies: [], realGenerationPerformed: false, note: 'This candidate reuses the A fixture GLB; B generation remains pending.' })
+    await writeFile(path.join(stage, 'handoff.md'), `# ${story.title}\n\n固定候选 ${releaseId}。入口 scene.json；需要 ${plan.requiredCapabilities.join(', ')}。未完成世界 AI 复审与 C 页面验收，不得提升为 current。\n`)
+    const files = await digestFiles(stage, ['scene.json', 'story.json', 'sources.json', 'quality-report.json', 'provenance.json', 'generation-report.json', 'handoff.md', ...scene.assets.map((item) => item.path), ...handoff.files.filter((item) => item.path.startsWith('references/')).map((item) => item.path)])
+    await putJson(path.join(stage, 'release.json'), { handoffVersion: '1.0.0', storyId: story.storyId, releaseId, contentRevision: story.contentRevision, sceneRevision: scene.sceneRevision, inputSubmissionIds: [handoff.submissionId], entrypoint: 'scene.json', files, requiredCapabilities: plan.requiredCapabilities, optionalCapabilities: plan.optionalCapabilities, qualityStatus: 'needs_review', knownLimitations: plan.unresolved })
+    await mkdir(path.dirname(finalDir), { recursive: true })
+    try { await rename(stage, finalDir) } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== 'ENOTEMPTY' && (error as NodeJS.ErrnoException).code !== 'EEXIST') throw error
+      await rm(stage, { recursive: true, force: true })
+    }
+    return { storyId: story.storyId, releaseId, status: 'needs_review', path: finalDir, sceneHash: digest(await readFile(path.join(finalDir, 'scene.json'))) }
+  } catch (error) { await rm(stage, { recursive: true, force: true }); throw error }
+}
+
+function checkAttachment(relation: WorldPlan['relations'][number], objects: Map<string, SceneObject>): { relationId: string; required: boolean; pass: boolean; verticalGapM: number | null; horizontalOverlap: boolean } {
+  const parent = objects.get(relation.parentObjectId)
+  const child = objects.get(relation.childObjectId)
+  if (!parent || !child) return { relationId: relation.relationId, required: relation.required, pass: false, verticalGapM: null, horizontalOverlap: false }
+  const verticalGapM = child.position[1] - (parent.position[1] + parent.dimensionsM[1])
+  const xOverlap = Math.abs(parent.position[0] - child.position[0]) <= (parent.dimensionsM[0] + child.dimensionsM[0]) / 2
+  const zOverlap = Math.abs(parent.position[2] - child.position[2]) <= (parent.dimensionsM[2] + child.dimensionsM[2]) / 2
+  return { relationId: relation.relationId, required: relation.required, pass: Math.abs(verticalGapM) <= relation.toleranceM && xOverlap && zOverlap, verticalGapM, horizontalOverlap: xOverlap && zOverlap }
+}
+
+async function digestFiles(root: string, paths: string[]): Promise<FileDigest[]> {
+  const unique = [...new Set(paths)].sort()
+  return Promise.all(unique.map(async (file) => { const bytes = await readFile(path.join(root, file)); return { path: file, sha256: digest(bytes), bytes: bytes.length } }))
+}

@@ -1,0 +1,9 @@
+{
+  "requiredBriefIds": ["brief-pack"],
+  "optionalBriefIds": ["brief-beast"],
+  "focusBriefId": "brief-pack",
+  "relations": [{"id":"relation-load","parentBriefId":"brief-beast","childBriefId":"brief-pack","kind":"attachment","note":"演示挂接；真实固定方式待采集层确认"}],
+  "beats": [{"id":"beat-departure","description":"展示出发前的货包和载体","briefIds":["brief-pack","brief-beast"]}],
+  "constraints": [{"id":"constraint-demo","severity":"must","statement":"不得把占位尺寸当成史实","sourceIds":[],"illustrative":true}],
+  "unknowns": ["载体与货包的历史固定方式"]
+}

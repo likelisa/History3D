@@ -1,0 +1,12 @@
+{
+  "planVersion": "1.0.0",
+  "storyId": "silk-road-demo",
+  "templateScenePath": "packages/silk-road-demo/scene.json",
+  "profileId": "desktop-demo-v1",
+  "assetBindings": [{ "assetId": "asset-pack-bundle", "collectionAssetId": "asset-pack-bundle" }],
+  "placements": [{ "objectId": "obj-pack-a", "position": [0, 2, 2], "rotationY": 0 }],
+  "relations": [{ "relationId": "relation-load", "parentObjectId": "obj-beast", "childObjectId": "obj-pack-a", "kind": "attachment", "toleranceM": 0.05, "required": true }],
+  "requiredCapabilities": ["static-glb-v1"],
+  "optionalCapabilities": [],
+  "unresolved": ["驮兽仍为技术灰盒；货包与载体的历史固定方式未获采集层确认", "动态挂接尚未接入正式 viewer"]
+}

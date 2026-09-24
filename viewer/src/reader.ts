@@ -40,6 +40,11 @@ export function packageBaseUrl(storyId: string): string {
   return `/packages/${storyId}`
 }
 
+export function candidateBaseUrl(storyId: string, releaseId: string): string | null {
+  if (!/^[a-z0-9][a-z0-9-]{0,63}$/.test(storyId) || !/^release-[a-f0-9]{20}$/.test(releaseId)) return null
+  return `/candidates/${storyId}/${releaseId}`
+}
+
 export function packageUrl(baseUrl: string, relPath: string): string {
   return joinUrl(baseUrl, relPath)
 }
