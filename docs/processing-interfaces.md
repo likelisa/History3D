@@ -46,7 +46,11 @@ B 可用 `npm run processing -- review-patch /absolute/path/to/decision.json` �
 
 `npm run processing -- review-asset <taskId>` 对 task 中固定输入/输出 GLB 各渲染六视角，附规划、来源、几何指标与修整参数，执行必需的 `asset_review`。报告和原始模型响应保存在该 task 的 `reviews/`；失败或无效输出不会变成 pass。已保存的完整响应可用 `revalidate-asset <taskId> <reviewId> <attempt>` 在修正校验器后重新核验，不重复付费调用。模型结论是 B 裁定依据，`needs_information` 或未评估范围不能自动采用资产。
 
-Blender 的一般网格/绑定/UV 修整与外部生成执行适配尚未接通，`/strategies` 列出限制或 unavailable。`POST /reviews`、付费资产任务执行/恢复、候选提升为 current 的发布/回退命令仍待实现。本服务没有跨机器身份认证，只用于本机联调。Python 解包解释器默认 `/usr/bin/python3`，可通过 `PROCESSING_PYTHON` 指定团队机器上的解释器。
+`POST /reviews` 已支持 `scope:input/asset/world` 的固定快照补审，分别提交 importId、taskId 或 storyId+releaseId，并附从导入回执、asset task 的 `result.reviewSnapshotHash` 或 release 元数据读取的 `snapshotHash`，以及 `rubricVersion:input-v1/asset-v1/world-v1`。返回 202 与 jobId；`GET /reviews/<jobId>` 或 `/jobs/<jobId>` 查询审核状态，完成后以 `GET /reviews/<reviewId>` 读取报告。快照不符返回 409；模型不可用或输出无效时 job 为 failed，不能提升 release。world release 自带 `world-plan.json`，世界补审不依赖调用方提供 B 机器的规划路径。`release_review` 的正式页面截图/录屏入口仍待接入。
+
+B 用 `npm run processing -- decide-asset-task <decision.json>` 记录一个 asset task 的拒绝决定，决策写明 `decisionId`、`taskId`、`reviewId`、`snapshotHash`、`operator`、`reason`、`action:"reject"`。它必须引用已完成资产报告和未被篡改的候选 GLB；任务转为 `rejected`，文件和报告仍可复查。蓝灰货包技术候选已因对比度与装配证据不足被 B 拒绝。通过审核后的 B 候选整合仍待实现。
+
+Blender 的一般网格/绑定/UV 修整与外部生成执行适配尚未接通，`/strategies` 列出限制或 unavailable。付费资产任务执行/恢复、B 候选整合、候选提升为 current 的发布/回退命令仍待实现。本服务没有跨机器身份认证，只用于本机联调。Python 解包解释器默认 `/usr/bin/python3`，可通过 `PROCESSING_PYTHON` 指定团队机器上的解释器。
 
 ## B→C 静态候选
 

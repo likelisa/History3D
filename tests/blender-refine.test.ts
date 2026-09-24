@@ -8,7 +8,9 @@ import { buildWorldRelease } from '../processing/src/world-compile.ts'
 import { DEFAULT_BLENDER_PATH, loadStrategyPolicy } from '../processing/src/strategies/registry.ts'
 import { proposeAssetTask } from '../processing/src/strategies/tasks.ts'
 import { executeBlenderRefine } from '../processing/src/strategies/blender-refine.ts'
-import { runAssetReview } from '../processing/src/review/asset-review.ts'
+import { assetReviewSnapshotHash } from '../processing/src/review/asset-review.ts'
+import { createReviewRequest, getReviewReport, processReviewRequest } from '../processing/src/review/requests.ts'
+import { decideAssetTask } from '../processing/src/strategies/decision.ts'
 
 it.skipIf(!existsSync(DEFAULT_BLENDER_PATH))('returns an unchanged-geometry Blender material candidate without adoption', async () => {
   const data = await mkdtemp(path.join(os.tmpdir(), 'history3d-refine-'))
@@ -30,13 +32,22 @@ it.skipIf(!existsSync(DEFAULT_BLENDER_PATH))('returns an unchanged-geometry Blen
     expect((await readFile(path.join(data, 'asset-tasks', proposed.taskId, executed.result!.outputPath))).length).toBeGreaterThan(0)
     expect((await executeBlenderRefine(proposed.taskId, data, path.resolve('.'))).result?.outputSha256).toBe(executed.result?.outputSha256)
     const fakeFetch = (async () => ({ ok: true, json: async () => ({ id: 'fixture-review', model: 'deepseek-flash', choices: [{ finish_reason: 'stop', message: { content: JSON.stringify({ decision: 'inconclusive', findings: [], unassessed: ['formal viewer candidate comparison'], suggestedStrategies: [] }) } }], usage: { prompt_tokens: 10, completion_tokens: 20 } }) })) as unknown as typeof fetch
-    const review = await runAssetReview(proposed.taskId, data, { apiKey: 'test', fetchImpl: fakeFetch })
-    expect(review.status).toBe('inconclusive')
+    const reviewRequest = await createReviewRequest({ scope: 'asset', taskId: proposed.taskId, snapshotHash: assetReviewSnapshotHash(executed), rubricVersion: 'asset-v1' }, data)
+    const reviewedJob = await processReviewRequest(reviewRequest.jobId, data, { apiKey: 'test', fetchImpl: fakeFetch })
+    expect(reviewedJob.status).toBe('complete')
+    const reviewId = reviewedJob.reviewRefs[0].reviewId
+    expect((await getReviewReport(reviewId, data) as { decision: string }).decision).toBe('inconclusive')
     const reviewed = JSON.parse(await readFile(path.join(data, 'asset-tasks', proposed.taskId, 'task.json'), 'utf8'))
     expect(reviewed.result.reviewStatus).toBe('inconclusive')
     const candidateFile = path.join(data, 'asset-tasks', proposed.taskId, executed.result!.outputPath)
-    await writeFile(candidateFile, Buffer.concat([await readFile(candidateFile), Buffer.from('tampered')]))
+    const originalCandidate = await readFile(candidateFile)
+    await writeFile(candidateFile, Buffer.concat([originalCandidate, Buffer.from('tampered')]))
     await expect(executeBlenderRefine(proposed.taskId, data, path.resolve('.'))).rejects.toThrow('ASSET_TASK_ARTIFACT_MISMATCH')
+    await writeFile(candidateFile, originalCandidate)
+    const report = JSON.parse(await readFile(path.join(data, 'asset-tasks', proposed.taskId, 'reviews', reviewId, 'report.json'), 'utf8'))
+    const decision = { decisionId: 'b-reject-test', taskId: proposed.taskId, reviewId, action: 'reject' as const, operator: 'processing-test', reason: 'insufficient evidence for adoption', snapshotHash: report.snapshotHash as string }
+    expect((await decideAssetTask(decision, data)).status).toBe('rejected')
+    expect((await decideAssetTask(decision, data)).decision?.reason).toBe(decision.reason)
     await expect(readFile(path.join(data, 'registry', release.storyId, 'current.json'))).rejects.toMatchObject({ code: 'ENOENT' })
   } finally { await rm(data, { recursive: true, force: true }) }
 }, 30000)

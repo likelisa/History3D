@@ -97,9 +97,11 @@ export async function runAssetReview(taskId: string, dataDir: string, options: R
   } finally { await rm(stage, { recursive: true, force: true }) }
 }
 
-function assetReviewSnapshotHash(task: AssetTaskRecord): string {
+export function assetReviewSnapshotHash(task: AssetTaskRecord): string {
   if (!task.result) throw new Error('ASSET_REVIEW_CANDIDATE_MISSING')
-  return digest(JSON.stringify([task.snapshotHash, task.result.inputSha256, task.result.outputSha256, task.request, 'asset-v1']))
+  const expected = digest(JSON.stringify([task.snapshotHash, task.result.inputSha256, task.result.outputSha256, task.request, 'asset-v1']))
+  if (task.result.reviewSnapshotHash && task.result.reviewSnapshotHash !== expected) throw new Error('ASSET_REVIEW_SNAPSHOT_INVALID')
+  return expected
 }
 
 export async function revalidateSavedAssetReview(taskId: string, reviewId: string, dataDir: string, attempt: number): Promise<ReviewJob> {

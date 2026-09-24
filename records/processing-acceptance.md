@@ -50,3 +50,9 @@
 
 - 对 `task-22a6e73658eceb9e0993` 的原版和蓝色 Blender 候选各取六张固定视角，连同几何指标、规划与修整记录发给真实 `deepseek-flash`。请求 ID `b443ffe4-2833-44da-b377-842fa53f472d`，输入 13,904 token、输出 12,899 token。首次完整响应的 `unassessed`/`suggestedStrategies` 使用了带引用的另一种结构，先被校验器拒绝；校验器核对其 subject/evidence 引用后，只重验已保存响应，没有第二次模型调用。
 - 报告 `asset-review-2e2c2901c1cd7b9f55e7` 判 `needs_information`：5 条发现、4 项未评估范围。它确认 GLB 尺寸和底部原点不变；也指出蓝灰货包在侧视图里可能更接近中性灰背景，当前证据不足以证明材质对比改善，且没有载体组装/运行画面。B 暂不采用该候选，`reviewStatus=needs_information`、`adopted=false`，旧固定 release 与当前采用指针不变。模型调用费用未知，不从 token 数推算成已核实美元成本。
+- B 已把上述判断写成固定决策 `b-reject-blue-cargo-001`，引用对应 reviewId/snapshotHash、操作者和理由；asset task 变为 `rejected`，候选 GLB、审查图及模型原响应仍留在忽略 Git 的本机数据目录。无新 release、无 current 切换。
+
+## 2026-09-25 固定快照补审接口
+
+- 新 release `release-66bb03f28024e5f620e6` 将 `world-plan.json` 封进不可变文件清单，正式包校验 0 错误、1 条载物悬置警告。正式 viewer 从本机 API 打开后显示“可体验”，原三幕控件仍在。
+- `/reviews` 用该 release 的服务端 `snapshotHash` 提交 world_review，返回 `job-review-05c134310410109ed5e8`。本机 API 进程没有配置 DeepSeek Key，因此该 job 明确结束为 failed/review unavailable、无报告 URL；没有把缺模型推理当成 world pass。自动化测试还证明旧 snapshotHash 返回 409，asset task 的补审完成后可通过 reviewId 索引读取报告。

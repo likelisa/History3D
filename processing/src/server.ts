@@ -1,5 +1,5 @@
 import { createServer, type IncomingMessage, type Server, type ServerResponse } from 'node:http'
-import { randomUUID } from 'node:crypto'
+import { createHash, randomUUID } from 'node:crypto'
 import { mkdir, readFile, readdir, realpath, rename, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { storeBundle } from './bundles.ts'
@@ -9,12 +9,13 @@ import { runInputReview } from './review/orchestrator.ts'
 import { blenderAvailable, listStrategies, loadStrategyPolicy } from './strategies/registry.ts'
 import { proposeAssetTask } from './strategies/tasks.ts'
 import { executeBlenderRefine } from './strategies/blender-refine.ts'
+import { createReviewRequest, getReviewReport, processReviewRequest, reviewRequestPath, type ReviewRequestInput } from './review/requests.ts'
 
 const PREFIX = '/api/processing/v1'
 const MAX_JSON = 1_000_000
 const MAX_UPLOAD = 257 * 1024 * 1024
 type JobStatus = 'processing' | 'needs_input' | 'needs_review' | 'failed'
-export interface JobRecord { jobId: string; importId: string; status: JobStatus; stage: string; progress: number; diagnostics: string[]; feedbackUrl: string; updatedAt: string }
+export interface JobRecord { jobId: string; importId: string; snapshotHash?: string; status: JobStatus; stage: string; progress: number; diagnostics: string[]; feedbackUrl: string; updatedAt: string }
 export interface ServerOptions { dataDir: string; port?: number; host?: string; reviewApiKey?: string }
 
 function respond(res: ServerResponse, status: number, body: unknown, headers: Record<string, string> = {}): void {
@@ -51,6 +52,7 @@ export function createProcessingServer(options: ServerOptions): Server {
   const dataDir = path.resolve(options.dataDir)
   const runningJobs = new Set<string>()
   const runningAssetTasks = new Set<string>()
+  const runningReviewRequests = new Set<string>()
   let importQueue: Promise<unknown> = Promise.resolve()
   const serializeImport = <T>(operation: () => Promise<T>): Promise<T> => {
     const next = importQueue.then(operation, operation)
@@ -93,6 +95,17 @@ export function createProcessingServer(options: ServerOptions): Server {
     }
     finally { runningAssetTasks.delete(taskId) }
   }
+  const progressReviewRequest = async (jobId: string): Promise<void> => {
+    if (runningReviewRequests.has(jobId)) return
+    runningReviewRequests.add(jobId)
+    try { await processReviewRequest(jobId, dataDir, options.reviewApiKey === undefined ? {} : { apiKey: options.reviewApiKey }) }
+    catch (error) {
+      const file = reviewRequestPath(dataDir, jobId)
+      const job = await readJson<{ status: string; diagnostics: string[]; updatedAt: string }>(file).catch(() => null)
+      if (job) { job.status = 'failed'; job.diagnostics = [error instanceof Error ? error.message : String(error)]; job.updatedAt = new Date().toISOString(); await putJson(file, job) }
+    }
+    finally { runningReviewRequests.delete(jobId) }
+  }
   const server = createServer(async (req, res) => {
     try {
       const hostName = String(req.headers.host ?? '').split(':')[0]
@@ -111,6 +124,18 @@ export function createProcessingServer(options: ServerOptions): Server {
       if (req.method === 'GET' && parts[0] === 'strategies' && parts.length === 1) {
         const policy = await loadStrategyPolicy(process.cwd())
         respond(res, 200, { policy, strategies: listStrategies(policy, Boolean(process.env.TRIPO_API_KEY), await blenderAvailable()) }); return
+      }
+      if (req.method === 'POST' && parts[0] === 'reviews' && parts.length === 1) {
+        const input = await jsonBody<ReviewRequestInput>(req)
+        const job = await createReviewRequest(input, dataDir)
+        respond(res, 202, { jobId: job.jobId, status: job.status, reviewUrl: `${PREFIX}/reviews/${job.jobId}` })
+        if (job.status !== 'complete') void progressReviewRequest(job.jobId)
+        return
+      }
+      if (req.method === 'GET' && parts[0] === 'reviews' && parts.length === 2) {
+        if (/^job-review-[a-f0-9]{20}$/.test(parts[1])) respond(res, 200, await readJson<Record<string, unknown>>(reviewRequestPath(dataDir, parts[1])))
+        else respond(res, 200, await getReviewReport(parts[1], dataDir))
+        return
       }
       if (req.method === 'POST' && parts[0] === 'asset-tasks' && parts.length === 1) {
         const request = await jsonBody<Parameters<typeof proposeAssetTask>[0]>(req)
@@ -154,21 +179,25 @@ export function createProcessingServer(options: ServerOptions): Server {
         let job: JobRecord
         try { job = await readJson<JobRecord>(file) }
         catch {
-          job = { jobId: receipt.jobId, importId: receipt.importId, status: 'processing', stage: 'reviewing_input', progress: 60, diagnostics: [], feedbackUrl: `${PREFIX}/imports/${receipt.importId}/feedback`, updatedAt: new Date().toISOString() }
+          job = { jobId: receipt.jobId, importId: receipt.importId, snapshotHash: receipt.snapshotHash, status: 'processing', stage: 'reviewing_input', progress: 60, diagnostics: [], feedbackUrl: `${PREFIX}/imports/${receipt.importId}/feedback`, updatedAt: new Date().toISOString() }
           await putJson(file, job)
         }
-        respond(res, 202, { importId: receipt.importId, jobId: receipt.jobId, status: job.status, feedbackUrl: job.feedbackUrl })
+        respond(res, 202, { importId: receipt.importId, jobId: receipt.jobId, snapshotHash: receipt.snapshotHash, status: job.status, feedbackUrl: job.feedbackUrl })
         if (job.status === 'processing') void progressReview(job.jobId)
         return
       }
-      if (req.method === 'GET' && parts[0] === 'jobs' && parts.length === 2 && safeSegment(parts[1])) { respond(res, 200, await readJson<JobRecord>(jobPath(parts[1]))); return }
+      if (req.method === 'GET' && parts[0] === 'jobs' && parts.length === 2 && safeSegment(parts[1])) {
+        respond(res, 200, /^job-review-[a-f0-9]{20}$/.test(parts[1]) ? await readJson<Record<string, unknown>>(reviewRequestPath(dataDir, parts[1])) : await readJson<JobRecord>(jobPath(parts[1])))
+        return
+      }
       if (req.method === 'GET' && parts[0] === 'imports' && parts.length === 3 && parts[2] === 'feedback' && /^import-[a-f0-9]{20}$/.test(parts[1])) {
         const feedback = await readJson<Record<string, unknown>>(path.join(dataDir, 'imports', parts[1], 'feedback', 'feedback.json'))
         respond(res, 200, { ...feedback, packageBaseUrl: `${PREFIX}/artifacts/${parts[1]}/feedback`, feedbackMarkdownUrl: `${PREFIX}/artifacts/${parts[1]}/feedback/feedback.md`, revisedPlanUrl: `${PREFIX}/artifacts/${parts[1]}/feedback/revised-plan.md` }); return
       }
       if (req.method === 'GET' && parts[0] === 'worlds' && parts.length === 4 && parts[2] === 'releases' && /^[a-z0-9][a-z0-9-]{0,63}$/.test(parts[1]) && /^release-[a-f0-9]{20}$/.test(parts[3])) {
-        const release = await readJson<Record<string, unknown>>(path.join(dataDir, 'releases', parts[1], parts[3], 'release.json'))
-        respond(res, 200, { ...release, packageBaseUrl: `${PREFIX}/artifacts/${parts[3]}`, registryStatus: 'candidate' }); return
+        const bytes = await readFile(path.join(dataDir, 'releases', parts[1], parts[3], 'release.json'))
+        const release = JSON.parse(bytes.toString('utf8')) as Record<string, unknown>
+        respond(res, 200, { ...release, snapshotHash: createHash('sha256').update(bytes).digest('hex'), packageBaseUrl: `${PREFIX}/artifacts/${parts[3]}`, registryStatus: 'candidate' }); return
       }
       if (req.method === 'GET' && parts[0] === 'worlds' && parts.length === 3 && parts[2] === 'releases' && /^[a-z0-9][a-z0-9-]{0,63}$/.test(parts[1])) {
         const dir = path.join(dataDir, 'releases', parts[1])
@@ -214,8 +243,8 @@ export function createProcessingServer(options: ServerOptions): Server {
         error instanceof ImportError ? (error.code === 'INVALID_IDEMPOTENCY_KEY' ? 400 : error.code.includes('CONFLICT') ? 409 : 422)
         : typed.code === 'ENOENT' ? 404
         : message === 'BUNDLE_SIZE_INVALID' || message === 'BUNDLE_TOO_LARGE' ? 413
-        : message.includes('CONFLICT') ? 409
-        : /^(BUNDLE_INVALID|WORLD_FEEDBACK_INVALID|WORLD_FEEDBACK_ISSUE_INVALID|WORLD_PATCH_INVALID|WORLD_PATCH_HASH_MISMATCH|PATCH_BUNDLE_REQUIRED|ASSET_TASK_INVALID|STRATEGY_UNKNOWN|STRATEGY_POLICY_INVALID)/.test(message) ? 422
+        : message.includes('CONFLICT') || message === 'REVIEW_STALE' ? 409
+        : /^(BUNDLE_INVALID|WORLD_FEEDBACK_INVALID|WORLD_FEEDBACK_ISSUE_INVALID|WORLD_PATCH_INVALID|WORLD_PATCH_HASH_MISMATCH|PATCH_BUNDLE_REQUIRED|ASSET_TASK_INVALID|STRATEGY_UNKNOWN|STRATEGY_POLICY_INVALID|REVIEW_REQUEST_INVALID|REVIEW_ID_INVALID)/.test(message) ? 422
         : error instanceof TypeError ? 400 : 500
       )
       const inferredCode = message.split(':')[0]
@@ -232,6 +261,11 @@ export function createProcessingServer(options: ServerOptions): Server {
       if (!/^task-[a-f0-9]{20}$/.test(taskId)) continue
       const task = await readJson<{ status: string; strategyId: string }>(path.join(dataDir, 'asset-tasks', taskId, 'task.json')).catch(() => null)
       if (task?.strategyId === 'blender-refine' && ['queued', 'running'].includes(task.status)) void progressAssetTask(taskId)
+    }
+    for (const file of await readdir(path.join(dataDir, 'review-requests')).catch(() => [])) {
+      if (!/^job-review-[a-f0-9]{20}\.json$/.test(file)) continue
+      const job = await readJson<{ jobId: string; status: string }>(path.join(dataDir, 'review-requests', file)).catch(() => null)
+      if (job && ['received', 'processing'].includes(job.status)) void progressReviewRequest(job.jobId)
     }
   }
   return server

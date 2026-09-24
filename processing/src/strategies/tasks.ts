@@ -10,11 +10,12 @@ export interface AssetTaskRequest {
   parameters: Record<string, unknown>; maxCostUsd: number
 }
 export interface AssetTaskRecord {
-  taskId: string; status: 'needs_budget' | 'needs_quote' | 'unavailable' | 'needs_review' | 'queued' | 'running' | 'candidate_ready' | 'failed'
+  taskId: string; status: 'needs_budget' | 'needs_quote' | 'unavailable' | 'needs_review' | 'queued' | 'running' | 'candidate_ready' | 'rejected' | 'failed'
   strategyId: string; storyId: string; releaseId: string; assetId: string
   snapshotHash: string; reason: string; maxCostUsd: number; estimatedCostUsd: null
   attemptCount: number; artifactRefs: string[]; policy: StrategyPolicy; request: AssetTaskRequest
-  result?: { inputSha256: string; outputSha256: string; outputPath: string; beforeDimensionsM: [number, number, number]; afterDimensionsM: [number, number, number]; tool: string; toolVersion: string; materialsEdited: number; costUsd: 0; adopted: false; reviewStatus: 'pending' | 'pass' | 'needs_revision' | 'needs_information' | 'inconclusive' | 'failed' }
+  result?: { inputSha256: string; outputSha256: string; outputPath: string; reviewSnapshotHash?: string; beforeDimensionsM: [number, number, number]; afterDimensionsM: [number, number, number]; tool: string; toolVersion: string; materialsEdited: number; costUsd: 0; adopted: false; reviewStatus: 'pending' | 'pass' | 'needs_revision' | 'needs_information' | 'inconclusive' | 'failed' }
+  decision?: { decisionId: string; action: 'reject'; operator: string; reason: string; reviewId: string; snapshotHash: string }
 }
 const digest = (value: string): string => createHash('sha256').update(value).digest('hex')
 const json = async <T>(file: string): Promise<T> => JSON.parse(await readFile(file, 'utf8')) as T

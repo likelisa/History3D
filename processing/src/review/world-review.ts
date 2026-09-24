@@ -12,9 +12,10 @@ const readJson = async <T>(file: string): Promise<T> => JSON.parse(await readFil
 const putJson = async (file: string, value: unknown): Promise<void> => { const temp = `${file}.${randomUUID()}.tmp`; await writeFile(temp, JSON.stringify(value, null, 2) + '\n'); await rename(temp, file) }
 const sha = (bytes: Buffer): string => createHash('sha256').update(bytes).digest('hex')
 
-export async function runWorldReview(storyId: string, releaseId: string, planPath: string, dataDir: string, options: ReviewCallOptions & { blenderPath?: string } = {}): Promise<ReviewJob> {
+export async function runWorldReview(storyId: string, releaseId: string, planPath: string | null, dataDir: string, options: ReviewCallOptions & { blenderPath?: string } = {}): Promise<ReviewJob> {
   if (!/^[a-z0-9][a-z0-9-]{0,63}$/.test(storyId) || !/^release-[a-f0-9]{20}$/.test(releaseId)) throw new Error('INVALID_RELEASE_ID')
   const releaseDir = path.join(dataDir, 'releases', storyId, releaseId)
+  const fixedPlanPath = planPath ?? path.join(releaseDir, 'world-plan.json')
   const releaseBytes = await readFile(path.join(releaseDir, 'release.json'))
   const release = JSON.parse(releaseBytes.toString('utf8')) as { storyId: string; releaseId: string; files: Array<{ path: string; sha256: string; bytes: number }> }
   if (release.storyId !== storyId || release.releaseId !== releaseId) throw new Error('RELEASE_ID_MISMATCH')
@@ -43,7 +44,7 @@ export async function runWorldReview(storyId: string, releaseId: string, planPat
     const provenance = await readJson<{ inputImportId: string }>(path.join(releaseDir, 'provenance.json'))
     const originalPlanPath = path.join(dataDir, 'imports', provenance.inputImportId, 'source', 'plan.md')
     const [sceneText, storyText, sourcesText, qualityText, worldPlanText, originalPlanText] = await Promise.all([
-      readFile(path.join(releaseDir, 'scene.json'), 'utf8'), readFile(path.join(releaseDir, 'story.json'), 'utf8'), readFile(path.join(releaseDir, 'sources.json'), 'utf8'), readFile(path.join(releaseDir, 'quality-report.json'), 'utf8'), readFile(planPath, 'utf8'), readFile(originalPlanPath, 'utf8'),
+      readFile(path.join(releaseDir, 'scene.json'), 'utf8'), readFile(path.join(releaseDir, 'story.json'), 'utf8'), readFile(path.join(releaseDir, 'sources.json'), 'utf8'), readFile(path.join(releaseDir, 'quality-report.json'), 'utf8'), readFile(fixedPlanPath, 'utf8'), readFile(originalPlanPath, 'utf8'),
     ])
     const scene = JSON.parse(sceneText) as { objects: unknown[]; assets: unknown[] }
     const quality = JSON.parse(qualityText) as { relationChecks: Array<{ pass: boolean }> }

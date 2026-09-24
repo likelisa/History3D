@@ -108,7 +108,7 @@ export async function buildWorldRelease(importId: string, planPath: string, data
   const templateDir = path.dirname(path.join(repoRoot, plan.templateScenePath))
   const newAssetPaths = new Map((plan.newAssets ?? []).map((item) => [item.id, item.sourcePath]))
   const templateAssetHashes = await Promise.all(scene.assets.filter((item) => !bound.has(item.id)).map(async (item) => digest(await readFile(path.join(repoRoot, newAssetPaths.get(item.id) ?? path.relative(repoRoot, path.join(templateDir, item.path)))))))
-  const releaseId = `release-${digest(JSON.stringify(['world-compile-v2', receipt.snapshotHash, digest(planBytes), digest(JSON.stringify(scene)), templateAssetHashes, experienceBytes ? digest(experienceBytes) : null])).slice(0, 20)}`
+  const releaseId = `release-${digest(JSON.stringify(['world-compile-v3', receipt.snapshotHash, digest(planBytes), digest(JSON.stringify(scene)), templateAssetHashes, experienceBytes ? digest(experienceBytes) : null])).slice(0, 20)}`
   const finalDir = path.join(dataDir, 'releases', story.storyId, releaseId)
   const stage = `${finalDir}.${randomUUID()}.tmp`
   await mkdir(stage, { recursive: true })
@@ -136,6 +136,7 @@ export async function buildWorldRelease(importId: string, planPath: string, data
       })),
     })
     await putJson(path.join(stage, 'scene.json'), scene)
+    await writeFile(path.join(stage, 'world-plan.json'), planBytes)
     if (experienceBytes) await writeFile(path.join(stage, 'experience.json'), experienceBytes)
     const validation = await validateScenePackage(createNodeReader(stage), { checkGlbBounds: true })
     const errors = validation.diagnostics.filter((item) => item.severity === 'error')
@@ -154,7 +155,7 @@ export async function buildWorldRelease(importId: string, planPath: string, data
       note: 'The traveler and staff are deterministic Blender demo GLBs. A separate paid provider generation remains untested.',
     })
     await writeFile(path.join(stage, 'handoff.md'), `# ${story.title}\n\n固定候选 ${releaseId}。入口 scene.json；需要 ${plan.requiredCapabilities.join(', ')}。未完成世界 AI 复审与 C 页面验收，不得提升为 current。\n`)
-    const files = await digestFiles(stage, ['scene.json', 'story.json', 'sources.json', 'quality-report.json', 'provenance.json', 'generation-report.json', 'asset-lineage.json', 'handoff.md', ...(experienceBytes ? ['experience.json'] : []), ...scene.assets.map((item) => item.path), ...handoff.files.filter((item) => item.path.startsWith('references/')).map((item) => item.path)])
+    const files = await digestFiles(stage, ['scene.json', 'story.json', 'sources.json', 'world-plan.json', 'quality-report.json', 'provenance.json', 'generation-report.json', 'asset-lineage.json', 'handoff.md', ...(experienceBytes ? ['experience.json'] : []), ...scene.assets.map((item) => item.path), ...handoff.files.filter((item) => item.path.startsWith('references/')).map((item) => item.path)])
     await putJson(path.join(stage, 'release.json'), { handoffVersion: '1.0.0', storyId: story.storyId, releaseId, contentRevision: compiledStory.contentRevision, sceneRevision: scene.sceneRevision, inputSubmissionIds: [handoff.submissionId], entrypoint: 'scene.json', files, requiredCapabilities: plan.requiredCapabilities, optionalCapabilities: plan.optionalCapabilities, qualityStatus: 'needs_review', knownLimitations: plan.unresolved })
     await mkdir(path.dirname(finalDir), { recursive: true })
     try { await rename(stage, finalDir) } catch (error) {

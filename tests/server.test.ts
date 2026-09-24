@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest'
 import { spawnSync } from 'node:child_process'
+import { createHash } from 'node:crypto'
 import { readFile, mkdtemp, rm } from 'node:fs/promises'
 import { type AddressInfo } from 'node:net'
 import { request as httpRequest } from 'node:http'
@@ -30,7 +31,8 @@ describe('processing HTTP API', () => {
       const request = { bundleId: bundle.bundleId, submissionId: 'fixture-collection-001', storyId: 'silk-road-demo', sourceContentRevision: 1, profileId: 'desktop-demo-v1' }
       const imported = await fetch(`${base}/imports`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Idempotency-Key': 'fu-http-001' }, body: JSON.stringify(request) })
       expect(imported.status).toBe(202)
-      const importReceipt = await imported.json() as { importId: string; jobId: string }
+      const importReceipt = await imported.json() as { importId: string; jobId: string; snapshotHash: string }
+      expect(importReceipt.snapshotHash).toMatch(/^[a-f0-9]{64}$/)
       let job: { status: string; stage: string } | null = null
       for (let attempt = 0; attempt < 20; attempt++) {
         job = await (await fetch(`${base}/jobs/${importReceipt.jobId}`)).json() as { status: string; stage: string }
@@ -46,6 +48,19 @@ describe('processing HTTP API', () => {
       expect(glb.status).toBe(200)
       expect((await glb.arrayBuffer()).byteLength).toBe(1632)
       const release = await buildWorldRelease(importReceipt.importId, path.resolve('processing/fixtures/silk-road-world-plan.json'), dataDir, path.resolve('.'))
+      const worldHash = createHash('sha256').update(await readFile(path.join(release.path, 'release.json'))).digest('hex')
+      const requestedReview = await fetch(`${base}/reviews`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ scope: 'world', storyId: release.storyId, releaseId: release.releaseId, snapshotHash: worldHash, rubricVersion: 'world-v1' }) })
+      expect(requestedReview.status).toBe(202)
+      const reviewRequest = await requestedReview.json() as { jobId: string }
+      let reviewJob: { status: string } = { status: 'processing' }
+      for (let attempt = 0; attempt < 20 && ['received', 'processing'].includes(reviewJob.status); attempt++) {
+        reviewJob = await (await fetch(`${base}/reviews/${reviewRequest.jobId}`)).json() as { status: string }
+        if (['received', 'processing'].includes(reviewJob.status)) await new Promise((resolve) => setTimeout(resolve, 20))
+      }
+      expect(reviewJob.status).toBe('failed') // no model key: no false pass
+      expect((await fetch(`${base}/jobs/${reviewRequest.jobId}`)).status).toBe(200)
+      const staleReview = await fetch(`${base}/reviews`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ scope: 'world', storyId: release.storyId, releaseId: release.releaseId, snapshotHash: '0'.repeat(64), rubricVersion: 'world-v1' }) })
+      expect(staleReview.status).toBe(409)
       const strategies = await (await fetch(`${base}/strategies`)).json() as { policy: { maxCostUsd: number }; strategies: Array<{ id: string; available: boolean }> }
       expect(strategies.policy.maxCostUsd).toBe(0)
       expect(strategies.strategies.find((item) => item.id === 'generate-3d')?.available).toBe(false)
@@ -58,8 +73,9 @@ describe('processing HTTP API', () => {
       expect((await fetch(`${base}/asset-tasks/${proposed.taskId}`)).status).toBe(200)
       const released = await fetch(`${base}/worlds/${release.storyId}/releases/${release.releaseId}`)
       expect(released.status).toBe(200)
-      const releaseBody = await released.json() as { packageBaseUrl: string; qualityStatus: string }
+      const releaseBody = await released.json() as { packageBaseUrl: string; qualityStatus: string; snapshotHash: string }
       expect(releaseBody.qualityStatus).toBe('needs_review')
+      expect(releaseBody.snapshotHash).toBe(worldHash)
       expect((await fetch(`http://127.0.0.1:${(server.address() as AddressInfo).port}${releaseBody.packageBaseUrl}/scene.json`)).status).toBe(200)
       const postedFeedback = await fetch(`${base}/worlds/${release.storyId}/feedback`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },

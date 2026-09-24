@@ -48,7 +48,8 @@ export async function executeBlenderRefine(taskId: string, dataDir: string, repo
     task.status = 'candidate_ready'
     task.reason = 'Candidate GLB saved; asset review and formal viewer comparison still required'
     task.artifactRefs = [relative]
-    task.result = { inputSha256: asset.sha256, outputSha256, outputPath: relative, beforeDimensionsM: before.dimensions, afterDimensionsM: after.dimensions, tool: tool.tool, toolVersion: tool.version, materialsEdited: tool.materialsEdited, costUsd: 0, adopted: false, reviewStatus: 'pending' }
+    const reviewSnapshotHash = createHash('sha256').update(JSON.stringify([task.snapshotHash, asset.sha256, outputSha256, task.request, 'asset-v1'])).digest('hex')
+    task.result = { inputSha256: asset.sha256, outputSha256, outputPath: relative, reviewSnapshotHash, beforeDimensionsM: before.dimensions, afterDimensionsM: after.dimensions, tool: tool.tool, toolVersion: tool.version, materialsEdited: tool.materialsEdited, costUsd: 0, adopted: false, reviewStatus: 'pending' }
     await putJson(taskFile, task)
     return task
   } catch (error) {
