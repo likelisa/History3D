@@ -4,6 +4,7 @@ import process from 'node:process'
 
 import {
   DEFAULT_MAX_DIFF_CHARS,
+  DEFAULT_MAX_TOKENS,
   DEFAULT_TIMEOUT_MS,
   buildComment,
   buildUnavailableComment,
@@ -18,9 +19,10 @@ const MAX_DIFF_BUFFER_BYTES = 64 * 1024 * 1024
 
 const apiKey = process.env.OPENAI_API_KEY
 const apiBaseUrl = (process.env.AI_API_BASE_URL || 'https://aiping.cn/api/v1').replace(/\/+$/, '')
-// 注意大小写：该网关的模型 id 是 GLM-5.3-Flash，写错会被预检拦下。
-const model = process.env.AI_MODEL || 'GLM-5.3-Flash'
+// 注意大小写：写错会被预检拦下。
+const model = process.env.AI_MODEL || 'DeepSeek-V4.1-Flash'
 const maxDiffChars = readPositiveInt(process.env.AI_MAX_DIFF_CHARS, DEFAULT_MAX_DIFF_CHARS)
+const maxTokens = readPositiveInt(process.env.AI_MAX_TOKENS, DEFAULT_MAX_TOKENS)
 const timeoutMs = readPositiveInt(process.env.AI_TIMEOUT_MS, DEFAULT_TIMEOUT_MS)
 const PREFLIGHT_TIMEOUT_MS = 15_000
 const preflightEnabled = !['0', 'false', 'no'].includes(String(process.env.AI_PREFLIGHT || '').toLowerCase())
@@ -115,6 +117,20 @@ const systemPrompt = [
   'Use an empty issues array when there are no findings. Do not include Markdown code fences.',
 ].join('\n')
 
+/**
+ * 空响应要分清两种情况，否则只看到一句「empty response」，无从下手：
+ * 推理模型把 token 全花在思考上，正文一个字没有。
+ */
+function describeEmptyResponse(choice) {
+  const reasoning = typeof choice?.message?.reasoning_content === 'string' ? choice.message.reasoning_content : ''
+  if (reasoning.length > 0) {
+    return `模型只产出了思考内容（${reasoning.length} 字），没有给出审查结果。这通常是推理模型 + 输出上限过小：调大 AI_MAX_TOKENS，或改用非推理模型。`
+  }
+  return choice?.finish_reason === 'length'
+    ? '模型在产出内容前就撞上了 max_tokens 上限，请调大 AI_MAX_TOKENS。'
+    : 'AI provider returned an empty review response.'
+}
+
 async function requestReview(userPrompt) {
   let response
   try {
@@ -130,6 +146,9 @@ async function requestReview(userPrompt) {
       body: JSON.stringify({
         model,
         temperature: 0,
+        // 推理模型会把 token 先花在思考上，没有上限时（或上限太小）都会失败：
+        // 前者一直想到触发超时，后者只剩思考、没有正文。
+        max_tokens: maxTokens,
         response_format: { type: 'json_object' },
         messages: [
           { role: 'system', content: systemPrompt },
@@ -151,8 +170,9 @@ async function requestReview(userPrompt) {
   }
 
   const payload = await response.json()
-  const content = payload?.choices?.[0]?.message?.content
-  if (!content) throw new Error('AI provider returned an empty review response.')
+  const choice = payload?.choices?.[0]
+  const content = choice?.message?.content
+  if (!content) throw new Error(describeEmptyResponse(choice))
 
   try {
     return parseReviewContent(content)

@@ -4,7 +4,13 @@
  */
 
 export const DEFAULT_MAX_DIFF_CHARS = 100_000
-export const DEFAULT_TIMEOUT_MS = 180_000
+export const DEFAULT_TIMEOUT_MS = 300_000
+/**
+ * 输出上限，必须容得下推理模型的思考。这些模型先输出思考、再输出正文，
+ * 上限一到就只剩思考、一个字正文都没有；不设上限则会一直想到触发超时。
+ * 实测：DeepSeek-V4.1-Flash 审查一份 10 万字符的 diff，输出约 2 万 token。
+ */
+export const DEFAULT_MAX_TOKENS = 32_000
 
 /** 这三个级别视为需要人工确认。 */
 export const BLOCKING_SEVERITIES = ['critical', 'blocking']
