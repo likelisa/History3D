@@ -11,9 +11,13 @@ export const DEFAULT_MAX_DIFF_CHARS = 100_000
 export const DEFAULT_CHUNK_CHARS = 25_000
 export const DEFAULT_TIMEOUT_MS = 180_000
 /** 所有分块加起来的墙钟预算，避免分块数变多后把 job 拖到超时。 */
-export const DEFAULT_TOTAL_TIMEOUT_MS = 480_000
-/** 给「思考 + 正文」一个硬上限；不设的话生成长度完全不受控。 */
-export const DEFAULT_MAX_TOKENS = 8_000
+export const DEFAULT_TOTAL_TIMEOUT_MS = 600_000
+/**
+ * 给「思考 + 正文」一个硬上限；不设的话生成长度完全不受控。
+ * 这个值必须容得下推理模型的思考：实测 DeepSeek-V4.1-Flash 单块要 2.5 万～3 万字符
+ * 的思考才写出正文，8000 会让它全部卡在思考阶段、一个字都产不出来。
+ */
+export const DEFAULT_MAX_TOKENS = 32_000
 
 /** 这三个级别视为需要人工确认。 */
 export const BLOCKING_SEVERITIES = ['critical', 'blocking']

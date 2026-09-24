@@ -26,10 +26,9 @@ const SUMMARY_MAX_CHARS = 1200
 
 const apiKey = process.env.OPENAI_API_KEY
 const apiBaseUrl = (process.env.AI_API_BASE_URL || 'https://aiping.cn/api/v1').replace(/\/+$/, '')
-// 默认值是可用的兜底，CI 实际用仓库 Variable AI_MODEL。
-// 这里特意不用 GLM-5.3-Flash：它会把 token 全花在思考上，实测对一份 1 万字符的
-// 分块就能产出 2.8 万字思考却写不出正文，永远等不到结果。模型 id 区分大小写。
-const model = process.env.AI_MODEL || 'Qwen3.5-Flash'
+// 默认值是可用的兜底，CI 实际用仓库 Variable AI_MODEL。模型 id 区分大小写。
+// 实测：DeepSeek-V4.1-Flash 配 AI_MAX_TOKENS=32000，两次都在 5/5 块上产出结果。
+const model = process.env.AI_MODEL || 'DeepSeek-V4.1-Flash'
 const maxDiffChars = readPositiveInt(process.env.AI_MAX_DIFF_CHARS, DEFAULT_MAX_DIFF_CHARS)
 const chunkChars = readPositiveInt(process.env.AI_CHUNK_CHARS, DEFAULT_CHUNK_CHARS)
 const maxTokens = readPositiveInt(process.env.AI_MAX_TOKENS, DEFAULT_MAX_TOKENS)
