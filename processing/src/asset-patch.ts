@@ -136,7 +136,7 @@ export async function reviewViewerPatch(decision: PatchDecision, dataDir: string
   }
 }
 
-async function acquireAssetLock(lockDir: string): Promise<string> {
+export async function acquireAssetLock(lockDir: string): Promise<string> {
   await mkdir(path.dirname(lockDir), { recursive: true })
   for (let attempt = 0; attempt < 5; attempt++) {
     const token = randomUUID()
@@ -185,7 +185,7 @@ async function acquireAssetLock(lockDir: string): Promise<string> {
   throw new Error('ASSET_LOCKED')
 }
 
-async function verifyExistingRelease(root: string): Promise<void> {
+export async function verifyExistingRelease(root: string): Promise<void> {
   const release = await json<{ files: Array<{ path: string; sha256: string; bytes: number }>; sceneRevision: number }>(path.join(root, 'release.json'))
   const listed = new Set(release.files.map((file) => file.path))
   for (const required of ['scene.json', 'story.json', 'sources.json', 'asset-lineage.json', 'quality-report.json', 'patch-decision.json']) if (!listed.has(required)) throw new Error('RELEASE_CONFLICT')

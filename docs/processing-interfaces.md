@@ -52,9 +52,11 @@ B 可用 `npm run processing -- review-patch /absolute/path/to/decision.json` �
 
 模型请求如果在网络/超时阶段失去结果，审核 job 标为 `call_unknown`：证据、请求参数、错误和费用未知状态持久保存，同一 release 不自动付费重试。收到完整但结构无效的响应则保存原文并标 `failed`，校验器修复后可重验已保存响应。`call_unknown` 需要先核账或人工裁定是否重新调用；它不能作为 pass。
 
-B 用 `npm run processing -- decide-asset-task <decision.json>` 记录一个 asset task 的拒绝决定，决策写明 `decisionId`、`taskId`、`reviewId`、`snapshotHash`、`operator`、`reason`、`action:"reject"`。它必须引用已完成资产报告和未被篡改的候选 GLB；任务转为 `rejected`，文件和报告仍可复查。蓝灰货包技术候选已因对比度与装配证据不足被 B 拒绝。通过审核后的 B 候选整合仍待实现。
+B 用 `npm run processing -- decide-asset-task <decision.json>` 记录一个 asset task 的拒绝决定，决策写明 `decisionId`、`taskId`、`reviewId`、`snapshotHash`、`operator`、`reason`、`action:"reject"`。它必须引用已完成资产报告和未被篡改的候选 GLB；任务转为 `rejected`，文件和报告仍可复查。蓝灰货包技术候选已因对比度与装配证据不足被 B 拒绝。
 
-Blender 的一般网格/绑定/UV 修整与外部生成执行适配尚未接通，`/strategies` 列出限制或 unavailable。付费资产任务执行/恢复和 B 候选整合仍待实现；发布/回退闸门已有命令，但当前没有满足门槛的真实版本。本服务没有跨机器身份认证，只用于本机联调。Python 解包解释器默认 `/usr/bin/python3`，可通过 `PROCESSING_PYTHON` 指定团队机器上的解释器。
+通过资产审核的 B 候选可由 `npm run processing -- adopt-asset-task <decision.json>` 整合，决策字段相同而 `action:"adopt"`。命令要求固定快照的 `asset_review=pass`、无未评估项、候选 GLB 哈希和父资产版本一致、尺寸与底部原点兼容；同一父资产的 C/B 并行候选共用选择锁。成功只生成新的不可变 `needs_review` 世界，更新资产链与策略记录，仍需新的世界复审和 C 正式验收，不能直接切 current。当前蓝灰货包是 `needs_information` 且已拒绝，**没有可采用的真实 B 候选**。
+
+Blender 的一般网格/绑定/UV 修整与外部生成执行适配尚未接通，`/strategies` 列出限制或 unavailable。付费资产任务执行/恢复仍待实现；发布/回退闸门已有命令，但当前没有满足门槛的真实版本。本服务没有跨机器身份认证，只用于本机联调。Python 解包解释器默认 `/usr/bin/python3`，可通过 `PROCESSING_PYTHON` 指定团队机器上的解释器。
 
 ### 固定版本发布与回退闸门
 
