@@ -247,7 +247,8 @@ function buildSummary(summaries) {
   const text = summaries
     .map((summary) => String(summary ?? '').trim())
     .filter(Boolean)
-    .join(' ')
+    // 每块一段：分块审查时把多段摘要用空格拼在一起会变成一整坨，读不出边界。
+    .join('\n\n')
   if (text === '') return 'The AI reviewer did not provide a summary.'
   return text.length > SUMMARY_MAX_CHARS ? `${text.slice(0, SUMMARY_MAX_CHARS)}…` : text
 }
