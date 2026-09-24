@@ -72,6 +72,7 @@ export class ViewerApp {
 
   private storyId: string
   private candidateReleaseId: string | null
+  private apiReleaseId: string | null
   private readonly benchEnabled: boolean
   private readonly benchSeconds: number
   private bench: BenchRecorder | null = null
@@ -101,6 +102,7 @@ export class ViewerApp {
     this.storyId =
       query.get('story') || import.meta.env.VITE_DEFAULT_STORY_ID || 'silk-road-demo'
     this.candidateReleaseId = query.get('candidate')
+    this.apiReleaseId = query.get('release')
     this.benchEnabled = query.get('bench') === '1'
     this.benchSeconds = Number(query.get('benchSeconds') ?? '90') || 90
 
@@ -211,9 +213,26 @@ export class ViewerApp {
   }
 
   private async loadPackage(): Promise<void> {
-    const baseUrl = this.candidateReleaseId
+    let baseUrl = this.candidateReleaseId
       ? candidateBaseUrl(this.storyId, this.candidateReleaseId)
       : packageBaseUrl(this.storyId)
+    if (this.apiReleaseId) {
+      if (this.candidateReleaseId || !/^[a-z0-9][a-z0-9-]{0,63}$/.test(this.storyId) || !/^release-[a-f0-9]{20}$/.test(this.apiReleaseId)) {
+        this.failWith([errorDiagnostic('VALIDATION_FAILED', 'release.json', 'releaseId', '固定版本 ID 不合法')])
+        return
+      }
+      try {
+        const response = await fetch(`/api/processing/v1/worlds/${this.storyId}/releases/${this.apiReleaseId}`)
+        if (!response.ok) throw new Error(`HTTP ${response.status}`)
+        const release = await response.json() as { packageBaseUrl?: string }
+        const expected = `/api/processing/v1/artifacts/${this.apiReleaseId}`
+        if (release.packageBaseUrl !== expected) throw new Error('packageBaseUrl 不匹配固定版本')
+        baseUrl = expected
+      } catch (error) {
+        this.failWith([errorDiagnostic('PACKAGE_FETCH_FAILED', 'release.json', '', `固定版本无法读取：${String(error)}`)])
+        return
+      }
+    }
     if (!baseUrl) {
       this.failWith([errorDiagnostic('VALIDATION_FAILED', 'release.json', 'releaseId', '候选版本 ID 不合法')])
       return

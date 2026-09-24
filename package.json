@@ -8,6 +8,7 @@
     "validate:collection": "node --import tsx scripts/validate-collection.ts",
     "validate:handoff": "node --import tsx scripts/validate-handoff.ts",
     "processing": "node --import tsx processing/src/cli.ts",
+    "processing:server": "node --import tsx processing/src/server-main.ts",
     "validate:package": "node --import tsx scripts/validate-package.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",

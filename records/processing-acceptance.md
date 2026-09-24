@@ -25,3 +25,9 @@
 - 仍缺：C 本人的页面验收、三幕录屏与可共享截图、90 秒性能实测、音乐文件/听感、真实 A 素材和外部生成服务。此候选仍为 `needs_review`，不能提升为 current。
 - 对同一 release 的 `requiredCapabilities` 明确要求变换、挂接、显隐和环境；正式 viewer 加载为“可体验”。另用独立、已清理的测试副本声明 `gltf-clips-v1`，页面实际显示“查看器不支持：gltf-clips-v1”并拒绝进入。该能力目前确实未接入，不在本次已通过范围。
 - 在正式 viewer 增加剧情镜头及第一人称接管后，最终本机动态候选更新为 `release-0a7a5bf517c0e98df79a`，scene SHA-256 仍为 `d784a1d070c49a585fee9e27e0fa7687a86cdf14f63b74fbe1d6edfb36a61427`。新增必需能力 `camera-cues-v1`，页面已按该固定 ID 加载到“可体验”。正式包校验仍为 0 错误、1 条载物悬置警告；世界 AI 复审尚未针对这个新固定快照重跑。
+
+## 2026-09-25 HTTP 本机交接
+
+- `/api/processing/v1` 已在 `127.0.0.1:8798` 实现 ZIP 上传、导入/job、A 反馈附件下载、固定 release 资源、版本列表和 C 页面反馈。8788 已由另一个 in-note 服务监听，处理层没有占用或修改它。服务只监听 loopback，并拒绝非本机 Host/未允许 Origin。
+- 自动化端到端测试用仓库技术 fixture 做 ZIP 上传→导入→轮询→反馈 GLB 下载→固定 release 读取→C 问题回传；未配置模型 Key 的测试 job 结束为 `needs_input`/审核不可用，而非 ready。越界 ZIP/符号链接和编码路径被拒绝。B 的资产父版本清单 `asset-lineage.json` 使旧基底补丁返回 `ASSET_REVISION_CONFLICT`，候选仍保存且不会自动成为当前版本。
+- 本机固定 API 候选 `release-99334eec9b6e22026a93`。正式 viewer 从 API 的 `packageBaseUrl` 加载，页面为“可体验”；在 1280×720 浏览器画面中进入第二幕剧情镜头，真实行者、手杖、货包和载体均显示。它仍是技术 fixture `needs_review`，当前采用指针为 null。没有傅老师或靳老师实际回传。

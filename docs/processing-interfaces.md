@@ -1,6 +1,6 @@
 # 处理层交接接口（开发中）
 
-目标是傅老师提交来源、初步 GLB 与规划，由处理层审核、生成、优化、组装，再交给靳老师的正式 `viewer/`。本文件只描述已落地的部分；HTTP 路由、DeepSeek 真调用、生成策略和三方往返仍待实现。
+目标是傅老师提交来源、初步 GLB 与规划，由处理层审核、生成、优化、组装，再交给靳老师的正式 `viewer/`。本文件区分已实现的本机接口和仍待接入的生成、资产采用及三方往返。
 
 ## 当前可运行的 A→B 文件入口
 
@@ -14,7 +14,29 @@
 
 导入命令会自动尝试输入 AI 审核。有 `DEEPSEEK_API_KEY` 时，处理层使用 Blender 的六视角固定渲染和 `deepseek-flash`；没有凭据时记录 `unavailable`，不计为审核通过。`npm run processing -- review-input <importId>` 可继续同一快照；最多两次调用，失败报告和成功报告存于对应 `reviews/`。原始模型响应留在忽略 Git 的本机工作目录，不进入交接包。`needs_information` 等模型结论先作为建议，B 裁定后才写入正式问题队列。
 
-四类稳定消息名是 `CollectionPackage`（A→B）、`ProcessingFeedback`（B→A）、`WorldRelease`（B→C）、`WorldFeedback`（C→B），版本 `1.0.0`。共享类型在 `contracts/src/handoff-types.ts`。拟定 HTTP 前缀 `/api/processing/v1`；当前没有可调用的 HTTP 服务，不能把文件样例视为接口联调。
+四类稳定消息名是 `CollectionPackage`（A→B）、`ProcessingFeedback`（B→A）、`WorldRelease`（B→C）、`WorldFeedback`（C→B），版本 `1.0.0`。共享类型在 `contracts/src/handoff-types.ts`。本机 HTTP 前缀 `/api/processing/v1`；服务默认只监听 `127.0.0.1:8798`，Vite 的 `127.0.0.1:5173` 将该前缀代理过去。
+
+## 本机 HTTP 交接
+
+另开终端运行 `npm run processing:server`。下面的 `bundleId`、`importId`、`releaseId` 均来自上一步回执；路径只是调用范例，不能把示例值当作已验收内容。
+
+```sh
+curl --noproxy '*' -F 'file=@/absolute/path/to/collection.zip' http://127.0.0.1:8798/api/processing/v1/bundles
+curl --noproxy '*' -H 'Content-Type: application/json' -H 'Idempotency-Key: fu-001' \
+  -d '{"bundleId":"<bundleId>","submissionId":"<submissionId>","storyId":"<storyId>","sourceContentRevision":1,"profileId":"desktop-demo-v1"}' \
+  http://127.0.0.1:8798/api/processing/v1/imports
+curl --noproxy '*' http://127.0.0.1:8798/api/processing/v1/jobs/<jobId>
+curl --noproxy '*' http://127.0.0.1:8798/api/processing/v1/imports/<importId>/feedback
+curl --noproxy '*' http://127.0.0.1:8798/api/processing/v1/worlds/<storyId>/releases/<releaseId>
+curl --noproxy '*' -H 'Content-Type: application/json' --data-binary @/absolute/path/to/viewer-feedback.json \
+  http://127.0.0.1:8798/api/processing/v1/worlds/<storyId>/feedback
+```
+
+`/bundles` 只接 multipart `file` ZIP；检查越界路径、重复项、符号链接、超大解压和外部 GLB 引用。`POST /imports` 只引用已上传的 bundleId，不接受本机任意绝对路径；202 回执与 `/jobs` 是接收/处理状态，绝不代表 ready。`GET /imports/{importId}/feedback` 返回反馈内容、markdown/修订规划和原始 GLB 的只读 artifact URL。`GET /worlds/{storyId}/releases/{releaseId}` 返回固定包的 `packageBaseUrl`；正式页面可用 `http://127.0.0.1:5173/?story=<storyId>&release=<releaseId>` 直接从 API 加载，无需物化到 `viewer/public/candidates`。
+
+`POST /worlds/{storyId}/feedback` 保存 C 的逐项问题和 GLB 候选。候选须先经 `/bundles` 上传，再用 `baseAssetRevision` 和 `baseSha256` 指向固定 release 的 `asset-lineage.json`；过期基底返回该候选的 `ASSET_REVISION_CONFLICT`，候选原件仍保留。`accepted` 只记录 C 对该版本的页面意见，不自动采用 GLB、不切换 `currentReleaseId`。`GET /feedback/{feedbackId}` 可取回处理回执。`GET /worlds/{storyId}/releases` 列版本与当前指针；未经 B/C 门槛，当前指针为 null。
+
+`GET /capabilities` 与 `GET /strategies` 公开本机支持情况；Blender 修整和外部付费生成适配尚未接通，明确返回 unavailable。`POST /reviews`、`POST /asset-tasks`、资产采用与发布/回退命令仍待实现。本服务没有跨机器身份认证，只用于本机联调。
 
 ## B→C 静态候选
 
@@ -41,6 +63,6 @@ npm run dev -- --host 127.0.0.1
 
 - 傅老师：给一个真实 `storyId` 的来源、主 GLB、资产对应关系和原规划；对 fixture 中的历史未知项补证据或明确演示设定。
 - 靳老师：确认正式 viewer 对动作、挂接、音乐和压缩扩展的能力；后续按固定 releaseId 读取正式包，并回传加载与视觉问题。
-- 处理层：补发布/展示回传协议校验、HTTP、AI 资产候选与世界复审、自主生成和正式 viewer 验收；当前持久化覆盖导入回执、确定性反馈与输入 AI 审查。
+- 处理层：补审核触发与资产任务 API、策略预算/真实生成、C 候选裁定与采用、发布/回退门槛；当前持久化覆盖 ZIP、导入回执、反馈、固定 release 和输入 AI 审核任务。
 
 对接说明尚未发给两位老师，也没有收到兼容反馈。

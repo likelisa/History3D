@@ -32,6 +32,8 @@ describe('world release compiler', () => {
     expect(experience.beats).toHaveLength(3)
     const releaseManifest = JSON.parse(await readFile(path.join(release.path, 'release.json'), 'utf8'))
     expect(releaseManifest.requiredCapabilities).toContain('attachment-tracks-v1')
+    const lineage = JSON.parse(await readFile(path.join(release.path, 'asset-lineage.json'), 'utf8'))
+    expect(lineage.assets.find((item: { assetId: string }) => item.assetId === 'asset-pack-bundle').adoptedRevision).toBe(1)
     const quality = JSON.parse(await readFile(path.join(release.path, 'quality-report.json'), 'utf8'))
     expect(quality.relationChecks[0].pass).toBe(true)
     expect((await buildWorldRelease(receipt.importId, planFixture, data, repoRoot)).releaseId).toBe(release.releaseId)

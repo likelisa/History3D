@@ -17,6 +17,7 @@ export interface WorldPlan {
   newBriefs?: ObjectBrief[]
   newAssets?: Array<SceneAsset & { sourcePath: string }>
   newObjects?: SceneObject[]
+  assetRevisions?: Record<string, number>
   experienceSourcePath?: string
   relations: Array<{ relationId: string; parentObjectId: string; childObjectId: string; kind: 'attachment' | 'handheld'; expectedOffset?: Vec3; toleranceM: number; required: boolean }>
   requiredCapabilities: string[]; optionalCapabilities: string[]; unresolved: string[]
@@ -107,7 +108,7 @@ export async function buildWorldRelease(importId: string, planPath: string, data
   const templateDir = path.dirname(path.join(repoRoot, plan.templateScenePath))
   const newAssetPaths = new Map((plan.newAssets ?? []).map((item) => [item.id, item.sourcePath]))
   const templateAssetHashes = await Promise.all(scene.assets.filter((item) => !bound.has(item.id)).map(async (item) => digest(await readFile(path.join(repoRoot, newAssetPaths.get(item.id) ?? path.relative(repoRoot, path.join(templateDir, item.path)))))))
-  const releaseId = `release-${digest(JSON.stringify([receipt.snapshotHash, digest(planBytes), digest(JSON.stringify(scene)), templateAssetHashes, experienceBytes ? digest(experienceBytes) : null])).slice(0, 20)}`
+  const releaseId = `release-${digest(JSON.stringify(['world-compile-v2', receipt.snapshotHash, digest(planBytes), digest(JSON.stringify(scene)), templateAssetHashes, experienceBytes ? digest(experienceBytes) : null])).slice(0, 20)}`
   const finalDir = path.join(dataDir, 'releases', story.storyId, releaseId)
   const stage = `${finalDir}.${randomUUID()}.tmp`
   await mkdir(stage, { recursive: true })
@@ -127,6 +128,13 @@ export async function buildWorldRelease(importId: string, planPath: string, data
       await mkdir(path.dirname(path.join(stage, asset.path)), { recursive: true })
       await cp(from, path.join(stage, asset.path))
     }
+    await putJson(path.join(stage, 'asset-lineage.json'), {
+      assets: await Promise.all(scene.assets.map(async (asset) => {
+        const revision = plan.assetRevisions?.[asset.id] ?? 1
+        if (!Number.isSafeInteger(revision) || revision < 1) throw new Error(`ASSET_REVISION_INVALID: ${asset.id}`)
+        return { assetId: asset.id, adoptedRevision: revision, sha256: digest(await readFile(path.join(stage, asset.path))), path: asset.path }
+      })),
+    })
     await putJson(path.join(stage, 'scene.json'), scene)
     if (experienceBytes) await writeFile(path.join(stage, 'experience.json'), experienceBytes)
     const validation = await validateScenePackage(createNodeReader(stage), { checkGlbBounds: true })
@@ -146,7 +154,7 @@ export async function buildWorldRelease(importId: string, planPath: string, data
       note: 'The traveler and staff are deterministic Blender demo GLBs. A separate paid provider generation remains untested.',
     })
     await writeFile(path.join(stage, 'handoff.md'), `# ${story.title}\n\n固定候选 ${releaseId}。入口 scene.json；需要 ${plan.requiredCapabilities.join(', ')}。未完成世界 AI 复审与 C 页面验收，不得提升为 current。\n`)
-    const files = await digestFiles(stage, ['scene.json', 'story.json', 'sources.json', 'quality-report.json', 'provenance.json', 'generation-report.json', 'handoff.md', ...(experienceBytes ? ['experience.json'] : []), ...scene.assets.map((item) => item.path), ...handoff.files.filter((item) => item.path.startsWith('references/')).map((item) => item.path)])
+    const files = await digestFiles(stage, ['scene.json', 'story.json', 'sources.json', 'quality-report.json', 'provenance.json', 'generation-report.json', 'asset-lineage.json', 'handoff.md', ...(experienceBytes ? ['experience.json'] : []), ...scene.assets.map((item) => item.path), ...handoff.files.filter((item) => item.path.startsWith('references/')).map((item) => item.path)])
     await putJson(path.join(stage, 'release.json'), { handoffVersion: '1.0.0', storyId: story.storyId, releaseId, contentRevision: compiledStory.contentRevision, sceneRevision: scene.sceneRevision, inputSubmissionIds: [handoff.submissionId], entrypoint: 'scene.json', files, requiredCapabilities: plan.requiredCapabilities, optionalCapabilities: plan.optionalCapabilities, qualityStatus: 'needs_review', knownLimitations: plan.unresolved })
     await mkdir(path.dirname(finalDir), { recursive: true })
     try { await rename(stage, finalDir) } catch (error) {
