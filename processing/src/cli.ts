@@ -8,6 +8,7 @@ import { reviewViewerPatch } from './asset-patch.ts'
 import { revalidateSavedWorldReview, runWorldReview } from './review/world-review.ts'
 import { revalidateSavedAssetReview, runAssetReview } from './review/asset-review.ts'
 import { decideAssetTask } from './strategies/decision.ts'
+import { auditRelease, decideRelease } from './release-registry.ts'
 
 const dataDir = path.resolve(process.env.PROCESSING_DATA_DIR ?? '.processing-data')
 const [command, ...args] = process.argv.slice(2)
@@ -18,8 +19,9 @@ const arity: Record<string, number> = {
   'review-asset': 1,
   'revalidate-asset': 3,
   'decide-asset-task': 1,
+  'audit-release': 2, 'promote-release': 1, 'rollback-release': 1,
 }
-const usage = 'usage: npm run processing -- import <collection-dir> <idempotency-key> | review-input <importId> | review-asset <taskId> | revalidate-asset <taskId> <reviewId> <attempt> | decide-asset-task <decision.json> | revalidate-review <importId> <assetId> <attempt> | build-release <importId> <world-plan.json> | preview-release <storyId> <releaseId> | review-world <storyId> <releaseId> [world-plan.json] | revalidate-world <storyId> <releaseId> <reviewId> <attempt> | review-patch <decision.json>'
+const usage = 'usage: npm run processing -- import <collection-dir> <idempotency-key> | review-input <importId> | review-asset <taskId> | revalidate-asset <taskId> <reviewId> <attempt> | decide-asset-task <decision.json> | revalidate-review <importId> <assetId> <attempt> | build-release <importId> <world-plan.json> | preview-release <storyId> <releaseId> | review-world <storyId> <releaseId> [world-plan.json] | revalidate-world <storyId> <releaseId> <reviewId> <attempt> | review-patch <decision.json> | audit-release <storyId> <releaseId> | promote-release <decision.json> | rollback-release <decision.json>'
 
 function positiveAttempt(value: string): number {
   const attempt = Number(value)
@@ -56,6 +58,14 @@ if (!command || (arity[command] !== args.length && !(command === 'review-world' 
       case 'decide-asset-task': {
         const task = await decideAssetTask(JSON.parse(await readFile(await existingFile(args[0]), 'utf8')), dataDir)
         output = { taskId: task.taskId, status: task.status, decision: task.decision, artifactRefs: task.artifactRefs }
+        break
+      }
+      case 'audit-release': output = await auditRelease(args[0], args[1], dataDir); break
+      case 'promote-release':
+      case 'rollback-release': {
+        const decision = JSON.parse(await readFile(await existingFile(args[0]), 'utf8'))
+        if (decision.action !== (command === 'promote-release' ? 'promote' : 'rollback')) throw new Error('RELEASE_DECISION_ACTION_MISMATCH')
+        output = await decideRelease(decision, dataDir)
         break
       }
     }

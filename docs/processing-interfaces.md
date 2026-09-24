@@ -54,7 +54,15 @@ B 可用 `npm run processing -- review-patch /absolute/path/to/decision.json` �
 
 B 用 `npm run processing -- decide-asset-task <decision.json>` 记录一个 asset task 的拒绝决定，决策写明 `decisionId`、`taskId`、`reviewId`、`snapshotHash`、`operator`、`reason`、`action:"reject"`。它必须引用已完成资产报告和未被篡改的候选 GLB；任务转为 `rejected`，文件和报告仍可复查。蓝灰货包技术候选已因对比度与装配证据不足被 B 拒绝。通过审核后的 B 候选整合仍待实现。
 
-Blender 的一般网格/绑定/UV 修整与外部生成执行适配尚未接通，`/strategies` 列出限制或 unavailable。付费资产任务执行/恢复、B 候选整合、候选提升为 current 的发布/回退命令仍待实现。本服务没有跨机器身份认证，只用于本机联调。Python 解包解释器默认 `/usr/bin/python3`，可通过 `PROCESSING_PYTHON` 指定团队机器上的解释器。
+Blender 的一般网格/绑定/UV 修整与外部生成执行适配尚未接通，`/strategies` 列出限制或 unavailable。付费资产任务执行/恢复和 B 候选整合仍待实现；发布/回退闸门已有命令，但当前没有满足门槛的真实版本。本服务没有跨机器身份认证，只用于本机联调。Python 解包解释器默认 `/usr/bin/python3`，可通过 `PROCESSING_PYTHON` 指定团队机器上的解释器。
+
+### 固定版本发布与回退闸门
+
+`npm run processing -- audit-release <storyId> <releaseId>` 只读检查不可变文件哈希、组装和包错误、B 真实外部生成记录、每个输入资产的固定快照审核、当前 release 的世界审核，以及三方验收证据。它返回 `ready` 和具体未满足的 gate。技术 fixture 会因缺真实生成/审核/验收保持 `ready:false`。
+
+完成实际验收后，B 在 `.processing-data/registry/<storyId>/acceptance/<releaseId>.json` 保存 `ReleaseAcceptance`：固定 release hash、操作者、傅老师史实确认记录、靳老师同版 `viewerFeedbackId`/`viewerBuild`、1440×900 演示机 GPU/浏览器/DPR、三次冷加载、90 秒 FPS、连续播放、音乐听感及截图引用。类型见 `processing/src/release-registry.ts`。验收记录必须来自真实联调，不能用 fixture 填写。该文件位于 release 外，不改不可变包。
+
+只有 `audit-release` 通过，B 才用 `npm run processing -- promote-release <decision.json>` 切换 `currentReleaseId`。决策需写 `decisionId`、`action:"promote"`、`storyId`、`releaseId`、`expectedReleaseHash`、`expectedCurrentReleaseId`、`operator`、`reason`；预期 current 与当前不符会报冲突。`rollback-release` 使用相同字段及 `action:"rollback"`，仅能回退到此前已批准发布且文件哈希仍完整的版本。发布和回退决策都写 registry，旧 release 不删除。当前未有满足发布门槛的真实版本，因此没有执行提升。
 
 ## B→C 静态候选
 
