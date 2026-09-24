@@ -181,7 +181,7 @@ export function createProcessingServer(options: ServerOptions): Server {
       const status = typed.status ?? (
         error instanceof ImportError ? (error.code === 'INVALID_IDEMPOTENCY_KEY' ? 400 : error.code.includes('CONFLICT') ? 409 : 422)
         : typed.code === 'ENOENT' ? 404
-        : message === 'BUNDLE_SIZE_INVALID' ? 413
+        : message === 'BUNDLE_SIZE_INVALID' || message === 'BUNDLE_TOO_LARGE' ? 413
         : message.includes('CONFLICT') ? 409
         : /^(BUNDLE_INVALID|WORLD_FEEDBACK_INVALID|WORLD_FEEDBACK_ISSUE_INVALID|WORLD_PATCH_INVALID|WORLD_PATCH_HASH_MISMATCH|PATCH_BUNDLE_REQUIRED|RELEASE_REVISION_CONFLICT)/.test(message) ? 422
         : error instanceof TypeError ? 400 : 500

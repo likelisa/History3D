@@ -1,18 +1,22 @@
 import { spawn } from 'node:child_process'
 import { createHash, randomUUID } from 'node:crypto'
-import { copyFile, mkdir, readFile, rename, rm, stat, writeFile } from 'node:fs/promises'
+import { createReadStream } from 'node:fs'
+import { copyFile, lstat, mkdir, readFile, rename, rm, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import type { FileDigest } from '../../contracts/src/handoff-types.ts'
 
 const MAX_ZIP_BYTES = 256 * 1024 * 1024
+const MAX_UNCOMPRESSED_BYTES = 256 * 1024 * 1024
+const MAX_GLB_BYTES = 128 * 1024 * 1024
 export interface BundleReceipt { bundleId: string; sha256: string; bytes: number; files: FileDigest[]; uncompressedBytes: number }
 const readJson = async <T>(file: string): Promise<T> => JSON.parse(await readFile(file, 'utf8')) as T
 
 export async function storeBundle(zipPath: string, dataDir: string): Promise<BundleReceipt> {
   const info = await stat(zipPath)
   if (!info.isFile() || info.size <= 0 || info.size > MAX_ZIP_BYTES) throw new Error('BUNDLE_SIZE_INVALID')
-  const zipBytes = await readFile(zipPath)
-  const sha256 = createHash('sha256').update(zipBytes).digest('hex')
+  const hasher = createHash('sha256')
+  for await (const chunk of createReadStream(zipPath)) hasher.update(chunk)
+  const sha256 = hasher.digest('hex')
   const bundleId = `bundle-${sha256.slice(0, 20)}`
   const finalDir = path.join(dataDir, 'bundles', bundleId)
   try {
@@ -25,6 +29,16 @@ export async function storeBundle(zipPath: string, dataDir: string): Promise<Bun
   try {
     await copyFile(zipPath, path.join(stage, 'bundle.zip'))
     const unpacked = await unpack(path.join(stage, 'bundle.zip'), path.join(stage, 'files'))
+    if (!Number.isSafeInteger(unpacked.uncompressedBytes) || unpacked.uncompressedBytes > MAX_UNCOMPRESSED_BYTES || unpacked.files.length > 500) throw new Error('BUNDLE_TOO_LARGE')
+    let actualBytes = 0
+    for (const file of unpacked.files) {
+      if (!file.path || path.isAbsolute(file.path) || file.path.includes('\\') || file.path.split('/').some((part) => !part || part === '.' || part === '..')) throw new Error('BUNDLE_INVALID: unsafe extractor path')
+      const inspected = await lstat(path.join(stage, 'files', file.path))
+      if (!inspected.isFile() || inspected.size !== file.bytes || (file.path.toLowerCase().endsWith('.glb') && inspected.size > MAX_GLB_BYTES)) throw new Error('BUNDLE_INVALID: extracted file size mismatch')
+      actualBytes += inspected.size
+      if (actualBytes > MAX_UNCOMPRESSED_BYTES) throw new Error('BUNDLE_TOO_LARGE')
+    }
+    if (actualBytes !== unpacked.uncompressedBytes) throw new Error('BUNDLE_INVALID: uncompressed total mismatch')
     const receipt: BundleReceipt = { bundleId, sha256, bytes: info.size, files: unpacked.files, uncompressedBytes: unpacked.uncompressedBytes }
     await writeFile(path.join(stage, 'bundle.json'), JSON.stringify(receipt, null, 2) + '\n')
     await mkdir(path.dirname(finalDir), { recursive: true })
@@ -39,7 +53,7 @@ export async function storeBundle(zipPath: string, dataDir: string): Promise<Bun
 async function unpack(zipPath: string, outputDir: string): Promise<{ files: FileDigest[]; uncompressedBytes: number }> {
   const script = path.resolve('processing/tools/unpack_bundle.py')
   return new Promise((resolve, reject) => {
-    const child = spawn('/usr/bin/python3', [script, zipPath, outputDir], { stdio: ['ignore', 'pipe', 'pipe'] })
+    const child = spawn(process.env.PROCESSING_PYTHON ?? '/usr/bin/python3', [script, zipPath, outputDir], { stdio: ['ignore', 'pipe', 'pipe'] })
     let stdout = ''
     let stderr = ''
     child.stdout.setEncoding('utf8').on('data', (chunk: string) => { stdout += chunk.slice(0, 2_000_000) })

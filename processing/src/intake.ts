@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto'
-import { cp, lstat, mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises'
+import { cp, lstat, mkdir, readFile, realpath, rename, rm, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { randomUUID } from 'node:crypto'
 import { createNodeReader } from '../../contracts/src/node-reader.ts'
@@ -15,12 +15,22 @@ const atomicJson = async (file: string, value: unknown): Promise<void> => { cons
 
 export async function importCollection(inputDir: string, dataDir: string, idempotencyKey: string): Promise<ImportReceipt> {
   if (!idempotencyKey || idempotencyKey.length > 200) throw new ImportError('INVALID_IDEMPOTENCY_KEY', 'Idempotency-Key is required (max 200 characters)')
+  const handoffInfo = await lstat(path.join(inputDir, 'handoff.json')).catch(() => null)
+  if (!handoffInfo?.isFile() || handoffInfo.isSymbolicLink()) throw new ImportError('COLLECTION_INVALID', 'handoff.json must be a regular file')
   const rawHandoff = await json<HandoffManifest>(path.join(inputDir, 'handoff.json'))
   if (!Array.isArray(rawHandoff.files)) throw new ImportError('COLLECTION_INVALID', 'file list missing')
+  const inputRoot = await realpath(inputDir)
   for (const file of rawHandoff.files) {
     if (!file.path || file.path.startsWith('/') || file.path.includes('\\') || file.path.split('/').some((part) => !part || part === '.' || part === '..')) throw new ImportError('COLLECTION_INVALID', `unsafe path: ${file.path}`)
-    const current = await lstat(path.join(inputDir, file.path)).catch(() => null)
-    if (!current?.isFile() || current.isSymbolicLink()) throw new ImportError('COLLECTION_INVALID', `not a regular file: ${file.path}`)
+    let cursor = inputRoot
+    for (const segment of file.path.split('/')) {
+      cursor = path.join(cursor, segment)
+      const part = await lstat(cursor).catch(() => null)
+      if (!part || part.isSymbolicLink()) throw new ImportError('COLLECTION_INVALID', `symlink or missing path: ${file.path}`)
+    }
+    const current = await lstat(cursor)
+    const resolved = await realpath(cursor)
+    if (!current.isFile() || !resolved.startsWith(inputRoot + path.sep)) throw new ImportError('COLLECTION_INVALID', `not a regular in-package file: ${file.path}`)
   }
   const problems = await validateCollectionHandoff(createNodeReader(inputDir))
   if (problems.length) throw new ImportError('COLLECTION_INVALID', problems.map((item) => `${item.path}: ${item.message}`).join('\n'))

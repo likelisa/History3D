@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from 'vitest'
-import { cp, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
+import { cp, mkdtemp, readFile, rm, symlink, writeFile } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 import { createHash } from 'node:crypto'
@@ -58,6 +58,15 @@ describe('collection import', () => {
     entry.sha256 = createHash('sha256').update(bytes).digest('hex')
     await writeFile(handoffPath, JSON.stringify(handoff))
     await expect(importCollection(changed, dataDir, 'key-b')).rejects.toMatchObject({ code: 'SUBMISSION_CONFLICT' })
+  })
+
+  it('rejects an intermediate asset directory symlink even when target bytes match', async () => {
+    const dataDir = await workspace()
+    const changed = await workspace()
+    await cp(fixture, changed, { recursive: true })
+    await rm(path.join(changed, 'assets'), { recursive: true })
+    await symlink(path.join(fixture, 'assets'), path.join(changed, 'assets'), 'dir')
+    await expect(importCollection(changed, dataDir, 'symlink-key')).rejects.toMatchObject({ code: 'COLLECTION_INVALID' })
   })
 
   it('keeps old issues open until a changed revision names the resolved issue', async () => {

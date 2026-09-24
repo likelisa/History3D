@@ -36,7 +36,9 @@ curl --noproxy '*' -H 'Content-Type: application/json' --data-binary @/absolute/
 
 `POST /worlds/{storyId}/feedback` 保存 C 的逐项问题和 GLB 候选。候选须先经 `/bundles` 上传，再用 `baseAssetRevision` 和 `baseSha256` 指向固定 release 的 `asset-lineage.json`；过期基底返回该候选的 `ASSET_REVISION_CONFLICT`，候选原件仍保留。`accepted` 只记录 C 对该版本的页面意见，不自动采用 GLB、不切换 `currentReleaseId`。`GET /feedback/{feedbackId}` 可取回处理回执。`GET /worlds/{storyId}/releases` 列版本与当前指针；未经 B/C 门槛，当前指针为 null。
 
-`GET /capabilities` 与 `GET /strategies` 公开本机支持情况；Blender 修整和外部付费生成适配尚未接通，明确返回 unavailable。`POST /reviews`、`POST /asset-tasks`、资产采用与发布/回退命令仍待实现。本服务没有跨机器身份认证，只用于本机联调。
+B 可用 `npm run processing -- review-patch /absolute/path/to/decision.json` 裁定一个 C 候选。决策文件至少写 `decisionId`、`action: integrate/reject`、`operator`、`reason`、`storyId`、`feedbackId`、`assetId`、`candidateHash`、`baseReleaseId`、`baseAssetRevision`、`baseSha256`。`integrate` 只接受底部原点和三轴尺寸与父资产兼容的 GLB，产生新的不可变 `needs_review` release 和递增的候选资产 revision；原包、旧 release 与当前指针不变。新 release 必须重新做 asset/world review 和 C 页面验收。另一个候选若仍指向同一旧父版本，B 再整合会得到 `ASSET_REVISION_CONFLICT`，二进制不会自动合并。
+
+`GET /capabilities` 与 `GET /strategies` 公开本机支持情况；Blender 修整和外部付费生成适配尚未接通，明确返回 unavailable。`POST /reviews`、`POST /asset-tasks`、候选提升为 current 的发布/回退命令仍待实现。本服务没有跨机器身份认证，只用于本机联调。Python 解包解释器默认 `/usr/bin/python3`，可通过 `PROCESSING_PYTHON` 指定团队机器上的解释器。
 
 ## B→C 静态候选
 
@@ -63,6 +65,6 @@ npm run dev -- --host 127.0.0.1
 
 - 傅老师：给一个真实 `storyId` 的来源、主 GLB、资产对应关系和原规划；对 fixture 中的历史未知项补证据或明确演示设定。
 - 靳老师：确认正式 viewer 对动作、挂接、音乐和压缩扩展的能力；后续按固定 releaseId 读取正式包，并回传加载与视觉问题。
-- 处理层：补审核触发与资产任务 API、策略预算/真实生成、C 候选裁定与采用、发布/回退门槛；当前持久化覆盖 ZIP、导入回执、反馈、固定 release 和输入 AI 审核任务。
+- 处理层：补审核触发与资产任务 API、策略预算/真实生成、正式 C 修改资产的再次验收、发布/回退门槛；当前持久化覆盖 ZIP、导入回执、反馈、固定 release、C 候选整合与输入 AI 审核任务。
 
 对接说明尚未发给两位老师，也没有收到兼容反馈。

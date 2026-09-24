@@ -3,6 +3,7 @@ import { importCollection } from './intake.ts'
 import { revalidateSavedInputReview, runInputReview } from './review/orchestrator.ts'
 import { buildWorldRelease } from './world-compile.ts'
 import { prepareReleasePreview } from './preview.ts'
+import { reviewViewerPatch } from './asset-patch.ts'
 import { revalidateSavedWorldReview, runWorldReview } from './review/world-review.ts'
 
 const [command, input, key] = process.argv.slice(2)
@@ -22,11 +23,14 @@ if (command === 'review-input' && input) {
 } else if (command === 'review-world' && input && key && process.argv[5]) {
   try { console.log(JSON.stringify(await runWorldReview(input, key, path.resolve(process.argv[5]), dataDir), null, 2)) }
   catch (error) { console.error(error); process.exitCode = 1 }
+} else if (command === 'review-patch' && input) {
+  try { console.log(JSON.stringify(await reviewViewerPatch(JSON.parse(await (await import('node:fs/promises')).readFile(path.resolve(input), 'utf8')), dataDir), null, 2)) }
+  catch (error) { console.error(error); process.exitCode = 1 }
 } else if (command === 'revalidate-world' && input && key && process.argv[5] && process.argv[6]) {
   try { console.log(JSON.stringify(await revalidateSavedWorldReview(input, key, process.argv[5], dataDir, Number(process.argv[6])), null, 2)) }
   catch (error) { console.error(error); process.exitCode = 1 }
 } else if (command !== 'import' || !input || !key) {
-  console.error('usage: npm run processing -- import <collection-dir> <idempotency-key> | review-input <importId> | revalidate-review <importId> <assetId> <attempt> | build-release <importId> <world-plan.json> | preview-release <storyId> <releaseId> | review-world <storyId> <releaseId> <world-plan.json> | revalidate-world <storyId> <releaseId> <reviewId> <attempt>')
+  console.error('usage: npm run processing -- import <collection-dir> <idempotency-key> | review-input <importId> | revalidate-review <importId> <assetId> <attempt> | build-release <importId> <world-plan.json> | preview-release <storyId> <releaseId> | review-world <storyId> <releaseId> <world-plan.json> | revalidate-world <storyId> <releaseId> <reviewId> <attempt> | review-patch <decision.json>')
   process.exitCode = 2
 } else {
   try {
