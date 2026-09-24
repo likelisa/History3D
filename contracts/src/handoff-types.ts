@@ -128,6 +128,7 @@ export interface AssetStrategy {
   kind: 'generate' | 'prompt-compare' | 'blender' | 'procedural' | 'recompose'
   available: boolean
   reason: string | null
+  limitations?: string[]
 }
 
 export interface StrategyPolicy {

@@ -40,9 +40,11 @@ curl --noproxy '*' -H 'Content-Type: application/json' --data-binary @/absolute/
 
 B 可用 `npm run processing -- review-patch /absolute/path/to/decision.json` 裁定一个 C 候选。决策文件至少写 `decisionId`、`action: integrate/reject`、`operator`、`reason`、`storyId`、`feedbackId`、`assetId`、`candidateHash`、`baseReleaseId`、`baseAssetRevision`、`baseSha256`。`integrate` 只接受底部原点和三轴尺寸与父资产兼容的 GLB，产生新的不可变 `needs_review` release 和递增的候选资产 revision；原包、旧 release 与当前指针不变。新 release 必须重新做 asset/world review 和 C 页面验收。另一个候选若仍指向同一旧父版本，B 再整合会得到 `ASSET_REVISION_CONFLICT`，二进制不会自动合并。
 
-`GET /capabilities` 与 `GET /strategies` 公开本机支持情况和 `processing/config/strategy-policy.json` 的生效预算。`POST /asset-tasks` 与 `GET /asset-tasks/{taskId}` 可保存固定 release/资产快照上的修复提案；字段包括 `strategyId`、`storyId`、`releaseId`、`assetId`、`expectedBaseSha256`、`issueIds`、`repairGoal`、`parameters`、`maxCostUsd`，POST 还要求 `Idempotency-Key`。默认外部生成预算为 0 美元，`generate-3d` / `prompt-variants` 返回 `needs_budget`、`attemptCount:0`、无产物，不会调用付费提供方。本地策略提案也不自动改资产或 current。
+`GET /capabilities` 与 `GET /strategies` 公开本机支持情况和 `processing/config/strategy-policy.json` 的生效预算。`POST /asset-tasks` 与 `GET /asset-tasks/{taskId}` 可保存固定 release/资产快照上的修复任务；字段包括 `strategyId`、`storyId`、`releaseId`、`assetId`、`expectedBaseSha256`、`issueIds`、`repairGoal`、`parameters`、`maxCostUsd`，POST 还要求 `Idempotency-Key`。默认外部生成预算为 0 美元，`generate-3d` / `prompt-variants` 返回 `needs_budget`、`attemptCount:0`、无产物，不会调用付费提供方。
 
-Blender 通用修整与外部生成执行适配尚未接通，`/strategies` 明确标 unavailable。`POST /reviews`、资产任务执行/恢复、候选提升为 current 的发布/回退命令仍待实现。本服务没有跨机器身份认证，只用于本机联调。Python 解包解释器默认 `/usr/bin/python3`，可通过 `PROCESSING_PYTHON` 指定团队机器上的解释器。
+本机有 Blender 时，`strategyId:"blender-refine"` 支持一个受控操作：`parameters:{"operation":"material_tint","color":"#49748f"}`。HTTP task 从 `queued` 经 Blender GLB 导入/材质修整/导出到 `candidate_ready`；结果保留输入/输出 SHA-256、前后尺寸、工具版本和 0 美元 API 成本。候选通过 `/artifacts/<taskId>/<outputPath>` 读取；动画 GLB 不在该适配器支持范围。`candidate_ready` 仍是待 AI 资产复审的候选，**没有采用或切换 current**。
+
+Blender 的一般网格/绑定/UV 修整与外部生成执行适配尚未接通，`/strategies` 列出限制或 unavailable。`POST /reviews`、付费资产任务执行/恢复、候选提升为 current 的发布/回退命令仍待实现。本服务没有跨机器身份认证，只用于本机联调。Python 解包解释器默认 `/usr/bin/python3`，可通过 `PROCESSING_PYTHON` 指定团队机器上的解释器。
 
 ## B→C 静态候选
 

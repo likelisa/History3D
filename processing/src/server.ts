@@ -6,8 +6,9 @@ import { storeBundle } from './bundles.ts'
 import { submitWorldFeedback, type WorldFeedback } from './feedback.ts'
 import { ImportError, importCollection } from './intake.ts'
 import { runInputReview } from './review/orchestrator.ts'
-import { listStrategies, loadStrategyPolicy } from './strategies/registry.ts'
+import { blenderAvailable, listStrategies, loadStrategyPolicy } from './strategies/registry.ts'
 import { proposeAssetTask } from './strategies/tasks.ts'
+import { executeBlenderRefine } from './strategies/blender-refine.ts'
 
 const PREFIX = '/api/processing/v1'
 const MAX_JSON = 1_000_000
@@ -49,6 +50,7 @@ async function jsonBody<T>(req: IncomingMessage): Promise<T> {
 export function createProcessingServer(options: ServerOptions): Server {
   const dataDir = path.resolve(options.dataDir)
   const runningJobs = new Set<string>()
+  const runningAssetTasks = new Set<string>()
   let importQueue: Promise<unknown> = Promise.resolve()
   const serializeImport = <T>(operation: () => Promise<T>): Promise<T> => {
     const next = importQueue.then(operation, operation)
@@ -76,6 +78,21 @@ export function createProcessingServer(options: ServerOptions): Server {
       if (job) { job.status = 'failed'; job.stage = 'reviewing_input'; job.diagnostics = [error instanceof Error ? error.message : String(error)]; job.updatedAt = new Date().toISOString(); await putJson(jobPath(jobId), job) }
     } finally { runningJobs.delete(jobId) }
   }
+  const progressAssetTask = async (taskId: string): Promise<void> => {
+    if (runningAssetTasks.has(taskId)) return
+    runningAssetTasks.add(taskId)
+    try { await executeBlenderRefine(taskId, dataDir, process.cwd()) }
+    catch (error) {
+      const file = path.join(dataDir, 'asset-tasks', taskId, 'task.json')
+      const task = await readJson<{ status: string; reason: string }>(file).catch(() => null)
+      if (task && ['queued', 'running'].includes(task.status)) {
+        task.status = 'failed'
+        task.reason = error instanceof Error ? error.message : String(error)
+        await putJson(file, task)
+      }
+    }
+    finally { runningAssetTasks.delete(taskId) }
+  }
   const server = createServer(async (req, res) => {
     try {
       const hostName = String(req.headers.host ?? '').split(':')[0]
@@ -93,12 +110,14 @@ export function createProcessingServer(options: ServerOptions): Server {
       }
       if (req.method === 'GET' && parts[0] === 'strategies' && parts.length === 1) {
         const policy = await loadStrategyPolicy(process.cwd())
-        respond(res, 200, { policy, strategies: listStrategies(policy, Boolean(process.env.TRIPO_API_KEY)) }); return
+        respond(res, 200, { policy, strategies: listStrategies(policy, Boolean(process.env.TRIPO_API_KEY), await blenderAvailable()) }); return
       }
       if (req.method === 'POST' && parts[0] === 'asset-tasks' && parts.length === 1) {
         const request = await jsonBody<Parameters<typeof proposeAssetTask>[0]>(req)
         const policy = await loadStrategyPolicy(process.cwd())
-        respond(res, 202, await proposeAssetTask(request, String(req.headers['idempotency-key'] ?? ''), dataDir, policy, Boolean(process.env.TRIPO_API_KEY)))
+        const task = await proposeAssetTask(request, String(req.headers['idempotency-key'] ?? ''), dataDir, policy, Boolean(process.env.TRIPO_API_KEY), await blenderAvailable())
+        respond(res, 202, task)
+        if (task.status === 'queued') void progressAssetTask(task.taskId)
         return
       }
       if (req.method === 'GET' && parts[0] === 'asset-tasks' && parts.length === 2 && /^task-[a-f0-9]{20}$/.test(parts[1])) {
@@ -209,6 +228,11 @@ export function createProcessingServer(options: ServerOptions): Server {
       const job = await readJson<JobRecord>(path.join(dataDir, 'jobs', file)).catch(() => null)
       if (job?.status === 'processing') void progressReview(job.jobId)
     }
+    for (const taskId of await readdir(path.join(dataDir, 'asset-tasks')).catch(() => [])) {
+      if (!/^task-[a-f0-9]{20}$/.test(taskId)) continue
+      const task = await readJson<{ status: string; strategyId: string }>(path.join(dataDir, 'asset-tasks', taskId, 'task.json')).catch(() => null)
+      if (task?.strategyId === 'blender-refine' && ['queued', 'running'].includes(task.status)) void progressAssetTask(taskId)
+    }
   }
   return server
 }
@@ -216,6 +240,7 @@ export function createProcessingServer(options: ServerOptions): Server {
 async function artifactRoot(dataDir: string, artifactId: string): Promise<string | null> {
   if (/^import-[a-f0-9]{20}$/.test(artifactId)) return path.join(dataDir, 'imports', artifactId)
   if (/^bundle-[a-f0-9]{20}$/.test(artifactId)) return path.join(dataDir, 'bundles', artifactId, 'files')
+  if (/^task-[a-f0-9]{20}$/.test(artifactId)) return path.join(dataDir, 'asset-tasks', artifactId)
   if (/^release-[a-f0-9]{20}$/.test(artifactId)) {
     for (const storyId of await readdir(path.join(dataDir, 'releases')).catch(() => [])) {
       if (!/^[a-z0-9][a-z0-9-]{0,63}$/.test(storyId)) continue

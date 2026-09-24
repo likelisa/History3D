@@ -44,3 +44,4 @@
 
 - 生效政策位于 `processing/config/strategy-policy.json`：每资产最多两次尝试、世界最多三轮审核、候选数 2；本轮付费生成上限 0 美元、0 次。没有来自用户的正预算与 Tripo 凭据位置时，`generate-3d` 和 `prompt-variants` 不可执行。
 - `/strategies` 明确列可用/不可用原因；`POST /asset-tasks` 在固定 release 与父资产 hash 上保存修复提案，随后可按 taskId 取回。技术 fixture 的生成任务返回 `needs_budget`、`attemptCount=0`、无产物；没有实际 Tripo 提交。该接口仍未提供付费执行或 Blender 通用修整适配。
+- 后续已接入 Blender **仅材质改色**适配，并在 Mac Blender 5.2.0 LTS 实测：货包任务 `task-22a6e73658eceb9e0993` 用 `#49748f` 输出 SHA-256 `12f512c694d7aa3d901607157488b04841835611bf46396d3f61e9e2cf2eb371` 的候选 GLB；前后包围盒相同，1 次尝试、API 成本 0，artifact HTTP 200。状态是 `candidate_ready`、`reviewStatus=pending`、`adopted=false`；尚未将它接进正式世界或完成资产 AI review。
