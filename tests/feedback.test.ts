@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest'
 import { spawnSync } from 'node:child_process'
-import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
+import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 import { storeBundle } from '../processing/src/bundles.ts'
@@ -71,9 +71,15 @@ describe('viewer feedback', () => {
     const receipt = await submitWorldFeedback(feedback, data)
     expect(receipt.patchResults[0].status).toBe('needs_review')
     const decision = { decisionId: 'b-adopt-001', action: 'integrate' as const, operator: 'processing-test', reason: 'material-only candidate for formal recheck', storyId: base.storyId, feedbackId: feedback.feedbackId, assetId: 'asset-pack-bundle', candidateHash: receipt.patchResults[0].candidateHash!, baseReleaseId: base.releaseId, baseAssetRevision: 1, baseSha256: parent.sha256 }
+    const staleLock = path.join(data, 'locks', `${base.storyId}-asset-pack-bundle.lock`)
+    await mkdir(staleLock, { recursive: true })
+    await writeFile(path.join(staleLock, 'owner.json'), JSON.stringify({ pid: 999999, startedAt: Date.now() - 60_000 }))
     const selected = await reviewViewerPatch(decision, data)
     expect(selected.status).toBe('integrated_candidate')
     expect(selected.assetRevision).toBe(2)
+    expect((await reviewViewerPatch(decision, data)).releaseId).toBe(selected.releaseId)
+    await rm(path.join(data, 'decisions', base.storyId, `${decision.decisionId}.json`))
+    await rm(path.join(data, 'registry', base.storyId, 'selected-assets', 'asset-pack-bundle.json'))
     expect((await reviewViewerPatch(decision, data)).releaseId).toBe(selected.releaseId)
     const nextDir = path.join(data, 'releases', base.storyId, selected.releaseId!)
     const nextLineage = JSON.parse(await readFile(path.join(nextDir, 'asset-lineage.json'), 'utf8'))
@@ -82,6 +88,7 @@ describe('viewer feedback', () => {
     expect((await validateScenePackage(createNodeReader(nextDir), { checkGlbBounds: true })).diagnostics.filter((item) => item.severity === 'error')).toEqual([])
     expect((await readFile(path.join(base.path, 'assets/pack-bundle.glb'))).equals(source)).toBe(false)
     await expect(readFile(path.join(data, 'registry', base.storyId, 'current.json'))).rejects.toMatchObject({ code: 'ENOENT' })
+    await expect(submitWorldFeedback({ ...feedback, feedbackId: 'jin-missing-bundle', bundleId: 'bundle-aaaaaaaaaaaaaaaaaaaa' }, data)).rejects.toThrow('BUNDLE_NOT_FOUND')
     const competing = await readFile(path.join(base.path, 'assets/pack-bundle.glb'))
     const competingJson = competing.subarray(20, 20 + competing.readUInt32LE(12)).toString('utf8').replace('0.4341536361747489', '0.6341536361747489')
     Buffer.from(competingJson).copy(competing, 20)

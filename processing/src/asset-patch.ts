@@ -1,5 +1,5 @@
 import { createHash, randomUUID } from 'node:crypto'
-import { cp, mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises'
+import { cp, mkdir, readFile, rename, rm, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { readGlbBounds } from '../../contracts/src/glb.ts'
 import { sizeTolerance } from '../../contracts/src/geometry.ts'
@@ -31,9 +31,9 @@ export async function reviewViewerPatch(decision: PatchDecision, dataDir: string
   const decisionPath = path.join(decisionsDir, `${decision.decisionId}.json`)
   const decisionHash = digest(JSON.stringify(decision))
   try {
-    const prior = await json<{ decisionHash: string; result: PatchDecisionResult }>(decisionPath)
+    const prior = await json<{ decisionHash: string; result?: PatchDecisionResult }>(decisionPath)
     if (prior.decisionHash !== decisionHash) throw new Error('PATCH_DECISION_ID_CONFLICT')
-    return prior.result
+    if (prior.result) return prior.result
   } catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error }
   if (decision.action === 'reject') {
     const result: PatchDecisionResult = { decisionId: decision.decisionId, status: 'rejected', releaseId: null, assetRevision: null }
@@ -54,14 +54,14 @@ export async function reviewViewerPatch(decision: PatchDecision, dataDir: string
   if (!patch.preservesDimensions || candidateBounds.dimensions.some((value, axis) => Math.abs(value - asset.dimensionsM[axis]) > sizeTolerance(asset.dimensionsM[axis])) || Math.abs(candidateBounds.min[1]) > 0.05) throw new Error('PATCH_DIMENSION_REVIEW_REQUIRED')
 
   const lockDir = path.join(dataDir, 'locks', `${decision.storyId}-${decision.assetId}.lock`)
-  await mkdir(path.dirname(lockDir), { recursive: true })
-  try { await mkdir(lockDir) } catch { throw new Error('ASSET_LOCKED') }
+  await putJson(decisionPath, { decisionHash, decision, status: 'pending' })
+  await acquireAssetLock(lockDir)
   try {
     const selectedPath = path.join(dataDir, 'registry', decision.storyId, 'selected-assets', `${decision.assetId}.json`)
     const selected = await json<{ baseSha256: string; candidateHash: string; assetRevision: number; decisionId: string; releaseId: string }>(selectedPath).catch(() => null)
     if (selected && selected.baseSha256 !== decision.baseSha256) throw new Error('ASSET_REVISION_CONFLICT')
     if (selected && selected.candidateHash !== decision.candidateHash) throw new Error('ASSET_REVISION_CONFLICT')
-    if (selected && selected.decisionId === decision.decisionId) {
+    if (selected) {
       const result: PatchDecisionResult = { decisionId: decision.decisionId, status: 'integrated_candidate', releaseId: selected.releaseId, assetRevision: selected.assetRevision }
       await putJson(decisionPath, { decisionHash, decision, result })
       return result
@@ -69,6 +69,16 @@ export async function reviewViewerPatch(decision: PatchDecision, dataDir: string
     const nextRevision = parent.adoptedRevision + 1
     const releaseId = `release-${digest(JSON.stringify(['viewer-patch-v1', decision.baseReleaseId, decisionHash, decision.candidateHash])).slice(0, 20)}`
     const finalDir = path.join(dataDir, 'releases', decision.storyId, releaseId)
+    const existingRelease = await json<{ releaseId: string }>(path.join(finalDir, 'release.json')).catch((error) => { if ((error as NodeJS.ErrnoException).code === 'ENOENT') return null; throw error })
+    if (existingRelease) {
+      const existingLineage = await json<{ assets: Array<{ assetId: string; adoptedRevision: number; sha256: string }> }>(path.join(finalDir, 'asset-lineage.json'))
+      const existingAsset = existingLineage.assets.find((item) => item.assetId === decision.assetId)
+      if (existingRelease.releaseId !== releaseId || existingAsset?.sha256 !== decision.candidateHash || existingAsset.adoptedRevision !== nextRevision) throw new Error('RELEASE_CONFLICT')
+      const result: PatchDecisionResult = { decisionId: decision.decisionId, status: 'integrated_candidate', releaseId, assetRevision: nextRevision }
+      await putJson(selectedPath, { baseSha256: decision.baseSha256, candidateHash: decision.candidateHash, assetRevision: nextRevision, decisionId: decision.decisionId, releaseId })
+      await putJson(decisionPath, { decisionHash, decision, result })
+      return result
+    }
     const stage = `${finalDir}.${randomUUID()}.tmp`
     await cp(baseDir, stage, { recursive: true })
     try {
@@ -112,4 +122,30 @@ export async function reviewViewerPatch(decision: PatchDecision, dataDir: string
       return result
     } catch (error) { await rm(stage, { recursive: true, force: true }); throw error }
   } finally { await rm(lockDir, { recursive: true, force: true }) }
+}
+
+async function acquireAssetLock(lockDir: string): Promise<void> {
+  await mkdir(path.dirname(lockDir), { recursive: true })
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      await mkdir(lockDir)
+      await putJson(path.join(lockDir, 'owner.json'), { pid: process.pid, startedAt: Date.now() })
+      return
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== 'EEXIST') throw error
+      const owner = await json<{ pid: number; startedAt: number }>(path.join(lockDir, 'owner.json')).catch(() => null)
+      const age = Date.now() - (owner?.startedAt ?? (await stat(lockDir)).mtimeMs)
+      let alive = false
+      if (owner && Number.isSafeInteger(owner.pid)) {
+        try { process.kill(owner.pid, 0); alive = true }
+        catch (probe) { alive = (probe as NodeJS.ErrnoException).code !== 'ESRCH' }
+      }
+      if (age < 30_000 && (alive || !owner)) throw new Error('ASSET_LOCKED')
+      if (alive && age < 10 * 60_000) throw new Error('ASSET_LOCKED')
+      const stale = `${lockDir}.stale-${randomUUID()}`
+      try { await rename(lockDir, stale); await rm(stale, { recursive: true, force: true }) }
+      catch { throw new Error('ASSET_LOCKED') }
+    }
+  }
+  throw new Error('ASSET_LOCKED')
 }

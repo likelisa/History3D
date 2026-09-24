@@ -43,7 +43,7 @@ export async function submitWorldFeedback(input: WorldFeedback, dataDir: string)
   const lineage = await readJson<{ assets: Array<{ assetId: string; adoptedRevision: number; sha256: string }> }>(path.join(releaseDir, 'asset-lineage.json'))
   const adopted = new Map(lineage.assets.map((item) => [item.assetId, item]))
   const bundleDir = input.bundleId ? path.join(dataDir, 'bundles', input.bundleId, 'files') : null
-  const bundle = input.bundleId ? await readJson<{ files: Array<{ path: string; sha256: string }> }>(path.join(dataDir, 'bundles', input.bundleId, 'bundle.json')) : null
+  const bundle = input.bundleId ? await readJson<{ files: Array<{ path: string; sha256: string }> }>(path.join(dataDir, 'bundles', input.bundleId, 'bundle.json')).catch((error) => { if ((error as NodeJS.ErrnoException).code === 'ENOENT') throw new Error('BUNDLE_NOT_FOUND'); throw error }) : null
   const listed = new Map(bundle?.files.map((item) => [item.path, item.sha256]))
   const stage = `${finalDir}.${randomUUID()}.tmp`
   await mkdir(path.join(stage, 'assets'), { recursive: true })

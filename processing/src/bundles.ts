@@ -56,12 +56,17 @@ async function unpack(zipPath: string, outputDir: string): Promise<{ files: File
     const child = spawn(process.env.PROCESSING_PYTHON ?? '/usr/bin/python3', [script, zipPath, outputDir], { stdio: ['ignore', 'pipe', 'pipe'] })
     let stdout = ''
     let stderr = ''
-    child.stdout.setEncoding('utf8').on('data', (chunk: string) => { stdout += chunk.slice(0, 2_000_000) })
-    child.stderr.setEncoding('utf8').on('data', (chunk: string) => { stderr += chunk.slice(0, 2_000) })
+    if (!child.stdout || !child.stderr) { reject(new Error('BUNDLE_INVALID: extractor streams unavailable')); return }
+    child.stdout.setEncoding('utf8').on('data', (chunk: string) => { stdout += chunk.slice(0, Math.max(0, 2_000_000 - stdout.length)) })
+    child.stderr.setEncoding('utf8').on('data', (chunk: string) => { stderr += chunk.slice(0, Math.max(0, 2_000 - stderr.length)) })
     child.on('error', reject)
     child.on('exit', (code) => {
       if (code !== 0) { reject(new Error(`BUNDLE_INVALID: ${stderr.trim() || `extractor exit ${code}`}`)); return }
-      try { resolve(JSON.parse(stdout) as { files: FileDigest[]; uncompressedBytes: number }) }
+      try {
+        const parsed = JSON.parse(stdout) as { files?: unknown; uncompressedBytes?: unknown }
+        if (!Array.isArray(parsed.files) || typeof parsed.uncompressedBytes !== 'number' || !Number.isSafeInteger(parsed.uncompressedBytes) || parsed.uncompressedBytes < 0 || parsed.files.some((file) => !file || typeof file.path !== 'string' || !Number.isSafeInteger(file.bytes) || !/^[a-f0-9]{64}$/.test(file.sha256))) throw new Error('invalid extractor shape')
+        resolve(parsed as { files: FileDigest[]; uncompressedBytes: number })
+      }
       catch { reject(new Error('BUNDLE_INVALID: extractor result invalid')) }
     })
   })

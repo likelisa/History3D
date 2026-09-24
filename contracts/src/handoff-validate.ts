@@ -5,6 +5,7 @@ import type { CollectionAsset, CollectionPlan, HandoffManifest } from './handoff
 import type { PackageReader } from './validate.ts'
 import { validateCollection } from './validate.ts'
 import { readGlbBounds } from './glb.ts'
+import { sizeTolerance } from './geometry.ts'
 import handoffSchema from '../schemas/handoff/handoff.schema.json'
 import planSchema from '../schemas/handoff/collection-plan.schema.json'
 import assetsSchema from '../schemas/handoff/asset-manifest.schema.json'
@@ -32,10 +33,11 @@ export async function validateCollectionHandoff(reader: PackageReader): Promise<
   const plan = await json<CollectionPlan>('plan.json')
   if (await reader.readText('plan.md') === null) problems.push({ path: 'plan.md', message: 'original plan missing' })
   const collection = await validateCollection(reader)
-  problems.push(...collection.diagnostics.filter((item) => item.severity === 'error').map((item) => ({ path: item.file, message: item.message })))
+  const collectionErrors = collection.diagnostics.filter((item) => item.severity === 'error')
+  problems.push(...collectionErrors.map((item) => ({ path: item.file, message: item.message })))
   if (!handoff || !assets || !plan) return problems
   if (handoff.handoffVersion !== '1.0.0' || handoff.kind !== 'collection' || !handoff.submissionId || !handoff.producer || !Number.isInteger(handoff.sourceContentRevision)) problems.push({ path: 'handoff.json', message: 'invalid handoff identity' })
-  if (handoff.storyId !== collection.story?.storyId || handoff.storyId !== collection.sources?.storyId || handoff.sourceContentRevision !== collection.story?.contentRevision) problems.push({ path: 'handoff.json', message: 'story or revision mismatch' })
+  if (collection.story && collection.sources && (handoff.storyId !== collection.story.storyId || handoff.storyId !== collection.sources.storyId || handoff.sourceContentRevision !== collection.story.contentRevision)) problems.push({ path: 'handoff.json', message: 'story or revision mismatch' })
   if (!Array.isArray(handoff.files) || !Array.isArray(assets.assets)) return [...problems, { path: 'handoff.json', message: 'file or asset list missing' }]
   const listed = new Set<string>()
   for (const file of handoff.files) {
@@ -47,6 +49,7 @@ export async function validateCollectionHandoff(reader: PackageReader): Promise<
     if (bytes.length !== file.bytes || createHash('sha256').update(bytes).digest('hex') !== file.sha256) problems.push({ path: file.path, message: 'file digest mismatch' })
   }
   for (const required of ['story.json', 'sources.json', 'plan.md', 'plan.json', 'assets/asset-manifest.json']) if (!listed.has(required)) problems.push({ path: required, message: 'required file not listed' })
+  if (collectionErrors.length || !collection.story || !collection.sources) return problems
   const briefs = new Set(collection.story?.objectBriefs.map((item) => item.id))
   const sources = new Set(collection.sources?.sources.map((item) => item.id))
   const claims = new Set(collection.story?.claims.map((item) => item.id))
@@ -59,7 +62,9 @@ export async function validateCollectionHandoff(reader: PackageReader): Promise<
     if (asset.scaleStatus === 'unknown' && asset.dimensionsM !== null) problems.push({ path: asset.path, message: 'unknown scale must have null dimensions' })
     if (asset.scaleStatus === 'known' && (!asset.dimensionsM || asset.dimensionsM.some((value) => !Number.isFinite(value) || value <= 0))) problems.push({ path: asset.path, message: 'known scale needs positive dimensions' })
     const binary = safePath(asset.path) ? await reader.readBinary(asset.path) : null
-    if (binary && !readGlbBounds(binary)) problems.push({ path: asset.path, message: 'invalid GLB geometry' })
+    const bounds = binary ? readGlbBounds(binary) : null
+    if (binary && !bounds) problems.push({ path: asset.path, message: 'invalid GLB geometry' })
+    if (bounds && asset.scaleStatus === 'known' && asset.dimensionsM && bounds.dimensions.some((measured, axis) => Math.abs(measured - asset.dimensionsM![axis]) > sizeTolerance(asset.dimensionsM![axis]))) problems.push({ path: asset.path, message: 'known dimensions do not match GLB bounds' })
   }
   for (const requiredBriefId of plan.requiredBriefIds) if (!assets.assets.some((asset) => asset.briefId === requiredBriefId)) problems.push({ path: 'plan.json', message: `required asset missing: ${requiredBriefId}` })
   for (const id of plan.requiredBriefIds) if (!briefs.has(id)) problems.push({ path: 'plan.json', message: `unknown required brief: ${id}` })

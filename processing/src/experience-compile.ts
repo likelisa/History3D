@@ -1,4 +1,4 @@
-import type { ExperienceFile, TransformTrack, VisibilityTrack } from '../../contracts/src/experience.ts'
+import type { AttachmentTrack, ExperienceFile, TransformTrack, VisibilityTrack } from '../../contracts/src/experience.ts'
 import type { SceneFile, Vec3 } from '../../contracts/src/types.ts'
 import Ajv2020 from 'ajv/dist/2020.js'
 import experienceSchema from '../../contracts/schemas/handoff/experience.schema.json'
@@ -65,9 +65,13 @@ export function validateExperience(scene: SceneFile, experience: ExperienceFile)
   }
   const environment = experience.environment.keyframes
   if (!environment.length || environment[0].timeSeconds !== 0 || environment.at(-1)?.timeSeconds !== experience.durationSeconds) errors.push('ENVIRONMENT_RANGE_INVALID')
-  for (const frame of environment) if (!validTime(frame.timeSeconds, experience.durationSeconds) || frame.fogNearM < 0 || frame.fogFarM <= frame.fogNearM || frame.lightIntensity < 0 || !/^#[a-fA-F0-9]{6}$/.test(frame.fogColor)) errors.push('ENVIRONMENT_FRAME_INVALID')
+  let priorEnvironmentTime = -1
+  for (const frame of environment) {
+    if (!validTime(frame.timeSeconds, experience.durationSeconds) || frame.timeSeconds <= priorEnvironmentTime || frame.fogNearM < 0 || frame.fogFarM <= frame.fogNearM || frame.lightIntensity < 0 || !/^#[a-fA-F0-9]{6}$/.test(frame.fogColor)) errors.push('ENVIRONMENT_FRAME_INVALID')
+    priorEnvironmentTime = frame.timeSeconds
+  }
   for (const cue of experience.cameraCues) if (!validTime(cue.timeSeconds, experience.durationSeconds) || !vec3Valid(cue.position) || !vec3Valid(cue.target)) errors.push(`CAMERA_CUE_INVALID: ${cue.id}`)
-  for (const audio of experience.audio) if (!audio.id || !audio.path || audio.defaultEnabled !== false || audio.startSeconds < 0 || audio.endSeconds > experience.durationSeconds || audio.startSeconds >= audio.endSeconds || audio.volume < 0 || audio.volume > 1) errors.push(`AUDIO_INVALID: ${audio.id}`)
+  for (const audio of experience.audio) if (!audio.id || !safeAudioPath(audio.path) || audio.defaultEnabled !== false || audio.startSeconds < 0 || audio.endSeconds > experience.durationSeconds || audio.startSeconds >= audio.endSeconds || audio.volume < 0 || audio.volume > 1) errors.push(`AUDIO_INVALID: ${audio.id}`)
   return errors
 }
 
@@ -93,26 +97,28 @@ function sampleValidated(scene: SceneFile, experience: ExperienceFile, requested
       objects[track.objectId].visible = step(track.keyframes, time).visible
     }
   }
-  const unresolved = experience.tracks.filter((track) => track.type === 'attachment')
-  for (let remaining = unresolved.length; remaining > 0 && unresolved.length; remaining--) {
-    for (let index = unresolved.length - 1; index >= 0; index--) {
-      const track = unresolved[index]
-      if (track.type !== 'attachment') continue
-      if (unresolved.some((other) => other.type === 'attachment' && other.childObjectId === track.parentObjectId)) continue
-      if (time >= track.startSeconds && time <= track.endSeconds) {
-        const parent = objects[track.parentObjectId]
-        const local = rotateYaw(track.localPosition, parent.yawRad)
-        objects[track.childObjectId] = { position: [parent.position[0] + local[0], parent.position[1] + local[1], parent.position[2] + local[2]], yawRad: parent.yawRad + track.localYawRad, visible: parent.visible && objects[track.childObjectId].visible }
-      }
-      unresolved.splice(index, 1)
+  const attachments = new Map(experience.tracks.filter((track): track is AttachmentTrack => track.type === 'attachment').map((track) => [track.childObjectId, track]))
+  const resolved = new Set<string>()
+  const applyAttachment = (childId: string): void => {
+    if (resolved.has(childId)) return
+    const track = attachments.get(childId)
+    if (!track) return
+    if (attachments.has(track.parentObjectId)) applyAttachment(track.parentObjectId)
+    if (time >= track.startSeconds && time <= track.endSeconds) {
+      const parent = objects[track.parentObjectId]
+      const local = rotateYaw(track.localPosition, parent.yawRad)
+      objects[track.childObjectId] = { position: [parent.position[0] + local[0], parent.position[1] + local[1], parent.position[2] + local[2]], yawRad: parent.yawRad + track.localYawRad, visible: parent.visible && objects[track.childObjectId].visible }
     }
+    resolved.add(childId)
   }
+  for (const childId of attachments.keys()) applyAttachment(childId)
   const env = interpolate(experience.environment.keyframes, time)
   const beat = experience.beats.find((item) => time >= item.startSeconds && (time < item.endSeconds || (time === experience.durationSeconds && item.endSeconds === time)))
   return { timeSeconds: time, beatId: beat?.id ?? null, objects, environment: env }
 }
 
 function validTime(value: number, duration: number): boolean { return Number.isFinite(value) && value >= 0 && value <= duration }
+function safeAudioPath(value: string): boolean { return Boolean(value) && !value.startsWith('/') && !value.includes('\\') && !value.split('/').some((part) => !part || part === '.' || part === '..') && !value.includes(':') }
 function vec3Valid(value: unknown): value is Vec3 { return Array.isArray(value) && value.length === 3 && value.every((item) => Number.isFinite(item)) }
 function rotateYaw([x, y, z]: Vec3, yaw: number): Vec3 { const c = Math.cos(yaw), s = Math.sin(yaw); return [x * c + z * s, y, z * c - x * s] }
 function step<T extends { timeSeconds: number }>(frames: T[], time: number): T { return [...frames].reverse().find((frame) => frame.timeSeconds <= time) ?? frames[0] }
@@ -125,6 +131,7 @@ function interpolate<T extends { timeSeconds: number }>(frames: T[], time: numbe
   for (const [key, value] of Object.entries(left)) {
     if (key === 'timeSeconds') continue
     const next = (right as Record<string, unknown>)[key]
+    if (Array.isArray(value) && Array.isArray(next) && value.length !== next.length) throw new Error(`EXPERIENCE_KEYFRAME_SHAPE_INVALID: ${key}`)
     result[key] = typeof value === 'number' && typeof next === 'number' ? value + (next - value) * factor
       : Array.isArray(value) && Array.isArray(next) ? value.map((item, index) => item + (next[index] - item) * factor)
       : value

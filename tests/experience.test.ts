@@ -54,4 +54,24 @@ describe('experience sampler', () => {
     experience.tracks.push({ id: 'loop', type: 'attachment', childObjectId: 'obj-beast', parentObjectId: 'obj-pack-a', localPosition: [0, 0, 0], localYawRad: 0, startSeconds: 0, endSeconds: 30, evidenceType: 'illustrative' })
     expect(validateExperience(scene, experience).some((item) => item.startsWith('ATTACHMENT_CYCLE'))).toBe(true)
   })
+
+  it('resolves two-level attachments in order and leaves inactive children at baseline', () => {
+    const { scene, experience } = fixture()
+    const satchel = structuredClone(scene.objects.find((item) => item.id === 'obj-crate')!)
+    satchel.id = 'obj-satchel'
+    satchel.position = [8, 0, 8]
+    scene.objects.push(satchel)
+    experience.tracks.push({ id: 'satchel-on-tool', type: 'attachment', childObjectId: 'obj-satchel', parentObjectId: 'obj-tool', localPosition: [0.1, 0, 0], localYawRad: 0, startSeconds: 5, endSeconds: 25, evidenceType: 'illustrative' })
+    expect(sampleExperience(scene, experience, 0).objects['obj-satchel'].position).toEqual([8, 0, 8])
+    const middle = sampleExperience(scene, experience, 10)
+    expect(middle.objects['obj-satchel'].position[0]).toBeCloseTo(middle.objects['obj-tool'].position[0])
+    expect(middle.objects['obj-satchel'].position[2]).toBeCloseTo(middle.objects['obj-tool'].position[2] - 0.1)
+    expect(sampleExperience(scene, experience, 30).objects['obj-satchel'].position).toEqual([8, 0, 8])
+  })
+
+  it('rejects audio paths that leave the release package', () => {
+    const { scene, experience } = fixture()
+    experience.audio.push({ id: 'bad-audio', path: '../outside.mp3', startSeconds: 0, endSeconds: 10, loop: false, volume: 0.5, defaultEnabled: false, rights: 'test' })
+    expect(validateExperience(scene, experience).some((item) => item.includes('EXPERIENCE_SCHEMA_INVALID') || item.includes('AUDIO_INVALID'))).toBe(true)
+  })
 })
