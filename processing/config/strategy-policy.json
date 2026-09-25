@@ -1,0 +1,14 @@
+{
+  "policyVersion": "1.0.0",
+  "allowedStrategyIds": ["procedural-import", "scene-recompose", "blender-refine", "mesh-normalize", "generate-3d", "prompt-variants"],
+  "preferredOrder": ["scene-recompose", "blender-refine", "mesh-normalize", "procedural-import", "generate-3d", "prompt-variants"],
+  "maxAttemptsPerAsset": 2,
+  "maxReviewCycles": 3,
+  "maxPaidAttempts": 0,
+  "maxCostUsd": 0,
+  "maxWallTimeSeconds": 900,
+  "candidateCount": 2,
+  "autoAdoptRules": [],
+  "requireAssetReview": true,
+  "requireWorldReview": true
+}

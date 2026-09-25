@@ -3,6 +3,7 @@ dist
 dist-ssr
 *.tsbuildinfo
 coverage
+.processing-data/
 *.local
 .DS_Store
 .env
@@ -13,6 +14,7 @@ coverage
 
 # 生成物：由 npm run prepare:assets 从 packages/ 复制而来
 viewer/public/packages
+viewer/public/candidates
 
 processing/demo/node_modules/
 processing/demo/dist/

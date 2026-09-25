@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["handoffVersion", "kind", "submissionId", "storyId", "sourceContentRevision", "createdAt", "producer", "files"],
+  "properties": {
+    "handoffVersion": { "const": "1.0.0" },
+    "kind": { "const": "collection" },
+    "submissionId": { "type": "string", "minLength": 1 },
+    "storyId": { "type": "string", "minLength": 1 },
+    "sourceContentRevision": { "type": "integer", "minimum": 1 },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "producer": { "type": "string", "minLength": 1 },
+    "supersedesSubmissionId": { "type": "string", "minLength": 1 },
+    "resolvesIssueIds": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+    "resolvesRequestIds": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+    "files": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["path", "sha256", "bytes"],
+        "properties": {
+          "path": { "type": "string", "minLength": 1 },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "bytes": { "type": "integer", "minimum": 0 }
+        }
+      }
+    }
+  }
+}

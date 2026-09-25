@@ -11,6 +11,9 @@ export default defineConfig({
     emptyOutDir: true,
   },
   server: {
+    proxy: {
+      '/api/processing/v1': 'http://127.0.0.1:8798',
+    },
     fs: {
       allow: [repoRoot],
     },

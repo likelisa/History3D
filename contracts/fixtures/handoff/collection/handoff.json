@@ -1,0 +1,46 @@
+{
+  "handoffVersion": "1.0.0",
+  "kind": "collection",
+  "submissionId": "fixture-collection-001",
+  "storyId": "silk-road-demo",
+  "sourceContentRevision": 1,
+  "createdAt": "2026-09-25T00:00:00Z",
+  "producer": "processing-fixture",
+  "files": [
+    {
+      "path": "story.json",
+      "sha256": "7d725897e5e8ecedfb7de42ec79f92bf6fbcf53dec6285ec5eb470c467505f49",
+      "bytes": 18267
+    },
+    {
+      "path": "sources.json",
+      "sha256": "eeb43e65295eb74c0dd55c51e8f92611ed6362b335b4ba03ed34b304a27fca14",
+      "bytes": 810
+    },
+    {
+      "path": "plan.md",
+      "sha256": "f443ee4ccbf06ee7e76ed2e59d7a23beca2a6385a02ae5b94d40db3321a1b52a",
+      "bytes": 311
+    },
+    {
+      "path": "plan.json",
+      "sha256": "5e1d934467e4915924e8fcbbf2e3c32fadd3f232c087c8c8b02cd06be4ec47d3",
+      "bytes": 622
+    },
+    {
+      "path": "assets/asset-manifest.json",
+      "sha256": "d021846bc2e30c0188da88ad36a139b2502546168f93b92bff0e76d228173947",
+      "bytes": 781
+    },
+    {
+      "path": "assets/pack-bundle.glb",
+      "sha256": "3ec686ab7668bb52fc939cfffd0e8d96b40716e73e7ea7e30f95252ec56bb534",
+      "bytes": 1632
+    },
+    {
+      "path": "references/route-overview.svg",
+      "sha256": "18026d09428bee349d99626bcd67dd402b4ab2c33b60bd7acef6381541e2961f",
+      "bytes": 1481
+    }
+  ]
+}

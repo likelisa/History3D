@@ -1,0 +1,41 @@
+{
+  "experienceVersion": "1.0.0",
+  "storyId": "silk-road-demo",
+  "sceneRevision": 2,
+  "durationSeconds": 30,
+  "beats": [
+    { "id": "departure", "label": "启程", "startSeconds": 0, "endSeconds": 10, "focusObjectIds": ["obj-beast", "obj-pack-a"], "evidenceType": "illustrative" },
+    { "id": "load", "label": "整理货物", "startSeconds": 10, "endSeconds": 20, "focusObjectIds": ["obj-traveler", "obj-staff"], "evidenceType": "illustrative" },
+    { "id": "road", "label": "前路", "startSeconds": 20, "endSeconds": 30, "focusObjectIds": ["obj-road-ahead", "obj-beast"], "evidenceType": "illustrative" }
+  ],
+  "tracks": [
+    { "id": "carrier-route", "type": "transform", "objectId": "obj-beast", "evidenceType": "illustrative", "keyframes": [
+      { "timeSeconds": 0, "position": [0, 0, 2], "yawRad": 0 },
+      { "timeSeconds": 10, "position": [0, 0, 0], "yawRad": 0 },
+      { "timeSeconds": 20, "position": [0, 0, 0], "yawRad": 0.35 },
+      { "timeSeconds": 30, "position": [0, 0, -3], "yawRad": 0.35 }
+    ] },
+    { "id": "cargo-on-carrier", "type": "attachment", "childObjectId": "obj-pack-a", "parentObjectId": "obj-beast", "localPosition": [0, 2, 0], "localYawRad": 0, "parentAnchorM": [0, 2, 0], "childAnchorM": [0, 0, 0], "startSeconds": 0, "endSeconds": 30, "evidenceType": "illustrative" },
+    { "id": "traveler-route", "type": "transform", "objectId": "obj-traveler", "evidenceType": "illustrative", "keyframes": [
+      { "timeSeconds": 0, "position": [2.8, 0, 4], "yawRad": 0 },
+      { "timeSeconds": 10, "position": [2.8, 0, 4], "yawRad": 0 },
+      { "timeSeconds": 20, "position": [1.8, 0, 2.4], "yawRad": -0.4 },
+      { "timeSeconds": 30, "position": [1.8, 0, 2.4], "yawRad": -0.4 }
+    ] },
+    { "id": "staff-with-traveler", "type": "attachment", "childObjectId": "obj-staff", "parentObjectId": "obj-traveler", "localPosition": [0.35, 0, 0], "localYawRad": 0, "parentAnchorM": [0.35, 1.05, 0], "childAnchorM": [0, 1.05, 0], "startSeconds": 0, "endSeconds": 30, "evidenceType": "illustrative" },
+    { "id": "crate-state", "type": "visibility", "objectId": "obj-crate", "evidenceType": "illustrative", "keyframes": [
+      { "timeSeconds": 0, "visible": true }, { "timeSeconds": 20, "visible": false }, { "timeSeconds": 30, "visible": false }
+    ] }
+  ],
+  "cameraCues": [
+    { "id": "cue-departure", "timeSeconds": 0, "position": [6, 3.1, 11], "target": [0, 1, 2], "evidenceType": "illustrative" },
+    { "id": "cue-load", "timeSeconds": 10, "position": [5, 2.3, 7], "target": [1.5, 1, 2], "evidenceType": "illustrative" },
+    { "id": "cue-road", "timeSeconds": 20, "position": [5, 3.5, 9], "target": [0, 0.8, -7], "evidenceType": "illustrative" }
+  ],
+  "environment": { "keyframes": [
+    { "timeSeconds": 0, "fogColor": "#16233a", "fogNearM": 80, "fogFarM": 220, "lightIntensity": 1 },
+    { "timeSeconds": 20, "fogColor": "#4a5566", "fogNearM": 55, "fogFarM": 170, "lightIntensity": 0.78 },
+    { "timeSeconds": 30, "fogColor": "#4a5566", "fogNearM": 55, "fogFarM": 170, "lightIntensity": 0.78 }
+  ] },
+  "audio": []
+}
