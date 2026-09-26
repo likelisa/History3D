@@ -1,0 +1,40 @@
+{
+  "storyId": "zhang-qian-yuezhi-pilot",
+  "baseRevision": 1,
+  "question": "核查张骞首次使月氏的出使目标、抵达顺序、未得要领及继位异文",
+  "period": "西汉武帝时，张骞首次出使月氏期间",
+  "place": "大宛、康居、大月氏及大夏；会面地点不详",
+  "queries": [
+    {
+      "id": "q-1",
+      "text": "张骞 大月氏 竟不能得月氏要领 史记 汉书",
+      "language": "zh",
+      "purpose": "support",
+      "sourceTypes": ["website"],
+      "providerIds": ["wikipedia-zh"]
+    },
+    {
+      "id": "q-2",
+      "text": "Zhang Qian Yuezhi mission alliance Xiongnu",
+      "language": "en",
+      "purpose": "context",
+      "sourceTypes": ["paper", "book", "website"],
+      "providerIds": ["openalex", "crossref", "wikipedia-en"]
+    },
+    {
+      "id": "q-3",
+      "text": "史记 太子 汉书 夫人 大月氏 异文",
+      "language": "zh",
+      "purpose": "challenge",
+      "sourceTypes": ["website"],
+      "providerIds": ["wikipedia-zh"]
+    }
+  ],
+  "controversySignal": "《史记》作太子，《汉书》作夫人，继位者有文本异文",
+  "omittedCoverage": [
+    "未配置馆藏专用搜索源",
+    "未配置历史地图专用搜索源",
+    "本轮公共元数据搜索不能替代古籍影印底本或校勘"
+  ],
+  "stopReason": "这只是最多五次获批试查；须记录每次结果、空结果、错误与覆盖缺口，再决定是否扩展"
+}

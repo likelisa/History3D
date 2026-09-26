@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "0.1.0",
+  "storyId": "zhang-qian-yuezhi-pilot",
+  "contentRevision": 1,
+  "title": "张骞首次使月氏：未取得联合抗匈奴的约定（史料试点，未审核）",
+  "status": "draft",
+  "historicalScope": {
+    "period": "西汉武帝时，张骞首次出使月氏期间",
+    "place": "大宛、康居、大月氏及大夏；会面地点不详",
+    "scopeNote": "只呈现古籍记述的出使目标、到达顺序与结果。此处不是精确地理复原；人物面貌、王庭建筑、会面站位、服饰、器物与年月均未获本包证据支持。"
+  },
+  "experienceQuestion": "张骞到达大月氏后，为什么没有取得汉廷原先期待的联合抗匈奴约定？",
+  "claims": [
+    {
+      "id": "claim-mission-goal",
+      "subjectId": "zhang-qian-yuezhi-pilot",
+      "property": "narrative",
+      "statement": "《史记》记载汉廷因月氏与匈奴有仇，拟通使月氏以共击匈奴。",
+      "value": "使月氏、谋共击匈奴",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "documented",
+      "sourceIds": ["src-shiji-goal"],
+      "note": "只表述《史记》的记载及出使目标，不把史书叙述直接等同可独立证实的现场事实。"
+    },
+    {
+      "id": "claim-arrival-sequence",
+      "subjectId": "zhang-qian-yuezhi-pilot",
+      "property": "route",
+      "statement": "《史记》记载张骞经大宛、康居抵达大月氏，后来又从月氏到大夏。",
+      "value": "大宛→康居→大月氏→大夏（叙事顺序，非精确路线）",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "documented",
+      "sourceIds": ["src-shiji-journey"],
+      "note": "仅是文本顺序；不得据示意图推断路线方位、距离或抵达月氏时的具体地点。"
+    },
+    {
+      "id": "claim-no-accord",
+      "subjectId": "zhang-qian-yuezhi-pilot",
+      "property": "narrative",
+      "statement": "《史记》《汉书》均记张骞未能取得月氏要领；《史记》还记月氏当时无报复匈奴之心。",
+      "value": "未取得使行目标所需的月氏约定",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "documented",
+      "sourceIds": ["src-shiji-journey", "src-hanshu-outcome"],
+      "note": "“未能得月氏要领”是原文；“未取得约定”是限于使行目标的现代释义。《汉书》相关段落与《史记》相近，不计作独立现场证据。"
+    },
+    {
+      "id": "claim-succession-variant",
+      "subjectId": "zhang-qian-yuezhi-pilot",
+      "property": "narrative",
+      "statement": "同一继位细节，《史记》记“立其太子为王”，《汉书》记“立其夫人为王”。",
+      "value": "太子／夫人：文本异文，人物身份不定",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "documented",
+      "sourceIds": ["src-shiji-journey", "src-hanshu-succession"],
+      "note": "这是两部文本的记述差异，不是两种人物同时成立；未做版本校勘，禁止据其中任一版画出特定继位者。"
+    },
+    {
+      "id": "claim-meeting-visuals-unknown",
+      "subjectId": "zhang-qian-yuezhi-pilot",
+      "property": "appearance",
+      "statement": "本轮资料不能确定具体会面场所、人物形貌、座次、服饰及器物。",
+      "value": null,
+      "unit": null,
+      "valueStatus": "unknown",
+      "evidenceType": null,
+      "sourceIds": [],
+      "note": "输出给 B 层的禁画边界：不得把任何概念图或臆造的王庭细节标成史料记载。"
+    }
+  ],
+  "objectBriefs": [],
+  "hotspots": [
+    {
+      "id": "hotspot-goal",
+      "title": "出使目标",
+      "body": "《史记》记载：汉廷希望与月氏联手应对匈奴。这里只陈述史书记载，不复原出发现场。",
+      "claimIds": ["claim-mission-goal"]
+    },
+    {
+      "id": "hotspot-arrival",
+      "title": "抵达月氏",
+      "body": "《史记》给出大宛、康居、大月氏及大夏的叙事顺序；旁边线条只是关系示意，不是古代路线地图。",
+      "claimIds": ["claim-arrival-sequence"]
+    },
+    {
+      "id": "hotspot-outcome",
+      "title": "未取得要领",
+      "body": "两书都写张骞未得月氏要领。月氏王继位者的文字记载不一，因此本试点不指定王的身份，也不复原会面场景。",
+      "claimIds": ["claim-no-accord", "claim-succession-variant", "claim-meeting-visuals-unknown"]
+    }
+  ],
+  "routeOverview": {
+    "kind": "schematic",
+    "imagePath": "references/narrative-sequence.svg"
+  }
+}
