@@ -17,6 +17,7 @@ export interface RevisionStore {
 export class CollectorCoordinator {
   private queue: Promise<void> = Promise.resolve()
   private readonly pending = new Set<string>()
+  private readonly admitting = new Map<string, Promise<string>>()
 
   constructor(
     private readonly root: string,
@@ -49,6 +50,18 @@ export class CollectorCoordinator {
         base.story.contentRevision !== base.sources.contentRevision) {
       throw new Error('反馈与资料基线不匹配')
     }
+    // Share the entire lookup-and-save operation between simultaneous submissions.
+    // A persisted store may return snapshots, so checking its current records alone
+    // does not make two concurrent HTTP requests atomic.
+    const inFlight = this.admitting.get(feedback.id)
+    if (inFlight) return inFlight
+    const admission = this.admit(feedback, base)
+    this.admitting.set(feedback.id, admission)
+    try { return await admission }
+    finally { if (this.admitting.get(feedback.id) === admission) this.admitting.delete(feedback.id) }
+  }
+
+  private async admit(feedback: FeedbackRecord, base: BaseCollection): Promise<string> {
     const existing = (await this.store.revisions()).find((item) =>
       item.feedbackId === feedback.id && ['queued', 'running', 'candidate', 'published'].includes(item.status),
     )

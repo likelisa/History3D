@@ -87,6 +87,40 @@ it('默认流程只在本地规划检索，不向公共搜索源外发用户反�
   expect(research[0].search.coverageGaps).toContain('没有配置搜索源')
 })
 
+it('相同反馈并发入队只保存并执行一条修订，即使持久化延迟', async () => {
+  const directory = path.resolve('contracts/fixtures/collection/silk-road-demo')
+  const story = JSON.parse(await readFile(path.join(directory, 'story.json'), 'utf8')) as StoryFile
+  const sources = JSON.parse(await readFile(path.join(directory, 'sources.json'), 'utf8')) as SourcesFile
+  const feedback = receiveFeedback({ origin: 'viewer', text: 'brief-pack 并发反馈' }, story)
+  const records = new Map<string, RevisionRecord>()
+  let queuedSaves = 0
+  let runs = 0
+  const store: RevisionStore = {
+    async revisions() { return [...records.values()].map((record) => structuredClone(record)) },
+    async saveRevision(record) {
+      if (record.status === 'queued') {
+        queuedSaves += 1
+        await new Promise((resolve) => setTimeout(resolve, 10))
+      }
+      records.set(record.id, structuredClone(record))
+    },
+    async saveResearch() {},
+  }
+  const coordinator = new CollectorCoordinator('unused', store, async () => {
+    runs += 1
+    throw new Error('synthetic pipeline failure')
+  })
+  const [first, second] = await Promise.all([
+    coordinator.enqueue(feedback, { story, sources, directory }),
+    coordinator.enqueue(feedback, { story, sources, directory }),
+  ])
+  await coordinator.waitIdle()
+  expect(first).toBe(second)
+  expect(queuedSaves).toBe(1)
+  expect(runs).toBe(1)
+  expect(records.size).toBe(1)
+})
+
 it('进程重启后恢复已持久化的 queued 修订；版本变化时转人工而非静默丢失', async () => {
   const directory = path.resolve('contracts/fixtures/collection/silk-road-demo')
   const story = JSON.parse(await readFile(path.join(directory, 'story.json'), 'utf8')) as StoryFile

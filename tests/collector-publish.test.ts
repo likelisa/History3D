@@ -1,4 +1,4 @@
-import { cp, mkdir, mkdtemp, readFile, stat, writeFile } from 'node:fs/promises'
+import { cp, mkdir, mkdtemp, readFile, stat, unlink, writeFile } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 import { describe, expect, it } from 'vitest'
@@ -50,5 +50,19 @@ describe('候选包受控发布', () => {
     await expect(publishCandidate(root, directory, 1, approval)).rejects.toThrow('未引用')
     const stillPublished = JSON.parse(await readFile(path.join(root, 'output', candidate.story.storyId, 'story.json'), 'utf8')) as StoryFile
     expect(stillPublished.contentRevision).toBe(1)
+  })
+
+  it('上次发布残留的锁给出可操作的恢复提示，清理后可重试', async () => {
+    const { root, directory, candidate } = await sample()
+    const approval = { reviewer: 'synthetic-reviewer', reviewedAt: '2026-09-25T00:00:00Z',
+      storyId: candidate.story.storyId, candidateRevision: candidate.story.contentRevision,
+      expectedBaseRevision: 1, evidenceRef: 'synthetic-approval-record', candidateSha256: await candidateSha256(directory) }
+    const lockPath = path.join(root, '.publish.lock')
+    await writeFile(lockPath, JSON.stringify({ pid: 999999, acquiredAt: '2026-09-25T00:00:00Z' }))
+    await expect(publishCandidate(root, directory, 1, approval)).rejects.toThrow('先确认没有发布进程')
+    expect(await readFile(lockPath, 'utf8')).toContain('999999')
+    await unlink(lockPath)
+    await publishCandidate(root, directory, 1, approval)
+    await expect(stat(lockPath)).rejects.toMatchObject({ code: 'ENOENT' })
   })
 })

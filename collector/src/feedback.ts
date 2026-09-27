@@ -4,7 +4,7 @@ import type { StoryFile } from '../../contracts/src/types.ts'
 import type { FeedbackContext, FeedbackInput, FeedbackRecord } from './types.ts'
 
 function canonicalText(text: string): string {
-  return text.normalize('NFKC').trim().replace(/\s+/g, ' ').toLocaleLowerCase()
+  return text.normalize('NFKC').trim().replace(/\s+/g, ' ').toLowerCase()
 }
 
 function validContext(context: FeedbackContext, story: StoryFile): boolean {

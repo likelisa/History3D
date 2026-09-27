@@ -211,7 +211,7 @@ export async function runRevision(options: PipelineOptions): Promise<RevisionRec
     evidenceA: item.supportExcerpt, evidenceB: excerpt,
   })))
   const judged = await judgeNarrowQuestions(narrowQuestions, options.judge)
-  if (judged.unresolved.length) return stop(options, record, 'J', 'blocked', judged.decisions.map((item) => item.questionId), judged.unresolved.join('；'))
+  if (judged.unresolved.length) return stop(options, record, 'J', judged.failed ? 'blocked' : 'needs_human', judged.decisions.map((item) => item.questionId), judged.unresolved.join('；'))
   await recordStage(options, record, event('J', record.baseRevision, 'closed', judged.decisions.map((item) => `${item.questionId}:${item.verdict}`),
     narrowQuestions.length ? '窄判断已记录，结论仍需来源和人审' : '本轮无明确争议题；无需调用 Jev'))
 

@@ -7,8 +7,11 @@ let feedbackId = null
 
 async function send(url, payload) {
   const response = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) })
-  const result = await response.json()
-  if (!response.ok) throw new Error(result.error || '提交失败')
+  let result
+  try { result = JSON.parse(await response.text()) }
+  catch { throw new Error(response.ok ? '服务响应格式无效，请稍后重试。' : `提交失败（HTTP ${response.status}），请稍后重试。`) }
+  if (!response.ok) throw new Error(result?.error || `提交失败（HTTP ${response.status}）`)
+  if (!result || typeof result !== 'object') throw new Error('服务响应格式无效，请稍后重试。')
   return result
 }
 
@@ -18,6 +21,7 @@ function showResult(result) {
     question.textContent = result.question
     clarify.style.display = 'block'
     message.textContent = '已收到。请回答下面的问题，帮助我们找到准确位置。'
+    document.getElementById('answer').focus()
   } else {
     clarify.style.display = 'none'
     message.textContent = result.status === 'duplicate'

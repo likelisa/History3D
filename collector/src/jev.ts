@@ -79,20 +79,23 @@ export class TypeSafeJevJudge implements NarrowJudge {
 export async function judgeNarrowQuestions(
   questions: readonly NarrowQuestion[],
   judge: NarrowJudge | null,
-): Promise<{ decisions: NarrowDecision[]; unresolved: string[] }> {
-  if (questions.length === 0) return { decisions: [], unresolved: [] }
-  if (!judge) return { decisions: [], unresolved: questions.map((item) => `${item.id}: Jev 未配置`) }
+): Promise<{ decisions: NarrowDecision[]; unresolved: string[]; failed: boolean }> {
+  if (questions.length === 0) return { decisions: [], unresolved: [], failed: false }
+  if (!judge) return { decisions: [], unresolved: questions.map((item) => `${item.id}: Jev 未配置`), failed: true }
   const decisions: NarrowDecision[] = []
   const unresolved: string[] = []
+  let failed = false
   for (const question of questions) {
     if (!question.question.trim() || !question.evidenceA.trim() || !question.evidenceB.trim()) {
       unresolved.push(`${question.id}: 问题或两侧证据不完整`)
+      failed = true
       continue
     }
     try {
       const decision = await judge.judge(question)
       if (decision.questionId !== question.id || !['a', 'b', 'unclear'].includes(decision.verdict)) {
         unresolved.push(`${question.id}: 判断响应与提问不匹配`)
+        failed = true
       } else {
         decisions.push(decision)
         if (decision.verdict === 'unclear') unresolved.push(`${question.id}: Jev 判断不明确`)
@@ -100,7 +103,8 @@ export async function judgeNarrowQuestions(
     } catch {
       // Provider exceptions may contain authentication headers or signed URLs.
       unresolved.push(`${question.id}: Jev 调用失败；请查看受控服务端诊断`)
+      failed = true
     }
   }
-  return { decisions, unresolved }
+  return { decisions, unresolved, failed }
 }

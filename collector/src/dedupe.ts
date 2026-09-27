@@ -5,10 +5,14 @@ function canonicalUrl(value: string): string {
     const url = new URL(value)
     url.hash = ''
     for (const key of [...url.searchParams.keys()]) {
-      if (/^(utm_|fbclid$|gclid$|ref$)/i.test(key)) url.searchParams.delete(key)
+      if (/^(utm_|fbclid$|gclid$|msclkid$|mc_cid$|mc_eid$|ref$|ref_src$)/i.test(key)) url.searchParams.delete(key)
     }
-    url.hostname = url.hostname.toLowerCase()
-    url.pathname = url.pathname.replace(/\/$/, '')
+    if (url.protocol === 'http:' || url.protocol === 'https:') {
+      url.protocol = 'https:'
+      url.hostname = url.hostname.replace(/^www\./i, '').toLowerCase()
+    }
+    url.pathname = url.pathname.replace(/\/+$/, '') || '/'
+    url.searchParams.sort()
     return url.toString()
   } catch { return value.trim().toLowerCase() }
 }

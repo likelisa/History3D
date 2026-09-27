@@ -93,6 +93,17 @@ describe('采集反馈与搜索', () => {
     expect(clusters[0].mirrors).toHaveLength(1)
   })
 
+  it('镜像 URL 归并，但不同内容路径或查询仍保持独立', () => {
+    const clusters = dedupeHits([
+      { ...hit, doi: null, url: 'http://www.example.org/synthetic-record///?utm_source=test&b=2&a=1#part' },
+      { ...hit, doi: null, url: 'https://example.org/synthetic-record?a=1&b=2' },
+      { ...hit, doi: null, url: 'https://example.org/other-record?a=1&b=2' },
+      { ...hit, doi: null, url: 'https://example.org/synthetic-record?a=3&b=2' },
+    ])
+    expect(clusters).toHaveLength(3)
+    expect(clusters[0].mirrors).toHaveLength(1)
+  })
+
   it('搜索源异常即使含秘密或检索词，也不写入审计轨迹', async () => {
     const { story } = await base()
     const feedback = receiveFeedback({ origin: 'user', text: 'brief-pack 需要核查' }, story)
@@ -505,6 +516,17 @@ describe('完整修订链（全部资料均为合成测试）', () => {
     expect(result.stages.at(-1)?.stage).toBe('J')
   })
 
+  it('Jev 仅给出 unclear 时停在 J 等待人工复核', async () => {
+    const input = await options(true, true)
+    input.judge = { async judge(question) {
+      return { questionId: question.id, verdict: 'unclear', model: 'synthetic', rationale: 'insufficient evidence', rawResponseRef: 'fixture' }
+    } }
+    const result = await runRevision(input)
+    expect(result.status).toBe('needs_human')
+    expect(result.stages.at(-1)?.stage).toBe('J')
+    expect(result.candidatePath).toBeNull()
+  })
+
   it('未经原文核对的反向摘录先停在 E，不能交给 Jev', async () => {
     const input = await options(true, true)
     let calls = 0
@@ -550,5 +572,20 @@ describe('完整修订链（全部资料均为合成测试）', () => {
     expect(candidate.sources.contentRevision).toBe(2)
     expect(candidate.story.claims.some((claim) => claim.id === 'claim-story-context')).toBe(false)
     expect(story.claims.some((claim) => claim.id === 'claim-story-context')).toBe(true)
+  })
+
+  it('来源字段相同但 JSON 键顺序不同不误报 ID 冲突', async () => {
+    const { story, sources, references } = await base()
+    const item = evidence(story)
+    const original = sources.sources[0]
+    const reordered = Object.fromEntries(Object.entries(original).reverse()) as typeof original
+    item.source = reordered
+    item.claim.sourceIds = [original.id]
+    const candidate = buildCandidate(story, sources, [{ kind: 'replace', previousClaimId: 'claim-story-context', evidence: item }], references)
+    await validateCandidate(candidate)
+    expect(candidate.sources.sources.filter((source) => source.id === original.id)).toHaveLength(1)
+    expect(() => buildCandidate(story, sources, [{ kind: 'replace', previousClaimId: 'claim-story-context', evidence: {
+      ...item, source: { ...reordered, title: 'conflicting title' },
+    } }], references)).toThrow('来源 ID 冲突')
   })
 })

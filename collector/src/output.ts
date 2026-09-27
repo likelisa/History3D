@@ -1,6 +1,7 @@
 import { createHash, randomUUID } from 'node:crypto'
 import { lstat, mkdir, open, readFile, readdir, realpath, rename, writeFile } from 'node:fs/promises'
 import path from 'node:path'
+import { isDeepStrictEqual } from 'node:util'
 
 import { hasBlockingError } from '../../contracts/src/diagnostics.ts'
 import { createNodeReader } from '../../contracts/src/node-reader.ts'
@@ -44,7 +45,7 @@ export function buildCandidate(
     const next: Claim = structuredClone(edit.evidence.claim)
     const source: SourceEntry = structuredClone(edit.evidence.source)
     const existingSource = sources.sources.find((item) => item.id === source.id)
-    if (existingSource && JSON.stringify(existingSource) !== JSON.stringify(source)) throw new Error(`来源 ID 冲突：${source.id}`)
+    if (existingSource && !isDeepStrictEqual(existingSource, source)) throw new Error(`来源 ID 冲突：${source.id}`)
     if (!existingSource) sources.sources.push(source)
     if (story.claims.some((claim) => claim.id === next.id)) throw new Error(`断言 ID 冲突：${next.id}`)
     if (edit.kind === 'replace') {
@@ -168,8 +169,14 @@ export async function publishCandidate(root: string, candidateDirectory: string,
   }
   const lockPath = path.join(root, '.publish.lock')
   await mkdir(root, { recursive: true })
-  const lock = await open(lockPath, 'wx')
+  let lock
+  try { lock = await open(lockPath, 'wx') }
+  catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== 'EEXIST') throw error
+    throw new Error(`发布锁已存在：${lockPath}。若上次发布中断，请先确认没有发布进程，再手动移走此锁文件并重试。`)
+  }
   try {
+    await lock.writeFile(JSON.stringify({ pid: process.pid, acquiredAt: new Date().toISOString() }), 'utf8')
     const verified = await validateCollection(createNodeReader(candidatePath))
     if (hasBlockingError(verified.diagnostics) || !verified.story || !verified.sources) throw new Error('候选包校验失败')
     const storyId = verified.story.storyId
