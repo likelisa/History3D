@@ -13,3 +13,10 @@ coverage
 
 # 生成物：由 npm run prepare:assets 从 packages/ 复制而来
 viewer/public/packages
+
+# 采集运行态可能包含用户反馈原文、检索记录及未审核候选；不可误提交。
+collector/state/
+collector/candidates/
+collector/output/
+collector/archive/
+collector/.publish.lock

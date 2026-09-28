@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>史料反馈</title>
+  <style>
+    body { font: 16px/1.55 system-ui,sans-serif; max-width: 720px; margin: 3rem auto; padding: 0 1rem; color: #17212b; }
+    h1 { font-size: 1.6rem; } p { color: #4c5966; }
+    label { display: block; margin: 1.2rem 0 .4rem; font-weight: 600; }
+    select,textarea,input { box-sizing: border-box; width: 100%; padding: .7rem; border: 1px solid #8d9aa5; border-radius: .4rem; font: inherit; }
+    textarea { min-height: 9rem; } button { margin-top: 1rem; padding: .65rem 1.2rem; border: 0; border-radius: .4rem; background: #1d5fa7; color: white; font: inherit; cursor: pointer; }
+    #message { margin-top: 1.3rem; padding: .9rem; border-radius: .4rem; background: #eef3f8; white-space: pre-wrap; }
+    #clarify { display: none; }
+  </style>
+</head>
+<body>
+  <h1>指出史料中的问题</h1>
+  <p>按平常说话的方式描述哪里不对、缺了什么，或为什么有疑问。信息不够时，我们会继续问你。</p>
+  <form id="feedback">
+    <label for="story">哪段故事？</label>
+    <select id="story"><option value="">暂时不确定</option></select>
+    <label for="text">你发现的问题</label>
+    <textarea id="text" required placeholder="例如：画面里的驮兽大小好像不对，我看到另一份资料说……"></textarea>
+    <button type="submit">提交反馈</button>
+  </form>
+  <form id="clarify">
+    <label for="answer" id="question">请再说明一下</label>
+    <input id="answer" required>
+    <button type="submit">补充说明</button>
+  </form>
+  <div id="message" role="status" aria-live="polite">正在加载故事列表……</div>
+  <script src="/app.js" defer></script>
+</body>
+</html>

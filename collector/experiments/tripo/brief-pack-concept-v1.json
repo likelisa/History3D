@@ -1,0 +1,41 @@
+{
+  "purpose": "B-layer concept reference for brief-pack; not a historical reconstruction",
+  "storyId": "silk-road-demo",
+  "subjectId": "brief-pack",
+  "status": "superseded_by_v2",
+  "api": "Tripo OpenAPI generate_image",
+  "model_version": "default (flux.1_kontext_pro per official docs)",
+  "prompt": "A single generic rectangular cargo bundle for a 3D blockout reference in the History3D silk-road-demo technical placeholder. Plain unmarked matte cloth wrapped around a box-like load, two simple crossed rope ties, softened edges. Three-quarter isometric view clearly showing front, top and right side; entire object centered on a clean off-white studio background with a soft contact shadow. Readable silhouette and materials. No people, animals, scenery, labels, logos, ornament, or period-specific motifs. Illustrative concept only, not a historical reconstruction.",
+  "task_id": "9660e50a-bfa9-4705-b493-d26e563acdc5",
+  "consumed_credit": 5,
+  "image_file": "brief-pack-concept-v1.png",
+  "image_sha256": "620fb76d67afff47379bfad02c681b611a5cfd0b9fff6a11bc70d0a2a1c3f68d",
+  "image_bytes": 815153,
+  "content_type": "image/png",
+  "source_documentation": [
+    "https://docs.tripo3d.ai/get-started/quick-start.html",
+    "https://docs.tripo3d.ai/image-generation/advanced-image-generation.html",
+    "https://docs.tripo3d.ai/task-query/get-your-task-result.html"
+  ],
+  "historical_validation": "none; materials, shape and period specificity remain unverified",
+  "publication": "not approved; keep outside story.json, sources.json and references until review",
+  "agent_review": {
+    "decision": "concept-reference-only; await user review",
+    "prompt_alignment": "one centered load, three-quarter view, plain studio background, no text or ornament: met",
+    "modeling_utility": "readable silhouette and cloth/rope material distinction; perspective does not establish dimensions or orthographic views; silhouette appears too cube-like for the illustrative 1.2 x 0.8 x 0.6 m brief",
+    "issues": [
+      "lower tier and several knots may be interpreted as two stacked packages rather than one bundle",
+      "specific cloth weave and rope configuration have no cited historical evidence",
+      "the illustrated width/height/depth cannot be validated against the fixture's 1.2 x 0.8 x 0.6 m dimensions",
+      "possible modern packaging impression; not suitable for factual display"
+    ],
+    "process_issue": "The preceding user-facing update mentioned a pack-animal concept, but the submitted task intentionally targeted the simpler brief-pack without announcing the switch. No additional task should run until the user reviews this discrepancy.",
+    "next_iteration_if_requested": "single continuous low rectangular bundle with visibly wider horizontal dimension, simpler rope routing, front/side/back consistency or orthographic multi-view after user feedback"
+  },
+  "user_review": {
+    "decision": "requested_revision",
+    "user_words": "按更扁长的单件行囊重试",
+    "scope": "v1 remains comparison only"
+  },
+  "proposed_prompt_v2_not_submitted": "One single low, wide rectangular cargo bundle, roughly 2:1 width-to-height silhouette, for a History3D technical placeholder. One continuous cloth-wrapped volume, two simple ropes, no horizontal seam or stacked layers, no extra knots. Three-quarter view showing top, front and one side. Plain neutral studio background. Clear modeling reference, no people, animals, scenery, text, logos, decorative motifs or claimed historical authenticity."
+}

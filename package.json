@@ -6,6 +6,8 @@
   "scripts": {
     "prepare:assets": "node scripts/prepare-assets.mjs",
     "validate:collection": "node --import tsx scripts/validate-collection.ts",
+    "collector:dev": "node --import tsx scripts/collector-server.ts --demo",
+    "collector:publish": "node --import tsx scripts/collector-publish.ts",
     "validate:package": "node --import tsx scripts/validate-package.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
