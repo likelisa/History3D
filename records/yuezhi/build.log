@@ -1,0 +1,51 @@
+
+> history3d@0.0.1 build
+> npm run validate:collection && npm run validate:package && npm run validate:yuezhi && npm run prepare:assets && tsc --noEmit && vite build
+
+
+> history3d@0.0.1 validate:collection
+> node --import tsx scripts/validate-collection.ts
+
+
+校验对象：contracts/fixtures/collection/silk-road-demo
+✓ 未发现问题
+
+> history3d@0.0.1 validate:package
+> node --import tsx scripts/validate-package.ts
+
+
+校验对象：packages/silk-road-demo
+✓ 未发现问题
+
+> history3d@0.0.1 validate:yuezhi
+> node --import tsx scripts/validate-package.ts packages/zhang-qian-yuezhi
+
+
+校验对象：packages/zhang-qian-yuezhi
+! [VALIDATION_FAILED] scene.json#objects[0].position
+    对象实例 obj-environment 的底部原点不在接地高度（0）上，请确认这是有意为之
+
+共 0 个错误、1 个警告
+
+> history3d@0.0.1 prepare:assets
+> node scripts/prepare-assets.mjs
+
+已复制 packages/ → viewer/public/packages/
+vite v6.4.3 building for production...
+transforming...
+✓ 222 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/index.html                       0.50 kB │ gzip:   0.34 kB
+../dist/yuezhi.html                      0.63 kB │ gzip:   0.44 kB
+../dist/assets/viewer-7U-9-jlR.css       6.51 kB │ gzip:   2.00 kB
+../dist/assets/yuezhi-CkCx-YVW.css       8.81 kB │ gzip:   2.79 kB
+../dist/assets/yuezhi-Bbwbz9Yn.js       39.66 kB │ gzip:  13.07 kB
+../dist/assets/viewer-CQ44rxLV.js       44.79 kB │ gzip:  15.01 kB
+../dist/assets/GLTFLoader-BU2aP31T.js  750.97 kB │ gzip: 199.20 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 1.23s

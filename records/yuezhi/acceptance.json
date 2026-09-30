@@ -1,0 +1,65 @@
+{
+  "baseline": "66e7a83d643bdd7f7ccce866f9bffabf8b43fb00",
+  "status": "local interactive draft",
+  "storyId": "zhang-qian-yuezhi",
+  "assets": [
+    {
+      "assetId": "asset-environment",
+      "bytes": 7431156,
+      "sha256": "8a10547637835b2c18cd6b9c94d11b998ae1b20c56fd8a7440f04daed7a2b4a7",
+      "taskId": null,
+      "creditsConsumed": 0
+    },
+    {
+      "assetId": "asset-envoy",
+      "bytes": 1959616,
+      "sha256": "d4266180a9f0b7ca677d70faa95c2972953be4ffe719fd52bf11f938cd415df4",
+      "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf",
+      "creditsConsumed": 20
+    },
+    {
+      "assetId": "asset-representative",
+      "bytes": 1939684,
+      "sha256": "306fc0a601fa65bb9d1486a815fd2b14ec93cd63448a8e0c409c8e1ab99ad3e7",
+      "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb",
+      "creditsConsumed": 20
+    },
+    {
+      "assetId": "asset-staff",
+      "bytes": 28984,
+      "sha256": "4484a2a14f86bee0458b05912370515b57e2e0feac27a8415f73183b63f69649",
+      "taskId": null,
+      "creditsConsumed": 0
+    }
+  ],
+  "totalTripoCredits": 40,
+  "checks": {
+    "typecheck": "pass",
+    "packageValidation": "0 errors, 1 intentional riverbed/terrain bottom-height warning",
+    "build": "pass, existing Three.js chunk size warning",
+    "tests": "86/86 passed",
+    "browser": [
+      "three chapter progression",
+      "three discovery clues and original text disclosure",
+      "accept and decline predictions both reveal fixed historical outcome",
+      "chapter revisit",
+      "refresh restores progress",
+      "recap and reset",
+      "walking forward/turn via step controls",
+      "collapsible narration panel",
+      "four GLB hashes verified before ready",
+      "no browser error/warn logs"
+    ]
+  },
+  "notYetVerified": [
+    "90 second fixed-environment performance benchmark",
+    "user visual acceptance",
+    "scholarly historical review",
+    "speech listening acceptance"
+  ],
+  "screenshots": [
+    "01-arrival.jpg",
+    "02-investigation.jpg",
+    "03-outcome.jpg"
+  ]
+}
