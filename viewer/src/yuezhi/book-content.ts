@@ -1,0 +1,86 @@
+export type Speaker = 'narrator' | 'envoy' | 'guide' | 'representative' | 'merchant'
+export interface BookLine {
+  id: string
+  speaker: Speaker
+  text: string
+  sourceIds: string[]
+  next?: string
+  choices?: Array<{ id: string; text: string; next: string }>
+}
+export interface BookScene {
+  id: string
+  title: string
+  place: string
+  time: string
+  backdrop: 'asset-environment' | 'asset-meeting' | 'asset-market'
+  mood: 'arrival' | 'meeting' | 'waiting' | 'market'
+  partner: Speaker
+  start: string
+  note: string
+  noteSourceIds?: string[]
+  lines: BookLine[]
+}
+export const speakerNames: Record<Speaker, string> = { narrator: '记述', envoy: '张骞', guide: '当地协助者', representative: '月氏接见者', merchant: '大夏答问者' }
+export const bookScenes: BookScene[] = [
+  {
+    id: 'arrival', title: '终于抵达', place: '月氏居地外围 · 具体地点未详', time: '第一次出使期间', backdrop: 'asset-environment', mood: 'arrival', partner: 'guide', start: 'arrival-1',
+    note: '大宛、康居协助传送有记载。眼前的接引人物、站位与谈话为创作补充；不指定谁一路随行。',
+    lines: [
+      { id: 'arrival-1', speaker: 'narrator', text: '被匈奴留了十余年，张骞逃离后继续西行。大宛与康居的协助，终于把他带到了大月氏。', sourceIds: ['shiji-mission', 'shiji-arrival'], next: 'arrival-2' },
+      { id: 'arrival-2', speaker: 'guide', text: '汉朝的使者，您到了。这里便是月氏如今生活的地方。', sourceIds: ['shiji-arrival'], next: 'arrival-3' },
+      { id: 'arrival-3', speaker: 'envoy', text: '我奉汉廷之命而来。我们听闻月氏与匈奴的旧仇，希望能共同应对匈奴。', sourceIds: ['shiji-mission'], next: 'arrival-4' },
+      { id: 'arrival-4', speaker: 'guide', text: '眼前的人们，已经在新的地方立足。您一路带来的期待，也许要在这里重新看一看。', sourceIds: ['shiji-disposition'], next: 'arrival-5' },
+      { id: 'arrival-5', speaker: 'envoy', text: '先把汉廷的来意说清楚。走了这么久，我仍要完成这项使命。', sourceIds: ['shiji-mission'], next: 'arrival-6' },
+      { id: 'arrival-6', speaker: 'narrator', text: '使者抵达了目的地。接下来，他要面对的，是已经改变的月氏处境。', sourceIds: ['shiji-disposition'] },
+    ],
+  },
+  {
+    id: 'meeting', title: '同一个旧敌', place: '史料书页 · 接见空间未详', time: '抵达之后 · 间隔未详', backdrop: 'asset-meeting', mood: 'meeting', partner: 'representative', start: 'meeting-1',
+    note: '本页压缩呈现史家概括的双方诉求，不能理解为一次会面中正式拒绝。接见者不指定为国王；太子／夫人异文保留。',
+    noteSourceIds: ['hanshu-variant'],
+    lines: [
+      { id: 'meeting-1', speaker: 'envoy', text: '汉廷愿与月氏相通。匈奴曾给月氏带来深重伤害，我们希望找到共同的盟友。', sourceIds: ['shiji-mission'], next: 'meeting-2' },
+      { id: 'meeting-2', speaker: 'representative', text: '旧日的仇怨仍在。但这里土地肥饶，侵扰较少，人们更愿意守住现在的生活。', sourceIds: ['shiji-disposition'], next: 'meeting-3' },
+      { id: 'meeting-3', speaker: 'envoy', text: '月氏如今更看重什么？我还想听一听。', sourceIds: ['shiji-disposition'], choices: [
+        { id: 'grievance', text: '询问：共同的旧仇，能否促成合作？', next: 'meeting-grievance' },
+        { id: 'distance', text: '询问：汉朝的遥远，意味着什么？', next: 'meeting-distance' },
+      ] },
+      { id: 'meeting-grievance', speaker: 'representative', text: '经历过迁徙，眼前的安定也有分量。过去的仇，并不意味着现在仍要为它出战。', sourceIds: ['shiji-disposition'], next: 'meeting-4' },
+      { id: 'meeting-distance', speaker: 'representative', text: '汉朝离这里遥远。要共同采取行动，眼前的人们会有自己的顾虑。', sourceIds: ['shiji-disposition'], next: 'meeting-4' },
+      { id: 'meeting-4', speaker: 'envoy', text: '我明白，旧仇之外，你们还有如今要守护的生活。汉廷的期待，与这里的处境并不相同。', sourceIds: ['shiji-disposition'], next: 'meeting-5' },
+      { id: 'meeting-5', speaker: 'narrator', text: '《史记》以“地肥饶，少寇，志安乐，又自以远汉”解释月氏的处境。张骞在这一地区的活动中，终究未能取得期望的联合约定。', sourceIds: ['shiji-disposition'] },
+    ],
+  },
+  {
+    id: 'waiting', title: '留下来，看见更多', place: '月氏与大夏区域 · 活动压缩表达', time: '停留一年多', backdrop: 'asset-environment', mood: 'waiting', partner: 'guide', start: 'waiting-1',
+    note: '一年多指区域活动，不表示整年住在同一王庭。光线、人流与对话用于叙事，不复原具体日期、季节或每日行程。',
+    lines: [
+      { id: 'waiting-1', speaker: 'narrator', text: '目标未成，故事却没有在一次接见后结束。张骞由月氏到大夏，在这一区域停留一年多。', sourceIds: ['shiji-stay'], next: 'waiting-2' },
+      { id: 'waiting-2', speaker: 'envoy', text: '来到这里，才知道每个地方都有自己的生活。我还要看清，他们怎样往来，又与哪些地方相通。', sourceIds: ['shiji-report', 'shiji-market'], next: 'waiting-3' },
+      { id: 'waiting-3', speaker: 'guide', text: '月氏与大夏，并不是同一个地方。大夏有城邑，有市场，也有人从远处带来货物。', sourceIds: ['shiji-region'], next: 'waiting-4' },
+      { id: 'waiting-4', speaker: 'envoy', text: '去看看那些物品。它们也许能告诉我，这片土地与外面的世界如何相连。', sourceIds: ['shiji-market'], next: 'waiting-5' },
+      { id: 'waiting-5', speaker: 'narrator', text: '翻到下一页，我们读到张骞在大夏的见物与答问。月氏接见与大夏见物，属于不同的叙事空间；市场见闻的确切日期不详。', sourceIds: ['shiji-market', 'shiji-stay'] },
+    ],
+  },
+  {
+    id: 'market', title: '异乡的蜀物', place: '史料书页 · 大夏见物答问', time: '区域活动期间 · 日期未详', backdrop: 'asset-market', mood: 'market', partner: 'merchant', start: 'market-1',
+    note: '邛竹杖、蜀布及“商人从身毒购得”的答问有记载。人物发言为现代改编；市场与器物外形不复原；不将蜀布预设为丝绸。',
+    lines: [
+      { id: 'market-1', speaker: 'narrator', text: '在大夏，张骞看见了邛竹杖和蜀布。遥远的市场里，出现了来自汉地的物品。', sourceIds: ['shiji-market'], next: 'market-2' },
+      { id: 'market-2', speaker: 'envoy', text: '这些物品，是从哪里来的？', sourceIds: ['shiji-market'], choices: [
+        { id: 'cloth', text: '问蜀布的来处。', next: 'market-cloth' },
+        { id: 'bamboo', text: '问邛竹杖的来处。', next: 'market-bamboo' },
+      ] },
+      { id: 'market-cloth', speaker: 'narrator', text: '史料记载产地为蜀，却没有交代这匹布的纤维、织法与颜色。本页仅据文字讨论蜀布，不复原没有依据的外观。', sourceIds: ['shiji-market'], next: 'market-3' },
+      { id: 'market-bamboo', speaker: 'narrator', text: '史料记下了邛竹杖。具体形制与尺寸未详，本页不补造它的外形。', sourceIds: ['shiji-market'], next: 'market-3' },
+      { id: 'market-3', speaker: 'merchant', text: '我们的商人，从身毒购得这些物品。', sourceIds: ['shiji-market'], next: 'market-4' },
+      { id: 'market-4', speaker: 'envoy', text: '既然蜀地的物品能够经身毒来到这里，或许可以从蜀地寻找另一条通往身毒、大夏的路。', sourceIds: ['shiji-market'], next: 'market-5' },
+      { id: 'market-5', speaker: 'narrator', text: '这是张骞由见物与答问产生的道路推想，并非已经走通的新路线。联合目标未成，新的认识却在观察中展开。', sourceIds: ['shiji-market', 'shiji-report'], next: 'market-6' },
+      { id: 'market-6', speaker: 'narrator', text: '后来，张骞历经归途波折回到汉朝，报告了西域诸国的亲历与传闻。这一段故事，停在他对世界的认识正在扩展的时刻。', sourceIds: ['shiji-report'] },
+    ],
+  },
+]
+
+export function lineInScene(scene: number, id: string): BookLine | undefined {
+  return bookScenes[scene]?.lines.find((line) => line.id === id)
+}

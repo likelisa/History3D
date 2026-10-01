@@ -1,0 +1,10 @@
+[
+  {
+    "id": "mural-horse",
+    "label": "壁画中的马 · Tripo 3D",
+    "path": "/yuezhi/murals/mural-horse.glb",
+    "hash": "638f54e5d1016617d48871c295a7719706f4f0c8aac1600d6bc816a8bb167f35",
+    "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b",
+    "note": "新增 Tripo 文生模型：依据第323窟壁画可见马的轮廓与土红、赭石色作风格转译。不是原图直接转3D，也不是汉代马具的考古复原。"
+  }
+]

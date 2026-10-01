@@ -135,6 +135,48 @@
       },
       "status": "illustrative",
       "source": "figures/han-staff.glb"
+    },
+    {
+      "assetId": "asset-meeting",
+      "path": "assets/asset-meeting.glb",
+      "bytes": 228908,
+      "sha256": "8a7041072cefbc2d44b5a86ad3aed8140c6e525b5e4e628625713b06de3a0ee9",
+      "inputSha256": "a099b30921cdaedf43fad7648103f3afe8f27e839d43722613733b0035bdac04",
+      "provider": "Blender authored illustrative story set",
+      "tool": "5.2.0 LTS",
+      "taskId": null,
+      "creditsConsumed": 0,
+      "conversion": {
+        "operation": "translate bottom-center to origin",
+        "offset": [
+          0,
+          -0.18000000715255737,
+          0
+        ]
+      },
+      "status": "illustrative",
+      "source": "sets/meeting.glb"
+    },
+    {
+      "assetId": "asset-market",
+      "path": "assets/asset-market.glb",
+      "bytes": 488156,
+      "sha256": "37395ddc315339f660191a0b39eff5e989c99d6412dc774be85e378b5c4e1f2c",
+      "inputSha256": "af78f80a4928f3425c0ee1bf5261c05f3a4be9e97a517870bff2be482f72a31e",
+      "provider": "Blender authored illustrative story set",
+      "tool": "5.2.0 LTS",
+      "taskId": null,
+      "creditsConsumed": 0,
+      "conversion": {
+        "operation": "translate bottom-center to origin",
+        "offset": [
+          0,
+          -0.1599999964237213,
+          0
+        ]
+      },
+      "status": "illustrative",
+      "source": "sets/market.glb"
     }
   ],
   "environment": {

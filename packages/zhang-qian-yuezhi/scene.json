@@ -1,8 +1,8 @@
 {
   "schemaVersion": "0.1.0",
   "storyId": "zhang-qian-yuezhi",
-  "contentRevision": 1,
-  "sceneRevision": 1,
+  "contentRevision": 2,
+  "sceneRevision": 2,
   "storyPath": "story.json",
   "sourcesPath": "sources.json",
   "units": "m",
@@ -56,6 +56,28 @@
       ],
       "format": "glb",
       "rights": "项目原创Blender杆状道具示意；不是历史外形复原"
+    },
+    {
+      "id": "asset-meeting",
+      "path": "assets/asset-meeting.glb",
+      "dimensionsM": [
+        20,
+        3.8499998934566975,
+        18
+      ],
+      "format": "glb",
+      "rights": "项目原创Blender叙事布景；建筑、器形与布局为示意，不指认历史王庭或城邑"
+    },
+    {
+      "id": "asset-market",
+      "path": "assets/asset-market.glb",
+      "dimensionsM": [
+        22,
+        2.9599999487400055,
+        20
+      ],
+      "format": "glb",
+      "rights": "项目原创Blender叙事布景；建筑、器形与布局为示意，不指认历史王庭或城邑"
     }
   ],
   "objects": [
@@ -320,34 +342,34 @@
   ],
   "hotspotBindings": [
     {
-      "hotspotId": "settled",
-      "anchor": {
-        "type": "world",
-        "position": [
-          -9,
-          1.6,
-          -4
-        ]
-      }
-    },
-    {
-      "hotspotId": "distance",
-      "anchor": {
-        "type": "world",
-        "position": [
-          7,
-          1.9,
-          -4
-        ]
-      }
-    },
-    {
-      "hotspotId": "past",
+      "hotspotId": "arrival",
       "anchor": {
         "type": "world",
         "position": [
           -3,
-          2,
+          1.7,
+          4
+        ]
+      }
+    },
+    {
+      "hotspotId": "meeting",
+      "anchor": {
+        "type": "world",
+        "position": [
+          -3,
+          1.7,
+          4
+        ]
+      }
+    },
+    {
+      "hotspotId": "market",
+      "anchor": {
+        "type": "world",
+        "position": [
+          -3,
+          1.7,
           4
         ]
       }

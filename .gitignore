@@ -8,6 +8,8 @@ viewer/public/yuezhi/*.blend1
 viewer/public/yuezhi/*.blend
 viewer/public/yuezhi/figures/*.blend1
 viewer/public/yuezhi/figures/*.blend
+viewer/public/yuezhi/sets/*.blend
+viewer/public/yuezhi/sets/*.blend1
 viewer/public/yuezhi/figures/*-procedural.glb
 *.local
 .DS_Store

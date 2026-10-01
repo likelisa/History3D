@@ -1,346 +1,254 @@
-import * as THREE from 'three'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import type { SceneFile, SourcesFile, Vec3 } from '../../../contracts/src/types.ts'
 import { validateScenePackage } from '../../../contracts/src/validate.ts'
+import type { SourcesFile } from '../../../contracts/src/types.ts'
 import { createFetchReader } from '../reader.ts'
-import { Walker } from '../walker.ts'
-import { resolveMove } from '../../../contracts/src/geometry.ts'
-import { boundary, chapters, clues, REVISION, STORY_ID } from './content.ts'
-import { advance, freshProgress, readProgress } from './state.ts'
-import type { Prediction, Progress } from './state.ts'
+import { boundary, REVISION, STORY_ID } from './content.ts'
+import { bookScenes, lineInScene, speakerNames } from './book-content.ts'
+import { freshBook, nextLine, restoreBook, turnToScene } from './book-state.ts'
+import type { BookProgress } from './book-state.ts'
+import { installInspector } from './asset-inspector.ts'
+import type { InspectAsset } from './asset-inspector.ts'
 import './style.css'
 
 const root = document.querySelector<HTMLDivElement>('#app')!
 root.innerHTML = `
-  <div id="world" aria-label="月氏空间场景"></div>
-  <header class="masthead"><a class="brand" href="/yuezhi.html">HISTORY<span>3D</span></a><span class="mast-divider"></span><span class="series">第一次出使 · 一段历史现场</span>
-    <div class="header-actions"><button id="source-button">史料与边界 ↗</button><button id="restart">重新开始</button></div></header>
-  <div class="chapter-rail" aria-label="故事章节">${chapters.map((chapter, i) => `<button data-chapter="${i}"><span>${chapter.number}</span><span>${chapter.subtitle}</span></button>`).join('')}</div>
-  <div class="scene-caption"><span class="caption-rule"></span><span>大月氏 · 会见地点未详</span><small>河谷、布局与人物外形为制作示意</small></div>
-  <div id="markers"></div>
-  <div class="view-tools" aria-label="观察方式"><button id="overview">全景</button><button id="walk">人尺度漫游</button><button id="route">出使路线</button><button id="sound" aria-pressed="false">朗读：关</button></div>
-  <div class="walk-pad" hidden aria-label="漫游步进控制"><button data-step="left" aria-label="向左转">↶</button><button data-step="forward" aria-label="向前走一步">↑</button><button data-step="right" aria-label="向右转">↷</button></div>
-  <section class="story-panel" aria-label="故事讲述" aria-live="polite"></section>
-  <div class="controls-hint" id="controls-hint">拖动观察 · 滚轮靠近 · 点击线索了解处境</div>
-  <div class="asset-note" id="asset-note">正在核对场景资产…</div>
-  <div id="loading" class="loading"><span class="loading-brand">HISTORY3D</span><h1>张骞使月氏</h1><p id="load-text">正在读取故事与来源</p><div class="load-line"><span id="load-progress"></span></div></div>
-  <dialog id="detail"><div class="dialog-body"></div><button class="dialog-close" aria-label="关闭面板">×</button></dialog>
-  <div id="toast" role="status"></div>`
+  <header class="reader-header"><a href="/yuezhi.html" class="book-title">张骞使月氏</a><span class="reader-subtitle">一段可读、可玩的历史</span><div class="reader-actions"><button id="atlas-button">打开书页</button><button id="notes-button">史料旁注</button><button id="music" aria-pressed="false">配乐：关</button><button id="voice" aria-pressed="false">朗读：关</button></div></header>
+  <main class="reader" aria-label="张骞使月氏叙事书页">
+    <div class="page-heading"><h1 id="scene-title"></h1><span id="scene-place"></span></div>
+    <section class="stage" aria-label="敦煌壁画叙事场景"><div id="world"><img id="mural" src="/yuezhi/murals/full.jpg" alt="莫高窟第323窟张骞出使西域图"><div class="wind-dust" aria-hidden="true"></div><div id="image-caption"></div><div id="asset-hotspots"><button data-asset="asset-envoy">汉使 · 查看 3D</button><button data-asset="asset-representative">当地人物 · 查看 3D</button></div></div><div id="goods-label" hidden><span data-good="bamboo">邛竹杖</span><span data-good="cloth">蜀布</span></div><div class="stage-note">图像：敦煌研究院网站 · 莫高窟第323窟 · 初唐</div></section>
+    <section class="dialogue-controls" aria-label="推进对话"><div id="speech" aria-live="polite"></div><div class="line-status"><span id="line-speaker"></span><button id="history-button">回看本页对话</button></div><div id="choices"></div><div class="dialogue-bottom"><span id="reading-progress"></span><button id="continue" class="advance-button"></button></div></section>
+    <footer class="page-footer"><button id="previous-page">上一页</button><span id="folio"></span><button id="restart">从头读起</button></footer>
+    <div id="page-turn" aria-hidden="true"><div class="turn-front"><span>张骞使月氏</span><h2 id="turn-title"></h2><p>翻过这一页，来到下一段故事。</p><div class="page-ink-rule"></div></div><div class="turn-back"></div></div>
+    <div id="loading"><h2>打开这段历史</h2><p id="loading-text">正在读取史料与人物</p><progress id="loading-progress" max="6" value="0"></progress></div>
+  </main>
+  <aside id="notes" hidden aria-label="史料旁注"><div class="notes-header"><h2>史料旁注</h2><button id="close-notes" aria-label="关闭旁注">关闭</button></div><div id="notes-body"></div></aside>
+  <dialog id="atlas" aria-label="章节书页"><button id="close-atlas" aria-label="合上书页">合上书页</button><div id="atlas-body" class="book-spread"></div></dialog>`
 root.querySelectorAll<HTMLButtonElement>('button').forEach((button) => { button.disabled = true })
-
-const STORAGE_KEY = `history3d:${STORY_ID}:r${REVISION}`
-let progress: Progress = freshProgress()
-try { progress = readProgress(JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null')) } catch { /* Corrupt or disabled storage starts a new local session. */ }
-const panel = root.querySelector<HTMLElement>('.story-panel')!
-const dialog = root.querySelector<HTMLDialogElement>('#detail')!
-const dialogBody = dialog.querySelector<HTMLElement>('.dialog-body')!
-const assetNote = root.querySelector<HTMLElement>('#asset-note')!
-const markersElement = root.querySelector<HTMLElement>('#markers')!
-const base = `/packages/${STORY_ID}`
-const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false })
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-renderer.outputColorSpace = THREE.SRGBColorSpace
-renderer.toneMapping = THREE.ACESFilmicToneMapping
-renderer.toneMappingExposure = 1.25
-renderer.shadowMap.enabled = true
-renderer.shadowMap.type = THREE.PCFSoftShadowMap
-renderer.domElement.setAttribute('aria-label', '可拖动观察的月氏场景')
-renderer.domElement.setAttribute('tabindex', '0')
-root.querySelector('#world')!.append(renderer.domElement)
-const world = new THREE.Scene()
-world.background = new THREE.Color('#bacad0')
-world.fog = new THREE.Fog('#bacad0', 40, 115)
-const camera = new THREE.PerspectiveCamera(47, 1, 0.08, 180)
-const controls = new OrbitControls(camera, renderer.domElement)
-controls.enableDamping = true
-controls.dampingFactor = 0.075
-controls.maxPolarAngle = Math.PI / 2 - 0.045
-controls.minDistance = 3
-controls.maxDistance = 38
-controls.enablePan = true
-const sky = new THREE.HemisphereLight('#e1efff', '#938064', 2.0)
-world.add(sky)
-const sun = new THREE.DirectionalLight('#ffe7bd', 3.0)
-sun.position.set(-18, 25, 12)
-sun.castShadow = true
-sun.shadow.mapSize.set(2048, 2048)
-Object.assign(sun.shadow.camera, { left: -28, right: 28, top: 28, bottom: -28, near: 0.5, far: 85 })
-sun.shadow.normalBias = 0.035
-world.add(sun)
-let scene: SceneFile
-let sourceFile: SourcesFile
-let walker: Walker
-let walking = false
-let speaking = false
+const stage = root.querySelector<HTMLElement>('.stage')!
+const reader = root.querySelector<HTMLElement>('.reader')!
+const speech = root.querySelector<HTMLElement>('#speech')!
+const continueButton = root.querySelector<HTMLButtonElement>('#continue')!
+const notes = root.querySelector<HTMLElement>('#notes')!
+const notesBody = root.querySelector<HTMLElement>('#notes-body')!
+const atlas = root.querySelector<HTMLDialogElement>('#atlas')!
+const turn = root.querySelector<HTMLElement>('#page-turn')!
+const storageKey = `history3d:${STORY_ID}:book-r${REVISION}`
+let progress: BookProgress = freshBook()
+try { progress = restoreBook(JSON.parse(localStorage.getItem(storageKey) ?? 'null')) } catch { /* An unavailable save does not prevent reading. */ }
 let ready = false
-let animationFrames = 0
-let loadMs = 0
-const assetRecords: Array<{ id: string; bytes: number; sha256: string; dimensions: number[]; instances: number }> = []
-let flight: { started: number; from: THREE.Vector3; fromTarget: THREE.Vector3; to: THREE.Vector3; toTarget: THREE.Vector3 } | null = null
-const markers: Array<{ element: HTMLButtonElement; position: THREE.Vector3 }> = []
-let toastTimer = 0
+let turning = false
+let voice = false
+let sourceFile: SourcesFile
+let showingHistory = false
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches
+const music = new Audio('/yuezhi/murals/reflection.mp3')
+music.loop = true
+music.volume = 0.28
+let musicWanted = false
+const visuals = [
+  { image: 'full.jpg', caption: '行旅图像 · 初唐的历史记忆，非首次出使实景', mode: 'mural' },
+  { image: 'full.jpg', caption: '接见地点与建筑未详 · 本页只呈现史料与改编对话', mode: 'text' },
+  { image: 'journey.jpg', caption: '行旅画面复用 · 不推定一年多活动的季节与居所', mode: 'mural' },
+  { image: 'full.jpg', caption: '大夏见蜀物有记载 · 不补造具体市场空间', mode: 'text' },
+]
 
+function escape(text: string) { return text.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!) }
 function save() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(progress)) } catch { /* Persistence is optional, never blocks the story. */ }
-  Object.assign(window, { __yuezhi: { progress: structuredClone(progress), ready, loadMs, animationFrames, walking, assets: assetRecords } })
+  try { localStorage.setItem(storageKey, JSON.stringify(progress)) } catch { /* Local progress is optional. */ }
   root.dataset.ready = String(ready)
-  root.dataset.chapter = String(progress.chapter)
+  root.dataset.scene = String(progress.scene)
+  root.dataset.line = progress.line
+  root.dataset.turning = String(turning)
+  root.dataset.complete = String(progress.complete)
+  root.dataset.loadedImages = '3'
   root.dataset.furthest = String(progress.furthest)
-  root.dataset.seenClues = progress.clues.join(',')
-  root.dataset.walking = String(walking)
-  root.dataset.completed = String(progress.completed)
-  root.dataset.loadedAssets = String(assetRecords.length)
-  if (walker) root.dataset.feet = walker.feet.map((coordinate) => coordinate.toFixed(3)).join(',')
 }
-function toast(text: string) {
-  root.querySelector('#toast')!.textContent = text
-  root.querySelector('#toast')!.classList.add('visible')
-  clearTimeout(toastTimer)
-  toastTimer = window.setTimeout(() => root.querySelector('#toast')!.classList.remove('visible'), 3500)
-}
-function escape(text: string) {
-  return text.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!)
-}
+function currentLine() { return lineInScene(progress.scene, progress.line)! }
 function sourceHtml(ids: string[]) {
-  return ids.map((id) => sourceFile.sources.find((source) => source.id === id)).filter((source) => !!source).map((source) => `<article class="source"><span class="eyebrow">古籍记载 · 数字文本</span><h3>${escape(source.title)}</h3><blockquote>${escape(source.excerpt)}</blockquote><p>${escape(source.location)}</p><a href="${escape(source.locator.url!)}" target="_blank" rel="noopener noreferrer">打开原文 ↗</a></article>`).join('')
+  return [...new Set(ids)].map((id) => sourceFile.sources.find((source) => source.id === id)).filter((source) => !!source).map((source) => `<article class="source-entry"><h3>${escape(source.title)}</h3><blockquote>${escape(source.excerpt)}</blockquote><p>${escape(source.location)}</p><a target="_blank" rel="noopener noreferrer" href="${escape(source.locator.url!)}">打开古籍原文</a></article>`).join('')
 }
-function openDetail(html: string) {
-  dialogBody.innerHTML = html
-  if (!dialog.open) dialog.showModal()
-  if (document.pointerLockElement) document.exitPointerLock()
-  if (walker) { walker.clearInput(); walker.enabled = false }
+function showNotes(history = false) {
+  if (!ready || turning) return
+  showingHistory = history
+  const scene = bookScenes[progress.scene]!
+  if (history) {
+    const ids = new Set([...progress.read, progress.line])
+    notesBody.innerHTML = `<p class="notes-intro">本页已读对话 · ${escape(scene.title)}</p>${scene.lines.filter((line) => ids.has(line.id)).map((line) => `<article class="history-entry"><h3>${speakerNames[line.speaker]}</h3><p>${escape(line.text)}</p></article>`).join('')}`
+  } else {
+    notesBody.innerHTML = `<p class="notes-intro">${escape(scene.note)}</p><p class="notes-boundary">配乐：At Rest — Kevin MacLeod (incompetech.com)。<a href="https://www.incompetech.com/music/royalty-free/index.html?isrc=USUAN1100748" target="_blank" rel="noopener noreferrer">原曲</a> · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>；截取 15–50 秒，淡入淡出并转为 MP3。</p><p class="notes-boundary">壁画为初唐的后世叙述，含佛教改写，不作为首次出使的实景依据。<a href="https://www.dha.ac.cn/info/1266/2524.htm" target="_blank" rel="noopener noreferrer">敦煌研究院图像说明</a></p><p class="notes-boundary">人物发言是现代改编，不是史书记下的逐字谈话；“记述”呈现古籍内容的现代转述。</p>${sourceHtml([...currentLine().sourceIds, ...(scene.noteSourceIds ?? [])])}<details><summary>本页全部依据与制作边界</summary>${sourceHtml(scene.lines.flatMap((line) => line.sourceIds))}<p>${escape(boundary)}</p></details>`
+  }
+  notes.hidden = false
+  root.querySelector('#close-notes')!.scrollIntoView({ block: 'nearest' })
 }
 function narrate(text: string) {
-  if (!speaking || !('speechSynthesis' in window)) return
+  if (!voice || !('speechSynthesis' in window)) return
   speechSynthesis.cancel()
   const utterance = new SpeechSynthesisUtterance(text)
-  utterance.lang = 'zh-CN'; utterance.rate = 0.93
+  utterance.lang = 'zh-CN'; utterance.rate = 0.91
   speechSynthesis.speak(utterance)
 }
-function lookAt(position: Vec3, target: Vec3) {
-  exitWalk()
-  flight = { started: performance.now(), from: camera.position.clone(), fromTarget: controls.target.clone(), to: new THREE.Vector3(...position), toTarget: new THREE.Vector3(...target) }
-}
-function showChapter(index: number, animate = true) {
-  progress.chapter = index
-  save(); renderStory()
-  const chapter = chapters[index]!
-  if (animate) lookAt(chapter.position, chapter.target)
-  narrate(chapter.text)
-}
-function renderStory() {
-  const chapter = chapters[progress.chapter]!
-  panel.classList.remove('collapsed')
-  panel.innerHTML = `<div class="chapter-heading"><span class="eyebrow">${chapter.number} / 03 · ${chapter.kicker}</span><button id="collapse-story" class="text-button" aria-expanded="true">收起讲述 −</button></div><h1>${chapter.title}</h1><p>${chapter.text}</p>
-    ${progress.chapter === 1 ? `<div class="clue-list" aria-label="可探索线索">${clues.map((clue) => `<button data-clue="${clue.id}" class="${progress.clues.includes(clue.id) ? 'seen' : ''}"><span>${progress.clues.includes(clue.id) ? '✓' : '○'}</span> ${clue.title}</button>`).join('')}</div>` : `<div class="story-thought">${chapter.question}</div>`}
-    <div class="panel-footer"><button id="chapter-source" class="text-button">查看本幕出处 ↗</button><button id="continue" class="primary">${progress.completed && progress.chapter === 2 ? '已完成 · 回看故事' : chapter.action}<span>→</span></button></div>`
-  panel.querySelector('#continue')!.addEventListener('click', () => {
-    if (progress.chapter === 0) { progress = advance(progress); showChapter(1) }
-    else if (progress.chapter === 1) showPrediction()
-    else { progress.completed = true; save(); showRecap() }
-  })
-  panel.querySelector('#chapter-source')!.addEventListener('click', () => openDetail(`<span class="eyebrow">${chapter.subtitle}</span><h2>本幕依据</h2>${sourceHtml(chapter.sourceIds)}`))
-  panel.querySelector('#collapse-story')!.addEventListener('click', (event) => {
-    const collapsed = panel.classList.toggle('collapsed')
-    const button = event.currentTarget as HTMLButtonElement
-    button.textContent = collapsed ? '展开讲述 +' : '收起讲述 −'
-    button.setAttribute('aria-expanded', String(!collapsed))
-  })
-  panel.querySelectorAll<HTMLButtonElement>('[data-clue]').forEach((button) => button.addEventListener('click', () => visitClue(button.dataset.clue!)))
-  root.querySelectorAll<HTMLButtonElement>('[data-chapter]').forEach((button) => {
-    const index = Number(button.dataset.chapter)
-    button.classList.toggle('active', index === progress.chapter)
-    button.setAttribute('aria-current', index === progress.chapter ? 'step' : 'false')
-    button.disabled = index > progress.furthest
-  })
-  markersElement.hidden = progress.chapter !== 1
-}
-function visitClue(id: string) {
-  const clue = clues.find((candidate) => candidate.id === id)!
-  if (!progress.clues.includes(id)) progress.clues.push(id)
-  save(); renderStory(); lookAt(clue.camera, clue.target)
-  openDetail(`<span class="eyebrow">空间线索 · ${clue.label}</span><h2>${clue.title}</h2><p class="detail-lead">${clue.text}</p><details><summary>展开史料依据</summary>${sourceHtml(clue.sourceIds)}</details><p class="annotation">你看到的场景是制作示意；古籍没有提供这里的具体布局。</p><button class="primary" id="back-explore">继续观察 →</button>`)
-  dialogBody.querySelector('#back-explore')!.addEventListener('click', () => dialog.close())
-  narrate(clue.text)
-}
-function showPrediction() {
-  openDetail(`<span class="eyebrow">在结果揭晓之前</span><h2>月氏会接受联合请求吗？</h2><p class="detail-lead">结合你看到的线索，说说自己的判断。这里的选择不会改写历史。</p><div class="prediction-options"><button data-prediction="accept">有共同旧敌，可能愿意</button><button data-prediction="decline">更重视现状，未必愿意</button><button data-prediction="skip">直接看史书记载</button></div>`)
-  dialogBody.querySelectorAll<HTMLButtonElement>('[data-prediction]').forEach((button) => button.addEventListener('click', () => {
-    progress.prediction = button.dataset.prediction as Prediction
-    save()
-    dialogBody.innerHTML = `<span class="eyebrow">史书记载的结果</span><h2>张骞未取得期望的约定</h2><p class="detail-lead">${progress.prediction === 'accept' ? '共同的旧敌确实解释了汉廷的期待。但抵达后的月氏，已处在另一种生活与地理条件中。' : '《史记》将月氏安居、少受侵扰、认为与汉遥远的处境，与未得要领的结果放在同一段记述中。'}</p>${sourceHtml(['shiji-disposition'])}<button class="primary" id="reveal-outcome">进入最后一幕 →</button>`
-    dialogBody.querySelector('#reveal-outcome')!.addEventListener('click', () => { dialog.close(); progress = advance(progress); showChapter(2) })
+function renderLine() {
+  const scene = bookScenes[progress.scene]!
+  const line = currentLine()
+  const goodsLabel = root.querySelector<HTMLElement>('#goods-label')!
+  goodsLabel.hidden = true
+  goodsLabel.dataset.selected = line.id === 'market-cloth' ? 'cloth' : line.id === 'market-bamboo' ? 'bamboo' : ''
+  const side = line.speaker === 'narrator' ? 'center' : 'left'
+  speech.className = `speech ${side}`
+  stage.dataset.speaker = line.speaker
+  speech.innerHTML = `<div class="speaker-name">${speakerNames[line.speaker]}</div><p>${escape(line.text)}</p>`
+  root.querySelector('#line-speaker')!.textContent = line.speaker === 'narrator' ? '记述 · 史料内容转述' : `${speakerNames[line.speaker]} · 据史料改编`
+  root.querySelector('#scene-title')!.textContent = scene.title
+  root.querySelector('#scene-place')!.textContent = visuals[progress.scene]!.mode === 'text' ? '史料书页 · 空间未详' : '行旅壁画 · 图像记忆'
+  root.querySelector('#folio')!.textContent = `${scene.time} · 第 ${progress.scene + 1} 页 / ${bookScenes.length}`
+  root.querySelector('#reading-progress')!.textContent = line.choices ? '选择你想问的话' : line.next ? '继续读这一页' : progress.scene < bookScenes.length - 1 ? '这一页读完了，翻页继续' : '这一段故事读完了'
+  const choices = root.querySelector<HTMLElement>('#choices')!
+  choices.innerHTML = line.choices?.map((choice, index) => `<button data-choice="${choice.id}" class="dialogue-choice"><span>${index + 1}</span>${escape(choice.text)}</button>`).join('') ?? ''
+  choices.querySelectorAll<HTMLButtonElement>('[data-choice]').forEach((button) => button.addEventListener('click', () => {
+    if (turning) return
+    progress = nextLine(progress, button.dataset.choice); save(); renderLine()
   }))
+  continueButton.hidden = !!line.choices
+  continueButton.textContent = line.next ? '下一句' : progress.scene < bookScenes.length - 1 ? `翻页 · ${bookScenes[progress.scene + 1]!.title}` : progress.complete ? '回看这本书' : '读完这一段'
+  root.querySelector<HTMLButtonElement>('#previous-page')!.disabled = progress.scene === 0 || turning
+  if (!notes.hidden) showNotes()
+  save(); narrate(line.text)
+  if (!notes.hidden) showNotes(showingHistory)
 }
-function showRecap() {
-  openDetail(`<span class="eyebrow">三幕故事 · 回看</span><h2>一次目标未成的出使</h2><ol class="recap"><li><strong>汉廷希望什么？</strong><p>联系月氏，共同对付匈奴。</p></li><li><strong>月氏当时的处境是什么？</strong><p>史书描述其安居、少寇，倾向安乐，又认为与汉遥远。</p></li><li><strong>出使留下什么？</strong><p>未得期望的约定；张骞后来报告了西域诸国的亲历与传闻。</p></li></ol><p class="annotation">${boundary}</p><button class="primary" id="replay">重新走一遍 →</button>`)
-  dialogBody.querySelector('#replay')!.addEventListener('click', reset)
+function setStage() {
+  const visual = visuals[progress.scene]!
+  root.querySelector<HTMLImageElement>('#mural')!.src = `/yuezhi/murals/${visual.image}`
+  stage.dataset.mode = visual.mode
+  root.querySelector('#image-caption')!.textContent = visual.caption
+  notes.hidden = true
+  renderLine()
+}
+function advance() {
+  if (!ready || turning || atlas.open) return
+  const line = currentLine()
+  if (line.choices) return
+  if (line.next) { progress = nextLine(progress); save(); renderLine(); return }
+  if (progress.scene < bookScenes.length - 1) { void turnPage(progress.scene + 1); return }
+  progress.complete = true; save(); renderLine(); showAtlas()
+}
+async function turnPage(index: number) {
+  if (turning || !ready || index === progress.scene) return
+  const next = turnToScene(progress, index)
+  if (next === progress) return
+  if (atlas.open) atlas.close()
+  if ('speechSynthesis' in window) speechSynthesis.cancel()
+  turning = true; save()
+  reader.setAttribute('aria-busy', 'true')
+  root.querySelectorAll<HTMLButtonElement>('.reader button').forEach((button) => { button.disabled = true })
+  root.querySelector('#turn-title')!.textContent = bookScenes[progress.scene]!.title
+  turn.classList.toggle('backwards', index < progress.scene)
+  turn.classList.add('turning')
+  const duration = reducedMotion ? 0 : 850
+  await new Promise((resolve) => setTimeout(resolve, duration * 0.45))
+  progress = next; setStage()
+  await new Promise((resolve) => setTimeout(resolve, duration * 0.55))
+  turn.classList.remove('turning', 'backwards')
+  turning = false
+  root.querySelectorAll<HTMLButtonElement>('.reader button').forEach((button) => { button.disabled = false })
+  reader.removeAttribute('aria-busy')
+  renderLine(); save()
+}
+function showAtlas() {
+  if (!ready || turning) return
+  const pageButtons = bookScenes.map((scene, i) => `<button class="chapter-entry ${i === progress.scene ? 'current' : ''}" data-scene="${i}" ${i > progress.furthest ? 'disabled' : ''}><span>${['一', '二', '三', '四'][i]}</span><strong>${scene.title}</strong><small>${scene.place}</small></button>`).join('')
+  root.querySelector('#atlas-body')!.innerHTML = `<section class="book-leaf"><h2>张骞使月氏</h2><p class="book-description">带着联盟的期待抵达，在异乡的生活与物品中，认识另一个世界。</p><div class="journey-line"><span>大宛</span><i></i><span>康居</span><i></i><span>大月氏</span><i></i><span>大夏</span></div><p class="book-small">史书记述的顺序示意，不代表实际路线、方位与距离。</p><div class="book-colophon"><p>《史记·大宛列传》《汉书·张骞李广利传》</p><p>人物发言据史料改编；初唐壁画为后世图像记忆，未补绘人物或复原交涉场所。</p></div></section><section class="book-leaf"><h2>这一段故事</h2><nav aria-label="章节目录">${pageButtons}</nav><p class="book-small">已读书页可以回看。新的场景在读完当前页后翻开。</p>${progress.complete ? '<p class="book-finished">故事读毕 · 联盟目标未成，新的认识在观察中展开。</p>' : ''}</section>`
+  root.querySelectorAll<HTMLButtonElement>('[data-scene]').forEach((button) => button.addEventListener('click', () => {
+    const index = Number(button.dataset.scene)
+    if (index === progress.scene) atlas.close(); else void turnPage(index)
+  }))
+  atlas.showModal()
 }
 function reset() {
-  if (dialog.open) dialog.close()
-  progress = freshProgress()
-  if ('speechSynthesis' in window) speechSynthesis.cancel()
-  showChapter(0)
-  toast('已回到故事起点；本地探索记录已重置。')
+  if (!ready || turning) return
+  if (atlas.open) atlas.close()
+  progress = freshBook(); save(); setStage()
 }
-function exitWalk() {
-  if (!walking) return
-  walking = false; walker.clearInput(); walker.enabled = false
-  if (document.pointerLockElement) document.exitPointerLock()
-  controls.enabled = true
-  root.querySelector('#walk')!.setAttribute('aria-pressed', 'false')
-  root.querySelector<HTMLElement>('.walk-pad')!.hidden = true
-  root.querySelector('#controls-hint')!.textContent = '拖动观察 · 滚轮靠近 · 点击线索了解处境'
-  save()
-}
-function enterWalk() {
-  if (walking) { exitWalk(); lookAt(chapters[progress.chapter]!.position, chapters[progress.chapter]!.target); return }
-  walking = true; flight = null; controls.enabled = false
-  walker.reset(); walker.enabled = true; walker.applyTo(camera)
-  root.querySelector('#walk')!.setAttribute('aria-pressed', 'true')
-  root.querySelector<HTMLElement>('.walk-pad')!.hidden = false
-  root.querySelector('#controls-hint')!.textContent = 'WASD / 方向键移动 · 点击画面后鼠标转向 · Esc 释放鼠标'
-  renderer.domElement.focus(); save()
-}
-root.querySelector('#overview')!.addEventListener('click', () => lookAt(scene.cameras.overview.position, scene.cameras.overview.target))
-root.querySelector('#walk')!.addEventListener('click', enterWalk)
-root.querySelector('#route')!.addEventListener('click', () => openDetail(`<span class="eyebrow">叙事顺序 · 非精确地理地图</span><h2>从任务到抵达</h2><div class="route-sequence">应募出使<span>↓</span>途中被匈奴留十余年<span>↓</span>逃离后至大宛<span>↓</span>康居<span>↓</span>大月氏 → 大夏</div><p class="annotation">此图不表示方位、距离或实际行进路线。</p>${sourceHtml(['shiji-mission', 'shiji-arrival'])}`))
-root.querySelector('#source-button')!.addEventListener('click', () => openDetail(`<span class="eyebrow">史料与表达边界</span><h2>我们知道什么，哪些仍未知</h2><p class="detail-lead">${boundary}</p><p class="annotation">人物外形为生成示意。页面不重演未经史料支持的谈判对白；“月氏一侧”不指定某位王或继位者。数字文本来源仍待底本与史料负责人复核。</p>${sourceHtml(sourceFile.sources.map((source) => source.id))}`))
+root.querySelector('#continue')!.addEventListener('click', advance)
+root.querySelector('#atlas-button')!.addEventListener('click', showAtlas)
+root.querySelector('#close-atlas')!.addEventListener('click', () => atlas.close())
+root.querySelector('#notes-button')!.addEventListener('click', () => { if (notes.hidden) showNotes(); else notes.hidden = true })
+root.querySelector('#history-button')!.addEventListener('click', () => showNotes(true))
+root.querySelector('#close-notes')!.addEventListener('click', () => { notes.hidden = true })
 root.querySelector('#restart')!.addEventListener('click', reset)
-root.querySelectorAll<HTMLButtonElement>('[data-step]').forEach((button) => button.addEventListener('click', () => {
-  if (!walking) return
-  if (button.dataset.step === 'left') walker.yawRad += Math.PI / 8
-  else if (button.dataset.step === 'right') walker.yawRad -= Math.PI / 8
-  else {
-    const next = resolveMove(walker.feet, [-Math.sin(walker.yawRad) * 0.8, -Math.cos(walker.yawRad) * 0.8], walker.config.bounds, walker.config.blockers, walker.config.radiusM)
-    walker.feet = [next.x, next.z]
-  }
-  save()
-}))
-root.querySelector('#sound')!.addEventListener('click', () => {
-  if (!('speechSynthesis' in window)) { toast('此浏览器未提供朗读，故事文字仍可完整阅读。'); return }
-  speaking = !speaking
-  root.querySelector('#sound')!.textContent = `朗读：${speaking ? '开' : '关'}`
-  root.querySelector('#sound')!.setAttribute('aria-pressed', String(speaking))
-  if (speaking) narrate(chapters[progress.chapter]!.text); else speechSynthesis.cancel()
+root.querySelector('#previous-page')!.addEventListener('click', () => { void turnPage(progress.scene - 1) })
+root.querySelector('#voice')!.addEventListener('click', () => {
+  if (!('speechSynthesis' in window)) return
+  voice = !voice
+  root.querySelector('#voice')!.textContent = `朗读：${voice ? '开' : '关'}`
+  root.querySelector('#voice')!.setAttribute('aria-pressed', String(voice))
+  if (voice) narrate(currentLine().text); else speechSynthesis.cancel()
 })
-root.querySelectorAll<HTMLButtonElement>('[data-chapter]').forEach((button) => button.addEventListener('click', () => showChapter(Number(button.dataset.chapter))))
-dialog.querySelector('.dialog-close')!.addEventListener('click', () => dialog.close())
-dialog.addEventListener('close', () => { if (walking) walker.enabled = true })
-dialog.addEventListener('click', (event) => { if (event.target === dialog) { const rect = dialog.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close() } })
-controls.addEventListener('start', () => { flight = null })
-document.addEventListener('keydown', (event) => {
-  if (!ready || dialog.open || !walking) return
-  if (['KeyW', 'KeyA', 'KeyS', 'KeyD', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.code)) event.preventDefault()
-  walker.handleKey(event, true)
+addEventListener('keydown', (event) => {
+  const target = event.target as HTMLElement
+  if (target.closest('button,a,input,summary') || document.querySelector('dialog[open]')) return
+  if (event.code === 'Space' || event.code === 'ArrowRight') { event.preventDefault(); advance() }
 })
-document.addEventListener('keyup', (event) => walker?.handleKey(event, false))
-window.addEventListener('blur', () => { if (walking) { walker.clearInput(); walker.enabled = false; toast('已暂停漫游；重新点击画面继续。') } })
-document.addEventListener('mousemove', (event) => { if (document.pointerLockElement === renderer.domElement) walker.handleMouseMove(event.movementX, event.movementY) })
-renderer.domElement.addEventListener('click', () => {
-  if (walking && !dialog.open) {
-    walker.enabled = true
-    if (!renderer.domElement.requestPointerLock) { toast('鼠标锁定不可用；仍可用方向键或步进按钮移动。'); return }
-    const request = renderer.domElement.requestPointerLock()
-    if (request && typeof request.catch === 'function') void request.catch(() => toast('鼠标锁定不可用；仍可用方向键或步进按钮移动。'))
-  }
-})
-window.addEventListener('resize', resize)
-function resize() {
-  renderer.setSize(window.innerWidth, window.innerHeight)
-  camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix()
+function showError(error: unknown) {
+  root.querySelector('#loading-text')!.textContent = error instanceof Error ? error.message : String(error)
+  const retry = document.createElement('button'); retry.textContent = '重新打开'; retry.addEventListener('click', () => location.reload())
+  root.querySelector('#loading')!.append(retry)
+  console.error('Story page unavailable', error)
 }
-resize()
-
 async function start() {
-  const started = performance.now()
+  const base = `/packages/${STORY_ID}`
   const result = await validateScenePackage(createFetchReader(base))
   const errors = result.diagnostics.filter((diagnostic) => diagnostic.severity === 'error')
-  if (errors.length || !result.scene || !result.story || !result.sources) throw new Error(`故事包校验失败：${errors.map((error) => error.message).join('；')}`)
-  if (result.story.storyId !== STORY_ID || result.story.contentRevision !== REVISION) throw new Error('故事版本与交互版本不一致')
-  scene = result.scene; sourceFile = result.sources
+  if (errors.length || !result.scene || !result.sources || !result.story) throw new Error(`故事包校验失败：${errors.map((error) => error.message).join('；')}`)
+  if (result.story.contentRevision !== REVISION) throw new Error('故事包与书页版本不一致')
+  sourceFile = result.sources
+  const bookResponse = await fetch(`${base}/book.json`)
+  if (!bookResponse.ok) throw new Error('没有找到人物对话与场景书页')
+  const book = await bookResponse.json()
+  if (book.contentRevision !== REVISION || book.storyId !== STORY_ID || JSON.stringify(book.scenes) !== JSON.stringify(bookScenes)) throw new Error('对话书页版本不一致，请重新准备故事包')
+  await Promise.all(['full.jpg', 'journey.jpg', 'farewell.jpg'].map((name) => new Promise<void>((resolve, reject) => {
+    const image = new Image()
+    image.onload = () => resolve()
+    image.onerror = () => reject(new Error(`壁画无法加载：${name}`))
+    image.src = `/yuezhi/murals/${name}`
+  })))
   const provenanceResponse = await fetch(`${base}/asset-provenance.json`)
-  if (!provenanceResponse.ok) throw new Error('无法读取资产来源清单')
-  const provenance = await provenanceResponse.json() as { realTripoAssetsReceived: boolean; assets: Array<{ assetId: string; sha256: string }> }
-  const loader = new GLTFLoader()
-  const templates = new Map<string, THREE.Group>()
-  for (const [index, asset] of scene.assets.entries()) {
-    root.querySelector('#load-text')!.textContent = `正在加载与核对资产 ${index + 1} / ${scene.assets.length}`
-    const response = await fetch(`${base}/${asset.path}`)
-    if (!response.ok) throw new Error(`模型加载失败：${asset.path} (${response.status})`)
-    const bytes = await response.arrayBuffer()
-    const hash = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map((byte) => byte.toString(16).padStart(2, '0')).join('')
-    if (provenance.assets.find((item) => item.assetId === asset.id)?.sha256 !== hash) throw new Error(`模型哈希与来源清单不一致：${asset.path}`)
-    const gltf = await loader.parseAsync(bytes, `${base}/assets/`)
-    gltf.scene.updateMatrixWorld(true)
-    const size = new THREE.Box3().setFromObject(gltf.scene).getSize(new THREE.Vector3())
-    templates.set(asset.id, gltf.scene)
-    assetRecords.push({ id: asset.id, bytes: bytes.byteLength, sha256: hash, dimensions: size.toArray(), instances: scene.objects.filter((object) => object.render.type === 'asset' && object.render.assetId === asset.id).length })
-    root.querySelector<HTMLElement>('#load-progress')!.style.width = `${(index + 1) / scene.assets.length * 100}%`
-  }
-  for (const definition of scene.objects) {
-    if (definition.render.type !== 'asset') throw new Error('本场景不允许静默替换主对象为灰盒')
-    const instance = templates.get(definition.render.assetId)!.clone(true)
-    instance.position.set(...definition.position)
-    instance.rotation.set(...definition.rotation)
-    instance.scale.set(...definition.scale)
-    instance.name = definition.id
-    instance.traverse((object) => { if (object instanceof THREE.Mesh) { object.castShadow = definition.id !== 'obj-environment'; object.receiveShadow = true } })
-    world.add(instance)
-  }
-  walker = new Walker({ ...scene.cameras.firstPerson, bounds: scene.walkableBounds, blockers: scene.blockers, groundY: scene.ground.y })
-  for (const clue of clues) {
+  if (!provenanceResponse.ok) throw new Error('无法读取 Tripo 资产来源')
+  const provenance = await provenanceResponse.json() as { assets: Array<{ assetId: string; path: string; sha256: string; taskId: string; provider: string }> }
+  const extraResponse = await fetch('/yuezhi/murals/3d-assets.json')
+  const extras: InspectAsset[] = extraResponse.ok ? await extraResponse.json() : []
+  const openAsset = installInspector([...extras, ...provenance.assets.filter(a => a.provider.startsWith('Tripo')).map(a => ({
+    id: a.assetId, label: a.assetId === 'asset-envoy' ? '汉使人物 · Tripo 3D' : '当地人物 · Tripo 3D',
+    path: `${base}/${a.path}`, hash: a.sha256, taskId: a.taskId,
+    note: '已有 Tripo 文生模型，供人物形体与服饰示意；并非据此壁画生成，不是张骞或月氏人物的确定肖像。',
+  }))])
+  const hotspots = root.querySelector('#asset-hotspots')!
+  for (const asset of extras) {
     const button = document.createElement('button')
-    button.className = 'world-marker'; button.dataset.clue = clue.id
-    button.innerHTML = `<span class="marker-dot"></span><span>${clue.title}</span>`
-    button.addEventListener('click', () => visitClue(clue.id))
-    markersElement.append(button)
-    markers.push({ element: button, position: new THREE.Vector3(...clue.position) })
+    button.dataset.asset = asset.id; button.textContent = '壁画中的马 · 查看 3D'
+    hotspots.append(button)
   }
-  const chapter = chapters[progress.chapter]!
-  camera.position.set(...chapter.position); controls.target.set(...chapter.target); controls.update()
-  loadMs = performance.now() - started
+  root.querySelectorAll<HTMLButtonElement>('[data-asset]').forEach(button => button.addEventListener('click', () => {
+    if (!turning) openAsset(button.dataset.asset!)
+  }))
   ready = true
   root.querySelectorAll<HTMLButtonElement>('button').forEach((button) => { button.disabled = false })
-  assetNote.textContent = provenance.realTripoAssetsReceived ? '人物由 Tripo 制作 · 外形为示意' : '暂用人物示意 · 待真实主资产替换'
-  root.querySelector('#loading')!.classList.add('loaded')
-  root.querySelector('#loading')!.setAttribute('aria-hidden', 'true')
-  showChapter(progress.chapter, false)
-  save()
+  root.querySelector<HTMLElement>('#loading')!.hidden = true
+  setStage(); save()
 }
-let previous = performance.now()
-function animate(now: number) {
-  const delta = Math.min((now - previous) / 1000, 0.05)
-  previous = now
-  if (flight) {
-    const t = Math.min(1, (now - flight.started) / 1450)
-    const eased = t * t * (3 - 2 * t)
-    camera.position.lerpVectors(flight.from, flight.to, eased)
-    controls.target.lerpVectors(flight.fromTarget, flight.toTarget, eased)
-    if (t === 1) flight = null
-  }
-  if (walking) {
-    walker.update(delta); walker.applyTo(camera)
-    if (progress.chapter === 1 && !dialog.open) {
-      const nearby = clues.find((clue) => !progress.clues.includes(clue.id) && Math.hypot(walker.feet[0] - clue.position[0], walker.feet[1] - clue.position[2]) < 2.1)
-      if (nearby) visitClue(nearby.id)
-    }
-  } else controls.update()
-  for (const marker of markers) {
-    const projected = marker.position.clone().project(camera)
-    marker.element.hidden = projected.z < -1 || projected.z > 1 || Math.abs(projected.x) > 0.93 || Math.abs(projected.y) > 0.87
-    marker.element.style.transform = `translate(-50%, -50%) translate(${(projected.x * 0.5 + 0.5) * window.innerWidth}px, ${(-projected.y * 0.5 + 0.5) * window.innerHeight}px)`
-  }
-  renderer.render(world, camera)
-  animationFrames++
-  if (ready && animationFrames % 90 === 0) save()
-  requestAnimationFrame(animate)
-}
-requestAnimationFrame(animate)
-void start().catch((error: unknown) => {
-  root.querySelector('#load-text')!.textContent = error instanceof Error ? error.message : String(error)
-  const retry = document.createElement('button'); retry.textContent = '重新加载'; retry.className = 'primary'
-  retry.addEventListener('click', () => location.reload()); root.querySelector('#loading')!.append(retry)
-  console.error('Yuezhi scene failed', error)
+root.querySelector('#music')!.addEventListener('click', async () => {
+  const button = root.querySelector<HTMLButtonElement>('#music')!
+  musicWanted = !musicWanted
+  if (musicWanted) {
+    try { await music.play() } catch { musicWanted = false; button.textContent = '配乐未能播放 · 点击重试'; button.setAttribute('aria-pressed', 'false'); return }
+  } else music.pause()
+  button.textContent = `配乐：${musicWanted ? '开' : '关'}`
+  button.setAttribute('aria-pressed', String(musicWanted))
 })
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) { music.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel() }
+  else if (musicWanted) void music.play().catch(() => {
+    musicWanted = false
+    root.querySelector('#music')!.textContent = '配乐暂停 · 点击重试'
+    root.querySelector('#music')!.setAttribute('aria-pressed', 'false')
+  })
+})
+void start().catch(showError)

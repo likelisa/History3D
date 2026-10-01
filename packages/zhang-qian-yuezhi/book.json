@@ -1,4 +1,5 @@
 {
+  "formatVersion": "1.0.0",
   "contentRevision": 2,
   "storyId": "zhang-qian-yuezhi",
   "scenes": [
@@ -314,5 +315,6 @@
       ]
     }
   ],
-  "boundary": "历史事件依据古籍数字文本；人物相貌、服饰、具体会面地点、河谷布局和尺寸为制作示意。月氏继位者在《史记》《汉书》中有太子／夫人异文，本场景不指定其身份。数字文本核对不能替代底本校勘与最终史料审核。"
+  "dialogueStatus": "modern adaptation grounded in cited historical passages; not verbatim recorded speech",
+  "historicalBoundary": "历史事件依据古籍数字文本；人物相貌、服饰、具体会面地点、河谷布局和尺寸为制作示意。月氏继位者在《史记》《汉书》中有太子／夫人异文，本场景不指定其身份。数字文本核对不能替代底本校勘与最终史料审核。"
 }

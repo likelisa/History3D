@@ -1,7 +1,7 @@
 {
   "schemaVersion": "0.1.0",
   "storyId": "zhang-qian-yuezhi",
-  "contentRevision": 1,
+  "contentRevision": 2,
   "title": "张骞使月氏：抵达了，目标却不同",
   "status": "draft",
   "historicalScope": {
@@ -23,7 +23,7 @@
       "sourceIds": [
         "shiji-mission"
       ],
-      "note": "古籍数字文本摘录；现代讲述是限义释读，仍待史料负责人最终审核。"
+      "note": "古籍数字文本摘录；现代对白为据史料改编，仍待史料负责人最终审核。"
     },
     {
       "id": "claim-shiji-arrival",
@@ -37,7 +37,7 @@
       "sourceIds": [
         "shiji-arrival"
       ],
-      "note": "古籍数字文本摘录；现代讲述是限义释读，仍待史料负责人最终审核。"
+      "note": "古籍数字文本摘录；现代对白为据史料改编，仍待史料负责人最终审核。"
     },
     {
       "id": "claim-shiji-disposition",
@@ -51,7 +51,7 @@
       "sourceIds": [
         "shiji-disposition"
       ],
-      "note": "古籍数字文本摘录；现代讲述是限义释读，仍待史料负责人最终审核。"
+      "note": "古籍数字文本摘录；现代对白为据史料改编，仍待史料负责人最终审核。"
     },
     {
       "id": "claim-shiji-report",
@@ -65,7 +65,63 @@
       "sourceIds": [
         "shiji-report"
       ],
-      "note": "古籍数字文本摘录；现代讲述是限义释读，仍待史料负责人最终审核。"
+      "note": "古籍数字文本摘录；现代对白为据史料改编，仍待史料负责人最终审核。"
+    },
+    {
+      "id": "claim-shiji-stay",
+      "subjectId": "zhang-qian-yuezhi",
+      "property": "narrative",
+      "statement": "支持在这一区域活动一年多，不能推定整年住在同一王庭、具体日程或交涉次数。",
+      "value": "騫從月氏至大夏，竟不能得月氏要領。留歲餘，還。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "documented",
+      "sourceIds": [
+        "shiji-stay"
+      ],
+      "note": "古籍数字文本摘录；现代对白为据史料改编，仍待史料负责人最终审核。"
+    },
+    {
+      "id": "claim-shiji-region",
+      "subjectId": "zhang-qian-yuezhi",
+      "property": "narrative",
+      "statement": "省略号表示不同段落摘录。只作区域生活背景，不确定本故事会见或市场的具体城市。",
+      "value": "大月氏……行國也，隨畜移徙。……大夏……其俗土著，有城屋。……其都曰藍市城，有市販賈諸物。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "documented",
+      "sourceIds": [
+        "shiji-region"
+      ],
+      "note": "古籍数字文本摘录；现代对白为据史料改编，仍待史料负责人最终审核。"
+    },
+    {
+      "id": "claim-shiji-market",
+      "subjectId": "zhang-qian-yuezhi",
+      "property": "narrative",
+      "statement": "同段记张骞推想蜀地与身毒、大夏的交通关系。见物、答问与推想有记载；摊位、人物外形及现代对白为改编。",
+      "value": "臣在大夏時，見邛竹杖、蜀布。問曰：「安得此？」大夏國人曰：「吾賈人往市之身毒。」",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "documented",
+      "sourceIds": [
+        "shiji-market"
+      ],
+      "note": "古籍数字文本摘录；现代对白为据史料改编，仍待史料负责人最终审核。"
+    },
+    {
+      "id": "claim-hanshu-variant",
+      "subjectId": "zhang-qian-yuezhi",
+      "property": "narrative",
+      "statement": "《史记》相应段落记“立其太子为王”。本书保留异文，不据任一数字文本确定此次接见者身份；底本校勘待做。",
+      "value": "大月氏王已爲胡所殺，立其夫人爲王。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "documented",
+      "sourceIds": [
+        "hanshu-variant"
+      ],
+      "note": "古籍数字文本摘录；现代对白为据史料改编，仍待史料负责人最终审核。"
     },
     {
       "id": "environment-dimensions",
@@ -456,28 +512,31 @@
   ],
   "hotspots": [
     {
-      "id": "settled",
-      "title": "安居的生活",
-      "body": "《史记》描述月氏“地肥饶，少寇，志安乐”。史书记述他们所处的生活环境与取向；画面里的水源和牧地帮助理解这层处境，并非会见地点的复原。",
+      "id": "arrival",
+      "title": "终于抵达",
+      "body": "大宛、康居协助传送有记载。眼前的接引人物、站位与谈话为创作补充；不指定谁一路随行。",
       "claimIds": [
+        "claim-shiji-mission",
+        "claim-shiji-arrival",
         "claim-shiji-disposition"
       ]
     },
     {
-      "id": "distance",
-      "title": "遥远的汉朝",
-      "body": "史书同时记下“又自以远汉”。地理上的遥远也是当时处境的一部分。这里不把古籍中的里数换算成精确现代路线，也不把观点写成虚构谈判对白。",
-      "claimIds": [
-        "claim-shiji-disposition"
-      ]
-    },
-    {
-      "id": "past",
-      "title": "共同的旧敌",
-      "body": "汉廷听闻月氏与匈奴的旧仇，因此希望通使。但关于抵达后的月氏，《史记》写“殊无报胡之心”。这两处记述共同解释了原先期待与实际结果之间的落差。",
+      "id": "meeting",
+      "title": "同一个旧敌",
+      "body": "本页压缩呈现史家概括的双方诉求，不能理解为一次会面中正式拒绝。接见者不指定为国王；太子／夫人异文保留。",
       "claimIds": [
         "claim-shiji-mission",
         "claim-shiji-disposition"
+      ]
+    },
+    {
+      "id": "market",
+      "title": "异乡的蜀物",
+      "body": "邛竹杖、蜀布及“商人从身毒购得”的答问有记载。人物发言为现代改编；市场与器物外形不复原；不将蜀布预设为丝绸。",
+      "claimIds": [
+        "claim-shiji-market",
+        "claim-shiji-report"
       ]
     }
   ],
