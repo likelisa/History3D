@@ -1,0 +1,262 @@
+{
+  "assets": [
+    {
+      "assetId": "asset-environment",
+      "assetRevision": 1,
+      "path": "assets/input/asset-environment.glb",
+      "sha256": "2956955061a5278a293320c598719c175e74c28133aa8a2785e4652760db2832",
+      "label": "河谷与牧地环境示意",
+      "briefId": "brief-environment",
+      "sourceIds": [],
+      "claimIds": [
+        "environment-dimensions",
+        "environment-appearance"
+      ],
+      "rights": "原创Blender地形与Poly Haven CC0材质/植被，实际来源见source-evidence.json",
+      "role": "received-Blender-illustrative-asset",
+      "intendedUse": "与同版故事整合到可打开的3D场景；主绘本仍保持原壁画与对白",
+      "knownIssues": [
+        "外形和尺寸为制作设定，未通过最终史料/视觉/公开权利审核"
+      ],
+      "generation": null,
+      "inputUnits": "m",
+      "upAxis": "Y",
+      "forwardAxis": null,
+      "pivot": null,
+      "dimensionsM": [
+        180,
+        7.740933656692505,
+        180
+      ],
+      "scaleStatus": "known"
+    },
+    {
+      "assetId": "asset-envoy",
+      "assetRevision": 1,
+      "path": "assets/input/asset-envoy.glb",
+      "sha256": "74277e7f5b769f92a608fec1b77ad928415155b37d08d07a1c843382a0f8ea26",
+      "label": "张骞角色示意",
+      "briefId": "brief-envoy",
+      "sourceIds": [],
+      "claimIds": [
+        "envoy-dimensions",
+        "envoy-appearance"
+      ],
+      "rights": "Tripo账户条款下生成的示意资产；公开使用许可待确认",
+      "role": "received-generated-illustrative-asset",
+      "intendedUse": "与同版故事整合到可打开的3D场景；主绘本仍保持原壁画与对白",
+      "knownIssues": [
+        "外形和尺寸为制作设定，未通过最终史料/视觉/公开权利审核"
+      ],
+      "generation": {
+        "provider": "Tripo text-to-model v3.1-20260211",
+        "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf",
+        "promptPath": "evidence/generation-script.py"
+      },
+      "inputUnits": "m",
+      "upAxis": "Y",
+      "forwardAxis": "+Z",
+      "pivot": null,
+      "dimensionsM": [
+        0.7265763963554284,
+        1.7000000476837158,
+        0.36395283082684415
+      ],
+      "scaleStatus": "known"
+    },
+    {
+      "assetId": "asset-representative",
+      "assetRevision": 1,
+      "path": "assets/input/asset-representative.glb",
+      "sha256": "5051979679573bec5b1c4805480698de04654dea3d2ba221c708223e795411fa",
+      "label": "月氏一侧角色示意（身份未指定）",
+      "briefId": "brief-representative",
+      "sourceIds": [],
+      "claimIds": [
+        "representative-dimensions",
+        "representative-appearance"
+      ],
+      "rights": "Tripo账户条款下生成的示意资产；公开使用许可待确认",
+      "role": "received-generated-illustrative-asset",
+      "intendedUse": "与同版故事整合到可打开的3D场景；主绘本仍保持原壁画与对白",
+      "knownIssues": [
+        "外形和尺寸为制作设定，未通过最终史料/视觉/公开权利审核"
+      ],
+      "generation": {
+        "provider": "Tripo text-to-model v3.1-20260211",
+        "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb",
+        "promptPath": "evidence/generation-script.py"
+      },
+      "inputUnits": "m",
+      "upAxis": "Y",
+      "forwardAxis": "+Z",
+      "pivot": null,
+      "dimensionsM": [
+        0.5560953624064879,
+        1.7000000476837158,
+        0.7161145589944766
+      ],
+      "scaleStatus": "known"
+    },
+    {
+      "assetId": "asset-staff",
+      "assetRevision": 1,
+      "path": "assets/input/asset-staff.glb",
+      "sha256": "7ee3975984333e3eb341ee9e24cd587a18d77884641b6c3704037a2e533c5bdb",
+      "label": "汉节持有记载／杆状外形示意",
+      "briefId": "brief-staff",
+      "sourceIds": [],
+      "claimIds": [
+        "staff-dimensions",
+        "staff-appearance"
+      ],
+      "rights": "项目原创Blender示意资产；形制与布局不指认历史现场",
+      "role": "received-Blender-illustrative-asset",
+      "intendedUse": "与同版故事整合到可打开的3D场景；主绘本仍保持原壁画与对白",
+      "knownIssues": [
+        "外形和尺寸为制作设定，未通过最终史料/视觉/公开权利审核"
+      ],
+      "generation": null,
+      "inputUnits": "m",
+      "upAxis": "Y",
+      "forwardAxis": null,
+      "pivot": null,
+      "dimensionsM": [
+        0.022601164877414703,
+        1.4894895069301128,
+        0.022775111719965935
+      ],
+      "scaleStatus": "known"
+    },
+    {
+      "assetId": "asset-mural-horse",
+      "assetRevision": 1,
+      "path": "assets/input/asset-mural-horse.glb",
+      "sha256": "638f54e5d1016617d48871c295a7719706f4f0c8aac1600d6bc816a8bb167f35",
+      "label": "壁画启发的马匹示意",
+      "briefId": "brief-mural-horse",
+      "sourceIds": [],
+      "claimIds": [
+        "mural-horse-dimensions",
+        "mural-horse-appearance"
+      ],
+      "rights": "Tripo账户条款下生成的示意资产；公开使用许可待确认",
+      "role": "received-generated-illustrative-asset",
+      "intendedUse": "与同版故事整合到可打开的3D场景；主绘本仍保持原壁画与对白",
+      "knownIssues": [
+        "外形和尺寸为制作设定，未通过最终史料/视觉/公开权利审核",
+        "输入马匹尚为归一化生成尺寸，B层按示意高度1.6米作统一缩放"
+      ],
+      "generation": {
+        "provider": "Tripo text-to-model v3.1-20260211",
+        "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b",
+        "promptPath": "evidence/mural-horse-generation.json"
+      },
+      "inputUnits": null,
+      "upAxis": "Y",
+      "forwardAxis": null,
+      "pivot": null,
+      "dimensionsM": null,
+      "scaleStatus": "unknown"
+    },
+    {
+      "assetId": "asset-xiongnu",
+      "assetRevision": 1,
+      "path": "assets/input/asset-xiongnu.glb",
+      "sha256": "1802a80083cd118295717f6e405a5bc98b99a48406dd2074c1a580c7a591f47f",
+      "label": "匈奴人物 · 交叉史料推定（仅羁留前情）",
+      "briefId": "brief-xiongnu",
+      "sourceIds": [
+        "xiongnu-belt-met",
+        "xiongnu-cap-yaloman",
+        "xiongnu-robe-noinula",
+        "xiongnu-boots-noinula"
+      ],
+      "claimIds": [
+        "xiongnu-dimensions",
+        "xiongnu-appearance"
+      ],
+      "rights": "Tripo账户条款下生成的示意资产；公开使用许可待确认",
+      "role": "received-generated-illustrative-asset",
+      "intendedUse": "只在captivity羁留前情context采用，月氏接见/大夏市场均隐藏",
+      "knownIssues": [
+        "外形和尺寸为制作设定，未通过最终史料/视觉/公开权利审核"
+      ],
+      "generation": {
+        "provider": "Tripo text-to-model v3.1-20260211",
+        "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27",
+        "promptPath": "evidence/xiongnu-manifest.json"
+      },
+      "inputUnits": "m",
+      "upAxis": "Y",
+      "forwardAxis": "+Z",
+      "pivot": null,
+      "dimensionsM": [
+        0.9372644126415253,
+        1.7200000286102295,
+        0.44542883336544037
+      ],
+      "scaleStatus": "known"
+    },
+    {
+      "assetId": "asset-meeting",
+      "assetRevision": 1,
+      "path": "assets/input/asset-meeting.glb",
+      "sha256": "4624bcec210da9e5b2315b7905bb679223bf2c5a4b5a2479a71a4d74e23fa1e6",
+      "label": "接见布景示意",
+      "briefId": "brief-meeting",
+      "sourceIds": [],
+      "claimIds": [
+        "meeting-dimensions",
+        "meeting-appearance"
+      ],
+      "rights": "项目原创Blender示意资产；形制与布局不指认历史现场",
+      "role": "received-Blender-illustrative-asset",
+      "intendedUse": "与同版故事整合到可打开的3D场景；主绘本仍保持原壁画与对白",
+      "knownIssues": [
+        "外形和尺寸为制作设定，未通过最终史料/视觉/公开权利审核"
+      ],
+      "generation": null,
+      "inputUnits": "m",
+      "upAxis": "Y",
+      "forwardAxis": null,
+      "pivot": null,
+      "dimensionsM": [
+        20,
+        3.8499998934566975,
+        18
+      ],
+      "scaleStatus": "known"
+    },
+    {
+      "assetId": "asset-market",
+      "assetRevision": 1,
+      "path": "assets/input/asset-market.glb",
+      "sha256": "3690fdef841e35d5370bc74a333092a9a875a89b60521be861fe017423cff542",
+      "label": "市场布景示意",
+      "briefId": "brief-market",
+      "sourceIds": [],
+      "claimIds": [
+        "market-dimensions",
+        "market-appearance"
+      ],
+      "rights": "项目原创Blender示意资产；形制与布局不指认历史现场",
+      "role": "received-Blender-illustrative-asset",
+      "intendedUse": "与同版故事整合到可打开的3D场景；主绘本仍保持原壁画与对白",
+      "knownIssues": [
+        "外形和尺寸为制作设定，未通过最终史料/视觉/公开权利审核"
+      ],
+      "generation": null,
+      "inputUnits": "m",
+      "upAxis": "Y",
+      "forwardAxis": null,
+      "pivot": null,
+      "dimensionsM": [
+        22,
+        2.9599999487400055,
+        20
+      ],
+      "scaleStatus": "known"
+    }
+  ]
+}

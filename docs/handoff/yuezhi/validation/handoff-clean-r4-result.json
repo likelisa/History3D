@@ -1,0 +1,348 @@
+{
+  "verifiedAtUtc": "2026-10-01T09:21:39.881560+00:00",
+  "targetPlatform": "desktop",
+  "contentRevision": 4,
+  "cleanProject": "C:\\Users\\ASUS\\Documents\\Codex\\2026-10-01\\thread-01a0cf0a-c996-7942-9c33-9c6126dd15e3\\work\\handoff-clean-r4-20261001\\History3D",
+  "transport": {
+    "candidate": "History3D-张骞场景验收候选-REV4-2026-10-01.zip",
+    "candidatePayloadFiles": 488,
+    "verifyExitCode": 0,
+    "extractExitCode": 0
+  },
+  "commands": {
+    "npmCiExitCode": 0,
+    "prepareExitCode": 0,
+    "checkExitCode": 0,
+    "buildExitCode": 0,
+    "testsPassed": 227,
+    "testsSkipped": 3,
+    "testsFailed": 0
+  },
+  "commandEvidence": [
+    "handoff-clean-r4-stage-build.log",
+    "handoff-clean-r4-stage-verify.log",
+    "handoff-clean-r4-stage-extract.log",
+    "handoff-clean-r4-npm-ci.log",
+    "handoff-clean-r4-prepare.log",
+    "handoff-clean-r4-check.log",
+    "handoff-clean-r4-build.log"
+  ],
+  "rebuildArtifacts": [
+    {
+      "path": "assets/asset-environment.glb",
+      "source": {
+        "bytes": 11548084,
+        "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9"
+      },
+      "rebuilt": {
+        "bytes": 11548084,
+        "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9"
+      },
+      "matches": true
+    },
+    {
+      "path": "assets/asset-envoy.glb",
+      "source": {
+        "bytes": 1959632,
+        "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4"
+      },
+      "rebuilt": {
+        "bytes": 1959632,
+        "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4"
+      },
+      "matches": true
+    },
+    {
+      "path": "assets/asset-market.glb",
+      "source": {
+        "bytes": 3364228,
+        "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211"
+      },
+      "rebuilt": {
+        "bytes": 3364228,
+        "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211"
+      },
+      "matches": true
+    },
+    {
+      "path": "assets/asset-meeting.glb",
+      "source": {
+        "bytes": 2786288,
+        "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c"
+      },
+      "rebuilt": {
+        "bytes": 2786288,
+        "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c"
+      },
+      "matches": true
+    },
+    {
+      "path": "assets/asset-mural-horse.glb",
+      "source": {
+        "bytes": 5612548,
+        "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8"
+      },
+      "rebuilt": {
+        "bytes": 5612548,
+        "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8"
+      },
+      "matches": true
+    },
+    {
+      "path": "assets/asset-representative.glb",
+      "source": {
+        "bytes": 1939700,
+        "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03"
+      },
+      "rebuilt": {
+        "bytes": 1939700,
+        "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03"
+      },
+      "matches": true
+    },
+    {
+      "path": "assets/asset-staff.glb",
+      "source": {
+        "bytes": 29000,
+        "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63"
+      },
+      "rebuilt": {
+        "bytes": 29000,
+        "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63"
+      },
+      "matches": true
+    },
+    {
+      "path": "assets/asset-xiongnu.glb",
+      "source": {
+        "bytes": 4198644,
+        "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778"
+      },
+      "rebuilt": {
+        "bytes": 4198644,
+        "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778"
+      },
+      "matches": true
+    },
+    {
+      "path": "book.json",
+      "source": {
+        "bytes": 15431,
+        "sha256": "1712e9572a7edf4a79976cd16e48407e7b2af8e9d608706fe8b0f06cc130a161"
+      },
+      "rebuilt": {
+        "bytes": 15431,
+        "sha256": "1712e9572a7edf4a79976cd16e48407e7b2af8e9d608706fe8b0f06cc130a161"
+      },
+      "matches": true
+    },
+    {
+      "path": "perspectives.json",
+      "source": {
+        "bytes": 66240,
+        "sha256": "0d795feab0d717f7af212ec13c8c01e5473b300bb3033828aac5887523b2ea4c"
+      },
+      "rebuilt": {
+        "bytes": 66240,
+        "sha256": "0d795feab0d717f7af212ec13c8c01e5473b300bb3033828aac5887523b2ea4c"
+      },
+      "matches": true
+    }
+  ],
+  "frozenSnapshotComparison": [
+    {
+      "path": "viewer/src/yuezhi/main.ts",
+      "expected": {
+        "bytes": 19856,
+        "sha256": "3782147651bb7d5af68c25523e298aea76520f85dc2154ca3001d7e567e99eaa"
+      },
+      "clean": {
+        "bytes": 19856,
+        "sha256": "3782147651bb7d5af68c25523e298aea76520f85dc2154ca3001d7e567e99eaa"
+      },
+      "matches": true
+    },
+    {
+      "path": "viewer/src/yuezhi/book-content.ts",
+      "expected": {
+        "bytes": 11654,
+        "sha256": "1926b0b9bcd85fa2fcdc3c50f924079dacc2b14802437b67bcbdad83ed587355"
+      },
+      "clean": {
+        "bytes": 11654,
+        "sha256": "1926b0b9bcd85fa2fcdc3c50f924079dacc2b14802437b67bcbdad83ed587355"
+      },
+      "matches": true
+    },
+    {
+      "path": "viewer/src/yuezhi/content.ts",
+      "expected": {
+        "bytes": 4855,
+        "sha256": "20ed9523e30369df9f0eb170e5a7371a0b5e6e1ea6f8bf61689f84c6ee87ca11"
+      },
+      "clean": {
+        "bytes": 4855,
+        "sha256": "20ed9523e30369df9f0eb170e5a7371a0b5e6e1ea6f8bf61689f84c6ee87ca11"
+      },
+      "matches": true
+    },
+    {
+      "path": "viewer/src/yuezhi/perspectives.ts",
+      "expected": {
+        "bytes": 29494,
+        "sha256": "e385f4053e58bd65536790cf95e0775ee0750de53f11eeaab9240ca7a241cca1"
+      },
+      "clean": {
+        "bytes": 29494,
+        "sha256": "e385f4053e58bd65536790cf95e0775ee0750de53f11eeaab9240ca7a241cca1"
+      },
+      "matches": true
+    },
+    {
+      "path": "viewer/src/yuezhi/scene-inspector.ts",
+      "expected": {
+        "bytes": 12164,
+        "sha256": "c66816eb57679842780fa6fdeaa483c791a7b9ebcea904531a8b88adfc1e4cd1"
+      },
+      "clean": {
+        "bytes": 12164,
+        "sha256": "c66816eb57679842780fa6fdeaa483c791a7b9ebcea904531a8b88adfc1e4cd1"
+      },
+      "matches": true
+    },
+    {
+      "path": "viewer/src/yuezhi/story-world.ts",
+      "expected": {
+        "bytes": 26735,
+        "sha256": "8b8e58ecb5b1a25fa6c2d6df36f42555232967b720777461aea778c021a84640"
+      },
+      "clean": {
+        "bytes": 26735,
+        "sha256": "8b8e58ecb5b1a25fa6c2d6df36f42555232967b720777461aea778c021a84640"
+      },
+      "matches": true
+    },
+    {
+      "path": "viewer/src/yuezhi/style.css",
+      "expected": {
+        "bytes": 21389,
+        "sha256": "8ceaa7caf0158852bf32f133248866075e24cfcdc02428484dc30422472eaf5b"
+      },
+      "clean": {
+        "bytes": 21389,
+        "sha256": "8ceaa7caf0158852bf32f133248866075e24cfcdc02428484dc30422472eaf5b"
+      },
+      "matches": true
+    },
+    {
+      "path": "scripts/build-yuezhi-package.ts",
+      "expected": {
+        "bytes": 25274,
+        "sha256": "d34836b458d527aed98ae25b6535200375a4c099f714d3a6612ad808f1bc384a"
+      },
+      "clean": {
+        "bytes": 25274,
+        "sha256": "d34836b458d527aed98ae25b6535200375a4c099f714d3a6612ad808f1bc384a"
+      },
+      "matches": true
+    },
+    {
+      "path": "scripts/prepare-assets.mjs",
+      "expected": {
+        "bytes": 2429,
+        "sha256": "62bd72c1035d7a2a33502087bf3d501c80ef5845c1b96c1515bc1d1cd5ee9f53"
+      },
+      "clean": {
+        "bytes": 2429,
+        "sha256": "62bd72c1035d7a2a33502087bf3d501c80ef5845c1b96c1515bc1d1cd5ee9f53"
+      },
+      "matches": true
+    },
+    {
+      "path": "packages/zhang-qian-yuezhi/book.json",
+      "expected": {
+        "bytes": 15431,
+        "sha256": "1712e9572a7edf4a79976cd16e48407e7b2af8e9d608706fe8b0f06cc130a161"
+      },
+      "clean": {
+        "bytes": 15431,
+        "sha256": "1712e9572a7edf4a79976cd16e48407e7b2af8e9d608706fe8b0f06cc130a161"
+      },
+      "matches": true
+    },
+    {
+      "path": "packages/zhang-qian-yuezhi/build-manifest.json",
+      "expected": {
+        "bytes": 6996,
+        "sha256": "7909f10c827669ca45caa8878b92614d3fed350be77d90864406bda46ae119b0"
+      },
+      "clean": {
+        "bytes": 6996,
+        "sha256": "7909f10c827669ca45caa8878b92614d3fed350be77d90864406bda46ae119b0"
+      },
+      "matches": true
+    },
+    {
+      "path": "packages/zhang-qian-yuezhi/asset-lineage.json",
+      "expected": {
+        "bytes": 3157,
+        "sha256": "6fb42c2ce3bcc37e1878a91d5c5446a2887677cf092042860656059f42c6d0fb"
+      },
+      "clean": {
+        "bytes": 3157,
+        "sha256": "6fb42c2ce3bcc37e1878a91d5c5446a2887677cf092042860656059f42c6d0fb"
+      },
+      "matches": true
+    },
+    {
+      "path": "collector/deliveries/zhang-qian-yuezhi/handoff.json",
+      "expected": {
+        "bytes": 6650,
+        "sha256": "1580c148f88fee8d69208f60e2dd76d4fcdbe921a2cbc76b197114197e99115d"
+      },
+      "clean": {
+        "bytes": 6650,
+        "sha256": "1580c148f88fee8d69208f60e2dd76d4fcdbe921a2cbc76b197114197e99115d"
+      },
+      "matches": true
+    }
+  ],
+  "artifactMismatches": [],
+  "snapshotMismatches": [],
+  "raw": {
+    "source": {
+      "bytes": 12067204,
+      "sha256": "39eb65f9443ae5e0242aedd2bde06c265c4394c3656f7419fce0bd94b74811e1"
+    },
+    "clean": {
+      "bytes": 12067204,
+      "sha256": "39eb65f9443ae5e0242aedd2bde06c265c4394c3656f7419fce0bd94b74811e1"
+    },
+    "matches": true
+  },
+  "forbiddenPresent": [],
+  "generatedRuntimeDirectory": {
+    "existsAfterBuild": true,
+    "files": [],
+    "directories": [
+      "asset-sync"
+    ],
+    "note": "The extraction had no runtime cache. prepare:assets creates an empty asset-sync lock directory during normal build; it is not the private generation input."
+  },
+  "nodeModulesInstalledByNpmCi": true,
+  "dialogue": {
+    "nodes": 35,
+    "questions": 5,
+    "options": 10
+  },
+  "privateRuntimeCacheRequired": false,
+  "providerCalled": false,
+  "cleanDesktopBrowser": {
+    "status": "passed",
+    "evidence": "handoff-clean-r4-browser.json",
+    "screenshot": "handoff-clean-r4-scene.png",
+    "targetPlatform": "desktop",
+    "scope": "same-host clean extraction"
+  },
+  "historicalAndRightsReview": "needs_review"
+}

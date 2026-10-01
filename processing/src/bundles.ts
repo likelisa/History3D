@@ -4,12 +4,13 @@ import { createReadStream } from 'node:fs'
 import { copyFile, lstat, mkdir, readFile, readdir, rename, rm, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import type { FileDigest } from '../../contracts/src/handoff-types.ts'
+import { processingPython } from './python-runtime.ts'
 
 const MAX_ZIP_BYTES = 256 * 1024 * 1024
 const MAX_UNCOMPRESSED_BYTES = 256 * 1024 * 1024
 const MAX_GLB_BYTES = 128 * 1024 * 1024
 export interface BundleReceipt { bundleId: string; sha256: string; bytes: number; files: FileDigest[]; uncompressedBytes: number }
-export interface BundleOptions { pythonPath?: string; timeoutMs?: number }
+export interface BundleOptions { pythonPath?: string; timeoutMs?: number; extractorPath?: string }
 const readJson = async <T>(file: string): Promise<T> => JSON.parse(await readFile(file, 'utf8')) as T
 
 export async function storeBundle(zipPath: string, dataDir: string, options: BundleOptions = {}): Promise<BundleReceipt> {
@@ -96,9 +97,9 @@ async function fileHash(file: string): Promise<string> {
 }
 
 async function unpack(zipPath: string, outputDir: string, options: BundleOptions): Promise<{ files: FileDigest[]; uncompressedBytes: number }> {
-  const script = path.resolve('processing/tools/unpack_bundle.py')
+  const script = options.extractorPath ?? path.resolve('processing/tools/unpack_bundle.py')
   return new Promise((resolve, reject) => {
-    const child = spawn(options.pythonPath ?? process.env.PROCESSING_PYTHON ?? '/usr/bin/python3', [script, zipPath, outputDir], { stdio: ['ignore', 'pipe', 'pipe'] })
+    const child = spawn(options.pythonPath ?? processingPython(), [script, zipPath, outputDir], { stdio: ['ignore', 'pipe', 'pipe'] })
     let stdout = ''
     let stderr = ''
     let settled = false

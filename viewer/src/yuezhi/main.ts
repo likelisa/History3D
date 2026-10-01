@@ -7,11 +7,12 @@ import { freshBook, nextLine, restoreBook, turnToScene } from './book-state.ts'
 import type { BookProgress } from './book-state.ts'
 import { installInspector } from './asset-inspector.ts'
 import type { InspectAsset } from './asset-inspector.ts'
+import { installSceneInspector } from './scene-inspector.ts'
 import './style.css'
 
 const root = document.querySelector<HTMLDivElement>('#app')!
 root.innerHTML = `
-  <header class="reader-header"><a href="/yuezhi.html" class="book-title">张骞使月氏</a><span class="reader-subtitle">一段可读、可玩的历史</span><div class="reader-actions"><button id="atlas-button">打开书页</button><button id="notes-button">史料旁注</button><button id="music" aria-pressed="false">配乐：关</button><button id="voice" aria-pressed="false">朗读：关</button></div></header>
+  <header class="reader-header"><a href="/yuezhi.html" class="book-title">张骞使月氏</a><span class="reader-subtitle">一段可读、可玩的历史</span><div class="reader-actions"><button id="scene-view-button">查看 3D 场景</button><button id="atlas-button">打开书页</button><button id="notes-button">史料旁注</button><button id="music" aria-pressed="false">配乐：关</button><button id="voice" aria-pressed="false">朗读：关</button></div></header>
   <main class="reader" aria-label="张骞使月氏叙事书页">
     <div class="page-heading"><h1 id="scene-title"></h1><span id="scene-place"></span></div>
     <section class="stage" aria-label="敦煌壁画叙事场景"><div id="world"><img id="mural" src="/yuezhi/murals/full.jpg" alt="莫高窟第323窟张骞出使西域图"><div class="wind-dust" aria-hidden="true"></div><div id="image-caption"></div><div id="asset-hotspots"><button data-asset="asset-envoy">汉使 · 查看 3D</button><button data-asset="asset-representative">当地人物 · 查看 3D</button></div></div><div id="goods-label" hidden><span data-good="bamboo">邛竹杖</span><span data-good="cloth">蜀布</span></div><div class="stage-note">图像：敦煌研究院网站 · 莫高窟第323窟 · 初唐</div></section>
@@ -110,7 +111,6 @@ function renderLine() {
   continueButton.hidden = !!line.choices
   continueButton.textContent = line.next ? '下一句' : progress.scene < bookScenes.length - 1 ? `翻页 · ${bookScenes[progress.scene + 1]!.title}` : progress.complete ? '回看这本书' : '读完这一段'
   root.querySelector<HTMLButtonElement>('#previous-page')!.disabled = progress.scene === 0 || turning
-  if (!notes.hidden) showNotes()
   save(); narrate(line.text)
   if (!notes.hidden) showNotes(showingHistory)
 }
@@ -213,6 +213,12 @@ async function start() {
   const provenanceResponse = await fetch(`${base}/asset-provenance.json`)
   if (!provenanceResponse.ok) throw new Error('无法读取 Tripo 资产来源')
   const provenance = await provenanceResponse.json() as { assets: Array<{ assetId: string; path: string; sha256: string; taskId: string; provider: string }> }
+  const openScene = installSceneInspector({
+    base, scene: result.scene, provenance,
+    currentPage: () => ({ scene: progress.scene, line: progress.line }),
+    onOpen: () => { if ('speechSynthesis' in window) speechSynthesis.cancel() },
+  })
+  root.querySelector('#scene-view-button')!.addEventListener('click', () => { if (!turning) openScene() })
   const extraResponse = await fetch('/yuezhi/murals/3d-assets.json')
   const extras: InspectAsset[] = extraResponse.ok ? await extraResponse.json() : []
   const openAsset = installInspector([...extras, ...provenance.assets.filter(a => a.provider.startsWith('Tripo')).map(a => ({

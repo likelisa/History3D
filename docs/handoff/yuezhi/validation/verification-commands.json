@@ -1,0 +1,38 @@
+[
+  {
+    "task": "yuezhi:prepare",
+    "command": [
+      "npm.cmd",
+      "run",
+      "yuezhi:prepare"
+    ],
+    "startedAt": "2026-10-01T08:51:30.658703+00:00",
+    "finishedAt": "2026-10-01T08:51:32.238341+00:00",
+    "exitCode": 0,
+    "log": "npm-prepare.log"
+  },
+  {
+    "task": "check",
+    "command": [
+      "npm.cmd",
+      "run",
+      "check"
+    ],
+    "startedAt": "2026-10-01T08:51:32.239258+00:00",
+    "finishedAt": "2026-10-01T08:51:45.967431+00:00",
+    "exitCode": 0,
+    "log": "npm-check.log"
+  },
+  {
+    "task": "build",
+    "command": [
+      "npm.cmd",
+      "run",
+      "build"
+    ],
+    "startedAt": "2026-10-01T08:51:45.968073+00:00",
+    "finishedAt": "2026-10-01T08:51:53.286268+00:00",
+    "exitCode": 0,
+    "log": "npm-build.log"
+  }
+]

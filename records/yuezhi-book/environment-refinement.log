@@ -1,0 +1,215 @@
+12:46:53 | INFO: Data are loaded, start creating Blender stuff
+12:46:53 | INFO: Blender create Mesh node Distant illustrative mountain ridge
+12:46:53 | INFO: Blender create Mesh node Plane.037
+12:46:53 | INFO: Blender create Mesh node Illustrative river ribbon
+12:46:53 | INFO: Blender create Mesh node Illustrative valley terrain
+12:46:53 | INFO: Blender create Mesh node Non walkable landscape continuation
+12:46:53 | INFO: Blender create Mesh node Icosphere
+12:46:53 | INFO: Blender create Mesh node Icosphere.001
+12:46:53 | INFO: Blender create Mesh node Icosphere.002
+12:46:53 | INFO: Blender create Mesh node Icosphere.003
+12:46:53 | INFO: Blender create Mesh node Icosphere.004
+12:46:53 | INFO: Blender create Mesh node Icosphere.005
+12:46:53 | INFO: Blender create Mesh node Icosphere.006
+12:46:53 | INFO: Blender create Mesh node Icosphere.007
+12:46:53 | INFO: Blender create Mesh node Icosphere.008
+12:46:53 | INFO: Blender create Mesh node Icosphere.009
+12:46:53 | INFO: Blender create Mesh node Icosphere.010
+12:46:53 | INFO: Blender create Mesh node Icosphere.011
+12:46:53 | INFO: Blender create Mesh node Icosphere.012
+12:46:53 | INFO: Blender create Mesh node Icosphere.013
+12:46:53 | INFO: Blender create Mesh node Icosphere.014
+12:46:53 | INFO: Blender create Mesh node Icosphere.015
+12:46:53 | INFO: Blender create Mesh node Icosphere.016
+12:46:53 | INFO: Blender create Mesh node Icosphere.017
+12:46:53 | INFO: Blender create Mesh node Icosphere.018
+12:46:53 | INFO: Blender create Mesh node Icosphere.019
+12:46:53 | INFO: Blender create Mesh node Icosphere.020
+12:46:53 | INFO: Blender create Mesh node Icosphere.021
+12:46:53 | INFO: Blender create Mesh node Icosphere.022
+12:46:53 | INFO: Blender create Mesh node Icosphere.023
+12:46:53 | INFO: Blender create Mesh node Icosphere.024
+12:46:53 | INFO: Blender create Mesh node Icosphere.025
+12:46:53 | INFO: Blender create Mesh node Icosphere.026
+12:46:53 | INFO: Blender create Mesh node Icosphere.027
+12:46:53 | INFO: Blender create Mesh node Icosphere.028
+12:46:53 | INFO: Blender create Mesh node Icosphere.029
+12:46:53 | INFO: Blender create Mesh node Icosphere.030
+12:46:53 | INFO: Blender create Mesh node Icosphere.031
+12:46:53 | INFO: Blender create Mesh node Icosphere.032
+12:46:53 | INFO: Blender create Mesh node Icosphere.033
+12:46:53 | INFO: Blender create Mesh node Icosphere.034
+12:46:53 | INFO: Blender create Mesh node Icosphere.035
+12:46:53 | INFO: Blender create Mesh node Icosphere.036
+12:46:53 | INFO: Blender create Mesh node Icosphere.037
+12:46:53 | INFO: Blender create Mesh node Icosphere.038
+12:46:53 | INFO: Blender create Mesh node Icosphere.039
+12:46:53 | INFO: Blender create Mesh node Icosphere.040
+12:46:53 | INFO: Blender create Mesh node Icosphere.041
+12:46:53 | INFO: Blender create Mesh node Icosphere.042
+12:46:53 | INFO: Blender create Mesh node Icosphere.043
+12:46:53 | INFO: Blender create Mesh node Icosphere.044
+12:46:53 | INFO: Blender create Mesh node Icosphere.045
+12:46:53 | INFO: Blender create Mesh node Icosphere.046
+12:46:53 | INFO: Blender create Mesh node Icosphere.047
+12:46:53 | INFO: Blender create Mesh node Icosphere.048
+12:46:53 | INFO: Blender create Mesh node Icosphere.049
+12:46:53 | INFO: Blender create Mesh node Icosphere.050
+12:46:53 | INFO: Blender create Mesh node Icosphere.051
+12:46:53 | INFO: Blender create Mesh node Icosphere.052
+12:46:53 | INFO: Blender create Mesh node Icosphere.053
+12:46:53 | INFO: Blender create Mesh node Icosphere.054
+12:46:53 | INFO: Blender create Mesh node Icosphere.055
+12:46:53 | INFO: Blender create Mesh node Icosphere.056
+12:46:53 | INFO: Blender create Mesh node Icosphere.057
+12:46:53 | INFO: Blender create Mesh node Icosphere.058
+12:46:53 | INFO: Blender create Mesh node Icosphere.059
+12:46:53 | INFO: Blender create Mesh node Circle.010
+12:46:53 | INFO: glTF import finished in 0.08s
+INFO Draco mesh compression is available, use library at C:\Users\ASUS\Documents\Codex\2026-10-01\history3d-tripo-repair\work\blender\blender-4.5.14-windows-x64\4.5\scripts\addons_core\io_scene_gltf2\extern_draco.dll
+12:46:55 | INFO: Starting glTF 2.0 export
+12:46:55 | INFO: Extracting primitive: Distant illustrative mountain ridge
+12:46:55 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Plane.037
+12:46:55 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+12:46:55 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Illustrative river ribbon
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Illustrative valley terrain
+12:46:55 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Non walkable landscape continuation
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere
+12:46:55 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.001
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.002
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.003
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.004
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.005
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.006
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.007
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.008
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.009
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.010
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.011
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.012
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.013
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.014
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.015
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.016
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.017
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.018
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.019
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.020
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.021
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.022
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.023
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.024
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.025
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.026
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.027
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.028
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.029
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.030
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.031
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.032
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.033
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.034
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.035
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.036
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.037
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.038
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.039
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.040
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.041
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.042
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.043
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.044
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.045
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.046
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.047
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.048
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.049
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.050
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.051
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.052
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.053
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.054
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.055
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.056
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.057
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.058
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Icosphere.059
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Extracting primitive: Circle.010
+12:46:55 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+12:46:55 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+12:46:55 | INFO: Primitives created: 1
+12:46:55 | INFO: Finished glTF 2.0 export in 0.2924931049346924 s
+
+ENVIRONMENT_REFINED {"file": "C:\\Users\\ASUS\\Documents\\Codex\\2026-10-01\\thread-01a0cf0a-c996-7942-9c33-9c6126dd15e3\\work\\History3D-yuezhi\\viewer\\public\\yuezhi\\environment-refined.glb", "sha256": "667b1974b230db4e0d6f6029f0be8d24cd3234e3b6251209117436a769e2d545", "bytes": 11287284, "checks": {"nodes": 100, "meshes": 66, "embeddedImages": 15, "refinedMaterials": [{"name": "Refined illustrative ridge - embedded PBR", "baseColorTexture": {"index": 1}, "normalTexture": {"index": 0, "scale": 0.6499999761581421}, "metallicRoughnessTexture": {"index": 2}}, {"name": "Refined illustrative ground - original atlas with 2m detail PBR", "baseColorTexture": {"index": 7}, "normalTexture": {"index": 6, "scale": 0.699999988079071, "texCoord": 1}, "metallicRoughnessTexture": {"index": 8, "texCoord": 1}}, {"name": "Refined illustrative rock - embedded PBR", "baseColorTexture": {"index": 10}, "normalTexture": {"index": 9, "scale": 0.6499999761581421}, "metallicRoughnessTexture": {"index": 11}}]}}
+Blender 4.5.14 LTS (hash 62c1db4208e8 built 2026-09-15 01:33:49)
+
+Blender quit

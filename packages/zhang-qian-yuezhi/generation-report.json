@@ -1,0 +1,69 @@
+{
+  "storyId": "zhang-qian-yuezhi",
+  "contentRevision": 4,
+  "newPaidGenerationPerformed": true,
+  "realProviderGenerationPerformed": true,
+  "realProviderTasks": [
+    {
+      "origin": "collector",
+      "assetId": "asset-envoy",
+      "provider": "Tripo text-to-model v3.1-20260211",
+      "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf",
+      "requestDigest": null,
+      "model": null,
+      "promptSha256": null,
+      "sourceRecordPath": "evidence/figure-manifest.json",
+      "inputSha256": "74277e7f5b769f92a608fec1b77ad928415155b37d08d07a1c843382a0f8ea26",
+      "outputSha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+      "creditsConsumed": 20,
+      "generationEvidence": "saved_task_metadata_and_delivered_hash",
+      "adopted": true
+    },
+    {
+      "origin": "collector",
+      "assetId": "asset-representative",
+      "provider": "Tripo text-to-model v3.1-20260211",
+      "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb",
+      "requestDigest": null,
+      "model": null,
+      "promptSha256": null,
+      "sourceRecordPath": "evidence/figure-manifest.json",
+      "inputSha256": "5051979679573bec5b1c4805480698de04654dea3d2ba221c708223e795411fa",
+      "outputSha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+      "creditsConsumed": 20,
+      "generationEvidence": "saved_task_metadata_and_delivered_hash",
+      "adopted": true
+    },
+    {
+      "origin": "collector",
+      "assetId": "asset-mural-horse",
+      "provider": "Tripo text-to-model v3.1-20260211",
+      "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b",
+      "requestDigest": null,
+      "model": null,
+      "promptSha256": null,
+      "sourceRecordPath": "evidence/mural-horse-generation.json",
+      "inputSha256": "638f54e5d1016617d48871c295a7719706f4f0c8aac1600d6bc816a8bb167f35",
+      "outputSha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+      "creditsConsumed": 20,
+      "generationEvidence": "saved_task_metadata_and_delivered_hash",
+      "adopted": true
+    },
+    {
+      "origin": "collector",
+      "assetId": "asset-xiongnu",
+      "provider": "Tripo text-to-model v3.1-20260211",
+      "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27",
+      "requestDigest": "84ef41faf7b75efe9a02f9536b5df4f3eb407d870f09aa1b335d1b03a8a40089",
+      "model": "v3.1-20260211",
+      "promptSha256": "e62d54b9a4b49b763f56c3152ebdde0115a475b53eb03063135d3284a535c23b",
+      "sourceRecordPath": "evidence/xiongnu-manifest.json",
+      "inputSha256": "1802a80083cd118295717f6e405a5bc98b99a48406dd2074c1a580c7a591f47f",
+      "outputSha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+      "creditsConsumed": 30,
+      "generationEvidence": "saved_task_metadata_and_delivered_hash",
+      "adopted": true
+    }
+  ],
+  "note": "Collection adopts saved Tripo tasks and delivered files. Actual request digest/model/prompt are present only where retained generation records support them; older teammate requests and dollar cost are not invented."
+}

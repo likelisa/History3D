@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from 'vitest'
-import { cp, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
+import { cp, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 import { importCollection } from '../processing/src/intake.ts'
@@ -66,5 +66,51 @@ describe('world release compiler', () => {
     plan.claimChanges[0].claimId = 'claim-story-context'
     await writeFile(planPath, JSON.stringify(plan))
     await expect(buildWorldRelease(receipt.importId, planPath, data, repoRoot)).rejects.toThrow('CLAIM_CHANGE_REQUIRES_COLLECTOR_REVIEW')
+  })
+
+  it('rejects an existing candidate whose asset changed and preserves that directory', async () => {
+    const data = await temp()
+    const receipt = await importCollection(fixture, data, 'build-corrupt')
+    const release = await buildWorldRelease(receipt.importId, planFixture, data, repoRoot)
+    const manifest = JSON.parse(await readFile(path.join(release.path, 'release.json'), 'utf8')) as { files: Array<{ path: string }> }
+    const assetPath = path.join(release.path, manifest.files.find((file) => file.path.endsWith('.glb'))!.path)
+    const damaged = await readFile(assetPath)
+    damaged[damaged.length - 1]! ^= 1
+    await writeFile(assetPath, damaged)
+    await expect(buildWorldRelease(receipt.importId, planFixture, data, repoRoot)).rejects.toThrow('EXISTING_RELEASE_INVALID')
+    expect(await readFile(assetPath)).toEqual(damaged)
+  })
+
+  it('rejects an existing candidate with a missing declared file', async () => {
+    const data = await temp()
+    const receipt = await importCollection(fixture, data, 'build-missing')
+    const release = await buildWorldRelease(receipt.importId, planFixture, data, repoRoot)
+    await rm(path.join(release.path, 'story.json'))
+    await expect(buildWorldRelease(receipt.importId, planFixture, data, repoRoot)).rejects.toThrow('EXISTING_RELEASE_INVALID')
+    expect(JSON.parse(await readFile(path.join(release.path, 'release.json'), 'utf8')).releaseId).toBe(release.releaseId)
+  })
+
+  it('rejects a changed manifest even when all assets still exist', async () => {
+    const data = await temp()
+    const receipt = await importCollection(fixture, data, 'build-manifest-change')
+    const release = await buildWorldRelease(receipt.importId, planFixture, data, repoRoot)
+    const manifestPath = path.join(release.path, 'release.json')
+    const manifest = JSON.parse(await readFile(manifestPath, 'utf8'))
+    manifest.files = []
+    await writeFile(manifestPath, JSON.stringify(manifest))
+    await expect(buildWorldRelease(receipt.importId, planFixture, data, repoRoot)).rejects.toThrow('EXISTING_RELEASE_INVALID')
+    expect(JSON.parse(await readFile(manifestPath, 'utf8')).files).toEqual([])
+  })
+
+  it.each(['file', 'empty-directory'])('preserves a preexisting %s at the release target', async (kind) => {
+    const data = await temp()
+    const receipt = await importCollection(fixture, data, `build-target-${kind}`)
+    const release = await buildWorldRelease(receipt.importId, planFixture, data, repoRoot)
+    await rm(release.path, { recursive: true })
+    if (kind === 'file') await writeFile(release.path, 'unrelated target contents')
+    else await mkdir(release.path)
+    await expect(buildWorldRelease(receipt.importId, planFixture, data, repoRoot)).rejects.toThrow('EXISTING_RELEASE_INVALID')
+    if (kind === 'file') expect(await readFile(release.path, 'utf8')).toBe('unrelated target contents')
+    else expect(await readdir(release.path)).toEqual([])
   })
 })

@@ -1,5 +1,5 @@
 import { createHash, randomUUID } from 'node:crypto'
-import { cp, mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises'
+import { cp, lstat, mkdir, readFile, realpath, rename, rm, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { createNodeReader } from '../../contracts/src/node-reader.ts'
 import { validateScenePackage } from '../../contracts/src/validate.ts'
@@ -177,9 +177,18 @@ export async function buildWorldRelease(importId: string, planPath: string, data
     const files = await digestFiles(stage, ['scene.json', 'story.json', 'sources.json', 'world-plan.json', 'quality-report.json', 'provenance.json', 'generation-report.json', 'asset-lineage.json', 'handoff.md', ...(experienceBytes ? ['experience.json'] : []), ...scene.assets.map((item) => item.path), ...handoff.files.filter((item) => item.path.startsWith('references/')).map((item) => item.path)])
     await putJson(path.join(stage, 'release.json'), { handoffVersion: '1.0.0', storyId: story.storyId, releaseId, contentRevision: compiledStory.contentRevision, sceneRevision: scene.sceneRevision, inputSubmissionIds: [handoff.submissionId], entrypoint: 'scene.json', files, requiredCapabilities: plan.requiredCapabilities, optionalCapabilities: plan.optionalCapabilities, qualityStatus: 'needs_review', knownLimitations: plan.unresolved })
     await mkdir(path.dirname(finalDir), { recursive: true })
-    try { await rename(stage, finalDir) } catch (error) {
-      if ((error as NodeJS.ErrnoException).code !== 'ENOTEMPTY' && (error as NodeJS.ErrnoException).code !== 'EEXIST') throw error
+    const existing = await lstat(finalDir).catch((error) => { if ((error as NodeJS.ErrnoException).code === 'ENOENT') return null; throw error })
+    if (existing) {
+      // Windows can replace a plain file or empty directory during rename without raising an error.
+      if (!await matchesStagedRelease(stage, finalDir)) throw new Error(`EXISTING_RELEASE_INVALID: ${releaseId}`)
       await rm(stage, { recursive: true, force: true })
+    } else {
+      try { await rename(stage, finalDir) } catch (error) {
+        // Another compiler can win the race after the preflight. Reuse only an intact identical release.
+        if (!['ENOTEMPTY', 'EEXIST', 'EPERM'].includes((error as NodeJS.ErrnoException).code ?? '')) throw error
+        if (!await matchesStagedRelease(stage, finalDir)) throw new Error(`EXISTING_RELEASE_INVALID: ${releaseId}`, { cause: error })
+        await rm(stage, { recursive: true, force: true })
+      }
     }
     return { storyId: story.storyId, releaseId, status: 'needs_review', path: finalDir, sceneHash: digest(await readFile(path.join(finalDir, 'scene.json'))) }
   } catch (error) { await rm(stage, { recursive: true, force: true }); throw error }
@@ -217,4 +226,33 @@ function rotateYaw([x, y, z]: Vec3, yaw: number): Vec3 {
 async function digestFiles(root: string, paths: string[]): Promise<FileDigest[]> {
   const unique = [...new Set(paths)].sort()
   return Promise.all(unique.map(async (file) => { const bytes = await readFile(path.join(root, file)); return { path: file, sha256: digest(bytes), bytes: bytes.length } }))
+}
+
+async function matchesStagedRelease(stage: string, destination: string): Promise<boolean> {
+  try {
+    const directory = await lstat(destination)
+    if (!directory.isDirectory() || directory.isSymbolicLink()) return false
+    const expectedBytes = await readFile(path.join(stage, 'release.json'))
+    const manifestFile = path.join(destination, 'release.json')
+    const manifestStat = await lstat(manifestFile)
+    if (!manifestStat.isFile() || manifestStat.isSymbolicLink()) return false
+    if (!expectedBytes.equals(await readFile(manifestFile))) return false
+    const manifest = JSON.parse(expectedBytes.toString('utf8')) as { files: FileDigest[] }
+    const realDestination = await realpath(destination)
+    for (const expected of manifest.files) {
+      if (!isSafeRelative(expected.path)) return false
+      const file = path.join(destination, expected.path)
+      const info = await lstat(file)
+      if (!info.isFile() || info.isSymbolicLink() || info.size !== expected.bytes) return false
+      const relative = path.relative(realDestination, await realpath(file))
+      if (path.isAbsolute(relative) || relative === '..' || relative.startsWith(`..${path.sep}`)) return false
+      const bytes = await readFile(file)
+      if (bytes.length !== expected.bytes || digest(bytes) !== expected.sha256) return false
+    }
+    return true
+  } catch (error) {
+    // Missing files invalidate the collision; permissions and other I/O failures still propagate.
+    if (['ENOENT', 'ENOTDIR'].includes((error as NodeJS.ErrnoException).code ?? '')) return false
+    throw error
+  }
 }

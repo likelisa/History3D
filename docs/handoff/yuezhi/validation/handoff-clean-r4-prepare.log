@@ -1,0 +1,5 @@
+
+> history3d@0.0.1 yuezhi:prepare
+> node --import tsx scripts/build-yuezhi-package.ts
+
+Prepared zhang-qian-yuezhi from collection-zhang-qian-yuezhi-afdae2de6f7f6d29: 8 assets, 8 objects; candidate needs_review.

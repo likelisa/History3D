@@ -1,0 +1,1509 @@
+{
+  "formatVersion": "1.0.0",
+  "storyId": "zhang-qian-yuezhi",
+  "contentRevision": 4,
+  "scope": "3d-scene-modal-only",
+  "perspectives": [
+    {
+      "id": "envoy",
+      "label": "张骞视角",
+      "identity": "汉使张骞 · 使命与见闻",
+      "evidenceScope": "出使目标、抵达经历、大夏见物与答问有记载。",
+      "boundary": "用现代语言切入张骞的探询；内心与具体对白为改编，不是古籍原话。"
+    },
+    {
+      "id": "opponent",
+      "label": "匈奴视角",
+      "identity": "匿名匈奴人物 · 羁留前情",
+      "evidenceScope": "张骞被留匈奴十余年、得妻有子、持汉节有记载；服装另据同期及相近时期考古材料交叉补全。",
+      "boundary": "仅在匈奴羁留前情中提供。人物身份、面容、营地、站位与具体发言为推定；不把匈奴人物放进月氏接见或大夏见物现场。月氏不是敌方。"
+    },
+    {
+      "id": "passersby",
+      "label": "路人视角",
+      "identity": "匿名路人 · 日常生活的阅读位置",
+      "evidenceScope": "月氏处境、大夏城邑与市场、见物答问有记载。",
+      "boundary": "路人的身份、到场与听闻均为示意；不把个体的想法当作月氏或大夏全体人的意见。"
+    },
+    {
+      "id": "overview",
+      "label": "上帝视角",
+      "identity": "读者总览 · 史料与叙事顺序",
+      "evidenceScope": "对照古籍梳理使命、月氏处境、区域活动与大夏见闻。",
+      "boundary": "总览沿用书页文字。人物对白仍是现代改编，图像与3D空间为制作示意。"
+    },
+    {
+      "id": "host",
+      "label": "月氏接见者视角",
+      "identity": "不具名的月氏接见者 · 当地处境",
+      "evidenceScope": "月氏的安定处境、离汉遥远及联合未成有记载。",
+      "boundary": "接见者不指为某位国王；具体身份与发言是改编，史记与汉书的继位者异文保留。这里不是战争中的敌方。"
+    },
+    {
+      "id": "trader",
+      "label": "大夏答问者视角",
+      "identity": "不具名的大夏国人 · 见物答问",
+      "evidenceScope": "大夏国人转述商人从身毒购得邛竹杖和蜀布，并述身毒方位与风土，有记载；身毒信息属传闻。",
+      "boundary": "不把答问者确定为售货商人或货主；具体面容、摊位与改编发言为补全。物品形制、纤维与颜色未详。"
+    }
+  ],
+  "scenes": [
+    {
+      "sceneId": "arrival",
+      "available": [
+        "envoy",
+        "passersby",
+        "overview"
+      ],
+      "views": {
+        "envoy": {
+          "metadata": {
+            "id": "envoy",
+            "label": "张骞视角",
+            "identity": "汉使张骞 · 使命与见闻",
+            "evidenceScope": "出使目标、抵达经历、大夏见物与答问有记载。",
+            "boundary": "用现代语言切入张骞的探询；内心与具体对白为改编，不是古籍原话。"
+          },
+          "description": "从汉使的位置看抵达后的相遇，以出使使命为线索。",
+          "crop": {
+            "x": 0.43,
+            "y": 0.55,
+            "scale": 1.25
+          },
+          "visibleInformation": "抵达月氏的经历与寻求联合的使命。",
+          "unavailableInformation": "接引者身份、原话和张骞具体内心未详。",
+          "lines": [
+            {
+              "lineId": "arrival-1",
+              "text": "被匈奴留了十余年，逃离后我继续向西。经大宛、康居的协助，我终于抵达大月氏。",
+              "sourceIds": [
+                "shiji-mission",
+                "shiji-arrival"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "arrival-2",
+              "text": "到了月氏，我要把汉廷的来意带到这里。谁接引我、说了哪些话，史书没有留下细节。",
+              "sourceIds": [
+                "shiji-arrival"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "source-boundary"
+            },
+            {
+              "lineId": "arrival-question-life",
+              "text": "抵达之后，我想了解月氏为何远迁到这里，以及它与南边大夏的关系。两种探询都围绕当地的区域背景展开。",
+              "sourceIds": [
+                "shiji-region"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "arrival-migration",
+              "text": "月氏原居敦煌、祁连一带，被匈奴击败后远迁。这段背景帮助我理解汉廷所听到的旧仇，不把协助者写成迁居的亲历者。",
+              "sourceIds": [
+                "shiji-region"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "arrival-daxia-relations",
+              "text": "史书记述月氏西击大夏而使其臣属，大夏在月氏以南。我分开认识两地，不能把政治关系当成同一地方或同一种生活。",
+              "sourceIds": [
+                "shiji-region"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "arrival-3",
+              "text": "我奉汉廷的使命而来，希望以月氏与匈奴的旧仇为契机，寻求共同应对匈奴。",
+              "sourceIds": [
+                "shiji-mission"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "arrival-4",
+              "text": "抵达之后，我还要向月氏说明汉廷的来意。具体接引和接见过程仍是改编，不补出史书没有留下的谈话安排。",
+              "sourceIds": [
+                "shiji-disposition"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "arrival-5",
+              "text": "我的使命是通使月氏、寻求联合。到达只是这项任务的一步。",
+              "sourceIds": [
+                "shiji-mission"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "arrival-6",
+              "text": "我来到月氏，但他们是否愿意联合，不能只由汉廷的期待决定。",
+              "sourceIds": [
+                "shiji-disposition"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            }
+          ]
+        },
+        "passersby": {
+          "metadata": {
+            "id": "passersby",
+            "label": "接引者视角",
+            "identity": "不具名的当地协助者 · 抵达时的相遇",
+            "evidenceScope": "大宛、康居协助传送张骞抵达月氏有记载。",
+            "boundary": "接引者身份与具体发言为示意，不指定谁一路随行。此页用协助者切入，接见页不提供路人旁听视角。"
+          },
+          "description": "从当地协助者的位置看远来的汉使，接引人物为示意。",
+          "crop": {
+            "x": 0.72,
+            "y": 0.6,
+            "scale": 1.15
+          },
+          "visibleInformation": "协助传送与抵达月氏的事件、当地的生活处境。",
+          "unavailableInformation": "具体接引者的身份、原话与一路同行情况未详。",
+          "lines": [
+            {
+              "lineId": "arrival-1",
+              "text": "从当地协助者这一端阅读：汉使经大宛、康居传送后抵达月氏。接引的具体人物没有详细记录。",
+              "sourceIds": [
+                "shiji-mission",
+                "shiji-arrival"
+              ],
+              "speakerLabel": "接引者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "arrival-2",
+              "text": "汉朝使者抵达了月氏。这个接引者是对协助相通的示意，不指定谁一路随行，也不把改编发言当作原话。",
+              "sourceIds": [
+                "shiji-arrival"
+              ],
+              "speakerLabel": "接引者 · 视角旁述",
+              "evidenceType": "source-boundary"
+            },
+            {
+              "lineId": "arrival-question-life",
+              "text": "从接引者这一端回应汉使对月氏迁居、与大夏关系的探询。这是当地的区域背景，不把这位协助者安排成历次迁居和战争的亲历者。",
+              "sourceIds": [
+                "shiji-region"
+              ],
+              "speakerLabel": "接引者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "arrival-migration",
+              "text": "史书记下月氏原居敦煌、祁连间，受匈奴击败后远迁。接引者的现代改编回答转述背景，不把他写成曾亲历这些事件。",
+              "sourceIds": [
+                "shiji-region"
+              ],
+              "speakerLabel": "接引者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "arrival-daxia-relations",
+              "text": "月氏西击大夏而使其臣属、大夏居月氏以南有记载。接引者帮助理解两地关系，不将两地居民或生活方式混为一体。",
+              "sourceIds": [
+                "shiji-region"
+              ],
+              "speakerLabel": "接引者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "arrival-3",
+              "text": "使者带来寻求联合的使命。从接引者这一位置，读到的是汉廷的来意，而非一位具体协助者留下的回忆。",
+              "sourceIds": [
+                "shiji-mission"
+              ],
+              "speakerLabel": "接引者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "arrival-4",
+              "text": "接引者的示意回答把来意带向下一页的接见。谁实际安排过会面、怎样安排，仍没有具体记录。",
+              "sourceIds": [
+                "shiji-disposition"
+              ],
+              "speakerLabel": "接引者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "arrival-5",
+              "text": "使者的使命还要继续。协助者形象让相遇可以被看见，却不会替月氏决定如何回应。",
+              "sourceIds": [
+                "shiji-mission"
+              ],
+              "speakerLabel": "接引者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "arrival-6",
+              "text": "抵达之后，使命与当地处境相遇。具体接引过程未详，这个窗口保留示意人物和叙事边界。",
+              "sourceIds": [
+                "shiji-disposition"
+              ],
+              "speakerLabel": "接引者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            }
+          ]
+        },
+        "overview": {
+          "metadata": {
+            "id": "overview",
+            "label": "上帝视角",
+            "identity": "读者总览 · 史料与叙事顺序",
+            "evidenceScope": "对照古籍梳理使命、月氏处境、区域活动与大夏见闻。",
+            "boundary": "总览沿用书页文字。人物对白仍是现代改编，图像与3D空间为制作示意。"
+          },
+          "description": "总览抵达顺序与月氏处境，对照书页的史料与改编。",
+          "crop": {
+            "x": 0.5,
+            "y": 0.5,
+            "scale": 1
+          },
+          "visibleInformation": "出使缘起、抵达顺序、接下来要理解的当地处境。",
+          "unavailableInformation": "实际到达地点、站位与接引对白未详。",
+          "lines": [
+            {
+              "lineId": "arrival-1",
+              "text": "被匈奴留了十余年，张骞逃离后继续西行。大宛与康居的协助，终于把他带到了大月氏。",
+              "sourceIds": [
+                "shiji-mission",
+                "shiji-arrival"
+              ],
+              "speakerLabel": "记述",
+              "evidenceType": "historical-summary"
+            },
+            {
+              "lineId": "arrival-2",
+              "text": "汉朝的使者，您到了。这里便是月氏如今生活的地方。",
+              "sourceIds": [
+                "shiji-arrival"
+              ],
+              "speakerLabel": "当地协助者",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "arrival-question-life",
+              "text": "月氏来到这里，又与南边的大夏有什么关系？我想多了解一些。",
+              "sourceIds": [
+                "shiji-region"
+              ],
+              "speakerLabel": "张骞",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "arrival-migration",
+              "text": "月氏原先住在敦煌、祁连一带。被匈奴击败后，才远迁，经过大宛，来到西边。",
+              "sourceIds": [
+                "shiji-region"
+              ],
+              "speakerLabel": "当地协助者",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "arrival-daxia-relations",
+              "text": "月氏西迁后击败大夏，使大夏臣属。大夏在月氏以南，两地有关联，却不是同一个地方。",
+              "sourceIds": [
+                "shiji-region"
+              ],
+              "speakerLabel": "当地协助者",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "arrival-3",
+              "text": "我奉汉廷之命而来。我们听闻月氏与匈奴的旧仇，希望能共同应对匈奴。",
+              "sourceIds": [
+                "shiji-mission"
+              ],
+              "speakerLabel": "张骞",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "arrival-4",
+              "text": "这里的人们已经在新的地方立足。您的来意，还需要让接见者听一听。",
+              "sourceIds": [
+                "shiji-disposition"
+              ],
+              "speakerLabel": "当地协助者",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "arrival-5",
+              "text": "先把汉廷的来意说清楚。走了这么久，我仍要完成这项使命。",
+              "sourceIds": [
+                "shiji-mission"
+              ],
+              "speakerLabel": "张骞",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "arrival-6",
+              "text": "使者抵达了目的地。接下来，他要面对的，是已经改变的月氏处境。",
+              "sourceIds": [
+                "shiji-disposition"
+              ],
+              "speakerLabel": "记述",
+              "evidenceType": "historical-summary"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "sceneId": "meeting",
+      "available": [
+        "envoy",
+        "host",
+        "overview"
+      ],
+      "views": {
+        "envoy": {
+          "metadata": {
+            "id": "envoy",
+            "label": "张骞视角",
+            "identity": "汉使张骞 · 使命与见闻",
+            "evidenceScope": "出使目标、抵达经历、大夏见物与答问有记载。",
+            "boundary": "用现代语言切入张骞的探询；内心与具体对白为改编，不是古籍原话。"
+          },
+          "description": "沿汉使的探询看双方处境，问题仍回到同一记载结果。",
+          "crop": {
+            "x": 0.4,
+            "y": 0.5,
+            "scale": 1.3
+          },
+          "visibleInformation": "汉廷寻求联合的目标，以及史家解释的月氏处境。",
+          "unavailableInformation": "谈判逐字记录、接见者确切身份与交涉次数未详。",
+          "lines": [
+            {
+              "lineId": "meeting-1",
+              "text": "汉廷希望与月氏相通，共同面对匈奴。我带来的这项目标，源于双方与匈奴的关系。",
+              "sourceIds": [
+                "shiji-mission"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "meeting-2",
+              "text": "我面对的是迁徙后在新地方生活的月氏。来意已经说明，接下来还要听听他们如何考虑联合。",
+              "sourceIds": [
+                "shiji-disposition"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "meeting-3",
+              "text": "我继续探询月氏对联合的考虑，可以从共同的旧仇，也可以从汉与月氏的距离问起。",
+              "sourceIds": [
+                "shiji-disposition"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "meeting-grievance",
+              "text": "从史家的解释看，有共同的旧仇，并不等于月氏仍愿为报仇出战。",
+              "sourceIds": [
+                "shiji-disposition"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "meeting-distance",
+              "text": "史家还提到月氏自觉离汉遥远。希望联合的一方，必须面对这种距离。",
+              "sourceIds": [
+                "shiji-disposition"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "meeting-4",
+              "text": "汉廷的使命与月氏如今的处境并不相同。这一段交涉，不能仅按我的期待理解。",
+              "sourceIds": [
+                "shiji-disposition"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "meeting-5",
+              "text": "我最终未能取得期望的联合约定。史书记下这一结果，没有留下可逐句重演的谈判。",
+              "sourceIds": [
+                "shiji-disposition"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            }
+          ]
+        },
+        "host": {
+          "metadata": {
+            "id": "host",
+            "label": "月氏接见者视角",
+            "identity": "不具名的月氏接见者 · 当地处境",
+            "evidenceScope": "月氏的安定处境、离汉遥远及联合未成有记载。",
+            "boundary": "接见者不指为某位国王；具体身份与发言是改编，史记与汉书的继位者异文保留。这里不是战争中的敌方。"
+          },
+          "description": "沿月氏接见者的位置看汉使，关注迁徙后安定生活的处境。",
+          "crop": {
+            "x": 0.75,
+            "y": 0.55,
+            "scale": 1.2
+          },
+          "visibleInformation": "月氏的安定处境、离汉遥远和寻求联合的交涉背景。",
+          "unavailableInformation": "接见者确切身份、逐字谈话与会面次数未详；不引入无据的旁听路人。",
+          "lines": [
+            {
+              "lineId": "meeting-1",
+              "text": "汉使带来了联合应对匈奴的来意。我们从月氏接见者这一位置，读双方不同的处境。",
+              "sourceIds": [
+                "shiji-mission"
+              ],
+              "speakerLabel": "月氏接见者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "meeting-2",
+              "text": "汉使说明来意，接见者从月氏眼下的处境回应。这里先展开交谈，还没有替后面的提问给出完整回答。",
+              "sourceIds": [
+                "shiji-disposition"
+              ],
+              "speakerLabel": "月氏接见者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "meeting-3",
+              "text": "共同的旧仇与眼前的生活，并不是同一个问题。选择旧仇或距离，都是在理解月氏的处境。",
+              "sourceIds": [
+                "shiji-disposition"
+              ],
+              "speakerLabel": "月氏接见者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "meeting-grievance",
+              "text": "有旧仇，不等于如今仍要为报仇出战。从接见者这一位置，看见的是重新安定后的处境。",
+              "sourceIds": [
+                "shiji-disposition"
+              ],
+              "speakerLabel": "月氏接见者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "meeting-distance",
+              "text": "史家提到月氏自觉离汉遥远。距离的顾虑是记述中的解释，不是一段已被记录的谈判原话。",
+              "sourceIds": [
+                "shiji-disposition"
+              ],
+              "speakerLabel": "月氏接见者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "meeting-4",
+              "text": "汉廷希望联合，月氏也有如今的生活处境。接见者的具体身份未详，我们不把这个形象指定为某位国王。",
+              "sourceIds": [
+                "shiji-disposition"
+              ],
+              "speakerLabel": "月氏接见者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "meeting-5",
+              "text": "张骞未能取得期望的联合约定。接见者视角帮助理解当地处境，也保留同一记载结果。",
+              "sourceIds": [
+                "shiji-disposition"
+              ],
+              "speakerLabel": "月氏接见者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            }
+          ]
+        },
+        "overview": {
+          "metadata": {
+            "id": "overview",
+            "label": "上帝视角",
+            "identity": "读者总览 · 史料与叙事顺序",
+            "evidenceScope": "对照古籍梳理使命、月氏处境、区域活动与大夏见闻。",
+            "boundary": "总览沿用书页文字。人物对白仍是现代改编，图像与3D空间为制作示意。"
+          },
+          "description": "并看汉廷期待与月氏处境，保留固定的联合未成结局。",
+          "crop": {
+            "x": 0.5,
+            "y": 0.5,
+            "scale": 1
+          },
+          "visibleInformation": "出使目标、月氏处境、未能取得联合约定的结果。",
+          "unavailableInformation": "具体接见空间和逐字谈话未详；继位者存在文本异文。",
+          "lines": [
+            {
+              "lineId": "meeting-1",
+              "text": "汉廷愿与月氏相通。匈奴曾给月氏带来深重伤害，我们希望找到共同的盟友。",
+              "sourceIds": [
+                "shiji-mission"
+              ],
+              "speakerLabel": "张骞",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "meeting-2",
+              "text": "我们已经在新的地方生活。汉廷的来意，也要放在我们眼下的处境里谈。",
+              "sourceIds": [
+                "shiji-disposition"
+              ],
+              "speakerLabel": "月氏接见者",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "meeting-3",
+              "text": "我还想了解，你们会怎样考虑联合这件事。",
+              "sourceIds": [
+                "shiji-disposition"
+              ],
+              "speakerLabel": "张骞",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "meeting-grievance",
+              "text": "经历过迁徙，眼前的安定也有分量。过去的仇，并不意味着现在仍要为它出战。",
+              "sourceIds": [
+                "shiji-disposition"
+              ],
+              "speakerLabel": "月氏接见者",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "meeting-distance",
+              "text": "汉朝离这里遥远。要共同采取行动，眼前的人们会有自己的顾虑。",
+              "sourceIds": [
+                "shiji-disposition"
+              ],
+              "speakerLabel": "月氏接见者",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "meeting-4",
+              "text": "我明白，旧仇之外，你们还有如今要守护的生活。汉廷的期待，与这里的处境并不相同。",
+              "sourceIds": [
+                "shiji-disposition"
+              ],
+              "speakerLabel": "张骞",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "meeting-5",
+              "text": "《史记》以“地肥饶，少寇，志安乐，又自以远汉”解释月氏的处境。张骞在这一地区的活动中，终究未能取得期望的联合约定。",
+              "sourceIds": [
+                "shiji-disposition"
+              ],
+              "speakerLabel": "记述",
+              "evidenceType": "historical-summary"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "sceneId": "waiting",
+      "available": [
+        "envoy",
+        "passersby",
+        "overview"
+      ],
+      "views": {
+        "envoy": {
+          "metadata": {
+            "id": "envoy",
+            "label": "张骞视角",
+            "identity": "汉使张骞 · 使命与见闻",
+            "evidenceScope": "出使目标、抵达经历、大夏见物与答问有记载。",
+            "boundary": "用现代语言切入张骞的探询；内心与具体对白为改编，不是古籍原话。"
+          },
+          "description": "跟随使者由使命转向观察，区域活动不是单一王庭的停留。",
+          "crop": {
+            "x": 0.4,
+            "y": 0.58,
+            "scale": 1.2
+          },
+          "visibleInformation": "由月氏到大夏、一年多的活动、逐步展开的见闻。",
+          "unavailableInformation": "每日行程、具体季节与各处停留时长未详。",
+          "lines": [
+            {
+              "lineId": "waiting-1",
+              "text": "我从月氏到大夏，在这一区域停留一年多。并非整年住在同一接见场所。",
+              "sourceIds": [
+                "shiji-stay"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "waiting-2",
+              "text": "除了联盟的目标，我还有西域诸国的亲历与见闻。在大夏的见物答问，是其中的一部分。",
+              "sourceIds": [
+                "shiji-report",
+                "shiji-market"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "waiting-question-region",
+              "text": "我想分开认识月氏与大夏的生活背景：月氏的随畜迁徙，与大夏的城邑市场，不是同一幅地方图景。",
+              "sourceIds": [
+                "shiji-region"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "waiting-yuezhi-life",
+              "text": "月氏条记述随畜迁徙。这是区域生活背景，不能据此补出我每天住在哪里、与哪些人同行。",
+              "sourceIds": [
+                "shiji-region"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "waiting-daxia-life",
+              "text": "大夏条记述土著、城屋与市场。认识这些背景，不等于确定我所到的每一个市场或居所。",
+              "sourceIds": [
+                "shiji-region"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "waiting-3",
+              "text": "分开认识月氏与大夏之后，我把探询继续转向往来与物品。具体所见的蜀物和答问，下一页才展开。",
+              "sourceIds": [
+                "shiji-region",
+                "shiji-market"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "waiting-4",
+              "text": "在大夏，我看见的物品引出了一个问题：它们怎样来到这里？",
+              "sourceIds": [
+                "shiji-market"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "waiting-5",
+              "text": "下一页转入我在大夏的见物与答问。它与月氏交涉是不同的空间，见物的具体日期不详。",
+              "sourceIds": [
+                "shiji-market",
+                "shiji-stay"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "source-boundary"
+            }
+          ]
+        },
+        "passersby": {
+          "metadata": {
+            "id": "passersby",
+            "label": "路人视角",
+            "identity": "匿名路人 · 日常生活的阅读位置",
+            "evidenceScope": "月氏处境、大夏城邑与市场、见物答问有记载。",
+            "boundary": "路人的身份、到场与听闻均为示意；不把个体的想法当作月氏或大夏全体人的意见。"
+          },
+          "description": "从人们往来的一侧看区域生活，不让一个路人全程同行。",
+          "crop": {
+            "x": 0.73,
+            "y": 0.6,
+            "scale": 1.1
+          },
+          "visibleInformation": "月氏与大夏不同的生活背景，大夏有城邑与市场。",
+          "unavailableInformation": "具体相遇者、同行者和日常活动细节未详。",
+          "lines": [
+            {
+              "lineId": "waiting-1",
+              "text": "一年多的活动跨过月氏与大夏。这一阅读位置关注来往与停留，不把一位路人安排成张骞全程同行者。",
+              "sourceIds": [
+                "shiji-stay"
+              ],
+              "speakerLabel": "路人 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "waiting-2",
+              "text": "从往来的人们这一端阅读，张骞的见闻涉及远处的物品与联系。具体谁与他相遇，仍需保留未知。",
+              "sourceIds": [
+                "shiji-report",
+                "shiji-market"
+              ],
+              "speakerLabel": "路人 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "waiting-question-region",
+              "text": "从当地来往的人们这一侧，分开理解月氏与大夏。路人是阅读位置，不被写成亲历张骞全部活动的目击者。",
+              "sourceIds": [
+                "shiji-region"
+              ],
+              "speakerLabel": "路人 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "waiting-yuezhi-life",
+              "text": "月氏随畜迁徙的背景有记载。路人这一位置不因此认定每位居民的住处，也不被安排成带领汉使走遍当地的人。",
+              "sourceIds": [
+                "shiji-region"
+              ],
+              "speakerLabel": "路人 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "waiting-daxia-life",
+              "text": "大夏有城屋与市场的背景有记载。这个日常生活的阅读位置，不补定某位路人的姓名、住所或具体市场。",
+              "sourceIds": [
+                "shiji-region"
+              ],
+              "speakerLabel": "路人 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "waiting-3",
+              "text": "了解两地生活背景之后，目光转向区域往来与物品。这位匿名路人不被安排成知道所有货源、跟随张骞全程的目击者。",
+              "sourceIds": [
+                "shiji-region",
+                "shiji-market"
+              ],
+              "speakerLabel": "路人 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "waiting-4",
+              "text": "下一段将关注物品与来处。路人位置帮助把目光移向往来，不捏造一个具体摊位或货主。",
+              "sourceIds": [
+                "shiji-market"
+              ],
+              "speakerLabel": "路人 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "waiting-5",
+              "text": "从月氏的交涉切到大夏的见物，叙事空间变了。路人不是带着所有信息跨页同行的目击者。",
+              "sourceIds": [
+                "shiji-market",
+                "shiji-stay"
+              ],
+              "speakerLabel": "路人 · 视角旁述",
+              "evidenceType": "source-boundary"
+            }
+          ]
+        },
+        "overview": {
+          "metadata": {
+            "id": "overview",
+            "label": "上帝视角",
+            "identity": "读者总览 · 史料与叙事顺序",
+            "evidenceScope": "对照古籍梳理使命、月氏处境、区域活动与大夏见闻。",
+            "boundary": "总览沿用书页文字。人物对白仍是现代改编，图像与3D空间为制作示意。"
+          },
+          "description": "总览区域活动，并将月氏交涉与大夏见物分开阅读。",
+          "crop": {
+            "x": 0.5,
+            "y": 0.5,
+            "scale": 1
+          },
+          "visibleInformation": "一年多的区域活动及不同叙事空间。",
+          "unavailableInformation": "不能据此确定整年居所或市场答问的日期。",
+          "lines": [
+            {
+              "lineId": "waiting-1",
+              "text": "目标未成，故事却没有在一次接见后结束。张骞由月氏到大夏，在这一区域停留一年多。",
+              "sourceIds": [
+                "shiji-stay"
+              ],
+              "speakerLabel": "记述",
+              "evidenceType": "historical-summary"
+            },
+            {
+              "lineId": "waiting-2",
+              "text": "来到这里，才知道每个地方都有自己的生活。我还要看清，他们怎样往来，又与哪些地方相通。",
+              "sourceIds": [
+                "shiji-report",
+                "shiji-market"
+              ],
+              "speakerLabel": "张骞",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "waiting-question-region",
+              "text": "月氏与大夏的生活，有哪些不同？",
+              "sourceIds": [
+                "shiji-region"
+              ],
+              "speakerLabel": "张骞",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "waiting-yuezhi-life",
+              "text": "月氏有随畜迁移的生活习惯，人们和牲畜一起移动。",
+              "sourceIds": [
+                "shiji-region"
+              ],
+              "speakerLabel": "当地协助者",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "waiting-daxia-life",
+              "text": "大夏的人们定居生活，有城邑和房屋，也有买卖各种物品的市场。",
+              "sourceIds": [
+                "shiji-region"
+              ],
+              "speakerLabel": "当地协助者",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "waiting-3",
+              "text": "两地各有自己的生活。要了解它们与外界的往来，还可以留意市场上的物品。",
+              "sourceIds": [
+                "shiji-region",
+                "shiji-market"
+              ],
+              "speakerLabel": "当地协助者",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "waiting-4",
+              "text": "去看看那些物品。它们也许能告诉我，这片土地与外面的世界如何相连。",
+              "sourceIds": [
+                "shiji-market"
+              ],
+              "speakerLabel": "张骞",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "waiting-5",
+              "text": "翻到下一页，我们读到张骞在大夏的见物与答问。月氏接见与大夏见物，属于不同的叙事空间；市场见闻的确切日期不详。",
+              "sourceIds": [
+                "shiji-market",
+                "shiji-stay"
+              ],
+              "speakerLabel": "记述",
+              "evidenceType": "historical-summary"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "sceneId": "market",
+      "available": [
+        "envoy",
+        "trader",
+        "passersby",
+        "overview"
+      ],
+      "views": {
+        "envoy": {
+          "metadata": {
+            "id": "envoy",
+            "label": "张骞视角",
+            "identity": "汉使张骞 · 使命与见闻",
+            "evidenceScope": "出使目标、抵达经历、大夏见物与答问有记载。",
+            "boundary": "用现代语言切入张骞的探询；内心与具体对白为改编，不是古籍原话。"
+          },
+          "description": "由使者的见物与发问切入，走到道路推想而非既成路线。",
+          "crop": {
+            "x": 0.4,
+            "y": 0.62,
+            "scale": 1.3
+          },
+          "visibleInformation": "邛竹杖、蜀布、身毒来源的答问及张骞的道路推想。",
+          "unavailableInformation": "器物外观未详；张骞并未在本段亲走完整货路。",
+          "lines": [
+            {
+              "lineId": "market-1",
+              "text": "我在大夏看见了邛竹杖和蜀布。来自蜀地的物品，使远方的交通联系有了线索。",
+              "sourceIds": [
+                "shiji-market"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-2",
+              "text": "这些物品从哪里来？我向大夏国人询问它们的来处。",
+              "sourceIds": [
+                "shiji-market"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-cloth",
+              "text": "我先询问蜀布。来自蜀地的布出现在大夏的货物中，接下来还要继续问清它怎样来到这里。",
+              "sourceIds": [
+                "shiji-market"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-bamboo",
+              "text": "我先询问邛竹杖。大夏国人说商人带来了这样的杖，这让物品往来的问题更加具体；购入地还要继续探询。",
+              "sourceIds": [
+                "shiji-market"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-3",
+              "text": "大夏国人答道，他们的商人从身毒购得这些物品。这是答问中的转述，并非我亲走了整条货路。",
+              "sourceIds": [
+                "shiji-market"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-question-shendu",
+              "text": "听到商人从身毒购货，我想继续了解那个地方的方位或风土。此刻我在大夏，关于身毒的信息需要从答问中听来。",
+              "sourceIds": [
+                "shiji-shendu"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-shendu-direction",
+              "text": "据大夏国人的答问，身毒在大夏东南约数千里。我记下的是传闻中的约数，不是自己走出的里程或精确地图。",
+              "sourceIds": [
+                "shiji-shendu"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-shendu-life",
+              "text": "答问中说身毒定居生活与大夏大体相似，地势低湿、天气湿热。我听到这种风土描述，却没有亲至身毒。",
+              "sourceIds": [
+                "shiji-shendu"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-4",
+              "text": "我把大夏见到的蜀物与答问中听来的身毒消息联系起来，推想可以从蜀地寻找道路。此刻还只是推想。",
+              "sourceIds": [
+                "shiji-market",
+                "shiji-shendu"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-5",
+              "text": "联合目标未成，见物与传闻带来了新的认识。我没有亲至身毒，推想的道路也不能当作已经走通的路线。",
+              "sourceIds": [
+                "shiji-market",
+                "shiji-shendu",
+                "shiji-report"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-6",
+              "text": "故事在这里停下。后来归汉、报告亲历与传闻的记载，由读者回看；不把未来消息装进此刻的我所知。",
+              "sourceIds": [
+                "shiji-report"
+              ],
+              "speakerLabel": "张骞 · 视角旁述",
+              "evidenceType": "source-boundary"
+            }
+          ]
+        },
+        "trader": {
+          "metadata": {
+            "id": "trader",
+            "label": "大夏答问者视角",
+            "identity": "不具名的大夏国人 · 见物答问",
+            "evidenceScope": "大夏国人转述商人从身毒购得邛竹杖和蜀布，并述身毒方位与风土，有记载；身毒信息属传闻。",
+            "boundary": "不把答问者确定为售货商人或货主；具体面容、摊位与改编发言为补全。物品形制、纤维与颜色未详。"
+          },
+          "description": "由大夏答问者的位置看汉使询问物品来处，不指定其为售货者。",
+          "crop": {
+            "x": 0.66,
+            "y": 0.51,
+            "scale": 1.25
+          },
+          "visibleInformation": "大夏国人转述商人从身毒购得邛竹杖与蜀布。",
+          "unavailableInformation": "答问者的姓名、职业、是否亲自购货及具体摊位未详。",
+          "lines": [
+            {
+              "lineId": "market-1",
+              "text": "从大夏答问者这一端阅读，汉使注意到了邛竹杖和蜀布。说话者是大夏国人，未必就是卖这些物品的人。",
+              "sourceIds": [
+                "shiji-market"
+              ],
+              "speakerLabel": "大夏答问者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-2",
+              "text": "汉使问这些物品从哪里来。这是史书记下的见物答问，具体答问者的名字没有留下。",
+              "sourceIds": [
+                "shiji-market"
+              ],
+              "speakerLabel": "大夏答问者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-cloth",
+              "text": "汉使先问蜀布。我们按物名与见物背景改编回应：来自蜀地的布，也出现在大夏的货物中；答问者仍不确定为货主。",
+              "sourceIds": [
+                "shiji-market"
+              ],
+              "speakerLabel": "大夏答问者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-bamboo",
+              "text": "汉使先问邛竹杖。我们从物品来到大夏这一端回应，不把这位国人安排成杖的制作者，也不提前补定他亲走的货路。",
+              "sourceIds": [
+                "shiji-market"
+              ],
+              "speakerLabel": "大夏答问者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-3",
+              "text": "我们的商人从身毒购得这些物品。这句话按史书记下的答问作现代改编，不确定说话者本人就是那位商人。",
+              "sourceIds": [
+                "shiji-market"
+              ],
+              "speakerLabel": "大夏答问者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-question-shendu",
+              "text": "汉使继续问起身毒的方位或风土。这些内容在大夏国人的答问中有记载，但不能确定这位答问者本人是否到过身毒。",
+              "sourceIds": [
+                "shiji-shendu"
+              ],
+              "speakerLabel": "大夏答问者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-shendu-direction",
+              "text": "从答问者这一端转述：身毒据说在大夏东南约数千里。约数和方位来自记载，不补造一条具体商路。",
+              "sourceIds": [
+                "shiji-shendu"
+              ],
+              "speakerLabel": "大夏答问者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-shendu-life",
+              "text": "答问记下身毒土著、与大夏大体相同而低湿暑热。这里以听说的方式说明风土，不把答问者确定为身毒亲历者。",
+              "sourceIds": [
+                "shiji-shendu"
+              ],
+              "speakerLabel": "大夏答问者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-4",
+              "text": "汉使将见物与身毒传闻联系起来作道路推想。答问者的具体行程未详，张骞也未亲至身毒。",
+              "sourceIds": [
+                "shiji-market",
+                "shiji-shendu"
+              ],
+              "speakerLabel": "大夏答问者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-5",
+              "text": "见物与传闻帮助汉使扩展认识。联合未成、未亲至身毒、道路尚属推想的结局不会因答问者视角而改变。",
+              "sourceIds": [
+                "shiji-market",
+                "shiji-shendu",
+                "shiji-report"
+              ],
+              "speakerLabel": "大夏答问者 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-6",
+              "text": "后来张骞归汉并报告见闻。答问者是否再见过他，没有具体记录，这个窗口不补演送别。",
+              "sourceIds": [
+                "shiji-report"
+              ],
+              "speakerLabel": "大夏答问者 · 视角旁述",
+              "evidenceType": "source-boundary"
+            }
+          ]
+        },
+        "passersby": {
+          "metadata": {
+            "id": "passersby",
+            "label": "路人视角",
+            "identity": "匿名路人 · 日常生活的阅读位置",
+            "evidenceScope": "月氏处境、大夏城邑与市场、见物答问有记载。",
+            "boundary": "路人的身份、到场与听闻均为示意；不把个体的想法当作月氏或大夏全体人的意见。"
+          },
+          "description": "从日常交易这一侧理解物品往来，路人不自动成为答问者。",
+          "crop": {
+            "x": 0.74,
+            "y": 0.63,
+            "scale": 1.15
+          },
+          "visibleInformation": "物品流通与大夏国人转述的商人购货来源。",
+          "unavailableInformation": "具体摊位、货主、路人身份、物品形制与颜色未详。",
+          "lines": [
+            {
+              "lineId": "market-1",
+              "text": "从日常交易这一端阅读，邛竹杖和蜀布提示远方的往来；眼前的市场空间与路人都是制作示意。",
+              "sourceIds": [
+                "shiji-market"
+              ],
+              "speakerLabel": "路人 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-2",
+              "text": "物品从哪里来？这一个问题通向史书记下的答问，不假定周围路人全都知道答案。",
+              "sourceIds": [
+                "shiji-market"
+              ],
+              "speakerLabel": "路人 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-cloth",
+              "text": "这段答问从蜀布切入商人的购货来处。路人不是答问者，也不自动听闻全过程；蜀布的纤维和颜色仍未详。",
+              "sourceIds": [
+                "shiji-market"
+              ],
+              "speakerLabel": "路人 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-bamboo",
+              "text": "这段答问从邛竹杖切入货物往来。路人阅读位置不补写物品使用者，也不把周围每个人当作货物来处的知情者。",
+              "sourceIds": [
+                "shiji-market"
+              ],
+              "speakerLabel": "路人 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-3",
+              "text": "答问者说商人从身毒购得物品。说话者不自动就是售货的商人，匿名路人也不自动就是答问者。",
+              "sourceIds": [
+                "shiji-market"
+              ],
+              "speakerLabel": "路人 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-question-shendu",
+              "text": "这一页由商人购货信息继续问起身毒。路人这一阅读位置不自动知道身毒方位与风土，更不被指定为答问者。",
+              "sourceIds": [
+                "shiji-shendu"
+              ],
+              "speakerLabel": "路人 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-shendu-direction",
+              "text": "大夏国人的答问转述身毒在东南约数千里。匿名路人不是这条消息的确证者，也不提供精确地图或亲走的货路。",
+              "sourceIds": [
+                "shiji-shendu"
+              ],
+              "speakerLabel": "路人 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-shendu-life",
+              "text": "关于身毒定居、低湿暑热的信息是听来的风土描述。路人这一侧不把传闻变为自己或张骞在身毒的亲历。",
+              "sourceIds": [
+                "shiji-shendu"
+              ],
+              "speakerLabel": "路人 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-4",
+              "text": "见物与身毒传闻共同引出张骞的道路推想。路人位置帮助理解往来，不把推想当成任何人已亲走的路线。",
+              "sourceIds": [
+                "shiji-market",
+                "shiji-shendu"
+              ],
+              "speakerLabel": "路人 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-5",
+              "text": "见物与传闻扩展认识，联合仍未成，张骞也未亲至身毒。切换生活的一侧，不会改变这些记载边界。",
+              "sourceIds": [
+                "shiji-market",
+                "shiji-shendu",
+                "shiji-report"
+              ],
+              "speakerLabel": "路人 · 视角旁述",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-6",
+              "text": "后来张骞归汉报告见闻。具体路人与他的告别没有记载；这个窗口不补演一场送别。",
+              "sourceIds": [
+                "shiji-report"
+              ],
+              "speakerLabel": "路人 · 视角旁述",
+              "evidenceType": "source-boundary"
+            }
+          ]
+        },
+        "overview": {
+          "metadata": {
+            "id": "overview",
+            "label": "上帝视角",
+            "identity": "读者总览 · 史料与叙事顺序",
+            "evidenceScope": "对照古籍梳理使命、月氏处境、区域活动与大夏见闻。",
+            "boundary": "总览沿用书页文字。人物对白仍是现代改编，图像与3D空间为制作示意。"
+          },
+          "description": "并看见物、答问与推想，收束到联盟未成而见闻扩展。",
+          "crop": {
+            "x": 0.5,
+            "y": 0.5,
+            "scale": 1
+          },
+          "visibleInformation": "张骞所见、他人答问、道路推想与后来报告的区别。",
+          "unavailableInformation": "没有已经走通新路线的证据，不补演具体市场与送别。",
+          "lines": [
+            {
+              "lineId": "market-1",
+              "text": "在大夏，张骞看见了邛竹杖和蜀布。遥远的市场里，出现了来自汉地的物品。",
+              "sourceIds": [
+                "shiji-market"
+              ],
+              "speakerLabel": "记述",
+              "evidenceType": "historical-summary"
+            },
+            {
+              "lineId": "market-2",
+              "text": "这些物品，是从哪里来的？",
+              "sourceIds": [
+                "shiji-market"
+              ],
+              "speakerLabel": "张骞",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-cloth",
+              "text": "您认出的是蜀布，来自蜀地的布。它也出现在我们大夏的货物之中。",
+              "sourceIds": [
+                "shiji-market"
+              ],
+              "speakerLabel": "大夏答问者",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-bamboo",
+              "text": "您问的邛竹杖，也是从外面来到大夏的物品。我们的商人会带来这样的杖。",
+              "sourceIds": [
+                "shiji-market"
+              ],
+              "speakerLabel": "大夏答问者",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-3",
+              "text": "我们的商人，从身毒购得这些物品。",
+              "sourceIds": [
+                "shiji-market"
+              ],
+              "speakerLabel": "大夏答问者",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-question-shendu",
+              "text": "商人既然从身毒购得这些物品，我想再问问那个地方。",
+              "sourceIds": [
+                "shiji-shendu"
+              ],
+              "speakerLabel": "张骞",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-shendu-direction",
+              "text": "据说在大夏东南，约数千里。我们的商人往那里购货。",
+              "sourceIds": [
+                "shiji-shendu"
+              ],
+              "speakerLabel": "大夏答问者",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-shendu-life",
+              "text": "听说那里定居生活，与大夏大体相似，但地势低湿、天气湿热。",
+              "sourceIds": [
+                "shiji-shendu"
+              ],
+              "speakerLabel": "大夏答问者",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-4",
+              "text": "把这些见物和听来的消息放在一起，或许可以从蜀地寻找另一条通往身毒、大夏的路。",
+              "sourceIds": [
+                "shiji-market",
+                "shiji-shendu"
+              ],
+              "speakerLabel": "张骞",
+              "evidenceType": "modern-adaptation"
+            },
+            {
+              "lineId": "market-5",
+              "text": "这是张骞由见物与答问产生的道路推想，并非已经走通的新路线；他并未亲至身毒。联合目标未成，新的认识却在观察中展开。",
+              "sourceIds": [
+                "shiji-market",
+                "shiji-shendu",
+                "shiji-report"
+              ],
+              "speakerLabel": "记述",
+              "evidenceType": "historical-summary"
+            },
+            {
+              "lineId": "market-6",
+              "text": "后来，张骞历经归途波折回到汉朝，报告了西域诸国的亲历与传闻。这一段故事，停在他对世界的认识正在扩展的时刻。",
+              "sourceIds": [
+                "shiji-report"
+              ],
+              "speakerLabel": "记述",
+              "evidenceType": "historical-summary"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "contexts": [
+    {
+      "id": "captivity",
+      "title": "前情：张骞被留匈奴",
+      "available": [
+        "envoy",
+        "opponent",
+        "overview"
+      ],
+      "sourceIds": [
+        "shiji-mission"
+      ],
+      "boundary": "前情窗口独立于绘本进度。人物服装依据同期及相近时期考古材料交叉推定，营地、身份和具体言语为补全。",
+      "views": {
+        "envoy": {
+          "metadata": {
+            "id": "envoy",
+            "label": "张骞视角",
+            "identity": "汉使张骞 · 被留匈奴的前情",
+            "evidenceScope": "被留十余年、得妻有子、仍持汉节的记载。",
+            "boundary": "前情窗口根据被留的记载与考古资料补全，张骞的具体内心、发言、营地和日常动作是制作推定；不推进绘本。"
+          },
+          "description": "由被留的汉使这一端看匈奴人物与营地，回到抵达月氏之前的前情。",
+          "crop": {
+            "x": 0.4,
+            "y": 0.55,
+            "scale": 1.2
+          },
+          "visibleInformation": "被留十余年、得妻有子、仍持汉节的记载与人物示意。",
+          "unavailableInformation": "具体羁留地点、人物身份、原话及日常行动没有完整记录。",
+          "lines": [
+            {
+              "lineId": "captivity-context",
+              "text": "我是奉汉廷使命出发的使者。史书记载我被留在匈奴十余年，得妻有子，仍持汉节。这里重建这段漫长羁留的前情；具体言语、人物相处与营地布局为推定。",
+              "sourceIds": [
+                "shiji-mission"
+              ],
+              "speakerLabel": "张骞 · 前情改编",
+              "evidenceType": "modern-adaptation"
+            }
+          ]
+        },
+        "opponent": {
+          "metadata": {
+            "id": "opponent",
+            "label": "匈奴视角",
+            "identity": "匿名匈奴人物 · 羁留前情",
+            "evidenceScope": "张骞被留匈奴十余年、得妻有子、持汉节有记载；服装另据同期及相近时期考古材料交叉补全。",
+            "boundary": "仅在匈奴羁留前情中提供。人物身份、面容、营地、站位与具体发言为推定；不把匈奴人物放进月氏接见或大夏见物现场。月氏不是敌方。"
+          },
+          "description": "回到羁留前情，从匈奴人物这一端近看被留汉使，以交叉史料补全的服装与场景切入。",
+          "crop": {
+            "x": 0.72,
+            "y": 0.55,
+            "scale": 1.2
+          },
+          "visibleInformation": "匈奴羁留前情中的人物形象、汉使与相处空间的制作示意。",
+          "unavailableInformation": "不指认具体看守或单于；营地与动作是推定，不把人物送入后来的月氏接见。",
+          "lines": [
+            {
+              "lineId": "captivity-context",
+              "text": "从这位匈奴人物身旁看汉使被留的前情。张骞被留十余年有记载；眼前人物的服装由同期与相近时期材料交叉补全，具体身份和言语是创作推定。他属于匈奴前情，不出现在后来的月氏接见。",
+              "sourceIds": [
+                "shiji-mission"
+              ],
+              "speakerLabel": "匈奴人物 · 前情示意",
+              "evidenceType": "modern-adaptation"
+            }
+          ]
+        },
+        "overview": {
+          "metadata": {
+            "id": "overview",
+            "label": "上帝视角",
+            "identity": "读者总览 · 匈奴羁留前情",
+            "evidenceScope": "对照张骞被留的古籍记载与同期、相近时期的服饰考古材料。",
+            "boundary": "这是故事抵达月氏之前的前情，营地和具体人物互动是交叉史料推定；不是月氏接见现场。"
+          },
+          "description": "总览匈奴羁留的前情重建，区分古籍记载、服饰参考与场景补全。",
+          "crop": {
+            "x": 0.5,
+            "y": 0.5,
+            "scale": 1
+          },
+          "visibleInformation": "故事抵达月氏之前的被留记载，以及交叉材料支持的人物服装轮廓。",
+          "unavailableInformation": "没有足以确定每个人的面貌、服色、营地坐标或看守人数的史料。",
+          "lines": [
+            {
+              "lineId": "captivity-context",
+              "text": "抵达月氏之前，张骞被留匈奴十余年，得妻有子，仍持汉节。这个3D前情以记载为骨架、服饰考古为辅助，补全人物与空间供读者观察；不确定营地地点，也不改写之后的抵达与联合未成。",
+              "sourceIds": [
+                "shiji-mission"
+              ],
+              "speakerLabel": "记述 · 羁留前情",
+              "evidenceType": "historical-summary"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

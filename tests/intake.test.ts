@@ -65,7 +65,7 @@ describe('collection import', () => {
     const changed = await workspace()
     await cp(fixture, changed, { recursive: true })
     await rm(path.join(changed, 'assets'), { recursive: true })
-    await symlink(path.join(fixture, 'assets'), path.join(changed, 'assets'), 'dir')
+    await symlink(path.join(fixture, 'assets'), path.join(changed, 'assets'), process.platform === 'win32' ? 'junction' : 'dir')
     await expect(importCollection(changed, dataDir, 'symlink-key')).rejects.toMatchObject({ code: 'COLLECTION_INVALID' })
   })
 

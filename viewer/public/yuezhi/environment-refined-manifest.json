@@ -1,0 +1,249 @@
+{
+  "historicalStatus": "illustrative landscape; geography and meeting layout not asserted as historical facts",
+  "blenderVersion": "4.5.14 LTS",
+  "unit": "meter",
+  "upAxis": "Y",
+  "centralWalkableHeight": 0,
+  "meetingPoints": [
+    [
+      -4,
+      0,
+      4
+    ],
+    [
+      5,
+      0,
+      -4
+    ]
+  ],
+  "sources": [
+    {
+      "asset": "Rocks Ground 05 diffuse 1K",
+      "url": "https://polyhaven.com/a/rocks_ground_05",
+      "downloadUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rocks_ground_05/rocks_ground_05_diff_1k.jpg",
+      "license": "CC0",
+      "used": true
+    }
+  ],
+  "additionalSources": [
+    {
+      "asset": "grass_path_2",
+      "url": "https://polyhaven.com/a/grass_path_2",
+      "license": "CC0"
+    },
+    {
+      "asset": "grass_medium_01",
+      "url": "https://polyhaven.com/a/grass_medium_01",
+      "license": "CC0"
+    },
+    {
+      "asset": "shrub_01",
+      "url": "https://polyhaven.com/a/shrub_01",
+      "license": "CC0"
+    }
+  ],
+  "visualNote": "Baked real meadow/earth atlas and decimated photographed plant meshes; illustrative geography",
+  "geometrySource": "Procedural Blender terrain, river, ridges and stones; Poly Haven natural grass and shrub meshes; original rocks refined with authored fracture geometry",
+  "sha256": "2956955061a5278a293320c598719c175e74c28133aa8a2785e4652760db2832",
+  "bytes": 11547972,
+  "triangles": 121408,
+  "bounds": {
+    "min": [
+      -90.0,
+      -0.4515402317047119,
+      -90.0
+    ],
+    "max": [
+      90.0,
+      7.289393424987793,
+      90.0
+    ]
+  },
+  "sourceFileHashes": {
+    "shrub_01/shrub_01.bin": "a8646f51386c84b12a6be8324dd0c2357c393c9108aac911847a203cf490b426",
+    "shrub_01/shrub_01_1k.gltf": "c3bb3340687d46c684b9dab82f5b2f92b7b0fe761842423d3c9e19f59a839393",
+    "grass_medium_01/grass_medium_01.bin": "f4587cabdb96a2e96d8be644923dc954a248edfaaa717a0ff224cacb898bee1f",
+    "grass_medium_01/grass_medium_01_1k.gltf": "3e5e2a314c94e16de54fd7c28e41709731fbd2b1613ab539f1544f622ddb6a85",
+    "grass_medium_01/textures/grass_medium_01_nor_gl_1k.jpg": "cae298d3d1d7ff7c7e210ad8ac772b96706e356f9315a6b04fde373ce01ccf1e",
+    "grass_medium_01/textures/grass_medium_01_arm_1k.jpg": "9a3a30f72bc02f4398967c5b08f2d20cce30bd423a2613b42a727034296fa3ae",
+    "grass_medium_01/textures/grass_medium_01_diff_1k.jpg": "71495bd6a11fddcab0aaff38246fea1a7b802a705483f1c7cbca53955daa8050",
+    "shrub_01/textures/shrub_01_arm_1k.jpg": "8faecdc28d8f03ba0ac139be16e617e8bfd0778780ec1d7850812230378b89be",
+    "shrub_01/textures/shrub_01_diff_1k.jpg": "fe60e639d694e1807c0a3ae97dd1d5a7e7b3f84e5fc32d0610b868ce48f36331",
+    "shrub_01/textures/shrub_01_nor_gl_1k.jpg": "076870a39a4e21a364cf94566e6dd1852a29045fdf1f23393637235b19d1c2e8"
+  },
+  "file": "environment-refined.glb",
+  "refinement": {
+    "upstreamFile": "environment.glb",
+    "upstreamSha256": "92c1f8b4f825726f033d4f3d844b92078efc421ffa2dba18dfed2274b906fcf3",
+    "upstreamBytes": 7431064,
+    "upstreamManifest": "environment-manifest.json",
+    "upstreamTool": "5.2.0 LTS",
+    "tool": "Blender 4.5.14 LTS",
+    "script": "scripts/refine-yuezhi-environment.py",
+    "scriptSha256": "7087983fa473797579c06fe97d791443c0e9d85747bc29d796c6bbcb9b007ad0",
+    "seed": 20261001,
+    "editedObjects": [
+      "Distant illustrative mountain ridge",
+      "Illustrative river ribbon",
+      "Illustrative valley terrain",
+      "Procedural weathered stone",
+      "Procedural weathered stone.001",
+      "Procedural weathered stone.002",
+      "Procedural weathered stone.003",
+      "Procedural weathered stone.004",
+      "Procedural weathered stone.005",
+      "Procedural weathered stone.006",
+      "Procedural weathered stone.007",
+      "Procedural weathered stone.008",
+      "Procedural weathered stone.009",
+      "Procedural weathered stone.010",
+      "Procedural weathered stone.011",
+      "Procedural weathered stone.012",
+      "Procedural weathered stone.013",
+      "Procedural weathered stone.014",
+      "Procedural weathered stone.015",
+      "Procedural weathered stone.016",
+      "Procedural weathered stone.017",
+      "Procedural weathered stone.018",
+      "Procedural weathered stone.019",
+      "Procedural weathered stone.020",
+      "Procedural weathered stone.021",
+      "Procedural weathered stone.022",
+      "Procedural weathered stone.023",
+      "Procedural weathered stone.024",
+      "Procedural weathered stone.025",
+      "Procedural weathered stone.026",
+      "Procedural weathered stone.027",
+      "Procedural weathered stone.028",
+      "Procedural weathered stone.029",
+      "Procedural weathered stone.030",
+      "Procedural weathered stone.031",
+      "Procedural weathered stone.032",
+      "Procedural weathered stone.033",
+      "Procedural weathered stone.034",
+      "Procedural weathered stone.035",
+      "Procedural weathered stone.036",
+      "Procedural weathered stone.037",
+      "Procedural weathered stone.038",
+      "Procedural weathered stone.039",
+      "Procedural weathered stone.040",
+      "Procedural weathered stone.041",
+      "Procedural weathered stone.042",
+      "Procedural weathered stone.043",
+      "Procedural weathered stone.044",
+      "Procedural weathered stone.045",
+      "Procedural weathered stone.046",
+      "Procedural weathered stone.047",
+      "Procedural weathered stone.048",
+      "Procedural weathered stone.049",
+      "Procedural weathered stone.050",
+      "Procedural weathered stone.051",
+      "Procedural weathered stone.052",
+      "Procedural weathered stone.053",
+      "Procedural weathered stone.054",
+      "Procedural weathered stone.055",
+      "Procedural weathered stone.056",
+      "Procedural weathered stone.057",
+      "Procedural weathered stone.058",
+      "Procedural weathered stone.059"
+    ],
+    "changes": [
+      "60 existing rocks: triangulated fracture surfaces and asymmetrical flattened shapes",
+      "Original mountain ridge: authored layered rock texture/normal/roughness",
+      "Original river: dark desaturated matte water; no bright cyan sheen",
+      "Original ground atlas retained; added 2m repeat detail normal/roughness through a separate UV, ground geometry unchanged"
+    ],
+    "textureOrigin": "Project-authored 512px procedural PBR image rasters; not photos or newly downloaded assets",
+    "preservedMeshAndMaterialSignatures": {
+      "grass_medium_01_small_a_LOD0": "b79c0dd47399fbd018a82a1c5e87ca9d7ede6d0b4ba2d76959f2b747a4ae1d5a",
+      "grass_medium_01_small_a_LOD0.001": "b51837f64978e9a9b6f7ad0f6e7d90962a103f868abd096aa3b21eeb943d778b",
+      "grass_medium_01_small_a_LOD0.002": "102207b89009941bc8aef242914140a1ee259a481f1f171275a60dbd95962f60",
+      "grass_medium_01_small_a_LOD0.003": "93dc4c010b4b1ebe169fd405f0c38f5b43901ca6a41a80b3ad4d1f7f3592c0b8",
+      "grass_medium_01_small_a_LOD0.004": "7322968a1edd77f17019e3109448086ca3d3798a72d3552e655e2b42fcaf91ae",
+      "grass_medium_01_small_a_LOD0.005": "fc97448d9808bdb5defb34471d20e07bd15281a9bb420e4bf6d3818d1d376555",
+      "grass_medium_01_small_a_LOD0.006": "3d35882c0c505ddb503c7754b8b0ca2da4ecf34a416c43a2203497f9952a1e7e",
+      "grass_medium_01_small_a_LOD0.007": "f4b43dab47310681578e8c297e72070d1a1bba68e39ee01cbfc160a8fdb07b98",
+      "grass_medium_01_small_a_LOD0.008": "87774a2650b517a2d3f1f7827c231969276e779294f12e69694f1f86ffb670cc",
+      "grass_medium_01_small_a_LOD0.009": "fedd43a31a8fd44dc911fd424cd8a0c451187608b043f58dada738fbd8389cc1",
+      "grass_medium_01_small_a_LOD0.010": "ba07b925a98678fcb452c9d35b94112b76238f25df3b80b1eecca651f1502364",
+      "grass_medium_01_small_a_LOD0.011": "6a76b8fbf000387c449de55388662b38dca9d4b5f4cdceb1f32639922deb8916",
+      "grass_medium_01_small_a_LOD0.012": "261c46e4692ed0d477fcec43795adbf4ca79ed29520057a9764afbaf16a7f4e4",
+      "grass_medium_01_small_a_LOD0.013": "f4e657ed0302426bd01541c5ed89a7b83a68724b02825138eb85c56caf0f4f49",
+      "grass_medium_01_small_a_LOD0.014": "b4ae3fc0d2ae9d6575abff737c51aa476f1d767147c3a4fe23573ab772404c6f",
+      "grass_medium_01_small_a_LOD0.015": "001b361419b8f696731b550c2e2eb11d44ca625ebaf986837a4786d64bacd888",
+      "grass_medium_01_small_a_LOD0.016": "dd9e123a2bef47153410dfbad9ce3c350033bc6944947b11d425be03f84977d9",
+      "grass_medium_01_small_a_LOD0.017": "1f41b41e7df7da3a49f4deb3fd1aea8b7a8f2ec575274f9607ea7fee36879cbd",
+      "grass_medium_01_small_a_LOD0.018": "0013960cdd1ed08c2d0d95db548cc153be4c8ea3fec070e68eb2fe2a08d6f611",
+      "grass_medium_01_small_a_LOD0.019": "e7d5b67820598e103a3cb8947c707819e5314d542ecf5d1068c6c49249e1413e",
+      "grass_medium_01_small_a_LOD0.020": "660d6fe03809ce0cd393a584e31e0aa55de43271079f68ef1d26c2a676d6f629",
+      "grass_medium_01_small_a_LOD0.021": "ead3a6934ec1f10cabf306ba061aa9c1da3c081421b39c20be2138652b29602b",
+      "grass_medium_01_small_a_LOD0.022": "bf62eae8bf9db414e1e727cffbe27eafadad4c1a31a9475439549e9fef2e3099",
+      "grass_medium_01_small_a_LOD0.023": "c66b19c792c8c0091c71b2afcb5408665c763a26b57131233e79eae80134f07e",
+      "grass_medium_01_small_a_LOD0.024": "918c65cd8b3cea485c3f1b54e8a63d09fb66e059343ed7dde4d362d570140cea",
+      "grass_medium_01_small_a_LOD0.025": "15bc31ca68e2390fad4f029fe13a8af867a5f61f9156569f5e98e4d6ff03f323",
+      "grass_medium_01_small_a_LOD0.026": "315420290f3aa41557dd43ec4a87984290fe7a10ca0a72cc2e1c3aa49c11c292",
+      "grass_medium_01_small_a_LOD0.027": "b4f39d1b70a3e8d6d2dc5714fdb0fcd3addfc89e8c7075be495f6141854ff8e5",
+      "Non walkable landscape continuation": "b4e7ab95ec442f1738784d4709d91ef87ad9c0695af17fca8549ed65de08e647",
+      "shrub_01_a": "39562ebcbf018e0f7ec55c854eee6dfb3d01ef3bd0407935c8e0b5736750f4bd",
+      "shrub_01_a.001": "204ceb7aa869c7053e630ad9453032625612c126bb7f98a3921efd81cdb40e27",
+      "shrub_01_a.002": "d897e21808d2af0fb5f4ef58111eb38355207fefdbd8a6520701674c323429fe",
+      "shrub_01_a.003": "1123cbc789f99d16fc50c802f57f5caac3b5b3325a2779fa688b0318c6bcbcb3",
+      "shrub_01_a.004": "2a66c1473ee528ffd0f03b02a1e4d2ca8dacab271287ee040696f2874ac06874",
+      "shrub_01_a.005": "4bf9993975e13b0922adf6e5f6b0a99b676e0081c2b88558db84ebee1ffb235a",
+      "shrub_01_a.006": "b2f32b1587b77b47b2a67a62f1867312a938c179d86d8be6734249d933a1c4e5",
+      "shrub_01_a.007": "2f9dfd8b894978f5b2e9e694cd8e87eb832504b46fdf8dda0e1beca2a7e34c1e"
+    },
+    "preservedGroundGeometrySignatures": {
+      "Illustrative valley terrain": "1039dee38e94fbaecfb6e10f6381c1d5871fd1f16bbb9066cf51e12507e5c9fe"
+    },
+    "preservationScope": "Before/after Blender processing; re-export can re-encode original texture files",
+    "exportChecks": {
+      "nodes": 100,
+      "meshes": 66,
+      "embeddedImages": 15,
+      "refinedMaterials": [
+        {
+          "name": "Refined illustrative ridge - embedded PBR",
+          "baseColorTexture": {
+            "index": 1
+          },
+          "normalTexture": {
+            "index": 0,
+            "scale": 0.6499999761581421
+          },
+          "metallicRoughnessTexture": {
+            "index": 2
+          }
+        },
+        {
+          "name": "Refined illustrative ground - original atlas with 2m detail PBR",
+          "baseColorTexture": {
+            "index": 7
+          },
+          "normalTexture": {
+            "index": 6,
+            "scale": 0.699999988079071,
+            "texCoord": 1
+          },
+          "metallicRoughnessTexture": {
+            "index": 8,
+            "texCoord": 1
+          }
+        },
+        {
+          "name": "Refined illustrative rock - embedded PBR",
+          "baseColorTexture": {
+            "index": 10
+          },
+          "normalTexture": {
+            "index": 9,
+            "scale": 0.6499999761581421
+          },
+          "metallicRoughnessTexture": {
+            "index": 11
+          }
+        }
+      ]
+    }
+  }
+}
