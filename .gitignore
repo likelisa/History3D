@@ -31,3 +31,10 @@ processing/demo/public/cases/tripo/assets/*.glb
 # Local previews of superseded procedural figures; preserve but do not publish.
 viewer/public/yuezhi/figures/envoy.png
 viewer/public/yuezhi/figures/yuezhi.png
+
+# 采集运行态可能包含用户反馈原文、检索记录及未审核候选；不可误提交。
+collector/state/
+collector/candidates/
+collector/output/
+collector/archive/
+collector/.publish.lock

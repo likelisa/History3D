@@ -3,8 +3,10 @@
 把史料里的一个瞬间，变成可以走进去、有人的尺度、能查看来源的 3D 场景。
 
 本仓库当前是**展示层（C）+ 公共协议（contracts）**的可运行实现，配套一个技术占位场景包
-`packages/silk-road-demo/`（丝路商队出发前）。采集层 `collector/` 与生成层 `generator/` 归 A/B 队友，
-本仓库不创建这两个目录；它们按第 4 节的接口交付文件即可。
+`packages/silk-road-demo/`（丝路商队出发前）。当前功能分支另外集成了采集层（A）的
+`collector/` 原型，供三方审查；生成层（B）的 `generator/` 源码仍不在本仓库。
+采集原型已有反馈接口、候选资料包、受控交接与测试，但默认不向公共搜索接口外发反馈，
+评分政策尚未获史料负责人批准，不能据此宣称已经完成真实史料采集。
 
 > 当前场景包 `status = draft`，全部尺寸与布局都是 `illustrative`（演示设定）。
 > 页面会持续显示「技术占位，未经历史核验」。它验证的是工具链路，不是历史结论。
@@ -40,9 +42,11 @@ npm run preview # 启动构建后的站点，用于最终运行验收
 | --- | --- |
 | `npm ci` | 按 `package-lock.json` 从干净环境安装 |
 | `npm run validate:collection -- collector/output/<storyId>` | 检查资料包格式、引用与本地素材；有错返回非零退出码 |
+| `npm run collector:dev` | 在本机运行采集反馈原型与技术样例；默认只做本地检索规划，不自动外发用户原话 |
+| `npm run collector:publish -- hash/publish ...` | 对已人工审核的候选包计算摘要或执行受控发布；不替代史料审核 |
 | `npm run validate:package -- packages/<storyId>` | 检查场景包格式、版本、引用、尺寸声明与文件存在性 |
 | `npm run typecheck` | `tsc --noEmit` |
-| `npm run test` | `vitest run`（几何、测距协议、GLB 解析、协议校验共 37 项） |
+| `npm run test` | `vitest run`（协议、查看器、采集层及安全门槛测试；数量以当前运行结果为准） |
 | `npm run check` | 固定样例 + 正式包校验 + 类型检查 + 测试，任一步失败则整体失败 |
 | `npm run prepare:assets` | 把 `packages/` 复制到 `viewer/public/packages/` |
 | `npm run dev` / `build` | 自动先跑校验与资源准备 |
@@ -67,6 +71,7 @@ npm run preview # 启动构建后的站点，用于最终运行验收
 
 ```text
 history-demo/
+  collector/                    # 当前功能分支的 A 层原型；候选/正式输出按公共契约交接
   contracts/                    # 协议、JSON Schema、校验实现与固定样例（C 维护入口，三方审核规则）
   packages/<storyId>/           # 唯一正式场景包输出区（B 输出；查看器的入口是 scene.json）
   viewer/                       # 浏览器查看器（C）
@@ -125,6 +130,10 @@ http://localhost:4173/?bench=1&benchSeconds=90
 清除站点缓存后测三次并保留每次结果。本地表现不能推广成公网或手机性能。
 
 ## 协作约定
+
+采集层的协议与当前实现边界见 `contracts/COLLECTOR_HANDOFF.md` 和 `collector/RUBRIC_DRAFT.md`；独立审查的逐项指标、结果与用户复核步骤见 `collector/REVIEW_REPORT.md`、`collector/REVIEW_CHECKLIST.md`。
+Tripo 生成的行囊图保存在 `collector/experiments/tripo/`，只获用户批准作为 B 层**概念参考**，
+不是史料来源、已发布素材或正式三件套的一部分。
 
 - 三层是「资料 → 场景 → 展示」的单向生产依赖；浏览器运行时只需要完整场景包。
 - `main` 只接收通过 Pull Request 的变更：`feature/xxx` 新功能、`fix/xxx` 修问题、

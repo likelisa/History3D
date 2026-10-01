@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "0.1.0",
+  "storyId": "zhang-qian-yuezhi-pilot",
+  "contentRevision": 1,
+  "sources": [
+    {
+      "id": "src-shiji-goal",
+      "title": "《史记》卷一百二十三〈大宛列传〉：使月氏缘起",
+      "type": "book",
+      "locator": {
+        "url": "https://zh.wikisource.org/wiki/%E5%8F%B2%E8%A8%98/%E5%8D%B7123",
+        "localPath": null
+      },
+      "citation": "司马迁《史记》卷一百二十三〈大宛列传〉，维基文库数字文本，〈张骞〉段。",
+      "location": "〈张骞〉首段，“月氏遁逃”至“乃募能使者”",
+      "excerpt": "月氏遁逃而常怨仇匈奴，無與共擊之。漢方欲事滅胡，聞此言，因欲通使。道必更匈奴中，乃募能使者。",
+      "rights": "维基文库页面标示 CC BY-SA 4.0；本试点只保留短摘录与链接，正式再发布权利范围待确认。",
+      "accessedAt": "2026-09-26"
+    },
+    {
+      "id": "src-shiji-journey",
+      "title": "《史记》卷一百二十三〈大宛列传〉：至月氏与结果",
+      "type": "book",
+      "locator": {
+        "url": "https://zh.wikisource.org/wiki/%E5%8F%B2%E8%A8%98/%E5%8D%B7123",
+        "localPath": null
+      },
+      "citation": "司马迁《史记》卷一百二十三〈大宛列传〉，维基文库数字文本，〈张骞〉段。",
+      "location": "〈张骞〉第二段，“大宛以为然”至“竟不能得月氏要领”",
+      "excerpt": "大宛以為然，遣騫，為發導繹，抵康居，康居傳致大月氏。大月氏王已為胡所殺，立其太子為王。既臣大夏而居，地肥饒，少寇，志安樂，又自以遠漢，殊無報胡之心。騫從月氏至大夏，竟不能得月氏要領。",
+      "rights": "维基文库页面标示 CC BY-SA 4.0；本试点只保留短摘录与链接，正式再发布权利范围待确认。",
+      "accessedAt": "2026-09-26"
+    },
+    {
+      "id": "src-hanshu-succession",
+      "title": "《汉书》卷六十一〈张骞李广利传〉：月氏王继位异文",
+      "type": "book",
+      "locator": {
+        "url": "https://zh.wikisource.org/wiki/%E6%BC%A2%E6%9B%B8/%E5%8D%B7061",
+        "localPath": null
+      },
+      "citation": "班固《汉书》卷六十一〈张骞李广利传〉，维基文库数字文本，〈张骞〉段；页面标注未校对或来源可靠性不明。",
+      "location": "〈张骞〉第二段，“大月氏王已爲胡所殺”句",
+      "excerpt": "大月氏王已爲胡所殺，立其夫人爲王。",
+      "rights": "维基文库页面标示 CC BY-SA 4.0；本试点只保留短摘录与链接，正式再发布权利范围待确认。",
+      "accessedAt": "2026-09-26"
+    },
+    {
+      "id": "src-hanshu-outcome",
+      "title": "《汉书》卷六十一〈张骞李广利传〉：至月氏与结果",
+      "type": "book",
+      "locator": {
+        "url": "https://zh.wikisource.org/wiki/%E6%BC%A2%E6%9B%B8/%E5%8D%B7061",
+        "localPath": null
+      },
+      "citation": "班固《汉书》卷六十一〈张骞李广利传〉，维基文库数字文本，〈张骞〉段；页面标注未校对或来源可靠性不明。",
+      "location": "〈张骞〉第二段末，“騫從月氏至大夏”句",
+      "excerpt": "騫從月氏至大夏，竟不能得月氏要領。",
+      "rights": "维基文库页面标示 CC BY-SA 4.0；本试点只保留短摘录与链接，正式再发布权利范围待确认。",
+      "accessedAt": "2026-09-26"
+    }
+  ]
+}

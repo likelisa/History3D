@@ -1,0 +1,40 @@
+{
+  "purpose": "Second-pass B-layer modeling concept for brief-pack after user requested a flatter, longer single bundle",
+  "storyId": "silk-road-demo",
+  "subjectId": "brief-pack",
+  "status": "approved_concept_reference_only",
+  "user_direction": "retry as flatter and longer one-piece cargo bundle",
+  "api": "Tripo OpenAPI generate_image",
+  "model_version": "default (flux.1_kontext_pro per official docs)",
+  "prompt": "One single low, wide rectangular fabric-wrapped cargo bundle for a History3D technical placeholder. Approximate width:depth:height proportion 1.2:0.8:0.6, visibly wider than tall. One continuous volume with smooth uninterrupted side panels; no horizontal seam and no stacked layers. Two simple cord loops crossing on top with one small top knot, no side knots. Three-quarter elevated view showing top, front and one side; whole object centered on a clean off-white studio background with a soft contact shadow. Neutral undyed cloth, clear silhouette. Concept reference only, not a historical reconstruction.",
+  "negative_prompt": "stacked packages, two bundles, split layers, cube-shaped parcel, extra knots, people, animals, scenery, text, logos, ornate motifs",
+  "task_id": "316164ad-1ea1-4d49-b3b3-71ecef5921c1",
+  "consumed_credit": 5,
+  "image_file": "brief-pack-concept-v2.png",
+  "image_sha256": "0d6ab3822c10cee71bfe9237c58f7524a27b7f7c86ea9163ed3c4c91ec919db6",
+  "source_documentation": [
+    "https://docs.tripo3d.ai/get-started/quick-start.html",
+    "https://docs.tripo3d.ai/image-generation/advanced-image-generation.html",
+    "https://docs.tripo3d.ai/task-query/get-your-task-result.html"
+  ],
+  "historical_validation": "none; silhouette and materials remain illustrative and unverified",
+  "publication": "not approved; do not place in story.json, sources.json or references before dual review",
+  "agent_review": {
+    "decision": "concept-reference-only; await user review",
+    "comparison_to_v1": "one continuous bundle and visibly wider horizontal silhouette; lower stacked tier and side knots are gone",
+    "prompt_alignment": "single object, elevated three-quarter view, neutral background, no text or motifs: met",
+    "issues": [
+      "top knot includes a fabric tail despite the simpler-rope request",
+      "still a perspective image, so 1.2 x 0.8 x 0.6 m proportions cannot be measured or verified",
+      "fabric and rope configuration remain unsupported as historical facts"
+    ],
+    "publication_gate": "not a historical source; do not add to the formal A-to-B evidence package before user and historical review"
+  },
+  "user_review": {
+    "decision": "approved_concept_reference",
+    "user_words": "达到，保留作概念参考",
+    "scope": "concept reference only; not historical validation or publication approval"
+  },
+  "image_bytes": 805894,
+  "content_type": "image/png"
+}

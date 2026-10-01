@@ -1,4 +1,4 @@
-import { readFile, readdir, stat } from 'node:fs/promises'
+import { readFile, readdir, realpath, stat } from 'node:fs/promises'
 import path from 'node:path'
 
 import type { PackageReader } from './validate.ts'
@@ -11,8 +11,17 @@ export function isInsideRoot(rootDir: string, relPath: string): boolean {
 }
 
 export function createNodeReader(rootDir: string): PackageReader {
-  const resolve = (relPath: string): string | null =>
-    isInsideRoot(rootDir, relPath) ? path.resolve(rootDir, relPath) : null
+  const resolve = async (relPath: string): Promise<string | null> => {
+    if (!isInsideRoot(rootDir, relPath)) return null
+    try {
+      const [realRoot, realTarget] = await Promise.all([
+        realpath(rootDir), realpath(path.resolve(rootDir, relPath)),
+      ])
+      return isInsideRoot(realRoot, path.relative(realRoot, realTarget)) ? realTarget : null
+    } catch {
+      return null
+    }
+  }
 
   return {
     async listFiles() {
@@ -29,7 +38,7 @@ export function createNodeReader(rootDir: string): PackageReader {
       return files
     },
     async readText(relPath) {
-      const target = resolve(relPath)
+      const target = await resolve(relPath)
       if (!target) return null
       try {
         return await readFile(target, 'utf8')
@@ -38,7 +47,7 @@ export function createNodeReader(rootDir: string): PackageReader {
       }
     },
     async exists(relPath) {
-      const target = resolve(relPath)
+      const target = await resolve(relPath)
       if (!target) return false
       try {
         const info = await stat(target)
@@ -48,7 +57,7 @@ export function createNodeReader(rootDir: string): PackageReader {
       }
     },
     async readBinary(relPath) {
-      const target = resolve(relPath)
+      const target = await resolve(relPath)
       if (!target) return null
       try {
         const buffer = await readFile(target)
