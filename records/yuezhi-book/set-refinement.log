@@ -1,0 +1,221 @@
+12:47:00 | INFO: Data are loaded, start creating Blender stuff
+12:47:00 | INFO: Blender create Mesh node Cube.001
+12:47:00 | INFO: Blender create Mesh node Cube.004
+12:47:00 | INFO: Blender create Mesh node Cube.013
+12:47:00 | INFO: Blender create Mesh node Cube.014
+12:47:00 | INFO: Blender create Mesh node Cube.007
+12:47:00 | INFO: Blender create Mesh node Cube.008
+12:47:00 | INFO: Blender create Mesh node Cube.009
+12:47:00 | INFO: Blender create Mesh node Cube.010
+12:47:00 | INFO: Blender create Mesh node Cube.011
+12:47:00 | INFO: Blender create Mesh node Cube.012
+12:47:00 | INFO: Blender create Mesh node Cylinder
+12:47:00 | INFO: Blender create Mesh node Cylinder.001
+12:47:00 | INFO: Blender create Mesh node Cylinder.002
+12:47:00 | INFO: Blender create Mesh node Cylinder.003
+12:47:00 | INFO: Blender create Mesh node Cube.002
+12:47:00 | INFO: Blender create Mesh node Cube.003
+12:47:00 | INFO: Blender create Mesh node Cube.005
+12:47:00 | INFO: Blender create Mesh node Sphere
+12:47:00 | INFO: Blender create Mesh node Sphere.001
+12:47:00 | INFO: Blender create Mesh node Cube.006
+12:47:00 | INFO: glTF import finished in 0.02s
+INFO Draco mesh compression is available, use library at C:\Users\ASUS\Documents\Codex\2026-10-01\history3d-tripo-repair\work\blender\blender-4.5.14-windows-x64\4.5\scripts\addons_core\io_scene_gltf2\extern_draco.dll
+12:47:00 | INFO: Starting glTF 2.0 export
+12:47:00 | INFO: Extracting primitive: Cube.001
+12:47:00 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+12:47:00 | INFO: Primitives created: 1
+12:47:00 | INFO: Extracting primitive: Cube.004
+12:47:00 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+12:47:00 | INFO: Primitives created: 1
+12:47:00 | INFO: Extracting primitive: Cube.013
+12:47:00 | INFO: Primitives created: 1
+12:47:00 | INFO: Extracting primitive: Cube.014
+12:47:00 | INFO: Primitives created: 1
+12:47:00 | INFO: Extracting primitive: Cube.007
+12:47:00 | INFO: Primitives created: 1
+12:47:00 | INFO: Extracting primitive: Cube.008
+12:47:00 | INFO: Primitives created: 1
+12:47:00 | INFO: Extracting primitive: Cube.009
+12:47:00 | INFO: Primitives created: 1
+12:47:00 | INFO: Extracting primitive: Cube.010
+12:47:00 | INFO: Primitives created: 1
+12:47:00 | INFO: Extracting primitive: Cube.011
+12:47:00 | INFO: Primitives created: 1
+12:47:00 | INFO: Extracting primitive: Cube.012
+12:47:00 | INFO: Primitives created: 1
+12:47:00 | INFO: Extracting primitive: Cylinder
+12:47:00 | INFO: Primitives created: 1
+12:47:00 | INFO: Extracting primitive: Cylinder.001
+12:47:00 | INFO: Primitives created: 1
+12:47:00 | INFO: Extracting primitive: Cylinder.002
+12:47:00 | INFO: Primitives created: 1
+12:47:00 | INFO: Extracting primitive: Cylinder.003
+12:47:00 | INFO: Primitives created: 1
+12:47:00 | INFO: Extracting primitive: Cube.002
+12:47:00 | INFO: Primitives created: 1
+12:47:00 | INFO: Extracting primitive: Cube.003
+12:47:00 | INFO: Primitives created: 1
+12:47:00 | INFO: Extracting primitive: Cube.005
+12:47:00 | INFO: Primitives created: 1
+12:47:00 | INFO: Extracting primitive: Sphere
+12:47:00 | INFO: Primitives created: 1
+12:47:00 | INFO: Extracting primitive: Sphere.001
+12:47:00 | INFO: Primitives created: 1
+12:47:00 | INFO: Extracting primitive: Cube.006
+12:47:00 | INFO: Primitives created: 1
+12:47:00 | INFO: Finished glTF 2.0 export in 0.03054523468017578 s
+
+12:47:01 | INFO: Data are loaded, start creating Blender stuff
+12:47:01 | INFO: Blender create Mesh node Cube.024
+12:47:01 | INFO: Blender create Mesh node Cube.028
+12:47:01 | INFO: Blender create Mesh node Cylinder.014
+12:47:01 | INFO: Blender create Mesh node Cylinder.015
+12:47:01 | INFO: Blender create Mesh node Cube.018
+12:47:01 | INFO: Blender create Mesh node Cube.019
+12:47:01 | INFO: Blender create Mesh node Cube.022
+12:47:01 | INFO: Blender create Mesh node Cube.023
+12:47:01 | INFO: Blender create Mesh node Cube.032
+12:47:01 | INFO: Blender create Mesh node Cube.033
+12:47:01 | INFO: Blender create Mesh node Cube.034
+12:47:01 | INFO: Blender create Mesh node Cube.016
+12:47:01 | INFO: Blender create Mesh node Cube.020
+12:47:01 | INFO: Blender create Mesh node Cube.015
+12:47:01 | INFO: Blender create Mesh node Plain cloth drape
+12:47:01 | INFO: Blender create Mesh node Cylinder.006
+12:47:01 | INFO: Blender create Mesh node Cylinder.007
+12:47:01 | INFO: Blender create Mesh node Cylinder.008
+12:47:01 | INFO: Blender create Mesh node Cylinder.011
+12:47:01 | INFO: Blender create Mesh node Cylinder.012
+12:47:01 | INFO: Blender create Mesh node Cylinder.013
+12:47:01 | INFO: Blender create Mesh node Cube.017
+12:47:01 | INFO: Blender create Mesh node Cube.021
+12:47:01 | INFO: Blender create Mesh node Sphere.002
+12:47:01 | INFO: Blender create Mesh node Sphere.003
+12:47:01 | INFO: Blender create Mesh node Sphere.004
+12:47:01 | INFO: Blender create Mesh node Sphere.005
+12:47:01 | INFO: Blender create Mesh node Sphere.006
+12:47:01 | INFO: Blender create Mesh node Sphere.007
+12:47:01 | INFO: Blender create Mesh node Cylinder.004
+12:47:01 | INFO: Blender create Mesh node Cylinder.005
+12:47:01 | INFO: Blender create Mesh node Cylinder.009
+12:47:01 | INFO: Blender create Mesh node Cylinder.010
+12:47:01 | INFO: Blender create Mesh node Cube.026
+12:47:01 | INFO: Blender create Mesh node Cube.027
+12:47:01 | INFO: Blender create Mesh node Cube.030
+12:47:01 | INFO: Blender create Mesh node Cube.031
+12:47:01 | INFO: Blender create Mesh node Torus
+12:47:01 | INFO: Blender create Mesh node Torus.001
+12:47:01 | INFO: Blender create Mesh node Torus.002
+12:47:01 | INFO: Blender create Mesh node Torus.003
+12:47:01 | INFO: Blender create Mesh node Torus.004
+12:47:01 | INFO: Blender create Mesh node Torus.005
+12:47:01 | INFO: Blender create Mesh node Torus.006
+12:47:01 | INFO: Blender create Mesh node Torus.007
+12:47:01 | INFO: Blender create Mesh node Cube.025
+12:47:01 | INFO: Blender create Mesh node Cube.029
+12:47:01 | INFO: glTF import finished in 0.04s
+12:47:01 | INFO: Starting glTF 2.0 export
+12:47:01 | INFO: Extracting primitive: Cube.024
+12:47:01 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cube.028
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cylinder.014
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cylinder.015
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cube.018
+12:47:01 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cube.019
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cube.022
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cube.023
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cube.032
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cube.033
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cube.034
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cube.016
+12:47:01 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cube.020
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cube.015
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Plain cloth drape
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cylinder.006
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cylinder.007
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cylinder.008
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cylinder.011
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cylinder.012
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cylinder.013
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cube.017
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cube.021
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Sphere.002
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Sphere.003
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Sphere.004
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Sphere.005
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Sphere.006
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Sphere.007
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cylinder.004
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cylinder.005
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cylinder.009
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cylinder.010
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cube.026
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cube.027
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cube.030
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cube.031
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Torus
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Torus.001
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Torus.002
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Torus.003
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Torus.004
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Torus.005
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Torus.006
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Torus.007
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cube.025
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Extracting primitive: Cube.029
+12:47:01 | INFO: Primitives created: 1
+12:47:01 | INFO: Finished glTF 2.0 export in 0.06454801559448242 s
+
+SETS_REFINED [{"id": "meeting", "file": "meeting-refined.glb", "sha256": "baade9d9181e4c05cbe972744b41abeb8e3793e952f16d4b5f0cfd28434a0690", "bytes": 1616612, "tool": "4.5.14 LTS", "status": "illustrative architecture and props; unknown historical location and form", "refinement": {"upstreamFile": "meeting.glb", "upstreamSha256": "a099b30921cdaedf43fad7648103f3afe8f27e839d43722613733b0035bdac04", "upstreamBytes": 228812, "upstreamTool": "5.2.0 LTS", "script": "scripts/refine-yuezhi-environment.py --sets", "scriptSha256": "66a382296a7dd9dd3e0b890ab8d7fbccf4cf7da8f218c3bbd7d58a946e41bcea", "seed": 20261001, "editedMaterials": [{"object": "Courtyard floor", "material": "plaster"}, {"object": "Entry lintel", "material": "wood"}, {"object": "Light roof covering", "material": "plaster"}, {"object": "Plain reception bench", "material": "wood"}, {"object": "Portico roof beam", "material": "wood"}, {"object": "Portico roof beam.001", "material": "wood"}, {"object": "Portico roof beam.002", "material": "wood"}, {"object": "Portico roof beam.003", "material": "wood"}, {"object": "Portico roof beam.004", "material": "wood"}, {"object": "Portico roof beam.005", "material": "wood"}, {"object": "Portico timber", "material": "wood"}, {"object": "Portico timber.001", "material": "wood"}, {"object": "Pot neck", "material": "wood"}, {"object": "Pot neck.001", "material": "wood"}, {"object": "Reception wall left", "material": "plaster"}, {"object": "Reception wall right", "material": "plaster"}, {"object": "Shadowed inner wall", "material": "plaster"}, {"object": "Timber crossbeam", "material": "wood"}], "geometryModified": false, "textureOrigin": "Project-authored procedural PBR rasters; not photographic or downloaded textures", "exportChecks": {"nodes": 20, "meshes": 20, "embeddedImages": 6, "refinedMaterials": [{"name": "Refined illustrative plaster - embedded PBR", "baseColorTexture": {"index": 1}, "normalTexture": {"index": 0, "scale": 0.6499999761581421}, "metallicRoughnessTexture": {"index": 2}}, {"name": "Refined illustrative wood - embedded PBR", "baseColorTexture": {"index": 4}, "normalTexture": {"index": 3, "scale": 0.6499999761581421}, "metallicRoughnessTexture": {"index": 5}}]}}}, {"id": "market", "file": "market-refined.glb", "sha256": "df4d467634dd710b7141299311319e3bd012f8a59514ada45cc6a7b511404f6e", "bytes": 2194920, "tool": "4.5.14 LTS", "status": "illustrative architecture and props; unknown historical location and form", "refinement": {"upstreamFile": "market.glb", "upstreamSha256": "af78f80a4928f3425c0ee1bf5261c05f3a4be9e97a517870bff2be482f72a31e", "upstreamBytes": 488060, "upstreamTool": "5.2.0 LTS", "script": "scripts/refine-yuezhi-environment.py --sets", "scriptSha256": "66a382296a7dd9dd3e0b890ab8d7fbccf4cf7da8f218c3bbd7d58a946e41bcea", "seed": 20261001, "editedMaterials": [{"object": "Canopy", "material": "cloth"}, {"object": "Canopy.001", "material": "cloth"}, {"object": "Doorway timber", "material": "wood"}, {"object": "Doorway timber.001", "material": "wood"}, {"object": "Doorway timber.002", "material": "wood"}, {"object": "Doorway timber.003", "material": "wood"}, {"object": "Goods table", "material": "wood"}, {"object": "Goods table legs", "material": "wood"}, {"object": "Goods table legs.001", "material": "wood"}, {"object": "Low market wall", "material": "plaster"}, {"object": "Low market wall.001", "material": "plaster"}, {"object": "Market courtyard", "material": "plaster"}, {"object": "Plain Shu cloth - fibre and weave unknown", "material": "cloth"}, {"object": "Pot neck", "material": "wood"}, {"object": "Pot neck.001", "material": "wood"}, {"object": "Pot neck.002", "material": "wood"}, {"object": "Pot neck.003", "material": "wood"}, {"object": "Pot neck.004", "material": "wood"}, {"object": "Pot neck.005", "material": "wood"}, {"object": "Side facade", "material": "plaster"}, {"object": "Side facade.001", "material": "plaster"}, {"object": "Stall canopy posts", "material": "wood"}, {"object": "Stall canopy posts.001", "material": "wood"}, {"object": "Stall canopy posts.002", "material": "wood"}, {"object": "Stall canopy posts.003", "material": "wood"}, {"object": "Table legs", "material": "wood"}, {"object": "Table legs.001", "material": "wood"}, {"object": "Table legs.002", "material": "wood"}, {"object": "Table legs.003", "material": "wood"}, {"object": "Trading table", "material": "wood"}, {"object": "Trading table.001", "material": "wood"}], "geometryModified": false, "textureOrigin": "Project-authored procedural PBR rasters; not photographic or downloaded textures", "exportChecks": {"nodes": 47, "meshes": 47, "embeddedImages": 9, "refinedMaterials": [{"name": "Refined illustrative cloth - embedded PBR", "baseColorTexture": {"index": 1}, "normalTexture": {"index": 0, "scale": 0.6499999761581421}, "metallicRoughnessTexture": {"index": 2}}, {"name": "Refined illustrative wood - embedded PBR.001", "baseColorTexture": {"index": 4}, "normalTexture": {"index": 3, "scale": 0.6499999761581421}, "metallicRoughnessTexture": {"index": 5}}, {"name": "Refined illustrative plaster - embedded PBR.001", "baseColorTexture": {"index": 7}, "normalTexture": {"index": 6, "scale": 0.6499999761581421}, "metallicRoughnessTexture": {"index": 8}}]}}}]
+Blender 4.5.14 LTS (hash 62c1db4208e8 built 2026-09-15 01:33:49)
+
+Blender quit

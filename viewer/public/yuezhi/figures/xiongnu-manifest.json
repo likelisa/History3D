@@ -1,0 +1,71 @@
+{
+  "id": "xiongnu",
+  "file": "xiongnu.glb",
+  "sha256": "1802a80083cd118295717f6e405a5bc98b99a48406dd2074c1a580c7a591f47f",
+  "bytes": 4198512,
+  "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27",
+  "source": "Tripo text-to-model v3.1-20260211",
+  "rawSha256": "39eb65f9443ae5e0242aedd2bde06c265c4394c3656f7419fce0bd94b74811e1",
+  "creditsConsumed": 30,
+  "model": "v3.1-20260211",
+  "requestDigest": "84ef41faf7b75efe9a02f9536b5df4f3eb407d870f09aa1b335d1b03a8a40089",
+  "promptSha256": "e62d54b9a4b49b763f56c3152ebdde0115a475b53eb03063135d3284a535c23b",
+  "approxHeightMeters": 1.72,
+  "triangles": 49256,
+  "historicalStatus": "Cross-source interpretive reconstruction; anonymous character, not an attested portrait or uniform",
+  "sourceIds": [
+    "xiongnu-belt-met",
+    "xiongnu-cap-yaloman",
+    "xiongnu-robe-noinula",
+    "xiongnu-boots-noinula"
+  ],
+  "conversion": {
+    "blenderVersion": "4.5.14 LTS",
+    "scale": 1.72,
+    "yawDegrees": -90,
+    "rawBoundsBlenderZUp": {
+      "min": [
+        -0.1294851154088974,
+        -0.49628114700317383,
+        -0.5
+      ],
+      "max": [
+        0.1294851154088974,
+        0.49628114700317383,
+        0.5
+      ]
+    },
+    "texturesMaxPixels": 2048,
+    "coordinateSystem": "glTF Y up",
+    "origin": "feet on ground",
+    "frontAxis": "glTF +Z; visually checked",
+    "poseCorrection": {
+      "method": "Blender local arm deformation preserving UVs; static pose, not skeletal animation",
+      "shoulderAngleDegrees": 65,
+      "verticesAffected": 5748
+    }
+  },
+  "generationRecord": {
+    "request": {
+      "prompt": "One anonymous adult Xiongnu steppe horseman, historically informed illustrative reconstruction for 2nd-century BCE. Neutral natural face, calm expression, simple close-fitting soft cap. Knee-length narrow-sleeved overlapping robe tied closed at right side, muted reddish-brown wool fabric, loose dark trousers, low plain felt boots with flat soles. Narrow leather belt with a small rectangular bronze plaque. Full body standing in relaxed low A-pose, hands separated from torso, feet visible and level. Real wool weave, leather wear, garment seams and folds. Anatomically proportioned museum diorama figure. No horse, weapon, armor, royal crown, background, pedestal or text. No modern Mongolian standing collar or decorative button rows, Qing shaved hairstyle, long braid, upturned boots or exaggerated face. Garment cut and colors are interpretive, not a portrait.",
+      "model": "v3.1-20260211",
+      "texture": true,
+      "pbr": true,
+      "face_limit": 50000,
+      "geometry_quality": "standard",
+      "texture_quality": "detailed"
+    },
+    "assetId": "asset-xiongnu",
+    "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27",
+    "requestDigest": "84ef41faf7b75efe9a02f9536b5df4f3eb407d870f09aa1b335d1b03a8a40089",
+    "status": "success",
+    "createdAt": "2026-10-01T04:49:28.415Z",
+    "expectedCredits": 30,
+    "progress": 100,
+    "creditsConsumed": 30,
+    "checkedAt": "2026-10-01T04:53:43.222Z",
+    "rawSha256": "39eb65f9443ae5e0242aedd2bde06c265c4394c3656f7419fce0bd94b74811e1",
+    "rawBytes": 12067204,
+    "rawPath": "xiongnu-raw.glb"
+  }
+}

@@ -1,5 +1,5 @@
 import { createHash, randomUUID } from 'node:crypto'
-import { cp, mkdir, readFile, rename, rm, stat, writeFile } from 'node:fs/promises'
+import { cp, lstat, mkdir, readFile, rename, rm, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { readGlbBounds } from '../../contracts/src/glb.ts'
 import { sizeTolerance } from '../../contracts/src/geometry.ts'
@@ -147,11 +147,18 @@ export async function acquireAssetLock(lockDir: string): Promise<string> {
     await mkdir(prepared)
     await putJson(path.join(prepared, 'owner.json'), { pid: process.pid, startedAt: Date.now(), token })
     try {
+      // Windows may replace a plain file (or an empty directory) without raising a collision.
+      // Inspect the destination before rename so an unrelated entry is never used as a lock.
+      const existing = await lstat(lockDir).catch(missingOnly)
+      if (existing && (!existing.isDirectory() || existing.isSymbolicLink() || !await verifiedAssetLockOwner(lockDir))) throw new Error('ASSET_LOCK_OWNER_INVALID')
       await rename(prepared, lockDir)
       return token
     } catch (error) {
       await rm(prepared, { recursive: true, force: true })
-      if (!['EEXIST', 'ENOTEMPTY'].includes((error as NodeJS.ErrnoException).code ?? '')) throw error
+      if (!['EEXIST', 'ENOTEMPTY', 'EPERM'].includes((error as NodeJS.ErrnoException).code ?? '')) throw error
+      // Windows returns EPERM for an occupied destination. Treat it as contention only
+      // when the destination is an actual lock directory with a valid owner record.
+      if (!await verifiedAssetLockOwner(lockDir)) throw error
       const recoveryLock = `${lockDir}.recovery`
       try { await mkdir(recoveryLock) }
       catch (recoveryError) {
@@ -165,20 +172,21 @@ export async function acquireAssetLock(lockDir: string): Promise<string> {
         await new Promise((resolve) => setTimeout(resolve, 40)); continue
       }
       try {
-        const lockInfo = await stat(lockDir).catch(() => null)
-        if (lockInfo) {
-          const owner = await json<{ pid: number; startedAt: number }>(path.join(lockDir, 'owner.json')).catch(() => null)
-          const age = Date.now() - (owner?.startedAt ?? lockInfo.mtimeMs)
+        const owner = await verifiedAssetLockOwner(lockDir)
+        if (owner) {
+          const age = Date.now() - owner.startedAt
           let alive = false
-          if (owner && Number.isSafeInteger(owner.pid)) {
-            try { process.kill(owner.pid, 0); alive = true }
-            catch (probe) { alive = (probe as NodeJS.ErrnoException).code !== 'ESRCH' }
-          }
+          try { process.kill(owner.pid, 0); alive = true }
+          catch (probe) { alive = (probe as NodeJS.ErrnoException).code !== 'ESRCH' }
           // A dead owner can be recovered after 30 s. PID reuse cannot block longer than 2 min.
           if (age >= 30_000 && (!alive || age >= 2 * 60_000)) {
             const stale = `${lockDir}.stale-${randomUUID()}`
-            await rename(lockDir, stale).catch((renameError) => { if ((renameError as NodeJS.ErrnoException).code !== 'ENOENT') throw renameError })
-            await rm(stale, { recursive: true, force: true })
+            const moved = await rename(lockDir, stale).then(() => true).catch((renameError) => { if ((renameError as NodeJS.ErrnoException).code !== 'ENOENT') throw renameError; return false })
+            if (moved) {
+              const movedOwner = await verifiedAssetLockOwner(stale)
+              if (!movedOwner || movedOwner.pid !== owner.pid || movedOwner.startedAt !== owner.startedAt || movedOwner.token !== owner.token) throw new Error('ASSET_LOCK_OWNER_CHANGED')
+              await rm(stale, { recursive: true, force: true })
+            }
           }
         }
       } finally { await rm(recoveryLock, { recursive: true, force: true }) }
@@ -186,6 +194,25 @@ export async function acquireAssetLock(lockDir: string): Promise<string> {
     }
   }
   throw new Error('ASSET_LOCKED')
+}
+
+interface AssetLockOwner { pid: number; startedAt: number; token?: string }
+async function verifiedAssetLockOwner(lockDir: string): Promise<AssetLockOwner | null> {
+  try {
+    const directory = await lstat(lockDir)
+    if (!directory.isDirectory() || directory.isSymbolicLink()) return null
+    const ownerPath = path.join(lockDir, 'owner.json')
+    const file = await lstat(ownerPath)
+    if (!file.isFile() || file.isSymbolicLink()) return null
+    const owner = await json<AssetLockOwner>(ownerPath)
+    if (!owner || !Number.isSafeInteger(owner.pid) || owner.pid <= 0 || !Number.isFinite(owner.startedAt) || owner.startedAt <= 0 || owner.startedAt > Date.now() + 60_000) return null
+    // Legacy locks have pid/startedAt but no token; current locks use a UUID.
+    if (owner.token !== undefined && (typeof owner.token !== 'string' || !/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(owner.token))) return null
+    return owner
+  } catch (error) {
+    if (error instanceof SyntaxError || (error as NodeJS.ErrnoException).code === 'ENOENT') return null
+    throw error
+  }
 }
 
 export async function verifyExistingRelease(root: string): Promise<void> {

@@ -1,8 +1,8 @@
 {
   "schemaVersion": "0.1.0",
   "storyId": "zhang-qian-yuezhi",
-  "contentRevision": 2,
-  "sceneRevision": 2,
+  "contentRevision": 4,
+  "sceneRevision": 4,
   "storyPath": "story.json",
   "sourcesPath": "sources.json",
   "units": "m",
@@ -18,11 +18,11 @@
       "path": "assets/asset-environment.glb",
       "dimensionsM": [
         180,
-        7.724523346262288,
+        7.740933656692505,
         180
       ],
       "format": "glb",
-      "rights": "项目原创Blender示意地形，实际材质来源见asset-provenance.json"
+      "rights": "原创Blender地形与Poly Haven CC0材质/植被，实际来源见source-evidence.json"
     },
     {
       "id": "asset-envoy",
@@ -33,7 +33,7 @@
         0.36395283082684415
       ],
       "format": "glb",
-      "rights": "Tripo账户条款下生成的角色；服饰与面貌仅为制作示意，发布许可待核"
+      "rights": "Tripo账户条款下生成的示意资产；公开使用许可待确认"
     },
     {
       "id": "asset-representative",
@@ -44,7 +44,7 @@
         0.7161145589944766
       ],
       "format": "glb",
-      "rights": "Tripo账户条款下生成的角色；服饰与面貌仅为制作示意，发布许可待核"
+      "rights": "Tripo账户条款下生成的示意资产；公开使用许可待确认"
     },
     {
       "id": "asset-staff",
@@ -55,7 +55,29 @@
         0.022775111719965935
       ],
       "format": "glb",
-      "rights": "项目原创Blender杆状道具示意；不是历史外形复原"
+      "rights": "项目原创Blender示意资产；形制与布局不指认历史现场"
+    },
+    {
+      "id": "asset-mural-horse",
+      "path": "assets/asset-mural-horse.glb",
+      "dimensionsM": [
+        0.611925482604313,
+        1.6,
+        1.8869435411649425
+      ],
+      "format": "glb",
+      "rights": "Tripo账户条款下生成的示意资产；公开使用许可待确认"
+    },
+    {
+      "id": "asset-xiongnu",
+      "path": "assets/asset-xiongnu.glb",
+      "dimensionsM": [
+        0.9372644126415253,
+        1.7200000286102295,
+        0.44542883336544037
+      ],
+      "format": "glb",
+      "rights": "Tripo账户条款下生成的示意资产；公开使用许可待确认"
     },
     {
       "id": "asset-meeting",
@@ -66,7 +88,7 @@
         18
       ],
       "format": "glb",
-      "rights": "项目原创Blender叙事布景；建筑、器形与布局为示意，不指认历史王庭或城邑"
+      "rights": "项目原创Blender示意资产；形制与布局不指认历史现场"
     },
     {
       "id": "asset-market",
@@ -77,7 +99,7 @@
         20
       ],
       "format": "glb",
-      "rights": "项目原创Blender叙事布景；建筑、器形与布局为示意，不指认历史王庭或城邑"
+      "rights": "项目原创Blender示意资产；形制与布局不指认历史现场"
     }
   ],
   "objects": [
@@ -91,7 +113,7 @@
       },
       "position": [
         0,
-        -0.4351299212744948,
+        -0.4515402317047119,
         0
       ],
       "rotation": [
@@ -106,7 +128,7 @@
       ],
       "dimensionsM": [
         180,
-        7.724523346262288,
+        7.740933656692505,
         180
       ],
       "evidence": {
@@ -338,6 +360,92 @@
           "staff-count"
         ]
       }
+    },
+    {
+      "id": "obj-mural-horse",
+      "briefId": "brief-mural-horse",
+      "label": "壁画启发的马匹示意",
+      "render": {
+        "type": "asset",
+        "assetId": "asset-mural-horse"
+      },
+      "position": [
+        -5.7,
+        0,
+        4.4
+      ],
+      "rotation": [
+        0,
+        0.7,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensionsM": [
+        0.611925482604313,
+        1.6,
+        1.8869435411649425
+      ],
+      "evidence": {
+        "dimensions": [
+          "mural-horse-dimensions"
+        ],
+        "appearance": [
+          "mural-horse-appearance"
+        ],
+        "placement": [
+          "mural-horse-layout"
+        ],
+        "quantity": [
+          "mural-horse-count"
+        ]
+      }
+    },
+    {
+      "id": "obj-xiongnu",
+      "briefId": "brief-xiongnu",
+      "label": "匈奴人物 · 交叉史料推定（仅羁留前情）",
+      "render": {
+        "type": "asset",
+        "assetId": "asset-xiongnu"
+      },
+      "position": [
+        1.6,
+        0,
+        -0.5
+      ],
+      "rotation": [
+        0,
+        -1.1,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensionsM": [
+        0.9372644126415253,
+        1.7200000286102295,
+        0.44542883336544037
+      ],
+      "evidence": {
+        "dimensions": [
+          "xiongnu-dimensions"
+        ],
+        "appearance": [
+          "xiongnu-appearance"
+        ],
+        "placement": [
+          "xiongnu-layout"
+        ],
+        "quantity": [
+          "xiongnu-count"
+        ]
+      }
     }
   ],
   "hotspotBindings": [
@@ -459,6 +567,28 @@
       "max": [
         -6.65,
         -6.65
+      ]
+    },
+    {
+      "id": "obj-mural-horse-body",
+      "min": [
+        -6.05,
+        4.050000000000001
+      ],
+      "max": [
+        -5.3500000000000005,
+        4.75
+      ]
+    },
+    {
+      "id": "obj-xiongnu-body",
+      "min": [
+        1.25,
+        -0.85
+      ],
+      "max": [
+        1.9500000000000002,
+        -0.15000000000000002
       ]
     }
   ]

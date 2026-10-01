@@ -212,3 +212,40 @@ a { color: var(--red); text-underline-offset: 4px; }
 
 #asset-hotspots button[data-asset="mural-horse"] { left: 43%; right: auto; bottom: 5%; background: #713e31ed; }
 @media(max-width:520px) { #asset-hotspots button[data-asset="mural-horse"] { left: 35%; bottom: 11%; } }
+
+/* The original book remains the reading surface. The composed 3D scene has its own window. */
+#scene-inspector { width: min(1160px, 96vw); max-height: 94dvh; overflow: auto; padding: 20px 24px; color: #f2e3c9; background: #342c25; border: 1px solid #ad8d60; }
+#scene-inspector::backdrop { background: #17120fd6; }
+#scene-inspector header { display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+#scene-inspector h2 { font-size: 23px; font-weight: 500; margin: 5px 0; }
+.scene-kicker { font: 11px system-ui, sans-serif; color: #c9ae86; }
+#scene-inspector button { color: #f5e6cc; border: 1px solid #ba9d76; background: #493c30; padding: 9px 14px; }
+#world-image-download { color: #f5e6cc; border: 1px solid #ba9d76; background: #493c30; padding: 9px 14px; }
+#scene-inspector button:hover:not(:disabled), #scene-inspector button[aria-pressed="true"] { background: #805039; color: #fff4da; }
+#scene-viewport { width: 100%; height: min(53dvh, 520px); min-height: 260px; margin: 14px 0; background: #9c9c81; }
+#scene-viewport canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+#scene-perspectives, #scene-inspector footer { display: flex; flex-wrap: wrap; gap: 10px; }
+#world-status { font: 12px/1.7 system-ui, sans-serif; }
+.scene-perspective-note { border-top: 1px solid #82694d; margin-top: 14px; padding-top: 4px; }
+#world-view-note { font-size: 14px; line-height: 1.7; color: #d8c3a1; }
+#world-narrative { font-size: 17px; line-height: 1.8; margin: 10px 0; }
+#world-boundary { font: 11px/1.8 system-ui, sans-serif; color: #b9a98b; }
+.scene-view-open #mural, .scene-view-open .wind-dust, .scene-view-open .wind-dust::after { animation-play-state: paused; }
+@media(max-width:520px) {
+  .reader-actions { flex-wrap: wrap; gap: 9px 15px; justify-content: flex-start; }
+  .reader-header { height: auto; min-height: 92px; }
+  #scene-inspector { padding: 14px; }
+  #scene-inspector h2 { font-size: 19px; }
+  #scene-inspector button { padding: 8px 10px; font-size: 12px; }
+  #scene-viewport { height: 36dvh; min-height: 240px; }
+  #scene-perspectives { display: grid; grid-template-columns: 1fr 1fr; }
+}
+#scene-contexts { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 12px; }
+#scene-contexts button[aria-pressed="true"] { background:#694f36; border-color:#b69364; }
+#world-character-sources { margin:14px 0; color:#cdbd9c; font-size:13px; line-height:1.8; }
+#world-character-sources a { display:block; color:#e1bf88; }
+.scene-exploration { margin: 12px 0; border-top: 1px solid #82694d; padding-top: 12px; font: 13px/1.7 system-ui, sans-serif; }
+.scene-exploration summary { cursor: pointer; padding: 8px 0; }
+#world-inspect-objects { display: flex; flex-wrap: wrap; gap: 8px; }
+#world-inspect-objects button { min-height: 44px; }
+#world-object-note { color: #dfc9a6; }

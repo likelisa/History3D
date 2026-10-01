@@ -9,6 +9,7 @@ import path from 'node:path'
 import { createProcessingServer } from '../processing/src/server.ts'
 import { buildWorldRelease } from '../processing/src/world-compile.ts'
 import { makePng } from './png-fixture.ts'
+import { processingPython } from '../processing/src/python-runtime.ts'
 
 const tempDirs: string[] = []
 async function temp() { const dir = await mkdtemp(path.join(os.tmpdir(), 'history3d-server-')); tempDirs.push(dir); return dir }
@@ -19,7 +20,7 @@ describe('processing HTTP API', () => {
     const dataDir = await temp()
     const zipPath = path.join(dataDir, 'collection.zip')
     const code = 'import pathlib,sys,zipfile\nroot=pathlib.Path(sys.argv[1])\nwith zipfile.ZipFile(sys.argv[2],"w",zipfile.ZIP_DEFLATED) as z:\n for p in root.rglob("*"):\n  if p.is_file(): z.write(p,p.relative_to(root))'
-    expect(spawnSync('/usr/bin/python3', ['-c', code, path.resolve('contracts/fixtures/handoff/collection'), zipPath]).status).toBe(0)
+    expect(spawnSync(processingPython(), ['-c', code, path.resolve('contracts/fixtures/handoff/collection'), zipPath]).status).toBe(0)
     const server = createProcessingServer({ dataDir, reviewApiKey: '' })
     await new Promise<void>((resolve) => server.listen(0, '127.0.0.1', resolve))
     const base = `http://127.0.0.1:${(server.address() as AddressInfo).port}/api/processing/v1`

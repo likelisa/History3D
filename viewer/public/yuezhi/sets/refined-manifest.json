@@ -1,0 +1,430 @@
+{
+  "license": "project authored Blender geometry",
+  "historicalStatus": "illustrative sets inspired by regional spatial references; not an identified palace or city",
+  "assets": [
+    {
+      "id": "meeting",
+      "file": "meeting-refined.glb",
+      "sha256": "4624bcec210da9e5b2315b7905bb679223bf2c5a4b5a2479a71a4d74e23fa1e6",
+      "bytes": 2786176,
+      "tool": "4.5.14 LTS",
+      "status": "illustrative architecture and props; unknown historical location and form",
+      "refinement": {
+        "upstreamFile": "meeting.glb",
+        "upstreamSha256": "a099b30921cdaedf43fad7648103f3afe8f27e839d43722613733b0035bdac04",
+        "upstreamBytes": 228812,
+        "upstreamTool": "5.2.0 LTS",
+        "script": "scripts/refine-yuezhi-environment.py --sets",
+        "scriptSha256": "7087983fa473797579c06fe97d791443c0e9d85747bc29d796c6bbcb9b007ad0",
+        "seed": 20261001,
+        "editedMaterials": [
+          {
+            "object": "Courtyard floor",
+            "material": "earth"
+          },
+          {
+            "object": "Entry lintel",
+            "material": "wood"
+          },
+          {
+            "object": "Light roof covering",
+            "material": "plaster"
+          },
+          {
+            "object": "Plain reception bench",
+            "material": "wood"
+          },
+          {
+            "object": "Portico roof beam",
+            "material": "wood"
+          },
+          {
+            "object": "Portico roof beam.001",
+            "material": "wood"
+          },
+          {
+            "object": "Portico roof beam.002",
+            "material": "wood"
+          },
+          {
+            "object": "Portico roof beam.003",
+            "material": "wood"
+          },
+          {
+            "object": "Portico roof beam.004",
+            "material": "wood"
+          },
+          {
+            "object": "Portico roof beam.005",
+            "material": "wood"
+          },
+          {
+            "object": "Portico timber",
+            "material": "wood"
+          },
+          {
+            "object": "Portico timber.001",
+            "material": "wood"
+          },
+          {
+            "object": "Pot neck",
+            "material": "wood"
+          },
+          {
+            "object": "Pot neck.001",
+            "material": "wood"
+          },
+          {
+            "object": "Reception wall left",
+            "material": "plaster"
+          },
+          {
+            "object": "Reception wall right",
+            "material": "plaster"
+          },
+          {
+            "object": "Shadowed inner wall",
+            "material": "plaster"
+          },
+          {
+            "object": "Timber crossbeam",
+            "material": "wood"
+          }
+        ],
+        "geometryModified": false,
+        "preservedGeometrySignatures": {
+          "Courtyard floor": "c2e80e5ff2d7846a19b618af9da595ba6916beabcfc9419812053fe1ac296fd5",
+          "Entry lintel": "582e4ba266024330d75ec7ade8aae369036d11ececddfcd4cbfaf264a62bd99d",
+          "Light roof covering": "6b93a514a5dd1472e2927142f94d9fbc8d33864a882b688f853eee7a0639630b",
+          "Plain reception bench": "ddf10999636a4b07476994197b3c003a22dd25f6b5e1a4d1a33a7a7d15827df2",
+          "Portico roof beam": "cad92f3dee7d436eca8ead3f91e3ccddf57fa7486e17541ee704490379796164",
+          "Portico roof beam.001": "1ca0d9ad18158cc48cf24c8ef7f71534ce3b74c1177054593ad18df231f8cab6",
+          "Portico roof beam.002": "f81d14b7824a26bc6618b74e25de6dc83bc16282cddffef5790119ccaa8e5d6b",
+          "Portico roof beam.003": "584891e4cc1e73478429518ab7ca733356983bd4a43b56dbbc48b3beed5fb59e",
+          "Portico roof beam.004": "c8d70413508ad8f334b142e57340e0e73a80d63e9dea0b83564497d0ad3a398d",
+          "Portico roof beam.005": "2f126202b24040bc588c6418234a383f6e3e10ad853267c5fb7d34c0e6dfe901",
+          "Portico timber": "52878c086ad2259d68689195be7136977c98109cd638100b5129a2cea31c2cf5",
+          "Portico timber.001": "0d83356dbd1ec45df040936e0282e4f0aec5ebf84e4e15267db97808e7646b73",
+          "Pot neck": "de32b65f1d1d0c09f23f48c630a88ec7f57adbc58137ac5ab3917b132272e9b3",
+          "Pot neck.001": "7e60033131ed328b43ed320005ae7ba7e6248a4a16c78c46d64b38f3b27fef0b",
+          "Reception wall left": "17350dd32102612ef0334104dfe4b2d568b7361ee898c837cda4456d15a07c01",
+          "Reception wall right": "4cad978ca3b8ff61cdf17caa3855cd2ff0622c7eee01c6b639567ef58a01b008",
+          "Shadowed inner wall": "720b2aa409de192756c15cd4cc49a69b445b675fd44e45c444e5ab187f814c31",
+          "Sphere": "de4c23887d49fded1ad6134cc1b2ec8144104d44311de0fb3414dd02322dbb9f",
+          "Sphere.001": "df56f63e5d2258f6a2155a75ee2e202036a110f37742400dfea72dc816f550a1",
+          "Timber crossbeam": "3b8ca3a5776ce03722a4473457d327cd67deef702666d1865fa04a2cf6d738a3"
+        },
+        "surfaceUv": {
+          "earthTileM": 1.5,
+          "plasterTileM": 1.0,
+          "projection": "World-metre dominant-face box projection; timber and cloth keep smart UV"
+        },
+        "textureOrigin": "Project-authored procedural PBR rasters; earth/plaster use isotropic multiscale noise; not photographic or downloaded textures",
+        "exportChecks": {
+          "nodes": 20,
+          "meshes": 20,
+          "embeddedImages": 9,
+          "refinedMaterials": [
+            {
+              "name": "Refined illustrative earth - embedded PBR",
+              "baseColorTexture": {
+                "index": 1
+              },
+              "normalTexture": {
+                "index": 0,
+                "scale": 0.6499999761581421
+              },
+              "metallicRoughnessTexture": {
+                "index": 2
+              }
+            },
+            {
+              "name": "Refined illustrative wood - embedded PBR",
+              "baseColorTexture": {
+                "index": 4
+              },
+              "normalTexture": {
+                "index": 3,
+                "scale": 0.6499999761581421
+              },
+              "metallicRoughnessTexture": {
+                "index": 5
+              }
+            },
+            {
+              "name": "Refined illustrative plaster - embedded PBR",
+              "baseColorTexture": {
+                "index": 7
+              },
+              "normalTexture": {
+                "index": 6,
+                "scale": 0.6499999761581421
+              },
+              "metallicRoughnessTexture": {
+                "index": 8
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "market",
+      "file": "market-refined.glb",
+      "sha256": "3690fdef841e35d5370bc74a333092a9a875a89b60521be861fe017423cff542",
+      "bytes": 3364120,
+      "tool": "4.5.14 LTS",
+      "status": "illustrative architecture and props; unknown historical location and form",
+      "refinement": {
+        "upstreamFile": "market.glb",
+        "upstreamSha256": "af78f80a4928f3425c0ee1bf5261c05f3a4be9e97a517870bff2be482f72a31e",
+        "upstreamBytes": 488060,
+        "upstreamTool": "5.2.0 LTS",
+        "script": "scripts/refine-yuezhi-environment.py --sets",
+        "scriptSha256": "7087983fa473797579c06fe97d791443c0e9d85747bc29d796c6bbcb9b007ad0",
+        "seed": 20261001,
+        "editedMaterials": [
+          {
+            "object": "Canopy",
+            "material": "cloth"
+          },
+          {
+            "object": "Canopy.001",
+            "material": "cloth"
+          },
+          {
+            "object": "Doorway timber",
+            "material": "wood"
+          },
+          {
+            "object": "Doorway timber.001",
+            "material": "wood"
+          },
+          {
+            "object": "Doorway timber.002",
+            "material": "wood"
+          },
+          {
+            "object": "Doorway timber.003",
+            "material": "wood"
+          },
+          {
+            "object": "Goods table",
+            "material": "wood"
+          },
+          {
+            "object": "Goods table legs",
+            "material": "wood"
+          },
+          {
+            "object": "Goods table legs.001",
+            "material": "wood"
+          },
+          {
+            "object": "Low market wall",
+            "material": "plaster"
+          },
+          {
+            "object": "Low market wall.001",
+            "material": "plaster"
+          },
+          {
+            "object": "Market courtyard",
+            "material": "earth"
+          },
+          {
+            "object": "Plain Shu cloth - fibre and weave unknown",
+            "material": "cloth"
+          },
+          {
+            "object": "Pot neck",
+            "material": "wood"
+          },
+          {
+            "object": "Pot neck.001",
+            "material": "wood"
+          },
+          {
+            "object": "Pot neck.002",
+            "material": "wood"
+          },
+          {
+            "object": "Pot neck.003",
+            "material": "wood"
+          },
+          {
+            "object": "Pot neck.004",
+            "material": "wood"
+          },
+          {
+            "object": "Pot neck.005",
+            "material": "wood"
+          },
+          {
+            "object": "Side facade",
+            "material": "plaster"
+          },
+          {
+            "object": "Side facade.001",
+            "material": "plaster"
+          },
+          {
+            "object": "Stall canopy posts",
+            "material": "wood"
+          },
+          {
+            "object": "Stall canopy posts.001",
+            "material": "wood"
+          },
+          {
+            "object": "Stall canopy posts.002",
+            "material": "wood"
+          },
+          {
+            "object": "Stall canopy posts.003",
+            "material": "wood"
+          },
+          {
+            "object": "Table legs",
+            "material": "wood"
+          },
+          {
+            "object": "Table legs.001",
+            "material": "wood"
+          },
+          {
+            "object": "Table legs.002",
+            "material": "wood"
+          },
+          {
+            "object": "Table legs.003",
+            "material": "wood"
+          },
+          {
+            "object": "Trading table",
+            "material": "wood"
+          },
+          {
+            "object": "Trading table.001",
+            "material": "wood"
+          }
+        ],
+        "geometryModified": false,
+        "preservedGeometrySignatures": {
+          "Canopy": "c71a7d6f98fa6c96d9d6d27da3d0ba589d69bcc15a4f8e14cd0b2df521b0bdf0",
+          "Canopy.001": "e4396e698d6d29e805427c188a0dcfbde5367708844e748f6de47b7b4db884c2",
+          "Cylinder": "9c8441ab2b9f66f3182db738c04088af8f9f511a9376f8481fcd65144b6c0521",
+          "Cylinder.001": "fb44d6160c80ff22e379409ec9e0ada95a796d911de2cb7128d291f9ffb111bb",
+          "Doorway timber": "f31f837107046d8fd2dc6275320d0f1e00d6fc8a9e7a1083d6a9ab15b193d3e1",
+          "Doorway timber.001": "9d33531e2a85db8041ff8e93f65eeccd4306243207079ad552f42abaea1a274c",
+          "Doorway timber.002": "f8c3d51d61acd123b76f5d62a66d8577ffccaa5909d90a2e30bc971ccc7ecab3",
+          "Doorway timber.003": "eebfce35c9291a644f4ac347706110ec44287de67bde674a7801ccd95afa46b5",
+          "Goods table": "f830c76c69f18c022319b127ee68cf5eb695a071baf5c8f5e6e84b78e799ff2a",
+          "Goods table legs": "368f21daf80a33ec3d047925f11ea2cb913dd18629e2d51f53505c65de826d1c",
+          "Goods table legs.001": "0a4324c28e8bf2673500af92630929e30046a77a0b4f681a3e3959dac63ac607",
+          "Low market wall": "aa281c343082c2a2596892ee4c05adddeb61980a57fcd02d903dc5bb837bd310",
+          "Low market wall.001": "49f9cf86c417f0ee9e2858d7a71f765676761bf0113b786ee96cb53fc63f20cb",
+          "Market courtyard": "8d3f06c9928187ef0279ec2df0e7d7386013bfee06ad57b26ddda654cd084fbc",
+          "Plain Shu cloth - fibre and weave unknown": "f91538fdb970055e085d94aa3d1bf34d555987e9f0396e8c56e2a60cf41eaf25",
+          "Pot neck": "095c060e26c5a5aa858d6301341a47d140f85357b909412e5a6624a4dd1313cb",
+          "Pot neck.001": "7e60033131ed328b43ed320005ae7ba7e6248a4a16c78c46d64b38f3b27fef0b",
+          "Pot neck.002": "75b1670c6e99dea28b0fd140b9ea482d2b467d77e22c9207a4bb9737eff9b819",
+          "Pot neck.003": "362ab6debc158e9544fa810017c2941fed1338021e27e24a1a349875c525284d",
+          "Pot neck.004": "feabb96e0b3e1e978ab49dc78e3a63ea185d6a625acde2f858986d551a66a617",
+          "Pot neck.005": "03fcd8f1b385a4b983d615a6001200f67004618fe819e3eb222f25fcf8909ef6",
+          "Side facade": "08164f8cade577e090a30e7ce54a6b9d34998ca7be9439c1044ef1b0b628a31f",
+          "Side facade.001": "4b8803a818f8d1612a32fc53aa4da56a80ade796ed16de58e36200614df4946a",
+          "Sphere": "fd8582cfbb1e3aa58f3af1b5fdeb247d8b6e36f494d6b0ab3e30181d07f29089",
+          "Sphere.001": "cadd5b7dd252fceeefc6adf51907d351bbd0cc225c7fb42ae35b86a462e9c0fb",
+          "Sphere.002": "b7bfcd0f297b8a01e54cebcc3297e2478ae95766caa778f0f8e55f3a457494ca",
+          "Sphere.003": "fad896aef573e53548b35d01e23b916f3287deff2b33a1d9f473a859b24aa6fa",
+          "Sphere.004": "91731e34561aa0b6edfa5514138c74f3b3e76202682ab2d67b1741a6c6eb8a27",
+          "Sphere.005": "d3f93b7e4d5d669c2f4de3d533a1980b0f511cce3e29233c36e6fdf0343e8a8c",
+          "Stall canopy posts": "247c101728c022cd41fa5943ee593bc2f5c9f4d1ee60976db081b99c02400074",
+          "Stall canopy posts.001": "f43d1e23d01963d91be3bb8ff848b926ca0b01fc9a3f43ace32646cf541a0ab3",
+          "Stall canopy posts.002": "6de65559522bf1b2af2da3a78fc03867c03a8a1b4c6ad4c38ad696919f718e53",
+          "Stall canopy posts.003": "137d8c92dbb9889f26369576d78524a4f517e47ff88785660711e79d67fa8636",
+          "Table legs": "08f1791f5041fc76ff9c46680c5348032aaa63dd99409ae0dd89ccd3725258c6",
+          "Table legs.001": "73ad8cd1b62f4c4ef4b26ef420dc2a35cc0e5bffb4266328e70b4ea8d0f87d8e",
+          "Table legs.002": "fb3e063abff78212cf845033a75f0e5309d0546c7bc3de7c0aa1a200d74af093",
+          "Table legs.003": "245d0f5ce65e54a9f08ea5d179daa88dae78a8806fd757584b97a87e72cc07bc",
+          "Torus": "aeb1fc452645d21b3819eee927a65e7a9d7c8d44beaf7586e4935e1974f3f36a",
+          "Torus.001": "57d5d257420619d2d398dd32e0fbd6f2cb4b1bda69b5b76404d3ac3ead728e3f",
+          "Torus.002": "8cbe8e1fa473170a1cac7e4e2a946d9318afae365a62a61f030e8e0f3c68a387",
+          "Torus.003": "83bea69979d74a26d392127f6fbb036a4efd602b2b63e154daf417c7d6865657",
+          "Torus.004": "603bc12515b83d4738df0139f11a73d7a1cf34fe204daf6354c91255e70f2256",
+          "Torus.005": "371b4a819bb0ca11b79430d467930e688ceae381423916ad19b1c760306c3ee7",
+          "Torus.006": "741dad377c243bd00082fe55c3cb966e406024d6df9133edc10fcee7ac8f8f60",
+          "Torus.007": "3a3457f282ba4fb27ca5078ea260b3f6eb1461dac42031b98d71ddb605968329",
+          "Trading table": "af0924cb4b0930ed65fa166b1449d45a07daf9926de3cfbdc8e94f5726f9e170",
+          "Trading table.001": "b79cd2ac9fde5f6509b34c22051a20fd3d794436322828093e592dc1f3fe21a1"
+        },
+        "surfaceUv": {
+          "earthTileM": 1.5,
+          "plasterTileM": 1.0,
+          "projection": "World-metre dominant-face box projection; timber and cloth keep smart UV"
+        },
+        "textureOrigin": "Project-authored procedural PBR rasters; earth/plaster use isotropic multiscale noise; not photographic or downloaded textures",
+        "exportChecks": {
+          "nodes": 47,
+          "meshes": 47,
+          "embeddedImages": 12,
+          "refinedMaterials": [
+            {
+              "name": "Refined illustrative cloth - embedded PBR",
+              "baseColorTexture": {
+                "index": 1
+              },
+              "normalTexture": {
+                "index": 0,
+                "scale": 0.6499999761581421
+              },
+              "metallicRoughnessTexture": {
+                "index": 2
+              }
+            },
+            {
+              "name": "Refined illustrative wood - embedded PBR.001",
+              "baseColorTexture": {
+                "index": 4
+              },
+              "normalTexture": {
+                "index": 3,
+                "scale": 0.6499999761581421
+              },
+              "metallicRoughnessTexture": {
+                "index": 5
+              }
+            },
+            {
+              "name": "Refined illustrative plaster - embedded PBR.001",
+              "baseColorTexture": {
+                "index": 7
+              },
+              "normalTexture": {
+                "index": 6,
+                "scale": 0.6499999761581421
+              },
+              "metallicRoughnessTexture": {
+                "index": 8
+              }
+            },
+            {
+              "name": "Refined illustrative earth - embedded PBR.001",
+              "baseColorTexture": {
+                "index": 10
+              },
+              "normalTexture": {
+                "index": 9,
+                "scale": 0.6499999761581421
+              },
+              "metallicRoughnessTexture": {
+                "index": 11
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

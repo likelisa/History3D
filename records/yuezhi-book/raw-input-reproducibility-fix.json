@@ -1,0 +1,28 @@
+{
+  "classification": "failure_record",
+  "scope": "project-only; no global memory or policy change",
+  "problem": "The exported project excludes private .processing-data, but the builder previously required its xiongnu-raw.glb to reconstruct the collection.",
+  "rootCause": "The builder coupled a durable collection input to a transient generation cache even though the same verified raw bytes already existed in the collection snapshot.",
+  "evidence": [
+    "scripts/build-yuezhi-package.ts: createYuezhiDelivery",
+    "collector/deliveries/zhang-qian-yuezhi/assets/raw/asset-xiongnu.glb",
+    "tests/yuezhi-package-chain.test.ts: handoff-without-runtime reconstruction"
+  ],
+  "minimalFix": "Read and hash-check the runtime raw first; only ENOENT permits reading the durable collector raw snapshot. Read the buffer before updating that same snapshot directory.",
+  "validation": {
+    "chainTestsPassed": 20,
+    "offlineReconstruction": "An isolated project with no .processing-data rebuilt from its own collection snapshot; all eight GLB hashes and book.json matched.",
+    "typecheckExitCode": 0,
+    "prepareExitCode": 0,
+    "validateYuezhiExitCode": 0,
+    "validateHandoffExitCode": 0,
+    "compiledHashComparison": "8 of 8 unchanged; no mismatches",
+    "submissionId": "collection-zhang-qian-yuezhi-3574ac5f4fc3c251"
+  },
+  "constraints": [
+    "No real runtime file was renamed, removed or changed.",
+    "No paid generation or credential access was performed.",
+    "A retained raw snapshot is required when the runtime cache is absent; incorrect raw SHA or byte count remains an error."
+  ],
+  "rollbackCondition": "Revert the fallback only if valid existing runtime inputs stop rebuilding; retain the offline regression test and choose another durable raw-input path."
+}

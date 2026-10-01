@@ -1,0 +1,23 @@
+{
+  "request": {
+    "prompt": "One anonymous adult Xiongnu steppe horseman, historically informed illustrative reconstruction for 2nd-century BCE. Neutral natural face, calm expression, simple close-fitting soft cap. Knee-length narrow-sleeved overlapping robe tied closed at right side, muted reddish-brown wool fabric, loose dark trousers, low plain felt boots with flat soles. Narrow leather belt with a small rectangular bronze plaque. Full body standing in relaxed low A-pose, hands separated from torso, feet visible and level. Real wool weave, leather wear, garment seams and folds. Anatomically proportioned museum diorama figure. No horse, weapon, armor, royal crown, background, pedestal or text. No modern Mongolian standing collar or decorative button rows, Qing shaved hairstyle, long braid, upturned boots or exaggerated face. Garment cut and colors are interpretive, not a portrait.",
+    "model": "v3.1-20260211",
+    "texture": true,
+    "pbr": true,
+    "face_limit": 50000,
+    "geometry_quality": "standard",
+    "texture_quality": "detailed"
+  },
+  "assetId": "asset-xiongnu",
+  "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27",
+  "requestDigest": "84ef41faf7b75efe9a02f9536b5df4f3eb407d870f09aa1b335d1b03a8a40089",
+  "status": "success",
+  "createdAt": "2026-10-01T04:49:28.415Z",
+  "expectedCredits": 30,
+  "progress": 100,
+  "creditsConsumed": 30,
+  "checkedAt": "2026-10-01T04:53:43.222Z",
+  "rawSha256": "39eb65f9443ae5e0242aedd2bde06c265c4394c3656f7419fce0bd94b74811e1",
+  "rawBytes": 12067204,
+  "rawPath": "xiongnu-raw.glb"
+}

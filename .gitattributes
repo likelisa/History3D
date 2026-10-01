@@ -1,0 +1,18 @@
+# Signed fixture and delivery digests require identical bytes on every platform.
+*.json text eol=lf
+*.md text eol=lf
+*.svg text eol=lf
+*.ts text eol=lf
+*.py text eol=lf
+*.glb binary
+*.png binary
+*.jpg binary
+*.mp3 binary
+
+# These trees contain byte-hashed delivery snapshots and original evidence.
+# Preserve their verified line endings instead of applying text normalization.
+packages/** -text
+collector/deliveries/** -text
+viewer/public/yuezhi/** -text
+records/** -text
+docs/historical/** -text

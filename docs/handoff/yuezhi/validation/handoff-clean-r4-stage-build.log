@@ -1,0 +1,38 @@
+{
+  "plan": "C:\\Users\\ASUS\\Documents\\Codex\\2026-10-01\\thread-01a0cf0a-c996-7942-9c33-9c6126dd15e3\\outputs\\History3D-接力包清单.json",
+  "files": 488,
+  "bytes": 131887901,
+  "MiB": 125.78,
+  "excludedPaths": 15,
+  "sensitivePaths": [],
+  "missingRequired": [],
+  "groups": {
+    "History3D": {
+      "files": 430,
+      "bytes": 123511263
+    },
+    "交付工具": {
+      "files": 2,
+      "bytes": 27737
+    },
+    "交接说明": {
+      "files": 8,
+      "bytes": 468855
+    },
+    "请先阅读-当前状态.md": {
+      "files": 1,
+      "bytes": 10600
+    },
+    "验收证据": {
+      "files": 47,
+      "bytes": 7869446
+    }
+  }
+}
+{
+  "zip": "C:\\Users\\ASUS\\Documents\\Codex\\2026-10-01\\thread-01a0cf0a-c996-7942-9c33-9c6126dd15e3\\outputs\\History3D-张骞场景验收候选-REV4-2026-10-01.zip",
+  "deliveryStage": "verification_candidate",
+  "zipBytes": 117790801,
+  "sha256": "b0802cbaec6fe4676baca32c1013131345d9ae42878bedb171b2b0da0a9c20b9",
+  "verifiedPayloadFiles": 488
+}

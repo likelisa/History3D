@@ -12,7 +12,7 @@
     "collector:dev": "node --import tsx scripts/collector-server.ts --demo",
     "collector:publish": "node --import tsx scripts/collector-publish.ts",
     "validate:package": "node --import tsx scripts/validate-package.ts",
-    "validate:yuezhi": "node --import tsx scripts/validate-package.ts packages/zhang-qian-yuezhi",
+    "validate:yuezhi": "node --import tsx scripts/validate-yuezhi-package.ts",
     "yuezhi:prepare": "node --import tsx scripts/build-yuezhi-package.ts",
     "yuezhi:dev": "npm run yuezhi:prepare && npm run validate:yuezhi && npm run dev -- --host 127.0.0.1 --port 5191",
     "typecheck": "tsc --noEmit",

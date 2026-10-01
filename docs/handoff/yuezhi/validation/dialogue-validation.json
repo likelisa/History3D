@@ -1,0 +1,5950 @@
+{
+  "verifiedAt": "2026-10-01T08:50:26.858Z",
+  "contentRevision": 4,
+  "url": "http://127.0.0.1:5193/yuezhi.html",
+  "targetPlatform": "desktop",
+  "walks": [
+    {
+      "name": "all-first-topics",
+      "choiceIndex": 0,
+      "nodes": [
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "0",
+            "line": "arrival-1",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "0",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "记述被匈奴留了十余年，张骞逃离后继续西行。大宛与康居的协助，终于把他带到了大月氏。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "0",
+            "line": "arrival-2",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "0",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "当地协助者汉朝的使者，您到了。这里便是月氏如今生活的地方。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "0",
+            "line": "arrival-question-life",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "0",
+            "turning": "false"
+          },
+          "choices": [
+            {
+              "id": "migration",
+              "text": "1询问：月氏为什么迁到这里？"
+            },
+            {
+              "id": "daxia-relation",
+              "text": "2询问：月氏与大夏是什么关系？"
+            }
+          ],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞月氏来到这里，又与南边的大夏有什么关系？我想多了解一些。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "0",
+            "line": "arrival-migration",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "0",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "当地协助者月氏原先住在敦煌、祁连一带。被匈奴击败后，才远迁，经过大宛，来到西边。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "0",
+            "line": "arrival-migration",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "0",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "当地协助者月氏原先住在敦煌、祁连一带。被匈奴击败后，才远迁，经过大宛，来到西边。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "0",
+            "line": "arrival-3",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "0",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞我奉汉廷之命而来。我们听闻月氏与匈奴的旧仇，希望能共同应对匈奴。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "0",
+            "line": "arrival-4",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "0",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "当地协助者这里的人们已经在新的地方立足。您的来意，还需要让接见者听一听。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "0",
+            "line": "arrival-5",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "0",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞先把汉廷的来意说清楚。走了这么久，我仍要完成这项使命。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "0",
+            "line": "arrival-6",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "0",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "记述使者抵达了目的地。接下来，他要面对的，是已经改变的月氏处境。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "1",
+            "line": "meeting-1",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "1",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞汉廷愿与月氏相通。匈奴曾给月氏带来深重伤害，我们希望找到共同的盟友。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "1",
+            "line": "meeting-1",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "1",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞汉廷愿与月氏相通。匈奴曾给月氏带来深重伤害，我们希望找到共同的盟友。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "1",
+            "line": "meeting-2",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "1",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "月氏接见者我们已经在新的地方生活。汉廷的来意，也要放在我们眼下的处境里谈。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "1",
+            "line": "meeting-3",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "1",
+            "turning": "false"
+          },
+          "choices": [
+            {
+              "id": "grievance",
+              "text": "1询问：共同的旧仇，能否促成合作？"
+            },
+            {
+              "id": "distance",
+              "text": "2询问：汉朝的遥远，意味着什么？"
+            }
+          ],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞我还想了解，你们会怎样考虑联合这件事。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "1",
+            "line": "meeting-grievance",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "1",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "月氏接见者经历过迁徙，眼前的安定也有分量。过去的仇，并不意味着现在仍要为它出战。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "1",
+            "line": "meeting-4",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "1",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞我明白，旧仇之外，你们还有如今要守护的生活。汉廷的期待，与这里的处境并不相同。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "1",
+            "line": "meeting-5",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "1",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "记述《史记》以“地肥饶，少寇，志安乐，又自以远汉”解释月氏的处境。张骞在这一地区的活动中，终究未能取得期望的联合约定。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "2",
+            "line": "waiting-1",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "2",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "记述目标未成，故事却没有在一次接见后结束。张骞由月氏到大夏，在这一区域停留一年多。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "2",
+            "line": "waiting-1",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "2",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "记述目标未成，故事却没有在一次接见后结束。张骞由月氏到大夏，在这一区域停留一年多。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "2",
+            "line": "waiting-2",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "2",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞来到这里，才知道每个地方都有自己的生活。我还要看清，他们怎样往来，又与哪些地方相通。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "2",
+            "line": "waiting-question-region",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "2",
+            "turning": "false"
+          },
+          "choices": [
+            {
+              "id": "yuezhi-life",
+              "text": "1询问：月氏怎样安排生活？"
+            },
+            {
+              "id": "daxia-life",
+              "text": "2询问：大夏的人们怎样居住生活？"
+            }
+          ],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞月氏与大夏的生活，有哪些不同？"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "2",
+            "line": "waiting-yuezhi-life",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "2",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "当地协助者月氏有随畜迁移的生活习惯，人们和牲畜一起移动。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "2",
+            "line": "waiting-3",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "2",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "当地协助者两地各有自己的生活。要了解它们与外界的往来，还可以留意市场上的物品。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "2",
+            "line": "waiting-4",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "2",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞去看看那些物品。它们也许能告诉我，这片土地与外面的世界如何相连。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "2",
+            "line": "waiting-5",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "2",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "记述翻到下一页，我们读到张骞在大夏的见物与答问。月氏接见与大夏见物，属于不同的叙事空间；市场见闻的确切日期不详。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "3",
+            "line": "market-1",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "3",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "记述在大夏，张骞看见了邛竹杖和蜀布。遥远的市场里，出现了来自汉地的物品。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "3",
+            "line": "market-1",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "3",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "记述在大夏，张骞看见了邛竹杖和蜀布。遥远的市场里，出现了来自汉地的物品。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "3",
+            "line": "market-2",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "3",
+            "turning": "false"
+          },
+          "choices": [
+            {
+              "id": "cloth",
+              "text": "1问蜀布的来处。"
+            },
+            {
+              "id": "bamboo",
+              "text": "2问邛竹杖的来处。"
+            }
+          ],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞这些物品，是从哪里来的？"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "3",
+            "line": "market-cloth",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "3",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "大夏答问者您认出的是蜀布，来自蜀地的布。它也出现在我们大夏的货物之中。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "3",
+            "line": "market-3",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "3",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "大夏答问者我们的商人，从身毒购得这些物品。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "3",
+            "line": "market-question-shendu",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "3",
+            "turning": "false"
+          },
+          "choices": [
+            {
+              "id": "shendu-direction",
+              "text": "1询问：身毒在大夏的什么方向？"
+            },
+            {
+              "id": "shendu-life",
+              "text": "2询问：身毒的生活和风土怎样？"
+            }
+          ],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞商人既然从身毒购得这些物品，我想再问问那个地方。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "3",
+            "line": "market-question-shendu",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "3",
+            "turning": "false"
+          },
+          "choices": [
+            {
+              "id": "shendu-direction",
+              "text": "1询问：身毒在大夏的什么方向？"
+            },
+            {
+              "id": "shendu-life",
+              "text": "2询问：身毒的生活和风土怎样？"
+            }
+          ],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞商人既然从身毒购得这些物品，我想再问问那个地方。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "3",
+            "line": "market-shendu-direction",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "3",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "大夏答问者据说在大夏东南，约数千里。我们的商人往那里购货。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "3",
+            "line": "market-4",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "3",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞把这些见物和听来的消息放在一起，或许可以从蜀地寻找另一条通往身毒、大夏的路。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "3",
+            "line": "market-5",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "3",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "记述这是张骞由见物与答问产生的道路推想，并非已经走通的新路线；他并未亲至身毒。联合目标未成，新的认识却在观察中展开。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "3",
+            "line": "market-6",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "3",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "记述后来，张骞历经归途波折回到汉朝，报告了西域诸国的亲历与传闻。这一段故事，停在他对世界的认识正在扩展的时刻。"
+        },
+        {
+          "atlas": true,
+          "book": {
+            "complete": "true",
+            "furthest": "3",
+            "line": "market-6",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "3",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "记述后来，张骞历经归途波折回到汉朝，报告了西域诸国的亲历与传闻。这一段故事，停在他对世界的认识正在扩展的时刻。"
+        }
+      ],
+      "chosen": [
+        {
+          "scene": "0",
+          "line": "arrival-question-life",
+          "id": "migration",
+          "text": "1询问：月氏为什么迁到这里？"
+        },
+        {
+          "scene": "1",
+          "line": "meeting-3",
+          "id": "grievance",
+          "text": "1询问：共同的旧仇，能否促成合作？"
+        },
+        {
+          "scene": "2",
+          "line": "waiting-question-region",
+          "id": "yuezhi-life",
+          "text": "1询问：月氏怎样安排生活？"
+        },
+        {
+          "scene": "3",
+          "line": "market-2",
+          "id": "cloth",
+          "text": "1问蜀布的来处。"
+        },
+        {
+          "scene": "3",
+          "line": "market-question-shendu",
+          "id": "shendu-direction",
+          "text": "1询问：身毒在大夏的什么方向？"
+        }
+      ]
+    },
+    {
+      "name": "all-second-topics",
+      "choiceIndex": 1,
+      "nodes": [
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "0",
+            "line": "arrival-1",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "0",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "记述被匈奴留了十余年，张骞逃离后继续西行。大宛与康居的协助，终于把他带到了大月氏。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "0",
+            "line": "arrival-2",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "0",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "当地协助者汉朝的使者，您到了。这里便是月氏如今生活的地方。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "0",
+            "line": "arrival-question-life",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "0",
+            "turning": "false"
+          },
+          "choices": [
+            {
+              "id": "migration",
+              "text": "1询问：月氏为什么迁到这里？"
+            },
+            {
+              "id": "daxia-relation",
+              "text": "2询问：月氏与大夏是什么关系？"
+            }
+          ],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞月氏来到这里，又与南边的大夏有什么关系？我想多了解一些。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "0",
+            "line": "arrival-daxia-relations",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "0",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "当地协助者月氏西迁后击败大夏，使大夏臣属。大夏在月氏以南，两地有关联，却不是同一个地方。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "0",
+            "line": "arrival-3",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "0",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞我奉汉廷之命而来。我们听闻月氏与匈奴的旧仇，希望能共同应对匈奴。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "0",
+            "line": "arrival-4",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "0",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "当地协助者这里的人们已经在新的地方立足。您的来意，还需要让接见者听一听。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "0",
+            "line": "arrival-5",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "0",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞先把汉廷的来意说清楚。走了这么久，我仍要完成这项使命。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "0",
+            "line": "arrival-6",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "0",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "记述使者抵达了目的地。接下来，他要面对的，是已经改变的月氏处境。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "1",
+            "line": "meeting-1",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "1",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞汉廷愿与月氏相通。匈奴曾给月氏带来深重伤害，我们希望找到共同的盟友。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "1",
+            "line": "meeting-2",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "1",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "月氏接见者我们已经在新的地方生活。汉廷的来意，也要放在我们眼下的处境里谈。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "1",
+            "line": "meeting-3",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "1",
+            "turning": "false"
+          },
+          "choices": [
+            {
+              "id": "grievance",
+              "text": "1询问：共同的旧仇，能否促成合作？"
+            },
+            {
+              "id": "distance",
+              "text": "2询问：汉朝的遥远，意味着什么？"
+            }
+          ],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞我还想了解，你们会怎样考虑联合这件事。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "1",
+            "line": "meeting-distance",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "1",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "月氏接见者汉朝离这里遥远。要共同采取行动，眼前的人们会有自己的顾虑。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "1",
+            "line": "meeting-4",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "1",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞我明白，旧仇之外，你们还有如今要守护的生活。汉廷的期待，与这里的处境并不相同。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "1",
+            "line": "meeting-5",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "1",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "记述《史记》以“地肥饶，少寇，志安乐，又自以远汉”解释月氏的处境。张骞在这一地区的活动中，终究未能取得期望的联合约定。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "2",
+            "line": "waiting-1",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "2",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "记述目标未成，故事却没有在一次接见后结束。张骞由月氏到大夏，在这一区域停留一年多。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "2",
+            "line": "waiting-2",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "2",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞来到这里，才知道每个地方都有自己的生活。我还要看清，他们怎样往来，又与哪些地方相通。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "2",
+            "line": "waiting-question-region",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "2",
+            "turning": "false"
+          },
+          "choices": [
+            {
+              "id": "yuezhi-life",
+              "text": "1询问：月氏怎样安排生活？"
+            },
+            {
+              "id": "daxia-life",
+              "text": "2询问：大夏的人们怎样居住生活？"
+            }
+          ],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞月氏与大夏的生活，有哪些不同？"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "2",
+            "line": "waiting-daxia-life",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "2",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "当地协助者大夏的人们定居生活，有城邑和房屋，也有买卖各种物品的市场。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "2",
+            "line": "waiting-3",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "2",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "当地协助者两地各有自己的生活。要了解它们与外界的往来，还可以留意市场上的物品。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "2",
+            "line": "waiting-4",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "2",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞去看看那些物品。它们也许能告诉我，这片土地与外面的世界如何相连。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "2",
+            "line": "waiting-5",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "2",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "记述翻到下一页，我们读到张骞在大夏的见物与答问。月氏接见与大夏见物，属于不同的叙事空间；市场见闻的确切日期不详。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "3",
+            "line": "market-1",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "3",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "记述在大夏，张骞看见了邛竹杖和蜀布。遥远的市场里，出现了来自汉地的物品。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "3",
+            "line": "market-2",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "3",
+            "turning": "false"
+          },
+          "choices": [
+            {
+              "id": "cloth",
+              "text": "1问蜀布的来处。"
+            },
+            {
+              "id": "bamboo",
+              "text": "2问邛竹杖的来处。"
+            }
+          ],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞这些物品，是从哪里来的？"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "3",
+            "line": "market-bamboo",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "3",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "大夏答问者您问的邛竹杖，也是从外面来到大夏的物品。我们的商人会带来这样的杖。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "3",
+            "line": "market-3",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "3",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "大夏答问者我们的商人，从身毒购得这些物品。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "3",
+            "line": "market-question-shendu",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "3",
+            "turning": "false"
+          },
+          "choices": [
+            {
+              "id": "shendu-direction",
+              "text": "1询问：身毒在大夏的什么方向？"
+            },
+            {
+              "id": "shendu-life",
+              "text": "2询问：身毒的生活和风土怎样？"
+            }
+          ],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞商人既然从身毒购得这些物品，我想再问问那个地方。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "3",
+            "line": "market-shendu-life",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "3",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "大夏答问者听说那里定居生活，与大夏大体相似，但地势低湿、天气湿热。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "3",
+            "line": "market-4",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "3",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "张骞把这些见物和听来的消息放在一起，或许可以从蜀地寻找另一条通往身毒、大夏的路。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "3",
+            "line": "market-5",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "3",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "记述这是张骞由见物与答问产生的道路推想，并非已经走通的新路线；他并未亲至身毒。联合目标未成，新的认识却在观察中展开。"
+        },
+        {
+          "atlas": false,
+          "book": {
+            "complete": "false",
+            "furthest": "3",
+            "line": "market-6",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "3",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "记述后来，张骞历经归途波折回到汉朝，报告了西域诸国的亲历与传闻。这一段故事，停在他对世界的认识正在扩展的时刻。"
+        },
+        {
+          "atlas": true,
+          "book": {
+            "complete": "true",
+            "furthest": "3",
+            "line": "market-6",
+            "loadedImages": "3",
+            "ready": "true",
+            "scene": "3",
+            "turning": "false"
+          },
+          "choices": [],
+          "loadedScripts": [
+            "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+          ],
+          "prototypeMounted": false,
+          "text": "记述后来，张骞历经归途波折回到汉朝，报告了西域诸国的亲历与传闻。这一段故事，停在他对世界的认识正在扩展的时刻。"
+        }
+      ],
+      "chosen": [
+        {
+          "scene": "0",
+          "line": "arrival-question-life",
+          "id": "daxia-relation",
+          "text": "2询问：月氏与大夏是什么关系？"
+        },
+        {
+          "scene": "1",
+          "line": "meeting-3",
+          "id": "distance",
+          "text": "2询问：汉朝的遥远，意味着什么？"
+        },
+        {
+          "scene": "2",
+          "line": "waiting-question-region",
+          "id": "daxia-life",
+          "text": "2询问：大夏的人们怎样居住生活？"
+        },
+        {
+          "scene": "3",
+          "line": "market-2",
+          "id": "bamboo",
+          "text": "2问邛竹杖的来处。"
+        },
+        {
+          "scene": "3",
+          "line": "market-question-shendu",
+          "id": "shendu-life",
+          "text": "2询问：身毒的生活和风土怎样？"
+        }
+      ]
+    }
+  ],
+  "views": [
+    {
+      "view": {
+        "id": "envoy",
+        "label": "张骞视角"
+      },
+      "storyId": "zhang-qian-yuezhi",
+      "context": "book",
+      "scene": 0,
+      "sceneId": "arrival",
+      "line": "arrival-question-life",
+      "perspective": "envoy",
+      "frames": 64,
+      "elapsedSeconds": 0.3330600000000014,
+      "paused": false,
+      "camera": {
+        "position": [
+          -3.835313178843516,
+          1.6400000000000003,
+          2.7000638287229997
+        ],
+        "target": [
+          1.2,
+          1.1199999999999932,
+          0.7
+        ],
+        "fieldOfView": 43
+      },
+      "assets": [
+        {
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "hashChecked": true,
+          "bytes": 11548084,
+          "meshes": 100,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "hashChecked": true,
+          "bytes": 1959632,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf"
+        },
+        {
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "hashChecked": true,
+          "bytes": 1939700,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb"
+        },
+        {
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "hashChecked": true,
+          "bytes": 29000,
+          "meshes": 1,
+          "provider": "procedural illustrative Blender pole",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "hashChecked": true,
+          "bytes": 5612548,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b"
+        },
+        {
+          "assetId": "asset-xiongnu",
+          "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+          "hashChecked": true,
+          "bytes": 4198644,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27"
+        },
+        {
+          "assetId": "asset-meeting",
+          "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+          "hashChecked": true,
+          "bytes": 2786288,
+          "meshes": 20,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-market",
+          "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+          "hashChecked": true,
+          "bytes": 3364228,
+          "meshes": 47,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        }
+      ],
+      "visibleObjects": [
+        {
+          "objectId": "obj-environment",
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "meshesRendered": 50,
+          "bounds": {
+            "min": [
+              -90,
+              -0.4515402317047119,
+              -90
+            ],
+            "max": [
+              90,
+              7.289393424987793,
+              90
+            ]
+          },
+          "floorGapM": null
+        },
+        {
+          "objectId": "obj-envoy",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -2.335986076778923,
+              0,
+              2.0940908373190976
+            ],
+            "max": [
+              -1.664013926742075,
+              1.7000000476837158,
+              2.90590914896505
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-companion",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -3.835986076778923,
+              7.105427357601002e-15,
+              3.294090837319098
+            ],
+            "max": [
+              -3.164013926742075,
+              1.700000047683723,
+              4.1059091489650505
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-representative",
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              0.7517170204707309,
+              -7.105427357601002e-15,
+              0.28239937329590736
+            ],
+            "max": [
+              1.648282979529269,
+              1.7000000476837087,
+              1.1176006267040925
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-staff",
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -2.3413005824387074,
+              0,
+              2.488612444140017
+            ],
+            "max": [
+              -2.3186994175612927,
+              1.4894895069301128,
+              2.511387555859983
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-mural-horse",
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -5.105962741302156,
+              0,
+              1.0565282294175287
+            ],
+            "max": [
+              -4.494037258697843,
+              1.6,
+              2.9434717705824713
+            ]
+          },
+          "floorGapM": 0
+        }
+      ],
+      "backdrop": "asset-environment",
+      "rendering": {
+        "calls": 71,
+        "triangles": 249974,
+        "width": 1488,
+        "height": 693
+      },
+      "historicalStatus": "illustrative"
+    },
+    {
+      "view": {
+        "id": "passersby",
+        "label": "接引者视角"
+      },
+      "storyId": "zhang-qian-yuezhi",
+      "context": "book",
+      "scene": 0,
+      "sceneId": "arrival",
+      "line": "arrival-question-life",
+      "perspective": "passersby",
+      "frames": 114,
+      "elapsedSeconds": 0.6299599999999994,
+      "paused": false,
+      "camera": {
+        "position": [
+          3.034992218926058,
+          1.6399999999999926,
+          0.49701340812549244
+        ],
+        "target": [
+          -1.9999999999999996,
+          1.12,
+          2.5
+        ],
+        "fieldOfView": 43
+      },
+      "assets": [
+        {
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "hashChecked": true,
+          "bytes": 11548084,
+          "meshes": 100,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "hashChecked": true,
+          "bytes": 1959632,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf"
+        },
+        {
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "hashChecked": true,
+          "bytes": 1939700,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb"
+        },
+        {
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "hashChecked": true,
+          "bytes": 29000,
+          "meshes": 1,
+          "provider": "procedural illustrative Blender pole",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "hashChecked": true,
+          "bytes": 5612548,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b"
+        },
+        {
+          "assetId": "asset-xiongnu",
+          "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+          "hashChecked": true,
+          "bytes": 4198644,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27"
+        },
+        {
+          "assetId": "asset-meeting",
+          "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+          "hashChecked": true,
+          "bytes": 2786288,
+          "meshes": 20,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-market",
+          "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+          "hashChecked": true,
+          "bytes": 3364228,
+          "meshes": 47,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        }
+      ],
+      "visibleObjects": [
+        {
+          "objectId": "obj-environment",
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "meshesRendered": 43,
+          "bounds": {
+            "min": [
+              -90,
+              -0.4515402317047119,
+              -90
+            ],
+            "max": [
+              90,
+              7.289393424987793,
+              90
+            ]
+          },
+          "floorGapM": null
+        },
+        {
+          "objectId": "obj-envoy",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -2.335986076778923,
+              0,
+              2.0940908373190976
+            ],
+            "max": [
+              -1.664013926742075,
+              1.7000000476837158,
+              2.90590914896505
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-companion",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -3.835986076778923,
+              7.105427357601002e-15,
+              3.294090837319098
+            ],
+            "max": [
+              -3.164013926742075,
+              1.700000047683723,
+              4.1059091489650505
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-representative",
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              0.7517170204707309,
+              -7.105427357601002e-15,
+              0.28239937329590736
+            ],
+            "max": [
+              1.648282979529269,
+              1.7000000476837087,
+              1.1176006267040925
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-staff",
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -2.3413005824387074,
+              0,
+              2.488612444140017
+            ],
+            "max": [
+              -2.3186994175612927,
+              1.4894895069301128,
+              2.511387555859983
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-mural-horse",
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -5.105962741302156,
+              0,
+              1.0565282294175287
+            ],
+            "max": [
+              -4.494037258697843,
+              1.6,
+              2.9434717705824713
+            ]
+          },
+          "floorGapM": 0
+        }
+      ],
+      "backdrop": "asset-environment",
+      "rendering": {
+        "calls": 65,
+        "triangles": 253394,
+        "width": 1488,
+        "height": 693
+      },
+      "historicalStatus": "illustrative"
+    },
+    {
+      "view": {
+        "id": "overview",
+        "label": "上帝视角"
+      },
+      "storyId": "zhang-qian-yuezhi",
+      "context": "book",
+      "scene": 0,
+      "sceneId": "arrival",
+      "line": "arrival-question-life",
+      "perspective": "overview",
+      "frames": 163,
+      "elapsedSeconds": 0.9207599999999991,
+      "paused": false,
+      "camera": {
+        "position": [
+          6.8,
+          4.4,
+          9.3
+        ],
+        "target": [
+          -0.8,
+          0.9,
+          1.2
+        ],
+        "fieldOfView": 43
+      },
+      "assets": [
+        {
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "hashChecked": true,
+          "bytes": 11548084,
+          "meshes": 100,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "hashChecked": true,
+          "bytes": 1959632,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf"
+        },
+        {
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "hashChecked": true,
+          "bytes": 1939700,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb"
+        },
+        {
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "hashChecked": true,
+          "bytes": 29000,
+          "meshes": 1,
+          "provider": "procedural illustrative Blender pole",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "hashChecked": true,
+          "bytes": 5612548,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b"
+        },
+        {
+          "assetId": "asset-xiongnu",
+          "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+          "hashChecked": true,
+          "bytes": 4198644,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27"
+        },
+        {
+          "assetId": "asset-meeting",
+          "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+          "hashChecked": true,
+          "bytes": 2786288,
+          "meshes": 20,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-market",
+          "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+          "hashChecked": true,
+          "bytes": 3364228,
+          "meshes": 47,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        }
+      ],
+      "visibleObjects": [
+        {
+          "objectId": "obj-environment",
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "meshesRendered": 48,
+          "bounds": {
+            "min": [
+              -90,
+              -0.4515402317047119,
+              -90
+            ],
+            "max": [
+              90,
+              7.289393424987793,
+              90
+            ]
+          },
+          "floorGapM": null
+        },
+        {
+          "objectId": "obj-envoy",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -2.335986076778923,
+              0,
+              2.0940908373190976
+            ],
+            "max": [
+              -1.664013926742075,
+              1.7000000476837158,
+              2.90590914896505
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-companion",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -3.835986076778923,
+              7.105427357601002e-15,
+              3.294090837319098
+            ],
+            "max": [
+              -3.164013926742075,
+              1.700000047683723,
+              4.1059091489650505
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-representative",
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              0.7517170204707309,
+              -7.105427357601002e-15,
+              0.28239937329590736
+            ],
+            "max": [
+              1.648282979529269,
+              1.7000000476837087,
+              1.1176006267040925
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-staff",
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -2.3413005824387074,
+              0,
+              2.488612444140017
+            ],
+            "max": [
+              -2.3186994175612927,
+              1.4894895069301128,
+              2.511387555859983
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-mural-horse",
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -5.105962741302156,
+              0,
+              1.0565282294175287
+            ],
+            "max": [
+              -4.494037258697843,
+              1.6,
+              2.9434717705824713
+            ]
+          },
+          "floorGapM": 0
+        }
+      ],
+      "backdrop": "asset-environment",
+      "rendering": {
+        "calls": 75,
+        "triangles": 270574,
+        "width": 1488,
+        "height": 693
+      },
+      "historicalStatus": "illustrative"
+    },
+    {
+      "view": {
+        "id": "envoy",
+        "label": "张骞视角"
+      },
+      "storyId": "zhang-qian-yuezhi",
+      "context": "book",
+      "scene": 1,
+      "sceneId": "meeting",
+      "line": "meeting-1",
+      "perspective": "envoy",
+      "frames": 21098,
+      "elapsedSeconds": 136.74135999998467,
+      "paused": false,
+      "camera": {
+        "position": [
+          -3.2022815568037646,
+          1.640035902069196,
+          1.9002793920432821
+        ],
+        "target": [
+          1.4,
+          1.1199999999999999,
+          -0.4999999999999999
+        ],
+        "fieldOfView": 43
+      },
+      "assets": [
+        {
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "hashChecked": true,
+          "bytes": 11548084,
+          "meshes": 100,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "hashChecked": true,
+          "bytes": 1959632,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf"
+        },
+        {
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "hashChecked": true,
+          "bytes": 1939700,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb"
+        },
+        {
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "hashChecked": true,
+          "bytes": 29000,
+          "meshes": 1,
+          "provider": "procedural illustrative Blender pole",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "hashChecked": true,
+          "bytes": 5612548,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b"
+        },
+        {
+          "assetId": "asset-xiongnu",
+          "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+          "hashChecked": true,
+          "bytes": 4198644,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27"
+        },
+        {
+          "assetId": "asset-meeting",
+          "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+          "hashChecked": true,
+          "bytes": 2786288,
+          "meshes": 20,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-market",
+          "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+          "hashChecked": true,
+          "bytes": 3364228,
+          "meshes": 47,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        }
+      ],
+      "visibleObjects": [
+        {
+          "objectId": "obj-meeting",
+          "assetId": "asset-meeting",
+          "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+          "meshesRendered": 14,
+          "bounds": {
+            "min": [
+              -10,
+              -0.18000000715255737,
+              -9
+            ],
+            "max": [
+              10,
+              3.66999988630414,
+              9
+            ]
+          },
+          "floorGapM": null
+        },
+        {
+          "objectId": "obj-envoy",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -1.7590385125096222,
+              0,
+              1.0985428275075266
+            ],
+            "max": [
+              -1.0409614924957977,
+              1.7000000476837158,
+              1.9014571592460467
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-companion",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -3.3590385125096223,
+              0,
+              1.798542827507527
+            ],
+            "max": [
+              -2.640961492495798,
+              1.7000000476837158,
+              2.6014571592460474
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-representative",
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              0.947015023033672,
+              0,
+              -0.9344441595044384
+            ],
+            "max": [
+              1.8529849769663278,
+              1.7000000476837158,
+              -0.06555584049556162
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-staff",
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -1.7413005824387073,
+              -7.105427357601002e-15,
+              1.488612444140017
+            ],
+            "max": [
+              -1.7186994175612926,
+              1.4894895069301057,
+              1.511387555859983
+            ]
+          },
+          "floorGapM": 0
+        }
+      ],
+      "backdrop": "asset-meeting",
+      "rendering": {
+        "calls": 19,
+        "triangles": 117696,
+        "width": 1488,
+        "height": 693
+      },
+      "historicalStatus": "illustrative"
+    },
+    {
+      "view": {
+        "id": "host",
+        "label": "月氏接见者视角"
+      },
+      "storyId": "zhang-qian-yuezhi",
+      "context": "book",
+      "scene": 1,
+      "sceneId": "meeting",
+      "line": "meeting-1",
+      "perspective": "host",
+      "frames": 21143,
+      "elapsedSeconds": 137.01995999998462,
+      "paused": false,
+      "camera": {
+        "position": [
+          3.2016187847122035,
+          1.6400009188490396,
+          -0.9032007368204131
+        ],
+        "target": [
+          -1.3999999999999997,
+          1.12,
+          1.5
+        ],
+        "fieldOfView": 43
+      },
+      "assets": [
+        {
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "hashChecked": true,
+          "bytes": 11548084,
+          "meshes": 100,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "hashChecked": true,
+          "bytes": 1959632,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf"
+        },
+        {
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "hashChecked": true,
+          "bytes": 1939700,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb"
+        },
+        {
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "hashChecked": true,
+          "bytes": 29000,
+          "meshes": 1,
+          "provider": "procedural illustrative Blender pole",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "hashChecked": true,
+          "bytes": 5612548,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b"
+        },
+        {
+          "assetId": "asset-xiongnu",
+          "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+          "hashChecked": true,
+          "bytes": 4198644,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27"
+        },
+        {
+          "assetId": "asset-meeting",
+          "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+          "hashChecked": true,
+          "bytes": 2786288,
+          "meshes": 20,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-market",
+          "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+          "hashChecked": true,
+          "bytes": 3364228,
+          "meshes": 47,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        }
+      ],
+      "visibleObjects": [
+        {
+          "objectId": "obj-meeting",
+          "assetId": "asset-meeting",
+          "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+          "meshesRendered": 12,
+          "bounds": {
+            "min": [
+              -10,
+              -0.18000000715255737,
+              -9
+            ],
+            "max": [
+              10,
+              3.66999988630414,
+              9
+            ]
+          },
+          "floorGapM": null
+        },
+        {
+          "objectId": "obj-envoy",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -1.7590385125096222,
+              0,
+              1.0985428275075266
+            ],
+            "max": [
+              -1.0409614924957977,
+              1.7000000476837158,
+              1.9014571592460467
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-companion",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -3.3590385125096223,
+              0,
+              1.798542827507527
+            ],
+            "max": [
+              -2.640961492495798,
+              1.7000000476837158,
+              2.6014571592460474
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-representative",
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              0.947015023033672,
+              0,
+              -0.9344441595044384
+            ],
+            "max": [
+              1.8529849769663278,
+              1.7000000476837158,
+              -0.06555584049556162
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-staff",
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -1.7413005824387073,
+              -7.105427357601002e-15,
+              1.488612444140017
+            ],
+            "max": [
+              -1.7186994175612926,
+              1.4894895069301057,
+              1.511387555859983
+            ]
+          },
+          "floorGapM": 0
+        }
+      ],
+      "backdrop": "asset-meeting",
+      "rendering": {
+        "calls": 17,
+        "triangles": 117824,
+        "width": 1488,
+        "height": 693
+      },
+      "historicalStatus": "illustrative"
+    },
+    {
+      "view": {
+        "id": "overview",
+        "label": "上帝视角"
+      },
+      "storyId": "zhang-qian-yuezhi",
+      "context": "book",
+      "scene": 1,
+      "sceneId": "meeting",
+      "line": "meeting-1",
+      "perspective": "overview",
+      "frames": 21188,
+      "elapsedSeconds": 137.30475999998455,
+      "paused": false,
+      "camera": {
+        "position": [
+          6.499999933711684,
+          4.200000046853686,
+          8.600000038289238
+        ],
+        "target": [
+          -0.8,
+          0.9,
+          0
+        ],
+        "fieldOfView": 43
+      },
+      "assets": [
+        {
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "hashChecked": true,
+          "bytes": 11548084,
+          "meshes": 100,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "hashChecked": true,
+          "bytes": 1959632,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf"
+        },
+        {
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "hashChecked": true,
+          "bytes": 1939700,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb"
+        },
+        {
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "hashChecked": true,
+          "bytes": 29000,
+          "meshes": 1,
+          "provider": "procedural illustrative Blender pole",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "hashChecked": true,
+          "bytes": 5612548,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b"
+        },
+        {
+          "assetId": "asset-xiongnu",
+          "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+          "hashChecked": true,
+          "bytes": 4198644,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27"
+        },
+        {
+          "assetId": "asset-meeting",
+          "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+          "hashChecked": true,
+          "bytes": 2786288,
+          "meshes": 20,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-market",
+          "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+          "hashChecked": true,
+          "bytes": 3364228,
+          "meshes": 47,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        }
+      ],
+      "visibleObjects": [
+        {
+          "objectId": "obj-meeting",
+          "assetId": "asset-meeting",
+          "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+          "meshesRendered": 20,
+          "bounds": {
+            "min": [
+              -10,
+              -0.18000000715255737,
+              -9
+            ],
+            "max": [
+              10,
+              3.66999988630414,
+              9
+            ]
+          },
+          "floorGapM": null
+        },
+        {
+          "objectId": "obj-envoy",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -1.7590385125096222,
+              0,
+              1.0985428275075266
+            ],
+            "max": [
+              -1.0409614924957977,
+              1.7000000476837158,
+              1.9014571592460467
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-companion",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -3.3590385125096223,
+              0,
+              1.798542827507527
+            ],
+            "max": [
+              -2.640961492495798,
+              1.7000000476837158,
+              2.6014571592460474
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-representative",
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              0.947015023033672,
+              0,
+              -0.9344441595044384
+            ],
+            "max": [
+              1.8529849769663278,
+              1.7000000476837158,
+              -0.06555584049556162
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-staff",
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -1.7413005824387073,
+              -7.105427357601002e-15,
+              1.488612444140017
+            ],
+            "max": [
+              -1.7186994175612926,
+              1.4894895069301057,
+              1.511387555859983
+            ]
+          },
+          "floorGapM": 0
+        }
+      ],
+      "backdrop": "asset-meeting",
+      "rendering": {
+        "calls": 25,
+        "triangles": 119104,
+        "width": 1488,
+        "height": 693
+      },
+      "historicalStatus": "illustrative"
+    },
+    {
+      "view": {
+        "id": "envoy",
+        "label": "张骞视角"
+      },
+      "storyId": "zhang-qian-yuezhi",
+      "context": "book",
+      "scene": 2,
+      "sceneId": "waiting",
+      "line": "waiting-1",
+      "perspective": "envoy",
+      "frames": 28854,
+      "elapsedSeconds": 184.62169399997543,
+      "paused": false,
+      "camera": {
+        "position": [
+          -3.835313178843516,
+          1.6400000000000003,
+          2.7000638287229997
+        ],
+        "target": [
+          1.2,
+          1.1199999999999932,
+          0.7
+        ],
+        "fieldOfView": 43
+      },
+      "assets": [
+        {
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "hashChecked": true,
+          "bytes": 11548084,
+          "meshes": 100,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "hashChecked": true,
+          "bytes": 1959632,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf"
+        },
+        {
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "hashChecked": true,
+          "bytes": 1939700,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb"
+        },
+        {
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "hashChecked": true,
+          "bytes": 29000,
+          "meshes": 1,
+          "provider": "procedural illustrative Blender pole",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "hashChecked": true,
+          "bytes": 5612548,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b"
+        },
+        {
+          "assetId": "asset-xiongnu",
+          "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+          "hashChecked": true,
+          "bytes": 4198644,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27"
+        },
+        {
+          "assetId": "asset-meeting",
+          "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+          "hashChecked": true,
+          "bytes": 2786288,
+          "meshes": 20,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-market",
+          "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+          "hashChecked": true,
+          "bytes": 3364228,
+          "meshes": 47,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        }
+      ],
+      "visibleObjects": [
+        {
+          "objectId": "obj-environment",
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "meshesRendered": 50,
+          "bounds": {
+            "min": [
+              -90,
+              -0.4515402317047119,
+              -90
+            ],
+            "max": [
+              90,
+              7.289393424987793,
+              90
+            ]
+          },
+          "floorGapM": null
+        },
+        {
+          "objectId": "obj-envoy",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -2.335986076778923,
+              0,
+              2.0940908373190976
+            ],
+            "max": [
+              -1.664013926742075,
+              1.7000000476837158,
+              2.90590914896505
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-companion",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -3.835986076778923,
+              7.105427357601002e-15,
+              3.294090837319098
+            ],
+            "max": [
+              -3.164013926742075,
+              1.700000047683723,
+              4.1059091489650505
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-representative",
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              0.7517170204707309,
+              -7.105427357601002e-15,
+              0.28239937329590736
+            ],
+            "max": [
+              1.648282979529269,
+              1.7000000476837087,
+              1.1176006267040925
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-local",
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              3.5566705708428,
+              7.105427357601002e-15,
+              -2.952980546950358
+            ],
+            "max": [
+              4.4433294291572,
+              1.700000047683723,
+              -2.047019453049642
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-staff",
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -2.3413005824387074,
+              0,
+              2.488612444140017
+            ],
+            "max": [
+              -2.3186994175612927,
+              1.4894895069301128,
+              2.511387555859983
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-mural-horse",
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -5.105962741302156,
+              0,
+              1.0565282294175287
+            ],
+            "max": [
+              -4.494037258697843,
+              1.6,
+              2.9434717705824713
+            ]
+          },
+          "floorGapM": 0
+        }
+      ],
+      "backdrop": "asset-environment",
+      "rendering": {
+        "calls": 72,
+        "triangles": 288004,
+        "width": 1488,
+        "height": 693
+      },
+      "historicalStatus": "illustrative"
+    },
+    {
+      "view": {
+        "id": "passersby",
+        "label": "路人视角"
+      },
+      "storyId": "zhang-qian-yuezhi",
+      "context": "book",
+      "scene": 2,
+      "sceneId": "waiting",
+      "line": "waiting-1",
+      "perspective": "passersby",
+      "frames": 28903,
+      "elapsedSeconds": 184.91249399997537,
+      "paused": false,
+      "camera": {
+        "position": [
+          5.645856443148906,
+          1.6400000000000075,
+          -3.336394983572494
+        ],
+        "target": [
+          -1.9999999999999996,
+          1.12,
+          2.5
+        ],
+        "fieldOfView": 43
+      },
+      "assets": [
+        {
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "hashChecked": true,
+          "bytes": 11548084,
+          "meshes": 100,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "hashChecked": true,
+          "bytes": 1959632,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf"
+        },
+        {
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "hashChecked": true,
+          "bytes": 1939700,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb"
+        },
+        {
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "hashChecked": true,
+          "bytes": 29000,
+          "meshes": 1,
+          "provider": "procedural illustrative Blender pole",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "hashChecked": true,
+          "bytes": 5612548,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b"
+        },
+        {
+          "assetId": "asset-xiongnu",
+          "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+          "hashChecked": true,
+          "bytes": 4198644,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27"
+        },
+        {
+          "assetId": "asset-meeting",
+          "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+          "hashChecked": true,
+          "bytes": 2786288,
+          "meshes": 20,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-market",
+          "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+          "hashChecked": true,
+          "bytes": 3364228,
+          "meshes": 47,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        }
+      ],
+      "visibleObjects": [
+        {
+          "objectId": "obj-environment",
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "meshesRendered": 46,
+          "bounds": {
+            "min": [
+              -90,
+              -0.4515402317047119,
+              -90
+            ],
+            "max": [
+              90,
+              7.289393424987793,
+              90
+            ]
+          },
+          "floorGapM": null
+        },
+        {
+          "objectId": "obj-envoy",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -2.335986076778923,
+              0,
+              2.0940908373190976
+            ],
+            "max": [
+              -1.664013926742075,
+              1.7000000476837158,
+              2.90590914896505
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-companion",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -3.835986076778923,
+              7.105427357601002e-15,
+              3.294090837319098
+            ],
+            "max": [
+              -3.164013926742075,
+              1.700000047683723,
+              4.1059091489650505
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-representative",
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              0.7517170204707309,
+              -7.105427357601002e-15,
+              0.28239937329590736
+            ],
+            "max": [
+              1.648282979529269,
+              1.7000000476837087,
+              1.1176006267040925
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-local",
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              3.5566705708428,
+              7.105427357601002e-15,
+              -2.952980546950358
+            ],
+            "max": [
+              4.4433294291572,
+              1.700000047683723,
+              -2.047019453049642
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-staff",
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -2.3413005824387074,
+              0,
+              2.488612444140017
+            ],
+            "max": [
+              -2.3186994175612927,
+              1.4894895069301128,
+              2.511387555859983
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-mural-horse",
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -5.105962741302156,
+              0,
+              1.0565282294175287
+            ],
+            "max": [
+              -4.494037258697843,
+              1.6,
+              2.9434717705824713
+            ]
+          },
+          "floorGapM": 0
+        }
+      ],
+      "backdrop": "asset-environment",
+      "rendering": {
+        "calls": 73,
+        "triangles": 302304,
+        "width": 1488,
+        "height": 693
+      },
+      "historicalStatus": "illustrative"
+    },
+    {
+      "view": {
+        "id": "overview",
+        "label": "上帝视角"
+      },
+      "storyId": "zhang-qian-yuezhi",
+      "context": "book",
+      "scene": 2,
+      "sceneId": "waiting",
+      "line": "waiting-1",
+      "perspective": "overview",
+      "frames": 28952,
+      "elapsedSeconds": 185.2033939999753,
+      "paused": false,
+      "camera": {
+        "position": [
+          6.8,
+          4.4,
+          9.3
+        ],
+        "target": [
+          -0.8,
+          0.9,
+          1.2
+        ],
+        "fieldOfView": 43
+      },
+      "assets": [
+        {
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "hashChecked": true,
+          "bytes": 11548084,
+          "meshes": 100,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "hashChecked": true,
+          "bytes": 1959632,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf"
+        },
+        {
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "hashChecked": true,
+          "bytes": 1939700,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb"
+        },
+        {
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "hashChecked": true,
+          "bytes": 29000,
+          "meshes": 1,
+          "provider": "procedural illustrative Blender pole",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "hashChecked": true,
+          "bytes": 5612548,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b"
+        },
+        {
+          "assetId": "asset-xiongnu",
+          "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+          "hashChecked": true,
+          "bytes": 4198644,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27"
+        },
+        {
+          "assetId": "asset-meeting",
+          "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+          "hashChecked": true,
+          "bytes": 2786288,
+          "meshes": 20,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-market",
+          "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+          "hashChecked": true,
+          "bytes": 3364228,
+          "meshes": 47,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        }
+      ],
+      "visibleObjects": [
+        {
+          "objectId": "obj-environment",
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "meshesRendered": 48,
+          "bounds": {
+            "min": [
+              -90,
+              -0.4515402317047119,
+              -90
+            ],
+            "max": [
+              90,
+              7.289393424987793,
+              90
+            ]
+          },
+          "floorGapM": null
+        },
+        {
+          "objectId": "obj-envoy",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -2.335986076778923,
+              0,
+              2.0940908373190976
+            ],
+            "max": [
+              -1.664013926742075,
+              1.7000000476837158,
+              2.90590914896505
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-companion",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -3.835986076778923,
+              7.105427357601002e-15,
+              3.294090837319098
+            ],
+            "max": [
+              -3.164013926742075,
+              1.700000047683723,
+              4.1059091489650505
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-representative",
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              0.7517170204707309,
+              -7.105427357601002e-15,
+              0.28239937329590736
+            ],
+            "max": [
+              1.648282979529269,
+              1.7000000476837087,
+              1.1176006267040925
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-local",
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              3.5566705708428,
+              7.105427357601002e-15,
+              -2.952980546950358
+            ],
+            "max": [
+              4.4433294291572,
+              1.700000047683723,
+              -2.047019453049642
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-staff",
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -2.3413005824387074,
+              0,
+              2.488612444140017
+            ],
+            "max": [
+              -2.3186994175612927,
+              1.4894895069301128,
+              2.511387555859983
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-mural-horse",
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -5.105962741302156,
+              0,
+              1.0565282294175287
+            ],
+            "max": [
+              -4.494037258697843,
+              1.6,
+              2.9434717705824713
+            ]
+          },
+          "floorGapM": 0
+        }
+      ],
+      "backdrop": "asset-environment",
+      "rendering": {
+        "calls": 76,
+        "triangles": 308604,
+        "width": 1488,
+        "height": 693
+      },
+      "historicalStatus": "illustrative"
+    },
+    {
+      "view": {
+        "id": "envoy",
+        "label": "张骞视角"
+      },
+      "storyId": "zhang-qian-yuezhi",
+      "context": "book",
+      "scene": 3,
+      "sceneId": "market",
+      "line": "market-1",
+      "perspective": "envoy",
+      "frames": 29054,
+      "elapsedSeconds": 185.7790939999752,
+      "paused": false,
+      "camera": {
+        "position": [
+          -3.312526856274972,
+          1.639999999999993,
+          2.3989756046700905
+        ],
+        "target": [
+          1.7,
+          1.119999999999993,
+          -1
+        ],
+        "fieldOfView": 43
+      },
+      "assets": [
+        {
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "hashChecked": true,
+          "bytes": 11548084,
+          "meshes": 100,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "hashChecked": true,
+          "bytes": 1959632,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf"
+        },
+        {
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "hashChecked": true,
+          "bytes": 1939700,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb"
+        },
+        {
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "hashChecked": true,
+          "bytes": 29000,
+          "meshes": 1,
+          "provider": "procedural illustrative Blender pole",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "hashChecked": true,
+          "bytes": 5612548,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b"
+        },
+        {
+          "assetId": "asset-xiongnu",
+          "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+          "hashChecked": true,
+          "bytes": 4198644,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27"
+        },
+        {
+          "assetId": "asset-meeting",
+          "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+          "hashChecked": true,
+          "bytes": 2786288,
+          "meshes": 20,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-market",
+          "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+          "hashChecked": true,
+          "bytes": 3364228,
+          "meshes": 47,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        }
+      ],
+      "visibleObjects": [
+        {
+          "objectId": "obj-market",
+          "assetId": "asset-market",
+          "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+          "meshesRendered": 32,
+          "bounds": {
+            "min": [
+              -11,
+              -0.1599999964237213,
+              -10
+            ],
+            "max": [
+              11,
+              2.799999952316284,
+              10
+            ]
+          },
+          "floorGapM": null
+        },
+        {
+          "objectId": "obj-envoy",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -2.0984413656771754,
+              -7.105427357601002e-15,
+              1.133222977092598
+            ],
+            "max": [
+              -1.301558642907083,
+              1.7000000476837087,
+              1.8667770116454059
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-companion",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -3.598441365677176,
+              -7.105427357601002e-15,
+              2.633222977092598
+            ],
+            "max": [
+              -2.801558642907083,
+              1.7000000476837087,
+              3.3667770116454063
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-representative",
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              1.248130660616607,
+              -7.105427357601002e-15,
+              -1.4468242852740045
+            ],
+            "max": [
+              2.151869339383393,
+              1.7000000476837087,
+              -0.5531757147259955
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-local",
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              5.749427744649021,
+              -7.105427357601002e-15,
+              -0.34892010662795503
+            ],
+            "max": [
+              6.650572255350979,
+              1.7000000476837087,
+              0.548920106627955
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-staff",
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -2.041300582438707,
+              0,
+              1.488612444140017
+            ],
+            "max": [
+              -2.0186994175612925,
+              1.4894895069301128,
+              1.511387555859983
+            ]
+          },
+          "floorGapM": 0
+        }
+      ],
+      "backdrop": "asset-market",
+      "rendering": {
+        "calls": 38,
+        "triangles": 159870,
+        "width": 1488,
+        "height": 693
+      },
+      "historicalStatus": "illustrative"
+    },
+    {
+      "view": {
+        "id": "trader",
+        "label": "大夏答问者视角"
+      },
+      "storyId": "zhang-qian-yuezhi",
+      "context": "book",
+      "scene": 3,
+      "sceneId": "market",
+      "line": "market-1",
+      "perspective": "trader",
+      "frames": 29101,
+      "elapsedSeconds": 186.05779399997516,
+      "paused": false,
+      "camera": {
+        "position": [
+          3.4403938781382486,
+          1.6399999999999921,
+          -1.6159782049219815
+        ],
+        "target": [
+          -1.6999999999999995,
+          1.119999999999993,
+          1.4999999999999998
+        ],
+        "fieldOfView": 43
+      },
+      "assets": [
+        {
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "hashChecked": true,
+          "bytes": 11548084,
+          "meshes": 100,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "hashChecked": true,
+          "bytes": 1959632,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf"
+        },
+        {
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "hashChecked": true,
+          "bytes": 1939700,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb"
+        },
+        {
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "hashChecked": true,
+          "bytes": 29000,
+          "meshes": 1,
+          "provider": "procedural illustrative Blender pole",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "hashChecked": true,
+          "bytes": 5612548,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b"
+        },
+        {
+          "assetId": "asset-xiongnu",
+          "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+          "hashChecked": true,
+          "bytes": 4198644,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27"
+        },
+        {
+          "assetId": "asset-meeting",
+          "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+          "hashChecked": true,
+          "bytes": 2786288,
+          "meshes": 20,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-market",
+          "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+          "hashChecked": true,
+          "bytes": 3364228,
+          "meshes": 47,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        }
+      ],
+      "visibleObjects": [
+        {
+          "objectId": "obj-market",
+          "assetId": "asset-market",
+          "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+          "meshesRendered": 32,
+          "bounds": {
+            "min": [
+              -11,
+              -0.1599999964237213,
+              -10
+            ],
+            "max": [
+              11,
+              2.799999952316284,
+              10
+            ]
+          },
+          "floorGapM": null
+        },
+        {
+          "objectId": "obj-envoy",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -2.0984413656771754,
+              -7.105427357601002e-15,
+              1.133222977092598
+            ],
+            "max": [
+              -1.301558642907083,
+              1.7000000476837087,
+              1.8667770116454059
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-companion",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -3.598441365677176,
+              -7.105427357601002e-15,
+              2.633222977092598
+            ],
+            "max": [
+              -2.801558642907083,
+              1.7000000476837087,
+              3.3667770116454063
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-representative",
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              1.248130660616607,
+              -7.105427357601002e-15,
+              -1.4468242852740045
+            ],
+            "max": [
+              2.151869339383393,
+              1.7000000476837087,
+              -0.5531757147259955
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-staff",
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -2.041300582438707,
+              0,
+              1.488612444140017
+            ],
+            "max": [
+              -2.0186994175612925,
+              1.4894895069301128,
+              1.511387555859983
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-mural-horse",
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -5.405962741302156,
+              0,
+              3.256528229417529
+            ],
+            "max": [
+              -4.794037258697843,
+              1.6,
+              5.1434717705824715
+            ]
+          },
+          "floorGapM": 0
+        }
+      ],
+      "backdrop": "asset-market",
+      "rendering": {
+        "calls": 38,
+        "triangles": 150630,
+        "width": 1488,
+        "height": 693
+      },
+      "historicalStatus": "illustrative"
+    },
+    {
+      "view": {
+        "id": "passersby",
+        "label": "路人视角"
+      },
+      "storyId": "zhang-qian-yuezhi",
+      "context": "book",
+      "scene": 3,
+      "sceneId": "market",
+      "line": "market-1",
+      "perspective": "passersby",
+      "frames": 29148,
+      "elapsedSeconds": 186.33649399997512,
+      "paused": false,
+      "camera": {
+        "position": [
+          7.921134185259156,
+          1.639999999999994,
+          -0.5679050204425262
+        ],
+        "target": [
+          -1.6999999999999995,
+          1.119999999999993,
+          1.4999999999999998
+        ],
+        "fieldOfView": 43
+      },
+      "assets": [
+        {
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "hashChecked": true,
+          "bytes": 11548084,
+          "meshes": 100,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "hashChecked": true,
+          "bytes": 1959632,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf"
+        },
+        {
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "hashChecked": true,
+          "bytes": 1939700,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb"
+        },
+        {
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "hashChecked": true,
+          "bytes": 29000,
+          "meshes": 1,
+          "provider": "procedural illustrative Blender pole",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "hashChecked": true,
+          "bytes": 5612548,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b"
+        },
+        {
+          "assetId": "asset-xiongnu",
+          "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+          "hashChecked": true,
+          "bytes": 4198644,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27"
+        },
+        {
+          "assetId": "asset-meeting",
+          "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+          "hashChecked": true,
+          "bytes": 2786288,
+          "meshes": 20,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-market",
+          "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+          "hashChecked": true,
+          "bytes": 3364228,
+          "meshes": 47,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        }
+      ],
+      "visibleObjects": [
+        {
+          "objectId": "obj-market",
+          "assetId": "asset-market",
+          "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+          "meshesRendered": 42,
+          "bounds": {
+            "min": [
+              -11,
+              -0.1599999964237213,
+              -10
+            ],
+            "max": [
+              11,
+              2.799999952316284,
+              10
+            ]
+          },
+          "floorGapM": null
+        },
+        {
+          "objectId": "obj-envoy",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -2.0984413656771754,
+              -7.105427357601002e-15,
+              1.133222977092598
+            ],
+            "max": [
+              -1.301558642907083,
+              1.7000000476837087,
+              1.8667770116454059
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-companion",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -3.598441365677176,
+              -7.105427357601002e-15,
+              2.633222977092598
+            ],
+            "max": [
+              -2.801558642907083,
+              1.7000000476837087,
+              3.3667770116454063
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-representative",
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              1.248130660616607,
+              -7.105427357601002e-15,
+              -1.4468242852740045
+            ],
+            "max": [
+              2.151869339383393,
+              1.7000000476837087,
+              -0.5531757147259955
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-local",
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              5.749427744649021,
+              -7.105427357601002e-15,
+              -0.34892010662795503
+            ],
+            "max": [
+              6.650572255350979,
+              1.7000000476837087,
+              0.548920106627955
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-staff",
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -2.041300582438707,
+              0,
+              1.488612444140017
+            ],
+            "max": [
+              -2.0186994175612925,
+              1.4894895069301128,
+              1.511387555859983
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-mural-horse",
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -5.405962741302156,
+              0,
+              3.256528229417529
+            ],
+            "max": [
+              -4.794037258697843,
+              1.6,
+              5.1434717705824715
+            ]
+          },
+          "floorGapM": 0
+        }
+      ],
+      "backdrop": "asset-market",
+      "rendering": {
+        "calls": 49,
+        "triangles": 190708,
+        "width": 1488,
+        "height": 693
+      },
+      "historicalStatus": "illustrative"
+    },
+    {
+      "view": {
+        "id": "overview",
+        "label": "上帝视角"
+      },
+      "storyId": "zhang-qian-yuezhi",
+      "context": "book",
+      "scene": 3,
+      "sceneId": "market",
+      "line": "market-1",
+      "perspective": "overview",
+      "frames": 29198,
+      "elapsedSeconds": 186.63339399997503,
+      "paused": false,
+      "camera": {
+        "position": [
+          7.199999999999997,
+          4.699999999999999,
+          9.799999999999997
+        ],
+        "target": [
+          -0.3,
+          0.9,
+          0.8
+        ],
+        "fieldOfView": 43
+      },
+      "assets": [
+        {
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "hashChecked": true,
+          "bytes": 11548084,
+          "meshes": 100,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "hashChecked": true,
+          "bytes": 1959632,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf"
+        },
+        {
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "hashChecked": true,
+          "bytes": 1939700,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb"
+        },
+        {
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "hashChecked": true,
+          "bytes": 29000,
+          "meshes": 1,
+          "provider": "procedural illustrative Blender pole",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "hashChecked": true,
+          "bytes": 5612548,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b"
+        },
+        {
+          "assetId": "asset-xiongnu",
+          "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+          "hashChecked": true,
+          "bytes": 4198644,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27"
+        },
+        {
+          "assetId": "asset-meeting",
+          "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+          "hashChecked": true,
+          "bytes": 2786288,
+          "meshes": 20,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-market",
+          "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+          "hashChecked": true,
+          "bytes": 3364228,
+          "meshes": 47,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        }
+      ],
+      "visibleObjects": [
+        {
+          "objectId": "obj-market",
+          "assetId": "asset-market",
+          "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+          "meshesRendered": 47,
+          "bounds": {
+            "min": [
+              -11,
+              -0.1599999964237213,
+              -10
+            ],
+            "max": [
+              11,
+              2.799999952316284,
+              10
+            ]
+          },
+          "floorGapM": null
+        },
+        {
+          "objectId": "obj-envoy",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -2.0984413656771754,
+              -7.105427357601002e-15,
+              1.133222977092598
+            ],
+            "max": [
+              -1.301558642907083,
+              1.7000000476837087,
+              1.8667770116454059
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-companion",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -3.598441365677176,
+              -7.105427357601002e-15,
+              2.633222977092598
+            ],
+            "max": [
+              -2.801558642907083,
+              1.7000000476837087,
+              3.3667770116454063
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-representative",
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              1.248130660616607,
+              -7.105427357601002e-15,
+              -1.4468242852740045
+            ],
+            "max": [
+              2.151869339383393,
+              1.7000000476837087,
+              -0.5531757147259955
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-local",
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              5.749427744649021,
+              -7.105427357601002e-15,
+              -0.34892010662795503
+            ],
+            "max": [
+              6.650572255350979,
+              1.7000000476837087,
+              0.548920106627955
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-staff",
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -2.041300582438707,
+              0,
+              1.488612444140017
+            ],
+            "max": [
+              -2.0186994175612925,
+              1.4894895069301128,
+              1.511387555859983
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-mural-horse",
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -5.405962741302156,
+              0,
+              3.256528229417529
+            ],
+            "max": [
+              -4.794037258697843,
+              1.6,
+              5.1434717705824715
+            ]
+          },
+          "floorGapM": 0
+        }
+      ],
+      "backdrop": "asset-market",
+      "rendering": {
+        "calls": 54,
+        "triangles": 191676,
+        "width": 1488,
+        "height": 693
+      },
+      "historicalStatus": "illustrative"
+    },
+    {
+      "view": {
+        "id": "envoy",
+        "label": "张骞视角"
+      },
+      "storyId": "zhang-qian-yuezhi",
+      "context": "captivity",
+      "scene": 3,
+      "sceneId": "captivity",
+      "line": "market-1",
+      "perspective": "envoy",
+      "frames": 37801,
+      "elapsedSeconds": 238.91739399996493,
+      "paused": false,
+      "camera": {
+        "position": [
+          -2.455718999610396,
+          1.639999999999993,
+          2.2940515048282113
+        ],
+        "target": [
+          1.1,
+          1.1200000000000072,
+          -1.5
+        ],
+        "fieldOfView": 43
+      },
+      "assets": [
+        {
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "hashChecked": true,
+          "bytes": 11548084,
+          "meshes": 100,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "hashChecked": true,
+          "bytes": 1959632,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf"
+        },
+        {
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "hashChecked": true,
+          "bytes": 1939700,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb"
+        },
+        {
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "hashChecked": true,
+          "bytes": 29000,
+          "meshes": 1,
+          "provider": "procedural illustrative Blender pole",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "hashChecked": true,
+          "bytes": 5612548,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b"
+        },
+        {
+          "assetId": "asset-xiongnu",
+          "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+          "hashChecked": true,
+          "bytes": 4198644,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27"
+        },
+        {
+          "assetId": "asset-meeting",
+          "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+          "hashChecked": true,
+          "bytes": 2786288,
+          "meshes": 20,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-market",
+          "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+          "hashChecked": true,
+          "bytes": 3364228,
+          "meshes": 47,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        }
+      ],
+      "visibleObjects": [
+        {
+          "objectId": "obj-environment",
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "meshesRendered": 37,
+          "bounds": {
+            "min": [
+              -90,
+              -0.4515402317047119,
+              -90
+            ],
+            "max": [
+              90,
+              7.289393424987793,
+              90
+            ]
+          },
+          "floorGapM": null
+        },
+        {
+          "objectId": "obj-envoy",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -1.3024982948027977,
+              -7.105427357601002e-15,
+              0.9443669691671575
+            ],
+            "max": [
+              -0.49750171444132796,
+              1.7000000476837087,
+              1.6556330201058584
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-xiongnu",
+          "assetId": "asset-xiongnu",
+          "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              0.589185436326083,
+              7.105427357601002e-15,
+              -1.9535542549587646
+            ],
+            "max": [
+              1.610814563673917,
+              1.7200000286102366,
+              -1.0464457450412354
+            ]
+          },
+          "floorGapM": 0
+        }
+      ],
+      "backdrop": "asset-environment",
+      "rendering": {
+        "calls": 52,
+        "triangles": 181526,
+        "width": 1488,
+        "height": 693
+      },
+      "historicalStatus": "illustrative"
+    },
+    {
+      "view": {
+        "id": "opponent",
+        "label": "匈奴视角"
+      },
+      "storyId": "zhang-qian-yuezhi",
+      "context": "captivity",
+      "scene": 3,
+      "sceneId": "captivity",
+      "line": "market-1",
+      "perspective": "opponent",
+      "frames": 37848,
+      "elapsedSeconds": 239.1960939999649,
+      "paused": false,
+      "camera": {
+        "position": [
+          2.673752261710442,
+          1.6400000000000068,
+          -2.465248060739449
+        ],
+        "target": [
+          -0.9000000000000002,
+          1.119999999999993,
+          1.2999999999999996
+        ],
+        "fieldOfView": 43
+      },
+      "assets": [
+        {
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "hashChecked": true,
+          "bytes": 11548084,
+          "meshes": 100,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "hashChecked": true,
+          "bytes": 1959632,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf"
+        },
+        {
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "hashChecked": true,
+          "bytes": 1939700,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb"
+        },
+        {
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "hashChecked": true,
+          "bytes": 29000,
+          "meshes": 1,
+          "provider": "procedural illustrative Blender pole",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "hashChecked": true,
+          "bytes": 5612548,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b"
+        },
+        {
+          "assetId": "asset-xiongnu",
+          "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+          "hashChecked": true,
+          "bytes": 4198644,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27"
+        },
+        {
+          "assetId": "asset-meeting",
+          "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+          "hashChecked": true,
+          "bytes": 2786288,
+          "meshes": 20,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-market",
+          "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+          "hashChecked": true,
+          "bytes": 3364228,
+          "meshes": 47,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        }
+      ],
+      "visibleObjects": [
+        {
+          "objectId": "obj-environment",
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "meshesRendered": 39,
+          "bounds": {
+            "min": [
+              -90,
+              -0.4515402317047119,
+              -90
+            ],
+            "max": [
+              90,
+              7.289393424987793,
+              90
+            ]
+          },
+          "floorGapM": null
+        },
+        {
+          "objectId": "obj-envoy",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -1.3024982948027977,
+              -7.105427357601002e-15,
+              0.9443669691671575
+            ],
+            "max": [
+              -0.49750171444132796,
+              1.7000000476837087,
+              1.6556330201058584
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-xiongnu",
+          "assetId": "asset-xiongnu",
+          "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              0.589185436326083,
+              7.105427357601002e-15,
+              -1.9535542549587646
+            ],
+            "max": [
+              1.610814563673917,
+              1.7200000286102366,
+              -1.0464457450412354
+            ]
+          },
+          "floorGapM": 0
+        }
+      ],
+      "backdrop": "asset-environment",
+      "rendering": {
+        "calls": 57,
+        "triangles": 192786,
+        "width": 1488,
+        "height": 693
+      },
+      "historicalStatus": "illustrative"
+    },
+    {
+      "view": {
+        "id": "overview",
+        "label": "上帝视角"
+      },
+      "storyId": "zhang-qian-yuezhi",
+      "context": "captivity",
+      "scene": 3,
+      "sceneId": "captivity",
+      "line": "market-1",
+      "perspective": "overview",
+      "frames": 37895,
+      "elapsedSeconds": 239.4747939999648,
+      "paused": false,
+      "camera": {
+        "position": [
+          5.8,
+          3.499999999999999,
+          7.299999999999999
+        ],
+        "target": [
+          0,
+          0.9,
+          0
+        ],
+        "fieldOfView": 43
+      },
+      "assets": [
+        {
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "hashChecked": true,
+          "bytes": 11548084,
+          "meshes": 100,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "hashChecked": true,
+          "bytes": 1959632,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf"
+        },
+        {
+          "assetId": "asset-representative",
+          "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+          "hashChecked": true,
+          "bytes": 1939700,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb"
+        },
+        {
+          "assetId": "asset-staff",
+          "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+          "hashChecked": true,
+          "bytes": 29000,
+          "meshes": 1,
+          "provider": "procedural illustrative Blender pole",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-mural-horse",
+          "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+          "hashChecked": true,
+          "bytes": 5612548,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b"
+        },
+        {
+          "assetId": "asset-xiongnu",
+          "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+          "hashChecked": true,
+          "bytes": 4198644,
+          "meshes": 1,
+          "provider": "Tripo text-to-model v3.1-20260211",
+          "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27"
+        },
+        {
+          "assetId": "asset-meeting",
+          "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+          "hashChecked": true,
+          "bytes": 2786288,
+          "meshes": 20,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        },
+        {
+          "assetId": "asset-market",
+          "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+          "hashChecked": true,
+          "bytes": 3364228,
+          "meshes": 47,
+          "provider": "Blender authored illustrative geometry",
+          "taskId": null
+        }
+      ],
+      "visibleObjects": [
+        {
+          "objectId": "obj-environment",
+          "assetId": "asset-environment",
+          "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+          "meshesRendered": 43,
+          "bounds": {
+            "min": [
+              -90,
+              -0.4515402317047119,
+              -90
+            ],
+            "max": [
+              90,
+              7.289393424987793,
+              90
+            ]
+          },
+          "floorGapM": null
+        },
+        {
+          "objectId": "obj-envoy",
+          "assetId": "asset-envoy",
+          "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              -1.3024982948027977,
+              -7.105427357601002e-15,
+              0.9443669691671575
+            ],
+            "max": [
+              -0.49750171444132796,
+              1.7000000476837087,
+              1.6556330201058584
+            ]
+          },
+          "floorGapM": 0
+        },
+        {
+          "objectId": "obj-xiongnu",
+          "assetId": "asset-xiongnu",
+          "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+          "meshesRendered": 1,
+          "bounds": {
+            "min": [
+              0.589185436326083,
+              7.105427357601002e-15,
+              -1.9535542549587646
+            ],
+            "max": [
+              1.610814563673917,
+              1.7200000286102366,
+              -1.0464457450412354
+            ]
+          },
+          "floorGapM": 0
+        }
+      ],
+      "backdrop": "asset-environment",
+      "rendering": {
+        "calls": 67,
+        "triangles": 205766,
+        "width": 1488,
+        "height": 693
+      },
+      "historicalStatus": "illustrative"
+    }
+  ],
+  "checks": [
+    {
+      "name": "new-question-scene-preserves-line",
+      "book": {
+        "atlas": false,
+        "book": {
+          "complete": "false",
+          "furthest": "0",
+          "line": "arrival-question-life",
+          "loadedImages": "3",
+          "ready": "true",
+          "scene": "0",
+          "turning": "false"
+        },
+        "choices": [
+          {
+            "id": "migration",
+            "text": "1询问：月氏为什么迁到这里？"
+          },
+          {
+            "id": "daxia-relation",
+            "text": "2询问：月氏与大夏是什么关系？"
+          }
+        ],
+        "loadedScripts": [
+          "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+        ],
+        "prototypeMounted": false,
+        "text": "张骞月氏来到这里，又与南边的大夏有什么关系？我想多了解一些。"
+      }
+    },
+    {
+      "name": "canvas-select-through-transparent-grass",
+      "selected": "{\"objectId\":\"obj-envoy\",\"assetId\":\"asset-envoy\",\"label\":\"张骞角色示意\",\"context\":\"book\",\"sceneId\":\"arrival\",\"sha256\":\"008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4\"}",
+      "book": {
+        "atlas": false,
+        "book": {
+          "complete": "false",
+          "furthest": "0",
+          "line": "arrival-question-life",
+          "loadedImages": "3",
+          "ready": "true",
+          "scene": "0",
+          "turning": "false"
+        },
+        "choices": [
+          {
+            "id": "migration",
+            "text": "1询问：月氏为什么迁到这里？"
+          },
+          {
+            "id": "daxia-relation",
+            "text": "2询问：月氏与大夏是什么关系？"
+          }
+        ],
+        "loadedScripts": [
+          "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+        ],
+        "prototypeMounted": false,
+        "text": "张骞月氏来到这里，又与南边的大夏有什么关系？我想多了解一些。"
+      }
+    },
+    {
+      "name": "drag-rotates-camera",
+      "before": {
+        "position": [
+          6.8,
+          4.4,
+          9.3
+        ],
+        "target": [
+          -0.8,
+          0.9,
+          1.2
+        ],
+        "fieldOfView": 43
+      },
+      "after": {
+        "position": [
+          -2.7967851383783833,
+          10.496275752876658,
+          7.488429119096637
+        ],
+        "target": [
+          -0.8,
+          0.9,
+          1.2
+        ],
+        "fieldOfView": 43
+      }
+    },
+    {
+      "name": "scroll-zoom",
+      "camera": {
+        "position": [
+          -4.096751640115616,
+          16.06886534534424,
+          10.716836017847282
+        ],
+        "target": [
+          -0.8,
+          0.9,
+          1.2
+        ],
+        "fieldOfView": 43
+      }
+    },
+    {
+      "name": "return-to-new-question",
+      "book": {
+        "atlas": false,
+        "book": {
+          "complete": "false",
+          "furthest": "0",
+          "line": "arrival-question-life",
+          "loadedImages": "3",
+          "ready": "true",
+          "scene": "0",
+          "turning": "false"
+        },
+        "choices": [
+          {
+            "id": "migration",
+            "text": "1询问：月氏为什么迁到这里？"
+          },
+          {
+            "id": "daxia-relation",
+            "text": "2询问：月氏与大夏是什么关系？"
+          }
+        ],
+        "loadedScripts": [
+          "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+        ],
+        "prototypeMounted": false,
+        "text": "张骞月氏来到这里，又与南边的大夏有什么关系？我想多了解一些。"
+      }
+    },
+    {
+      "name": "rendered-PNG-export",
+      "bytes": 1231022,
+      "width": 1488,
+      "height": 693,
+      "evidence": {
+        "storyId": "zhang-qian-yuezhi",
+        "context": "captivity",
+        "scene": 3,
+        "sceneId": "captivity",
+        "line": "market-1",
+        "perspective": "opponent",
+        "frames": 37999,
+        "elapsedSeconds": 240.1291939999647,
+        "paused": false,
+        "camera": {
+          "position": [
+            2.673752261710442,
+            1.6400000000000068,
+            -2.465248060739449
+          ],
+          "target": [
+            -0.9000000000000002,
+            1.119999999999993,
+            1.2999999999999996
+          ],
+          "fieldOfView": 43
+        },
+        "assets": [
+          {
+            "assetId": "asset-environment",
+            "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+            "hashChecked": true,
+            "bytes": 11548084,
+            "meshes": 100,
+            "provider": "Blender authored illustrative geometry",
+            "taskId": null
+          },
+          {
+            "assetId": "asset-envoy",
+            "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+            "hashChecked": true,
+            "bytes": 1959632,
+            "meshes": 1,
+            "provider": "Tripo text-to-model v3.1-20260211",
+            "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf"
+          },
+          {
+            "assetId": "asset-representative",
+            "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+            "hashChecked": true,
+            "bytes": 1939700,
+            "meshes": 1,
+            "provider": "Tripo text-to-model v3.1-20260211",
+            "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb"
+          },
+          {
+            "assetId": "asset-staff",
+            "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+            "hashChecked": true,
+            "bytes": 29000,
+            "meshes": 1,
+            "provider": "procedural illustrative Blender pole",
+            "taskId": null
+          },
+          {
+            "assetId": "asset-mural-horse",
+            "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+            "hashChecked": true,
+            "bytes": 5612548,
+            "meshes": 1,
+            "provider": "Tripo text-to-model v3.1-20260211",
+            "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b"
+          },
+          {
+            "assetId": "asset-xiongnu",
+            "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+            "hashChecked": true,
+            "bytes": 4198644,
+            "meshes": 1,
+            "provider": "Tripo text-to-model v3.1-20260211",
+            "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27"
+          },
+          {
+            "assetId": "asset-meeting",
+            "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+            "hashChecked": true,
+            "bytes": 2786288,
+            "meshes": 20,
+            "provider": "Blender authored illustrative geometry",
+            "taskId": null
+          },
+          {
+            "assetId": "asset-market",
+            "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+            "hashChecked": true,
+            "bytes": 3364228,
+            "meshes": 47,
+            "provider": "Blender authored illustrative geometry",
+            "taskId": null
+          }
+        ],
+        "visibleObjects": [
+          {
+            "objectId": "obj-environment",
+            "assetId": "asset-environment",
+            "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+            "meshesRendered": 39,
+            "bounds": {
+              "min": [
+                -90,
+                -0.4515402317047119,
+                -90
+              ],
+              "max": [
+                90,
+                7.289393424987793,
+                90
+              ]
+            },
+            "floorGapM": null
+          },
+          {
+            "objectId": "obj-envoy",
+            "assetId": "asset-envoy",
+            "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+            "meshesRendered": 1,
+            "bounds": {
+              "min": [
+                -1.3024982948027977,
+                -7.105427357601002e-15,
+                0.9443669691671575
+              ],
+              "max": [
+                -0.49750171444132796,
+                1.7000000476837087,
+                1.6556330201058584
+              ]
+            },
+            "floorGapM": 0
+          },
+          {
+            "objectId": "obj-xiongnu",
+            "assetId": "asset-xiongnu",
+            "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+            "meshesRendered": 1,
+            "bounds": {
+              "min": [
+                0.589185436326083,
+                7.105427357601002e-15,
+                -1.9535542549587646
+              ],
+              "max": [
+                1.610814563673917,
+                1.7200000286102366,
+                -1.0464457450412354
+              ]
+            },
+            "floorGapM": 0
+          }
+        ],
+        "backdrop": "asset-environment",
+        "rendering": {
+          "calls": 57,
+          "triangles": 192786,
+          "width": 1488,
+          "height": 693
+        },
+        "historicalStatus": "illustrative"
+      }
+    },
+    {
+      "name": "pause",
+      "evidence": {
+        "storyId": "zhang-qian-yuezhi",
+        "context": "captivity",
+        "scene": 3,
+        "sceneId": "captivity",
+        "line": "market-1",
+        "perspective": "opponent",
+        "frames": 38006,
+        "elapsedSeconds": 240.17159399996473,
+        "paused": true,
+        "camera": {
+          "position": [
+            2.673752261710442,
+            1.6400000000000068,
+            -2.4652480607394494
+          ],
+          "target": [
+            -0.9000000000000001,
+            1.119999999999993,
+            1.2999999999999994
+          ],
+          "fieldOfView": 43
+        },
+        "assets": [
+          {
+            "assetId": "asset-environment",
+            "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+            "hashChecked": true,
+            "bytes": 11548084,
+            "meshes": 100,
+            "provider": "Blender authored illustrative geometry",
+            "taskId": null
+          },
+          {
+            "assetId": "asset-envoy",
+            "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+            "hashChecked": true,
+            "bytes": 1959632,
+            "meshes": 1,
+            "provider": "Tripo text-to-model v3.1-20260211",
+            "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf"
+          },
+          {
+            "assetId": "asset-representative",
+            "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+            "hashChecked": true,
+            "bytes": 1939700,
+            "meshes": 1,
+            "provider": "Tripo text-to-model v3.1-20260211",
+            "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb"
+          },
+          {
+            "assetId": "asset-staff",
+            "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+            "hashChecked": true,
+            "bytes": 29000,
+            "meshes": 1,
+            "provider": "procedural illustrative Blender pole",
+            "taskId": null
+          },
+          {
+            "assetId": "asset-mural-horse",
+            "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+            "hashChecked": true,
+            "bytes": 5612548,
+            "meshes": 1,
+            "provider": "Tripo text-to-model v3.1-20260211",
+            "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b"
+          },
+          {
+            "assetId": "asset-xiongnu",
+            "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+            "hashChecked": true,
+            "bytes": 4198644,
+            "meshes": 1,
+            "provider": "Tripo text-to-model v3.1-20260211",
+            "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27"
+          },
+          {
+            "assetId": "asset-meeting",
+            "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+            "hashChecked": true,
+            "bytes": 2786288,
+            "meshes": 20,
+            "provider": "Blender authored illustrative geometry",
+            "taskId": null
+          },
+          {
+            "assetId": "asset-market",
+            "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+            "hashChecked": true,
+            "bytes": 3364228,
+            "meshes": 47,
+            "provider": "Blender authored illustrative geometry",
+            "taskId": null
+          }
+        ],
+        "visibleObjects": [
+          {
+            "objectId": "obj-environment",
+            "assetId": "asset-environment",
+            "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+            "meshesRendered": 39,
+            "bounds": {
+              "min": [
+                -90,
+                -0.4515402317047119,
+                -90
+              ],
+              "max": [
+                90,
+                7.289393424987793,
+                90
+              ]
+            },
+            "floorGapM": null
+          },
+          {
+            "objectId": "obj-envoy",
+            "assetId": "asset-envoy",
+            "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+            "meshesRendered": 1,
+            "bounds": {
+              "min": [
+                -1.3024982948027977,
+                -7.105427357601002e-15,
+                0.9443669691671575
+              ],
+              "max": [
+                -0.49750171444132796,
+                1.7000000476837087,
+                1.6556330201058584
+              ]
+            },
+            "floorGapM": 0
+          },
+          {
+            "objectId": "obj-xiongnu",
+            "assetId": "asset-xiongnu",
+            "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+            "meshesRendered": 1,
+            "bounds": {
+              "min": [
+                0.589185436326083,
+                7.105427357601002e-15,
+                -1.9535542549587646
+              ],
+              "max": [
+                1.610814563673917,
+                1.7200000286102366,
+                -1.0464457450412354
+              ]
+            },
+            "floorGapM": 0
+          }
+        ],
+        "backdrop": "asset-environment",
+        "rendering": {
+          "calls": 57,
+          "triangles": 192786,
+          "width": 1488,
+          "height": 693
+        },
+        "historicalStatus": "illustrative"
+      }
+    },
+    {
+      "name": "resume",
+      "evidence": {
+        "storyId": "zhang-qian-yuezhi",
+        "context": "captivity",
+        "scene": 3,
+        "sceneId": "captivity",
+        "line": "market-1",
+        "perspective": "opponent",
+        "frames": 38049,
+        "elapsedSeconds": 240.41999399996465,
+        "paused": false,
+        "camera": {
+          "position": [
+            2.673752261710442,
+            1.6400000000000068,
+            -2.4652480607394494
+          ],
+          "target": [
+            -0.9000000000000001,
+            1.119999999999993,
+            1.2999999999999994
+          ],
+          "fieldOfView": 43
+        },
+        "assets": [
+          {
+            "assetId": "asset-environment",
+            "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+            "hashChecked": true,
+            "bytes": 11548084,
+            "meshes": 100,
+            "provider": "Blender authored illustrative geometry",
+            "taskId": null
+          },
+          {
+            "assetId": "asset-envoy",
+            "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+            "hashChecked": true,
+            "bytes": 1959632,
+            "meshes": 1,
+            "provider": "Tripo text-to-model v3.1-20260211",
+            "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf"
+          },
+          {
+            "assetId": "asset-representative",
+            "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+            "hashChecked": true,
+            "bytes": 1939700,
+            "meshes": 1,
+            "provider": "Tripo text-to-model v3.1-20260211",
+            "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb"
+          },
+          {
+            "assetId": "asset-staff",
+            "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+            "hashChecked": true,
+            "bytes": 29000,
+            "meshes": 1,
+            "provider": "procedural illustrative Blender pole",
+            "taskId": null
+          },
+          {
+            "assetId": "asset-mural-horse",
+            "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+            "hashChecked": true,
+            "bytes": 5612548,
+            "meshes": 1,
+            "provider": "Tripo text-to-model v3.1-20260211",
+            "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b"
+          },
+          {
+            "assetId": "asset-xiongnu",
+            "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+            "hashChecked": true,
+            "bytes": 4198644,
+            "meshes": 1,
+            "provider": "Tripo text-to-model v3.1-20260211",
+            "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27"
+          },
+          {
+            "assetId": "asset-meeting",
+            "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+            "hashChecked": true,
+            "bytes": 2786288,
+            "meshes": 20,
+            "provider": "Blender authored illustrative geometry",
+            "taskId": null
+          },
+          {
+            "assetId": "asset-market",
+            "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+            "hashChecked": true,
+            "bytes": 3364228,
+            "meshes": 47,
+            "provider": "Blender authored illustrative geometry",
+            "taskId": null
+          }
+        ],
+        "visibleObjects": [
+          {
+            "objectId": "obj-environment",
+            "assetId": "asset-environment",
+            "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+            "meshesRendered": 39,
+            "bounds": {
+              "min": [
+                -90,
+                -0.4515402317047119,
+                -90
+              ],
+              "max": [
+                90,
+                7.289393424987793,
+                90
+              ]
+            },
+            "floorGapM": null
+          },
+          {
+            "objectId": "obj-envoy",
+            "assetId": "asset-envoy",
+            "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+            "meshesRendered": 1,
+            "bounds": {
+              "min": [
+                -1.3024982948027977,
+                -7.105427357601002e-15,
+                0.9443669691671575
+              ],
+              "max": [
+                -0.49750171444132796,
+                1.7000000476837087,
+                1.6556330201058584
+              ]
+            },
+            "floorGapM": 0
+          },
+          {
+            "objectId": "obj-xiongnu",
+            "assetId": "asset-xiongnu",
+            "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+            "meshesRendered": 1,
+            "bounds": {
+              "min": [
+                0.589185436326083,
+                7.105427357601002e-15,
+                -1.9535542549587646
+              ],
+              "max": [
+                1.610814563673917,
+                1.7200000286102366,
+                -1.0464457450412354
+              ]
+            },
+            "floorGapM": 0
+          }
+        ],
+        "backdrop": "asset-environment",
+        "rendering": {
+          "calls": 57,
+          "triangles": 192786,
+          "width": 1488,
+          "height": 693
+        },
+        "historicalStatus": "illustrative"
+      }
+    },
+    {
+      "name": "reload-restores-new-question",
+      "book": {
+        "atlas": false,
+        "book": {
+          "complete": "false",
+          "furthest": "3",
+          "line": "market-question-shendu",
+          "loadedImages": "3",
+          "ready": "true",
+          "scene": "3",
+          "turning": "false"
+        },
+        "choices": [
+          {
+            "id": "shendu-direction",
+            "text": "1询问：身毒在大夏的什么方向？"
+          },
+          {
+            "id": "shendu-life",
+            "text": "2询问：身毒的生活和风土怎样？"
+          }
+        ],
+        "loadedScripts": [
+          "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+        ],
+        "prototypeMounted": false,
+        "text": "张骞商人既然从身毒购得这些物品，我想再问问那个地方。"
+      }
+    },
+    {
+      "name": "question-source-visible",
+      "excerpt": "吾賈人往市之身毒。身毒在大夏東南可數千里。其俗土著，大與大夏同，而卑溼暑熱云。"
+    },
+    {
+      "name": "history-mode-preserved-on-advance",
+      "interaction": "ArrowRight with history pane open",
+      "result": {
+        "historyEntries": 5,
+        "intro": "本页已读对话 · 终于抵达",
+        "line": "arrival-3",
+        "sourceEntries": 0
+      }
+    },
+    {
+      "name": "reload-complete-end-preserved",
+      "book": {
+        "atlas": false,
+        "book": {
+          "complete": "true",
+          "furthest": "3",
+          "line": "market-6",
+          "loadedImages": "3",
+          "ready": "true",
+          "scene": "3",
+          "turning": "false"
+        },
+        "choices": [],
+        "loadedScripts": [
+          "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+        ],
+        "prototypeMounted": false,
+        "text": "记述后来，张骞历经归途波折回到汉朝，报告了西域诸国的亲历与传闻。这一段故事，停在他对世界的认识正在扩展的时刻。"
+      }
+    },
+    {
+      "name": "asset-failure",
+      "result": {
+        "book": {
+          "complete": "true",
+          "furthest": "3",
+          "line": "market-6",
+          "loadedImages": "3",
+          "ready": "true",
+          "scene": "3",
+          "turning": "false"
+        },
+        "canvasCount": 0,
+        "ready": "false",
+        "retryVisible": true,
+        "status": "资产 asset-envoy 与来源 SHA-256 不一致，停止显示。"
+      }
+    },
+    {
+      "name": "asset-retry",
+      "result": {
+        "book": {
+          "complete": "true",
+          "furthest": "3",
+          "line": "market-6",
+          "loadedImages": "3",
+          "ready": "true",
+          "scene": "3",
+          "turning": "false"
+        },
+        "canvasCount": 1,
+        "evidence": {
+          "assets": [
+            {
+              "assetId": "asset-environment",
+              "bytes": 11548084,
+              "hashChecked": true,
+              "meshes": 100,
+              "provider": "Blender authored illustrative geometry",
+              "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+              "taskId": null
+            },
+            {
+              "assetId": "asset-envoy",
+              "bytes": 1959632,
+              "hashChecked": true,
+              "meshes": 1,
+              "provider": "Tripo text-to-model v3.1-20260211",
+              "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+              "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf"
+            },
+            {
+              "assetId": "asset-representative",
+              "bytes": 1939700,
+              "hashChecked": true,
+              "meshes": 1,
+              "provider": "Tripo text-to-model v3.1-20260211",
+              "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+              "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb"
+            },
+            {
+              "assetId": "asset-staff",
+              "bytes": 29000,
+              "hashChecked": true,
+              "meshes": 1,
+              "provider": "procedural illustrative Blender pole",
+              "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+              "taskId": null
+            },
+            {
+              "assetId": "asset-mural-horse",
+              "bytes": 5612548,
+              "hashChecked": true,
+              "meshes": 1,
+              "provider": "Tripo text-to-model v3.1-20260211",
+              "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+              "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b"
+            },
+            {
+              "assetId": "asset-xiongnu",
+              "bytes": 4198644,
+              "hashChecked": true,
+              "meshes": 1,
+              "provider": "Tripo text-to-model v3.1-20260211",
+              "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+              "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27"
+            },
+            {
+              "assetId": "asset-meeting",
+              "bytes": 2786288,
+              "hashChecked": true,
+              "meshes": 20,
+              "provider": "Blender authored illustrative geometry",
+              "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+              "taskId": null
+            },
+            {
+              "assetId": "asset-market",
+              "bytes": 3364228,
+              "hashChecked": true,
+              "meshes": 47,
+              "provider": "Blender authored illustrative geometry",
+              "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+              "taskId": null
+            }
+          ],
+          "backdrop": "asset-market",
+          "camera": {
+            "fieldOfView": 43,
+            "position": [
+              7.199999999999997,
+              4.699999999999999,
+              9.799999999999995
+            ],
+            "target": [
+              -0.3,
+              0.9,
+              0.8
+            ]
+          },
+          "context": "book",
+          "elapsedSeconds": 0.015091999999996915,
+          "frames": 12,
+          "historicalStatus": "illustrative",
+          "line": "market-6",
+          "paused": false,
+          "perspective": "overview",
+          "rendering": {
+            "calls": 54,
+            "height": 693,
+            "triangles": 191676,
+            "width": 1488
+          },
+          "scene": 3,
+          "sceneId": "market",
+          "storyId": "zhang-qian-yuezhi",
+          "visibleObjects": [
+            {
+              "assetId": "asset-market",
+              "bounds": {
+                "max": [
+                  11,
+                  2.799999952316284,
+                  10
+                ],
+                "min": [
+                  -11,
+                  -0.1599999964237213,
+                  -10
+                ]
+              },
+              "floorGapM": null,
+              "meshesRendered": 47,
+              "objectId": "obj-market",
+              "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211"
+            },
+            {
+              "assetId": "asset-envoy",
+              "bounds": {
+                "max": [
+                  -1.301558642907083,
+                  1.7000000476837087,
+                  1.866777011645406
+                ],
+                "min": [
+                  -2.098441365677175,
+                  -7.105427357601002e-15,
+                  1.133222977092598
+                ]
+              },
+              "floorGapM": 0,
+              "meshesRendered": 1,
+              "objectId": "obj-envoy",
+              "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4"
+            },
+            {
+              "assetId": "asset-envoy",
+              "bounds": {
+                "max": [
+                  -2.801558642907083,
+                  1.7000000476837087,
+                  3.3667770116454063
+                ],
+                "min": [
+                  -3.598441365677176,
+                  -7.105427357601002e-15,
+                  2.633222977092598
+                ]
+              },
+              "floorGapM": 0,
+              "meshesRendered": 1,
+              "objectId": "obj-companion",
+              "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4"
+            },
+            {
+              "assetId": "asset-representative",
+              "bounds": {
+                "max": [
+                  2.151869339383393,
+                  1.7000000476837087,
+                  -0.5531757147259955
+                ],
+                "min": [
+                  1.248130660616607,
+                  -7.105427357601002e-15,
+                  -1.4468242852740043
+                ]
+              },
+              "floorGapM": 0,
+              "meshesRendered": 1,
+              "objectId": "obj-representative",
+              "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03"
+            },
+            {
+              "assetId": "asset-representative",
+              "bounds": {
+                "max": [
+                  6.650572255350979,
+                  1.7000000476837087,
+                  0.548920106627955
+                ],
+                "min": [
+                  5.749427744649021,
+                  -7.105427357601002e-15,
+                  -0.34892010662795503
+                ]
+              },
+              "floorGapM": 0,
+              "meshesRendered": 1,
+              "objectId": "obj-local",
+              "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03"
+            },
+            {
+              "assetId": "asset-staff",
+              "bounds": {
+                "max": [
+                  -2.0186994175612925,
+                  1.4894895069301128,
+                  1.511387555859983
+                ],
+                "min": [
+                  -2.041300582438707,
+                  0,
+                  1.488612444140017
+                ]
+              },
+              "floorGapM": 0,
+              "meshesRendered": 1,
+              "objectId": "obj-staff",
+              "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63"
+            },
+            {
+              "assetId": "asset-mural-horse",
+              "bounds": {
+                "max": [
+                  -4.794037258697843,
+                  1.6,
+                  5.1434717705824715
+                ],
+                "min": [
+                  -5.405962741302156,
+                  0,
+                  3.256528229417529
+                ]
+              },
+              "floorGapM": 0,
+              "meshesRendered": 1,
+              "objectId": "obj-mural-horse",
+              "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8"
+            }
+          ]
+        },
+        "ready": "true",
+        "status": "本页场景已就绪 · 布景与在场人物已组合呈现"
+      }
+    }
+  ],
+  "prototypeStatus": "retained locally; excluded from production and handoff ZIP",
+  "consoleNormal": [],
+  "normalConsoleWindowStartedAt": "2026-10-01T08:50:26.858Z",
+  "normalConsoleWindowEndedAt": "2026-10-01T09:02:41.763Z",
+  "consoleFilterNote": "Only logs in this REV4 validation window; older REV3 deliberate failure logs retained in earlier validation records.",
+  "expectedFailureConsole": [
+    {
+      "level": "error",
+      "message": "3D scene unavailable Error: 资产 asset-envoy 与来源 SHA-256 不一致，停止显示。\n    at Ii (http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js:1:43189)\n    at async Mi (http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js:1:45305)\n    at async J (http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js:9:3109)",
+      "timestamp": "2026-10-01T09:04:10.036Z",
+      "url": "http://127.0.0.1:5193/assets/yuezhi-Zb7oxvgt.js"
+    }
+  ],
+  "verifiedSnapshot": [
+    {
+      "path": "viewer/src/yuezhi/main.ts",
+      "bytes": 19856,
+      "sha256": "3782147651bb7d5af68c25523e298aea76520f85dc2154ca3001d7e567e99eaa"
+    },
+    {
+      "path": "viewer/src/yuezhi/book-content.ts",
+      "bytes": 11654,
+      "sha256": "1926b0b9bcd85fa2fcdc3c50f924079dacc2b14802437b67bcbdad83ed587355"
+    },
+    {
+      "path": "viewer/src/yuezhi/content.ts",
+      "bytes": 4855,
+      "sha256": "20ed9523e30369df9f0eb170e5a7371a0b5e6e1ea6f8bf61689f84c6ee87ca11"
+    },
+    {
+      "path": "viewer/src/yuezhi/perspectives.ts",
+      "bytes": 29494,
+      "sha256": "e385f4053e58bd65536790cf95e0775ee0750de53f11eeaab9240ca7a241cca1"
+    },
+    {
+      "path": "viewer/src/yuezhi/scene-inspector.ts",
+      "bytes": 12164,
+      "sha256": "c66816eb57679842780fa6fdeaa483c791a7b9ebcea904531a8b88adfc1e4cd1"
+    },
+    {
+      "path": "viewer/src/yuezhi/story-world.ts",
+      "bytes": 26735,
+      "sha256": "8b8e58ecb5b1a25fa6c2d6df36f42555232967b720777461aea778c021a84640"
+    },
+    {
+      "path": "viewer/src/yuezhi/style.css",
+      "bytes": 21389,
+      "sha256": "8ceaa7caf0158852bf32f133248866075e24cfcdc02428484dc30422472eaf5b"
+    },
+    {
+      "path": "scripts/build-yuezhi-package.ts",
+      "bytes": 25274,
+      "sha256": "d34836b458d527aed98ae25b6535200375a4c099f714d3a6612ad808f1bc384a"
+    },
+    {
+      "path": "scripts/prepare-assets.mjs",
+      "bytes": 2429,
+      "sha256": "62bd72c1035d7a2a33502087bf3d501c80ef5845c1b96c1515bc1d1cd5ee9f53"
+    },
+    {
+      "path": "packages/zhang-qian-yuezhi/book.json",
+      "bytes": 15431,
+      "sha256": "1712e9572a7edf4a79976cd16e48407e7b2af8e9d608706fe8b0f06cc130a161"
+    },
+    {
+      "path": "packages/zhang-qian-yuezhi/build-manifest.json",
+      "bytes": 6996,
+      "sha256": "7909f10c827669ca45caa8878b92614d3fed350be77d90864406bda46ae119b0"
+    },
+    {
+      "path": "packages/zhang-qian-yuezhi/asset-lineage.json",
+      "bytes": 3157,
+      "sha256": "6fb42c2ce3bcc37e1878a91d5c5446a2887677cf092042860656059f42c6d0fb"
+    },
+    {
+      "path": "collector/deliveries/zhang-qian-yuezhi/handoff.json",
+      "bytes": 6650,
+      "sha256": "1580c148f88fee8d69208f60e2dd76d4fcdbe921a2cbc76b197114197e99115d"
+    }
+  ],
+  "summary": {
+    "dialogueNodesVisited": 35,
+    "distinctQuestionOptionsChosen": 10,
+    "questionPoints": 5,
+    "productionViews": 16,
+    "assetsHashChecked": 8,
+    "normalConsoleErrorsOrWarnings": 0,
+    "prototypeMounted": false,
+    "historicalAndRightsReview": "needs_review"
+  }
+}

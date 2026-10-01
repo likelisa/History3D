@@ -1,0 +1,107 @@
+{
+  "requiredBriefIds": [
+    "brief-environment",
+    "brief-envoy",
+    "brief-representative",
+    "brief-staff",
+    "brief-mural-horse",
+    "brief-xiongnu",
+    "brief-meeting",
+    "brief-market"
+  ],
+  "optionalBriefIds": [
+    "brief-companion",
+    "brief-local"
+  ],
+  "focusBriefId": "brief-envoy",
+  "relations": [],
+  "beats": [
+    {
+      "id": "arrival",
+      "description": "终于抵达",
+      "briefIds": [
+        "brief-environment",
+        "brief-envoy",
+        "brief-representative",
+        "brief-staff",
+        "brief-mural-horse",
+        "brief-xiongnu",
+        "brief-meeting",
+        "brief-market"
+      ]
+    },
+    {
+      "id": "meeting",
+      "description": "同一个旧敌",
+      "briefIds": [
+        "brief-environment",
+        "brief-envoy",
+        "brief-representative",
+        "brief-staff",
+        "brief-mural-horse",
+        "brief-xiongnu",
+        "brief-meeting",
+        "brief-market"
+      ]
+    },
+    {
+      "id": "waiting",
+      "description": "留下来，看见更多",
+      "briefIds": [
+        "brief-environment",
+        "brief-envoy",
+        "brief-representative",
+        "brief-staff",
+        "brief-mural-horse",
+        "brief-xiongnu",
+        "brief-meeting",
+        "brief-market"
+      ]
+    },
+    {
+      "id": "market",
+      "description": "异乡的蜀物",
+      "briefIds": [
+        "brief-environment",
+        "brief-envoy",
+        "brief-representative",
+        "brief-staff",
+        "brief-mural-horse",
+        "brief-xiongnu",
+        "brief-meeting",
+        "brief-market"
+      ]
+    }
+  ],
+  "constraints": [
+    {
+      "id": "preserve-book",
+      "severity": "must",
+      "statement": "保留原壁画、四页对白和阅读进度；3D组合场景只在弹窗打开",
+      "sourceIds": [],
+      "illustrative": true
+    },
+    {
+      "id": "historical-boundary",
+      "severity": "must",
+      "statement": "历史事件依据古籍数字文本；人物相貌、服饰、具体会面地点、河谷布局和尺寸为制作示意。月氏继位者在《史记》《汉书》中有太子／夫人异文，本场景不指定其身份。数字文本核对不能替代底本校勘与最终史料审核。",
+      "sourceIds": [
+        "shiji-mission",
+        "shiji-arrival",
+        "shiji-disposition",
+        "shiji-report",
+        "shiji-stay",
+        "shiji-region",
+        "shiji-market",
+        "shiji-shendu",
+        "hanshu-variant"
+      ],
+      "illustrative": true
+    }
+  ],
+  "unknowns": [
+    "伙伴原有两个人物的请求、账户收据与raw文件不在交接包，旧三项资产只能核对保存的任务元数据和GLB；本轮新匈奴人物另保存真实请求、成功记录和raw文件",
+    "旧任务请求提示不能由当前生成脚本反推为已验证发送内容；新匈奴人物实际请求须核对独立generation记录",
+    "史料、视觉与公开发布权利尚未最终审核"
+  ]
+}

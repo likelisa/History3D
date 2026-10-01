@@ -10,6 +10,7 @@ import { buildWorldRelease } from '../processing/src/world-compile.ts'
 import { reviewViewerPatch } from '../processing/src/asset-patch.ts'
 import { createNodeReader } from '../contracts/src/node-reader.ts'
 import { validateScenePackage } from '../contracts/src/validate.ts'
+import { processingPython } from '../processing/src/python-runtime.ts'
 
 const roots: string[] = []
 async function temp() { const root = await mkdtemp(path.join(os.tmpdir(), 'history3d-feedback-')); roots.push(root); return root }
@@ -24,7 +25,7 @@ describe('viewer feedback', () => {
     const base = lineage.assets.find((item: { assetId: string }) => item.assetId === 'asset-pack-bundle')
     const zipPath = path.join(data, 'patch.zip')
     const script = 'import sys,zipfile\nwith zipfile.ZipFile(sys.argv[2],"w") as z: z.write(sys.argv[1],"assets/cargo-patch.glb")'
-    const made = spawnSync('/usr/bin/python3', ['-c', script, path.resolve('processing/fixtures/assets/staff-demo.glb'), zipPath])
+    const made = spawnSync(processingPython(), ['-c', script, path.resolve('processing/fixtures/assets/staff-demo.glb'), zipPath])
     expect(made.status).toBe(0)
     const bundle = await storeBundle(zipPath, data)
     const input: WorldFeedback = {
@@ -59,7 +60,7 @@ describe('viewer feedback', () => {
     const candidatePath = path.join(data, 'cargo-material.glb')
     await writeFile(candidatePath, source)
     const zipPath = path.join(data, 'material-patch.zip')
-    const zipped = spawnSync('/usr/bin/python3', ['-c', 'import sys,zipfile\nwith zipfile.ZipFile(sys.argv[2],"w") as z: z.write(sys.argv[1],"assets/cargo-material.glb")', candidatePath, zipPath])
+    const zipped = spawnSync(processingPython(), ['-c', 'import sys,zipfile\nwith zipfile.ZipFile(sys.argv[2],"w") as z: z.write(sys.argv[1],"assets/cargo-material.glb")', candidatePath, zipPath])
     expect(zipped.status).toBe(0)
     const bundle = await storeBundle(zipPath, data)
     const feedback: WorldFeedback = {
@@ -108,7 +109,7 @@ describe('viewer feedback', () => {
     const competingFile = path.join(data, 'competing.glb')
     await writeFile(competingFile, competing)
     const competingZip = path.join(data, 'competing.zip')
-    expect(spawnSync('/usr/bin/python3', ['-c', 'import sys,zipfile\nwith zipfile.ZipFile(sys.argv[2],"w") as z: z.write(sys.argv[1],"assets/competing.glb")', competingFile, competingZip]).status).toBe(0)
+    expect(spawnSync(processingPython(), ['-c', 'import sys,zipfile\nwith zipfile.ZipFile(sys.argv[2],"w") as z: z.write(sys.argv[1],"assets/competing.glb")', competingFile, competingZip]).status).toBe(0)
     const competingBundle = await storeBundle(competingZip, data)
     const competingFeedback = { ...feedback, feedbackId: 'jin-material-002', bundleId: competingBundle.bundleId, assetPatches: [{ ...feedback.assetPatches[0], candidatePath: 'assets/competing.glb' }] }
     const competingReceipt = await submitWorldFeedback(competingFeedback, data)

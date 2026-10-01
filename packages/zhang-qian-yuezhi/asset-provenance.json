@@ -1,6 +1,10 @@
 {
+  "storyId": "zhang-qian-yuezhi",
+  "contentRevision": 4,
   "status": "draft",
   "realTripoAssetsReceived": true,
+  "newPaidGenerationPerformed": true,
+  "evidenceScope": "Saved generation records and matching delivered files; old teammate task/account metadata were not independently queried.",
   "accountEvidence": {
     "balanceBefore": 24600,
     "balanceAfter": 24560,
@@ -11,35 +15,226 @@
     {
       "assetId": "asset-environment",
       "path": "assets/asset-environment.glb",
-      "bytes": 7431156,
-      "sha256": "8a10547637835b2c18cd6b9c94d11b998ae1b20c56fd8a7440f04daed7a2b4a7",
-      "inputSha256": "92c1f8b4f825726f033d4f3d844b92078efc421ffa2dba18dfed2274b906fcf3",
+      "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+      "bytes": 11548084,
+      "inputSha256": "2956955061a5278a293320c598719c175e74c28133aa8a2785e4652760db2832",
       "rawSha256": null,
-      "provider": "Blender procedural environment",
+      "source": "viewer/public/yuezhi/environment-refined.glb",
+      "collectionPath": "assets/input/asset-environment.glb",
+      "provider": "Blender authored illustrative geometry",
       "taskId": null,
       "creditsConsumed": 0,
-      "sourceConversion": null,
+      "requestDigest": null,
+      "promptSha256": null,
+      "model": null,
+      "appearanceSourceIds": [],
+      "tool": "4.5.14 LTS",
+      "sourceConversion": {
+        "upstreamFile": "environment.glb",
+        "upstreamSha256": "92c1f8b4f825726f033d4f3d844b92078efc421ffa2dba18dfed2274b906fcf3",
+        "upstreamBytes": 7431064,
+        "upstreamManifest": "environment-manifest.json",
+        "upstreamTool": "5.2.0 LTS",
+        "tool": "Blender 4.5.14 LTS",
+        "script": "scripts/refine-yuezhi-environment.py",
+        "scriptSha256": "7087983fa473797579c06fe97d791443c0e9d85747bc29d796c6bbcb9b007ad0",
+        "seed": 20261001,
+        "editedObjects": [
+          "Distant illustrative mountain ridge",
+          "Illustrative river ribbon",
+          "Illustrative valley terrain",
+          "Procedural weathered stone",
+          "Procedural weathered stone.001",
+          "Procedural weathered stone.002",
+          "Procedural weathered stone.003",
+          "Procedural weathered stone.004",
+          "Procedural weathered stone.005",
+          "Procedural weathered stone.006",
+          "Procedural weathered stone.007",
+          "Procedural weathered stone.008",
+          "Procedural weathered stone.009",
+          "Procedural weathered stone.010",
+          "Procedural weathered stone.011",
+          "Procedural weathered stone.012",
+          "Procedural weathered stone.013",
+          "Procedural weathered stone.014",
+          "Procedural weathered stone.015",
+          "Procedural weathered stone.016",
+          "Procedural weathered stone.017",
+          "Procedural weathered stone.018",
+          "Procedural weathered stone.019",
+          "Procedural weathered stone.020",
+          "Procedural weathered stone.021",
+          "Procedural weathered stone.022",
+          "Procedural weathered stone.023",
+          "Procedural weathered stone.024",
+          "Procedural weathered stone.025",
+          "Procedural weathered stone.026",
+          "Procedural weathered stone.027",
+          "Procedural weathered stone.028",
+          "Procedural weathered stone.029",
+          "Procedural weathered stone.030",
+          "Procedural weathered stone.031",
+          "Procedural weathered stone.032",
+          "Procedural weathered stone.033",
+          "Procedural weathered stone.034",
+          "Procedural weathered stone.035",
+          "Procedural weathered stone.036",
+          "Procedural weathered stone.037",
+          "Procedural weathered stone.038",
+          "Procedural weathered stone.039",
+          "Procedural weathered stone.040",
+          "Procedural weathered stone.041",
+          "Procedural weathered stone.042",
+          "Procedural weathered stone.043",
+          "Procedural weathered stone.044",
+          "Procedural weathered stone.045",
+          "Procedural weathered stone.046",
+          "Procedural weathered stone.047",
+          "Procedural weathered stone.048",
+          "Procedural weathered stone.049",
+          "Procedural weathered stone.050",
+          "Procedural weathered stone.051",
+          "Procedural weathered stone.052",
+          "Procedural weathered stone.053",
+          "Procedural weathered stone.054",
+          "Procedural weathered stone.055",
+          "Procedural weathered stone.056",
+          "Procedural weathered stone.057",
+          "Procedural weathered stone.058",
+          "Procedural weathered stone.059"
+        ],
+        "changes": [
+          "60 existing rocks: triangulated fracture surfaces and asymmetrical flattened shapes",
+          "Original mountain ridge: authored layered rock texture/normal/roughness",
+          "Original river: dark desaturated matte water; no bright cyan sheen",
+          "Original ground atlas retained; added 2m repeat detail normal/roughness through a separate UV, ground geometry unchanged"
+        ],
+        "textureOrigin": "Project-authored 512px procedural PBR image rasters; not photos or newly downloaded assets",
+        "preservedMeshAndMaterialSignatures": {
+          "grass_medium_01_small_a_LOD0": "b79c0dd47399fbd018a82a1c5e87ca9d7ede6d0b4ba2d76959f2b747a4ae1d5a",
+          "grass_medium_01_small_a_LOD0.001": "b51837f64978e9a9b6f7ad0f6e7d90962a103f868abd096aa3b21eeb943d778b",
+          "grass_medium_01_small_a_LOD0.002": "102207b89009941bc8aef242914140a1ee259a481f1f171275a60dbd95962f60",
+          "grass_medium_01_small_a_LOD0.003": "93dc4c010b4b1ebe169fd405f0c38f5b43901ca6a41a80b3ad4d1f7f3592c0b8",
+          "grass_medium_01_small_a_LOD0.004": "7322968a1edd77f17019e3109448086ca3d3798a72d3552e655e2b42fcaf91ae",
+          "grass_medium_01_small_a_LOD0.005": "fc97448d9808bdb5defb34471d20e07bd15281a9bb420e4bf6d3818d1d376555",
+          "grass_medium_01_small_a_LOD0.006": "3d35882c0c505ddb503c7754b8b0ca2da4ecf34a416c43a2203497f9952a1e7e",
+          "grass_medium_01_small_a_LOD0.007": "f4b43dab47310681578e8c297e72070d1a1bba68e39ee01cbfc160a8fdb07b98",
+          "grass_medium_01_small_a_LOD0.008": "87774a2650b517a2d3f1f7827c231969276e779294f12e69694f1f86ffb670cc",
+          "grass_medium_01_small_a_LOD0.009": "fedd43a31a8fd44dc911fd424cd8a0c451187608b043f58dada738fbd8389cc1",
+          "grass_medium_01_small_a_LOD0.010": "ba07b925a98678fcb452c9d35b94112b76238f25df3b80b1eecca651f1502364",
+          "grass_medium_01_small_a_LOD0.011": "6a76b8fbf000387c449de55388662b38dca9d4b5f4cdceb1f32639922deb8916",
+          "grass_medium_01_small_a_LOD0.012": "261c46e4692ed0d477fcec43795adbf4ca79ed29520057a9764afbaf16a7f4e4",
+          "grass_medium_01_small_a_LOD0.013": "f4e657ed0302426bd01541c5ed89a7b83a68724b02825138eb85c56caf0f4f49",
+          "grass_medium_01_small_a_LOD0.014": "b4ae3fc0d2ae9d6575abff737c51aa476f1d767147c3a4fe23573ab772404c6f",
+          "grass_medium_01_small_a_LOD0.015": "001b361419b8f696731b550c2e2eb11d44ca625ebaf986837a4786d64bacd888",
+          "grass_medium_01_small_a_LOD0.016": "dd9e123a2bef47153410dfbad9ce3c350033bc6944947b11d425be03f84977d9",
+          "grass_medium_01_small_a_LOD0.017": "1f41b41e7df7da3a49f4deb3fd1aea8b7a8f2ec575274f9607ea7fee36879cbd",
+          "grass_medium_01_small_a_LOD0.018": "0013960cdd1ed08c2d0d95db548cc153be4c8ea3fec070e68eb2fe2a08d6f611",
+          "grass_medium_01_small_a_LOD0.019": "e7d5b67820598e103a3cb8947c707819e5314d542ecf5d1068c6c49249e1413e",
+          "grass_medium_01_small_a_LOD0.020": "660d6fe03809ce0cd393a584e31e0aa55de43271079f68ef1d26c2a676d6f629",
+          "grass_medium_01_small_a_LOD0.021": "ead3a6934ec1f10cabf306ba061aa9c1da3c081421b39c20be2138652b29602b",
+          "grass_medium_01_small_a_LOD0.022": "bf62eae8bf9db414e1e727cffbe27eafadad4c1a31a9475439549e9fef2e3099",
+          "grass_medium_01_small_a_LOD0.023": "c66b19c792c8c0091c71b2afcb5408665c763a26b57131233e79eae80134f07e",
+          "grass_medium_01_small_a_LOD0.024": "918c65cd8b3cea485c3f1b54e8a63d09fb66e059343ed7dde4d362d570140cea",
+          "grass_medium_01_small_a_LOD0.025": "15bc31ca68e2390fad4f029fe13a8af867a5f61f9156569f5e98e4d6ff03f323",
+          "grass_medium_01_small_a_LOD0.026": "315420290f3aa41557dd43ec4a87984290fe7a10ca0a72cc2e1c3aa49c11c292",
+          "grass_medium_01_small_a_LOD0.027": "b4f39d1b70a3e8d6d2dc5714fdb0fcd3addfc89e8c7075be495f6141854ff8e5",
+          "Non walkable landscape continuation": "b4e7ab95ec442f1738784d4709d91ef87ad9c0695af17fca8549ed65de08e647",
+          "shrub_01_a": "39562ebcbf018e0f7ec55c854eee6dfb3d01ef3bd0407935c8e0b5736750f4bd",
+          "shrub_01_a.001": "204ceb7aa869c7053e630ad9453032625612c126bb7f98a3921efd81cdb40e27",
+          "shrub_01_a.002": "d897e21808d2af0fb5f4ef58111eb38355207fefdbd8a6520701674c323429fe",
+          "shrub_01_a.003": "1123cbc789f99d16fc50c802f57f5caac3b5b3325a2779fa688b0318c6bcbcb3",
+          "shrub_01_a.004": "2a66c1473ee528ffd0f03b02a1e4d2ca8dacab271287ee040696f2874ac06874",
+          "shrub_01_a.005": "4bf9993975e13b0922adf6e5f6b0a99b676e0081c2b88558db84ebee1ffb235a",
+          "shrub_01_a.006": "b2f32b1587b77b47b2a67a62f1867312a938c179d86d8be6734249d933a1c4e5",
+          "shrub_01_a.007": "2f9dfd8b894978f5b2e9e694cd8e87eb832504b46fdf8dda0e1beca2a7e34c1e"
+        },
+        "preservedGroundGeometrySignatures": {
+          "Illustrative valley terrain": "1039dee38e94fbaecfb6e10f6381c1d5871fd1f16bbb9066cf51e12507e5c9fe"
+        },
+        "preservationScope": "Before/after Blender processing; re-export can re-encode original texture files",
+        "exportChecks": {
+          "nodes": 100,
+          "meshes": 66,
+          "embeddedImages": 15,
+          "refinedMaterials": [
+            {
+              "name": "Refined illustrative ridge - embedded PBR",
+              "baseColorTexture": {
+                "index": 1
+              },
+              "normalTexture": {
+                "index": 0,
+                "scale": 0.6499999761581421
+              },
+              "metallicRoughnessTexture": {
+                "index": 2
+              }
+            },
+            {
+              "name": "Refined illustrative ground - original atlas with 2m detail PBR",
+              "baseColorTexture": {
+                "index": 7
+              },
+              "normalTexture": {
+                "index": 6,
+                "scale": 0.699999988079071,
+                "texCoord": 1
+              },
+              "metallicRoughnessTexture": {
+                "index": 8,
+                "texCoord": 1
+              }
+            },
+            {
+              "name": "Refined illustrative rock - embedded PBR",
+              "baseColorTexture": {
+                "index": 10
+              },
+              "normalTexture": {
+                "index": 9,
+                "scale": 0.6499999761581421
+              },
+              "metallicRoughnessTexture": {
+                "index": 11
+              }
+            }
+          ]
+        }
+      },
+      "generationEvidence": "procedural_manifest_and_delivered_hash",
+      "status": "illustrative",
+      "rights": "原创Blender地形与Poly Haven CC0材质/植被，实际来源见source-evidence.json",
+      "historicalStatus": "illustrative environment, not historical reconstruction",
       "conversion": {
-        "operation": "translate bottom-center to origin; geometry preserved",
+        "operation": "translate bottom-center to origin; uniform display scale; meshes and textures preserved",
         "offset": [
           0,
-          -0.4351299212744948,
+          -0.4515402317047119,
           0
-        ]
-      },
-      "status": "illustrative",
-      "source": "environment.glb"
+        ],
+        "scale": 1,
+        "targetHeightM": null
+      }
     },
     {
       "assetId": "asset-envoy",
       "path": "assets/asset-envoy.glb",
-      "bytes": 1959616,
-      "sha256": "d4266180a9f0b7ca677d70faa95c2972953be4ffe719fd52bf11f938cd415df4",
+      "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+      "bytes": 1959632,
       "inputSha256": "74277e7f5b769f92a608fec1b77ad928415155b37d08d07a1c843382a0f8ea26",
       "rawSha256": "3745bb6ed4decbf9f11eb3961f7049294de4d1436ede9fe78b5572f23553086b",
+      "source": "viewer/public/yuezhi/figures/envoy.glb",
+      "collectionPath": "assets/input/asset-envoy.glb",
       "provider": "Tripo text-to-model v3.1-20260211",
       "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf",
       "creditsConsumed": 20,
+      "requestDigest": null,
+      "promptSha256": null,
+      "model": null,
+      "appearanceSourceIds": [],
+      "tool": "5.2.0 LTS",
       "sourceConversion": {
         "blenderVersion": "5.2.0 LTS",
         "scale": 1.7,
@@ -61,27 +256,38 @@
         "frontAxis": "glTF +Z",
         "yawDegrees": -90
       },
+      "generationEvidence": "saved_task_metadata_and_delivered_hash",
+      "status": "illustrative",
+      "rights": "Tripo账户条款下生成的示意资产；公开使用许可待确认",
+      "historicalStatus": "AI-generated illustrative visitor; no claim of authentic face or clothing",
       "conversion": {
-        "operation": "translate bottom-center to origin; geometry preserved",
+        "operation": "translate bottom-center to origin; uniform display scale; meshes and textures preserved",
         "offset": [
           -6.846093386636554e-9,
           0,
           -1.8059668344116986e-9
-        ]
-      },
-      "status": "illustrative",
-      "source": "figures/envoy.glb"
+        ],
+        "scale": 1,
+        "targetHeightM": null
+      }
     },
     {
       "assetId": "asset-representative",
       "path": "assets/asset-representative.glb",
-      "bytes": 1939684,
-      "sha256": "306fc0a601fa65bb9d1486a815fd2b14ec93cd63448a8e0c409c8e1ab99ad3e7",
+      "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+      "bytes": 1939700,
       "inputSha256": "5051979679573bec5b1c4805480698de04654dea3d2ba221c708223e795411fa",
       "rawSha256": "31f7aa5010fc524b823cd98083f92e7b2c722619b4fa0a4eb90b9756c21f9b9d",
+      "source": "viewer/public/yuezhi/figures/yuezhi.glb",
+      "collectionPath": "assets/input/asset-representative.glb",
       "provider": "Tripo text-to-model v3.1-20260211",
       "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb",
       "creditsConsumed": 20,
+      "requestDigest": null,
+      "promptSha256": null,
+      "model": null,
+      "appearanceSourceIds": [],
+      "tool": "5.2.0 LTS",
       "sourceConversion": {
         "blenderVersion": "5.2.0 LTS",
         "scale": 1.7,
@@ -103,85 +309,626 @@
         "frontAxis": "glTF +Z",
         "yawDegrees": 0
       },
+      "generationEvidence": "saved_task_metadata_and_delivered_hash",
+      "status": "illustrative",
+      "rights": "Tripo账户条款下生成的示意资产；公开使用许可待确认",
+      "historicalStatus": "AI-generated illustrative visitor; no claim of authentic face or clothing",
       "conversion": {
-        "operation": "translate bottom-center to origin; geometry preserved",
+        "operation": "translate bottom-center to origin; uniform display scale; meshes and textures preserved",
         "offset": [
           0,
           0,
           0
-        ]
-      },
-      "status": "illustrative",
-      "source": "figures/yuezhi.glb"
+        ],
+        "scale": 1,
+        "targetHeightM": null
+      }
     },
     {
       "assetId": "asset-staff",
       "path": "assets/asset-staff.glb",
-      "bytes": 28984,
-      "sha256": "4484a2a14f86bee0458b05912370515b57e2e0feac27a8415f73183b63f69649",
+      "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+      "bytes": 29000,
       "inputSha256": "7ee3975984333e3eb341ee9e24cd587a18d77884641b6c3704037a2e533c5bdb",
       "rawSha256": null,
+      "source": "viewer/public/yuezhi/figures/han-staff.glb",
+      "collectionPath": "assets/input/asset-staff.glb",
       "provider": "procedural illustrative Blender pole",
       "taskId": null,
       "creditsConsumed": 0,
+      "requestDigest": null,
+      "promptSha256": null,
+      "model": null,
+      "appearanceSourceIds": [],
+      "tool": null,
       "sourceConversion": null,
+      "generationEvidence": "procedural_manifest_and_delivered_hash",
+      "status": "illustrative",
+      "rights": "项目原创Blender示意资产；形制与布局不指认历史现场",
+      "historicalStatus": "Text attests possession of Han staff; external appearance unknown. Plain pole is a placeholder, not reconstruction.",
       "conversion": {
-        "operation": "translate bottom-center to origin; geometry preserved",
+        "operation": "translate bottom-center to origin; uniform display scale; meshes and textures preserved",
         "offset": [
           0.00001459568738937378,
           0.03025524690747261,
           -0.0001929132267832756
-        ]
-      },
+        ],
+        "scale": 1,
+        "targetHeightM": null
+      }
+    },
+    {
+      "assetId": "asset-mural-horse",
+      "path": "assets/asset-mural-horse.glb",
+      "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+      "bytes": 5612548,
+      "inputSha256": "638f54e5d1016617d48871c295a7719706f4f0c8aac1600d6bc816a8bb167f35",
+      "rawSha256": null,
+      "source": "viewer/public/yuezhi/murals/mural-horse.glb",
+      "collectionPath": "assets/input/asset-mural-horse.glb",
+      "provider": "Tripo text-to-model v3.1-20260211",
+      "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b",
+      "creditsConsumed": 20,
+      "requestDigest": null,
+      "promptSha256": null,
+      "model": null,
+      "appearanceSourceIds": [],
+      "tool": null,
+      "sourceConversion": null,
+      "generationEvidence": "saved_task_metadata_and_delivered_hash",
       "status": "illustrative",
-      "source": "figures/han-staff.glb"
+      "rights": "Tripo账户条款下生成的示意资产；公开使用许可待确认",
+      "historicalStatus": "Artistic mural-inspired study; not archaeological reconstruction",
+      "conversion": {
+        "operation": "translate bottom-center to origin; uniform display scale; meshes and textures preserved",
+        "offset": [
+          0,
+          -0.42396605014801025,
+          0
+        ],
+        "scale": 1.8869435411649425,
+        "targetHeightM": 1.6
+      }
+    },
+    {
+      "assetId": "asset-xiongnu",
+      "path": "assets/asset-xiongnu.glb",
+      "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+      "bytes": 4198644,
+      "inputSha256": "1802a80083cd118295717f6e405a5bc98b99a48406dd2074c1a580c7a591f47f",
+      "rawSha256": "39eb65f9443ae5e0242aedd2bde06c265c4394c3656f7419fce0bd94b74811e1",
+      "source": "viewer/public/yuezhi/figures/xiongnu.glb",
+      "collectionPath": "assets/input/asset-xiongnu.glb",
+      "provider": "Tripo text-to-model v3.1-20260211",
+      "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27",
+      "creditsConsumed": 30,
+      "requestDigest": "84ef41faf7b75efe9a02f9536b5df4f3eb407d870f09aa1b335d1b03a8a40089",
+      "promptSha256": "e62d54b9a4b49b763f56c3152ebdde0115a475b53eb03063135d3284a535c23b",
+      "model": "v3.1-20260211",
+      "appearanceSourceIds": [
+        "xiongnu-belt-met",
+        "xiongnu-cap-yaloman",
+        "xiongnu-robe-noinula",
+        "xiongnu-boots-noinula"
+      ],
+      "tool": "4.5.14 LTS",
+      "sourceConversion": {
+        "blenderVersion": "4.5.14 LTS",
+        "scale": 1.72,
+        "yawDegrees": -90,
+        "rawBoundsBlenderZUp": {
+          "min": [
+            -0.1294851154088974,
+            -0.49628114700317383,
+            -0.5
+          ],
+          "max": [
+            0.1294851154088974,
+            0.49628114700317383,
+            0.5
+          ]
+        },
+        "texturesMaxPixels": 2048,
+        "coordinateSystem": "glTF Y up",
+        "origin": "feet on ground",
+        "frontAxis": "glTF +Z; visually checked",
+        "poseCorrection": {
+          "method": "Blender local arm deformation preserving UVs; static pose, not skeletal animation",
+          "shoulderAngleDegrees": 65,
+          "verticesAffected": 5748
+        }
+      },
+      "generationEvidence": "saved_task_metadata_and_delivered_hash",
+      "status": "illustrative",
+      "rights": "Tripo账户条款下生成的示意资产；公开使用许可待确认",
+      "historicalStatus": "Cross-source interpretive reconstruction; anonymous character, not an attested portrait or uniform",
+      "conversion": {
+        "operation": "translate bottom-center to origin; uniform display scale; meshes and textures preserved",
+        "offset": [
+          -0.0008572787046432495,
+          0,
+          7.450580596923828e-9
+        ],
+        "scale": 1,
+        "targetHeightM": null
+      }
     },
     {
       "assetId": "asset-meeting",
       "path": "assets/asset-meeting.glb",
-      "bytes": 228908,
-      "sha256": "8a7041072cefbc2d44b5a86ad3aed8140c6e525b5e4e628625713b06de3a0ee9",
-      "inputSha256": "a099b30921cdaedf43fad7648103f3afe8f27e839d43722613733b0035bdac04",
-      "provider": "Blender authored illustrative story set",
-      "tool": "5.2.0 LTS",
+      "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+      "bytes": 2786288,
+      "inputSha256": "4624bcec210da9e5b2315b7905bb679223bf2c5a4b5a2479a71a4d74e23fa1e6",
+      "rawSha256": null,
+      "source": "viewer/public/yuezhi/sets/meeting-refined.glb",
+      "collectionPath": "assets/input/asset-meeting.glb",
+      "provider": "Blender authored illustrative geometry",
       "taskId": null,
       "creditsConsumed": 0,
+      "requestDigest": null,
+      "promptSha256": null,
+      "model": null,
+      "appearanceSourceIds": [],
+      "tool": "4.5.14 LTS",
+      "sourceConversion": {
+        "upstreamFile": "meeting.glb",
+        "upstreamSha256": "a099b30921cdaedf43fad7648103f3afe8f27e839d43722613733b0035bdac04",
+        "upstreamBytes": 228812,
+        "upstreamTool": "5.2.0 LTS",
+        "script": "scripts/refine-yuezhi-environment.py --sets",
+        "scriptSha256": "7087983fa473797579c06fe97d791443c0e9d85747bc29d796c6bbcb9b007ad0",
+        "seed": 20261001,
+        "editedMaterials": [
+          {
+            "object": "Courtyard floor",
+            "material": "earth"
+          },
+          {
+            "object": "Entry lintel",
+            "material": "wood"
+          },
+          {
+            "object": "Light roof covering",
+            "material": "plaster"
+          },
+          {
+            "object": "Plain reception bench",
+            "material": "wood"
+          },
+          {
+            "object": "Portico roof beam",
+            "material": "wood"
+          },
+          {
+            "object": "Portico roof beam.001",
+            "material": "wood"
+          },
+          {
+            "object": "Portico roof beam.002",
+            "material": "wood"
+          },
+          {
+            "object": "Portico roof beam.003",
+            "material": "wood"
+          },
+          {
+            "object": "Portico roof beam.004",
+            "material": "wood"
+          },
+          {
+            "object": "Portico roof beam.005",
+            "material": "wood"
+          },
+          {
+            "object": "Portico timber",
+            "material": "wood"
+          },
+          {
+            "object": "Portico timber.001",
+            "material": "wood"
+          },
+          {
+            "object": "Pot neck",
+            "material": "wood"
+          },
+          {
+            "object": "Pot neck.001",
+            "material": "wood"
+          },
+          {
+            "object": "Reception wall left",
+            "material": "plaster"
+          },
+          {
+            "object": "Reception wall right",
+            "material": "plaster"
+          },
+          {
+            "object": "Shadowed inner wall",
+            "material": "plaster"
+          },
+          {
+            "object": "Timber crossbeam",
+            "material": "wood"
+          }
+        ],
+        "geometryModified": false,
+        "preservedGeometrySignatures": {
+          "Courtyard floor": "c2e80e5ff2d7846a19b618af9da595ba6916beabcfc9419812053fe1ac296fd5",
+          "Entry lintel": "582e4ba266024330d75ec7ade8aae369036d11ececddfcd4cbfaf264a62bd99d",
+          "Light roof covering": "6b93a514a5dd1472e2927142f94d9fbc8d33864a882b688f853eee7a0639630b",
+          "Plain reception bench": "ddf10999636a4b07476994197b3c003a22dd25f6b5e1a4d1a33a7a7d15827df2",
+          "Portico roof beam": "cad92f3dee7d436eca8ead3f91e3ccddf57fa7486e17541ee704490379796164",
+          "Portico roof beam.001": "1ca0d9ad18158cc48cf24c8ef7f71534ce3b74c1177054593ad18df231f8cab6",
+          "Portico roof beam.002": "f81d14b7824a26bc6618b74e25de6dc83bc16282cddffef5790119ccaa8e5d6b",
+          "Portico roof beam.003": "584891e4cc1e73478429518ab7ca733356983bd4a43b56dbbc48b3beed5fb59e",
+          "Portico roof beam.004": "c8d70413508ad8f334b142e57340e0e73a80d63e9dea0b83564497d0ad3a398d",
+          "Portico roof beam.005": "2f126202b24040bc588c6418234a383f6e3e10ad853267c5fb7d34c0e6dfe901",
+          "Portico timber": "52878c086ad2259d68689195be7136977c98109cd638100b5129a2cea31c2cf5",
+          "Portico timber.001": "0d83356dbd1ec45df040936e0282e4f0aec5ebf84e4e15267db97808e7646b73",
+          "Pot neck": "de32b65f1d1d0c09f23f48c630a88ec7f57adbc58137ac5ab3917b132272e9b3",
+          "Pot neck.001": "7e60033131ed328b43ed320005ae7ba7e6248a4a16c78c46d64b38f3b27fef0b",
+          "Reception wall left": "17350dd32102612ef0334104dfe4b2d568b7361ee898c837cda4456d15a07c01",
+          "Reception wall right": "4cad978ca3b8ff61cdf17caa3855cd2ff0622c7eee01c6b639567ef58a01b008",
+          "Shadowed inner wall": "720b2aa409de192756c15cd4cc49a69b445b675fd44e45c444e5ab187f814c31",
+          "Sphere": "de4c23887d49fded1ad6134cc1b2ec8144104d44311de0fb3414dd02322dbb9f",
+          "Sphere.001": "df56f63e5d2258f6a2155a75ee2e202036a110f37742400dfea72dc816f550a1",
+          "Timber crossbeam": "3b8ca3a5776ce03722a4473457d327cd67deef702666d1865fa04a2cf6d738a3"
+        },
+        "surfaceUv": {
+          "earthTileM": 1.5,
+          "plasterTileM": 1,
+          "projection": "World-metre dominant-face box projection; timber and cloth keep smart UV"
+        },
+        "textureOrigin": "Project-authored procedural PBR rasters; earth/plaster use isotropic multiscale noise; not photographic or downloaded textures",
+        "exportChecks": {
+          "nodes": 20,
+          "meshes": 20,
+          "embeddedImages": 9,
+          "refinedMaterials": [
+            {
+              "name": "Refined illustrative earth - embedded PBR",
+              "baseColorTexture": {
+                "index": 1
+              },
+              "normalTexture": {
+                "index": 0,
+                "scale": 0.6499999761581421
+              },
+              "metallicRoughnessTexture": {
+                "index": 2
+              }
+            },
+            {
+              "name": "Refined illustrative wood - embedded PBR",
+              "baseColorTexture": {
+                "index": 4
+              },
+              "normalTexture": {
+                "index": 3,
+                "scale": 0.6499999761581421
+              },
+              "metallicRoughnessTexture": {
+                "index": 5
+              }
+            },
+            {
+              "name": "Refined illustrative plaster - embedded PBR",
+              "baseColorTexture": {
+                "index": 7
+              },
+              "normalTexture": {
+                "index": 6,
+                "scale": 0.6499999761581421
+              },
+              "metallicRoughnessTexture": {
+                "index": 8
+              }
+            }
+          ]
+        }
+      },
+      "generationEvidence": "procedural_manifest_and_delivered_hash",
+      "status": "illustrative",
+      "rights": "项目原创Blender示意资产；形制与布局不指认历史现场",
+      "historicalStatus": "illustrative architecture and props; unknown historical location and form",
       "conversion": {
-        "operation": "translate bottom-center to origin",
+        "operation": "translate bottom-center to origin; uniform display scale; meshes and textures preserved",
         "offset": [
           0,
           -0.18000000715255737,
           0
-        ]
-      },
-      "status": "illustrative",
-      "source": "sets/meeting.glb"
+        ],
+        "scale": 1,
+        "targetHeightM": null
+      }
     },
     {
       "assetId": "asset-market",
       "path": "assets/asset-market.glb",
-      "bytes": 488156,
-      "sha256": "37395ddc315339f660191a0b39eff5e989c99d6412dc774be85e378b5c4e1f2c",
-      "inputSha256": "af78f80a4928f3425c0ee1bf5261c05f3a4be9e97a517870bff2be482f72a31e",
-      "provider": "Blender authored illustrative story set",
-      "tool": "5.2.0 LTS",
+      "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+      "bytes": 3364228,
+      "inputSha256": "3690fdef841e35d5370bc74a333092a9a875a89b60521be861fe017423cff542",
+      "rawSha256": null,
+      "source": "viewer/public/yuezhi/sets/market-refined.glb",
+      "collectionPath": "assets/input/asset-market.glb",
+      "provider": "Blender authored illustrative geometry",
       "taskId": null,
       "creditsConsumed": 0,
+      "requestDigest": null,
+      "promptSha256": null,
+      "model": null,
+      "appearanceSourceIds": [],
+      "tool": "4.5.14 LTS",
+      "sourceConversion": {
+        "upstreamFile": "market.glb",
+        "upstreamSha256": "af78f80a4928f3425c0ee1bf5261c05f3a4be9e97a517870bff2be482f72a31e",
+        "upstreamBytes": 488060,
+        "upstreamTool": "5.2.0 LTS",
+        "script": "scripts/refine-yuezhi-environment.py --sets",
+        "scriptSha256": "7087983fa473797579c06fe97d791443c0e9d85747bc29d796c6bbcb9b007ad0",
+        "seed": 20261001,
+        "editedMaterials": [
+          {
+            "object": "Canopy",
+            "material": "cloth"
+          },
+          {
+            "object": "Canopy.001",
+            "material": "cloth"
+          },
+          {
+            "object": "Doorway timber",
+            "material": "wood"
+          },
+          {
+            "object": "Doorway timber.001",
+            "material": "wood"
+          },
+          {
+            "object": "Doorway timber.002",
+            "material": "wood"
+          },
+          {
+            "object": "Doorway timber.003",
+            "material": "wood"
+          },
+          {
+            "object": "Goods table",
+            "material": "wood"
+          },
+          {
+            "object": "Goods table legs",
+            "material": "wood"
+          },
+          {
+            "object": "Goods table legs.001",
+            "material": "wood"
+          },
+          {
+            "object": "Low market wall",
+            "material": "plaster"
+          },
+          {
+            "object": "Low market wall.001",
+            "material": "plaster"
+          },
+          {
+            "object": "Market courtyard",
+            "material": "earth"
+          },
+          {
+            "object": "Plain Shu cloth - fibre and weave unknown",
+            "material": "cloth"
+          },
+          {
+            "object": "Pot neck",
+            "material": "wood"
+          },
+          {
+            "object": "Pot neck.001",
+            "material": "wood"
+          },
+          {
+            "object": "Pot neck.002",
+            "material": "wood"
+          },
+          {
+            "object": "Pot neck.003",
+            "material": "wood"
+          },
+          {
+            "object": "Pot neck.004",
+            "material": "wood"
+          },
+          {
+            "object": "Pot neck.005",
+            "material": "wood"
+          },
+          {
+            "object": "Side facade",
+            "material": "plaster"
+          },
+          {
+            "object": "Side facade.001",
+            "material": "plaster"
+          },
+          {
+            "object": "Stall canopy posts",
+            "material": "wood"
+          },
+          {
+            "object": "Stall canopy posts.001",
+            "material": "wood"
+          },
+          {
+            "object": "Stall canopy posts.002",
+            "material": "wood"
+          },
+          {
+            "object": "Stall canopy posts.003",
+            "material": "wood"
+          },
+          {
+            "object": "Table legs",
+            "material": "wood"
+          },
+          {
+            "object": "Table legs.001",
+            "material": "wood"
+          },
+          {
+            "object": "Table legs.002",
+            "material": "wood"
+          },
+          {
+            "object": "Table legs.003",
+            "material": "wood"
+          },
+          {
+            "object": "Trading table",
+            "material": "wood"
+          },
+          {
+            "object": "Trading table.001",
+            "material": "wood"
+          }
+        ],
+        "geometryModified": false,
+        "preservedGeometrySignatures": {
+          "Canopy": "c71a7d6f98fa6c96d9d6d27da3d0ba589d69bcc15a4f8e14cd0b2df521b0bdf0",
+          "Canopy.001": "e4396e698d6d29e805427c188a0dcfbde5367708844e748f6de47b7b4db884c2",
+          "Cylinder": "9c8441ab2b9f66f3182db738c04088af8f9f511a9376f8481fcd65144b6c0521",
+          "Cylinder.001": "fb44d6160c80ff22e379409ec9e0ada95a796d911de2cb7128d291f9ffb111bb",
+          "Doorway timber": "f31f837107046d8fd2dc6275320d0f1e00d6fc8a9e7a1083d6a9ab15b193d3e1",
+          "Doorway timber.001": "9d33531e2a85db8041ff8e93f65eeccd4306243207079ad552f42abaea1a274c",
+          "Doorway timber.002": "f8c3d51d61acd123b76f5d62a66d8577ffccaa5909d90a2e30bc971ccc7ecab3",
+          "Doorway timber.003": "eebfce35c9291a644f4ac347706110ec44287de67bde674a7801ccd95afa46b5",
+          "Goods table": "f830c76c69f18c022319b127ee68cf5eb695a071baf5c8f5e6e84b78e799ff2a",
+          "Goods table legs": "368f21daf80a33ec3d047925f11ea2cb913dd18629e2d51f53505c65de826d1c",
+          "Goods table legs.001": "0a4324c28e8bf2673500af92630929e30046a77a0b4f681a3e3959dac63ac607",
+          "Low market wall": "aa281c343082c2a2596892ee4c05adddeb61980a57fcd02d903dc5bb837bd310",
+          "Low market wall.001": "49f9cf86c417f0ee9e2858d7a71f765676761bf0113b786ee96cb53fc63f20cb",
+          "Market courtyard": "8d3f06c9928187ef0279ec2df0e7d7386013bfee06ad57b26ddda654cd084fbc",
+          "Plain Shu cloth - fibre and weave unknown": "f91538fdb970055e085d94aa3d1bf34d555987e9f0396e8c56e2a60cf41eaf25",
+          "Pot neck": "095c060e26c5a5aa858d6301341a47d140f85357b909412e5a6624a4dd1313cb",
+          "Pot neck.001": "7e60033131ed328b43ed320005ae7ba7e6248a4a16c78c46d64b38f3b27fef0b",
+          "Pot neck.002": "75b1670c6e99dea28b0fd140b9ea482d2b467d77e22c9207a4bb9737eff9b819",
+          "Pot neck.003": "362ab6debc158e9544fa810017c2941fed1338021e27e24a1a349875c525284d",
+          "Pot neck.004": "feabb96e0b3e1e978ab49dc78e3a63ea185d6a625acde2f858986d551a66a617",
+          "Pot neck.005": "03fcd8f1b385a4b983d615a6001200f67004618fe819e3eb222f25fcf8909ef6",
+          "Side facade": "08164f8cade577e090a30e7ce54a6b9d34998ca7be9439c1044ef1b0b628a31f",
+          "Side facade.001": "4b8803a818f8d1612a32fc53aa4da56a80ade796ed16de58e36200614df4946a",
+          "Sphere": "fd8582cfbb1e3aa58f3af1b5fdeb247d8b6e36f494d6b0ab3e30181d07f29089",
+          "Sphere.001": "cadd5b7dd252fceeefc6adf51907d351bbd0cc225c7fb42ae35b86a462e9c0fb",
+          "Sphere.002": "b7bfcd0f297b8a01e54cebcc3297e2478ae95766caa778f0f8e55f3a457494ca",
+          "Sphere.003": "fad896aef573e53548b35d01e23b916f3287deff2b33a1d9f473a859b24aa6fa",
+          "Sphere.004": "91731e34561aa0b6edfa5514138c74f3b3e76202682ab2d67b1741a6c6eb8a27",
+          "Sphere.005": "d3f93b7e4d5d669c2f4de3d533a1980b0f511cce3e29233c36e6fdf0343e8a8c",
+          "Stall canopy posts": "247c101728c022cd41fa5943ee593bc2f5c9f4d1ee60976db081b99c02400074",
+          "Stall canopy posts.001": "f43d1e23d01963d91be3bb8ff848b926ca0b01fc9a3f43ace32646cf541a0ab3",
+          "Stall canopy posts.002": "6de65559522bf1b2af2da3a78fc03867c03a8a1b4c6ad4c38ad696919f718e53",
+          "Stall canopy posts.003": "137d8c92dbb9889f26369576d78524a4f517e47ff88785660711e79d67fa8636",
+          "Table legs": "08f1791f5041fc76ff9c46680c5348032aaa63dd99409ae0dd89ccd3725258c6",
+          "Table legs.001": "73ad8cd1b62f4c4ef4b26ef420dc2a35cc0e5bffb4266328e70b4ea8d0f87d8e",
+          "Table legs.002": "fb3e063abff78212cf845033a75f0e5309d0546c7bc3de7c0aa1a200d74af093",
+          "Table legs.003": "245d0f5ce65e54a9f08ea5d179daa88dae78a8806fd757584b97a87e72cc07bc",
+          "Torus": "aeb1fc452645d21b3819eee927a65e7a9d7c8d44beaf7586e4935e1974f3f36a",
+          "Torus.001": "57d5d257420619d2d398dd32e0fbd6f2cb4b1bda69b5b76404d3ac3ead728e3f",
+          "Torus.002": "8cbe8e1fa473170a1cac7e4e2a946d9318afae365a62a61f030e8e0f3c68a387",
+          "Torus.003": "83bea69979d74a26d392127f6fbb036a4efd602b2b63e154daf417c7d6865657",
+          "Torus.004": "603bc12515b83d4738df0139f11a73d7a1cf34fe204daf6354c91255e70f2256",
+          "Torus.005": "371b4a819bb0ca11b79430d467930e688ceae381423916ad19b1c760306c3ee7",
+          "Torus.006": "741dad377c243bd00082fe55c3cb966e406024d6df9133edc10fcee7ac8f8f60",
+          "Torus.007": "3a3457f282ba4fb27ca5078ea260b3f6eb1461dac42031b98d71ddb605968329",
+          "Trading table": "af0924cb4b0930ed65fa166b1449d45a07daf9926de3cfbdc8e94f5726f9e170",
+          "Trading table.001": "b79cd2ac9fde5f6509b34c22051a20fd3d794436322828093e592dc1f3fe21a1"
+        },
+        "surfaceUv": {
+          "earthTileM": 1.5,
+          "plasterTileM": 1,
+          "projection": "World-metre dominant-face box projection; timber and cloth keep smart UV"
+        },
+        "textureOrigin": "Project-authored procedural PBR rasters; earth/plaster use isotropic multiscale noise; not photographic or downloaded textures",
+        "exportChecks": {
+          "nodes": 47,
+          "meshes": 47,
+          "embeddedImages": 12,
+          "refinedMaterials": [
+            {
+              "name": "Refined illustrative cloth - embedded PBR",
+              "baseColorTexture": {
+                "index": 1
+              },
+              "normalTexture": {
+                "index": 0,
+                "scale": 0.6499999761581421
+              },
+              "metallicRoughnessTexture": {
+                "index": 2
+              }
+            },
+            {
+              "name": "Refined illustrative wood - embedded PBR.001",
+              "baseColorTexture": {
+                "index": 4
+              },
+              "normalTexture": {
+                "index": 3,
+                "scale": 0.6499999761581421
+              },
+              "metallicRoughnessTexture": {
+                "index": 5
+              }
+            },
+            {
+              "name": "Refined illustrative plaster - embedded PBR.001",
+              "baseColorTexture": {
+                "index": 7
+              },
+              "normalTexture": {
+                "index": 6,
+                "scale": 0.6499999761581421
+              },
+              "metallicRoughnessTexture": {
+                "index": 8
+              }
+            },
+            {
+              "name": "Refined illustrative earth - embedded PBR.001",
+              "baseColorTexture": {
+                "index": 10
+              },
+              "normalTexture": {
+                "index": 9,
+                "scale": 0.6499999761581421
+              },
+              "metallicRoughnessTexture": {
+                "index": 11
+              }
+            }
+          ]
+        }
+      },
+      "generationEvidence": "procedural_manifest_and_delivered_hash",
+      "status": "illustrative",
+      "rights": "项目原创Blender示意资产；形制与布局不指认历史现场",
+      "historicalStatus": "illustrative architecture and props; unknown historical location and form",
       "conversion": {
-        "operation": "translate bottom-center to origin",
+        "operation": "translate bottom-center to origin; uniform display scale; meshes and textures preserved",
         "offset": [
           0,
           -0.1599999964237213,
           0
-        ]
-      },
-      "status": "illustrative",
-      "source": "sets/market.glb"
+        ],
+        "scale": 1,
+        "targetHeightM": null
+      }
     }
   ],
   "environment": {
     "historicalStatus": "illustrative landscape; geography and meeting layout not asserted as historical facts",
-    "blenderVersion": "5.2.0 LTS",
+    "blenderVersion": "4.5.14 LTS",
     "unit": "meter",
     "upAxis": "Y",
     "centralWalkableHeight": 0,
@@ -224,14 +971,14 @@
       }
     ],
     "visualNote": "Baked real meadow/earth atlas and decimated photographed plant meshes; illustrative geography",
-    "geometrySource": "Procedural Blender terrain, river, ridges and stones; Poly Haven natural grass and shrub meshes",
-    "sha256": "92c1f8b4f825726f033d4f3d844b92078efc421ffa2dba18dfed2274b906fcf3",
-    "bytes": 7431064,
-    "triangles": 107008,
+    "geometrySource": "Procedural Blender terrain, river, ridges and stones; Poly Haven natural grass and shrub meshes; original rocks refined with authored fracture geometry",
+    "sha256": "2956955061a5278a293320c598719c175e74c28133aa8a2785e4652760db2832",
+    "bytes": 11547972,
+    "triangles": 121408,
     "bounds": {
       "min": [
         -90,
-        -0.43512991070747375,
+        -0.4515402317047119,
         -90
       ],
       "max": [
@@ -251,6 +998,181 @@
       "shrub_01/textures/shrub_01_arm_1k.jpg": "8faecdc28d8f03ba0ac139be16e617e8bfd0778780ec1d7850812230378b89be",
       "shrub_01/textures/shrub_01_diff_1k.jpg": "fe60e639d694e1807c0a3ae97dd1d5a7e7b3f84e5fc32d0610b868ce48f36331",
       "shrub_01/textures/shrub_01_nor_gl_1k.jpg": "076870a39a4e21a364cf94566e6dd1852a29045fdf1f23393637235b19d1c2e8"
+    },
+    "file": "environment-refined.glb",
+    "refinement": {
+      "upstreamFile": "environment.glb",
+      "upstreamSha256": "92c1f8b4f825726f033d4f3d844b92078efc421ffa2dba18dfed2274b906fcf3",
+      "upstreamBytes": 7431064,
+      "upstreamManifest": "environment-manifest.json",
+      "upstreamTool": "5.2.0 LTS",
+      "tool": "Blender 4.5.14 LTS",
+      "script": "scripts/refine-yuezhi-environment.py",
+      "scriptSha256": "7087983fa473797579c06fe97d791443c0e9d85747bc29d796c6bbcb9b007ad0",
+      "seed": 20261001,
+      "editedObjects": [
+        "Distant illustrative mountain ridge",
+        "Illustrative river ribbon",
+        "Illustrative valley terrain",
+        "Procedural weathered stone",
+        "Procedural weathered stone.001",
+        "Procedural weathered stone.002",
+        "Procedural weathered stone.003",
+        "Procedural weathered stone.004",
+        "Procedural weathered stone.005",
+        "Procedural weathered stone.006",
+        "Procedural weathered stone.007",
+        "Procedural weathered stone.008",
+        "Procedural weathered stone.009",
+        "Procedural weathered stone.010",
+        "Procedural weathered stone.011",
+        "Procedural weathered stone.012",
+        "Procedural weathered stone.013",
+        "Procedural weathered stone.014",
+        "Procedural weathered stone.015",
+        "Procedural weathered stone.016",
+        "Procedural weathered stone.017",
+        "Procedural weathered stone.018",
+        "Procedural weathered stone.019",
+        "Procedural weathered stone.020",
+        "Procedural weathered stone.021",
+        "Procedural weathered stone.022",
+        "Procedural weathered stone.023",
+        "Procedural weathered stone.024",
+        "Procedural weathered stone.025",
+        "Procedural weathered stone.026",
+        "Procedural weathered stone.027",
+        "Procedural weathered stone.028",
+        "Procedural weathered stone.029",
+        "Procedural weathered stone.030",
+        "Procedural weathered stone.031",
+        "Procedural weathered stone.032",
+        "Procedural weathered stone.033",
+        "Procedural weathered stone.034",
+        "Procedural weathered stone.035",
+        "Procedural weathered stone.036",
+        "Procedural weathered stone.037",
+        "Procedural weathered stone.038",
+        "Procedural weathered stone.039",
+        "Procedural weathered stone.040",
+        "Procedural weathered stone.041",
+        "Procedural weathered stone.042",
+        "Procedural weathered stone.043",
+        "Procedural weathered stone.044",
+        "Procedural weathered stone.045",
+        "Procedural weathered stone.046",
+        "Procedural weathered stone.047",
+        "Procedural weathered stone.048",
+        "Procedural weathered stone.049",
+        "Procedural weathered stone.050",
+        "Procedural weathered stone.051",
+        "Procedural weathered stone.052",
+        "Procedural weathered stone.053",
+        "Procedural weathered stone.054",
+        "Procedural weathered stone.055",
+        "Procedural weathered stone.056",
+        "Procedural weathered stone.057",
+        "Procedural weathered stone.058",
+        "Procedural weathered stone.059"
+      ],
+      "changes": [
+        "60 existing rocks: triangulated fracture surfaces and asymmetrical flattened shapes",
+        "Original mountain ridge: authored layered rock texture/normal/roughness",
+        "Original river: dark desaturated matte water; no bright cyan sheen",
+        "Original ground atlas retained; added 2m repeat detail normal/roughness through a separate UV, ground geometry unchanged"
+      ],
+      "textureOrigin": "Project-authored 512px procedural PBR image rasters; not photos or newly downloaded assets",
+      "preservedMeshAndMaterialSignatures": {
+        "grass_medium_01_small_a_LOD0": "b79c0dd47399fbd018a82a1c5e87ca9d7ede6d0b4ba2d76959f2b747a4ae1d5a",
+        "grass_medium_01_small_a_LOD0.001": "b51837f64978e9a9b6f7ad0f6e7d90962a103f868abd096aa3b21eeb943d778b",
+        "grass_medium_01_small_a_LOD0.002": "102207b89009941bc8aef242914140a1ee259a481f1f171275a60dbd95962f60",
+        "grass_medium_01_small_a_LOD0.003": "93dc4c010b4b1ebe169fd405f0c38f5b43901ca6a41a80b3ad4d1f7f3592c0b8",
+        "grass_medium_01_small_a_LOD0.004": "7322968a1edd77f17019e3109448086ca3d3798a72d3552e655e2b42fcaf91ae",
+        "grass_medium_01_small_a_LOD0.005": "fc97448d9808bdb5defb34471d20e07bd15281a9bb420e4bf6d3818d1d376555",
+        "grass_medium_01_small_a_LOD0.006": "3d35882c0c505ddb503c7754b8b0ca2da4ecf34a416c43a2203497f9952a1e7e",
+        "grass_medium_01_small_a_LOD0.007": "f4b43dab47310681578e8c297e72070d1a1bba68e39ee01cbfc160a8fdb07b98",
+        "grass_medium_01_small_a_LOD0.008": "87774a2650b517a2d3f1f7827c231969276e779294f12e69694f1f86ffb670cc",
+        "grass_medium_01_small_a_LOD0.009": "fedd43a31a8fd44dc911fd424cd8a0c451187608b043f58dada738fbd8389cc1",
+        "grass_medium_01_small_a_LOD0.010": "ba07b925a98678fcb452c9d35b94112b76238f25df3b80b1eecca651f1502364",
+        "grass_medium_01_small_a_LOD0.011": "6a76b8fbf000387c449de55388662b38dca9d4b5f4cdceb1f32639922deb8916",
+        "grass_medium_01_small_a_LOD0.012": "261c46e4692ed0d477fcec43795adbf4ca79ed29520057a9764afbaf16a7f4e4",
+        "grass_medium_01_small_a_LOD0.013": "f4e657ed0302426bd01541c5ed89a7b83a68724b02825138eb85c56caf0f4f49",
+        "grass_medium_01_small_a_LOD0.014": "b4ae3fc0d2ae9d6575abff737c51aa476f1d767147c3a4fe23573ab772404c6f",
+        "grass_medium_01_small_a_LOD0.015": "001b361419b8f696731b550c2e2eb11d44ca625ebaf986837a4786d64bacd888",
+        "grass_medium_01_small_a_LOD0.016": "dd9e123a2bef47153410dfbad9ce3c350033bc6944947b11d425be03f84977d9",
+        "grass_medium_01_small_a_LOD0.017": "1f41b41e7df7da3a49f4deb3fd1aea8b7a8f2ec575274f9607ea7fee36879cbd",
+        "grass_medium_01_small_a_LOD0.018": "0013960cdd1ed08c2d0d95db548cc153be4c8ea3fec070e68eb2fe2a08d6f611",
+        "grass_medium_01_small_a_LOD0.019": "e7d5b67820598e103a3cb8947c707819e5314d542ecf5d1068c6c49249e1413e",
+        "grass_medium_01_small_a_LOD0.020": "660d6fe03809ce0cd393a584e31e0aa55de43271079f68ef1d26c2a676d6f629",
+        "grass_medium_01_small_a_LOD0.021": "ead3a6934ec1f10cabf306ba061aa9c1da3c081421b39c20be2138652b29602b",
+        "grass_medium_01_small_a_LOD0.022": "bf62eae8bf9db414e1e727cffbe27eafadad4c1a31a9475439549e9fef2e3099",
+        "grass_medium_01_small_a_LOD0.023": "c66b19c792c8c0091c71b2afcb5408665c763a26b57131233e79eae80134f07e",
+        "grass_medium_01_small_a_LOD0.024": "918c65cd8b3cea485c3f1b54e8a63d09fb66e059343ed7dde4d362d570140cea",
+        "grass_medium_01_small_a_LOD0.025": "15bc31ca68e2390fad4f029fe13a8af867a5f61f9156569f5e98e4d6ff03f323",
+        "grass_medium_01_small_a_LOD0.026": "315420290f3aa41557dd43ec4a87984290fe7a10ca0a72cc2e1c3aa49c11c292",
+        "grass_medium_01_small_a_LOD0.027": "b4f39d1b70a3e8d6d2dc5714fdb0fcd3addfc89e8c7075be495f6141854ff8e5",
+        "Non walkable landscape continuation": "b4e7ab95ec442f1738784d4709d91ef87ad9c0695af17fca8549ed65de08e647",
+        "shrub_01_a": "39562ebcbf018e0f7ec55c854eee6dfb3d01ef3bd0407935c8e0b5736750f4bd",
+        "shrub_01_a.001": "204ceb7aa869c7053e630ad9453032625612c126bb7f98a3921efd81cdb40e27",
+        "shrub_01_a.002": "d897e21808d2af0fb5f4ef58111eb38355207fefdbd8a6520701674c323429fe",
+        "shrub_01_a.003": "1123cbc789f99d16fc50c802f57f5caac3b5b3325a2779fa688b0318c6bcbcb3",
+        "shrub_01_a.004": "2a66c1473ee528ffd0f03b02a1e4d2ca8dacab271287ee040696f2874ac06874",
+        "shrub_01_a.005": "4bf9993975e13b0922adf6e5f6b0a99b676e0081c2b88558db84ebee1ffb235a",
+        "shrub_01_a.006": "b2f32b1587b77b47b2a67a62f1867312a938c179d86d8be6734249d933a1c4e5",
+        "shrub_01_a.007": "2f9dfd8b894978f5b2e9e694cd8e87eb832504b46fdf8dda0e1beca2a7e34c1e"
+      },
+      "preservedGroundGeometrySignatures": {
+        "Illustrative valley terrain": "1039dee38e94fbaecfb6e10f6381c1d5871fd1f16bbb9066cf51e12507e5c9fe"
+      },
+      "preservationScope": "Before/after Blender processing; re-export can re-encode original texture files",
+      "exportChecks": {
+        "nodes": 100,
+        "meshes": 66,
+        "embeddedImages": 15,
+        "refinedMaterials": [
+          {
+            "name": "Refined illustrative ridge - embedded PBR",
+            "baseColorTexture": {
+              "index": 1
+            },
+            "normalTexture": {
+              "index": 0,
+              "scale": 0.6499999761581421
+            },
+            "metallicRoughnessTexture": {
+              "index": 2
+            }
+          },
+          {
+            "name": "Refined illustrative ground - original atlas with 2m detail PBR",
+            "baseColorTexture": {
+              "index": 7
+            },
+            "normalTexture": {
+              "index": 6,
+              "scale": 0.699999988079071,
+              "texCoord": 1
+            },
+            "metallicRoughnessTexture": {
+              "index": 8,
+              "texCoord": 1
+            }
+          },
+          {
+            "name": "Refined illustrative rock - embedded PBR",
+            "baseColorTexture": {
+              "index": 10
+            },
+            "normalTexture": {
+              "index": 9,
+              "scale": 0.6499999761581421
+            },
+            "metallicRoughnessTexture": {
+              "index": 11
+            }
+          }
+        ]
+      }
     }
   }
 }

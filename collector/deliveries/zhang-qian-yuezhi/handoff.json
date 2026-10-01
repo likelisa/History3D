@@ -1,0 +1,206 @@
+{
+  "handoffVersion": "1.0.0",
+  "kind": "collection",
+  "submissionId": "collection-zhang-qian-yuezhi-afdae2de6f7f6d29",
+  "storyId": "zhang-qian-yuezhi",
+  "sourceContentRevision": 4,
+  "createdAt": "2026-10-01T00:00:00.000Z",
+  "producer": "teammate-download-import; scripts/build-yuezhi-package.ts",
+  "files": [
+    {
+      "path": "assets/asset-manifest.json",
+      "sha256": "7205f7877c4cac05ff1bed02452f945115ef12eddbf12eea7450ef6196b35f6d",
+      "bytes": 9151
+    },
+    {
+      "path": "assets/input/asset-environment.glb",
+      "sha256": "2956955061a5278a293320c598719c175e74c28133aa8a2785e4652760db2832",
+      "bytes": 11547972
+    },
+    {
+      "path": "assets/input/asset-envoy.glb",
+      "sha256": "74277e7f5b769f92a608fec1b77ad928415155b37d08d07a1c843382a0f8ea26",
+      "bytes": 1959504
+    },
+    {
+      "path": "assets/input/asset-market.glb",
+      "sha256": "3690fdef841e35d5370bc74a333092a9a875a89b60521be861fe017423cff542",
+      "bytes": 3364120
+    },
+    {
+      "path": "assets/input/asset-meeting.glb",
+      "sha256": "4624bcec210da9e5b2315b7905bb679223bf2c5a4b5a2479a71a4d74e23fa1e6",
+      "bytes": 2786176
+    },
+    {
+      "path": "assets/input/asset-mural-horse.glb",
+      "sha256": "638f54e5d1016617d48871c295a7719706f4f0c8aac1600d6bc816a8bb167f35",
+      "bytes": 5612424
+    },
+    {
+      "path": "assets/input/asset-representative.glb",
+      "sha256": "5051979679573bec5b1c4805480698de04654dea3d2ba221c708223e795411fa",
+      "bytes": 1939608
+    },
+    {
+      "path": "assets/input/asset-staff.glb",
+      "sha256": "7ee3975984333e3eb341ee9e24cd587a18d77884641b6c3704037a2e533c5bdb",
+      "bytes": 28848
+    },
+    {
+      "path": "assets/input/asset-xiongnu.glb",
+      "sha256": "1802a80083cd118295717f6e405a5bc98b99a48406dd2074c1a580c7a591f47f",
+      "bytes": 4198512
+    },
+    {
+      "path": "assets/raw/asset-xiongnu.glb",
+      "sha256": "39eb65f9443ae5e0242aedd2bde06c265c4394c3656f7419fce0bd94b74811e1",
+      "bytes": 12067204
+    },
+    {
+      "path": "book.json",
+      "sha256": "1712e9572a7edf4a79976cd16e48407e7b2af8e9d608706fe8b0f06cc130a161",
+      "bytes": 15431
+    },
+    {
+      "path": "evidence/book-content.ts",
+      "sha256": "1926b0b9bcd85fa2fcdc3c50f924079dacc2b14802437b67bcbdad83ed587355",
+      "bytes": 11654
+    },
+    {
+      "path": "evidence/build-environment.py",
+      "sha256": "18ea9501fd2ccfa4a45740c2f819b7ff2b1e25d65ac313b220a67069eefa7467",
+      "bytes": 11639
+    },
+    {
+      "path": "evidence/build-sets.py",
+      "sha256": "6179512ecd8fd013b8919f2d6910711aef0747d58a4be26f9802862b0c466a9b",
+      "bytes": 5315
+    },
+    {
+      "path": "evidence/content.ts",
+      "sha256": "20ed9523e30369df9f0eb170e5a7371a0b5e6e1ea6f8bf61689f84c6ee87ca11",
+      "bytes": 4855
+    },
+    {
+      "path": "evidence/environment-manifest.json",
+      "sha256": "9b1cd22eaa7df699ad9b34b69bf0fee142098a45a1a7877cb6e232ed3b1a7c3d",
+      "bytes": 12007
+    },
+    {
+      "path": "evidence/figure-manifest.json",
+      "sha256": "e8df40e6b54aa3c67b891178b1bebb62e7e2dc0d9ba799689d7161ded689e18b",
+      "bytes": 3405
+    },
+    {
+      "path": "evidence/generate-xiongnu.mjs",
+      "sha256": "35fcc2993fa840b29b6b17f8c43abbd45a650456bbb9a3a79e58d578194acbc2",
+      "bytes": 5632
+    },
+    {
+      "path": "evidence/generation-script.py",
+      "sha256": "a71246d40eafe402b1fca80fd0140b5f65ba02ef57cc010d1d577a12e3c88ec2",
+      "bytes": 3523
+    },
+    {
+      "path": "evidence/mural-horse-generation.json",
+      "sha256": "defc347e9e72eec37df92c3780dc84b23de1124d44371330248abfd969b8a272",
+      "bytes": 1425
+    },
+    {
+      "path": "evidence/normalize-figures.py",
+      "sha256": "1554a251a2f34412aec81d9c8b65ce688d1bcf8754a5e3525203a0ff66e9e62c",
+      "bytes": 3592
+    },
+    {
+      "path": "evidence/normalize-xiongnu.py",
+      "sha256": "a8909bce6081106ebcd7790eab422a196fee2772aa35888b02f3db65b043c30b",
+      "bytes": 6455
+    },
+    {
+      "path": "evidence/perspectives.ts",
+      "sha256": "e385f4053e58bd65536790cf95e0775ee0750de53f11eeaab9240ca7a241cca1",
+      "bytes": 29494
+    },
+    {
+      "path": "evidence/refine-environment.py",
+      "sha256": "7087983fa473797579c06fe97d791443c0e9d85747bc29d796c6bbcb9b007ad0",
+      "bytes": 20524
+    },
+    {
+      "path": "evidence/set-manifest.json",
+      "sha256": "69063f24f9bcc2977c26d129f8ced5a734bfc1fbfc9651fddbd9d2f82af0727b",
+      "bytes": 17318
+    },
+    {
+      "path": "evidence/upstream-environment-manifest.json",
+      "sha256": "79b59c5fad1acab4d752d8c303345f11d85c81f727bfe15db79543b27cd352b7",
+      "bytes": 2771
+    },
+    {
+      "path": "evidence/upstream-set-manifest.json",
+      "sha256": "bb94b4c5c56182eee210a1fd6f8aa0020a167c9d88b8e49b1f61c2bf3197e5f9",
+      "bytes": 788
+    },
+    {
+      "path": "evidence/xiongnu-generation.json",
+      "sha256": "4eed831ef2b4287fdc53e5f568f3be1dfe7a072d86cc0657f1ccf9d245a87b3b",
+      "bytes": 1579
+    },
+    {
+      "path": "evidence/xiongnu-manifest.json",
+      "sha256": "305299a1938d23b51d6257e25a3123bc61e9e24b1d1e45f0601540630e92c6ef",
+      "bytes": 3223
+    },
+    {
+      "path": "narrative.json",
+      "sha256": "bd916848b0e4a0bbb48bcd2a7476318754e58cf00462e4d0b208d4fa09215293",
+      "bytes": 15284
+    },
+    {
+      "path": "perspectives.json",
+      "sha256": "0d795feab0d717f7af212ec13c8c01e5473b300bb3033828aac5887523b2ea4c",
+      "bytes": 66240
+    },
+    {
+      "path": "plan.json",
+      "sha256": "bf64471aa6795cece74a9713e1fd058d38fe1601503e9681175ab5080947e200",
+      "bytes": 2960
+    },
+    {
+      "path": "plan.md",
+      "sha256": "f7aee84d9f1aaa6d9710cfc7e03fba4ebc5abbe4bac82da6e1febdb2a0a0d6ff",
+      "bytes": 654
+    },
+    {
+      "path": "references/historical/xiongnu-character-reconstruction.md",
+      "sha256": "31847dc25b78eefb2cb96e47c2fe764252bbd6a7c6b88cb271a538cef2dde7fa",
+      "bytes": 11423
+    },
+    {
+      "path": "references/sequence.svg",
+      "sha256": "1f1168b7f3d11eea8b02f01cf5d0993268ffd8b4535f3e25cfad8f19a7c3d369",
+      "bytes": 353
+    },
+    {
+      "path": "scene-plan.json",
+      "sha256": "25ee4ecf1aa95d6cc5a2c76e6aa767bf517ab3cdc499d859f174077643b332a8",
+      "bytes": 13113
+    },
+    {
+      "path": "source-evidence.json",
+      "sha256": "b5d491e4c27b743af12b06b69e00092e6d85ba8205e472e55f8ec136712857e6",
+      "bytes": 52368
+    },
+    {
+      "path": "sources.json",
+      "sha256": "27fea205df3f055cba2dd7120f5718c68e8102653e848f3364615dd68558714c",
+      "bytes": 9364
+    },
+    {
+      "path": "story.json",
+      "sha256": "fb74b4b1e696ff13283f0b09803113d73cfb744504238ec855ad4fed3cf4ff96",
+      "bytes": 29204
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "storyId": "zhang-qian-yuezhi",
+  "contentRevision": 4,
+  "assets": [
+    {
+      "assetId": "asset-environment",
+      "path": "assets/asset-environment.glb",
+      "sha256": "9e0d3525f965eddd1307f21b05706d4de06a1470e54964b1feeeace964c2fdc9",
+      "inputPath": "assets/input/asset-environment.glb",
+      "inputSha256": "2956955061a5278a293320c598719c175e74c28133aa8a2785e4652760db2832",
+      "taskId": null,
+      "adoptedRevision": 1
+    },
+    {
+      "assetId": "asset-envoy",
+      "path": "assets/asset-envoy.glb",
+      "sha256": "008b79eb1d6baafcd893a7112a2b4586da17a69dee30ffadddd7b192cfc269e4",
+      "inputPath": "assets/input/asset-envoy.glb",
+      "inputSha256": "74277e7f5b769f92a608fec1b77ad928415155b37d08d07a1c843382a0f8ea26",
+      "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf",
+      "adoptedRevision": 1
+    },
+    {
+      "assetId": "asset-representative",
+      "path": "assets/asset-representative.glb",
+      "sha256": "6b53aadf8c795548bc8b6ce6b4b0c0045ebc1d5222cf849058bb1e064c1fde03",
+      "inputPath": "assets/input/asset-representative.glb",
+      "inputSha256": "5051979679573bec5b1c4805480698de04654dea3d2ba221c708223e795411fa",
+      "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb",
+      "adoptedRevision": 1
+    },
+    {
+      "assetId": "asset-staff",
+      "path": "assets/asset-staff.glb",
+      "sha256": "79da903fe5235f6e64a47ce3b9974a83b99371b2c3a6d301c817b3f8dc53dc63",
+      "inputPath": "assets/input/asset-staff.glb",
+      "inputSha256": "7ee3975984333e3eb341ee9e24cd587a18d77884641b6c3704037a2e533c5bdb",
+      "taskId": null,
+      "adoptedRevision": 1
+    },
+    {
+      "assetId": "asset-mural-horse",
+      "path": "assets/asset-mural-horse.glb",
+      "sha256": "617db02daed7ff68b0b25f8dda1dea43a25cd613fef0e532998c16cce35bdcb8",
+      "inputPath": "assets/input/asset-mural-horse.glb",
+      "inputSha256": "638f54e5d1016617d48871c295a7719706f4f0c8aac1600d6bc816a8bb167f35",
+      "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b",
+      "adoptedRevision": 1
+    },
+    {
+      "assetId": "asset-xiongnu",
+      "path": "assets/asset-xiongnu.glb",
+      "sha256": "05d09f82e450fca8d170f0744998fac119ca308735867a3d8283b066d0ef2778",
+      "inputPath": "assets/input/asset-xiongnu.glb",
+      "inputSha256": "1802a80083cd118295717f6e405a5bc98b99a48406dd2074c1a580c7a591f47f",
+      "taskId": "b614d405-a227-4642-9fa0-0495e08a5b27",
+      "adoptedRevision": 1
+    },
+    {
+      "assetId": "asset-meeting",
+      "path": "assets/asset-meeting.glb",
+      "sha256": "b60ac08b1a5cb3d60769b5efd8ae1e14b26c3a6acd7edd7ed1eb6a284c7c7b4c",
+      "inputPath": "assets/input/asset-meeting.glb",
+      "inputSha256": "4624bcec210da9e5b2315b7905bb679223bf2c5a4b5a2479a71a4d74e23fa1e6",
+      "taskId": null,
+      "adoptedRevision": 1
+    },
+    {
+      "assetId": "asset-market",
+      "path": "assets/asset-market.glb",
+      "sha256": "279efd48b69109fdc3bd57a2ef1b54f92709eac6f1bebacb8a40d9c18ba5e211",
+      "inputPath": "assets/input/asset-market.glb",
+      "inputSha256": "3690fdef841e35d5370bc74a333092a9a875a89b60521be861fe017423cff542",
+      "taskId": null,
+      "adoptedRevision": 1
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "storyId": "zhang-qian-yuezhi",
+  "contentRevision": 4,
+  "status": "needs_review",
+  "diagnostics": [
+    {
+      "code": "VALIDATION_FAILED",
+      "severity": "warning",
+      "file": "scene.json",
+      "field": "objects[0].position",
+      "message": "对象实例 obj-environment 的底部原点不在接地高度（0）上，请确认这是有意为之"
+    }
+  ],
+  "requiredReviews": [
+    "historical_review",
+    "asset_review",
+    "world_review",
+    "viewer_acceptance",
+    "rights_review"
+  ],
+  "unresolved": [
+    "人物外观、具体布局与马具均为示意，需用户视觉审核",
+    "古籍底本校勘与史料负责人审核待完成",
+    "Tripo及壁画公开使用权利待确认",
+    "完整浏览器故事、组合场景与动态角色视角验收证据待补齐"
+  ],
+  "viewerAcceptance": null,
+  "publicationReady": false
+}
