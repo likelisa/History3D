@@ -1,0 +1,46 @@
+{
+  "voice": "macOS Tingting",
+  "rate": 195,
+  "tracks": [
+    {
+      "file": "/mural-assets/narration/0.m4a",
+      "seconds": 6.978005,
+      "text": "这幅壁画绘于初唐。画家借张骞的远行，讲述他们心中的历史与佛教传播。"
+    },
+    {
+      "file": "/mural-assets/narration/1.m4a",
+      "seconds": 7.037324,
+      "text": "画中，帝王与群臣向金人礼拜。金人被画成佛像，这是唐人对往事的改写。"
+    },
+    {
+      "file": "/mural-assets/narration/2.m4a",
+      "seconds": 7.959456,
+      "text": "骑马的帝王面前，使者跪拜辞行。史书中的张骞，曾为联络月氏、应对匈奴而出使。"
+    },
+    {
+      "file": "/mural-assets/narration/3.m4a",
+      "seconds": 6.783265,
+      "text": "使者与持节的随从穿行山间。现在，跟着这支队伍，走向画中的城池。"
+    },
+    {
+      "file": "/mural-assets/narration/4.m4a",
+      "seconds": 6.829705,
+      "text": "《史记》记张骞被匈奴拘留十余年，仍持汉节不失。逃离后，他继续向西。"
+    },
+    {
+      "file": "/mural-assets/narration/5.m4a",
+      "seconds": 6.792245,
+      "text": "张骞确曾到过大夏。那里有城屋与市场，远方的消息，也随着使者往来。"
+    },
+    {
+      "file": "/mural-assets/narration/6.m4a",
+      "seconds": 7.702993,
+      "text": "僧人和佛塔属于这幅画的叙事。它们让我们看到，唐代画家怎样把远行与佛教相连。"
+    },
+    {
+      "file": "/mural-assets/narration/7.m4a",
+      "seconds": 7.416508,
+      "text": "出使有史书记载，壁画也有后世的想象。走过画中的空间，再看两者怎样相遇。"
+    }
+  ]
+}

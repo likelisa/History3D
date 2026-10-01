@@ -1,0 +1,9 @@
+{
+  "prompt": "Single full-body standing anonymous Buddhist monk inspired by an early Tang Dunhuang wall painting. Shaved head, serene face, long simple overlapping draped robe, muted ochre and earth brown mineral pigments with dark indigo inner cloth, plain feet visible. Hands together gently at waist, dignified neutral standing pose. Sculptural stylized human with physically thick flowing fabric folds, hand-painted matte fresco texture, weathered mineral pigment, elegant slender proportions. Museum illustrative figure, not a verified portrait or Han dynasty historical reconstruction. No pedestal, no background, no accessories, no modern clothing, no cartoon eyes, no golden statue. One person only.",
+  "model": "v3.1-20260211",
+  "texture": true,
+  "pbr": true,
+  "face_limit": 40000,
+  "geometry_quality": "standard",
+  "texture_quality": "standard"
+}

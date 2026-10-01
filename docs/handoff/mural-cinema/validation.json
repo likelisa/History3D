@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-02",
+  "baseSha": "4a05b14c159f10fd111941128961ba9c854bbfb7",
+  "target": "local desktop /mural.html",
+  "build": "passed",
+  "check": {
+    "filesPassed": 34,
+    "testsPassed": 230,
+    "failed": 0,
+    "node": "24.19.0",
+    "python": "3.12.14",
+    "pythonOverride": "PROCESSING_PYTHON set to bundled runtime"
+  },
+  "browser": {
+    "fullNaturalPlaybackSeconds": 112,
+    "assetCount": 6,
+    "narrationTracks": 8,
+    "audioPlaybackVerified": true,
+    "normalConsoleErrors": 0,
+    "controls": [
+      "pause/resume",
+      "voice toggle respects pause",
+      "previous/next chapter",
+      "source panel",
+      "replay"
+    ],
+    "note": "Full natural playback verified before final pause/end navigation fixes; affected controls verified again after those fixes."
+  },
+  "provider": {
+    "newTasks": 2,
+    "status": "success",
+    "creditsConsumed": 40
+  },
+  "limits": [
+    "palace/farewell remain mural camera shots",
+    "mountain/city threshold are 3D",
+    "static character poses, no skeletal walking animation",
+    "visual/historical/rights acceptance pending"
+  ]
+}

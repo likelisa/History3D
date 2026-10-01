@@ -1,0 +1,42 @@
+{
+  "kind": "mural-cinema-assets",
+  "createdAt": "2026-10-01T23:14:18.029Z",
+  "assets": [
+    {
+      "id": "envoy",
+      "path": "/yuezhi/figures/envoy.glb",
+      "bytes": 1959504,
+      "sha256": "74277e7f5b769f92a608fec1b77ad928415155b37d08d07a1c843382a0f8ea26"
+    },
+    {
+      "id": "attendant",
+      "path": "/yuezhi/figures/yuezhi.glb",
+      "bytes": 1939608,
+      "sha256": "5051979679573bec5b1c4805480698de04654dea3d2ba221c708223e795411fa"
+    },
+    {
+      "id": "horse",
+      "path": "/yuezhi/murals/mural-horse.glb",
+      "bytes": 5612424,
+      "sha256": "638f54e5d1016617d48871c295a7719706f4f0c8aac1600d6bc816a8bb167f35"
+    },
+    {
+      "id": "staff",
+      "path": "/yuezhi/figures/han-staff.glb",
+      "bytes": 28848,
+      "sha256": "7ee3975984333e3eb341ee9e24cd587a18d77884641b6c3704037a2e533c5bdb"
+    },
+    {
+      "id": "monk",
+      "path": "/mural-assets/monk.glb",
+      "bytes": 5341784,
+      "sha256": "0ae41c1b2f48e0da1effbd992d00cacb60e62bb2f897a7c83e987feb4aa1445d"
+    },
+    {
+      "id": "tower",
+      "path": "/mural-assets/tower.glb",
+      "bytes": 4223208,
+      "sha256": "f31d7c936590c6074a1f3c637377698845236e4cd7b3f4f55a070b6984af5969"
+    }
+  ]
+}

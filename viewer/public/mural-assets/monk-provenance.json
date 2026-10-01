@@ -1,0 +1,14 @@
+{
+  "id": "monk",
+  "taskId": "6f725af5-0d52-4f4d-a2b4-d3cd817dbdd0",
+  "requestHash": "78b6a1906201b3865f4d6f319c940507d63e50316b026e85c52624bc638f080c",
+  "status": "success",
+  "source": "Text interpretation of supplied Mogao cave 323 mural",
+  "submittedAt": "2026-10-01T23:09:59.455Z",
+  "progress": 100,
+  "creditsConsumed": 20,
+  "checkedAt": "2026-10-01T23:13:39.101Z",
+  "sha256": "0ae41c1b2f48e0da1effbd992d00cacb60e62bb2f897a7c83e987feb4aa1445d",
+  "bytes": 5341784,
+  "path": "viewer/public/mural-assets/monk.glb"
+}

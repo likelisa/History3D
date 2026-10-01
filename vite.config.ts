@@ -9,6 +9,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
+        mural: fileURLToPath(new URL('./viewer/mural.html', import.meta.url)),
         viewer: fileURLToPath(new URL('./viewer/index.html', import.meta.url)),
         yuezhi: fileURLToPath(new URL('./viewer/yuezhi.html', import.meta.url)),
       },

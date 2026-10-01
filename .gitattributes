@@ -16,3 +16,7 @@ collector/deliveries/** -text
 viewer/public/yuezhi/** -text
 records/** -text
 docs/historical/** -text
+
+# Mural cinema includes immutable GLB digests and locally recorded narration.
+*.m4a binary
+viewer/public/mural-assets/** -text
