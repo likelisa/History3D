@@ -1,0 +1,133 @@
+{
+  "verifiedAtUtc": "2026-10-01T09:56:16.429439+00:00",
+  "reviewUrl": "https://github.com/likelisa/History3D/pull/10#issuecomment-5928870126",
+  "reviewBodySha256": "48f4e29e24e74aada52f9469410fa3fa52b2e03e764fbdce6feab8f49688a315",
+  "reviewScopeLimitation": "Automated diff truncated 2181344 characters; runtime was omitted from shown portion.",
+  "runtimeCommit": "51448c7ba30f31350ade3597cc84e60a37b36dea",
+  "committedFilesScanned": 466,
+  "committedCredentialScan": "no matches",
+  "trackedPrivateRuntimeFiles": 0,
+  "baselineIgnoredPrivateRuntime": true,
+  "frozenSnapshotsRechecked": 13,
+  "cleanRebuildTests": {
+    "npmCiExitCode": 0,
+    "prepareExitCode": 0,
+    "checkExitCode": 0,
+    "buildExitCode": 0,
+    "testsPassed": 227,
+    "testsSkipped": 3,
+    "testsFailed": 0
+  },
+  "github": {
+    "mergeable": "MERGEABLE",
+    "state": "OPEN",
+    "statusCheckRollup": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-01T09:43:10Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/likelisa/History3D/actions/runs/36844369016/job/110310849121",
+        "name": "review",
+        "startedAt": "2026-10-01T09:41:41Z",
+        "status": "COMPLETED",
+        "workflowName": "AI PR Review"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-01T09:42:50Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/likelisa/History3D/actions/runs/36844368921/job/110310848726",
+        "name": "校验与构建",
+        "startedAt": "2026-10-01T09:41:40Z",
+        "status": "COMPLETED",
+        "workflowName": "CI"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-01T09:42:04Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/likelisa/History3D/actions/runs/36844369135/job/110310849760",
+        "name": "test (3.9)",
+        "startedAt": "2026-10-01T09:41:42Z",
+        "status": "COMPLETED",
+        "workflowName": "Processing tests"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-01T09:41:50Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/likelisa/History3D/actions/runs/36844369135/job/110310849487",
+        "name": "test (3.12)",
+        "startedAt": "2026-10-01T09:41:41Z",
+        "status": "COMPLETED",
+        "workflowName": "Processing tests"
+      }
+    ],
+    "url": "https://github.com/likelisa/History3D/pull/10"
+  },
+  "currentDeliverableBlockingFindings": 0,
+  "decisions": [
+    {
+      "item": "credential-file blocking",
+      "status": "not a present delivery blocker",
+      "evidence": "Baseline .gitignore already ignores .processing-data; zero tracked entries; complete committed-tree credential scan found no matches. Normal prepare/check/build does not execute Tripo recipes and clean rebuild used no key.",
+      "limitation": "Legacy optional author recipe reads a local key file. It is retained as recipe evidence, not a required handoff command or verified original provider request. Future generation should use the environment-based script and preserve submission guards."
+    },
+    {
+      "item": "broad -text",
+      "status": "byte-preservation rule retained",
+      "evidence": "packages contains delivery snapshots and their copied evidence. -text prevents EOL transformation; diff remains unspecified. Current application source remains outside protected snapshot trees."
+    },
+    {
+      "item": "legacy normalization resize and raw checks",
+      "status": "optional author-tool limitations retained",
+      "evidence": "Legacy recipes are not run by handoff commands. Delivered GLBs are SHA-checked; newer xiongnu normalizer verifies raw bytes and preserves image aspect ratio.",
+      "limitation": "Legacy three tasks lack original raw/provider receipts. No independent raw/provider audit is claimed. Non-square input resize and missing manifest/raw checks must be fixed before future reuse."
+    },
+    {
+      "item": "xiongnu split normals",
+      "status": "intentional derived-asset operation",
+      "evidence": "Arm-pose calibration recomputes shading normals after mesh deformation, preserves UVs, and exports a distinct derived hash. The actual derived model and floor alignment were verified in desktop screenshots and hash records."
+    },
+    {
+      "item": "downloads, atlas loop, public authoring intermediates",
+      "status": "optional author-tool limitations",
+      "evidence": "Normal build uses already delivered assets; clean ZIP and Git exclude blend sources and private runtime caches. No Blender or texture network download is required for preview.",
+      "limitation": "Future authoring should add expected download hashes and clearer errors, move intermediates outside public, and optimize atlas loops when needed."
+    },
+    {
+      "item": "provider interruption recovery",
+      "status": "no regeneration needed",
+      "evidence": "This task was submitted once and completed; request/task/raw evidence is preserved. Unknown outcomes deliberately block resubmission to avoid extra charges.",
+      "limitation": "Recover an interrupted future submission with provider evidence before proceeding; do not blindly resubmit."
+    },
+    {
+      "item": "TS import extension and book duplication",
+      "status": "supported and generated",
+      "evidence": "Committed tsconfig uses noEmit with allowImportingTsExtensions. Builder generates book JSON and copied evidence from canonical bookScenes; validators and clean tests check consistency."
+    },
+    {
+      "item": "LFS and evidence command paths",
+      "status": "current transport retained",
+      "evidence": "No file exceeds GitHub size limits. ZIP carries complete offline model files without LFS. Evidence scripts retain commands for canonical scripts which are included in the source tree, not standalone evidence execution instructions."
+    }
+  ],
+  "notPerformed": [
+    "provider calls",
+    "historical evidence rewriting",
+    "asset regeneration",
+    "GitHub comment or message",
+    "global memory or skill changes"
+  ],
+  "routing": {
+    "taskType": "review verification and handoff",
+    "risk": "external upload and credential review",
+    "model": "Codex",
+    "cheapModelUsed": false,
+    "verification": "Git tree, full credential scan, snapshot hashes, clean logs, GitHub check API",
+    "classification": [
+      "no_persist",
+      "project failure_record"
+    ]
+  }
+}

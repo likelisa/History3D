@@ -2,6 +2,8 @@
 
 # 张骞场景接力说明：以本文件和最终验收证据为准
 
+源码已上传项目私有仓库：[PR #10](https://github.com/likelisa/History3D/pull/10)，分支 `codex/yuezhi-continuation`，提交 `51448c7ba30f31350ade3597cc84e60a37b36dea`。直接使用本 ZIP 不需要 GitHub 权限；从 GitHub 接力则须能访问该私有仓库。原绘本之外的探索任务原型只留本机，未提交或打入 ZIP。
+
 **重要：`00-伙伴接力说明.md`、`01`、`02`及合并导出保留作历史记录，其中旧南缘绕行路线、固定四视角、资产未生成等旧状态已作废。当前任务是伙伴提供的大月氏四页故事，请优先阅读本文件；最终浏览器验证状态查看 `验收证据/yuezhi-3d/browser-validation.json`。**
 
 本包用于同伴在自己的电脑继续开发和核验，不等于史料、权利或用户视觉审签完成。候选状态仍为 `needs_review`，没有代替负责人签署接受。
@@ -81,7 +83,7 @@ npm run dev -- --host 127.0.0.1 --port 5193 --strictPort
 
 包内保留实际源码、测试、fixtures、原始/精修 GLB、采集 delivery 和整合 package。`viewer/public/packages` 是运行时复制副本，`npm run dev` 或 `build` 会自动重建。包内排除 `.git`、`.processing-data`、本机缓存、依赖目录、编译产物、环境变量文件、凭据和 Blender 安装，因此不是带 Git 历史的仓库克隆。
 
-开发原始基线为 `90a4b71f015e365c2f883f14708b403aae2b4353`，隔离分支为 `codex/yuezhi-continuation`；已同步源树相同的 main 提交 `0cc9917`，本包反映封包时的工作树文件。用户已授权完成后上传私有 GitHub 项目，由主任务执行并核验远端提交；本说明写入时上传步骤待主任务完成。接力人若需要版本历史，应从项目仓库取得对应分支，再将本包作为可审查的文件交付导入，不要覆盖自己的未保存修改。
+开发原始基线为 `90a4b71f015e365c2f883f14708b403aae2b4353`，隔离分支为 `codex/yuezhi-continuation`；已同步源树相同的 main 提交 `0cc9917`，本包反映封包时的工作树文件。源码已按授权上传私有 GitHub 的 PR #10；提交及自动检查已核实成功，当前 PR 保持待合并。接力人若需要版本历史，应从项目仓库取得对应分支，再将本包作为可审查的文件交付导入，不要覆盖自己的未保存修改。
 
 ## 验证与继续工作
 
@@ -105,3 +107,8 @@ python "交付工具/make-history3d-handoff.py" --extract "History3D-张骞场�
 接力人应在新解包的 `History3D/` 内重复前面的 `npm ci`、`yuezhi:prepare`、`check` 和 `build`，再用 `preview` 核对四页对白问答、两条主线走读、3D 场景观察与全部适用视角。重建是否独立于原电脑，须用这个干净目录的结果判断；原工作区的通过日志不能替代解包后的验证。
 
 补充：首次解包没有 `.processing-data`；运行构建后会正常新建空的 `asset-sync` 同步目录，没有私人生成输入或任何文件。它不影响从正式 raw 快照重建，也不需要 API key。
+
+
+## GitHub 自动审查核验
+
+构建与 Python 3.9/3.12 检查全部成功。自动审查的凭据阻断前提经核验不成立：基线已有忽略规则、无私人目录跟踪项、完整提交扫描无凭据命中；正常接力命令不运行收费配方。可选旧作者工具的不足与证据边界记录在源码 `docs/handoff/yuezhi/review-resolution.md` 和 `validation/github-review-resolution.json`，不改原始证据，不重复生成资产。
