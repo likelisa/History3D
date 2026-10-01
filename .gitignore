@@ -3,6 +3,14 @@ dist
 dist-ssr
 *.tsbuildinfo
 coverage
+.processing-data/
+viewer/public/yuezhi/*.blend1
+viewer/public/yuezhi/*.blend
+viewer/public/yuezhi/figures/*.blend1
+viewer/public/yuezhi/figures/*.blend
+viewer/public/yuezhi/sets/*.blend
+viewer/public/yuezhi/sets/*.blend1
+viewer/public/yuezhi/figures/*-procedural.glb
 *.local
 .DS_Store
 .env
@@ -13,6 +21,16 @@ coverage
 
 # 生成物：由 npm run prepare:assets 从 packages/ 复制而来
 viewer/public/packages
+viewer/public/candidates
+
+processing/demo/node_modules/
+processing/demo/dist/
+processing/demo/*.tsbuildinfo
+processing/demo/public/cases/tripo/assets/*.glb
+
+# Local previews of superseded procedural figures; preserve but do not publish.
+viewer/public/yuezhi/figures/envoy.png
+viewer/public/yuezhi/figures/yuezhi.png
 
 # 采集运行态可能包含用户反馈原文、检索记录及未审核候选；不可误提交。
 collector/state/

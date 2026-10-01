@@ -1,0 +1,31 @@
+{
+  "assets": [
+    {
+      "assetId": "asset-pack-bundle",
+      "assetRevision": 1,
+      "path": "assets/pack-bundle.glb",
+      "sha256": "3ec686ab7668bb52fc939cfffd0e8d96b40716e73e7ea7e30f95252ec56bb534",
+      "label": "货包技术样例",
+      "briefId": "brief-pack",
+      "sourceIds": [],
+      "claimIds": [],
+      "rights": "仓库 fixture 脚本生成，仅用于技术联调",
+      "role": "cargo",
+      "intendedUse": "演示载物关系",
+      "knownIssues": [
+        "历史形制与固定方式待审核"
+      ],
+      "generation": null,
+      "inputUnits": "m",
+      "upAxis": "Y",
+      "forwardAxis": null,
+      "pivot": "bottom-center",
+      "dimensionsM": [
+        1.2,
+        0.8,
+        0.6
+      ],
+      "scaleStatus": "known"
+    }
+  ]
+}

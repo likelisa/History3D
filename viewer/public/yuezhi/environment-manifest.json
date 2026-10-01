@@ -1,0 +1,74 @@
+{
+  "historicalStatus": "illustrative landscape; geography and meeting layout not asserted as historical facts",
+  "blenderVersion": "5.2.0 LTS",
+  "unit": "meter",
+  "upAxis": "Y",
+  "centralWalkableHeight": 0,
+  "meetingPoints": [
+    [
+      -4,
+      0,
+      4
+    ],
+    [
+      5,
+      0,
+      -4
+    ]
+  ],
+  "sources": [
+    {
+      "asset": "Rocks Ground 05 diffuse 1K",
+      "url": "https://polyhaven.com/a/rocks_ground_05",
+      "downloadUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rocks_ground_05/rocks_ground_05_diff_1k.jpg",
+      "license": "CC0",
+      "used": true
+    }
+  ],
+  "additionalSources": [
+    {
+      "asset": "grass_path_2",
+      "url": "https://polyhaven.com/a/grass_path_2",
+      "license": "CC0"
+    },
+    {
+      "asset": "grass_medium_01",
+      "url": "https://polyhaven.com/a/grass_medium_01",
+      "license": "CC0"
+    },
+    {
+      "asset": "shrub_01",
+      "url": "https://polyhaven.com/a/shrub_01",
+      "license": "CC0"
+    }
+  ],
+  "visualNote": "Baked real meadow/earth atlas and decimated photographed plant meshes; illustrative geography",
+  "geometrySource": "Procedural Blender terrain, river, ridges and stones; Poly Haven natural grass and shrub meshes",
+  "sha256": "92c1f8b4f825726f033d4f3d844b92078efc421ffa2dba18dfed2274b906fcf3",
+  "bytes": 7431064,
+  "triangles": 107008,
+  "bounds": {
+    "min": [
+      -90.0,
+      -0.43512991070747375,
+      -90.0
+    ],
+    "max": [
+      90.0,
+      7.289393424987793,
+      90.0
+    ]
+  },
+  "sourceFileHashes": {
+    "shrub_01/shrub_01.bin": "a8646f51386c84b12a6be8324dd0c2357c393c9108aac911847a203cf490b426",
+    "shrub_01/shrub_01_1k.gltf": "c3bb3340687d46c684b9dab82f5b2f92b7b0fe761842423d3c9e19f59a839393",
+    "grass_medium_01/grass_medium_01.bin": "f4587cabdb96a2e96d8be644923dc954a248edfaaa717a0ff224cacb898bee1f",
+    "grass_medium_01/grass_medium_01_1k.gltf": "3e5e2a314c94e16de54fd7c28e41709731fbd2b1613ab539f1544f622ddb6a85",
+    "grass_medium_01/textures/grass_medium_01_nor_gl_1k.jpg": "cae298d3d1d7ff7c7e210ad8ac772b96706e356f9315a6b04fde373ce01ccf1e",
+    "grass_medium_01/textures/grass_medium_01_arm_1k.jpg": "9a3a30f72bc02f4398967c5b08f2d20cce30bd423a2613b42a727034296fa3ae",
+    "grass_medium_01/textures/grass_medium_01_diff_1k.jpg": "71495bd6a11fddcab0aaff38246fea1a7b802a705483f1c7cbca53955daa8050",
+    "shrub_01/textures/shrub_01_arm_1k.jpg": "8faecdc28d8f03ba0ac139be16e617e8bfd0778780ec1d7850812230378b89be",
+    "shrub_01/textures/shrub_01_diff_1k.jpg": "fe60e639d694e1807c0a3ae97dd1d5a7e7b3f84e5fc32d0610b868ce48f36331",
+    "shrub_01/textures/shrub_01_nor_gl_1k.jpg": "076870a39a4e21a364cf94566e6dd1852a29045fdf1f23393637235b19d1c2e8"
+  }
+}

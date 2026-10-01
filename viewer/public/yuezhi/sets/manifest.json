@@ -1,0 +1,22 @@
+{
+  "license": "project authored Blender geometry",
+  "historicalStatus": "illustrative sets inspired by regional spatial references; not an identified palace or city",
+  "assets": [
+    {
+      "id": "meeting",
+      "file": "meeting.glb",
+      "sha256": "a099b30921cdaedf43fad7648103f3afe8f27e839d43722613733b0035bdac04",
+      "bytes": 228812,
+      "tool": "5.2.0 LTS",
+      "status": "illustrative architecture and props; unknown historical location and form"
+    },
+    {
+      "id": "market",
+      "file": "market.glb",
+      "sha256": "af78f80a4928f3425c0ee1bf5261c05f3a4be9e97a517870bff2be482f72a31e",
+      "bytes": 488060,
+      "tool": "5.2.0 LTS",
+      "status": "illustrative architecture and props; unknown historical location and form"
+    }
+  ]
+}

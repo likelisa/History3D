@@ -1,0 +1,547 @@
+{
+  "schemaVersion": "0.1.0",
+  "storyId": "zhang-qian-yuezhi",
+  "contentRevision": 2,
+  "title": "张骞使月氏：抵达了，目标却不同",
+  "status": "draft",
+  "historicalScope": {
+    "period": "西汉武帝时，张骞首次出使月氏期间",
+    "place": "大月氏及大夏，具体会面地点不详",
+    "scopeNote": "历史事件依据古籍数字文本；人物相貌、服饰、具体会面地点、河谷布局和尺寸为制作示意。月氏继位者在《史记》《汉书》中有太子／夫人异文，本场景不指定其身份。数字文本核对不能替代底本校勘与最终史料审核。"
+  },
+  "experienceQuestion": "为什么共同的旧敌，没有促成汉廷期待的联合约定？",
+  "claims": [
+    {
+      "id": "claim-shiji-mission",
+      "subjectId": "zhang-qian-yuezhi",
+      "property": "narrative",
+      "statement": "同段记载张骞应募、与堂邑父出发、被留十余岁，并持汉节不失。",
+      "value": "月氏遁逃而常怨仇匈奴，無與共擊之。漢方欲事滅胡，聞此言，因欲通使。……留騫十餘歲，與妻，有子，然騫持漢節不失。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "documented",
+      "sourceIds": [
+        "shiji-mission"
+      ],
+      "note": "古籍数字文本摘录；现代对白为据史料改编，仍待史料负责人最终审核。"
+    },
+    {
+      "id": "claim-shiji-arrival",
+      "subjectId": "zhang-qian-yuezhi",
+      "property": "narrative",
+      "statement": "同段记载逃离匈奴后至大宛。省略号表示不连续摘录，路线图只呈现叙事顺序。",
+      "value": "騫因與其屬亡鄉月氏，西走數十日至大宛。……抵康居，康居傳致大月氏。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "documented",
+      "sourceIds": [
+        "shiji-arrival"
+      ],
+      "note": "古籍数字文本摘录；现代对白为据史料改编，仍待史料负责人最终审核。"
+    },
+    {
+      "id": "claim-shiji-disposition",
+      "subjectId": "zhang-qian-yuezhi",
+      "property": "narrative",
+      "statement": "“未取得联合约定”是依出使目标作的限义释读。没有可据以重演具体谈判的对白。",
+      "value": "地肥饒，少寇，志安樂，又自以遠漢，殊無報胡之心。騫從月氏至大夏，竟不能得月氏要領。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "documented",
+      "sourceIds": [
+        "shiji-disposition"
+      ],
+      "note": "古籍数字文本摘录；现代对白为据史料改编，仍待史料负责人最终审核。"
+    },
+    {
+      "id": "claim-shiji-report",
+      "subjectId": "zhang-qian-yuezhi",
+      "property": "narrative",
+      "statement": "需区分张骞亲历与传闻；本段结束并非张骞全部生平的终点。",
+      "value": "騫身所至者大宛、大月氏、大夏、康居，而傳聞其旁大國五六，具為天子言之。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "documented",
+      "sourceIds": [
+        "shiji-report"
+      ],
+      "note": "古籍数字文本摘录；现代对白为据史料改编，仍待史料负责人最终审核。"
+    },
+    {
+      "id": "claim-shiji-stay",
+      "subjectId": "zhang-qian-yuezhi",
+      "property": "narrative",
+      "statement": "支持在这一区域活动一年多，不能推定整年住在同一王庭、具体日程或交涉次数。",
+      "value": "騫從月氏至大夏，竟不能得月氏要領。留歲餘，還。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "documented",
+      "sourceIds": [
+        "shiji-stay"
+      ],
+      "note": "古籍数字文本摘录；现代对白为据史料改编，仍待史料负责人最终审核。"
+    },
+    {
+      "id": "claim-shiji-region",
+      "subjectId": "zhang-qian-yuezhi",
+      "property": "narrative",
+      "statement": "省略号表示不同段落摘录。只作区域生活背景，不确定本故事会见或市场的具体城市。",
+      "value": "大月氏……行國也，隨畜移徙。……大夏……其俗土著，有城屋。……其都曰藍市城，有市販賈諸物。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "documented",
+      "sourceIds": [
+        "shiji-region"
+      ],
+      "note": "古籍数字文本摘录；现代对白为据史料改编，仍待史料负责人最终审核。"
+    },
+    {
+      "id": "claim-shiji-market",
+      "subjectId": "zhang-qian-yuezhi",
+      "property": "narrative",
+      "statement": "同段记张骞推想蜀地与身毒、大夏的交通关系。见物、答问与推想有记载；摊位、人物外形及现代对白为改编。",
+      "value": "臣在大夏時，見邛竹杖、蜀布。問曰：「安得此？」大夏國人曰：「吾賈人往市之身毒。」",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "documented",
+      "sourceIds": [
+        "shiji-market"
+      ],
+      "note": "古籍数字文本摘录；现代对白为据史料改编，仍待史料负责人最终审核。"
+    },
+    {
+      "id": "claim-hanshu-variant",
+      "subjectId": "zhang-qian-yuezhi",
+      "property": "narrative",
+      "statement": "《史记》相应段落记“立其太子为王”。本书保留异文，不据任一数字文本确定此次接见者身份；底本校勘待做。",
+      "value": "大月氏王已爲胡所殺，立其夫人爲王。",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "documented",
+      "sourceIds": [
+        "hanshu-variant"
+      ],
+      "note": "古籍数字文本摘录；现代对白为据史料改编，仍待史料负责人最终审核。"
+    },
+    {
+      "id": "environment-dimensions",
+      "subjectId": "brief-environment",
+      "property": "dimensions",
+      "statement": "河谷与牧地环境示意：dimensions为场景制作设定",
+      "value": [
+        180,
+        7.724523346262288,
+        180
+      ],
+      "unit": "m",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "外形、尺寸、人物数量和具体站位未经史料确认；角色是暂用资产。"
+    },
+    {
+      "id": "environment-appearance",
+      "subjectId": "brief-environment",
+      "property": "appearance",
+      "statement": "河谷与牧地环境示意：appearance为场景制作设定",
+      "value": "中性制作示意，非历史复原",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "外形、尺寸、人物数量和具体站位未经史料确认；角色是暂用资产。"
+    },
+    {
+      "id": "environment-layout",
+      "subjectId": "brief-environment",
+      "property": "layout",
+      "statement": "河谷与牧地环境示意：layout为场景制作设定",
+      "value": "米制位置 0, -0.4351299212744948, 0；具体站位为示意",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "外形、尺寸、人物数量和具体站位未经史料确认；角色是暂用资产。"
+    },
+    {
+      "id": "environment-count",
+      "subjectId": "brief-environment",
+      "property": "count",
+      "statement": "河谷与牧地环境示意：count为场景制作设定",
+      "value": 1,
+      "unit": "count",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "外形、尺寸、人物数量和具体站位未经史料确认；角色是暂用资产。"
+    },
+    {
+      "id": "envoy-dimensions",
+      "subjectId": "brief-envoy",
+      "property": "dimensions",
+      "statement": "张骞角色示意：dimensions为场景制作设定",
+      "value": [
+        0.7265763963554284,
+        1.7000000476837158,
+        0.36395283082684415
+      ],
+      "unit": "m",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "外形、尺寸、人物数量和具体站位未经史料确认；角色是暂用资产。"
+    },
+    {
+      "id": "envoy-appearance",
+      "subjectId": "brief-envoy",
+      "property": "appearance",
+      "statement": "张骞角色示意：appearance为场景制作设定",
+      "value": "中性制作示意，非历史复原",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "外形、尺寸、人物数量和具体站位未经史料确认；角色是暂用资产。"
+    },
+    {
+      "id": "envoy-layout",
+      "subjectId": "brief-envoy",
+      "property": "layout",
+      "statement": "张骞角色示意：layout为场景制作设定",
+      "value": "米制位置 -3, 0, 4；具体站位为示意",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "外形、尺寸、人物数量和具体站位未经史料确认；角色是暂用资产。"
+    },
+    {
+      "id": "envoy-count",
+      "subjectId": "brief-envoy",
+      "property": "count",
+      "statement": "张骞角色示意：count为场景制作设定",
+      "value": 1,
+      "unit": "count",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "外形、尺寸、人物数量和具体站位未经史料确认；角色是暂用资产。"
+    },
+    {
+      "id": "companion-dimensions",
+      "subjectId": "brief-companion",
+      "property": "dimensions",
+      "statement": "同行者角色示意：dimensions为场景制作设定",
+      "value": [
+        0.7265763963554284,
+        1.7000000476837158,
+        0.36395283082684415
+      ],
+      "unit": "m",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "外形、尺寸、人物数量和具体站位未经史料确认；角色是暂用资产。"
+    },
+    {
+      "id": "companion-appearance",
+      "subjectId": "brief-companion",
+      "property": "appearance",
+      "statement": "同行者角色示意：appearance为场景制作设定",
+      "value": "中性制作示意，非历史复原",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "外形、尺寸、人物数量和具体站位未经史料确认；角色是暂用资产。"
+    },
+    {
+      "id": "companion-layout",
+      "subjectId": "brief-companion",
+      "property": "layout",
+      "statement": "同行者角色示意：layout为场景制作设定",
+      "value": "米制位置 -4.6, 0, 5；具体站位为示意",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "外形、尺寸、人物数量和具体站位未经史料确认；角色是暂用资产。"
+    },
+    {
+      "id": "companion-count",
+      "subjectId": "brief-companion",
+      "property": "count",
+      "statement": "同行者角色示意：count为场景制作设定",
+      "value": 1,
+      "unit": "count",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "外形、尺寸、人物数量和具体站位未经史料确认；角色是暂用资产。"
+    },
+    {
+      "id": "representative-dimensions",
+      "subjectId": "brief-representative",
+      "property": "dimensions",
+      "statement": "月氏一侧角色示意（身份未指定）：dimensions为场景制作设定",
+      "value": [
+        0.5560953624064879,
+        1.7000000476837158,
+        0.7161145589944766
+      ],
+      "unit": "m",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "外形、尺寸、人物数量和具体站位未经史料确认；角色是暂用资产。"
+    },
+    {
+      "id": "representative-appearance",
+      "subjectId": "brief-representative",
+      "property": "appearance",
+      "statement": "月氏一侧角色示意（身份未指定）：appearance为场景制作设定",
+      "value": "中性制作示意，非历史复原",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "外形、尺寸、人物数量和具体站位未经史料确认；角色是暂用资产。"
+    },
+    {
+      "id": "representative-layout",
+      "subjectId": "brief-representative",
+      "property": "layout",
+      "statement": "月氏一侧角色示意（身份未指定）：layout为场景制作设定",
+      "value": "米制位置 4.8, 0, -3.5；具体站位为示意",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "外形、尺寸、人物数量和具体站位未经史料确认；角色是暂用资产。"
+    },
+    {
+      "id": "representative-count",
+      "subjectId": "brief-representative",
+      "property": "count",
+      "statement": "月氏一侧角色示意（身份未指定）：count为场景制作设定",
+      "value": 1,
+      "unit": "count",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "外形、尺寸、人物数量和具体站位未经史料确认；角色是暂用资产。"
+    },
+    {
+      "id": "local-dimensions",
+      "subjectId": "brief-local",
+      "property": "dimensions",
+      "statement": "生活人物示意：dimensions为场景制作设定",
+      "value": [
+        0.5560953624064879,
+        1.7000000476837158,
+        0.7161145589944766
+      ],
+      "unit": "m",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "外形、尺寸、人物数量和具体站位未经史料确认；角色是暂用资产。"
+    },
+    {
+      "id": "local-appearance",
+      "subjectId": "brief-local",
+      "property": "appearance",
+      "statement": "生活人物示意：appearance为场景制作设定",
+      "value": "中性制作示意，非历史复原",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "外形、尺寸、人物数量和具体站位未经史料确认；角色是暂用资产。"
+    },
+    {
+      "id": "local-layout",
+      "subjectId": "brief-local",
+      "property": "layout",
+      "statement": "生活人物示意：layout为场景制作设定",
+      "value": "米制位置 -7, 0, -7；具体站位为示意",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "外形、尺寸、人物数量和具体站位未经史料确认；角色是暂用资产。"
+    },
+    {
+      "id": "local-count",
+      "subjectId": "brief-local",
+      "property": "count",
+      "statement": "生活人物示意：count为场景制作设定",
+      "value": 1,
+      "unit": "count",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "外形、尺寸、人物数量和具体站位未经史料确认；角色是暂用资产。"
+    },
+    {
+      "id": "staff-dimensions",
+      "subjectId": "brief-staff",
+      "property": "dimensions",
+      "statement": "汉节持有记载／杆状外形示意：dimensions为场景制作设定",
+      "value": [
+        0.022601164877414703,
+        1.4894895069301128,
+        0.022775111719965935
+      ],
+      "unit": "m",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "外形、尺寸、人物数量和具体站位未经史料确认；角色是暂用资产。"
+    },
+    {
+      "id": "staff-appearance",
+      "subjectId": "brief-staff",
+      "property": "appearance",
+      "statement": "汉节持有记载／杆状外形示意：appearance为场景制作设定",
+      "value": "中性制作示意，非历史复原",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "外形、尺寸、人物数量和具体站位未经史料确认；角色是暂用资产。"
+    },
+    {
+      "id": "staff-layout",
+      "subjectId": "brief-staff",
+      "property": "layout",
+      "statement": "汉节持有记载／杆状外形示意：layout为场景制作设定",
+      "value": "米制位置 -2.65, 0, 4；具体站位为示意",
+      "unit": null,
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "外形、尺寸、人物数量和具体站位未经史料确认；角色是暂用资产。"
+    },
+    {
+      "id": "staff-count",
+      "subjectId": "brief-staff",
+      "property": "count",
+      "statement": "汉节持有记载／杆状外形示意：count为场景制作设定",
+      "value": 1,
+      "unit": "count",
+      "valueStatus": "known",
+      "evidenceType": "illustrative",
+      "sourceIds": [],
+      "note": "外形、尺寸、人物数量和具体站位未经史料确认；角色是暂用资产。"
+    }
+  ],
+  "objectBriefs": [
+    {
+      "id": "brief-environment",
+      "label": "河谷与牧地环境示意",
+      "purpose": "河谷与牧地环境示意",
+      "claimIds": [
+        "environment-dimensions",
+        "environment-appearance",
+        "environment-layout",
+        "environment-count"
+      ],
+      "referenceSourceIds": []
+    },
+    {
+      "id": "brief-envoy",
+      "label": "张骞角色示意",
+      "purpose": "张骞角色示意",
+      "claimIds": [
+        "envoy-dimensions",
+        "envoy-appearance",
+        "envoy-layout",
+        "envoy-count"
+      ],
+      "referenceSourceIds": []
+    },
+    {
+      "id": "brief-companion",
+      "label": "同行者角色示意",
+      "purpose": "同行者角色示意",
+      "claimIds": [
+        "companion-dimensions",
+        "companion-appearance",
+        "companion-layout",
+        "companion-count"
+      ],
+      "referenceSourceIds": []
+    },
+    {
+      "id": "brief-representative",
+      "label": "月氏一侧角色示意（身份未指定）",
+      "purpose": "月氏一侧角色示意（身份未指定）",
+      "claimIds": [
+        "representative-dimensions",
+        "representative-appearance",
+        "representative-layout",
+        "representative-count"
+      ],
+      "referenceSourceIds": []
+    },
+    {
+      "id": "brief-local",
+      "label": "生活人物示意",
+      "purpose": "生活人物示意",
+      "claimIds": [
+        "local-dimensions",
+        "local-appearance",
+        "local-layout",
+        "local-count"
+      ],
+      "referenceSourceIds": []
+    },
+    {
+      "id": "brief-staff",
+      "label": "汉节持有记载／杆状外形示意",
+      "purpose": "汉节持有记载／杆状外形示意",
+      "claimIds": [
+        "staff-dimensions",
+        "staff-appearance",
+        "staff-layout",
+        "staff-count"
+      ],
+      "referenceSourceIds": []
+    }
+  ],
+  "hotspots": [
+    {
+      "id": "arrival",
+      "title": "终于抵达",
+      "body": "大宛、康居协助传送有记载。眼前的接引人物、站位与谈话为创作补充；不指定谁一路随行。",
+      "claimIds": [
+        "claim-shiji-mission",
+        "claim-shiji-arrival",
+        "claim-shiji-disposition"
+      ]
+    },
+    {
+      "id": "meeting",
+      "title": "同一个旧敌",
+      "body": "本页压缩呈现史家概括的双方诉求，不能理解为一次会面中正式拒绝。接见者不指定为国王；太子／夫人异文保留。",
+      "claimIds": [
+        "claim-shiji-mission",
+        "claim-shiji-disposition"
+      ]
+    },
+    {
+      "id": "market",
+      "title": "异乡的蜀物",
+      "body": "邛竹杖、蜀布及“商人从身毒购得”的答问有记载。人物发言为现代改编；市场与器物外形不复原；不将蜀布预设为丝绸。",
+      "claimIds": [
+        "claim-shiji-market",
+        "claim-shiji-report"
+      ]
+    }
+  ],
+  "routeOverview": {
+    "kind": "schematic",
+    "imagePath": "references/sequence.svg"
+  }
+}

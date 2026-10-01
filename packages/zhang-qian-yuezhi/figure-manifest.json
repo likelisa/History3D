@@ -1,0 +1,103 @@
+{
+  "status": "Tripo generated provisional illustrative assets",
+  "license": "Tripo generated outputs under account terms; project authorship does not apply to Tripo assets",
+  "assets": [
+    {
+      "id": "envoy",
+      "file": "envoy.glb",
+      "sha256": "74277e7f5b769f92a608fec1b77ad928415155b37d08d07a1c843382a0f8ea26",
+      "rawSha256": "3745bb6ed4decbf9f11eb3961f7049294de4d1436ede9fe78b5572f23553086b",
+      "bytes": 1959504,
+      "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf",
+      "source": "Tripo text-to-model v3.1-20260211",
+      "creditsConsumed": 20.0,
+      "approxHeightMeters": 1.7,
+      "historicalStatus": "AI-generated illustrative visitor; no claim of authentic face or clothing",
+      "conversion": {
+        "blenderVersion": "5.2.0 LTS",
+        "scale": 1.7,
+        "rawBoundsBlenderZUp": {
+          "min": [
+            -0.10704494267702103,
+            -0.21369892358779907,
+            -0.5
+          ],
+          "max": [
+            0.10704494267702103,
+            0.21369892358779907,
+            0.5
+          ]
+        },
+        "texturesMaxPixels": 1024,
+        "coordinateSystem": "glTF Y up",
+        "origin": "feet on ground",
+        "frontAxis": "glTF +Z",
+        "yawDegrees": -90
+      }
+    },
+    {
+      "id": "yuezhi",
+      "file": "yuezhi.glb",
+      "sha256": "5051979679573bec5b1c4805480698de04654dea3d2ba221c708223e795411fa",
+      "rawSha256": "31f7aa5010fc524b823cd98083f92e7b2c722619b4fa0a4eb90b9756c21f9b9d",
+      "bytes": 1939608,
+      "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb",
+      "source": "Tripo text-to-model v3.1-20260211",
+      "creditsConsumed": 20.0,
+      "approxHeightMeters": 1.7,
+      "historicalStatus": "AI-generated illustrative visitor; no claim of authentic face or clothing",
+      "conversion": {
+        "blenderVersion": "5.2.0 LTS",
+        "scale": 1.7,
+        "rawBoundsBlenderZUp": {
+          "min": [
+            -0.16355745494365692,
+            -0.2106219232082367,
+            -0.5
+          ],
+          "max": [
+            0.16355745494365692,
+            0.2106219232082367,
+            0.5
+          ]
+        },
+        "texturesMaxPixels": 1024,
+        "coordinateSystem": "glTF Y up",
+        "origin": "feet on ground",
+        "frontAxis": "glTF +Z",
+        "yawDegrees": 0
+      }
+    },
+    {
+      "id": "han-staff",
+      "file": "han-staff.glb",
+      "sha256": "7ee3975984333e3eb341ee9e24cd587a18d77884641b6c3704037a2e533c5bdb",
+      "bytes": 28848,
+      "approxHeightMeters": 1.55,
+      "source": "procedural illustrative Blender pole",
+      "historicalStatus": "Text attests possession of Han staff; external appearance unknown. Plain pole is a placeholder, not reconstruction.",
+      "meshLocalBounds": {
+        "min": [
+          -0.011285986751317978,
+          0.03025524690747261,
+          -0.011580469086766243
+        ],
+        "max": [
+          0.011315178126096725,
+          1.5197447538375854,
+          0.011194642633199692
+        ]
+      }
+    }
+  ],
+  "accountEvidence": {
+    "balanceBefore": 24600,
+    "balanceAfter": 24560,
+    "totalCreditsConsumed": 40,
+    "frozenAfter": 0
+  },
+  "sources": [
+    "https://developers.tripo3d.ai/en/models/v3-1",
+    "https://developers.tripo3d.ai/en/docs/generation-text-to-model/standard"
+  ]
+}

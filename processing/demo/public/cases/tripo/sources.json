@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "story_id": "demo_ferry",
+  "sources": [
+    {
+      "id": "tripo-run",
+      "title": "本机会话中的真实 Tripo 任务",
+      "excerpt": "任务 471fb12e-1fcc-4bc5-b243-1c1b905874e9；text-to-model；已下载候选 GLB。不是历史资料。",
+      "evidence": "demo"
+    }
+  ]
+}

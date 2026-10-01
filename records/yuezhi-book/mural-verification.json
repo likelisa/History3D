@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-01",
+  "checkout": "f0d842ead71122e91e0ac7f4ba74998632d9605b + preserved uncommitted book work",
+  "url": "http://127.0.0.1:5191/yuezhi.html",
+  "checks": [
+    "build with package validation and TypeScript passed",
+    "6 yuezhi progress tests passed",
+    "git diff --check passed",
+    "Browser: four-page dialogue route, one branch per choice point, ending directory",
+    "Browser: music play action accepted",
+    "Browser: both existing Tripo models loaded after SHA-256 validation",
+    "Browser: new Tripo horse loaded after SHA-256 validation, rotate/zoom/return",
+    "Browser: 390x844 layout and character inspector inspected",
+    "Before dev push: full serial Vitest suite passed, 19 files and 88 tests"
+  ],
+  "limits": [
+    "Other choice branches verified by state tests, not each replayed in browser",
+    "Existing environment ground-height warning remains; this page no longer renders that environment",
+    "Main viewer chunk size warning remains",
+    "Historical reconstruction and public usage permissions not accepted",
+    "New horse is text-to-model, not image-to-model; existing characters are not generated from the mural",
+    "No production deployment"
+  ],
+  "screenshots": [
+    "tripo-envoy-inspector.jpg",
+    "tripo-mural-horse.jpg",
+    "mural-interaction.jpg"
+  ]
+}

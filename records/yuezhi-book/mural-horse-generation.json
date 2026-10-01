@@ -1,0 +1,21 @@
+{
+  "provider": "Tripo text-to-model v3.1-20260211",
+  "taskId": "02cabe4c-1356-4e5b-b0a3-88c10da4669b",
+  "status": "success",
+  "creditsConsumed": 20.0,
+  "input": {
+    "prompt": "One single complete horse, no rider, standing with all four hooves on the ground, simple historic bridle and a modest cloth saddle blanket. Stylized sculptural interpretation of a horse in the Early Tang Dunhuang Mogao Cave 323 mural: warm rust red and ochre mineral pigments, dark indigo fine painted contour lines, matte weathered plaster-like hand painted texture, restrained elegant elongated silhouette. All sides complete, readable from every angle, gentle natural proportions. No person, pedestal, buildings, landscape, text, weapons, modern equipment or photorealistic glossy finish. Artistic mural-inspired study, not an archaeological reconstruction.",
+    "model": "v3.1-20260211",
+    "texture": true,
+    "pbr": true,
+    "texture_quality": "standard",
+    "geometry_quality": "standard",
+    "face_limit": 30000
+  },
+  "imageReference": "https://www.dha.ac.cn/info/1266/2524.htm",
+  "outputSha256": "638f54e5d1016617d48871c295a7719706f4f0c8aac1600d6bc816a8bb167f35",
+  "bytes": 5612424,
+  "output": "viewer/public/yuezhi/murals/mural-horse.glb",
+  "historicalStatus": "Artistic mural-inspired study; not archaeological reconstruction",
+  "rights": "Tripo account terms; public release rights not confirmed"
+}

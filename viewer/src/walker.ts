@@ -64,6 +64,10 @@ export class Walker {
     this.feet = [this.config.spawnFeet[0], this.config.spawnFeet[2]]
     this.yawRad = this.config.yawRad
     this.pitchRad = this.config.pitchRad
+    this.clearInput()
+  }
+
+  clearInput(): void {
     this.keys.clear()
     this.synthetic = [0, 0]
   }

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "story_id": "demo_ferry",
+  "entities": [
+    {
+      "id": "tripo-object",
+      "name": "Tripo 真实生成候选",
+      "kind": "object",
+      "render_kind": "model",
+      "evidence": "demo",
+      "source_ids": [
+        "tripo-run"
+      ],
+      "dimensions_m": [
+        3,
+        3,
+        3
+      ],
+      "dimensions_basis": "展示包围盒最长边设为 3 米；仅显示归一化，非历史尺寸"
+    }
+  ]
+}

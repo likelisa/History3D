@@ -1,0 +1,36 @@
+{
+  "source": "https://www.dha.ac.cn/info/1266/2524.htm",
+  "credit": "敦煌研究院网站",
+  "period": "初唐，莫高窟第323窟",
+  "boundary": "后世图像记忆，含佛教改写，不作为首次出使实景；未补绘人物、建筑或器物。",
+  "usage": "本地原型；原始文件不修改；图像修改及商业用途需书面许可，发布许可未确认。",
+  "rights": "https://www.dha.ac.cn/index/bqsm.htm",
+  "assets": [
+    {
+      "file": "full.jpg",
+      "url": "https://www.dha.ac.cn/__local/3/3F/3F/C5737ECA5918E0D3C81E88FE5F1_D42C60DE_308FB.jpg",
+      "sha256": "0d74b143c0efcc89a7d1c97727823e4850abf50b82c8edd1ebc2d415980e2c35",
+      "changes": "none"
+    },
+    {
+      "file": "farewell.jpg",
+      "url": "https://www.dha.ac.cn/__local/6/E5/33/855D608A85DD63C7C8DEEDA58AD_C678BAA8_1E401.jpg",
+      "sha256": "594397e675c8588fc29d7610c74a9e3b9a3c837d7de52ebad4df318aba90ffde",
+      "changes": "none"
+    },
+    {
+      "file": "journey.jpg",
+      "url": "https://www.dha.ac.cn/__local/5/C1/BD/7E834354A7355CAC5211A6B2546_A3592F3D_2E681.jpg",
+      "sha256": "c70fe4df71324f77cbcd1f020d10c74b5120eba51829807b04fdcbefdb4e34ea",
+      "changes": "none"
+    }
+  ],
+  "music": {
+    "file": "reflection.mp3",
+    "title": "At Rest",
+    "author": "Kevin MacLeod",
+    "license": "CC BY 4.0",
+    "source": "https://www.incompetech.com/music/royalty-free/index.html?isrc=USUAN1100748",
+    "changes": "15–50秒，淡入淡出，MP3转码；复用已有试听文件"
+  }
+}

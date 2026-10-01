@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "story_id": "demo_ferry",
+  "sources": [
+    {
+      "id": "demo-brief",
+      "title": "渡口交接测试说明",
+      "excerpt": "虚构案例：一座 12 米长的木桥、两处门架和一组货物。只用于验证交接与显示，不提供历史证据。",
+      "evidence": "demo"
+    }
+  ]
+}

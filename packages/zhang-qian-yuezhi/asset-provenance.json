@@ -1,0 +1,256 @@
+{
+  "status": "draft",
+  "realTripoAssetsReceived": true,
+  "accountEvidence": {
+    "balanceBefore": 24600,
+    "balanceAfter": 24560,
+    "totalCreditsConsumed": 40,
+    "frozenAfter": 0
+  },
+  "assets": [
+    {
+      "assetId": "asset-environment",
+      "path": "assets/asset-environment.glb",
+      "bytes": 7431156,
+      "sha256": "8a10547637835b2c18cd6b9c94d11b998ae1b20c56fd8a7440f04daed7a2b4a7",
+      "inputSha256": "92c1f8b4f825726f033d4f3d844b92078efc421ffa2dba18dfed2274b906fcf3",
+      "rawSha256": null,
+      "provider": "Blender procedural environment",
+      "taskId": null,
+      "creditsConsumed": 0,
+      "sourceConversion": null,
+      "conversion": {
+        "operation": "translate bottom-center to origin; geometry preserved",
+        "offset": [
+          0,
+          -0.4351299212744948,
+          0
+        ]
+      },
+      "status": "illustrative",
+      "source": "environment.glb"
+    },
+    {
+      "assetId": "asset-envoy",
+      "path": "assets/asset-envoy.glb",
+      "bytes": 1959616,
+      "sha256": "d4266180a9f0b7ca677d70faa95c2972953be4ffe719fd52bf11f938cd415df4",
+      "inputSha256": "74277e7f5b769f92a608fec1b77ad928415155b37d08d07a1c843382a0f8ea26",
+      "rawSha256": "3745bb6ed4decbf9f11eb3961f7049294de4d1436ede9fe78b5572f23553086b",
+      "provider": "Tripo text-to-model v3.1-20260211",
+      "taskId": "e87b6ae6-78a2-4630-b616-91db00681bdf",
+      "creditsConsumed": 20,
+      "sourceConversion": {
+        "blenderVersion": "5.2.0 LTS",
+        "scale": 1.7,
+        "rawBoundsBlenderZUp": {
+          "min": [
+            -0.10704494267702103,
+            -0.21369892358779907,
+            -0.5
+          ],
+          "max": [
+            0.10704494267702103,
+            0.21369892358779907,
+            0.5
+          ]
+        },
+        "texturesMaxPixels": 1024,
+        "coordinateSystem": "glTF Y up",
+        "origin": "feet on ground",
+        "frontAxis": "glTF +Z",
+        "yawDegrees": -90
+      },
+      "conversion": {
+        "operation": "translate bottom-center to origin; geometry preserved",
+        "offset": [
+          -6.846093386636554e-9,
+          0,
+          -1.8059668344116986e-9
+        ]
+      },
+      "status": "illustrative",
+      "source": "figures/envoy.glb"
+    },
+    {
+      "assetId": "asset-representative",
+      "path": "assets/asset-representative.glb",
+      "bytes": 1939684,
+      "sha256": "306fc0a601fa65bb9d1486a815fd2b14ec93cd63448a8e0c409c8e1ab99ad3e7",
+      "inputSha256": "5051979679573bec5b1c4805480698de04654dea3d2ba221c708223e795411fa",
+      "rawSha256": "31f7aa5010fc524b823cd98083f92e7b2c722619b4fa0a4eb90b9756c21f9b9d",
+      "provider": "Tripo text-to-model v3.1-20260211",
+      "taskId": "d5830027-1d35-4835-9be1-f8035f9f82eb",
+      "creditsConsumed": 20,
+      "sourceConversion": {
+        "blenderVersion": "5.2.0 LTS",
+        "scale": 1.7,
+        "rawBoundsBlenderZUp": {
+          "min": [
+            -0.16355745494365692,
+            -0.2106219232082367,
+            -0.5
+          ],
+          "max": [
+            0.16355745494365692,
+            0.2106219232082367,
+            0.5
+          ]
+        },
+        "texturesMaxPixels": 1024,
+        "coordinateSystem": "glTF Y up",
+        "origin": "feet on ground",
+        "frontAxis": "glTF +Z",
+        "yawDegrees": 0
+      },
+      "conversion": {
+        "operation": "translate bottom-center to origin; geometry preserved",
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "status": "illustrative",
+      "source": "figures/yuezhi.glb"
+    },
+    {
+      "assetId": "asset-staff",
+      "path": "assets/asset-staff.glb",
+      "bytes": 28984,
+      "sha256": "4484a2a14f86bee0458b05912370515b57e2e0feac27a8415f73183b63f69649",
+      "inputSha256": "7ee3975984333e3eb341ee9e24cd587a18d77884641b6c3704037a2e533c5bdb",
+      "rawSha256": null,
+      "provider": "procedural illustrative Blender pole",
+      "taskId": null,
+      "creditsConsumed": 0,
+      "sourceConversion": null,
+      "conversion": {
+        "operation": "translate bottom-center to origin; geometry preserved",
+        "offset": [
+          0.00001459568738937378,
+          0.03025524690747261,
+          -0.0001929132267832756
+        ]
+      },
+      "status": "illustrative",
+      "source": "figures/han-staff.glb"
+    },
+    {
+      "assetId": "asset-meeting",
+      "path": "assets/asset-meeting.glb",
+      "bytes": 228908,
+      "sha256": "8a7041072cefbc2d44b5a86ad3aed8140c6e525b5e4e628625713b06de3a0ee9",
+      "inputSha256": "a099b30921cdaedf43fad7648103f3afe8f27e839d43722613733b0035bdac04",
+      "provider": "Blender authored illustrative story set",
+      "tool": "5.2.0 LTS",
+      "taskId": null,
+      "creditsConsumed": 0,
+      "conversion": {
+        "operation": "translate bottom-center to origin",
+        "offset": [
+          0,
+          -0.18000000715255737,
+          0
+        ]
+      },
+      "status": "illustrative",
+      "source": "sets/meeting.glb"
+    },
+    {
+      "assetId": "asset-market",
+      "path": "assets/asset-market.glb",
+      "bytes": 488156,
+      "sha256": "37395ddc315339f660191a0b39eff5e989c99d6412dc774be85e378b5c4e1f2c",
+      "inputSha256": "af78f80a4928f3425c0ee1bf5261c05f3a4be9e97a517870bff2be482f72a31e",
+      "provider": "Blender authored illustrative story set",
+      "tool": "5.2.0 LTS",
+      "taskId": null,
+      "creditsConsumed": 0,
+      "conversion": {
+        "operation": "translate bottom-center to origin",
+        "offset": [
+          0,
+          -0.1599999964237213,
+          0
+        ]
+      },
+      "status": "illustrative",
+      "source": "sets/market.glb"
+    }
+  ],
+  "environment": {
+    "historicalStatus": "illustrative landscape; geography and meeting layout not asserted as historical facts",
+    "blenderVersion": "5.2.0 LTS",
+    "unit": "meter",
+    "upAxis": "Y",
+    "centralWalkableHeight": 0,
+    "meetingPoints": [
+      [
+        -4,
+        0,
+        4
+      ],
+      [
+        5,
+        0,
+        -4
+      ]
+    ],
+    "sources": [
+      {
+        "asset": "Rocks Ground 05 diffuse 1K",
+        "url": "https://polyhaven.com/a/rocks_ground_05",
+        "downloadUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rocks_ground_05/rocks_ground_05_diff_1k.jpg",
+        "license": "CC0",
+        "used": true
+      }
+    ],
+    "additionalSources": [
+      {
+        "asset": "grass_path_2",
+        "url": "https://polyhaven.com/a/grass_path_2",
+        "license": "CC0"
+      },
+      {
+        "asset": "grass_medium_01",
+        "url": "https://polyhaven.com/a/grass_medium_01",
+        "license": "CC0"
+      },
+      {
+        "asset": "shrub_01",
+        "url": "https://polyhaven.com/a/shrub_01",
+        "license": "CC0"
+      }
+    ],
+    "visualNote": "Baked real meadow/earth atlas and decimated photographed plant meshes; illustrative geography",
+    "geometrySource": "Procedural Blender terrain, river, ridges and stones; Poly Haven natural grass and shrub meshes",
+    "sha256": "92c1f8b4f825726f033d4f3d844b92078efc421ffa2dba18dfed2274b906fcf3",
+    "bytes": 7431064,
+    "triangles": 107008,
+    "bounds": {
+      "min": [
+        -90,
+        -0.43512991070747375,
+        -90
+      ],
+      "max": [
+        90,
+        7.289393424987793,
+        90
+      ]
+    },
+    "sourceFileHashes": {
+      "shrub_01/shrub_01.bin": "a8646f51386c84b12a6be8324dd0c2357c393c9108aac911847a203cf490b426",
+      "shrub_01/shrub_01_1k.gltf": "c3bb3340687d46c684b9dab82f5b2f92b7b0fe761842423d3c9e19f59a839393",
+      "grass_medium_01/grass_medium_01.bin": "f4587cabdb96a2e96d8be644923dc954a248edfaaa717a0ff224cacb898bee1f",
+      "grass_medium_01/grass_medium_01_1k.gltf": "3e5e2a314c94e16de54fd7c28e41709731fbd2b1613ab539f1544f622ddb6a85",
+      "grass_medium_01/textures/grass_medium_01_nor_gl_1k.jpg": "cae298d3d1d7ff7c7e210ad8ac772b96706e356f9315a6b04fde373ce01ccf1e",
+      "grass_medium_01/textures/grass_medium_01_arm_1k.jpg": "9a3a30f72bc02f4398967c5b08f2d20cce30bd423a2613b42a727034296fa3ae",
+      "grass_medium_01/textures/grass_medium_01_diff_1k.jpg": "71495bd6a11fddcab0aaff38246fea1a7b802a705483f1c7cbca53955daa8050",
+      "shrub_01/textures/shrub_01_arm_1k.jpg": "8faecdc28d8f03ba0ac139be16e617e8bfd0778780ec1d7850812230378b89be",
+      "shrub_01/textures/shrub_01_diff_1k.jpg": "fe60e639d694e1807c0a3ae97dd1d5a7e7b3f84e5fc32d0610b868ce48f36331",
+      "shrub_01/textures/shrub_01_nor_gl_1k.jpg": "076870a39a4e21a364cf94566e6dd1852a29045fdf1f23393637235b19d1c2e8"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "storyId": "zhang-qian-yuezhi",
+  "status": "local visual evidence; no final historical or owner acceptance",
+  "codeSha256": "b163bb7f5a163fd8627d5125305b89f7b7c4b803ebbf0c3f1add9c0f846d0ccf",
+  "sceneSha256": "f3e215737cec2eb11d793c853a507cbc7ab2403cf6ca7d3b3758773ce9ead678",
+  "frames": [
+    {
+      "file": "01-arrival.jpg",
+      "sha256": "83c098ab85d6e94113a54642cc19941d10844f3665845e5cb5c592381248a436"
+    },
+    {
+      "file": "02-investigation.jpg",
+      "sha256": "9ba2626bb0257c577905d3952922e0c9e5be9dcab6ad67c8f07626d3175ddd85"
+    },
+    {
+      "file": "03-outcome.jpg",
+      "sha256": "a91dd8c0ea64d4abb0a2bc4d5fed61b41502d68608c250369ca503805c061df5"
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "0.1.0",
+  "storyId": "zhang-qian-yuezhi",
+  "contentRevision": 2,
+  "sources": [
+    {
+      "id": "shiji-mission",
+      "title": "出使缘起与途中被留",
+      "type": "book",
+      "locator": {
+        "url": "https://zh.wikisource.org/wiki/史記/卷123#張騫",
+        "localPath": null
+      },
+      "citation": "《史记》卷123〈张骞〉第一段，维基文库数字文本",
+      "location": "《史记》卷123〈张骞〉第一段",
+      "excerpt": "月氏遁逃而常怨仇匈奴，無與共擊之。漢方欲事滅胡，聞此言，因欲通使。……留騫十餘歲，與妻，有子，然騫持漢節不失。",
+      "rights": "古籍数字转录页面标示CC BY-SA；保留出处，正式发布仍待权利与底本复核",
+      "accessedAt": "2026-10-01"
+    },
+    {
+      "id": "shiji-arrival",
+      "title": "抵达的叙事顺序",
+      "type": "book",
+      "locator": {
+        "url": "https://zh.wikisource.org/wiki/史記/卷123#張騫",
+        "localPath": null
+      },
+      "citation": "《史记》卷123〈张骞〉第二段，维基文库数字文本",
+      "location": "《史记》卷123〈张骞〉第二段",
+      "excerpt": "騫因與其屬亡鄉月氏，西走數十日至大宛。……抵康居，康居傳致大月氏。",
+      "rights": "古籍数字转录页面标示CC BY-SA；保留出处，正式发布仍待权利与底本复核",
+      "accessedAt": "2026-10-01"
+    },
+    {
+      "id": "shiji-disposition",
+      "title": "月氏处境与出使结果",
+      "type": "book",
+      "locator": {
+        "url": "https://zh.wikisource.org/wiki/史記/卷123#張騫",
+        "localPath": null
+      },
+      "citation": "《史记》卷123〈张骞〉第二段，维基文库数字文本",
+      "location": "《史记》卷123〈张骞〉第二段",
+      "excerpt": "地肥饒，少寇，志安樂，又自以遠漢，殊無報胡之心。騫從月氏至大夏，竟不能得月氏要領。",
+      "rights": "古籍数字转录页面标示CC BY-SA；保留出处，正式发布仍待权利与底本复核",
+      "accessedAt": "2026-10-01"
+    },
+    {
+      "id": "shiji-report",
+      "title": "返回与报告见闻",
+      "type": "book",
+      "locator": {
+        "url": "https://zh.wikisource.org/wiki/史記/卷123#張騫",
+        "localPath": null
+      },
+      "citation": "《史记》卷123〈张骞〉第三段及下文，维基文库数字文本",
+      "location": "《史记》卷123〈张骞〉第三段及下文",
+      "excerpt": "騫身所至者大宛、大月氏、大夏、康居，而傳聞其旁大國五六，具為天子言之。",
+      "rights": "古籍数字转录页面标示CC BY-SA；保留出处，正式发布仍待权利与底本复核",
+      "accessedAt": "2026-10-01"
+    },
+    {
+      "id": "shiji-stay",
+      "title": "一年多的区域活动",
+      "type": "book",
+      "locator": {
+        "url": "https://zh.wikisource.org/wiki/史記/卷123#張騫",
+        "localPath": null
+      },
+      "citation": "《史记》卷123〈张骞〉第二、三段，维基文库数字文本",
+      "location": "《史记》卷123〈张骞〉第二、三段",
+      "excerpt": "騫從月氏至大夏，竟不能得月氏要領。留歲餘，還。",
+      "rights": "古籍数字转录页面标示CC BY-SA；保留出处，正式发布仍待权利与底本复核",
+      "accessedAt": "2026-10-01"
+    },
+    {
+      "id": "shiji-region",
+      "title": "月氏与大夏的不同生活背景",
+      "type": "book",
+      "locator": {
+        "url": "https://zh.wikisource.org/wiki/史記/卷123",
+        "localPath": null
+      },
+      "citation": "《史记》卷123：大月氏、大夏条，维基文库数字文本",
+      "location": "《史记》卷123：大月氏、大夏条",
+      "excerpt": "大月氏……行國也，隨畜移徙。……大夏……其俗土著，有城屋。……其都曰藍市城，有市販賈諸物。",
+      "rights": "古籍数字转录页面标示CC BY-SA；保留出处，正式发布仍待权利与底本复核",
+      "accessedAt": "2026-10-01"
+    },
+    {
+      "id": "shiji-market",
+      "title": "邛竹杖、蜀布与身毒来源",
+      "type": "book",
+      "locator": {
+        "url": "https://zh.wikisource.org/wiki/史記/卷123",
+        "localPath": null
+      },
+      "citation": "《史记》卷123：张骞报告大夏见闻段，维基文库数字文本",
+      "location": "《史记》卷123：张骞报告大夏见闻段",
+      "excerpt": "臣在大夏時，見邛竹杖、蜀布。問曰：「安得此？」大夏國人曰：「吾賈人往市之身毒。」",
+      "rights": "古籍数字转录页面标示CC BY-SA；保留出处，正式发布仍待权利与底本复核",
+      "accessedAt": "2026-10-01"
+    },
+    {
+      "id": "hanshu-variant",
+      "title": "月氏继位者的文本分歧",
+      "type": "book",
+      "locator": {
+        "url": "https://zh.wikisource.org/wiki/漢書/卷061",
+        "localPath": null
+      },
+      "citation": "《汉书》卷61〈张骞〉第二段，与《史记》对读，维基文库数字文本",
+      "location": "《汉书》卷61〈张骞〉第二段，与《史记》对读",
+      "excerpt": "大月氏王已爲胡所殺，立其夫人爲王。",
+      "rights": "古籍数字转录页面标示CC BY-SA；保留出处，正式发布仍待权利与底本复核",
+      "accessedAt": "2026-10-01"
+    }
+  ]
+}

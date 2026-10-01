@@ -1,0 +1,465 @@
+{
+  "schemaVersion": "0.1.0",
+  "storyId": "zhang-qian-yuezhi",
+  "contentRevision": 2,
+  "sceneRevision": 2,
+  "storyPath": "story.json",
+  "sourcesPath": "sources.json",
+  "units": "m",
+  "upAxis": "Y",
+  "handedness": "right",
+  "ground": {
+    "type": "plane",
+    "y": 0
+  },
+  "assets": [
+    {
+      "id": "asset-environment",
+      "path": "assets/asset-environment.glb",
+      "dimensionsM": [
+        180,
+        7.724523346262288,
+        180
+      ],
+      "format": "glb",
+      "rights": "项目原创Blender示意地形，实际材质来源见asset-provenance.json"
+    },
+    {
+      "id": "asset-envoy",
+      "path": "assets/asset-envoy.glb",
+      "dimensionsM": [
+        0.7265763963554284,
+        1.7000000476837158,
+        0.36395283082684415
+      ],
+      "format": "glb",
+      "rights": "Tripo账户条款下生成的角色；服饰与面貌仅为制作示意，发布许可待核"
+    },
+    {
+      "id": "asset-representative",
+      "path": "assets/asset-representative.glb",
+      "dimensionsM": [
+        0.5560953624064879,
+        1.7000000476837158,
+        0.7161145589944766
+      ],
+      "format": "glb",
+      "rights": "Tripo账户条款下生成的角色；服饰与面貌仅为制作示意，发布许可待核"
+    },
+    {
+      "id": "asset-staff",
+      "path": "assets/asset-staff.glb",
+      "dimensionsM": [
+        0.022601164877414703,
+        1.4894895069301128,
+        0.022775111719965935
+      ],
+      "format": "glb",
+      "rights": "项目原创Blender杆状道具示意；不是历史外形复原"
+    },
+    {
+      "id": "asset-meeting",
+      "path": "assets/asset-meeting.glb",
+      "dimensionsM": [
+        20,
+        3.8499998934566975,
+        18
+      ],
+      "format": "glb",
+      "rights": "项目原创Blender叙事布景；建筑、器形与布局为示意，不指认历史王庭或城邑"
+    },
+    {
+      "id": "asset-market",
+      "path": "assets/asset-market.glb",
+      "dimensionsM": [
+        22,
+        2.9599999487400055,
+        20
+      ],
+      "format": "glb",
+      "rights": "项目原创Blender叙事布景；建筑、器形与布局为示意，不指认历史王庭或城邑"
+    }
+  ],
+  "objects": [
+    {
+      "id": "obj-environment",
+      "briefId": "brief-environment",
+      "label": "河谷与牧地环境示意",
+      "render": {
+        "type": "asset",
+        "assetId": "asset-environment"
+      },
+      "position": [
+        0,
+        -0.4351299212744948,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensionsM": [
+        180,
+        7.724523346262288,
+        180
+      ],
+      "evidence": {
+        "dimensions": [
+          "environment-dimensions"
+        ],
+        "appearance": [
+          "environment-appearance"
+        ],
+        "placement": [
+          "environment-layout"
+        ],
+        "quantity": [
+          "environment-count"
+        ]
+      }
+    },
+    {
+      "id": "obj-envoy",
+      "briefId": "brief-envoy",
+      "label": "张骞角色示意",
+      "render": {
+        "type": "asset",
+        "assetId": "asset-envoy"
+      },
+      "position": [
+        -3,
+        0,
+        4
+      ],
+      "rotation": [
+        0,
+        2.541592653589793,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensionsM": [
+        0.7265763963554284,
+        1.7000000476837158,
+        0.36395283082684415
+      ],
+      "evidence": {
+        "dimensions": [
+          "envoy-dimensions"
+        ],
+        "appearance": [
+          "envoy-appearance"
+        ],
+        "placement": [
+          "envoy-layout"
+        ],
+        "quantity": [
+          "envoy-count"
+        ]
+      }
+    },
+    {
+      "id": "obj-companion",
+      "briefId": "brief-companion",
+      "label": "同行者角色示意",
+      "render": {
+        "type": "asset",
+        "assetId": "asset-envoy"
+      },
+      "position": [
+        -4.6,
+        0,
+        5
+      ],
+      "rotation": [
+        0,
+        2.541592653589793,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensionsM": [
+        0.7265763963554284,
+        1.7000000476837158,
+        0.36395283082684415
+      ],
+      "evidence": {
+        "dimensions": [
+          "companion-dimensions"
+        ],
+        "appearance": [
+          "companion-appearance"
+        ],
+        "placement": [
+          "companion-layout"
+        ],
+        "quantity": [
+          "companion-count"
+        ]
+      }
+    },
+    {
+      "id": "obj-representative",
+      "briefId": "brief-representative",
+      "label": "月氏一侧角色示意（身份未指定）",
+      "render": {
+        "type": "asset",
+        "assetId": "asset-representative"
+      },
+      "position": [
+        4.8,
+        0,
+        -3.5
+      ],
+      "rotation": [
+        0,
+        -0.6,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensionsM": [
+        0.5560953624064879,
+        1.7000000476837158,
+        0.7161145589944766
+      ],
+      "evidence": {
+        "dimensions": [
+          "representative-dimensions"
+        ],
+        "appearance": [
+          "representative-appearance"
+        ],
+        "placement": [
+          "representative-layout"
+        ],
+        "quantity": [
+          "representative-count"
+        ]
+      }
+    },
+    {
+      "id": "obj-local",
+      "briefId": "brief-local",
+      "label": "生活人物示意",
+      "render": {
+        "type": "asset",
+        "assetId": "asset-representative"
+      },
+      "position": [
+        -7,
+        0,
+        -7
+      ],
+      "rotation": [
+        0,
+        0.9,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensionsM": [
+        0.5560953624064879,
+        1.7000000476837158,
+        0.7161145589944766
+      ],
+      "evidence": {
+        "dimensions": [
+          "local-dimensions"
+        ],
+        "appearance": [
+          "local-appearance"
+        ],
+        "placement": [
+          "local-layout"
+        ],
+        "quantity": [
+          "local-count"
+        ]
+      }
+    },
+    {
+      "id": "obj-staff",
+      "briefId": "brief-staff",
+      "label": "汉节持有记载／杆状外形示意",
+      "render": {
+        "type": "asset",
+        "assetId": "asset-staff"
+      },
+      "position": [
+        -2.65,
+        0,
+        4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "dimensionsM": [
+        0.022601164877414703,
+        1.4894895069301128,
+        0.022775111719965935
+      ],
+      "evidence": {
+        "dimensions": [
+          "staff-dimensions"
+        ],
+        "appearance": [
+          "staff-appearance"
+        ],
+        "placement": [
+          "staff-layout"
+        ],
+        "quantity": [
+          "staff-count"
+        ]
+      }
+    }
+  ],
+  "hotspotBindings": [
+    {
+      "hotspotId": "arrival",
+      "anchor": {
+        "type": "world",
+        "position": [
+          -3,
+          1.7,
+          4
+        ]
+      }
+    },
+    {
+      "hotspotId": "meeting",
+      "anchor": {
+        "type": "world",
+        "position": [
+          -3,
+          1.7,
+          4
+        ]
+      }
+    },
+    {
+      "hotspotId": "market",
+      "anchor": {
+        "type": "world",
+        "position": [
+          -3,
+          1.7,
+          4
+        ]
+      }
+    }
+  ],
+  "cameras": {
+    "firstPerson": {
+      "spawnFeet": [
+        -8,
+        0,
+        10
+      ],
+      "eyeHeightM": 1.7,
+      "yawRad": -0.65,
+      "pitchRad": 0,
+      "moveSpeedMps": 2.8,
+      "radiusM": 0.3
+    },
+    "overview": {
+      "position": [
+        2,
+        12,
+        20
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ]
+    }
+  },
+  "walkableBounds": {
+    "min": [
+      -11,
+      -10
+    ],
+    "max": [
+      12,
+      12
+    ]
+  },
+  "blockers": [
+    {
+      "id": "obj-envoy-body",
+      "min": [
+        -3.35,
+        3.65
+      ],
+      "max": [
+        -2.65,
+        4.35
+      ]
+    },
+    {
+      "id": "obj-companion-body",
+      "min": [
+        -4.949999999999999,
+        4.65
+      ],
+      "max": [
+        -4.25,
+        5.35
+      ]
+    },
+    {
+      "id": "obj-representative-body",
+      "min": [
+        4.45,
+        -3.85
+      ],
+      "max": [
+        5.1499999999999995,
+        -3.15
+      ]
+    },
+    {
+      "id": "obj-local-body",
+      "min": [
+        -7.35,
+        -7.35
+      ],
+      "max": [
+        -6.65,
+        -6.65
+      ]
+    }
+  ]
+}

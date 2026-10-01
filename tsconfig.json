@@ -19,5 +19,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["contracts/src", "collector/src", "viewer/src", "scripts", "tests", "vite.config.ts", "vitest.config.ts"]
+  "include": ["contracts/src", "collector/src", "processing/src", "viewer/src", "scripts", "tests", "vite.config.ts", "vitest.config.ts"]
 }

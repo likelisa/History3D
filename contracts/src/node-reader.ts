@@ -1,4 +1,4 @@
-import { readFile, realpath, stat } from 'node:fs/promises'
+import { readFile, readdir, realpath, stat } from 'node:fs/promises'
 import path from 'node:path'
 
 import type { PackageReader } from './validate.ts'
@@ -24,6 +24,19 @@ export function createNodeReader(rootDir: string): PackageReader {
   }
 
   return {
+    async listFiles() {
+      const files: string[] = []
+      const walk = async (dir: string): Promise<void> => {
+        for (const entry of await readdir(path.join(rootDir, dir), { withFileTypes: true })) {
+          const rel = path.posix.join(dir, entry.name)
+          if (entry.isDirectory()) await walk(rel)
+          else if (entry.isFile()) files.push(rel)
+          else throw new Error(`non-regular package entry: ${rel}`)
+        }
+      }
+      await walk('')
+      return files
+    },
     async readText(relPath) {
       const target = await resolve(relPath)
       if (!target) return null
