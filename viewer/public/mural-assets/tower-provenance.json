@@ -1,0 +1,14 @@
+{
+  "id": "tower",
+  "taskId": "48c14a9a-598b-4092-984d-4832aae93270",
+  "requestHash": "cff81a75ca2d41f8cb52dd1d83abf701d2d593a51a7036e5f9bbf2cd35d3a414",
+  "status": "success",
+  "source": "Text interpretation of supplied Mogao cave 323 mural",
+  "submittedAt": "2026-10-01T23:10:01.536Z",
+  "progress": 100,
+  "creditsConsumed": 20,
+  "checkedAt": "2026-10-01T23:13:39.990Z",
+  "sha256": "f31d7c936590c6074a1f3c637377698845236e4cd7b3f4f55a070b6984af5969",
+  "bytes": 4223208,
+  "path": "viewer/public/mural-assets/tower.glb"
+}

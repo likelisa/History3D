@@ -1,0 +1,9 @@
+{
+  "prompt": "One freestanding ancient Buddhist tower inspired by the small tower silhouette in early Tang Dunhuang Mogao cave 323 mural. Square stepped pale stone base, tall dark indigo square body, a narrow pale arched niche outlined by ivory linework on the front, three stepped projecting cornices tapering upward, a small slender finial. Compact slender proportions, no large Chinese pagoda roof wings, no gate, no walls, no people, no entire city. Sculptural architectural model with tangible layered stone and plaster detail, hand-painted muted indigo and parchment mineral pigments, worn matte fresco surfaces, no glossy metallic parts, no modern elements. Interpretive 3D adaptation of a mural tower, single isolated object.",
+  "model": "v3.1-20260211",
+  "texture": true,
+  "pbr": true,
+  "face_limit": 40000,
+  "geometry_quality": "standard",
+  "texture_quality": "standard"
+}
