@@ -51,7 +51,8 @@ def main():
     camera_data.type = "ORTHO"
     camera_data.ortho_scale = max(size.x, size.y, size.z, 0.5) * 1.65
     scene = bpy.context.scene
-    scene.render.engine = "BLENDER_EEVEE"
+    engines = {item.identifier for item in scene.render.bl_rna.properties["engine"].enum_items}
+    scene.render.engine = "BLENDER_EEVEE_NEXT" if "BLENDER_EEVEE_NEXT" in engines else "BLENDER_EEVEE"
     scene.render.resolution_x = 640
     scene.render.resolution_y = 640
     scene.render.resolution_percentage = 100

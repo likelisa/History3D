@@ -1,0 +1,193 @@
+{
+  "id": "detention-camp",
+  "file": "detention-camp.glb",
+  "bytes": 5459324,
+  "sha256": "b6466afe31affc00faf8b689f3a08d300b819a9c86a8541d6c4b9298106d4001",
+  "tool": "Blender 4.5.14 LTS",
+  "unit": "metre",
+  "upAxis": "Y",
+  "bounds": {
+    "min": [
+      -13.0,
+      -0.07271678000688553,
+      -13.0
+    ],
+    "max": [
+      13.0,
+      2.878000259399414,
+      13.0
+    ]
+  },
+  "triangles": 36737,
+  "originalMeshObjects": 233,
+  "exportMeshObjects": 8,
+  "embeddedPBR": {
+    "nodes": 8,
+    "meshes": 8,
+    "embeddedImages": 18,
+    "refinedMaterials": [
+      {
+        "name": "Refined illustrative detention earth soil - embedded PBR",
+        "baseColorTexture": {
+          "index": 1
+        },
+        "normalTexture": {
+          "index": 0,
+          "scale": 0.6499999761581421
+        },
+        "metallicRoughnessTexture": {
+          "index": 2
+        }
+      },
+      {
+        "name": "Refined illustrative detention weathered felt - embedded PBR",
+        "baseColorTexture": {
+          "index": 4
+        },
+        "normalTexture": {
+          "index": 3,
+          "scale": 0.6499999761581421
+        },
+        "metallicRoughnessTexture": {
+          "index": 5
+        }
+      },
+      {
+        "name": "Refined illustrative detention dark woven cloth - embedded PBR",
+        "baseColorTexture": {
+          "index": 7
+        },
+        "normalTexture": {
+          "index": 6,
+          "scale": 0.6499999761581421
+        },
+        "metallicRoughnessTexture": {
+          "index": 8
+        }
+      },
+      {
+        "name": "Refined illustrative detention rough timber - embedded PBR",
+        "baseColorTexture": {
+          "index": 10
+        },
+        "normalTexture": {
+          "index": 9,
+          "scale": 0.6499999761581421
+        },
+        "metallicRoughnessTexture": {
+          "index": 11
+        }
+      },
+      {
+        "name": "Refined illustrative detention plant fibre rope - embedded PBR",
+        "baseColorTexture": {
+          "index": 13
+        },
+        "normalTexture": {
+          "index": 12,
+          "scale": 0.6499999761581421
+        },
+        "metallicRoughnessTexture": {
+          "index": 14
+        }
+      },
+      {
+        "name": "Refined illustrative detention plain earthenware - embedded PBR",
+        "baseColorTexture": {
+          "index": 16
+        },
+        "normalTexture": {
+          "index": 15,
+          "scale": 0.6499999761581421
+        },
+        "metallicRoughnessTexture": {
+          "index": 17
+        }
+      },
+      {
+        "name": "Refined illustrative detention rough hearth stone - embedded PB",
+        "baseColorTexture": {
+          "index": 19
+        },
+        "normalTexture": {
+          "index": 18,
+          "scale": 0.6499999761581421
+        },
+        "metallicRoughnessTexture": {
+          "index": 20
+        }
+      },
+      {
+        "name": "Refined illustrative detention dry grass - embedded PBR",
+        "baseColorTexture": {
+          "index": 22
+        },
+        "normalTexture": {
+          "index": 21,
+          "scale": 0.6499999761581421
+        },
+        "metallicRoughnessTexture": {
+          "index": 23
+        }
+      }
+    ]
+  },
+  "textureDimensions": [
+    512,
+    512
+  ],
+  "seed": 20261002,
+  "centralCharacterSpace": {
+    "x": [
+      -4,
+      4
+    ],
+    "z": [
+      -4,
+      4
+    ],
+    "surfaceY": 0,
+    "propsInside": false
+  },
+  "shelterEntrance": [
+    0,
+    0,
+    -4.25
+  ],
+  "components": {
+    "terrain": 1,
+    "felt_panel_seam": 34,
+    "guy_rope_and_peg": 18,
+    "felt_shelter": 3,
+    "low_boundary_post": 8,
+    "plain_hollow_vessel": 4,
+    "hearth_stone": 7,
+    "firewood_piece": 9,
+    "dry_grass_blade": 595,
+    "ground_stone": 14
+  },
+  "geometrySource": "Original procedural Blender mesh authored for this project",
+  "materialSource": "Original authored procedural PBR rasters; reused reviewed Yuezhi material functions",
+  "materialLineage": {
+    "script": "scripts/refine-yuezhi-environment.py",
+    "sha256": "7087983fa473797579c06fe97d791443c0e9d85747bc29d796c6bbcb9b007ad0",
+    "selectedFunctions": [
+      "image",
+      "inspect_glb",
+      "isotropic_noise",
+      "metric_uv",
+      "pbr_material",
+      "textures"
+    ],
+    "runsUpstreamAssetEntryPoint": false
+  },
+  "builder": {
+    "script": "scripts/build-mural-detention-set.py",
+    "sha256": "be5a67be4e57674ec111c981e16a0516c9a40dc13c1ff86dee70a3e6ec9eacbe"
+  },
+  "historicalStatus": "Illustrative reconstruction: camp layout, felt shelter form and detention arrangements are not attested for this episode",
+  "historicalNoteZh": "营地形制、毡幕样式、生活器物摆放和拘留安排缺乏本段史料的确证，均为便于理解的制作示意，不据此编造具体事件；张骞曾被匈奴扣留的主线由原故事史料另行标注。",
+  "charactersIncluded": false,
+  "runtimeFigures": "Integration reuses the existing Tripo xiongnu/envoy/staff figures",
+  "noNewProviderGeneration": true
+}

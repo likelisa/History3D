@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "acquiredAt": "2026-10-02T11:54:56.722740+00:00",
+  "originalProvider": "Carnegie Mellon University Graphics Lab Motion Capture Database",
+  "originalProviderUrl": "http://mocap.cs.cmu.edu/",
+  "capture": "07_01",
+  "indexLabel": "07_01\twalk",
+  "mirror": "https://github.com/una-dinosauria/cmu-mocap",
+  "mirrorRevision": "5d98bb6b62b4735d89ff5f53e96899de2b92d8b4",
+  "conversionAuthor": "Bruce Hahne",
+  "conversionEdition": "MotionBuilder-friendly BVH, 2010",
+  "conversionSourceUrl": "https://sites.google.com/a/cgspeed.com/cgspeed/motion-capture/cmu-bvh-conversion",
+  "useRightsEvidence": "READMEFIRST.txt USAGE RIGHTS: unrestricted original CMU data and no additional restrictions on BVH conversion; preserves CMU statement allowing research and commercial use worldwide.",
+  "providerVerificationLimit": "Direct CMU HTTPS page could not be read because its certificate chain fails local validation. License and motion label are verified in the pinned conversion distribution, not freshly at CMU HTTPS.",
+  "credit": "The data used in this project was obtained from mocap.cs.cmu.edu. The database was created with funding from NSF EIA-0196217. BVH conversion by Bruce Hahne (2010), mirrored by una-dinosauria.",
+  "importantConversionFacts": [
+    "Frame 0 is an added T-pose, not part of the captured walk",
+    "Captured motion begins at frame 1",
+    "Frame time is 0.0083333 seconds (120 fps)",
+    "All motion frames after frame 0 preserve the original captured movement"
+  ],
+  "files": [
+    {
+      "file": "07_01.bvh",
+      "url": "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/5d98bb6b62b4735d89ff5f53e96899de2b92d8b4/data/007/07_01.bvh",
+      "status": 200,
+      "bytes": 241649,
+      "sha256": "f8d82ea6ed1aab0cb7d9ee680f476b65471e2322e1da84add8a8527a2cb0b9a2"
+    },
+    {
+      "file": "READMEFIRST.txt",
+      "url": "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/5d98bb6b62b4735d89ff5f53e96899de2b92d8b4/READMEFIRST.txt",
+      "status": 200,
+      "bytes": 13248,
+      "sha256": "8e6fe2e640b3728ef2e43e722cb5ae9cdf0010028c0517c4226ed165f9037930"
+    },
+    {
+      "file": "mirror-README.md",
+      "url": "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/5d98bb6b62b4735d89ff5f53e96899de2b92d8b4/README.md",
+      "status": 200,
+      "bytes": 512,
+      "sha256": "1dff3f1b6cd54dd2375d8151f2b2eb112714ac2102778461c9245b37531b0ce9"
+    },
+    {
+      "file": "cmu-motion-index.txt",
+      "url": "https://raw.githubusercontent.com/una-dinosauria/cmu-mocap/5d98bb6b62b4735d89ff5f53e96899de2b92d8b4/cmu-mocap-index-text.txt",
+      "status": 200,
+      "bytes": 68400,
+      "sha256": "b611669b7e8e4cb653cbda3b47ebc42c4151d019e4d28f2ed3e052e4e240ffbd"
+    }
+  ]
+}

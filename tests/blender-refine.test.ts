@@ -12,8 +12,17 @@ import { assetReviewSnapshotHash } from '../processing/src/review/asset-review.t
 import { createReviewRequest, getReviewReport, processReviewRequest } from '../processing/src/review/requests.ts'
 import { decideAssetTask } from '../processing/src/strategies/decision.ts'
 import { adoptAssetTask } from '../processing/src/strategies/adopt.ts'
+import { renderAsset } from '../processing/src/review/orchestrator.ts'
 
-it.skipIf(!existsSync(DEFAULT_BLENDER_PATH))('returns an unchanged-geometry Blender material candidate without adoption', async () => {
+it.skipIf(!existsSync(process.env.BLENDER_BIN ?? DEFAULT_BLENDER_PATH))('rejects an asset review render when Blender Python import fails', async () => {
+  const data = await mkdtemp(path.join(os.tmpdir(), 'history3d-render-failure-'))
+  try {
+    await expect(renderAsset(process.env.BLENDER_BIN ?? DEFAULT_BLENDER_PATH, path.join(data, 'missing.glb'), path.join(data, 'views')))
+      .rejects.toThrow('REVIEW_RENDER_FAILED: Blender exit 1')
+  } finally { await rm(data, { recursive: true, force: true }) }
+}, 30000)
+
+it.skipIf(!existsSync(process.env.BLENDER_BIN ?? DEFAULT_BLENDER_PATH))('returns an unchanged-geometry Blender material candidate without adoption', async () => {
   const data = await mkdtemp(path.join(os.tmpdir(), 'history3d-refine-'))
   try {
     const imported = await importCollection(path.resolve('contracts/fixtures/handoff/collection'), data, 'fu-refine')
@@ -35,7 +44,7 @@ it.skipIf(!existsSync(DEFAULT_BLENDER_PATH))('returns an unchanged-geometry Blen
     const fakeFetch = (async () => ({ ok: true, json: async () => ({ id: 'fixture-review', model: 'deepseek-flash', choices: [{ finish_reason: 'stop', message: { content: JSON.stringify({ decision: 'inconclusive', findings: [], unassessed: ['formal viewer candidate comparison'], suggestedStrategies: [] }) } }], usage: { prompt_tokens: 10, completion_tokens: 20 } }) })) as unknown as typeof fetch
     const reviewRequest = await createReviewRequest({ scope: 'asset', taskId: proposed.taskId, snapshotHash: assetReviewSnapshotHash(executed), rubricVersion: 'asset-v1' }, data)
     const reviewedJob = await processReviewRequest(reviewRequest.jobId, data, { apiKey: 'test', fetchImpl: fakeFetch })
-    expect(reviewedJob.status).toBe('complete')
+    expect(reviewedJob.status, JSON.stringify(reviewedJob.diagnostics)).toBe('complete')
     const reviewId = reviewedJob.reviewRefs[0].reviewId
     expect((await getReviewReport(reviewId, data) as { decision: string }).decision).toBe('inconclusive')
     const reviewed = JSON.parse(await readFile(path.join(data, 'asset-tasks', proposed.taskId, 'task.json'), 'utf8'))
@@ -51,9 +60,10 @@ it.skipIf(!existsSync(DEFAULT_BLENDER_PATH))('returns an unchanged-geometry Blen
     expect((await decideAssetTask(decision, data)).decision?.reason).toBe(decision.reason)
     await expect(readFile(path.join(data, 'registry', release.storyId, 'current.json'))).rejects.toMatchObject({ code: 'ENOENT' })
   } finally { await rm(data, { recursive: true, force: true }) }
-}, 30000)
+  // Two real six-view Blender runs also include GPU/shader initialization.
+}, 120000)
 
-it.skipIf(!existsSync(DEFAULT_BLENDER_PATH))('integrates a passing B candidate only as a new unpromoted release', async () => {
+it.skipIf(!existsSync(process.env.BLENDER_BIN ?? DEFAULT_BLENDER_PATH))('integrates a passing B candidate only as a new unpromoted release', async () => {
   const data = await mkdtemp(path.join(os.tmpdir(), 'history3d-adopt-'))
   try {
     const imported = await importCollection(path.resolve('contracts/fixtures/handoff/collection'), data, 'fu-adopt')

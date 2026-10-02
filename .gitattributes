@@ -20,3 +20,6 @@ docs/historical/** -text
 # Mural cinema includes immutable GLB digests and locally recorded narration.
 *.m4a binary
 viewer/public/mural-assets/** -text
+
+# Validation payloads carry their original byte digests.
+docs/handoff/mural-clarity/validation/** -text

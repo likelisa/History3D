@@ -1,0 +1,11 @@
+{
+  "kind": "mural-supplementary-scenes",
+  "historicalStatus": "Illustrative history supplements. Not events directly painted in the mural or identified archaeological reconstructions.",
+  "assets": [
+    {"id":"xiongnu","path":"/yuezhi/figures/xiongnu.glb","bytes":4198512,"sha256":"1802a80083cd118295717f6e405a5bc98b99a48406dd2074c1a580c7a591f47f","sourceManifest":"/yuezhi/figures/xiongnu-manifest.json"},
+    {"id":"reception-court","path":"/mural-assets/reception-court.glb","bytes":5566684,"sha256":"051822ecb55da21953d80dc7c3b2d190fedff674d73b9cd1f14c027d7d74186a","sourceManifest":"/mural-assets/reception-court-manifest.json"},
+    {"id":"market","path":"/yuezhi/sets/market-refined.glb","bytes":3364120,"sha256":"3690fdef841e35d5370bc74a333092a9a875a89b60521be861fe017423cff542","sourceManifest":"/yuezhi/sets/refined-manifest.json"},
+    {"id":"environment","path":"/yuezhi/environment-refined.glb","bytes":11547972,"sha256":"2956955061a5278a293320c598719c175e74c28133aa8a2785e4652760db2832","sourceManifest":"/yuezhi/environment-refined-manifest.json"},
+    {"id":"detention-camp","path":"/mural-assets/detention-camp.glb","bytes":5459324,"sha256":"b6466afe31affc00faf8b689f3a08d300b819a9c86a8541d6c4b9298106d4001","sourceManifest":"/mural-assets/detention-camp-manifest.json"}
+  ]
+}
