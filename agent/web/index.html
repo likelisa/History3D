@@ -13,6 +13,7 @@
     <a class="brand" href="/" aria-label="文物与壁画讲解工坊首页"><span class="brand-mark" aria-hidden="true">物</span><span>文物与壁画讲解工坊<small>从原件与史料，讲清背后的故事</small></span></a>
     <span id="connection" class="connection" role="status">正在连接本地服务</span>
   </header>
+  <nav class="entry-nav" aria-label="项目入口"><a href="/experience.html">观看两个作品</a><a href="/guide.html">使用指南与填写示例</a></nav>
   <main class="workbench">
     <aside class="setup-pane">
       <div class="pane-heading"><span class="eyebrow">新建项目</span><h1>准备讲解素材</h1><p>填写素材和 API 后，自动制作故事、真实 3D、旁白与讲解网页。</p></div>
@@ -72,8 +73,7 @@
         <li data-stage="preview_ready"><span>D</span><div>人工验收<small>真实浏览器与交付</small></div></li>
       </ol>
       <div id="run-meta" class="run-meta" hidden><span>项目 <code id="run-id"></code></span><span id="run-status" class="tag"></span><span id="last-update"></span></div>
-      <div id="empty-state" class="empty-state"><div class="empty-art" aria-hidden="true"><span id="empty-image-label">原图</span><i></i><span>故事</span><i></i><span>场景</span></div><h3>把故事的来龙去脉放在前面</h3><p id="empty-description">上传壁画，提供史料摘录。你会先看到每句讲解、对应证据和拟生成资产，审核通过后再开始 3D 生成。</p><div class="empty-principles"><span>事实与艺术补充分开</span><span>原件与派生资产分开</span><span>结构检查与视觉验收分开</span></div></div>
-      <section id="quality-panel" class="quality-panel" hidden aria-label="当前验证范围"></section>
+      <div id="empty-state" class="empty-state"><div class="empty-art" aria-hidden="true"><span id="empty-image-label">原图</span><i></i><span>故事</span><i></i><span>场景</span></div><h3>把故事的来龙去脉放在前面</h3><p id="empty-description">上传壁画，提供史料摘录。工具会整理逐句讲解与依据，再生成 3D 和讲解网页；结果可在工作区查看。</p><div class="empty-principles"><span>事实与艺术补充分开</span><span>原件与派生资产分开</span><span>结构检查与视觉验收分开</span></div></div>
       <section id="story-panel" class="panel" hidden><div class="section-heading"><div><span class="eyebrow">先读故事</span><h3>逐句讲解与依据</h3></div><span id="cue-count" class="tag"></span></div><div id="story-list"></div></section>
       <section id="asset-panel" class="panel" hidden><div class="section-heading"><div><span class="eyebrow">真实主资产</span><h3>资产计划与生成记录</h3></div><span id="asset-count" class="tag"></span></div><div id="asset-list" class="asset-list"></div></section>
       <section id="candidate-panel" class="panel" hidden><h3>继续打磨 3D 资产</h3><p class="field-note">生成新候选后可对比并选用，故事与旁白继续复用。旧版资产保留，当前网页在新候选完成前仍可查看。</p><label for="candidate-asset">需要打磨的资产</label><select id="candidate-asset"></select><label for="candidate-reason">本次需要改善的地方</label><textarea id="candidate-reason" rows="2" maxlength="2000" placeholder="例如：腿部轮廓、踏鸟支撑和纹理细节。"></textarea><label for="candidate-prompt">资产描述</label><textarea id="candidate-prompt" rows="3" maxlength="2000"></textarea><p id="candidate-input-note" class="field-note"></p><label for="candidate-faces">网格面数目标</label><select id="candidate-faces"><option value="60000">60,000 面</option><option value="100000">100,000 面</option></select><button id="candidate-generate" class="button primary" type="button">生成更好的候选</button><p id="candidate-status" class="field-note"></p><div id="candidate-list" class="asset-list"></div></section>

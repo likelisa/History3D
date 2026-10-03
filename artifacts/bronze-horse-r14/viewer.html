@@ -10,11 +10,11 @@
   <script type="module" src="./viewer.js"></script>
 </head>
 <body>
-  <header class="viewer-header"><span id="subject-heading" class="eyebrow">故事讲解 · 人工预览</span><h1 id="story-title">正在载入故事</h1><p id="story-summary"></p><p id="subject-information" hidden></p></header>
+  <header class="viewer-header"><span id="subject-heading" class="eyebrow">故事讲解 · 人工预览</span><h1 id="story-title">正在载入故事</h1></header>
   <main class="viewer-shell">
     <div id="viewer-error" class="notice error" hidden role="alert"></div>
     <div class="viewer-stage">
-      <section id="scene-window" class="scene-window" aria-label="真实 3D 资产场景"><canvas id="scene-canvas" aria-label="可拖动调整观察角度的 3D 场景"></canvas><span id="scene-status" class="scene-status" role="status">校验实际 GLB 文件</span><div id="scene-error" class="scene-error" hidden></div><div class="view-controls"><button id="reset-view" type="button" title="恢复该场景的计划镜头">恢复镜头</button><button id="focus-primary" type="button" hidden disabled>观察文物整体</button><span>拖动旋转 · 滚轮缩放</span></div></section>
+      <section id="scene-window" class="scene-window" aria-label="真实 3D 资产场景"><canvas id="scene-canvas" aria-label="可拖动调整观察角度的 3D 场景"></canvas><img id="scene-photo-reference" class="scene-photo-reference" alt="当前讲解所依据的原图，未经修改" hidden><span id="scene-status" class="scene-status" role="status">校验实际 GLB 文件</span><div id="scene-error" class="scene-error" hidden></div><div id="view-controls" class="view-controls"><button id="reset-view" type="button" title="恢复该场景的计划镜头">恢复镜头</button><button id="focus-primary" type="button" hidden disabled>观察文物整体</button><span>拖动旋转 · 滚轮缩放</span></div></section>
       <figure class="mural-window"><div class="image-heading"><span id="image-heading">壁画原图</span><button id="inspect-image" type="button" disabled>放大原图</button></div><div id="mural-image-wrap" class="mural-image-wrap"><img id="mural-image" alt="作为叙事参照的原图"><span id="mural-anchor" class="mural-anchor" hidden aria-label="本句在原图中的标注位置"></span></div><figcaption id="mural-caption">原图与本句关系尚未载入</figcaption></figure>
     </div>
     <section class="viewer-caption" aria-label="位于场景下方的讲解字幕">
@@ -24,10 +24,9 @@
       <div class="viewer-controls"><button id="previous-cue" class="button secondary" type="button" disabled>上一句</button><button id="play-button" class="button primary" type="button" disabled>开始逐句阅读</button><button id="next-cue" class="button secondary" type="button" disabled>下一句</button><button id="voice-button" class="button secondary" type="button" aria-pressed="false" disabled>未配置旁白</button><label class="sr-only" for="playback-speed">讲解倍速</label><select id="playback-speed" disabled><option value="0.75">0.75 倍速</option><option value="1" selected>1 倍速</option><option value="1.25">1.25 倍速</option><option value="1.5">1.5 倍速</option><option value="2">2 倍速</option></select><label class="sr-only" for="timeline">故事进度</label><input id="timeline" type="range" min="0" max="1" step="0.01" value="0" disabled><span id="time-display" class="time-display">0:00 / 0:00</span><label class="sr-only" for="chapter-select">跳到章节</label><select id="chapter-select" disabled></select></div>
       <audio id="narration-audio" preload="auto" hidden></audio>
     </section>
-    <p id="viewer-limits" class="viewer-limits">正在核查本包的旁白、动作与验收范围。</p>
-    <details class="panel" open><summary>当前验收范围</summary><div id="quality-flags" class="quality-panel"></div><p class="field-note">提供的史料摘录与链接可以回查；结构检查不代表独立史实核实。原图标记需要人工核对，二维细节位置尚未自动对应 3D 纹饰位置。</p></details>
-    <section class="panel viewer-story"><div class="section-heading"><div><span class="eyebrow">完整故事</span><h2>讲解与逐句依据</h2></div><span id="story-count" class="tag"></span></div><div id="full-story"></div></section>
-    <section class="panel viewer-assets"><div class="section-heading"><div><span class="eyebrow">实际加载</span><h2>3D 资产与来源</h2></div><span id="loaded-count" class="tag"></span></div><div id="viewer-asset-list" class="asset-list"></div></section>
+    <p id="viewer-limits" class="viewer-limits">正在载入讲解。</p>
+    <details class="panel viewer-story"><summary>完整故事 <span id="story-count" class="tag"></span></summary><p id="story-summary" class="field-note"></p><p id="subject-information" class="field-note" hidden></p><div id="full-story"></div></details>
+    <details class="panel viewer-assets"><summary>3D 资产与来源 <span id="loaded-count" class="tag"></span></summary><p id="technical-notes" class="field-note"></p><div id="viewer-asset-list" class="asset-list"></div></details>
   </main>
   <dialog id="image-dialog" class="image-dialog" aria-labelledby="image-dialog-title"><div class="image-dialog-heading"><h2 id="image-dialog-title">原图细节对照</h2><button id="close-image" type="button" class="button secondary">关闭</button></div><div id="image-detail-wrap" class="image-detail-wrap"><img id="image-detail" alt="未经修改的原图放大对照"><span id="image-detail-anchor" class="mural-anchor" hidden aria-label="当前讲解对应的原图位置"></span></div><p id="image-detail-caption" class="field-note"></p></dialog>
 </body>

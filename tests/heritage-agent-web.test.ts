@@ -419,3 +419,14 @@ describe('fixed public narration in the real generic viewer script', () => {
     expect(speaking.eval('runtime.playing')).toBe(false)
   })
 })
+
+it('shows the unmodified photo for photo-grounded cues and restores 3D controls afterward', async () => {
+  const viewer = await harness('viewer');
+  viewer.eval(`runtime.story={subjectType:'mural'}; $('mural-image').src='http://127.0.0.1:5261/runs/run-one/image.png';renderImage({sceneId:null,imageRelation:'depicted',text:'原图中的千佛'});`);
+  expect(viewer.get('scene-photo-reference').hidden).toBe(false);
+  expect(viewer.get('scene-photo-reference').src).toBe(viewer.get('mural-image').src);
+  expect(viewer.get('scene-canvas').hidden).toBe(true); expect(viewer.get('view-controls').hidden).toBe(true);
+  viewer.eval(`renderImage({sceneId:'scene-one',imageRelation:'context-only',text:'资料记载'});`);
+  expect(viewer.get('scene-photo-reference').hidden).toBe(true);
+  expect(viewer.get('scene-canvas').hidden).toBe(false); expect(viewer.get('view-controls').hidden).toBe(false);
+});

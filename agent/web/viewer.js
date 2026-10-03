@@ -292,7 +292,7 @@ function showScene(id) {
       group.position.set(...placement.position); group.rotation.y = placement.heading; runtime.actors.add(group);
     }
     runtime.actors.updateMatrixWorld(true);
-    $('scene-status').textContent = `${scene.title} · ${scene.placements.length} 项真实 GLB · 静态布景预览`;
+    $('scene-status').textContent = scene.title;
   } else $('scene-status').textContent = '本句未配置 3D 场景，请阅读讲解与原图关系';
   $('focus-primary').hidden = !artifactMode(); $('focus-primary').disabled = !primaryActor();
   resetCamera();
@@ -317,9 +317,17 @@ function updateAnchor() {
   if ($('image-dialog').open) placeAnchor('image-detail-wrap', 'image-detail', 'image-detail-anchor', anchor);
 }
 function renderImage(cue) {
+  const photoOnly = cue.sceneId === null && cue.imageRelation === 'depicted';
+  $('scene-photo-reference').hidden = !photoOnly;
+  $('scene-canvas').hidden = photoOnly;
+  $('view-controls').hidden = photoOnly;
+  if (photoOnly) {
+    $('scene-photo-reference').src = $('mural-image').src;
+    $('scene-status').textContent = '原图观察' + (cue.imageAnchor?.label ? ` · ${cue.imageAnchor.label}` : '');
+  }
   const anchor = cueAnchor(cue), subject = artifactMode() ? '文物原图' : '壁画原图';
   const relation = cue.imageRelation;
-  $('mural-caption').textContent = relation === 'depicted' ? anchor ? `本句${anchor.label ? `「${anchor.label}」` : '细节'}已在${subject}标注；标记由模型计划提出，仍需人工核实。` : `计划将本句标为${subject}可见，未标注具体位置；请人工对照全图。` : relation === 'not-depicted' ? `本句内容未在${subject}展示；保留原图供整体参照，不补造可见细节点。` : `${subject}仅作背景参照；本句没有直接对应的细节位置标注。`;
+  $('mural-caption').textContent = relation === 'depicted' ? anchor ? `${anchor.label || '当前讲解细节'} · 已圈选，仍需人工核实` : '对照原图整体' : relation === 'not-depicted' ? '本句内容未出现在原图中' : '原图 · 背景参照';
   $('image-detail-caption').textContent = `${cue.text} ${$('mural-caption').textContent} 原图未经修改；标记仅为讲解叠层。`;
   updateAnchor();
 }
@@ -418,23 +426,21 @@ function renderStory() {
 function renderAssets() {
   for (const item of runtime.manifest.assets) {
     const primary = item.id === runtime.story.primaryAssetId;
-    const card = node('article', 'asset-card'); card.append(node('h4', '', primary ? runtime.story.subjectMetadata?.name || item.id : item.id), node('span', 'tag success', 'GLB 字节与 SHA 已校验'));
-    if (primary) card.append(node('span', 'tag warning', '文物主资产 · 图生 3D · 艺术重建'));
+    const card = node('article', 'asset-card'); card.append(node('h4', '', primary ? runtime.story.subjectMetadata?.name || item.id : item.id), node('span', 'tag', runtime.manifest.provider));
+    if (primary) card.append(node('span', 'tag warning', '图生 3D · 艺术重建'));
     const details = node('dl');
     for (const [label, value] of [['提供商', runtime.manifest.provider], ['Tripo task', item.taskId], ['文件大小', `${item.bytes.toLocaleString()} bytes`], ['展示高度', `${item.heightM} m（展示比例，非实测）`], ['前轴', '未经人工前轴审核']]) details.append(node('dt', '', label), node('dd', '', value));
-    card.append(details);
-    const hash = node('details'); hash.append(node('summary', '', '文件与请求指纹'), node('code', 'hash', `GLB ${item.sha256}`), node('code', 'hash', `request ${item.requestSha256}`)); card.append(hash); $('viewer-asset-list').append(card);
+
+    const hash = node('details'); hash.append(node('summary', '', '生成记录'), details, node('code', 'hash', `GLB ${item.sha256}`), node('code', 'hash', `request ${item.requestSha256}`)); card.append(hash); $('viewer-asset-list').append(card);
   }
   $('loaded-count').textContent = `${runtime.models.size} 项实际 GLB`;
 }
 function renderQuality() {
-  const keys = [['structuralPassed', '结构检查'], ['visualReviewed', '视觉审核'], ['historicalVerified', '独立史料核实'], ['recordingVerified', '完整录屏'], ['zipVerified', '独立解包']];
-  const actual = { structuralPassed: (runtime.quality.coveredChecks || []).some(item => item.id === 'json-contract' && item.result === 'pass'), visualReviewed: runtime.quality.visualReview?.approved === true, historicalVerified: false, recordingVerified: false, zipVerified: false };
-  for (const [key, label] of keys) $('quality-flags').append(node('span', `quality-item ${actual[key] ? 'passed' : ''}`, `${actual[key] ? '✓' : '○'} ${label}${actual[key] ? '已记录通过' : '待完成'}`));
   const narration = runtime.narrationReady ? `固定公开旁白已逐句通过字节、SHA、WAV 时长与字幕全文检查，播放使用真实媒体时钟。${runtime.story.narration.humanAudioReviewed ? '清单记录了人工听音审核；实际听感仍可逐句复核。' : '人工听音尚未验收，文件检查不能代替听音判断。'}` : '旁白尚未配置，本页提供有阅读时间的逐句播放。';
   const animation = runtime.sceneData.animation?.complete === true ? '动作标记为已配置，但当前模板仅提供静态布景；不得作为人物动作验收。' : '人物动作尚未配置，GLB 以静态布景显示。';
   const boundary = artifactMode() ? '文物 3D 是由原图生成的艺术重建。原图未见的背面、内部与补全纹饰属于艺术补全，不能当作考古事实。展示高度用于场景比例，不能代替实测尺寸。原图细节点可放大对照，尚未自动绑定 3D 纹饰位置。' : '资产按展示高度、落地与居中归一；前轴、手部、姿态与考古形制仍须人工审核。';
-  $('viewer-limits').textContent = `${narration} ${animation} ${boundary}`;
+  $('technical-notes').textContent = `${narration} ${animation} ${boundary}`;
+  $('viewer-limits').textContent = artifactMode() ? '3D 为照片生成的艺术重建，未见部分为推断。' : '3D 为辅助故事理解的艺术示意。';
 }
 function frame(now) {
   if (runtime.disposed) return;
