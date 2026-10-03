@@ -44,7 +44,7 @@ describe('readable and spoken mural timeline', () => {
     expect(() => buildPlaybackTimeline(chapters, duplicate)).toThrow('重复')
   })
   it('plays the 24 delivered recordings with exact current text, measured durations and verified bytes', () => {
-    const manifest = JSON.parse(readFileSync('viewer/public/mural-assets/narration-v4/manifest.json', 'utf8')) as { tracks: NarrationTrack[]; voice: string; privateReferenceUsed: boolean; voiceCloningUsed: boolean; model: { weightsIncludedInDelivery: boolean } }
+    const manifest = JSON.parse(readFileSync('viewer/public/mural-assets/narration-v7/manifest.json', 'utf8')) as { tracks: NarrationTrack[]; voice: string; privateReferenceUsed: boolean; voiceCloningUsed: boolean; model: { weightsIncludedInDelivery: boolean } }
     const result = buildPlaybackTimeline(chapters, manifest.tracks)
     expect(manifest.tracks).toHaveLength(24)
     expect(manifest.voice).toContain('zm_010')

@@ -1,0 +1,78 @@
+{
+  "experimentId": "prompt-detail-r1-2026-10-03",
+  "updatedAt": "2026-10-02T23:19:26.846Z",
+  "cases": [
+    {
+      "id": "staff-a",
+      "status": "downloaded",
+      "progress": 100,
+      "taskId": "e5bf4680-f290-4606-903d-e4926b7404e0",
+      "creditsConsumed": 20,
+      "requestHash": "cd2585386e383f1188c039f71d653dd34331eb8900f04dd0e5a8ff8bdc1a6153",
+      "path": "/tripo-prompt-lab/staff-a.glb",
+      "sha256": "96d5ed7b043ab9a3123aa1d7c06fc3dfeacc254b839f2c6e071574ed65f6d7cc",
+      "bytes": 3944472,
+      "stats": {
+        "triangles": 18816,
+        "meshes": 1,
+        "materials": 1,
+        "images": 3,
+        "normalMappedMaterials": 1
+      }
+    },
+    {
+      "id": "staff-b",
+      "status": "downloaded",
+      "progress": 100,
+      "taskId": "c84e08ce-70d9-4638-b6d5-610fe61a5cd6",
+      "creditsConsumed": 20,
+      "requestHash": "96f1dcbf4719ee3d6293fff1d8c78f908a85dd53e7b2cf609994a136f8545058",
+      "path": "/tripo-prompt-lab/staff-b.glb",
+      "sha256": "3c4af0837b8fa85bc9a03adf956e2ebfbd16d51c5bace824076c4ca99c75e2a5",
+      "bytes": 3776036,
+      "stats": {
+        "triangles": 19138,
+        "meshes": 1,
+        "materials": 1,
+        "images": 3,
+        "normalMappedMaterials": 1
+      }
+    },
+    {
+      "id": "gate-a",
+      "status": "downloaded",
+      "progress": 100,
+      "taskId": "31dd6975-a14c-4734-9047-9e0cfd4e7bc9",
+      "creditsConsumed": 20,
+      "requestHash": "f7363ea914738b8dc9573a0926eb2aaf28ff0110f15c42d34eadbd97a5e29c15",
+      "path": "/tripo-prompt-lab/gate-a.glb",
+      "sha256": "9b73ef9a420decbf9c7efc89fe98d48d4888b870d3a19a8e0dec8b6600435bc3",
+      "bytes": 4108168,
+      "stats": {
+        "triangles": 36627,
+        "meshes": 1,
+        "materials": 1,
+        "images": 3,
+        "normalMappedMaterials": 1
+      }
+    },
+    {
+      "id": "gate-b",
+      "status": "downloaded",
+      "progress": 100,
+      "taskId": "6e663572-c341-481e-ab89-1635dba4bf3a",
+      "creditsConsumed": 20,
+      "requestHash": "05547e07eddf9e97586e216a9ba16cd66ea53b3c623a08aa54a6b94c86673152",
+      "path": "/tripo-prompt-lab/gate-b.glb",
+      "sha256": "e112e16edec6cf428b28a99e4e42fc901cf8921f80861a4a8a1c7f4c535f76aa",
+      "bytes": 4631592,
+      "stats": {
+        "triangles": 37181,
+        "meshes": 1,
+        "materials": 1,
+        "images": 3,
+        "normalMappedMaterials": 1
+      }
+    }
+  ]
+}

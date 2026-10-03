@@ -1,0 +1,45 @@
+{
+  "baseline": "530910d7d9ed85eb30558ac82b12edf3aaea7c2d",
+  "headBranch": "build/mural-r5",
+  "baseBranch": "codex/mural-clarity",
+  "check": {
+    "command": "npm run check -- --maxWorkers=1 --fileParallelism=false",
+    "testFilesPassed": 44,
+    "testsPassed": 289,
+    "status": "passed",
+    "log": "check.log",
+    "earlierFailures": [
+      "Legacy scene asset test expected 12 visual beats and minimum 5 seconds; updated for 13 beats and 1-second opening.",
+      "A later parallel run timed out in unchanged yuezhi-package-chain test; final complete check passed."
+    ]
+  },
+  "build": {
+    "command": "npm run build",
+    "status": "passed",
+    "log": "build.log",
+    "warning": "Existing bundle size warning remains; publicationReady=false is an existing review gate."
+  },
+  "browser": {
+    "status": "passed for exercised desktop flows",
+    "scope": [
+      "opening fixed shot at 1 and 5 seconds",
+      "camp without screen wash",
+      "market framing, baskets and goods",
+      "bilingual captions",
+      "route map remaining through narration",
+      "short highlights",
+      "default narration and music active",
+      "Tripo A/B material, normal, wireframe and rotation",
+      "Zhang Qian trial SHA/bytes and front/back inspection"
+    ],
+    "fullListening": false,
+    "mobile": false
+  },
+  "assets": {
+    "shaAndBytesVerified": true,
+    "singleZhangQianCreate": true,
+    "zhangQianTrialAccepted": false,
+    "newTripoCredits": 110
+  },
+  "deployment": "not_performed"
+}

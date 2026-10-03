@@ -30,19 +30,16 @@ describe('mural narrative and evidence boundaries', () => {
     expect(duration).toBeGreaterThan(112)
   })
 
-  it('separates the painted question about golden figures from the first embassy purpose', () => {
-    expect(chapters[1]!.text).toMatch(/题记.*皇帝不知金人的名号.*派张骞去大夏/)
-    expect(chapters[1]!.text).toContain('后世的佛教故事')
-    expect(chapters[2]!.text).toContain('首次出使')
-    expect(chapters[2]!.text).toContain('外交求盟')
-    expect(chapters[2]!.text).toContain('共同抗击匈奴')
+  it('uses a direct guide voice while retaining the distinction between painting and journey', () => {
+    const spoken = chapters.flatMap(chapter => chapter.cues).map(cue => cue.text).join('')
+    expect(spoken).not.toMatch(/《史记》|《汉书》|敦煌研究院|史书说/)
+    expect(chapters[1]!.text).toContain('在这幅画里')
+    expect(chapters[1]!.text).toContain('佛像')
+    expect(chapters[2]!.text).toContain('共同对抗匈奴')
     expect(chapters[3]!.text).toContain('扣留十余年')
-    expect(chapters[4]!.text).toContain('离汉朝又远')
-    expect(chapters[4]!.text).toContain('不愿为旧仇再开战')
-    expect(chapters[4]!.text).toContain('求盟仍未成功')
-    expect(chapters[6]!.text).toContain('没有记载张骞在这里问佛')
-    const pictureCues = chapters.flatMap(chapter => chapter.cues).filter(cue => cue.sourceKind === 'mural')
-    expect(pictureCues.every(cue => !/月氏|扣留|匈奴控制/.test(cue.text))).toBe(true)
+    expect(chapters[3]!.text).toContain('营地场景')
+    expect(chapters[4]!.text).toContain('愿望却没有实现')
+    expect(chapters[6]!.text).toContain('后世的历史记忆')
     expect(annotations.find(annotation => annotation.id === 'alliance-result')!.detail).toContain('没有明确的月氏接见场景')
   })
 
@@ -65,7 +62,8 @@ describe('mural narrative and evidence boundaries', () => {
       expect(y + height).toBeLessThanOrEqual(1)
       const chapterAnnotations = annotations.filter(annotation => annotation.chapterIndex === chapterIndex)
       expect(chapterAnnotations.length).toBeGreaterThan(0)
-      expect(chapterAnnotations.length).toBeLessThanOrEqual(3)
+      // The detention chapter adds two explanatory anchors to the two image anchors.
+      expect(chapterAnnotations.length).toBeLessThanOrEqual(chapterIndex === 3 ? 4 : 3)
       for (const annotation of chapterAnnotations) {
         expect(annotation.x).toBeGreaterThanOrEqual(x)
         expect(annotation.x).toBeLessThanOrEqual(x + width)

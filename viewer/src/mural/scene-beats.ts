@@ -1,7 +1,7 @@
 import type { SourceKind } from './story.ts'
 
 export type SceneBeatId =
-  | 'mountain' | 'detention' | 'westward'
+  | 'opening' | 'mountain' | 'detention' | 'westward'
   | 'credential' | 'retained-credential' | 'audience'
   | 'city' | 'market' | 'goods' | 'greeting' | 'tower'
 
@@ -17,12 +17,16 @@ export type SceneBeat = {
 // These durations belong inside the cue; the playback timeline must also reserve
 // narration and its tail, rather than advancing at the end of this visual beat.
 const sceneBeats: Readonly<Record<string, SceneBeat>> = {
+  'c0-0': {
+    id: 'opening', title: '认识张骞与使团', visualSeconds: 1, sourceKind: 'interpretation',
+    boundaryNote: '人物、马与长杖由Tripo生成；开场为历史示意，地形与动作由项目制作，长杖不作为汉节考古复原。',
+  },
   'c3-0': {
     id: 'mountain', title: '使团沿山路前行', visualSeconds: 6, sourceKind: 'mural',
     boundaryNote: '依壁画山间汉使转译为3D；山道地形、人物背面与步行动作属于展示补全。',
   },
   'c3-1': {
-    id: 'detention', title: '匈奴营地：使团受阻驻足', visualSeconds: 7, sourceKind: 'history',
+    id: 'detention', title: '匈奴营地：拦截、扣留与驻足', visualSeconds: 12, sourceKind: 'history',
     boundaryNote: '史书补充：张骞被匈奴扣留十余年，非原画直接画出的事件；营地布局与匿名守卫是展示补全。',
   },
   'c3-2': {
@@ -31,7 +35,7 @@ const sceneBeats: Readonly<Record<string, SceneBeat>> = {
   },
   'c4-0': {
     id: 'credential', title: '近看使团的旌节', visualSeconds: 5, sourceKind: 'mural',
-    boundaryNote: '依壁画中长杆旌节作近景转译；材质与持握动作属于展示补全。',
+    boundaryNote: '长杖使用Tripo提示词实验B版，作为使者持杆的展示示意；持握动作由项目制作，不作为汉节考古复原。',
   },
   'c4-1': {
     id: 'retained-credential', title: '被扣多年，仍保留汉节', visualSeconds: 6, sourceKind: 'history',
@@ -58,8 +62,8 @@ const sceneBeats: Readonly<Record<string, SceneBeat>> = {
     boundaryNote: '依壁画城门边两位僧人的构图转译；它属于初唐佛教图像叙事，迎接动作不是汉代现场实录。',
   },
   'c6-1': {
-    id: 'goods', title: '对照史书：蜀物与身毒见闻', visualSeconds: 5, sourceKind: 'interpretation',
-    boundaryNote: '史书补充：所载是蜀物与身毒见闻，未载在大夏询问佛像名号；非原画直接画出的货物，不能当作问佛现场。',
+    id: 'tower', title: '看金人与僧塔的呼应', visualSeconds: 5, sourceKind: 'interpretation',
+    boundaryNote: '壁画叙事：僧人与佛塔回应甘泉宫的金人；3D佛塔为图像转译，不能当作汉代问佛现场。',
   },
   'c6-2': {
     id: 'tower', title: '僧人与佛塔，后世的佛教讲述', visualSeconds: 6, sourceKind: 'interpretation',

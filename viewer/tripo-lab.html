@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tripo 提示词实验 · History3D</title></head>
+<body>
+  <header><a class="brand" href="/mural.html">History<span>3D</span></a><a href="/mural.html">← 回到张骞壁画</a></header>
+  <main>
+    <p class="eyebrow">Tripo 3D · 提示词实验</p>
+    <h1>把细节放进提示词，会改变什么？</h1>
+    <p class="intro">在相同模型、质量和种子下，对照两份真实生成结果。转到背面，检查门洞；去掉贴图，检查细节是否存在于几何中。</p>
+    <p id="experiment-status" role="status">正在读取实验记录…</p>
+    <div class="toolbar">
+      <nav aria-label="选择比较对象"><button data-asset="staff" aria-pressed="true">长杖</button><button data-asset="gate" aria-pressed="false">城门与墙体</button></nav>
+      <label>查看方式 <select id="view-mode"><option value="material">原始 PBR 材质</option><option value="normal">法线 · 去除贴图</option><option value="wireframe">线框 · 查看网格</option></select></label>
+      <label class="check"><input id="link-views" type="checkbox" checked>联动视角</label>
+      <button id="reset-views">重置视角</button><button id="refresh">刷新结果</button>
+    </div>
+    <p id="scale-note" class="quiet">A / B 共用比例、灯光与初始视角。原始尺寸只用于相对比较，不作为真实米制测量。</p>
+    <div id="comparison" class="comparison" aria-label="A 与 B 的真实 Tripo 模型比较"></div>
+    <section class="review"><h2>看哪里</h2><ol id="criteria"></ol><p>面数、文件大小与法线贴图数量只能辅助判断。提示词 B 是否更好，等待你对正面、背面、侧光和可用性的实际审阅。</p></section>
+    <details class="experiment-details"><summary>实验控制与来源</summary><p id="controls"></p><p id="references"></p><p id="interpretation"></p><pre id="parameters"></pre><div id="sources"></div></details>
+    <p class="quiet">刷新仅重新读取已生成的结果，不会提交生成任务或产生额外生成费用。</p>
+  </main>
+  <script type="module" src="/src/tripo-lab/main.ts"></script>
+</body>
+</html>

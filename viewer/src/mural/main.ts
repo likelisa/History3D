@@ -1,58 +1,66 @@
 import * as THREE from 'three'
 import { createCinemaWorld, type CinemaWorld } from './cinema-world.ts'
-import { chapters as chapterDefinitions, annotations, sources } from './story.ts'
+import { chapters as chapterDefinitions, annotations as storyAnnotations, sources } from './story.ts'
 import { fitMuralView, interpolateMuralViews, toMuralCamera, type MuralView } from './framing.ts'
 import { buildPlaybackTimeline, locateMoment, type NarrationTrack } from './playback.ts'
 import { sceneBeatProgress } from './scene-beats.ts'
+import { subtitleText, routePosition } from './presentation.ts'
+import { cueView, cueFocus, focusVisible, spatialFocusIds, goldenFigureRegions, type PresentationView } from './cue-presentation.ts'
+import { englishSubtitles } from './subtitles.ts'
 import './style.css'
 
+const annotations = storyAnnotations.filter(annotation => annotation.id !== 'remembered-journey')
 const muralSize = { width: 21.72, height: 18 }
 const fov = 43
 const app = document.querySelector<HTMLDivElement>('#app')!
-const kindLabels = { mural: '画面解读', history: '史书记载', interpretation: '解读与推断' }
+const kindLabels = { mural: '壁画讲解', history: '旅途背景', interpretation: '导览解读' }
 const escape = (value: string) => value.replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]!)
 app.innerHTML = `
-  <header><a href="/yuezhi.html" class="brand">History<span>3D</span></a><div class="identity"><strong>张骞出使西域图</strong><span>莫高窟第323窟 · 初唐 · 图像来源：敦煌研究院</span></div><button id="source">壁画与史料</button></header>
+  <header><div class="identity"><strong>张骞出使西域图</strong></div><button id="source">壁画与史料</button></header>
   <main id="experience">
     <section id="presentation" aria-label="图像与当前讲述">
     <section id="stage" aria-label="壁画与立体场景">
       <canvas aria-label="沿壁画观察张骞故事"></canvas>
       <div id="scene-badge">原壁画 · 全画</div>
+      <button id="asset-credit" hidden aria-label="查看Tripo 3D资产来源">人物与马：Tripo 3D生成 · 布景与动作：项目制作</button>
+      <div id="detention-phase" hidden></div>
       <div id="view-controls"><button id="overview" disabled>定位全画</button><button id="view-toggle" disabled>查看对应3D场景</button></div>
+      <div id="focus-highlights" aria-hidden="true"></div><div id="character-names" aria-label="人物身份"></div>
+      <section id="route-stage" hidden aria-label="当前行进路线"><strong>沿路线看这段远行</strong><div id="large-route-map"><img src="/mural-assets/route-reference.png" alt="张骞出使西域路线参考图"><span id="large-route-marker" aria-hidden="true"></span></div><p id="large-route-location"></p></section>
       <div id="labels" aria-label="画中标注"></div>
       <div id="transition" aria-hidden="true"><span>从原画走进山道</span></div>
       <section id="intro"><p class="eyebrow">先看一幅画，再读一段历史</p><h1>一位使者，<br>两种历史记忆。</h1><p>沿画中标注，认识张骞为何出使、为何受阻，<br>再看初唐画家怎样把远行画成佛教故事。</p><button id="start" class="primary" disabled>正在准备原画与场景…</button><small id="load-status">读取立体资产与逐句旁白</small></section>
-      <section id="annotation-detail" hidden aria-label="标注详情"><button id="annotation-close" aria-label="关闭标注">×</button><span id="annotation-kind"></span><h3 id="annotation-title"></h3><p id="annotation-text"></p><small>标注位置来自原画。点击「继续讲述」接着看。</small></section>
+      <section id="annotation-detail" hidden aria-label="标注详情"><button id="annotation-close" aria-label="关闭标注">×</button><span id="annotation-kind"></span><h3 id="annotation-title"></h3><p id="annotation-text"></p><small id="annotation-hint">点击「继续讲述」接着看。</small></section>
       <section id="ending" hidden><p class="eyebrow">回到原画</p><h2>一段远行，两种讲述。</h2><p>史书解释出使的目的与结果。<br>初唐壁画呈现后世的佛教记忆。</p><button id="replay" class="primary">重新讲述</button><button id="explore-end">留在画中回看标注</button></section>
       <div id="error" hidden role="alert"><p id="error-message"></p><button id="retry">重新加载</button><a href="/yuezhi.html">打开原绘本</a></div>
     </section>
-    <section id="caption-row" aria-label="当前逐句讲述"><div id="caption" hidden><span id="cue-kind"></span><p id="narration"></p></div></section>
+    <section id="caption-row" aria-label="当前逐句讲述"><label id="caption-sizing">字幕区 <select id="caption-height" aria-label="字幕高度"><option value="120" selected>紧凑</option><option value="156">宽松</option></select></label><div id="caption" hidden><span id="cue-kind"></span><p id="narration" lang="zh-CN"></p><p id="narration-en" lang="en"></p></div></section>
     </section>
     <section id="reading" aria-label="故事讲解">
-      <div class="reading-top"><p class="eyebrow">读懂画中的远行</p><span id="chapter-number">序</span></div>
-      <p id="place">从右上宫殿，到左上城门</p><h2 id="chapter-title">先找到画中的三组事件</h2>
-      <p id="reading-intro">这幅画不是汉代现场记录。我们会一边看画，一边用《史记》解释出使的背景和结果。</p>
-      <div id="cue-list" aria-label="本段逐句讲述"></div>
-      <div id="chapter-annotations" aria-label="本段标注"></div>
-      <div id="takeaway"><span>先记住这一点</span><p>画中的礼佛、辞行和僧塔，与史书中的外交任务，要放在不同的时代读。</p></div>
       <section id="orientation" aria-label="在原画中的位置"><div><strong>你正在看原画的这里</strong><span id="map-location">全画</span></div><div id="mini-map"><img src="/yuezhi/murals/full.jpg" alt="原壁画位置图"><div id="mini-focus"></div></div></section>
-      <p id="status-note" role="status">自动讲述可暂停；点画中标注可仔细读。</p>
+      <section id="journey-map" aria-label="行进路线图"><strong>张骞的行进路线</strong><div id="route-map"><img src="/mural-assets/route-reference.png" alt="用户提供的张骞出使西域路线参考图"><span id="route-marker" aria-hidden="true"></span></div><p id="route-location"></p></section>
+      <div id="chapter-annotations" aria-label="本段标注"></div>
+
     </section>
   </main>
   <footer>
     <nav id="chapters" aria-label="沿壁画的八个讲述环节"></nav>
-    <div class="transport"><button id="previous" disabled aria-label="上一段">← 上一段</button><button id="pause" disabled>开始后可暂停</button><button id="next" disabled aria-label="下一段">下一段 →</button><button id="voice" aria-pressed="true">旁白：开</button><label>讲述速度 <select id="speed" aria-label="讲述速度"><option value="0.8">更慢 0.8×</option><option value="1" selected>舒缓 1×</option><option value="1.15">稍快 1.15×</option></select></label><progress aria-label="故事进度" value="0" max="1"></progress><span id="clock">准备中</span></div>
+    <div class="transport"><button id="previous" disabled aria-label="上一段">← 上一段</button><button id="pause" disabled>开始后可暂停</button><button id="next" disabled aria-label="下一段">下一段 →</button><label>讲述速度 <select id="speed" aria-label="讲述速度"><option value="0.8">更慢 0.8×</option><option value="1" selected>舒缓 1×</option><option value="1.15">稍快 1.15×</option><option value="1.3">清快 1.3×</option><option value="1.5">快讲 1.5×</option></select></label><input id="story-progress" type="range" disabled aria-label="故事进度" min="0" max="1" step="0.05" value="0"><span id="clock">准备中</span></div>
   </footer>
-  <section id="source-panel" hidden role="dialog" aria-modal="true" aria-labelledby="source-title"><button id="source-close" aria-label="关闭壁画与史料">×</button><p class="eyebrow">看画，也查证</p><h2 id="source-title">画面、史书和空间，各讲什么？</h2><p>初唐壁画有自己的佛教叙事。《史记》的外交经历帮助我们读懂背景，但不能把金人、僧人和佛塔当成首次出使的现场证据。</p><div id="source-links"></div><p>原画未改动。立体山道、人物面貌、尺度与背面是展示补全，不是考古复原。图像和生成资产的公开使用权利仍待负责人复核。</p></section>
-  <audio id="narrator" preload="auto"></audio>`
+  <section id="source-panel" hidden role="dialog" aria-modal="true" aria-labelledby="source-title"><button id="source-close" aria-label="关闭壁画与史料">×</button><p class="eyebrow">看画，也查证</p><h2 id="source-title">画面、史书和空间，各讲什么？</h2><p>初唐壁画有自己的佛教叙事。《史记》的外交经历帮助我们读懂背景，但不能把金人、僧人和佛塔当成首次出使的现场证据。</p><div id="source-links"></div><p>服饰与营地：第323窟是初唐壁画，画中服装不能直接证明汉代使者的真实穿着。现有汉使服装为艺术示意；匈奴人物使用考古资料作跨期参考。营地为原创布景，没有张骞扣留处的帐幕形制、布局或看守动作的逐项证据。<a href="https://www.metmuseum.org/art/collection/search/65231" target="_blank" rel="noopener">匈奴腰牌参考</a> · <a href="https://link.springer.com/article/10.1186/s43238-025-00191-2" target="_blank" rel="noopener">帐幕形制研究</a></p><p>配乐：At Rest — Kevin MacLeod (incompetech.com)。<a href="https://www.incompetech.com/music/royalty-free/index.html?isrc=USUAN1100748" target="_blank" rel="noopener">原曲</a> · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>；使用已有35秒节选，淡入淡出并转为MP3，循环播放。</p><p>地图包含副使及其他时期的路线；位置与连线用于空间示意。原画未改动。立体山道、人物面貌、尺度与背面是展示补全，不是考古复原。图像和生成资产的公开使用权利仍待负责人复核。</p></section>
+  <audio id="narrator" preload="auto"></audio>
+  <audio id="background-music" src="/yuezhi/murals/reflection.mp3" preload="metadata" loop></audio>`
 
 const query = <T extends HTMLElement>(selector: string) => app.querySelector<T>(selector)!
 const stage = query<HTMLElement>('#stage')
 const canvas = query<HTMLCanvasElement>('canvas')
 const audio = query<HTMLAudioElement>('#narrator')
+const music = query<HTMLAudioElement>('#background-music')
+music.volume = 0.12
+let musicWanted = true
 const start = query<HTMLButtonElement>('#start')
 const pause = query<HTMLButtonElement>('#pause')
-const note = query<HTMLElement>('#status-note')
+const note = document.createElement('p')
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true })
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2))
 renderer.outputColorSpace = THREE.SRGBColorSpace
@@ -76,12 +84,13 @@ let cinema: CinemaWorld | null = null
 let timeline = buildPlaybackTimeline(chapterDefinitions, [])
 let time = 0, playing = false, started = false, voice = true, speed = 1
 let currentChapter = -1, currentCue = -1, currentAudio = '', lastFrame = performance.now()
-let activeView: 'mural' | 'spatial' = 'mural', manualView = false, fullMural = false
+let activeView: PresentationView = 'mural', manualView = false, fullMural = false
 let stageWidth = 1, stageHeight = 1, viewFrom: MuralView | null = null, viewTo: MuralView | null = null, viewNow: MuralView | null = null
 let viewElapsed = 2, switchElapsed = 2
-let renderedMode: 'mural' | 'spatial' = 'mural', pendingMode: 'mural' | 'spatial' | null = null
+let renderedMode: PresentationView = 'mural', pendingMode: PresentationView | null = null
 let returnFocus: HTMLElement | null = null
 const labelButtons = new Map<string, HTMLButtonElement>()
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches
 const worldLabelIds: Record<string, string> = { 'westward-party': 'party', credential: 'staff', 'daxia-city': 'gate', monks: 'monks', 'buddhist-tower': 'tower' }
 const overviewAnnotationIds = new Set(['overview-palace', 'overview-farewell', 'overview-city', 'westward-party', 'credential'])
 
@@ -90,6 +99,7 @@ function overviewView() {
 }
 function focusView(index: number) {
   const chapter = timeline.chapters[index]!
+  if (started && locateMoment(timeline, time).cue.id === 'c6-1') return overviewView()
   return fitMuralView({ mode: chapter.mode === 'overview' ? 'overview' : 'detail', focus: chapter.focus, muralWidth: muralSize.width, muralHeight: muralSize.height, viewportWidth: stageWidth, viewportHeight: stageHeight })
 }
 function setMuralTarget(target: MuralView, instant = false) {
@@ -114,15 +124,22 @@ function updateControls() {
   query<HTMLButtonElement>('#previous').disabled = !started || currentChapter <= 0
   query<HTMLButtonElement>('#next').disabled = !started || currentChapter >= timeline.chapters.length - 1
   query<HTMLButtonElement>('#overview').disabled = !started
-  query<HTMLButtonElement>('#view-toggle').disabled = !started || !locateMoment(timeline,time).cue.beat
-  query<HTMLButtonElement>('#view-toggle').textContent = activeView === 'spatial' ? '对应原画' : '查看对应3D场景'
-  query<HTMLButtonElement>('#voice').textContent = voice ? '旁白：开' : '旁白：关'
-  query<HTMLButtonElement>('#voice').setAttribute('aria-pressed', String(voice))
-  query<HTMLProgressElement>('progress').max = timeline.duration
+  query<HTMLButtonElement>('#view-toggle').disabled = !started || (!locateMoment(timeline,time).cue.beat && activeView !== 'map')
+  query<HTMLButtonElement>('#view-toggle').textContent = activeView === 'mural' ? '查看对应3D场景' : '对应原画'
+  query<HTMLInputElement>('#story-progress').max = String(timeline.duration)
+  query<HTMLInputElement>('#story-progress').disabled = !started
 }
 function stop(message?: string) {
-  playing = false; audio.pause(); updateControls()
+  playing = false; audio.pause(); music.pause(); updateControls()
   if (message) note.textContent = message
+}
+function startMusic() {
+  if (!musicWanted || !playing || document.hidden) return
+  void music.play().catch(error => {
+    if (error?.name === 'AbortError' || !playing || !musicWanted) return
+    musicWanted = false; updateControls()
+    note.textContent = '音乐暂未播放；点击音乐开关可重试。'
+  })
 }
 function startAudio(restart = false) {
   const moment = locateMoment(timeline, time)
@@ -150,7 +167,7 @@ function resume() {
   fullMural = false
   if (activeView === 'mural') setMuralTarget(focusView(currentChapter))
   playing = true; note.textContent = '正在舒缓讲述；可暂停阅读，也可点击画中标注。'
-  updateControls(); startAudio()
+  updateControls(); startAudio(); startMusic()
 }
 function begin() {
   started = true; time = 0; currentChapter = -1; currentCue = -1; currentAudio = ''
@@ -159,9 +176,10 @@ function begin() {
   query<HTMLElement>('#intro').hidden = true
   query<HTMLElement>('#ending').hidden = true
   query<HTMLElement>('#caption').hidden = false
-  query<HTMLElement>('#reading-intro').hidden = true
   query<HTMLElement>('#annotation-detail').hidden = true
-  updateMoment(); setMuralTarget(overviewView(), true); updateControls(); startAudio()
+  updateMoment(); setMuralTarget(overviewView(), true)
+  renderedMode = activeView = 'spatial'; pendingMode = null; switchElapsed = 1.1
+  updateControls(); startAudio(); startMusic()
 }
 function seekChapter(index: number) {
   if (!started) return
@@ -174,28 +192,21 @@ function seekChapter(index: number) {
   query<HTMLElement>('#annotation-detail').hidden = true
   currentChapter = -1; currentCue = -1; updateMoment(); updateControls()
 }
-function seekCue(index: number) {
-  if (!started) return
-  const chapter = timeline.chapters[currentChapter]!
-  stop('已回到这句话；点击「继续讲述」可重新听。')
-  time = chapter.start + chapter.cues[index]!.start
-  canvas.dataset.complete = 'false'
-  query<HTMLElement>('#ending').hidden = true
-  query<HTMLElement>('#caption').hidden = false
+function seekTime(value: number) {
+  stop()
+  time = THREE.MathUtils.clamp(value, 0, timeline.duration)
+  currentAudio = ''; currentChapter = -1; currentCue = -1
+  manualView = false; fullMural = false
+  canvas.dataset.complete = String(time >= timeline.duration)
   query<HTMLElement>('#annotation-detail').hidden = true
-  currentAudio = ''; currentCue = -1; updateMoment()
+  query<HTMLElement>('#ending').hidden = time < timeline.duration
+  updateMoment(); updateControls()
 }
 function renderChapter(index: number) {
   const chapter = timeline.chapters[index]!
-  query<HTMLElement>('#chapter-number').textContent = `${String(index + 1).padStart(2, '0')} / 08`
-  query<HTMLElement>('#place').textContent = chapter.location
-  query<HTMLElement>('#chapter-title').textContent = chapter.title
-  query<HTMLElement>('#takeaway p').textContent = chapter.takeaway
   query<HTMLElement>('#mini-focus').style.cssText = `left:${chapter.focus.x * 100}%;top:${chapter.focus.y * 100}%;width:${chapter.focus.width * 100}%;height:${chapter.focus.height * 100}%`
   query<HTMLElement>('#map-location').textContent = chapter.mode === 'overview' ? '完整壁画' : chapter.location.split(' · ')[0]!
-  query<HTMLElement>('#cue-list').innerHTML = chapter.cues.map((cue, cueIndex) => `<button class="cue" data-cue="${cueIndex}" aria-label="回看第${cueIndex + 1}句"><span>${kindLabels[cue.sourceKind]}</span><p>${escape(cue.text)}</p></button>`).join('')
-  query<HTMLElement>('#cue-list').querySelectorAll<HTMLButtonElement>('button').forEach(button => { button.onclick = () => seekCue(Number(button.dataset.cue)) })
-  const chapterAnnotations = annotations.filter(annotation => annotation.chapterIndex === index)
+  const chapterAnnotations = annotations.filter(annotation => annotation.chapterIndex === index && annotation.id !== 'remembered-journey')
   query<HTMLElement>('#chapter-annotations').innerHTML = chapterAnnotations.map(annotation => `<button data-annotation="${annotation.id}" aria-label="查看本段标注：${escape(annotation.label)}">${escape(annotation.label)}</button>`).join('')
   query<HTMLElement>('#chapter-annotations').querySelectorAll<HTMLButtonElement>('button').forEach(button => { button.onclick = () => openAnnotation(button.dataset.annotation!) })
   query<HTMLElement>('#chapters').querySelectorAll<HTMLButtonElement>('button').forEach((button, buttonIndex) => {
@@ -215,14 +226,9 @@ function updateMoment() {
     currentCue = moment.cueIndex
     audio.pause();currentAudio=''
     // Every 3D beat has an explicit cue, rather than one shared walking shot.
-    if (!manualView) activeView = moment.cue.beat ? 'spatial' : 'mural'
-    query<HTMLElement>('#narration').textContent = moment.cue.text
+    if (!manualView) { activeView = cueView(moment.cue.id, moment.cueLocalSeconds, !!moment.cue.beat); setMuralTarget(focusView(currentChapter)) }
     query<HTMLElement>('#cue-kind').textContent = kindLabels[moment.cue.sourceKind]
-    query<HTMLElement>('#cue-list').querySelectorAll<HTMLButtonElement>('.cue').forEach((button, index) => {
-      button.classList.toggle('active', index === currentCue)
-      button.setAttribute('aria-current', index === currentCue ? 'true' : 'false')
-      if (index === currentCue) button.scrollIntoView({ block: 'nearest' })
-    })
+    if (playing && !moment.cue.beat) note.textContent = '正在讲述；可暂停阅读，或点击壁画标注。'
     if (playing) startAudio(true)
     updateControls()
   }
@@ -234,6 +240,7 @@ function openAnnotation(id: string) {
   query<HTMLElement>('#annotation-title').textContent = annotation.label
   query<HTMLElement>('#annotation-text').textContent = annotation.detail
   query<HTMLElement>('#annotation-kind').textContent = kindLabels[annotation.sourceKind]
+  query<HTMLElement>('#annotation-hint').textContent = '位置参照原画；史书补充场景另作示意。点击「继续讲述」接着看。'
   query<HTMLButtonElement>('#annotation-close').focus()
 }
 function buildNavigation() {
@@ -264,9 +271,35 @@ query<HTMLButtonElement>('#replay').onclick = begin
 pause.onclick = () => playing ? stop('已暂停，可以读完这句话再继续。') : resume()
 query<HTMLButtonElement>('#previous').onclick = () => seekChapter(currentChapter - 1)
 query<HTMLButtonElement>('#next').onclick = () => seekChapter(currentChapter + 1)
-query<HTMLButtonElement>('#voice').onclick = () => {
-  voice = !voice; audio.pause(); currentAudio = ''; updateControls()
-  if (voice && playing) startAudio(true)
+let scrubbing = false, resumeAfterSeek = false
+const progressControl = query<HTMLInputElement>('#story-progress')
+progressControl.onpointerdown = () => { scrubbing = true; resumeAfterSeek = playing; stop() }
+progressControl.oninput = () => {
+  if (!scrubbing) { scrubbing = true; resumeAfterSeek = playing }
+  seekTime(Number(progressControl.value))
+  note.textContent = '正在定位；松开进度条后从这里继续。'
+}
+function finishScrub() {
+  if (!scrubbing) return
+  scrubbing = false
+  if (resumeAfterSeek) resume()
+  else note.textContent = '已定位到这里，点击「继续讲述」可接着听。'
+  resumeAfterSeek = false
+}
+progressControl.onchange = finishScrub
+progressControl.onpointerup = finishScrub
+progressControl.onpointercancel = finishScrub
+query<HTMLSelectElement>('#caption-height').onchange = event => {
+  query<HTMLElement>('#presentation').style.setProperty('--caption-height', `${(event.target as HTMLSelectElement).value}px`)
+}
+query<HTMLButtonElement>('#asset-credit').onclick = () => {
+  stop('正在查看Tripo资产来源，讲述已暂停。')
+  query<HTMLElement>('#annotation-detail').hidden = false
+  query<HTMLElement>('#annotation-kind').textContent = '资产生成来源'
+  query<HTMLElement>('#annotation-hint').textContent = '展示使用已有生成资产。点击「继续讲述」接着看。'
+  query<HTMLElement>('#annotation-title').textContent = 'Tripo 3D生成资产'
+  query<HTMLElement>('#annotation-text').textContent = '人物、马、长杖、城门、僧人与佛塔使用Tripo生成模型；长杖与城门来自提示词实验B版。营地、王庭和动作由项目制作。长杖是艺术示意，不是汉节的考古复原。汉使服饰没有逐项复原依据，匈奴服装也包含跨时期的参考。它们是艺术示意，不代表汉代人物肖像、标准制服或考古复原。'
+  query<HTMLButtonElement>('#annotation-close').focus()
 }
 query<HTMLSelectElement>('#speed').onchange = event => { speed = Number((event.target as HTMLSelectElement).value); audio.playbackRate = speed; note.textContent = `讲述速度已改为 ${speed}×，文字与旁白一起调整。` }
 query<HTMLButtonElement>('#overview').onclick = () => {
@@ -305,7 +338,7 @@ addEventListener('keydown', event => {
     else if (!event.shiftKey && document.activeElement === focusable.at(-1)) { event.preventDefault(); focusable[0]!.focus() }
   }
 })
-addEventListener('pagehide', () => audio.pause())
+addEventListener('pagehide', () => { audio.pause(); music.pause() })
 document.addEventListener('visibilitychange', () => { if (document.hidden && started) stop('页面切到后台，故事已暂停；回来后可以继续。') })
 audio.addEventListener('error', () => {
   if (!started) return
@@ -316,7 +349,7 @@ async function loadScene() {
   try {
     const [texture, world, narrationResponse] = await Promise.all([
       new THREE.TextureLoader().loadAsync('/yuezhi/murals/full.jpg'),
-      createCinemaWorld(), fetch('/mural-assets/narration-v4/manifest.json'),
+      createCinemaWorld(), fetch('/mural-assets/narration-v7/manifest.json'),
     ])
     if (!narrationResponse.ok) throw new Error('逐句旁白清单无法读取')
     const narration = await narrationResponse.json() as { tracks: NarrationTrack[]; formatVersion: string; voice: string; synthesis: string }
@@ -348,6 +381,7 @@ async function loadScene() {
       }
     })
     canvas.dataset.ready = 'true'; canvas.dataset.assets = String(world.assetCount)
+    canvas.dataset.generatedAssets = 'staff-b,gate-b'
     canvas.dataset.audioTracks = String(narration.tracks.length)
     canvas.dataset.audioVerified = String(recordedUrls.size)
     canvas.dataset.audioVersion = narration.formatVersion
@@ -367,13 +401,14 @@ void loadScene()
 function projectLabels(travel: number) {
   if (!started || !viewNow || !cinema) return
   const chapter = timeline.chapters[currentChapter]!
-  const anchors = cinema.anchors(travel)
+  const anchors = renderedMode === 'spatial' ? cinema.anchors(travel) : {}
+  const narrated = new Set(cueFocus(locateMoment(timeline, time).cue.id))
   for (const annotation of annotations) {
     const button = labelButtons.get(annotation.id)!
     let point: THREE.Vector3 | undefined
     if (renderedMode === 'mural') point = new THREE.Vector3((annotation.x - .5) * muralSize.width, (.5 - annotation.y) * muralSize.height, .02)
     else point = anchors[worldLabelIds[annotation.id] ?? annotation.id]
-    const relevant = renderedMode === 'mural' ? (fullMural || chapter.mode === 'overview' ? overviewAnnotationIds.has(annotation.id) : chapter.annotationIds.includes(annotation.id)) : !!point && chapter.annotationIds.includes(annotation.id)
+    const relevant = annotation.id === 'remembered-journey' || renderedMode === 'map' ? false : renderedMode === 'mural' ? (narrated.has(annotation.id) || (fullMural || chapter.mode === 'overview' ? overviewAnnotationIds.has(annotation.id) : chapter.annotationIds.includes(annotation.id))) : !!point && (narrated.has(annotation.id) || chapter.annotationIds.includes(annotation.id))
     if (!point || !relevant) { button.hidden = true; continue }
     const projected = point.clone().project(camera)
     const x = (projected.x + 1) / 2 * stageWidth, y = (1 - projected.y) / 2 * stageHeight
@@ -381,10 +416,69 @@ function projectLabels(travel: number) {
     if (button.hidden) continue
     button.style.left = `${x}px`; button.style.top = `${y}px`
     button.classList.toggle('current', chapter.annotationIds.includes(annotation.id))
+    button.classList.toggle('narrated', narrated.has(annotation.id))
     button.classList.toggle('flip', x > stageWidth * .67)
   }
 }
+function renderCharacterNames() {
+  const overlay = query<HTMLElement>('#character-names')
+  const names: { name: string; point: THREE.Vector3 }[] = []
+  if (started && renderedMode === 'spatial' && cinema) names.push(...cinema.characterNames())
+  if (started && renderedMode === 'mural' && currentChapter === 2) {
+    for (const [id, name] of [['emperor', '汉武帝'], ['envoy-farewell', '张骞']] as const) {
+      const anchor = annotations.find(item => item.id === id)!
+      names.push({ name, point: new THREE.Vector3((anchor.x - .5) * muralSize.width, (.5 - anchor.y) * muralSize.height, .02) })
+    }
+  }
+  while (overlay.children.length < names.length) {
+    const label = document.createElement('span'); label.className = 'character-name'; overlay.append(label)
+  }
+  for (let i = 0; i < overlay.children.length; i++) {
+    const label = overlay.children[i] as HTMLElement, entry = names[i]
+    label.hidden = !entry
+    if (!entry) continue
+    const p = entry.point.clone().project(camera)
+    const x = (p.x + 1) / 2 * stageWidth, y = (1 - p.y) / 2 * stageHeight - 22
+    label.hidden = p.z < -1 || p.z > 1 || x < 42 || x > stageWidth - 42 || y < 55 || y > stageHeight - 35
+    label.textContent = entry.name
+    label.style.left = `${x}px`; label.style.top = `${y}px`
+  }
+}
+function renderFocus(cueId: string, visible: boolean) {
+  const overlay = query<HTMLElement>('#focus-highlights')
+  const ids = visible ? cueFocus(cueId) : []
+  const boxes: THREE.Box3[] = []
+  if (renderedMode === 'mural') {
+    for (const id of ids) {
+      const annotation = annotations.find(item => item.id === id)
+      if (!annotation) continue
+      const regions = id === 'golden-figures' ? goldenFigureRegions : [{ x: annotation.x - .025, y: annotation.y - .05, width: .05, height: .10 }]
+      for (const region of regions) boxes.push(new THREE.Box3(
+        new THREE.Vector3((region.x - .5) * muralSize.width, (.5 - region.y - region.height) * muralSize.height, 0),
+        new THREE.Vector3((region.x + region.width - .5) * muralSize.width, (.5 - region.y) * muralSize.height, .01),
+      ))
+    }
+  } else if (renderedMode === 'spatial' && cinema) boxes.push(...cinema.focusBounds(visible && cueId === 'c5-1' ? ['market-people'] : [...new Set(ids.map(id => spatialFocusIds[id]).filter((id): id is string => !!id))]))
+  while (overlay.children.length < boxes.length) { const region = document.createElement('div'); region.className = 'focus-region'; overlay.append(region) }
+  for (let index = 0; index < overlay.children.length; index++) {
+    const region = overlay.children[index] as HTMLElement, box = boxes[index]
+    region.hidden = !box
+    if (!box) continue
+    const points = []
+    for (const x of [box.min.x, box.max.x]) for (const y of [box.min.y, box.max.y]) for (const z of [box.min.z, box.max.z]) points.push(new THREE.Vector3(x, y, z).project(camera))
+    if (points.some(p => p.z < -1 || p.z > 1)) { region.hidden = true; continue }
+    const left = Math.max(0, Math.min(...points.map(p => (p.x + 1) / 2 * stageWidth)))
+    const top = Math.max(0, Math.min(...points.map(p => (1 - p.y) / 2 * stageHeight)))
+    const right = Math.min(stageWidth, Math.max(...points.map(p => (p.x + 1) / 2 * stageWidth)))
+    const bottom = Math.min(stageHeight, Math.max(...points.map(p => (1 - p.y) / 2 * stageHeight)))
+    region.hidden = right <= left || bottom <= top
+    region.style.cssText = `left:${left}px;top:${top}px;width:${right-left}px;height:${bottom-top}px`
+  }
+}
 renderer.setAnimationLoop(() => {
+  if (document.hidden) { lastFrame = performance.now(); return }
+  // Paused scenes still settle camera transitions, without redrawing heavy GLBs at 60fps.
+  if (!playing && performance.now() - lastFrame < 100) return
   const now = performance.now(), dt = Math.min((now - lastFrame) / 1000, .1); lastFrame = now
   if (playing) {
     const moment = locateMoment(timeline, time)
@@ -396,13 +490,16 @@ renderer.setAnimationLoop(() => {
   }
   viewElapsed = Math.min(2, viewElapsed + dt)
   if (viewFrom && viewTo) viewNow = interpolateMuralViews(viewFrom, viewTo, viewElapsed / 2)
-  const desiredMode = started && activeView === 'spatial' ? 'spatial' : 'mural'
+  const currentMoment = locateMoment(timeline, time)
+  if (started && !manualView) activeView = cueView(currentMoment.cue.id, currentMoment.cueLocalSeconds, !!currentMoment.cue.beat)
+  const desiredMode: PresentationView = started ? activeView : 'mural'
   if (desiredMode !== renderedMode && pendingMode !== desiredMode) { pendingMode = desiredMode; switchElapsed = 0 }
   if (pendingMode && desiredMode === renderedMode) pendingMode = null
   switchElapsed = Math.min(1.1, switchElapsed + dt)
   if (pendingMode && switchElapsed >= .55) { renderedMode = pendingMode; pendingMode = null }
   const spatial = renderedMode === 'spatial'
-  const mode = spatial ? 'spatial' : 'mural'
+  const mode = renderedMode
+  query<HTMLElement>('#route-stage').hidden = renderedMode !== 'map'
   query<HTMLElement>('#transition').style.opacity = String(switchElapsed < 1.1 ? Math.sin(switchElapsed / 1.1 * Math.PI) : 0)
   query<HTMLElement>('#transition span').textContent = desiredMode === 'spatial' ? '进入这一句对应的立体场景' : '回到原画，对照这一处'
   if (mural) mural.visible = !spatial
@@ -413,7 +510,7 @@ renderer.setAnimationLoop(() => {
   scene.fog = spatial ? new THREE.Fog('#c9bba0', 28, 80) : null
   const moment=locateMoment(timeline,time)
   const travel=moment.cue.beat?sceneBeatProgress(moment.cueLocalSeconds,moment.cue.beat):0
-  const spatialShot=cinema?.present(moment.cue.beat?.id??'mountain',travel)
+  const spatialShot=spatial ? cinema?.present(moment.cue.beat?.id??'mountain',travel,moment.cueLocalSeconds) : undefined
   if (spatial && cinema) {
     const shot=spatialShot!
     camera.fov = 48; camera.updateProjectionMatrix()
@@ -425,13 +522,34 @@ renderer.setAnimationLoop(() => {
   }
   scene.updateMatrixWorld(true); camera.updateMatrixWorld(true)
   projectLabels(travel)
-  if (cinema) canvas.dataset.walking = JSON.stringify(cinema.motion())
+  renderCharacterNames()
+  renderFocus(moment.cue.id, focusVisible(moment.cue.id, moment.cueLocalSeconds, moment.cue.visualSeconds))
+  if (cinema && spatial) canvas.dataset.walking = JSON.stringify(cinema.motion())
   const beat=moment.cue.beat
-  query<HTMLElement>('#scene-badge').textContent = spatial&&beat ? `${beat.sourceKind==='mural'?'壁画转译':beat.sourceKind==='history'?'史书补充':'解读与推断'} · ${beat.title}` : fullMural || !started || currentChapter === 0 || currentChapter === 7 ? '原壁画 · 全画标注' : '原壁画 · 局部观察'
+  const narrationSeconds = moment.cueLocalSeconds - moment.cue.visualSeconds
+  const text = !playing && narrationSeconds < 0 ? moment.cue.text : subtitleText(moment.cue.text, narrationSeconds, Math.max(moment.cue.readingSeconds, moment.cue.audioSeconds), reducedMotion)
+  const narration = query<HTMLElement>('#narration')
+  if (narration.textContent !== text) narration.textContent = text
+  const english = englishSubtitles[moment.cue.id] ?? ''
+  const englishText = !playing && narrationSeconds < 0 ? english : subtitleText(english, narrationSeconds, Math.max(moment.cue.readingSeconds, moment.cue.audioSeconds), reducedMotion)
+  query<HTMLElement>('#narration-en').textContent = englishText
+  const route = routePosition(moment.chapterIndex, moment.cueIndex, renderedMode === 'map' || !beat ? moment.cueLocalSeconds / (moment.cue.end - moment.cue.start) : travel)
+  query<HTMLElement>('#route-marker').style.left = `${route.x}%`
+  query<HTMLElement>('#route-marker').style.top = `${route.y}%`
+  query<HTMLElement>('#large-route-marker').style.left = `${route.x}%`
+  query<HTMLElement>('#large-route-marker').style.top = `${route.y}%`
+  query<HTMLElement>('#large-route-location').textContent = (route.label === '回看旅途' ? '' : route.label)
+  query<HTMLElement>('#route-location').textContent = (route.label === '回看旅途' ? '' : route.label)
+  query<HTMLElement>('#asset-credit').hidden = !spatial
+  query<HTMLElement>('#asset-credit').textContent = beat?.id === 'city' ? '人物、马、长杖与城门：Tripo 3D生成 · 布景与动作：项目制作' : beat?.id === 'tower' || beat?.id === 'greeting' ? '人物、长杖、城门、僧人与佛塔：Tripo 3D生成 · 布景与动作：项目制作' : ['detention', 'retained-credential', 'audience', 'market', 'goods'].includes(beat?.id ?? '') ? '人物与长杖：Tripo 3D生成 · 布景与动作：项目制作' : '人物、马与长杖：Tripo 3D生成 · 布景与动作：项目制作'
+  const detentionPhase = query<HTMLElement>('#detention-phase')
+  detentionPhase.hidden = !spatial || (beat?.id !== 'detention' && beat?.id !== 'retained-credential')
+  detentionPhase.textContent = beat?.id === 'retained-credential' ? '被扣留十余年 · 持汉节不失' : travel < .28 ? '① 西行途中，接近守卫' : travel < .48 ? '② 守卫拦截，使团停下' : travel < .9 ? '③ 被带入营地，出入受限' : '④ 扣留十余年 · 过程示意'
+  query<HTMLElement>('#scene-badge').textContent = spatial&&beat ? `${beat.sourceKind==='mural'?'壁画转译':beat.sourceKind==='history'?'史书补充':'解读与推断'} · ${beat.title}` : renderedMode === 'map' ? '行进路线 · 路线示意' : fullMural || !started || currentChapter === 0 || currentChapter === 7 ? '原壁画 · 全画标注' : '原壁画 · 局部观察'
   query<HTMLElement>('#caption').hidden=!started||query<HTMLElement>('#ending').hidden===false||(playing&&moment.phase==='visual')
-  if(playing&&beat)note.textContent=moment.phase==='visual'?`先看：${beat.title}。镜头与动作完成后讲述这一句。`:beat.boundaryNote
+  if(playing&&beat)note.textContent=moment.phase==='visual'?`先看：${beat.title}。镜头与动作完成后讲述这一句。`:'本段立体场景为展示示意；点击高亮标注可查看说明。'
   Object.assign(canvas.dataset,{beat:beat?.id??'',phase:moment.phase,visualProgress:travel.toFixed(3),audioReady:String(moment.phase==='narration')})
-  query<HTMLProgressElement>('progress').value = time
+  query<HTMLInputElement>('#story-progress').value = String(time)
   query<HTMLElement>('#clock').textContent = `${formatTime(time)} / ${formatTime(timeline.duration)}`
   Object.assign(canvas.dataset, { time: time.toFixed(2), chapter: String(Math.max(0, currentChapter)), cue: String(Math.max(0, currentCue)), audioCue: currentAudio, playing: String(playing), mode, travel: travel.toFixed(3), view: viewNow ? JSON.stringify({ x: viewNow.x, y: viewNow.y, width: viewNow.width, height: viewNow.height }) : '', speed: String(speed) })
   if (time >= timeline.duration && playing) {

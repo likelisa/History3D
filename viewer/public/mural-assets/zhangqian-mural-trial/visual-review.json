@@ -1,0 +1,18 @@
+{
+  "reviewedAt": "2026-10-02T23:58:25.893Z",
+  "status": "not_accepted_for_story_character",
+  "method": "Local browser GLB SHA/bytes check, direct front and back screenshots, provider preview comparison",
+  "observations": [
+    "The output is a thin relief-like irregular silhouette rather than a complete kneeling human figure.",
+    "Dark damage marks and neighboring figure fragments have become prominent surface features.",
+    "Both front and back lack readable face, arms and kneeling anatomy.",
+    "The source figure has only 62x147 native pixels; enlargement did not recover missing visual information."
+  ],
+  "decision": "Keep the raw single-task result as an independent trial; do not substitute it for the story's walking Zhang Qian.",
+  "sourceBoundary": "Early Tang mural form; hidden depth and back views are inference, not Han archaeology.",
+  "nextPotentialApproach": "A separate authorized attempt could use a clearer source or a reviewed simplified character concept; no further paid task was submitted in this trial.",
+  "screenshots": [
+    "output/zhangqian-mural-trial-2026-10-03/front.png",
+    "output/zhangqian-mural-trial-2026-10-03/back.png"
+  ]
+}
