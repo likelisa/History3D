@@ -1,8 +1,12 @@
 # 本地壁画与文物讲解 Agent
 
-输入壁画或文物照片、故事主题与史料摘录，网页会调用所填模型产生受合同约束的故事计划，再自动生成真实 Tripo 资产、固定公开男声、逐句字幕与桌面讲解网页。故事优先，原图和 3D 用来说明故事。结构通过与预览就绪不等于史实、视觉、听感或最终交付通过；完整录屏与源码 ZIP 仍需另验。
+输入壁画或文物照片、故事主题与史料摘录，网页会调用所填模型产生受合同约束的故事计划，再自动生成真实 Tripo 资产、逐句字幕与桌面讲解网页；配置公开声音环境后生成固定公开男声，未配置时提供阅读模式。故事优先，原图和 3D 用来说明故事。结构通过与预览就绪不等于史实、视觉、听感或最终交付通过；完整录屏与源码 ZIP 仍需另验。
 
 当前 Agent 场景切换直接开始旁白，不加固定观察期或阅读等待；字幕继续跟随真实媒体时钟。静态 3D 观察不套用早期张骞动画“3D先放完再叙述”的等待要求，需要查看细节时可以主动暂停。
+
+## 先观看作品或查看填写指南
+
+在根目录执行 `npm run demo`，打开 `/experience.html`，可直接观看张骞壁画和铜奔马；进入 `/guide.html` 查看实际字段和填写示例。已构建时直接启动 Agent 即可。观看保存的作品无需 Key。新生成的凭据与恢复步骤见下文。
 
 ## 启动与打开
 
@@ -51,6 +55,8 @@ powershell -NoProfile -File scripts/start-heritage-agent.ps1 -DataDir C:/Users/A
 
 ## 重启恢复
 
+Key 输入会清理首尾空白和复制引入的零宽字符，其余非 ASCII 字符与内部空白会在规划前拒绝，避免非法请求头到制作阶段才失败。`recoverable` 表示制作暂停，并不一定表示密钥丢失；`credentialsReady:true` 时可处理错误后直接继续。Tripo 只读请求的失败记录仅保存操作类型、HTTP 状态或安全分类，不保存 Key、响应正文或签名 URL。401/403、连接失败、其他 HTTP 失败分别返回 `TRIPO_AUTH_FAILED`、`TRIPO_NETWORK_FAILED`、`TRIPO_HTTP_FAILED`；生成 POST 的未知结果仍禁止重投。
+
 记录页面显示的项目 ID。服务重启时只读取文件，不自动调用模型或 Tripo；进程内 Key 已丢失。
 
 1. 在配置页输入项目 ID，读取现有项目与事件。
@@ -97,3 +103,9 @@ powershell -NoProfile -File scripts/start-heritage-agent.ps1 -DataDir C:/Users/A
 新运行默认冻结 [r14 政策](../../agent/quality-policy-r14.json) 的 38 条规则，报告绑定 run ID、政策身份与 SHA；旧 r10 的 26 条、r13 的 33 条冻结副本保持原字节和原证据。规则缺省 `pending`，自动检查只进入 `coveredChecks`。视觉批准只记录这次人工判断，不自动完成其他混合规则，也不把 `releaseReady` 改为真。固定旁白实现及测试夹具分别记载；未配置的人物动画仍不能冒充步态动画。
 
 新增执行规则与证据界限见 [workflow-lessons-r14.md](workflow-lessons-r14.md)，历史经验见 [mural-case-lessons-r10.md](mural-case-lessons-r10.md)。回归位于 [mural-agent-server.test.ts](../../tests/mural-agent-server.test.ts) 与 [heritage-agent-web.test.ts](../../tests/heritage-agent-web.test.ts)。规则文档、离线测试和旧项目认可均不能替代当前运行的视觉、故事及听感验收。
+
+## Mac 启动与规划诊断（2026-10-04）
+
+Mac 使用 Node 24 执行 `npm run agent:dev`。未设置 `HISTORY3D_PUBLIC_VOICE_ROOT` 时启动阅读模式，产物明确记录 `narration.status=not_configured`；配置独立公开声音环境后启用固定旁白，配置后的失败仍停止流程，不用其他声音替代。
+
+官方 DeepSeek 规划采用高强度思考和 32768 token 上限，启动入口请求超时 180 秒。模型响应上限 2 MiB；响应正文进入合同检查，思考不保存。每次规划的 `model-response-diagnostics.json`（修正时 `model-repair-response-diagnostics.json`）记录请求哈希、HTTP 状态、响应字节数、白名单结束原因、正文/思考字符数及数值 token 用量，不保存密钥、响应正文或思考文本。`MODEL_OUTPUT_LIMIT` 表示长度截断，`MODEL_RESPONSE_INVALID` 表示响应格式异常；均不自动重投。

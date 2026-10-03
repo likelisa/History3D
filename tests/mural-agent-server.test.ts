@@ -147,6 +147,12 @@ describe('mural agent strict contracts and delivered GLB', () => {
       expect(() => validatePlan(rejected, [{ ...source, status: 'provided' }], 'artifact')).toThrow()
     }
   })
+  it('cleans copied invisible key separators and rejects invalid headers before creating a paid run', () => {
+    const withInvisible = { ...input, tripo: { apiKey: ` \u200b${credentials.tripo.apiKey}\ufeff ` } }
+    expect(validateRunInput(withInvisible).tripo.apiKey).toBe(credentials.tripo.apiKey)
+    expect(() => validateRunInput({ ...input, tripo: { apiKey: '请填写真实TripoKey' } })).toThrow('API_KEY_FORMAT_INVALID')
+    expect(() => validateRunInput({ ...input, tripo: { apiKey: 'secret key value' } })).toThrow('API_KEY_FORMAT_INVALID')
+  })
   it('requires provided excerpts and rejects fabricated evidence and unknown scene references', () => {
     expect(() => validateRunInput({ ...input, sources: [{ ...source, excerpt: '' }] })).toThrow('PLAIN_TEXT_REQUIRED')
     const fabricated = structuredClone(plan); fabricated.chapters[0].cues[0].evidence[0].quote = '未提供的史实'
@@ -186,6 +192,20 @@ describe('mural agent offline HTTP state machine', () => {
     expect(run.assets.every((asset: any) => !asset.submittedIntent && !asset.taskId)).toBe(true)
     expect((await local.post(`/api/runs/${run.id}/generate`, { planSha256: run.planSha256 })).status).toBe(202)
     const completed = await waitStatus(local, run.id, ['preview_ready']); expect(completed.status).toBe('preview_ready')
+    expect(vendor.submits()).toBe(1); expect(vendor.calls.filter(call => call.url.endsWith('/chat/completions'))).toHaveLength(1)
+  })
+  it.each([[401, 'TRIPO_AUTH_FAILED'], [503, 'TRIPO_HTTP_FAILED']] as const)('reports safe Tripo balance HTTP %s diagnostics without submitting assets', async (httpStatus, errorCode) => {
+    const vendor = upstream(); let failed = true
+    const local = await start((request, init) => String(request).endsWith('/account/balance') && failed
+      ? Promise.resolve(new Response('private provider response', { status: httpStatus })) : vendor.fetchImpl(request, init))
+    const run = await generated(local)
+    expect(run.status).toBe('recoverable'); expect(run.credentialsReady).toBe(true)
+    expect(run.errors.at(-1).code).toBe(errorCode); expect(vendor.submits()).toBe(0)
+    const records = await readFile(path.join(local.directory, 'data', 'runs', run.id, 'events.jsonl'), 'utf8')
+    expect(records).toContain(`"httpStatus":${httpStatus}`); expect(records).not.toContain('private provider response')
+    failed = false
+    await local.post(`/api/runs/${run.id}/generate`, { planSha256: run.planSha256 })
+    await waitStatus(local, run.id, ['preview_ready'])
     expect(vendor.submits()).toBe(1); expect(vendor.calls.filter(call => call.url.endsWith('/chat/completions'))).toHaveLength(1)
   })
   it('repairs a known rejected candidate once, preserves evidence and requires fresh story approval', async () => {
@@ -291,7 +311,7 @@ describe('mural agent offline HTTP state machine', () => {
     } else {
       expect(run.status).toBe('story_review'); expect(calls).toHaveLength(1)
       const request: any = calls[0].body
-      expect(request.model).toBe('deepseek-flash'); expect(request.thinking).toEqual({ type: 'enabled' }); expect(request.reasoning_effort).toBe('high'); expect(request.max_tokens).toBe(12000)
+      expect(request.model).toBe('deepseek-flash'); expect(request.thinking).toEqual({ type: 'enabled' }); expect(request.reasoning_effort).toBe('high'); expect(request.max_tokens).toBe(32768)
       expect(request.messages[1].content[1].image_url.url).toBe(value.imageDataUrl)
       const folder = path.join(local.directory, 'data/runs', run.id)
       expect(JSON.parse(await readFile(path.join(folder, 'model-capabilities.json'), 'utf8')).verifiedFromOfficialModelsEndpoint).toBe(true)
@@ -764,7 +784,7 @@ describe('auditable quality-first replacement assets', () => {
     const fetchImpl: typeof fetch = (request, init) => replacementMode && String(request).includes('/tasks/') ? Promise.reject(new Error('temporary poll')) : vendor.fetchImpl(request, init)
     const local = await start(fetchImpl, undefined, fixtureNarration), original = await generated(local, { ...input, budget: { maxAssets: 1, maxCredits: 5000 } }), run = await idleRun(local, original.id)
     replacementMode = true; await candidateRequest(local, run); const stopped = await idleRun(local, run.id), candidate = stopped.assetCandidates[0]
-    expect(candidate).toMatchObject({ status: 'task_known', active: false }); expect(candidate.errors.at(-1).code).toBe('UPSTREAM_FAILED'); expect(vendor.submits()).toBe(2)
+    expect(candidate).toMatchObject({ status: 'task_known', active: false }); expect(candidate.errors.at(-1).code).toBe('TRIPO_NETWORK_FAILED'); expect(vendor.submits()).toBe(2)
     await local.app.close()
     const nextVendor = upstream(), restored = await start(nextVendor.fetchImpl, local.directory)
     await restored.post(`/api/runs/${run.id}/credentials`, credentials)
@@ -830,3 +850,33 @@ describe('auditable quality-first replacement assets', () => {
     const oldAudio = Buffer.from(await (await fetch(local.base + `/runs/${run.id}/narration/cue-one.wav`)).arrayBuffer()); expect(oldAudio.equals(fixtureWave())).toBe(true)
   })
 })
+
+ describe('safe model response diagnostics', () => {
+  it('records truncation without persisting reasoning or submitting Tripo', async () => {
+    const vendor = upstream(), privateReasoning = 'untrusted-reasoning-not-for-log';
+    const local = await start(async (request, init) => String(request).endsWith('/chat/completions') ? new Response(JSON.stringify({ choices: [{ finish_reason: 'length', message: { content: '', reasoning_content: privateReasoning } }], usage: { completion_tokens: 12000 } })) : vendor.fetchImpl(request, init));
+    const run = await planned(local);
+    expect(run.errors.at(-1).code).toBe('MODEL_OUTPUT_LIMIT'); expect(vendor.submits()).toBe(0);
+    const folder = path.join(local.directory, 'data/runs', run.id);
+    const diagnostic = JSON.parse(await readFile(path.join(folder, 'model-response-diagnostics.json'), 'utf8'));
+    expect(diagnostic.finishReason).toBe('length'); expect(diagnostic.reasoningCharacters).toBe(privateReasoning.length);
+    expect(await diskText(folder)).not.toContain(privateReasoning);
+  });
+  it('records malformed JSON without saving its body', async () => {
+    const vendor = upstream(), local = await start(async (request, init) => String(request).endsWith('/chat/completions') ? new Response('untrusted-invalid-body') : vendor.fetchImpl(request, init));
+    const run = await planned(local); expect(run.errors.at(-1).code).toBe('MODEL_RESPONSE_INVALID');
+    const folder = path.join(local.directory, 'data/runs', run.id);
+    expect(JSON.parse(await readFile(path.join(folder, 'model-response-diagnostics.json'), 'utf8')).reason).toBe('invalid_json');
+    expect(await diskText(folder)).not.toContain('untrusted-invalid-body'); expect(vendor.submits()).toBe(0);
+  });
+});
+
+it('identifies each malformed cue without weakening the contract', async () => {
+  const broken: any = structuredClone(plan); broken.chapters[0].cues[0].kind = 'inference'; delete broken.chapters[0].cues[0].sourceIds; delete broken.chapters[0].cues[0].evidence;
+  const vendor = upstream({plan: broken}), local = await start(vendor.fetchImpl), run = await planned(local);
+  expect(run.status).toBe('failed'); expect(vendor.submits()).toBe(0);
+  expect(run.planRepair.diagnostics).toEqual(expect.arrayContaining([
+    expect.objectContaining({code:'MISSING_FIELD',cueId:'cue-one',message:expect.stringContaining('sourceIds, evidence')}),
+    expect.objectContaining({code:'CUE_KIND_INVALID',cueId:'cue-one',message:expect.stringContaining('inferred')})
+  ]));
+});

@@ -56,8 +56,11 @@ function vector(value: unknown): [number, number, number] {
   return list(value, 3, 3).map(item => number(item, -100, 100)) as [number, number, number]
 }
 function key(value: unknown): string {
-  if (typeof value !== 'string' || value.length < 8 || value.length > 4096 || /[\r\n\u0000]/.test(value)) fail('API_KEY_REQUIRED')
-  return value
+  if (typeof value !== 'string') fail('API_KEY_REQUIRED')
+  const cleaned = value.replace(/[\u200B-\u200D\u2060\uFEFF]/g, '').trim()
+  if (cleaned.length < 8 || cleaned.length > 4096) fail('API_KEY_REQUIRED')
+  if (!/^[\x21-\x7e]+$/.test(cleaned)) fail('API_KEY_FORMAT_INVALID')
+  return cleaned
 }
 function navigationUrl(value: unknown): string {
   const text = plainText(value, 2000, true)
@@ -243,5 +246,7 @@ export function modelSystemPrompt(subjectType: SubjectType, policy?: PlanningPol
   const finalCheck = subjectType === 'artifact' ? '\nFinal JSON check before responding: root subjectType="artifact"; root primaryAssetId matches the single prop asset with generationMode="image-to-model"; all required chapters/assets/scenes fields and exact provided evidence quotes are present. Return the plan itself, not a policy report or a nested plan wrapper.' : ''
   const narration = '\nNarration is for a general visitor: explain what happened and why it matters in connected natural Chinese. Put source titles and exact quotations in evidence, rather than repeatedly saying the catalogue says or the lecture says in spoken text. Start with a clear subject and question, connect observation to the story, and end with its consequence or meaning. Do not fill narration with production process or engineering disclaimers; briefly explain only uncertainties that change how the visitor understands the history. Do not add unsupported causal claims to make the story dramatic. For visible details, provide an imageAnchor only when the actual image shows the referenced location. Evidence quotes must be copied character for character, preserving punctuation and every small word; shorter exact contiguous excerpts are preferable to rewriting long quotes.'
   const framing = subjectType === 'artifact' ? '\nFor each observation scene, you may add cameraFraming:{region:"whole"|"upper"|"lower",magnification:1..2.5}. Use whole for identity/overall silhouette, upper or lower only when the narration clearly refers to that broad visible region. The viewer fits the delivered model bounds and applies the chosen framing; camera defines viewing direction rather than a guessed exact feature coordinate. Do not infer 3D ornament/surface coordinates from 2D anchors. Avoid repeated identical views; select supported views that help the current sentence.' : ''
-  return base + shared + mode + frozenRequirements + finalCheck + narration + framing
+  const cueSchema = '\nMANDATORY final cue schema check, including inferred and illustrative cues: every cue MUST contain id, text, kind, sourceIds, evidence, sceneId. kind is exactly one of "documented", "inferred", "illustrative"; NEVER use "inference", "illustration" or other synonyms. For inferred/illustrative cues without direct citations, include sourceIds:[] and evidence:[] explicitly; never omit these fields. documented cues require real sourceIds and nonempty verbatim evidence. Do not change a claim to documented just to satisfy the schema.'
+  const spatialEvidence = '\nSpatial grounding: directions such as east/west refer to documented cave orientation, not photograph left/right. Without a labeled plan or established camera orientation, explicitly separate source description from visible photo detail and never assert a source-mentioned niche is visible. Use imageRelation=context-only or not-depicted accordingly. Prefer describing actually visible repeated Buddha figures, outlines, arrangement and surviving color. For photo-only explanation use sceneId:null rather than an unrelated 3D prop. Asset prompts must specify readable anatomy, separate fingers/hands, coherent robe folds, surface roughness and subtle pigment wear; do not use micro-cracks or extra polygons as proof of archaeological fidelity. Preserve source-supported shape and avoid generic toy-like features.'
+  return base + shared + mode + frozenRequirements + finalCheck + narration + framing + cueSchema + spatialEvidence
 }

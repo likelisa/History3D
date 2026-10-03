@@ -1,6 +1,6 @@
 const $ = (id) => document.getElementById(id);
 const state = { run: null, imageDataUrl: '', imageSequence: 0, sourceSeq: 0, pollTimer: null, refreshSequence: 0, busy: false, updateAt: null, recoveredId: null, candidateRequest: null };
-const statusLabels = { planning: '规划中', story_review: '等待故事审核', generating: 'Tripo 生成中', assembling: '整合网页中', preview_ready: '预览已就绪，待视觉审核', visual_reviewed: '已记录视觉审核', failed: '任务失败', recoverable: '需要恢复凭据', unknown: '提交结果未知' };
+const statusLabels = { planning: '规划中', story_review: '等待故事审核', generating: 'Tripo 生成中', assembling: '整合网页中', preview_ready: '预览已就绪，待视觉审核', visual_reviewed: '已记录视觉审核', failed: '任务失败', recoverable: '制作暂停，可继续', unknown: '提交结果未知' };
 const kindLabels = { documented: '原文支持', inferred: '推断', illustrative: '艺术补充', human: '人物', prop: '道具', environment: '环境' };
 const relationLabels = { depicted: '原图可见', 'context-only': '原图仅作背景', 'not-depicted': '原图未展示' };
 const focusLabels = { identity: '器物整体', use: '用途', craft: '工艺', motif: '纹饰', history: '历史故事', condition: '保存状态' };
@@ -203,11 +203,6 @@ function renderAssets(plan, run) {
   }
   $('asset-list').replaceChildren(fragment); $('asset-count').textContent = `${plan.assets.length} 项计划资产`;
 }
-function renderQuality(quality) {
-  const items = [['structuralPassed', '结构检查'], ['visualReviewed', '人工视觉审核'], ['historicalVerified', '独立史料核实'], ['recordingVerified', '完整录屏验收'], ['zipVerified', '独立解包验收']];
-  $('quality-panel').replaceChildren(...items.map(([key, label]) => node('span', `quality-item ${quality?.[key] === true ? 'passed' : 'pending'}`, `${quality?.[key] === true ? '✓' : '○'} ${label}${quality?.[key] === true ? '已通过' : '待完成'}`)));
-  $('quality-panel').hidden = false;
-}
 function renderEvents(events) {
   const fragment = document.createDocumentFragment();
   for (const event of events || []) {
@@ -301,7 +296,7 @@ function render(run) {
   const recovery = needsCandidateCredentials || ['story_review', 'failed', 'recoverable', 'unknown'].includes(run.status);
   $('recovery-panel').hidden = !recovery;
   $('recovery-title').textContent = run.status === 'story_review' ? '服务重启后，可恢复本项目凭据' : statusLabels[run.status] || '项目需要处理';
-  $('recovery-message').textContent = run.status === 'story_review' ? '故事与计划会保留，密钥仅在本地进程内存中。如果服务已经重启，请重新填写上方模型与 Tripo 配置，再恢复凭据。之后仍需审核并确认这版计划。' : run.status === 'unknown' ? '服务端没有确认提交结果。请保留本项目 ID 与已有任务记录，先刷新或核查 provider 任务，避免重复收费。' : run.status === 'recoverable' ? '服务端保留了项目与任务记录，但需要重新填写凭据。恢复凭据不会提交新的生成任务。' : '本次任务未通过。请查看下方记录和具体原因，保留已有文件，不自动重新收费生成。';
+  $('recovery-message').textContent = run.status === 'story_review' ? '故事与计划会保留，密钥仅在本地进程内存中。如果服务已经重启，请重新填写上方模型与 Tripo 配置，再恢复凭据。之后仍需审核并确认这版计划。' : run.status === 'unknown' ? '服务端没有确认提交结果。请保留本项目 ID 与已有任务记录，先刷新或核查 provider 任务，避免重复收费。' : run.status === 'recoverable' ? run.credentialsReady === true ? '项目与剧本已保留，凭据仍有效保存在本地进程内存。请处理下方错误后继续已有任务。' : '项目与剧本已保留。请重新填写凭据并恢复，再继续已有任务。恢复凭据本身不会提交生成。' : '本次任务未通过。请查看下方记录和具体原因，保留已有文件，不自动重新收费生成。';
   $('resume-button').hidden = run.credentialsReady === true || (!needsCandidateCredentials && !['story_review', 'recoverable'].includes(run.status) && !run.planRepair?.eligible);
   if (needsCandidateCredentials) { $('recovery-title').textContent = '恢复凭据后继续打磨'; $('recovery-message').textContent = '现有网页和资产已保留。重新填入 API 并恢复到本地进程内存，即可制作新的 3D 候选。'; }
   $('resume-button').textContent = '恢复当前凭据并刷新状态';
@@ -313,7 +308,7 @@ function render(run) {
   $('visual-button').disabled = state.busy || !$('visual-checkbox').checked || run.status !== 'preview_ready';
   $('visual-checkbox').disabled = run.status === 'visual_reviewed';
   if (run.status === 'visual_reviewed') $('visual-checkbox').checked = true;
-  renderRepair(run); renderCandidates(run); renderQuality(run.quality); renderEvents(run.events);
+  renderRepair(run); renderCandidates(run); renderEvents(run.events);
   const errors = (run.errors || []).map(item => typeof item === 'string' ? errorLabels[item] || item : errorLabels[item.code] || item.message || item.code || '').filter(Boolean);
   if (errors.length && ['failed', 'unknown', 'recoverable'].includes(run.status)) notice(errors.map(cleanMessage).join('；'), 'error');
   $('plan-button').disabled = state.busy || activeStatuses.has(run.status);
@@ -389,7 +384,7 @@ $('project-form').addEventListener('submit', event => {
     stopPolling();
     const created = await api('/api/runs', 'POST', input);
     state.recoveredId = null; state.run = { ...created, subjectType: input.subjectType, subjectMetadata: input.subjectMetadata, sources: input.sources, assets: [], events: [], errors: [] };
-    notice('已开始自动制作。故事通过合同检查后，将自动生成真实 3D、固定旁白和讲解网页。');
+    notice('项目已创建，可在工作区查看进度。');
     await refresh();
   });
 });

@@ -16,7 +16,7 @@ const runPattern = /^run-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9
 const maxBodyBytes = 12 * 1024 * 1024
 const tripoBase = 'https://openapi.tripo3d.ai/v3'
 type Json = Record<string, any>
-type Event = { at: string; type: string; assetId?: string; code?: string }
+type Event = { at: string; type: string; assetId?: string; code?: string; operation?: 'balance' | 'upload' | 'submission' | 'poll'; transportCode?: string; errorType?: string; errorCategory?: string; location?: string; httpStatus?: number }
 type ErrorNotice = { code: string; message: string }
 type PlanDiagnostic = ErrorNotice & { cueId?: string; sourceId?: string }
 type InputRecord = Pick<RunInput, 'subjectType' | 'subjectMetadata' | 'autoGenerate' | 'topic' | 'sources' | 'budget'> & { imageFile: 'image.png' | 'image.jpg'; imageSha256?: string }
@@ -40,7 +40,7 @@ type Run = {
   assetCandidates?: AssetCandidate[]; originalAssets?: AssetRecord[]; originalBudget?: RunInput['budget']; packageDirectory?: string
 }
 export type ServerOptions = {
-  dataDir?: string; webDir?: string; policyPath?: string; vendorRoot?: string; fetchImpl?: typeof fetch
+  dataDir?: string; webDir?: string; policyPath?: string; vendorRoot?: string; demoDir?: string; artifactDir?: string; fetchImpl?: typeof fetch
   pollIntervalMs?: number; maxPolls?: number; requestTimeoutMs?: number
   narrationRunner?: NarrationRunner
 }
@@ -49,7 +49,9 @@ const messages: Record<string, string> = {
   JSON_REQUIRED: '请求必须是 JSON。', NOT_FOUND: '未找到资源。', PLAN_HASH_MISMATCH: '故事版本不匹配，请重新审核。',
   BUDGET_REJECTED: '资产数量或预计积分超过本次预算。', INSUFFICIENT_BALANCE: '可用积分不足以覆盖尚未提交的资产。',
   CREDENTIALS_REQUIRED: '服务重启后需要重新输入凭据，凭据只保存在内存中。', UNKNOWN_SUBMISSION: '提交结果未知，已停止；需要核对提供方记录。',
-  UPSTREAM_FAILED: '上游请求失败，详细响应未写入日志。', UPSTREAM_INVALID: '上游响应不符合合同。', SECRET_IN_OUTPUT: '输出包含凭据内容，已拒绝保存。',
+  MODEL_OUTPUT_LIMIT: '模型输出达到长度上限，故事尚未完整返回。', MODEL_RESPONSE_INVALID: '模型响应格式异常，请查看本地安全诊断记录。', UPSTREAM_FAILED: '上游请求失败，详细响应未写入日志。', UPSTREAM_INVALID: '上游响应不符合合同。', SECRET_IN_OUTPUT: '输出包含凭据内容，已拒绝保存。',
+  API_KEY_FORMAT_INVALID: 'API Key 包含非 ASCII 字符或内部空格，请只粘贴完整密钥，不包含说明文字。', TRIPO_KEY_HEADER_INVALID: 'Tripo Key 含有无法发送的字符，请更新 Tripo Key 后继续已有项目。',
+  TRIPO_AUTH_FAILED: 'Tripo 拒绝了当前 API Key，请检查并更新 Tripo 凭据后继续已有项目。', TRIPO_NETWORK_FAILED: '连接 Tripo 失败，项目已保留，可在连接恢复后继续。', TRIPO_HTTP_FAILED: 'Tripo 接口暂未成功响应，请查看任务中的 HTTP 状态后继续。',
   IMAGE_UPLOAD_FAILED: '文物原图上传失败，已停止生成；请检查提供方状态后建立新任务。', INPUT_IMAGE_HASH_MISMATCH: '保存的原图与输入指纹不匹配，已停止生成。',
   VOICE_UNAVAILABLE: '固定公开音色服务不可用，3D 资产已保留，可恢复并补齐旁白。', VOICE_FAILED: '旁白未通过音频或字幕验证，3D 资产已保留，可恢复并补齐旁白。',
   CUE_TEXT_TOO_LONG: '单段讲解超过 500 字符，已在生成 3D 前停止；请拆句后重新审核。',
@@ -175,7 +177,7 @@ const vendorFiles: Record<string, string> = {
   'three/addons/loaders/GLTFLoader.js': 'examples/jsm/loaders/GLTFLoader.js',
   'three/addons/utils/BufferGeometryUtils.js': 'examples/jsm/utils/BufferGeometryUtils.js',
 }
-const contentTypes: Record<string, string> = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json; charset=utf-8', '.glb': 'model/gltf-binary', '.wav': 'audio/wav', '.png': 'image/png', '.jpg': 'image/jpeg', '.importmap': 'application/json; charset=utf-8' }
+const contentTypes: Record<string, string> = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json; charset=utf-8', '.glb': 'model/gltf-binary', '.mp3': 'audio/mpeg', '.ogg': 'audio/ogg', '.webp': 'image/webp', '.jpeg': 'image/jpeg', '.svg': 'image/svg+xml', '.txt': 'text/plain; charset=utf-8', '.wav': 'audio/wav', '.png': 'image/png', '.jpg': 'image/jpeg', '.importmap': 'application/json; charset=utf-8' }
 const packageFilePattern = /^(?:viewer\.(?:html|js|css)|genericviewer\.importmap|(?:story|scene|asset-manifest|quality-report|quality-policy)\.json|image\.(?:png|jpg)|assets\/[a-z][a-z0-9-]{0,47}\.glb|narration\/(?:[a-z][a-z0-9-]{0,47}\.wav|manifest\.json)|vendor\/(?:three\.(?:module|core)\.js|three\/addons\/(?:loaders\/GLTFLoader|utils\/BufferGeometryUtils)\.js))$/
 async function confinedFile(root: string, relative: string) {
   if (!relative || relative.includes('\\') || relative.includes('\0') || relative.split('/').some(part => !part || part === '.' || part === '..')) fail('NOT_FOUND')
@@ -189,6 +191,8 @@ export async function createMuralAgentServer(options: ServerOptions = {}) {
   const dataDir = options.dataDir ?? path.join(repo, '.processing-data/mural-agent')
   const webDir = options.webDir ?? path.join(repo, 'agent/web')
   const vendorRoot = options.vendorRoot ?? path.join(repo, 'node_modules/three')
+  const demoDir = options.demoDir ?? path.join(repo, 'dist')
+  const artifactDir = options.artifactDir ?? path.join(repo, 'artifacts/bronze-horse-r14')
   const policyPath = options.policyPath ?? path.join(repo, 'agent/quality-policy-r14.json')
   const fetchImpl = options.fetchImpl ?? fetch
   const pollIntervalMs = options.pollIntervalMs ?? 5000, maxPolls = options.maxPolls ?? 240, requestTimeoutMs = options.requestTimeoutMs ?? 60000
@@ -210,7 +214,7 @@ export async function createMuralAgentServer(options: ServerOptions = {}) {
     if (containsSecret(value, credentials.get(run.id))) fail('SECRET_IN_OUTPUT')
     await writeFile(path.join(runDir(run.id), name), JSON.stringify(value, null, 2) + '\n', { flag: 'wx', mode: 0o600 })
   }
-  async function event(run: Run, type: string, extra: Pick<Event, 'assetId' | 'code'> = {}) {
+  async function event(run: Run, type: string, extra: Omit<Event, 'at' | 'type'> = {}) {
     const item = { at: now(), type, ...extra }; run.events.push(item)
     await appendFile(path.join(runDir(run.id), 'events.jsonl'), JSON.stringify(item) + '\n', { mode: 0o600 }); await save(run)
   }
@@ -219,6 +223,21 @@ export async function createMuralAgentServer(options: ServerOptions = {}) {
       candidateSha256: run.modelCandidateSha256 ?? null, attempts: run.planRepairAttempts ?? 0, maxAttempts: 1, diagnostics: run.planDiagnostics ?? [] }
   }
   function candidateDiagnostics(content: string, run: Run, code: string): PlanDiagnostic[] {
+    if (['MISSING_FIELD', 'CUE_KIND_INVALID'].includes(code)) {
+      try {
+        const value = JSON.parse(content), result: PlanDiagnostic[] = []
+        for (const chapter of Array.isArray(value?.chapters) ? value.chapters : []) {
+          for (const cue of Array.isArray(chapter?.cues) ? chapter.cues : []) {
+            if (!cue || typeof cue !== 'object') continue
+            const cueId = typeof cue.id === 'string' && /^[a-z][a-z0-9-]{0,47}$/.test(cue.id) ? cue.id : undefined
+            const missing = ['id', 'text', 'kind', 'sourceIds', 'evidence', 'sceneId'].filter(key => !Object.hasOwn(cue, key))
+            if (missing.length) result.push({ code: 'MISSING_FIELD', cueId, message: `缺少必填字段：${missing.join(', ')}；无引用时也必须显式填写空数组。` })
+            if (!['documented', 'inferred', 'illustrative'].includes(cue.kind)) result.push({ code: 'CUE_KIND_INVALID', cueId, message: 'kind 只能为 documented、inferred、illustrative，不能使用 inference 或 illustration。' })
+          }
+        }
+        if (result.length) return result.slice(0, 48)
+      } catch { /* Do not expose malformed candidate text. */ }
+    }
     if (code === 'EVIDENCE_QUOTE_NOT_IN_PROVIDED_EXCERPT') {
       try {
         const value = JSON.parse(content), result: PlanDiagnostic[] = []
@@ -428,16 +447,27 @@ export async function createMuralAgentServer(options: ServerOptions = {}) {
     let response: Response
     const multipart = body instanceof FormData, failureCode = endpoint === '/files' ? 'IMAGE_UPLOAD_FAILED' : method === 'POST' ? 'UNKNOWN_SUBMISSION' : 'UPSTREAM_FAILED'
     try { response = await fetchImpl(tripoBase + endpoint, { method, headers: { Authorization: `Bearer ${creds.tripo.apiKey}`, ...(multipart ? {} : { 'Content-Type': 'application/json' }) }, body: body ? multipart ? body : JSON.stringify(body) : undefined, redirect: 'error', signal: signal() }) }
-    catch { fail(failureCode) }
-    if (!response.ok) fail(failureCode)
+    catch (error) {
+      const cause = error instanceof Error ? (error as Error & { cause?: { code?: string } }).cause?.code : undefined
+      const errorType = error instanceof Error && ['TypeError', 'ReferenceError', 'AbortError', 'TimeoutError', 'Error'].includes(error.name) ? error.name : 'Error'
+      const errorCategory = error instanceof Error && /ByteString|invalid header|Headers|header value/i.test(error.message) ? 'INVALID_HEADER' : error instanceof Error && /fetch failed/i.test(error.message) ? 'FETCH_FAILED' : 'OTHER'
+      const location = error instanceof Error ? error.stack?.match(/server\.ts:(\d+):(\d+)/)?.[0] : undefined
+      const transportCode = typeof cause === 'string' && /^(?:ECONNRESET|ECONNREFUSED|ENOTFOUND|EAI_AGAIN|ETIMEDOUT|UND_ERR_[A-Z_]+)$/.test(cause) ? cause : 'REQUEST_FAILED'
+      await event(run, 'tripo_request_failed', { operation: endpoint === '/account/balance' ? 'balance' : endpoint === '/files' ? 'upload' : method === 'POST' ? 'submission' : 'poll', transportCode, errorType, errorCategory, ...(location ? { location } : {}) })
+      fail(method === 'GET' ? errorCategory === 'INVALID_HEADER' ? 'TRIPO_KEY_HEADER_INVALID' : 'TRIPO_NETWORK_FAILED' : failureCode)
+    }
+    if (!response.ok) {
+      await event(run, 'tripo_request_failed', { operation: endpoint === '/account/balance' ? 'balance' : endpoint === '/files' ? 'upload' : method === 'POST' ? 'submission' : 'poll', httpStatus: response.status })
+      fail(method === 'GET' ? [401, 403].includes(response.status) ? 'TRIPO_AUTH_FAILED' : 'TRIPO_HTTP_FAILED' : failureCode)
+    }
     const result = await responseJson(response, creds)
     if (result.code !== 0 || !result.data || typeof result.data !== 'object' || Array.isArray(result.data)) fail('UPSTREAM_INVALID')
     return result.data as Json
   }
   async function terminal(run: Run, error: unknown) {
     const code = codeOf(error)
-    const safePreflightRecovery = code === 'UPSTREAM_FAILED' && Boolean(run.plan) && run.assets.every(asset => asset.status === 'pending' && !asset.submittedIntent && !asset.taskId)
-    run.status = code === 'UNKNOWN_SUBMISSION' ? 'unknown' : safePreflightRecovery || (['POLL_LIMIT', 'CREDENTIALS_REQUIRED', 'UPSTREAM_FAILED', 'VOICE_UNAVAILABLE', 'VOICE_FAILED'].includes(code) && run.assets.some(asset => asset.taskId)) ? 'recoverable' : 'failed'
+    const safePreflightRecovery = ['UPSTREAM_FAILED', 'TRIPO_KEY_HEADER_INVALID', 'TRIPO_AUTH_FAILED', 'TRIPO_NETWORK_FAILED', 'TRIPO_HTTP_FAILED'].includes(code) && Boolean(run.plan) && run.assets.every(asset => asset.status === 'pending' && !asset.submittedIntent && !asset.taskId)
+    run.status = code === 'UNKNOWN_SUBMISSION' ? 'unknown' : safePreflightRecovery || (['POLL_LIMIT', 'CREDENTIALS_REQUIRED', 'UPSTREAM_FAILED', 'TRIPO_KEY_HEADER_INVALID', 'TRIPO_AUTH_FAILED', 'TRIPO_NETWORK_FAILED', 'TRIPO_HTTP_FAILED', 'VOICE_UNAVAILABLE', 'VOICE_FAILED'].includes(code) && run.assets.some(asset => asset.taskId)) ? 'recoverable' : 'failed'
     run.errors.push(notice(code)); await event(run, 'stopped', { code })
   }
   function background(run: Run, job: () => Promise<void>) {
@@ -468,7 +498,7 @@ export async function createMuralAgentServer(options: ServerOptions = {}) {
     const body = { model: creds.model.model, messages: [{ role: 'system', content: system }, { role: 'user', content: [{ type: 'text', text: JSON.stringify({ subjectType: run.input.subjectType, subjectMetadata: run.input.subjectMetadata, topic: run.input.topic, sources: run.input.sources, budget: run.input.budget, ...(correction ? { correction } : {}) }) }, { type: 'image_url', image_url: { url: `data:image/${run.input.imageFile.endsWith('png') ? 'png' : 'jpeg'};base64,${bytes.toString('base64')}` } }] }], temperature: 0.2, response_format: { type: 'json_object' } }
     // Official DeepSeek supports bounded thinking. Keep these provider options
     // away from arbitrary compatible endpoints; candidate plans remain data.
-    if (deepseekOfficial) Object.assign(body, { thinking: { type: 'enabled' }, reasoning_effort: 'high', max_tokens: 12000 })
+    if (deepseekOfficial) Object.assign(body, { thinking: { type: 'enabled' }, reasoning_effort: 'high', max_tokens: 32768 })
     const requestSha256 = sha(JSON.stringify(body))
     await immutable(run, correction ? 'model-repair-intent.json' : 'model-intent.json', { at: now(), requestSha256, systemPromptSha256: sha(system), operation: correction ? 'one-explicit-plan-correction-post' : 'one-vision-plan-post', policySha256: run.policySha256, planningRuleIds: run.planningPolicy.rules.map(rule => rule.id), ...(correction ? { correction } : {}) })
     const submission = { intent: true as const, requestSha256 }
@@ -480,9 +510,20 @@ export async function createMuralAgentServer(options: ServerOptions = {}) {
     Object.assign(submission, { received: true })
     await immutable(run, correction ? 'model-repair-receipt.json' : 'model-receipt.json', { at: now(), requestSha256, httpStatus: response.status }); await save(run)
     if (!response.ok) fail('UPSTREAM_FAILED')
-    const result = await responseJson(response, creds)
-    const choice = result.choices?.[0]
-    if (!choice || (choice.finish_reason != null && choice.finish_reason !== 'stop') || choice.message?.tool_calls || choice.message?.function_call) fail('UPSTREAM_INVALID')
+    const diagnosticFile = correction ? 'model-repair-response-diagnostics.json' : 'model-response-diagnostics.json'
+    let responseBody: Buffer
+    try { responseBody = await responseBytes(response, 2 * 1024 * 1024) }
+    catch (error) { await immutable(run, diagnosticFile, { at: now(), requestSha256, httpStatus: response.status, reason: 'response_unreadable_or_oversized', maxResponseBytes: 2 * 1024 * 1024 }); throw error }
+    if (containsSecret(responseBody, creds)) fail('SECRET_IN_OUTPUT')
+    let result: Json
+    try { result = JSON.parse(responseBody.toString('utf8')) }
+    catch { await immutable(run, diagnosticFile, { at: now(), requestSha256, httpStatus: response.status, responseBytes: responseBody.length, reason: 'invalid_json' }); fail('MODEL_RESPONSE_INVALID') }
+    const choice = result?.choices?.[0]
+    const numeric = (value: unknown) => typeof value === 'number' && Number.isSafeInteger(value) && value >= 0 ? value : null
+    const finishReason = ['stop', 'length', 'content_filter', 'tool_calls', 'function_call'].includes(choice?.finish_reason) ? choice.finish_reason : choice?.finish_reason == null ? 'missing' : 'other'
+    await immutable(run, diagnosticFile, { at: now(), requestSha256, httpStatus: response.status, responseBytes: responseBody.length, finishReason, contentType: typeof choice?.message?.content, contentCharacters: typeof choice?.message?.content === 'string' ? choice.message.content.length : 0, reasoningCharacters: typeof choice?.message?.reasoning_content === 'string' ? choice.message.reasoning_content.length : 0, hasToolCalls: !!(choice?.message?.tool_calls || choice?.message?.function_call), usage: { promptTokens: numeric(result?.usage?.prompt_tokens), completionTokens: numeric(result?.usage?.completion_tokens), totalTokens: numeric(result?.usage?.total_tokens) }, maxTokens: deepseekOfficial ? 32768 : null })
+    if (finishReason === 'length') fail('MODEL_OUTPUT_LIMIT')
+    if (!choice || (choice.finish_reason != null && choice.finish_reason !== 'stop') || choice.message?.tool_calls || choice.message?.function_call) fail('MODEL_RESPONSE_INVALID')
     // Preserve the key-screened candidate as untrusted diagnostic data, even when its
     // schema is rejected. It is never exposed through the generated viewer routes.
     if (typeof choice.message?.content !== 'string' || choice.message.content.length > 1024 * 1024) fail('UPSTREAM_INVALID')
@@ -733,7 +774,7 @@ export async function createMuralAgentServer(options: ServerOptions = {}) {
     const promise = generateCandidate(run, candidate).catch(async error => {
       const code = codeOf(error)
       if (candidate.submittedIntent && !candidate.taskId) candidate.status = 'unknown'
-      else if (!['UPSTREAM_FAILED', 'POLL_LIMIT', 'CREDENTIALS_REQUIRED', 'BUDGET_REJECTED', 'INSUFFICIENT_BALANCE'].includes(code)) candidate.status = 'failed'
+      else if (!['UPSTREAM_FAILED', 'TRIPO_KEY_HEADER_INVALID', 'TRIPO_AUTH_FAILED', 'TRIPO_NETWORK_FAILED', 'TRIPO_HTTP_FAILED', 'POLL_LIMIT', 'CREDENTIALS_REQUIRED', 'BUDGET_REJECTED', 'INSUFFICIENT_BALANCE'].includes(code)) candidate.status = 'failed'
       candidate.errors.push(notice(code)); await event(run, 'asset_candidate_stopped', { assetId: candidate.id, code })
     }).finally(() => { active.delete(run.id); candidateJobs.delete(run.id) })
     active.set(run.id, promise)
@@ -787,7 +828,7 @@ export async function createMuralAgentServer(options: ServerOptions = {}) {
     if (pathname.includes('\\') || pathname.split('/').some(part => part === '..' || part === '.')) fail('NOT_FOUND')
     if (request.method === 'GET' && pathname === '/api/health') { send(response, 200, { ok: true, version: '1.0.0' }); return }
     if (request.method === 'GET' && pathname === '/api/policy') { send(response, 200, { ...policy, policySha256 }); return }
-    if (request.method === 'GET' && pathname === '/api/baseline') { send(response, 200, { title: '张骞壁画故事已确认对照', url: 'http://127.0.0.1:5197/mural.html', sources: ['docs/agent/quality-standard-r10.md', 'docs/agent/mural-case-lessons-r10.md'], status: 'project-reference-not-run-certification' }); return }
+    if (request.method === 'GET' && pathname === '/api/baseline') { send(response, 200, { title: '张骞壁画故事已确认对照', url: '/mural.html', sources: ['docs/agent/quality-standard-r10.md', 'docs/agent/mural-case-lessons-r10.md'], status: 'project-reference-not-run-certification' }); return }
     if (request.method === 'POST' && pathname === '/api/runs') {
       const input = validateRunInput(await body(request)), creds = { model: input.model, tripo: input.tripo }
       const image = imageBytes(input.imageDataUrl)
@@ -940,7 +981,16 @@ export async function createMuralAgentServer(options: ServerOptions = {}) {
     if (request.method === 'GET' && pathname.startsWith('/vendor/')) {
       const relative = vendorFiles[pathname.slice('/vendor/'.length)]; if (!relative) fail('NOT_FOUND'); await serveFile(response, vendorRoot, relative); return
     }
-    if (request.method === 'GET' && ['/', '/index.html', '/app.js', '/style.css'].includes(pathname)) { await serveFile(response, webDir, pathname === '/' ? 'index.html' : pathname.slice(1)); return }
+    if (request.method === 'GET' && pathname.startsWith('/examples/bronze-horse/')) {
+      const relative = pathname.slice('/examples/bronze-horse/'.length)
+      if (!packageFilePattern.test(relative)) fail('NOT_FOUND')
+      await serveFile(response, artifactDir, relative); return
+    }
+    // Only built viewer media is public; never expose repository or run-state directories.
+    if (request.method === 'GET' && (['/mural.html', '/yuezhi.html'].includes(pathname) || /^\/(?:assets|mural-assets|yuezhi|packages|tripo-prompt-lab)\//.test(pathname))) {
+      await serveFile(response, demoDir, pathname.slice(1)); return
+    }
+    if (request.method === 'GET' && ['/', '/index.html', '/experience.html', '/guide.html', '/app.js', '/style.css'].includes(pathname)) { await serveFile(response, webDir, pathname === '/' ? 'index.html' : pathname.slice(1)); return }
     fail('NOT_FOUND')
   }
   return {
@@ -951,7 +1001,9 @@ export async function createMuralAgentServer(options: ServerOptions = {}) {
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const app = await createMuralAgentServer({ narrationRunner: createPublicNarrationRunner() }); await app.listen()
-  console.log('文化遗产讲解 Agent: http://127.0.0.1:5210 — 使用固定公开音色，凭据仅保留在进程内存，生成需人工接受故事。')
+  const voiceConfigured = !!process.env.HISTORY3D_PUBLIC_VOICE_ROOT
+  const app = await createMuralAgentServer({ ...(voiceConfigured ? { narrationRunner: createPublicNarrationRunner() } : {}), requestTimeoutMs: 180000 }); await app.listen()
+  if (!voiceConfigured) console.log('公开声音环境未配置：新项目使用阅读模式，质量报告标记旁白未配置。')
+  console.log('文化遗产讲解 Agent: http://127.0.0.1:5210 — 凭据仅保留在进程内存，自动制作按页面配置推进。')
   for (const signalName of ['SIGINT', 'SIGTERM'] as const) process.on(signalName, () => { void app.close().then(() => process.exit(0)) })
 }

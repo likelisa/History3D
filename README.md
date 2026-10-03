@@ -1,19 +1,36 @@
 # History3D（Triple S）
 
-把史料里的一个瞬间，变成可以走进去、有人的尺度、能查看来源的 3D 场景。
+给今天的人，一份来自历史世界的礼物。项目包含两个可直接观看的作品，以及制作新讲解网页的通用工具。
 
-本仓库当前是**展示层（C）+ 公共协议（contracts）**的可运行实现，配套一个技术占位场景包
-`packages/silk-road-demo/`（丝路商队出发前）。当前功能分支另外集成了采集层（A）的
-`collector/` 原型，供三方审查；生成层（B）的 `generator/` 源码仍不在本仓库。
-采集原型已有反馈接口、候选资料包、受控交接与测试，但默认不向公共搜索接口外发反馈，
-评分政策尚未获史料负责人批准，不能据此宣称已经完成真实史料采集。
+## 直接体验：两个作品与一个工具
 
-> 当前场景包 `status = draft`，全部尺寸与布局都是 `illustrative`（演示设定）。
-> 页面会持续显示「技术占位，未经历史核验」。它验证的是工具链路，不是历史结论。
+在源码根目录使用 Node.js 22+（新生成推荐 Node 24；Windows 启动器要求 Node 24），首次安装依赖后启动：
+
+```bash
+npm ci
+npm run demo
+```
+
+打开 **[统一体验入口](http://127.0.0.1:5210/experience.html)**。这个命令先校验并构建壁画作品，再启动本地服务；构建和观看已有作品不调用付费生成。已有服务占用 5210 时，先确认其用途，勿重启正在制作的项目。
+
+| 入口 | 体验内容 | 是否需要 Key |
+| --- | --- | --- |
+| [丝绸之路壁画 · 张骞](http://127.0.0.1:5210/mural.html) | 原画、路线、人物、持节西行与市场故事；按页面开始入口进入 | 不需要 |
+| [铜奔马](http://127.0.0.1:5210/examples/bronze-horse/viewer.html) | 照片对照、旋转/缩放真实 Tripo GLB、三章九句讲解和保存的旁白 | 不需要 |
+| [制作工具](http://127.0.0.1:5210/) | 上传壁画或文物，填写主题与史料，生成新的独立讲解网页 | 需要故事模型和 Tripo Key |
+| [使用指南](http://127.0.0.1:5210/guide.html) | 四步填写说明、第39窟与文物资料示例、结果与恢复方式 | 不需要 |
+
+已构建时可直接 `npm run agent:dev`，无需再次构建。已有作品的模型和音轨保存在仓库内；新项目未配置公开声音服务时使用阅读模式。网页需 HTTP 服务，不能直接双击作品 HTML。地址仅在运行服务的电脑上有效。
+
+张骞是定制故事作品，铜奔马是通用工具的实际生成案例。工具目前不会自动完成联网史料认证，也不会复制张骞作品全部定制动作。第323窟张骞壁画、第39窟工具测试素材分别管理；生成模型是艺术示意或重建，不是文物扫描。
+
+- [项目地图与演示顺序](docs/demo/PROJECT-GUIDE.md)
+- [2026-10-04 更新梳理](docs/demo/2026-10-04-UPDATES.md)
+- [工具运行、输入限制与恢复](docs/agent/local-agent-README.md)
 
 ## 团队分支与处理层演示
 
-后续开发以 `dev` 为集成基线：从 `dev` 拉取功能分支，验证后合回 `dev`。`main` 暂不改动。处理层 Python 管线位于 [`processing/`](processing/README.md)，张骞三幕交互演示位于 `processing/demo/`，可独立运行；根目录 `npm run dev` 仍运行展示层 C 的正式 `viewer/`。演示包使用旧格式，不应当作 `packages/` v0.1 正式协议包。
+当前交接基线为 `main`（r14 已合入）。新改动从最新 `main` 开功能分支，通过 PR 审查后集成。处理层 Python 管线位于 [`processing/`](processing/README.md)，张骞三幕交互演示位于 `processing/demo/`，可独立运行；根目录 `npm run dev` 仍运行展示层 C 的正式 `viewer/`。演示包使用旧格式，不应当作 `packages/` v0.1 正式协议包。
 
 ## 运行环境
 
@@ -21,13 +38,13 @@
 
 | 项目 | 版本 |
 | --- | --- |
-| Node.js | 20.18.0（`>=20` 即可，CI 使用 20） |
+| Node.js | 本次实测 24.18.0；已有 CI 使用 20，新生成推荐 24 |
 | npm | 10.8.2 |
 | 浏览器 | Chrome（桌面，支持 WebGL2 与 Pointer Lock） |
 
 依赖与锁文件由集成负责人统一维护，请使用 npm，不要引入第二套包管理器。
 
-## 安装与启动
+## 开发命令与旧协议查看器
 
 ```bash
 npm ci          # 从干净环境安装主应用
@@ -52,12 +69,12 @@ npm run preview # 启动构建后的站点，用于最终运行验收
 | `npm run dev` / `build` | 自动先跑校验与资源准备 |
 | `npm run preview` | 预览 `dist/` 构建产物 |
 
-预期页面：打开后先经过 `idle → loading_manifest → validating → loading_assets → ready`，
+以下描述适用于旧协议查看器 `/index.html`（Vite 开发服务），不适用于工坊和两个作品。预期页面：打开后先经过 `idle → loading_manifest → validating → loading_assets → ready`，
 进入「可体验」后可用顶部五个入口：开始体验、俯视/第一人称、测距、故事列表、回到起点。
 
 **直接双击 HTML 文件不作为演示方式**，必须通过本地静态服务以 HTTP 加载包内资源。
 
-## 环境变量
+## 旧协议查看器环境变量
 
 复制 `.env.example` 为 `.env` 可覆盖默认场景包（默认 `silk-road-demo`）：
 
@@ -71,7 +88,9 @@ npm run preview # 启动构建后的站点，用于最终运行验收
 
 ```text
 history-demo/
-  collector/                    # 当前功能分支的 A 层原型；候选/正式输出按公共契约交接
+  agent/                        # 通用制作工坊、统一入口与使用指南
+  artifacts/bronze-horse-r14/     # 已生成铜奔马网页、模型与旁白
+  collector/                    # A 层原型；候选/正式输出按公共契约交接
   contracts/                    # 协议、JSON Schema、校验实现与固定样例（C 维护入口，三方审核规则）
   packages/<storyId>/           # 唯一正式场景包输出区（B 输出；查看器的入口是 scene.json）
   viewer/                       # 浏览器查看器（C）
@@ -100,7 +119,7 @@ history-demo/
 `VALIDATION_FAILED`、`REVISION_MISMATCH`、`REFERENCE_MISSING`、`ASSET_LOAD_FAILED`（error），
 `OPTIONAL_IMAGE_FAILED`、`SOURCE_OFFLINE`（warning）。
 
-## 操作说明
+## 旧协议查看器操作说明
 
 | 操作 | 按键 |
 | --- | --- |
@@ -114,7 +133,7 @@ history-demo/
 
 测距显示的是**两点直线距离**，不是沿路步行距离，也不是区域路线里程。
 
-## 性能基准（`?bench=`）
+## 旧协议查看器性能基准（`?bench=`）
 
 查看器内置采样器，按 1 秒窗口统计帧率，用于复核文档 12.4 的口径。
 
