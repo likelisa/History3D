@@ -1,0 +1,623 @@
+{
+  "scope": "offline ASR candidate and silence screening; no human listening verdict",
+  "manifestSha256": "cf2c5a7e549e61d5b067ddce8bf15a5f78454a8306df72efb49160fa95400f78",
+  "scriptSha256": "127e6c1323c06279a998acbf072c053ee9e79238c354d7c05535695aaf8edb0f",
+  "model": "local Paraformer + VAD + punctuation",
+  "records": [
+    {
+      "id": "c0-0",
+      "expectedText": "西汉时，汉武帝想找到一个盟友，共同对抗匈奴。张骞的故事，就从这项任务开始。",
+      "asrCandidateText": "西汉时，汉武帝想找到一个盟友，共同对抗匈奴张骞的故事，就从这项任务开始。",
+      "asrRaw": [
+        {
+          "key": "c0-0-16k",
+          "text": "西汉时，汉武帝想找到一个盟友，共同对抗匈奴张骞的故事，就从这项任务开始。"
+        }
+      ],
+      "normalizedSimilarity": 1.0,
+      "silenceSpans": [
+        [
+          4.626313,
+          5.225125,
+          0.598812
+        ]
+      ],
+      "longestSilenceSeconds": 0.598812,
+      "durationSeconds": 8.38,
+      "reviewFlagged": false,
+      "asrSeconds": 3.75,
+      "humanReviewed": false
+    },
+    {
+      "id": "c0-1",
+      "expectedText": "这个盟友是月氏。它曾被匈奴击败，国王被杀，部众向西迁走；汉武帝希望双方能一起对付共同的敌人。",
+      "asrCandidateText": "这个盟友是月氏，他曾被匈奴击败国王被杀，步众向西迁走。汉武帝希望双方能一起对付共同的敌人。",
+      "asrRaw": [
+        {
+          "key": "c0-1-16k",
+          "text": "这个盟友是月氏，他曾被匈奴击败国王被杀，步众向西迁走。汉武帝希望双方能一起对付共同的敌人。"
+        }
+      ],
+      "normalizedSimilarity": 0.9512195121951219,
+      "silenceSpans": [
+        [
+          1.479313,
+          2.156813,
+          0.6775
+        ],
+        [
+          6.475719,
+          7.080938,
+          0.605219
+        ]
+      ],
+      "longestSilenceSeconds": 0.6775,
+      "durationSeconds": 10.98,
+      "reviewFlagged": false,
+      "asrSeconds": 0.20300000000133878,
+      "humanReviewed": false
+    },
+    {
+      "id": "c0-2",
+      "expectedText": "可是，要找到月氏，先得穿过匈奴控制的地区。这是一趟前路不明的远行，张骞应募，接下了出使的使命。",
+      "asrCandidateText": "可是要找到月氏先得穿过匈奴控制的地区，这是一趟前路不明的远行。张骞硬木接下了初始的使命。",
+      "asrRaw": [
+        {
+          "key": "c0-2-16k",
+          "text": "可是要找到月氏先得穿过匈奴控制的地区，这是一趟前路不明的远行。张骞硬木接下了初始的使命。"
+        }
+      ],
+      "normalizedSimilarity": 0.9024390243902439,
+      "silenceSpans": [
+        [
+          4.987531,
+          5.717062,
+          0.729531
+        ],
+        [
+          7.956437,
+          8.523375,
+          0.566937
+        ]
+      ],
+      "longestSilenceSeconds": 0.729531,
+      "durationSeconds": 11.7,
+      "reviewFlagged": false,
+      "asrSeconds": 0.25,
+      "humanReviewed": false
+    },
+    {
+      "id": "c1-0",
+      "expectedText": "张骞带着百余人，从陇西向西出发。同行的甘父是一位善射的胡人，也是这场远行的重要伙伴。",
+      "asrCandidateText": "张骞带着百余人从陇西向西出发，同行的甘复是一位善射的胡人，也是这场远行的重要伙伴。",
+      "asrRaw": [
+        {
+          "key": "c1-0-16k",
+          "text": "张骞带着百余人从陇西向西出发，同行的甘复是一位善射的胡人，也是这场远行的重要伙伴。"
+        }
+      ],
+      "normalizedSimilarity": 0.9736842105263158,
+      "silenceSpans": [
+        [
+          3.475656,
+          4.193281,
+          0.717625
+        ]
+      ],
+      "longestSilenceSeconds": 0.717625,
+      "durationSeconds": 9.74,
+      "reviewFlagged": false,
+      "asrSeconds": 0.18800000000192085,
+      "humanReviewed": false
+    },
+    {
+      "id": "c1-1",
+      "expectedText": "使团还没见到月氏，就被匈奴截住。匈奴不肯放行，张骞被带到单于面前，求盟的任务就此中断。",
+      "asrCandidateText": "使团还没见到月氏，就被匈奴截住，匈奴不肯放行，张骞被带到单于面前求盟的任务就此中断。",
+      "asrRaw": [
+        {
+          "key": "c1-1-16k",
+          "text": "使团还没见到月氏，就被匈奴截住，匈奴不肯放行，张骞被带到单于面前求盟的任务就此中断。"
+        }
+      ],
+      "normalizedSimilarity": 1.0,
+      "silenceSpans": [
+        [
+          3.118688,
+          3.653906,
+          0.535219
+        ]
+      ],
+      "longestSilenceSeconds": 0.535219,
+      "durationSeconds": 9.62,
+      "reviewFlagged": false,
+      "asrSeconds": 0.18699999999807915,
+      "humanReviewed": false
+    },
+    {
+      "id": "c1-2",
+      "expectedText": "张骞被留在匈奴十余年，娶妻生子。远行变成漫长的等待，但他一直保留汉节，没有放下使者的使命。",
+      "asrCandidateText": "张骞被留在匈奴十余年，娶妻生子远行变成漫长的等待，但他一直保留汉杰，没有放下使者的使命。",
+      "asrRaw": [
+        {
+          "key": "c1-2-16k",
+          "text": "张骞被留在匈奴十余年，娶妻生子远行变成漫长的等待，但他一直保留汉杰，没有放下使者的使命。"
+        }
+      ],
+      "normalizedSimilarity": 0.975,
+      "silenceSpans": [
+        [
+          3.689594,
+          4.523844,
+          0.83425
+        ]
+      ],
+      "longestSilenceSeconds": 0.83425,
+      "durationSeconds": 11.14,
+      "reviewFlagged": false,
+      "asrSeconds": 0.18699999999807915,
+      "humanReviewed": false
+    },
+    {
+      "id": "c2-0",
+      "expectedText": "十余年后，监守渐渐松弛，张骞与同伴终于逃出。他没有就此回汉朝，而是继续向西寻找月氏。",
+      "asrCandidateText": "十余年后，坚守渐渐松弛。张骞与同伴终于逃出。他没有就此回汉朝，而是继续向西寻找月之。",
+      "asrRaw": [
+        {
+          "key": "c2-0-16k",
+          "text": "十余年后，坚守渐渐松弛。张骞与同伴终于逃出。他没有就此回汉朝，而是继续向西寻找月之。"
+        }
+      ],
+      "normalizedSimilarity": 0.9459459459459459,
+      "silenceSpans": [
+        [
+          5.083969,
+          5.5965,
+          0.512531
+        ]
+      ],
+      "longestSilenceSeconds": 0.512531,
+      "durationSeconds": 10.02,
+      "reviewFlagged": false,
+      "asrSeconds": 0.18699999999807915,
+      "humanReviewed": false
+    },
+    {
+      "id": "c2-1",
+      "expectedText": "旅途困乏时，善射的甘父猎取禽兽，帮助众人解决食物。向西赶路，还要设法跨过不同国家的边界。",
+      "asrCandidateText": "旅途困乏时，擅设的甘赴猎取禽兽，帮助众人解决食物向西赶路，还要设法跨过不同国家的边界。",
+      "asrRaw": [
+        {
+          "key": "c2-1-16k",
+          "text": "旅途困乏时，擅设的甘赴猎取禽兽，帮助众人解决食物向西赶路，还要设法跨过不同国家的边界。"
+        }
+      ],
+      "normalizedSimilarity": 0.9230769230769231,
+      "silenceSpans": [
+        [
+          5.738406,
+          6.307344,
+          0.568937
+        ]
+      ],
+      "longestSilenceSeconds": 0.568937,
+      "durationSeconds": 10.62,
+      "reviewFlagged": false,
+      "asrSeconds": 0.2190000000045984,
+      "humanReviewed": false
+    },
+    {
+      "id": "c2-2",
+      "expectedText": "大宛人希望与汉朝交往，便送他们到康居。经康居转送，张骞终于见到了他找寻多年的大月氏。",
+      "asrCandidateText": "大渊人希望与汉朝交往，便送他们到康居。经康居转，宋张骞终于见到了他找寻多年的大月之。",
+      "asrRaw": [
+        {
+          "key": "c2-2-16k",
+          "text": "大渊人希望与汉朝交往，便送他们到康居。经康居转，宋张骞终于见到了他找寻多年的大月之。"
+        }
+      ],
+      "normalizedSimilarity": 0.9473684210526315,
+      "silenceSpans": [
+        [
+          4.046031,
+          4.563281,
+          0.51725
+        ]
+      ],
+      "longestSilenceSeconds": 0.51725,
+      "durationSeconds": 9.18,
+      "reviewFlagged": false,
+      "asrSeconds": 0.18800000000192085,
+      "humanReviewed": false
+    },
+    {
+      "id": "c3-0",
+      "expectedText": "可大月氏已经在新的土地上安居。那里土地肥沃，也少受侵扰；他们不愿再为旧仇，重新与匈奴开战。",
+      "asrCandidateText": "可大月芝已经在新的土地上安居那里，土地肥沃也少受侵扰，他们不愿再为旧仇，重新与匈奴开战。",
+      "asrRaw": [
+        {
+          "key": "c3-0-16k",
+          "text": "可大月芝已经在新的土地上安居那里，土地肥沃也少受侵扰，他们不愿再为旧仇，重新与匈奴开战。"
+        }
+      ],
+      "normalizedSimilarity": 0.975,
+      "silenceSpans": [
+        [
+          2.826594,
+          3.676531,
+          0.849938
+        ],
+        [
+          6.078281,
+          6.60175,
+          0.523469
+        ]
+      ],
+      "longestSilenceSeconds": 0.849938,
+      "durationSeconds": 10.38,
+      "reviewFlagged": false,
+      "asrSeconds": 0.1879999999946449,
+      "humanReviewed": false
+    },
+    {
+      "id": "c3-1",
+      "expectedText": "汉朝盼着两面夹击匈奴，月氏却觉得汉朝太远，开战会打破眼前的安稳。双方的处境，早已不同。",
+      "asrCandidateText": "汉朝盼着两面夹击匈奴月氏，却觉得汉朝太远，开战会打破眼前的安稳，双方的处境早已不同。",
+      "asrRaw": [
+        {
+          "key": "c3-1-16k",
+          "text": "汉朝盼着两面夹击匈奴月氏，却觉得汉朝太远，开战会打破眼前的安稳，双方的处境早已不同。"
+        }
+      ],
+      "normalizedSimilarity": 1.0,
+      "silenceSpans": [
+        [
+          6.356094,
+          6.955563,
+          0.599469
+        ]
+      ],
+      "longestSilenceSeconds": 0.599469,
+      "durationSeconds": 9.46,
+      "reviewFlagged": false,
+      "asrSeconds": 0.1870000000053551,
+      "humanReviewed": false
+    },
+    {
+      "id": "c3-2",
+      "expectedText": "张骞从月氏来到大夏，停留一年多，仍没能促成结盟。他准备返回，把一路的见闻带给汉武帝。",
+      "asrCandidateText": "张骞从月之来到大夏，停留一年多，仍没能促成结盟，他准备返回，把一路的见闻带给汉武帝。",
+      "asrRaw": [
+        {
+          "key": "c3-2-16k",
+          "text": "张骞从月之来到大夏，停留一年多，仍没能促成结盟，他准备返回，把一路的见闻带给汉武帝。"
+        }
+      ],
+      "normalizedSimilarity": 0.972972972972973,
+      "silenceSpans": [],
+      "longestSilenceSeconds": 0,
+      "durationSeconds": 9.66,
+      "reviewFlagged": false,
+      "asrSeconds": 0.1879999999946449,
+      "humanReviewed": false
+    },
+    {
+      "id": "c4-0",
+      "expectedText": "求盟没有成功，远行却让他看见了另一个世界。大夏有城邑和市场，各方商人在这里交换货物。",
+      "asrCandidateText": "球盟没有成功远行，却让他看见了另一个世界。大夏有诚意和市场，各方商人在这里交换货物。",
+      "asrRaw": [
+        {
+          "key": "c4-0-16k",
+          "text": "球盟没有成功远行，却让他看见了另一个世界。大夏有诚意和市场，各方商人在这里交换货物。"
+        }
+      ],
+      "normalizedSimilarity": 0.9210526315789473,
+      "silenceSpans": [
+        [
+          1.275688,
+          1.878031,
+          0.602344
+        ],
+        [
+          4.198219,
+          4.878969,
+          0.68075
+        ]
+      ],
+      "longestSilenceSeconds": 0.68075,
+      "durationSeconds": 9.94,
+      "reviewFlagged": false,
+      "asrSeconds": 0.18699999999807915,
+      "humanReviewed": false
+    },
+    {
+      "id": "c4-1",
+      "expectedText": "市场里，张骞竟认出蜀布和邛竹杖，也就是四川的布和竹杖：熟悉的东西，怎么会出现在这么远的地方？",
+      "asrCandidateText": "市场里，张骞竟认出蜀布和穷竹杖，也就是四川的布和竹杖，熟悉的东西，怎么会出现在这么远的地方？",
+      "asrRaw": [
+        {
+          "key": "c4-1-16k",
+          "text": "市场里，张骞竟认出蜀布和穷竹杖，也就是四川的布和竹杖，熟悉的东西，怎么会出现在这么远的地方？"
+        }
+      ],
+      "normalizedSimilarity": 0.975609756097561,
+      "silenceSpans": [
+        [
+          3.608281,
+          4.152687,
+          0.544406
+        ],
+        [
+          6.060156,
+          6.606031,
+          0.545875
+        ]
+      ],
+      "longestSilenceSeconds": 0.545875,
+      "durationSeconds": 10.18,
+      "reviewFlagged": false,
+      "asrSeconds": 0.20300000000133878,
+      "humanReviewed": false
+    },
+    {
+      "id": "c4-2",
+      "expectedText": "大夏人说，商人从身毒买来这些货物。身毒指印度地区；张骞由此推想，四川也许另有通向西方的路。",
+      "asrCandidateText": "大夏人说，商人从捐渎买来这些货物，捐渎指印度地区张骞由此推想，四川也许另有通向西方的路。",
+      "asrRaw": [
+        {
+          "key": "c4-2-16k",
+          "text": "大夏人说，商人从捐渎买来这些货物，捐渎指印度地区张骞由此推想，四川也许另有通向西方的路。"
+        }
+      ],
+      "normalizedSimilarity": 0.9,
+      "silenceSpans": [
+        [
+          3.44675,
+          4.030062,
+          0.583313
+        ],
+        [
+          5.349156,
+          5.906656,
+          0.5575
+        ]
+      ],
+      "longestSilenceSeconds": 0.583313,
+      "durationSeconds": 10.26,
+      "reviewFlagged": false,
+      "asrSeconds": 0.20300000000133878,
+      "humanReviewed": false
+    },
+    {
+      "id": "c5-0",
+      "expectedText": "返程时，张骞想沿南山、经羌人地区避开匈奴，却还是再次被扣留。回家的路，又停了一年多。",
+      "asrCandidateText": "返程时，张骞想沿南山经羌人地区避开匈奴，却还是再次被扣留回家的路又停了一年多。",
+      "asrRaw": [
+        {
+          "key": "c5-0-16k",
+          "text": "返程时，张骞想沿南山经羌人地区避开匈奴，却还是再次被扣留回家的路又停了一年多。"
+        }
+      ],
+      "normalizedSimilarity": 1.0,
+      "silenceSpans": [
+        [
+          4.749344,
+          5.300094,
+          0.55075
+        ],
+        [
+          6.896781,
+          7.464406,
+          0.567625
+        ]
+      ],
+      "longestSilenceSeconds": 0.567625,
+      "durationSeconds": 10.18,
+      "reviewFlagged": false,
+      "asrSeconds": 0.21899999999732245,
+      "humanReviewed": false
+    },
+    {
+      "id": "c5-1",
+      "expectedText": "趁匈奴发生内乱，他才再次脱身，与妻子和甘父回到汉朝。第一次出使，前后已经过去十三年。",
+      "asrCandidateText": "趁匈奴发生内乱，他才再次脱身，与妻子和甘府回到汉朝第一次出使前后已经过去十三年。",
+      "asrRaw": [
+        {
+          "key": "c5-1-16k",
+          "text": "趁匈奴发生内乱，他才再次脱身，与妻子和甘府回到汉朝第一次出使前后已经过去十三年。"
+        }
+      ],
+      "normalizedSimilarity": 0.972972972972973,
+      "silenceSpans": [
+        [
+          5.546469,
+          6.087156,
+          0.540687
+        ]
+      ],
+      "longestSilenceSeconds": 0.540687,
+      "durationSeconds": 9.3,
+      "reviewFlagged": false,
+      "asrSeconds": 0.18800000000192085,
+      "humanReviewed": false
+    },
+    {
+      "id": "c5-2",
+      "expectedText": "原来出发的百余人中，只有张骞和甘父回到汉朝。没有带回盟约，他带回的西域见闻，却让朝廷有了新的判断。",
+      "asrCandidateText": "原来出发的百余人中，只有张骞和甘复回到汉朝，没有带回盟约，他带回的西域见闻，却让朝廷有了新的判断。",
+      "asrRaw": [
+        {
+          "key": "c5-2-16k",
+          "text": "原来出发的百余人中，只有张骞和甘复回到汉朝，没有带回盟约，他带回的西域见闻，却让朝廷有了新的判断。"
+        }
+      ],
+      "normalizedSimilarity": 0.9772727272727273,
+      "silenceSpans": [
+        [
+          6.067844,
+          6.728906,
+          0.661062
+        ]
+      ],
+      "longestSilenceSeconds": 0.661062,
+      "durationSeconds": 10.98,
+      "reviewFlagged": false,
+      "asrSeconds": 0.21899999999732245,
+      "humanReviewed": false
+    },
+    {
+      "id": "c6-0",
+      "expectedText": "汉武帝由此了解大宛、康居、大月氏和大夏。匈奴以西，还有许多国家；汉朝可以设法与它们直接往来。",
+      "asrCandidateText": "汉武帝由此了解大渊康居大月之和，大夏匈奴以西，还有许多国家，汉朝可以设法与他们直接往来。",
+      "asrRaw": [
+        {
+          "key": "c6-0-16k",
+          "text": "汉武帝由此了解大渊康居大月之和，大夏匈奴以西，还有许多国家，汉朝可以设法与他们直接往来。"
+        }
+      ],
+      "normalizedSimilarity": 0.95,
+      "silenceSpans": [],
+      "longestSilenceSeconds": 0,
+      "durationSeconds": 10.76,
+      "reviewFlagged": false,
+      "asrSeconds": 0.2190000000045984,
+      "humanReviewed": false
+    },
+    {
+      "id": "c6-1",
+      "expectedText": "后来，张骞再次出使，联络乌孙，并派副使前往各国。乌孙没有立即答应联汉行动，各地的使者往来却逐步增多。",
+      "asrCandidateText": "后来，掌前再次出使联络乌孙，并派副使前往各国乌孙没有立即答应联汉行动，各地的使者往来却逐步增多。",
+      "asrRaw": [
+        {
+          "key": "c6-1-16k",
+          "text": "后来，掌前再次出使联络乌孙，并派副使前往各国乌孙没有立即答应联汉行动，各地的使者往来却逐步增多。"
+        }
+      ],
+      "normalizedSimilarity": 0.9545454545454546,
+      "silenceSpans": [
+        [
+          8.599594,
+          9.16075,
+          0.561156
+        ]
+      ],
+      "longestSilenceSeconds": 0.561156,
+      "durationSeconds": 11.76,
+      "reviewFlagged": false,
+      "asrSeconds": 0.23399999999674037,
+      "humanReviewed": false
+    },
+    {
+      "id": "c6-2",
+      "expectedText": "商路早已存在。张骞没有凭一人走出整条丝绸之路；他的远行，帮助汉朝与西方诸国建立了更直接的联系。",
+      "asrCandidateText": "商路早已存在，张骞没有凭一人走出整条丝绸之路，他的远行帮助汉朝与西方诸国建立了更直接的联系。",
+      "asrRaw": [
+        {
+          "key": "c6-2-16k",
+          "text": "商路早已存在，张骞没有凭一人走出整条丝绸之路，他的远行帮助汉朝与西方诸国建立了更直接的联系。"
+        }
+      ],
+      "normalizedSimilarity": 1.0,
+      "silenceSpans": [
+        [
+          1.350906,
+          1.9945,
+          0.643594
+        ],
+        [
+          5.176219,
+          5.755187,
+          0.578969
+        ]
+      ],
+      "longestSilenceSeconds": 0.643594,
+      "durationSeconds": 10.82,
+      "reviewFlagged": false,
+      "asrSeconds": 0.20300000000133878,
+      "humanReviewed": false
+    },
+    {
+      "id": "c7-0",
+      "expectedText": "到了初唐，敦煌画家把张骞画进壁画。下方辞行、山间赶路和城门迎接，让我们看见后人记住的远行。",
+      "asrCandidateText": "到了初唐敦煌画家把张骞画进壁画下方辞行山间赶路和城门迎接，让我们看见后人记住的远行。",
+      "asrRaw": [
+        {
+          "key": "c7-0-16k",
+          "text": "到了初唐敦煌画家把张骞画进壁画下方辞行山间赶路和城门迎接，让我们看见后人记住的远行。"
+        }
+      ],
+      "normalizedSimilarity": 1.0,
+      "silenceSpans": [
+        [
+          3.998312,
+          4.61375,
+          0.615437
+        ]
+      ],
+      "longestSilenceSeconds": 0.615437,
+      "durationSeconds": 11.46,
+      "reviewFlagged": false,
+      "asrSeconds": 0.21899999999732245,
+      "humanReviewed": false
+    },
+    {
+      "id": "c7-1",
+      "expectedText": "但画里的缘由变了：皇帝礼拜金人，派张骞西去问名号，僧人与佛塔成了答案。这是后世佛教对远行的讲述。",
+      "asrCandidateText": "但话里的缘由变了皇帝礼拜惊人派张骞西去问明号僧人与佛塔成了答案，这是后世佛教对远行的讲述。",
+      "asrRaw": [
+        {
+          "key": "c7-1-16k",
+          "text": "但话里的缘由变了皇帝礼拜惊人派张骞西去问明号僧人与佛塔成了答案，这是后世佛教对远行的讲述。"
+        }
+      ],
+      "normalizedSimilarity": 0.9302325581395349,
+      "silenceSpans": [
+        [
+          1.707188,
+          2.361656,
+          0.654469
+        ],
+        [
+          5.68575,
+          6.227344,
+          0.541594
+        ],
+        [
+          8.086875,
+          8.912,
+          0.825125
+        ]
+      ],
+      "longestSilenceSeconds": 0.825125,
+      "durationSeconds": 11.66,
+      "reviewFlagged": false,
+      "asrSeconds": 0.20300000000133878,
+      "humanReviewed": false
+    },
+    {
+      "id": "c7-2",
+      "expectedText": "张骞为求盟出发，后人又借他的远行讲佛教来历。读过这段经历，再看壁画，就能分清历史与后世的记忆。",
+      "asrCandidateText": "张骞为求蒙出发，后人又借他的远行讲佛教来历，读过这段经历，再看壁画，就能分清历史与后世的记忆。",
+      "asrRaw": [
+        {
+          "key": "c7-2-16k",
+          "text": "张骞为求蒙出发，后人又借他的远行讲佛教来历，读过这段经历，再看壁画，就能分清历史与后世的记忆。"
+        }
+      ],
+      "normalizedSimilarity": 0.9761904761904762,
+      "silenceSpans": [
+        [
+          4.71075,
+          5.461156,
+          0.750406
+        ]
+      ],
+      "longestSilenceSeconds": 0.750406,
+      "durationSeconds": 10.54,
+      "reviewFlagged": false,
+      "asrSeconds": 0.20299999999406282,
+      "humanReviewed": false
+    }
+  ],
+  "flaggedIds": []
+}

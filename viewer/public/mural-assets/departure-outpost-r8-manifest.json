@@ -1,0 +1,68 @@
+{
+  "formatVersion": "1.0.0",
+  "asset": {
+    "id": "departure-outpost",
+    "path": "/mural-assets/departure-outpost-r8.glb",
+    "bytes": 6094372,
+    "sha256": "c90e502b3fac2f1c4c98c77571214a238db9239d6e3b53aa1ffb1f22e3cc302d"
+  },
+  "authoring": {
+    "builder": {
+      "script": "scripts/build-mural-departure-r8.py",
+      "sha256": "dbf076303ac078f04ae42d11c784b1a07d5afe2a201eff1fdee5efeca19b8190"
+    },
+    "materialLineage": {
+      "script": "scripts/refine-yuezhi-environment.py",
+      "sha256": "7087983fa473797579c06fe97d791443c0e9d85747bc29d796c6bbcb9b007ad0"
+    },
+    "tool": "Blender 4.5.14 LTS",
+    "offlineOriginalGeometryAndRasters": true,
+    "triangles": 35275,
+    "embeddedImages": 20,
+    "newProviderRequests": 0,
+    "downloadedModels": 0
+  },
+  "historicalStatus": "Illustrative Longxi departure; not an identified gate, fort, palace or excavated site.",
+  "boundaryNoteZh": "《史记》《汉书》记载张骞与甘父从陇西出发，未记具体出入口、道路、夯土边墙、行囊或水囊形制。本资产中的地点、建筑平面、器物和远坡均为原创展示示意，不能称为具名遗址或汉代建筑实测复原。少量既有Tripo人物由集成层代表百余人使团，本GLB不包含人物。",
+  "sourceRecords": [
+    {
+      "title": "《史记》卷123·大宛列传",
+      "url": "https://zh.wikisource.org/wiki/史記/卷123",
+      "cachedEvidence": "outputs/mural-clarity/reception-primary-web-r4-followup.json",
+      "supports": "出陇西；不支持此具体建筑、道路和设备布局"
+    },
+    {
+      "title": "《汉书》·张骞李广利传",
+      "url": "https://ctext.org/han-shu/zhang-qian-li-guang-li-zhuan/zh",
+      "cachedEvidence": "outputs/mural-clarity/reception-research-r6.json",
+      "supports": "从陇西出发；不支持此具体出塞地点和造型"
+    }
+  ],
+  "characterCorridor": {
+    "x": [
+      -3,
+      3
+    ],
+    "z": [
+      0,
+      12
+    ],
+    "flatSurfaceY": 0,
+    "narrativeDirection": "Z8 to Z3",
+    "obstructionsBelowY3_7": 0,
+    "overheadTimberMinimumY": 3.82
+  },
+  "bounds": {
+    "min": [
+      -24.0,
+      -0.14278069138526917,
+      -38.0
+    ],
+    "max": [
+      24.0,
+      4.080000400543213,
+      22.0
+    ]
+  },
+  "noExistingAssetOverwrite": true
+}

@@ -1,0 +1,361 @@
+{
+  "schemaVersion": "1.0.0",
+  "runVersion": "1.0.0",
+  "runId": "run-4382d4f9-c5fc-49a3-9b5e-1e464d935ccd",
+  "status": "preview-only",
+  "releaseReady": false,
+  "policy": {
+    "policyId": "heritage-story-quality-r13",
+    "schemaVersion": "1.0.0",
+    "sha256": "6d5d37bb211a1ee5d372a64992c1c5836a1982b72e68b036784200499420c557",
+    "file": "./quality-policy.json"
+  },
+  "planningPolicy": {
+    "status": "provided-to-planner-not-verified",
+    "policySha256": "6d5d37bb211a1ee5d372a64992c1c5836a1982b72e68b036784200499420c557",
+    "subjectType": "artifact",
+    "ruleIds": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "B01",
+      "B02",
+      "B03",
+      "B04",
+      "B05",
+      "B06",
+      "B07",
+      "B08",
+      "B09",
+      "B10",
+      "B11",
+      "C01",
+      "C02",
+      "C03",
+      "C04",
+      "D01",
+      "D02",
+      "D03",
+      "D04",
+      "D05",
+      "A07",
+      "A08",
+      "B12",
+      "B13",
+      "B14",
+      "C05",
+      "D06"
+    ]
+  },
+  "rules": [
+    {
+      "id": "A01",
+      "stage": "A",
+      "state": "pending",
+      "verificationMode": "human",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "A02",
+      "stage": "A",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "A03",
+      "stage": "A",
+      "state": "pending",
+      "verificationMode": "human",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "A04",
+      "stage": "A",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "A05",
+      "stage": "A",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "A06",
+      "stage": "A",
+      "state": "pending",
+      "verificationMode": "human",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "B01",
+      "stage": "B",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "B02",
+      "stage": "B",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "B03",
+      "stage": "B",
+      "state": "pending",
+      "verificationMode": "human",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "B04",
+      "stage": "B",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "B05",
+      "stage": "B",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "B06",
+      "stage": "B",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "B07",
+      "stage": "B",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "B08",
+      "stage": "B",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "B09",
+      "stage": "B",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "B10",
+      "stage": "B",
+      "state": "pending",
+      "verificationMode": "human",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "B11",
+      "stage": "B",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "C01",
+      "stage": "C",
+      "state": "pending",
+      "verificationMode": "human",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "C02",
+      "stage": "C",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "C03",
+      "stage": "C",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "C04",
+      "stage": "C",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "D01",
+      "stage": "D",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "D02",
+      "stage": "D",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "D03",
+      "stage": "D",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "D04",
+      "stage": "D",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "D05",
+      "stage": "D",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "A07",
+      "stage": "A",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "A08",
+      "stage": "A",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "B12",
+      "stage": "B",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "B13",
+      "stage": "B",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "B14",
+      "stage": "B",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "C05",
+      "stage": "C",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    },
+    {
+      "id": "D06",
+      "stage": "D",
+      "state": "pending",
+      "verificationMode": "mixed",
+      "releaseBlocking": true,
+      "evidence": []
+    }
+  ],
+  "coveredChecks": [
+    {
+      "id": "json-contract",
+      "result": "pass",
+      "evidence": "./story.json"
+    },
+    {
+      "id": "real-tripo-receipts-and-raw-glb",
+      "result": "pass",
+      "evidence": "./asset-manifest.json"
+    },
+    {
+      "id": "self-contained-uv-pbr",
+      "result": "pass",
+      "evidence": "./asset-manifest.json"
+    }
+  ],
+  "limitations": [
+    "Historical sources and subject metadata remain user-provided and unauthenticated.",
+    "Front direction and visual quality await human review.",
+    "Asset heights are display scales, not measured archaeological dimensions.",
+    "Depth, hidden surfaces and repaired details from a single photo are generated interpretations.",
+    "Generated narration requires human listening review.",
+    "Animation is not configured.",
+    "Natural playback, recording and ZIP delivery are not verified."
+  ],
+  "narration": {
+    "status": "generated-human-review-pending",
+    "complete": true,
+    "humanAudioReviewed": false,
+    "voiceId": "history3d-public-uncle-fu-r13",
+    "referenceSha256": "f47d4c2e50cdbc2dee165d7cd2415c5e667c9af68863127701344c20b6f73e37",
+    "tracks": 9
+  },
+  "animation": {
+    "status": "not_configured",
+    "complete": false
+  },
+  "visualReview": {
+    "approved": false,
+    "notes": ""
+  }
+}

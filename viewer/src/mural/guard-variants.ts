@@ -1,5 +1,80 @@
 import * as THREE from 'three'
-import { bindWalkRig } from './walking.ts'
+import { bindWalkRig, solveLeg, type WalkRig } from './walking.ts'
+import type { GuardMotion, GuardTurn } from './detention-motion.ts'
+
+type GuardRig = { rig: WalkRig; height: number; restPelvisY: number; soles: number[][]; centres: THREE.Vector3[]; armPitch: number[] }
+const guardRigs = new WeakMap<THREE.Group, GuardRig>()
+
+/** Alternate small planted-foot pivots; accumulate each completed step's root
+ * offset instead of spinning both planted boots about the body's centre.
+ */
+function pivotOffset(turn: GuardTurn, centres: THREE.Vector3[]) {
+  const delta = turn.toYaw - turn.fromYaw
+  const steps = Math.max(1, Math.ceil(Math.abs(delta) / (Math.PI / 4)))
+  const progress = THREE.MathUtils.clamp(turn.progress, 0, 1)
+  const completed = Math.min(steps, Math.floor(progress * steps))
+  const offset = new THREE.Vector3()
+  const rotate = (point: THREE.Vector3, yaw: number) => point.clone().applyAxisAngle(new THREE.Vector3(0, 1, 0), yaw)
+  for (let step = 0; step < steps; step++) {
+    if (step > completed || step === completed && completed < steps && progress * steps - completed === 0) break
+    const fraction = step < completed ? 1 : progress * steps - completed
+    const start = turn.fromYaw + delta * step / steps
+    const end = start + delta / steps * THREE.MathUtils.smoothstep(fraction, 0, 1)
+    const planted = centres[(step + (delta < 0 ? 1 : 0)) % 2]!
+    offset.add(rotate(planted, start).sub(rotate(planted, end)))
+  }
+  offset.y = 0
+  return { offset, step: Math.min(completed, steps - 1), fraction: completed === steps ? 1 : progress * steps - completed,
+    yaw: turn.fromYaw + delta / steps * (completed + (completed === steps ? 0 : THREE.MathUtils.smoothstep(progress * steps - completed, 0, 1))),
+    planted: (Math.min(completed, steps - 1) + (delta < 0 ? 1 : 0)) % 2 }
+}
+
+/** Reuse the real guard skin and captured walk; no second skeleton binding. */
+export function updateGuardMotion(guard: THREE.Group, motion: GuardMotion, phase: number) {
+  const binding = guardRigs.get(guard)
+  if (!binding) throw new Error('守卫动作缺少真实骨骼绑定')
+  const { rig, height, restPelvisY, soles, centres, armPitch } = binding
+  const active = motion.turns.find(turn => turn.progress > 0 && turn.progress < 1)
+  rig.update(motion.distance, phase, motion.weight === 0, motion.weight)
+  const pelvis = rig.skeleton.bones[0]!
+  const correction = new THREE.Vector3()
+  for (const turn of motion.turns) {
+    const pivot = pivotOffset(turn, centres); correction.add(pivot.offset)
+    if (turn === active) {
+      guard.rotation.y = pivot.yaw
+      const lift = Math.sin(Math.PI * pivot.fraction) * height * .022
+      pelvis.position.y = restPelvisY
+      for (const [index, leg] of rig.legs.entries()) {
+        const swingLift = index === pivot.planted ? 0 : lift
+        if (swingLift === 0) { leg.upper.rotation.x = 0; leg.lower.rotation.x = 0; leg.foot.rotation.x = 0 }
+        else {
+          const pose = solveLeg(leg.y - height * .065 - swingLift, 0, leg.upperLength, leg.lowerLength)
+          // The general IK solver avoids exactly straight joints. Fade its
+          // small residual bend away as a shuffle foot settles, so a support
+          // change cannot snap from that residual angle to the standing pose.
+          const settle = THREE.MathUtils.smoothstep(swingLift, 0, height * .003)
+          leg.upper.rotation.x = (pose.hip - leg.upperPitch) * settle
+          leg.lower.rotation.x = (pose.knee - leg.lowerPitch + leg.upperPitch) * settle
+          leg.foot.rotation.x = -leg.upper.rotation.x - leg.lower.rotation.x
+        }
+      }
+    }
+  }
+  if (!active) guard.rotation.y = motion.yaw
+  // Preserve the authored lowered grips instead of resetting their accessories
+  // when the common walking rig updates its fixed arms.
+  const arms = rig.skeleton.bones.filter(bone => bone.name === 'left-arm' || bone.name === 'right-arm')
+  arms.forEach((bone, index) => { bone.rotation.x = armPitch[index]! })
+  guard.position.set(motion.x + correction.x, .008, motion.z + correction.z)
+  guard.updateMatrixWorld(true); rig.skeleton.update()
+  if (active) {
+    let floor = Infinity; const point = new THREE.Vector3()
+    rig.meshes.forEach((mesh, index) => { const p = mesh.geometry.getAttribute('position'); for (const vertex of soles[index]!) floor = Math.min(floor, mesh.applyBoneTransform(vertex, point.fromBufferAttribute(p, vertex)).y) })
+    pelvis.position.y -= floor
+    guard.updateMatrixWorld(true); rig.skeleton.update()
+  }
+  guard.userData.motion = { action: motion.action, yaw: guard.rotation.y, gaitWeight: motion.weight }
+}
 
 export type GuardVariantId = 'older-mantle' | 'younger-bow'
 export const guardVariantSource = {
@@ -208,5 +283,17 @@ export function createGuardVariant(template: THREE.Group, variant: GuardVariantI
   body.userData.guardVariant = { id: variant, features, source: guardVariantSource, staticPose: true,
     originalFaceAndSkinMapsPreserved: true, wardrobeOnlyVertexTint: true, proceduralAccessories: true }
   body.updateMatrixWorld(true); rig.skeleton.update()
+  const soleIndices = rig.meshes.map(mesh => {
+    const p = mesh.geometry.getAttribute('position')
+    return Array.from({ length: p.count }, (_, i) => i).filter(i => p.getY(i) < height * .055)
+  })
+  const centres = [-1, 1].map(side => {
+    const centre = new THREE.Vector3(); let count = 0
+    rig.meshes.forEach((mesh, m) => { const p = mesh.geometry.getAttribute('position'); for (const index of soleIndices[m]!) if (p.getX(index) * side > 0) { centre.add(mesh.applyBoneTransform(index, new THREE.Vector3().fromBufferAttribute(p, index))); count++ } })
+    if (!count) throw new Error('守卫转身未找到左右真实鞋底')
+    centre.multiplyScalar(1 / count); centre.y = 0; return centre
+  })
+  guardRigs.set(body, { rig, height, restPelvisY: rig.skeleton.bones[0]!.position.y, soles: soleIndices, centres,
+    armPitch: [left.rotation.x, right.rotation.x] })
   return body
 }

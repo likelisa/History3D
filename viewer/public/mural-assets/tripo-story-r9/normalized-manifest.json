@@ -1,0 +1,311 @@
+{
+  "experimentId": "tripo-story-r9",
+  "status": "normalized_visual_review_pending",
+  "assets": [
+    {
+      "id": "zhangqian",
+      "path": "/mural-assets/tripo-story-r9/zhangqian.glb",
+      "bytes": 10035388,
+      "sha256": "2427845d0729d8c2fae1f518567d59e4d19db9610a636247952a0c37c590cd80",
+      "rawPath": "/mural-assets/tripo-story-r9/zhangqian-raw.glb",
+      "rawSha256": "5ebe1a28dac95ab5e3b0e51f117eeec8445d6b9cfd96c3800c135680d780a2fd",
+      "taskId": "629b77f4-64b0-4aa7-b38d-33b3b6b21cd7",
+      "creditsConsumed": 50,
+      "requestHash": "78783da25509d25ed1c59a5301f22018f66fe1b1dce081bb61972ba07aae4ab7",
+      "heightMeters": 1.75,
+      "frontAxis": "+Z",
+      "ground": "lowest mesh point at Y=0",
+      "stats": {
+        "triangles": 57432,
+        "meshes": 1,
+        "materials": 1,
+        "images": 3,
+        "baseColorTexturedMaterials": 1,
+        "normalMappedMaterials": 1,
+        "metallicRoughnessTexturedMaterials": 1,
+        "uvPrimitives": 1
+      },
+      "historicalBoundary": "史书支持出使、持汉节与经历，不支持精确肖像、身高、统一使者制服。脸、年龄、红袍和帽为清楚辨认的艺术设定。",
+      "editableBlend": "/mural-assets/tripo-story-r9/zhangqian-normalized.blend",
+      "reviewBlend": "/mural-assets/tripo-story-r9/review/normalized/zhangqian-normalized.blend",
+      "views": [
+        {
+          "view": "front-plus-z",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/zhangqian-front-plus-z.png",
+          "sha256": "65a013b5588b7728f6d0051a0d778809757d69b6dfd44544b4760346c643c0e5",
+          "bytes": 737583
+        },
+        {
+          "view": "back-minus-z",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/zhangqian-back-minus-z.png",
+          "sha256": "fba272845342f7259288d71e0404f10dc4cd84d0bed90077c1f596b62c50a8d9",
+          "bytes": 721211
+        },
+        {
+          "view": "right-plus-x",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/zhangqian-right-plus-x.png",
+          "sha256": "63907659bab9293a373fcc17c8c6cd61fb86d1aa20149598b4aea1deba044480",
+          "bytes": 693876
+        },
+        {
+          "view": "left-minus-x",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/zhangqian-left-minus-x.png",
+          "sha256": "9dda8d7ce4bb16a825a1b3c9706cd508f56684bf428a0468d6b20b8f67662f6c",
+          "bytes": 699392
+        },
+        {
+          "view": "three-quarter",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/zhangqian-three-quarter.png",
+          "sha256": "029459ddc9ddff20ed7463dd5292b7586783b4c8c057f2e5c96416fdf736a3cd",
+          "bytes": 738548
+        }
+      ],
+      "conversion": {
+        "blenderVersion": "4.5.14 LTS",
+        "scale": 1.787799805291426,
+        "yawDegrees": -90.0,
+        "rawBoundsBlenderZUp": {
+          "min": [
+            -0.09404425323009491,
+            -0.17894892394542694,
+            -0.4893115758895874
+          ],
+          "max": [
+            0.09404851496219635,
+            0.1787472814321518,
+            0.48954522609710693
+          ]
+        },
+        "exportedBoundsBlenderZUp": {
+          "min": [
+            -0.31974464654922485,
+            -0.1681361198425293,
+            0.0
+          ],
+          "max": [
+            0.31974464654922485,
+            0.1681361347436905,
+            1.75
+          ]
+        },
+        "coordinateSystem": "glTF Y up",
+        "uvCoordinatesUnchanged": true,
+        "textureResampling": "none",
+        "poseCorrection": {
+          "method": "no mesh pose deformation",
+          "acceptance": "requires normalized visual/runtime review"
+        }
+      },
+      "orientationDecision": "Root reviewed actual review/raw/zhangqian-right-plus-x.png (face), zhangqian-front-plus-z.png (side), zhangqian-left-minus-x.png (back); +X face mapped to glTF +Z; arms already low, no pose deformation.",
+      "visualReviewStatus": "normalized views require reviewer acceptance",
+      "animationStatus": "not evaluated; static GLB is not animation acceptance"
+    },
+    {
+      "id": "ganfu",
+      "path": "/mural-assets/tripo-story-r9/ganfu.glb",
+      "bytes": 9357096,
+      "sha256": "8aad47d0da6781e77ba488ae3ac12042dfb09ac3256caba97bbce240a79234ae",
+      "rawPath": "/mural-assets/tripo-story-r9/ganfu-raw.glb",
+      "rawSha256": "d4c0b7deb1513119bd1042d33e414eeef961a70a2723918c6c62fd3c97951a82",
+      "taskId": "c3c6a259-6e20-4811-8d87-dd6842442e46",
+      "creditsConsumed": 50,
+      "requestHash": "65751ec5b98e1503f5685252f3a7e040bfffcaaea5ba1fb274d0adc10f23da83",
+      "heightMeters": 1.69,
+      "frontAxis": "+Z",
+      "ground": "lowest mesh point at Y=0",
+      "stats": {
+        "triangles": 59736,
+        "meshes": 1,
+        "materials": 1,
+        "images": 3,
+        "baseColorTexturedMaterials": 1,
+        "normalMappedMaterials": 1,
+        "metallicRoughnessTexturedMaterials": 1,
+        "uvPrimitives": 1
+      },
+      "historicalBoundary": "善射用旁白和独立动作/道具讲述；基础人物保持空手，避免弓与身体融合。胡人称谓不能直接作为匈奴族属或固定民族脸型。",
+      "editableBlend": "/mural-assets/tripo-story-r9/ganfu-normalized.blend",
+      "reviewBlend": "/mural-assets/tripo-story-r9/review/normalized/ganfu-normalized.blend",
+      "views": [
+        {
+          "view": "front-plus-z",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/ganfu-front-plus-z.png",
+          "sha256": "f5e56a61e70b9f15fe74fae42db6a9e03a90c2c59d3efce4dfa91b8a2ded41fc",
+          "bytes": 798177
+        },
+        {
+          "view": "back-minus-z",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/ganfu-back-minus-z.png",
+          "sha256": "dd8560cf958950f4bf397740c7bb03f1d79a578cf977b4aa4c6a9886c58c0e5b",
+          "bytes": 767460
+        },
+        {
+          "view": "right-plus-x",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/ganfu-right-plus-x.png",
+          "sha256": "9a6c1a27768600d16d8e31a3250c36578fe8d76949405a6040f04d1b110c41b8",
+          "bytes": 722833
+        },
+        {
+          "view": "left-minus-x",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/ganfu-left-minus-x.png",
+          "sha256": "4db262295244f995004a0f4803b2c6640d7581fa3f2038f5e6d321b862bdbad6",
+          "bytes": 724401
+        },
+        {
+          "view": "three-quarter",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/ganfu-three-quarter.png",
+          "sha256": "21b09779dc9fa9ac0abac2a95a65aadbb37b75045add14196bbdaff5e505f037",
+          "bytes": 796722
+        }
+      ],
+      "conversion": {
+        "blenderVersion": "4.5.14 LTS",
+        "scale": 1.7256001633975393,
+        "yawDegrees": -90.0,
+        "rawBoundsBlenderZUp": {
+          "min": [
+            -0.14631611108779907,
+            -0.32795342803001404,
+            -0.4896787405014038
+          ],
+          "max": [
+            0.1462925672531128,
+            0.3276652991771698,
+            0.4896906614303589
+          ]
+        },
+        "exportedBoundsBlenderZUp": {
+          "min": [
+            -0.5656679272651672,
+            -0.25246283411979675,
+            0.0
+          ],
+          "max": [
+            0.565667986869812,
+            0.25246280431747437,
+            1.690000057220459
+          ]
+        },
+        "coordinateSystem": "glTF Y up",
+        "uvCoordinatesUnchanged": true,
+        "textureResampling": "none",
+        "poseCorrection": {
+          "method": "no mesh pose deformation",
+          "acceptance": "requires normalized visual/runtime review"
+        },
+        "diameterCorrection": null
+      },
+      "orientationDecision": "Root reviewed actual review/raw/ganfu-right-plus-x.png (face) and ganfu-front-plus-z.png (side); +X face mapped to glTF +Z; arms already low, no pose deformation.",
+      "visualReviewStatus": "normalized views require reviewer acceptance",
+      "animationStatus": "not evaluated; static GLB is not animation acceptance"
+    },
+    {
+      "id": "qiong-bamboo",
+      "path": "/mural-assets/tripo-story-r9/qiong-bamboo.glb",
+      "bytes": 10764692,
+      "sha256": "0b08f01e76410e412d2b8a5aabcb653452507ef7d9646b1a5c7dd13494bff6f4",
+      "rawPath": "/mural-assets/tripo-story-r9/qiong-bamboo-raw.glb",
+      "rawSha256": "b1360b2098aade7adbc8153613b698138025e5b788812dafba2de0430bd490f2",
+      "taskId": "f6942558-b7ee-480f-9f77-b32467a9972b",
+      "creditsConsumed": 50,
+      "requestHash": "11b6d95621a65c9de2a9f87487fbd2f20ed0fab738ad73fdc73df5cbf4ecc942",
+      "heightMeters": 1.55,
+      "frontAxis": "+Z",
+      "ground": "lowest mesh point at Y=0",
+      "stats": {
+        "triangles": 28206,
+        "meshes": 1,
+        "materials": 1,
+        "images": 3,
+        "baseColorTexturedMaterials": 1,
+        "normalMappedMaterials": 1,
+        "metallicRoughnessTexturedMaterials": 1,
+        "uvPrimitives": 1
+      },
+      "historicalBoundary": "表现流通中的货物，不用使团汉节替代，不称武器、蛇杖或魔法杖；商路推想不等于张骞亲至身毒。",
+      "editableBlend": "/mural-assets/tripo-story-r9/qiong-bamboo-normalized.blend",
+      "reviewBlend": "/mural-assets/tripo-story-r9/review/normalized/qiong-bamboo-normalized.blend",
+      "views": [
+        {
+          "view": "front-plus-z",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/qiong-bamboo-front-plus-z.png",
+          "sha256": "c597f5a1b025927bbb72a56da5323679a5b856dfe897224413a17eff71ee089a",
+          "bytes": 617145
+        },
+        {
+          "view": "back-minus-z",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/qiong-bamboo-back-minus-z.png",
+          "sha256": "313d58c737270a3f736587a66fc798f30d3256cd77b29377c46d102199185b4a",
+          "bytes": 616614
+        },
+        {
+          "view": "right-plus-x",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/qiong-bamboo-right-plus-x.png",
+          "sha256": "0b0c4d4b249e86c13fbfc97454c58c58efb087f53ff31f65b1fa32e53278abaa",
+          "bytes": 614499
+        },
+        {
+          "view": "left-minus-x",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/qiong-bamboo-left-minus-x.png",
+          "sha256": "68c6bd2c68fb7eb9320e146fa2b5f7aa46ee68ad4bb8e01a66925bac6e0b73e9",
+          "bytes": 616517
+        },
+        {
+          "view": "three-quarter",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/qiong-bamboo-three-quarter.png",
+          "sha256": "95e5b9f3f013651f598dab3d49ef37b37e3812b52efc0071c5c288fb286c371c",
+          "bytes": 625226
+        }
+      ],
+      "conversion": {
+        "blenderVersion": "4.5.14 LTS",
+        "scale": 1.5815402789529074,
+        "yawDegrees": 0.0,
+        "rawBoundsBlenderZUp": {
+          "min": [
+            -0.03566334769129753,
+            -0.03180738538503647,
+            -0.49011409282684326
+          ],
+          "max": [
+            0.035911332815885544,
+            0.032094866037368774,
+            0.48994314670562744
+          ]
+        },
+        "exportedBoundsBlenderZUp": {
+          "min": [
+            -0.01600000262260437,
+            -0.014284885488450527,
+            0.0
+          ],
+          "max": [
+            0.01600000075995922,
+            0.014284886419773102,
+            1.5499999523162842
+          ]
+        },
+        "coordinateSystem": "glTF Y up",
+        "uvCoordinatesUnchanged": true,
+        "textureResampling": "none",
+        "poseCorrection": {
+          "method": "no mesh pose deformation",
+          "acceptance": "requires normalized visual/runtime review"
+        },
+        "diameterCorrection": {
+          "method": "explicit local transverse scale preserving height/UV/PBR",
+          "rawCoordinateMaxTransverseWidth": 0.07157468050718307,
+          "widthMetersAfterUniformHeightScale": 0.11319823563098907,
+          "transverseScale": 0.2826899184569949,
+          "targetMaxDiameterMeters": 0.032,
+          "measuredMaxDiameterMeters": 0.03200000151991844,
+          "providerDimensionClaim": "provider did not meet the prompt diameter; local calibration applied"
+        }
+      },
+      "orientationDecision": "Root reviewed actual review/raw/qiong-bamboo-front-plus-z.png; upright continuous staff has no face orientation, yaw 0. Provider staff is too thick; explicitly calibrate max transverse diameter to 0.032 m preserving 1.55 m height.",
+      "visualReviewStatus": "normalized views require reviewer acceptance",
+      "animationStatus": "not evaluated; static GLB is not animation acceptance",
+      "diameterMeters": 0.03200000338256359
+    }
+  ]
+}

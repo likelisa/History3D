@@ -1,0 +1,388 @@
+[
+  {
+    "id": "envoy",
+    "glbSha256": "2427845d0729d8c2fae1f518567d59e4d19db9610a636247952a0c37c590cd80",
+    "thumbnail": "/asset-board-r8/thumbs/envoy.png",
+    "thumbnailSha256": "4ad586d3c245879610597b051323772f018c7102dd1ada815fc6023276d95e79",
+    "sourceBoundsBlender": {
+      "min": [
+        -0.31974467635154724,
+        -0.16813616454601288,
+        0.0
+      ],
+      "max": [
+        0.31974467635154724,
+        0.16813617944717407,
+        1.75
+      ]
+    },
+    "displayScale": 2.0,
+    "blenderVersion": "4.5.14 LTS"
+  },
+  {
+    "id": "attendant",
+    "glbSha256": "5051979679573bec5b1c4805480698de04654dea3d2ba221c708223e795411fa",
+    "thumbnail": "/asset-board-r8/thumbs/attendant.png",
+    "thumbnailSha256": "23107eab849423911cbcfc31f24f911ba03645702f0c4b38418d656c17ca37d9",
+    "sourceBoundsBlender": {
+      "min": [
+        -0.27804768085479736,
+        -0.35805729031562805,
+        0.0
+      ],
+      "max": [
+        0.27804768085479736,
+        0.35805729031562805,
+        1.7000000476837158
+      ]
+    },
+    "displayScale": 2.0588234716633216,
+    "blenderVersion": "4.5.14 LTS"
+  },
+  {
+    "id": "ganfu",
+    "glbSha256": "8aad47d0da6781e77ba488ae3ac12042dfb09ac3256caba97bbce240a79234ae",
+    "thumbnail": "/asset-board-r8/thumbs/ganfu.png",
+    "thumbnailSha256": "139b5578e3cac144a823079b2a9fc9693b2a0de3f822135470d100c797cce272",
+    "sourceBoundsBlender": {
+      "min": [
+        -0.565667986869812,
+        -0.25246289372444153,
+        0.0
+      ],
+      "max": [
+        0.565667986869812,
+        0.25246289372444153,
+        1.690000057220459
+      ]
+    },
+    "displayScale": 2.0710058470391095,
+    "blenderVersion": "4.5.14 LTS"
+  },
+  {
+    "id": "visitor",
+    "glbSha256": "74277e7f5b769f92a608fec1b77ad928415155b37d08d07a1c843382a0f8ea26",
+    "thumbnail": "/asset-board-r8/thumbs/visitor.png",
+    "thumbnailSha256": "2a19944e8e5717daa7927c6a860a89374f4b352054a91cbea55b94cf0d963318",
+    "sourceBoundsBlender": {
+      "min": [
+        -0.3632882237434387,
+        -0.18197645246982574,
+        0.0
+      ],
+      "max": [
+        0.3632882237434387,
+        0.18197645246982574,
+        1.7000000476837158
+      ]
+    },
+    "displayScale": 2.0588234716633216,
+    "blenderVersion": "4.5.14 LTS",
+    "reuse": "original envoy render preserved; no new render",
+    "originalThumbnail": "/asset-board-r8/thumbs/envoy-pre-tripo-r9.png"
+  },
+  {
+    "id": "qiong-bamboo",
+    "glbSha256": "0b08f01e76410e412d2b8a5aabcb653452507ef7d9646b1a5c7dd13494bff6f4",
+    "thumbnail": "/asset-board-r8/thumbs/qiong-bamboo.png",
+    "thumbnailSha256": "6d9219e7916d76797b6f31a4d33b56db7378c5d26ec379749fecd62455dd0032",
+    "sourceBoundsBlender": {
+      "min": [
+        -0.01600000262260437,
+        -0.014284885488450527,
+        0.0
+      ],
+      "max": [
+        0.01600000075995922,
+        0.014284886419773102,
+        1.5499999523162842
+      ]
+    },
+    "displayScale": 2.258064585595426,
+    "blenderVersion": "4.5.14 LTS"
+  },
+  {
+    "id": "horse",
+    "glbSha256": "638f54e5d1016617d48871c295a7719706f4f0c8aac1600d6bc816a8bb167f35",
+    "thumbnail": "/asset-board-r8/thumbs/horse.png",
+    "thumbnailSha256": "8407f61ae40c0fd0798dc5a69ccd5596669939293d17015f162ce17953b8f81f",
+    "sourceBoundsBlender": {
+      "min": [
+        -0.16214726865291595,
+        -0.5,
+        -0.42396605014801025
+      ],
+      "max": [
+        0.16214726865291595,
+        0.5,
+        0.42396605014801025
+      ]
+    },
+    "displayScale": 3.5,
+    "blenderVersion": "4.5.14 LTS"
+  },
+  {
+    "id": "staff-b",
+    "glbSha256": "3c4af0837b8fa85bc9a03adf956e2ebfbd16d51c5bace824076c4ca99c75e2a5",
+    "thumbnail": "/asset-board-r8/thumbs/staff.png",
+    "thumbnailSha256": "b66d5d0c740d826864882c7b88acaa6397b5e9a383af67f18ac12559d97f3726",
+    "sourceBoundsBlender": {
+      "min": [
+        -0.2957313358783722,
+        -0.4785405099391937,
+        -0.5
+      ],
+      "max": [
+        0.2957313358783722,
+        0.4785405099391937,
+        0.5
+      ]
+    },
+    "displayScale": 3.5,
+    "blenderVersion": "4.5.14 LTS",
+    "reuse": "original current staff-b render retained for A/B only; no new render",
+    "originalThumbnail": "/asset-board-r8/thumbs/staff.png",
+    "previousCurrentUseId": "staff",
+    "supersededBy": "qiong-bamboo"
+  },
+  {
+    "id": "gate",
+    "glbSha256": "e112e16edec6cf428b28a99e4e42fc901cf8921f80861a4a8a1c7f4c535f76aa",
+    "thumbnail": "/asset-board-r8/thumbs/gate.png",
+    "thumbnailSha256": "e6ca009b7b562fce0456e632e823dae398163db980e3e72ad336b9e9b1b81611",
+    "sourceBoundsBlender": {
+      "min": [
+        -0.22697071731090546,
+        -0.5,
+        -0.42022639513015747
+      ],
+      "max": [
+        0.22697071731090546,
+        0.5,
+        0.42022639513015747
+      ]
+    },
+    "displayScale": 3.5,
+    "blenderVersion": "4.5.14 LTS"
+  },
+  {
+    "id": "monk",
+    "glbSha256": "0ae41c1b2f48e0da1effbd992d00cacb60e62bb2f897a7c83e987feb4aa1445d",
+    "thumbnail": "/asset-board-r8/thumbs/monk.png",
+    "thumbnailSha256": "493ca07f3d58f57060e9f0d4d9c2cf74b541608acd11620d62b4a41b22fba362",
+    "sourceBoundsBlender": {
+      "min": [
+        -0.17414595186710358,
+        -0.175589919090271,
+        -0.5
+      ],
+      "max": [
+        0.17414595186710358,
+        0.175589919090271,
+        0.5
+      ]
+    },
+    "displayScale": 3.5,
+    "blenderVersion": "4.5.14 LTS"
+  },
+  {
+    "id": "tower",
+    "glbSha256": "f31d7c936590c6074a1f3c637377698845236e4cd7b3f4f55a070b6984af5969",
+    "thumbnail": "/asset-board-r8/thumbs/tower.png",
+    "thumbnailSha256": "9e187a1e5a1e38dce940db5aa9daf98549995d7f8aa46f9f53c298e327dcd9fc",
+    "sourceBoundsBlender": {
+      "min": [
+        -0.42239293456077576,
+        -0.42174455523490906,
+        -0.5
+      ],
+      "max": [
+        0.42239293456077576,
+        0.42174455523490906,
+        0.5
+      ]
+    },
+    "displayScale": 3.5,
+    "blenderVersion": "4.5.14 LTS"
+  },
+  {
+    "id": "xiongnu",
+    "glbSha256": "1802a80083cd118295717f6e405a5bc98b99a48406dd2074c1a580c7a591f47f",
+    "thumbnail": "/asset-board-r8/thumbs/xiongnu.png",
+    "thumbnailSha256": "6e360456509432d0cbadb63790672cfd44327d08af99ffdb0e4f89bcc1d448ca",
+    "sourceBoundsBlender": {
+      "min": [
+        -0.4694894850254059,
+        -0.22271442413330078,
+        0.0
+      ],
+      "max": [
+        0.4677749276161194,
+        0.2227144092321396,
+        1.7200000286102295
+      ]
+    },
+    "displayScale": 2.0348836870822735,
+    "blenderVersion": "4.5.14 LTS"
+  },
+  {
+    "id": "reception-court",
+    "glbSha256": "051822ecb55da21953d80dc7c3b2d190fedff674d73b9cd1f14c027d7d74186a",
+    "thumbnail": "/asset-board-r8/thumbs/reception-court.png",
+    "thumbnailSha256": "c12e05550d610c49a4ded5a8dacb34d04a515d15e7b8ee789d44c594f537655f",
+    "sourceBoundsBlender": {
+      "min": [
+        -9.5,
+        -10.199999809265137,
+        -0.11999999731779099
+      ],
+      "max": [
+        9.5,
+        10.800000190734863,
+        3.4228999614715576
+      ]
+    },
+    "displayScale": 0.16666666666666666,
+    "blenderVersion": "4.5.14 LTS"
+  },
+  {
+    "id": "market",
+    "glbSha256": "3690fdef841e35d5370bc74a333092a9a875a89b60521be861fe017423cff542",
+    "thumbnail": "/asset-board-r8/thumbs/market.png",
+    "thumbnailSha256": "9e43e35761c2edfc1788a7ab2e1d5865dfdef250fc61234d5875c6882c937be9",
+    "sourceBoundsBlender": {
+      "min": [
+        -11.0,
+        -10.0,
+        -0.1599999964237213
+      ],
+      "max": [
+        11.0,
+        10.0,
+        2.799999952316284
+      ]
+    },
+    "displayScale": 0.1590909090909091,
+    "blenderVersion": "4.5.14 LTS"
+  },
+  {
+    "id": "environment",
+    "glbSha256": "2956955061a5278a293320c598719c175e74c28133aa8a2785e4652760db2832",
+    "thumbnail": "/asset-board-r8/thumbs/environment.png",
+    "thumbnailSha256": "ce332c016bfbd67ca606c0da40624c4e1673bc228ab02ae3245155669d696920",
+    "sourceBoundsBlender": {
+      "min": [
+        -90.0,
+        -90.0,
+        -0.4515402317047119
+      ],
+      "max": [
+        90.0,
+        90.0,
+        7.289393424987793
+      ]
+    },
+    "displayScale": 0.019444444444444445,
+    "blenderVersion": "4.5.14 LTS"
+  },
+  {
+    "id": "detention-camp",
+    "glbSha256": "b6466afe31affc00faf8b689f3a08d300b819a9c86a8541d6c4b9298106d4001",
+    "thumbnail": "/asset-board-r8/thumbs/detention-camp.png",
+    "thumbnailSha256": "c0380420ee51391510dd237b448c930ad4e8ab2891b89fff056d704d6e830c0c",
+    "sourceBoundsBlender": {
+      "min": [
+        -13.0,
+        -13.0,
+        -0.07271678000688553
+      ],
+      "max": [
+        13.0,
+        13.0,
+        2.878000259399414
+      ]
+    },
+    "displayScale": 0.1346153846153846,
+    "blenderVersion": "4.5.14 LTS"
+  },
+  {
+    "id": "departure-outpost",
+    "glbSha256": "c90e502b3fac2f1c4c98c77571214a238db9239d6e3b53aa1ffb1f22e3cc302d",
+    "thumbnail": "/asset-board-r8/thumbs/departure-outpost.png",
+    "thumbnailSha256": "89177846aec5a9c4cdf3835b89a732529553ab3bd6b4a26507ce7e4807f295da",
+    "sourceBoundsBlender": {
+      "min": [
+        -24.0,
+        -22.0,
+        -0.14278066158294678
+      ],
+      "max": [
+        24.0,
+        38.0,
+        4.079999923706055
+      ]
+    },
+    "displayScale": 0.058333333333333334,
+    "blenderVersion": "4.5.14 LTS"
+  },
+  {
+    "id": "staff-a",
+    "glbSha256": "96d5ed7b043ab9a3123aa1d7c06fc3dfeacc254b839f2c6e071574ed65f6d7cc",
+    "thumbnail": "/asset-board-r8/thumbs/staff-a.png",
+    "thumbnailSha256": "89e38a7b3fdd67008ad450d353dbc8e04575366bfc2ef699a628e714e55df692",
+    "sourceBoundsBlender": {
+      "min": [
+        -0.31298014521598816,
+        -0.49017366766929626,
+        -0.5
+      ],
+      "max": [
+        0.31298014521598816,
+        0.49017366766929626,
+        0.5
+      ]
+    },
+    "displayScale": 3.5,
+    "blenderVersion": "4.5.14 LTS"
+  },
+  {
+    "id": "gate-a",
+    "glbSha256": "9b73ef9a420decbf9c7efc89fe98d48d4888b870d3a19a8e0dec8b6600435bc3",
+    "thumbnail": "/asset-board-r8/thumbs/gate-a.png",
+    "thumbnailSha256": "69db8222d522e53a1905bf1360e74f795ac871b8e31546b07fc06b87fd07d9aa",
+    "sourceBoundsBlender": {
+      "min": [
+        -0.23577922582626343,
+        -0.5,
+        -0.4231276512145996
+      ],
+      "max": [
+        0.23577922582626343,
+        0.5,
+        0.4231276512145996
+      ]
+    },
+    "displayScale": 3.5,
+    "blenderVersion": "4.5.14 LTS"
+  },
+  {
+    "id": "zhangqian-trial",
+    "glbSha256": "8be9da657767a6b90c180509457611871f999138b6834c4cebca9d2b13dbe1bd",
+    "thumbnail": "/asset-board-r8/thumbs/zhangqian-trial.png",
+    "thumbnailSha256": "64c4d753f6405b1c99e39232ff1098daa986656afe058720509374851a1b3357",
+    "sourceBoundsBlender": {
+      "min": [
+        -0.07452508062124252,
+        -0.18945811688899994,
+        -0.5
+      ],
+      "max": [
+        0.07452508062124252,
+        0.18945811688899994,
+        0.5
+      ]
+    },
+    "displayScale": 3.5,
+    "blenderVersion": "4.5.14 LTS"
+  }
+]

@@ -1,0 +1,401 @@
+{
+  "schemaVersion": "1.0.0",
+  "policyId": "mural-story-quality-r10",
+  "status": "fixed-project-standard",
+  "authority": "user-requested project quality rules; root-reviewed on 2026-10-03",
+  "scope": "project-only; no global skills, memory or safety policy modification",
+  "goal": "故事优先：人物目的、事件原因与结果讲清楚；壁画、地图、3D和配音服务故事。",
+  "sourceDocument": "../docs/agent/mural-case-lessons-r10.md",
+  "sourceSha256": "eda11ad0e6daa585619ca432a1d0bffcc53f53c1a6b5c63591d514b4c0577151",
+  "desktopOnly": true,
+  "maxConcurrentAgentsIncludingRoot": 3,
+  "pipeline": [
+    {
+      "stage": "A",
+      "name": "采集与真实初版资产",
+      "requiredOutputs": [
+        "provided-source-excerpts",
+        "causal-story-plan",
+        "reference-provenance",
+        "real-tripo-task-receipts",
+        "raw-pbr-glb"
+      ]
+    },
+    {
+      "stage": "B",
+      "name": "审核与整合",
+      "requiredOutputs": [
+        "story-review",
+        "asset-calibration",
+        "scene-cue-binding",
+        "complete-narration-manifest",
+        "timeline"
+      ]
+    },
+    {
+      "stage": "C",
+      "name": "桌面讲解网页",
+      "requiredOutputs": [
+        "source-code",
+        "real-runtime-asset-loading",
+        "caption-below-canvas",
+        "playback-controls",
+        "errors-with-recovery-boundaries"
+      ]
+    },
+    {
+      "stage": "D",
+      "name": "真实效果与交付验证",
+      "requiredOutputs": [
+        "current-build-and-tests",
+        "visible-natural-playback-evidence",
+        "human-story-and-audio-review",
+        "complete-recording",
+        "full-source-zip-clean-extraction-check"
+      ]
+    }
+  ],
+  "publicVoicePolicy": {
+    "privateVoiceForbiddenWithoutAuthorization": true,
+    "publicSyntheticReferenceCloningAllowedWithUserAuthorization": true,
+    "recordActualCloningMode": true,
+    "noTrainingInNormalBuild": true,
+    "noModelWeightsInDelivery": true
+  },
+  "evidencePolicy": {
+    "modelClaimsAreEvidence": false,
+    "providedExcerptMeansIndependentlyVerified": false,
+    "structuralPassMeansVisualPass": false,
+    "previewMeansFinalDelivery": false,
+    "oldRunEvidenceCertifiesNewVersion": false,
+    "defaultState": "pending"
+  },
+  "rules": [
+    {
+      "id": "A01",
+      "stage": "A",
+      "requirement": "先冻结观众应理解的人物、目的、事件、原因与结果，再安排图像。外交故事按因果与时间展开，壁画作为辅助和后记；不能要求观众先学会读画才能听懂故事。",
+      "caseEvidenceRefs": [
+        "E01",
+        "E20"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "human",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "A02",
+      "stage": "A",
+      "requirement": "每个叙事claim与图像解释保留source ID、原文/机构解读、稳定来源指针及具体边界；区分 `history`、`mural`、`interpretation`。来源列表和模型意见不能代替回读原文。",
+      "caseEvidenceRefs": [
+        "E01",
+        "E02"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "A03",
+      "stage": "A",
+      "requirement": "将史料支持的角色与艺术补全分开。十余年扣留不等于十三年全程；身毒是转述与推想，不画作张骞亲至；后续副使路线不算本人首次行程；乌孙未立即答应；接见不能表现成功盟约。争议与未知保留，不用精确肖像、统一民族服装或明确君主性别填空。",
+      "caseEvidenceRefs": [
+        "E01",
+        "E02",
+        "E03",
+        "E12"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "human",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "A04",
+      "stage": "A",
+      "requirement": "A层必须交付真实主资产初版GLB及task/request/费用/原始文件证据。2D概念图可作为参考，不能登记为3D完成。要事先列明人物、关键道具、建筑等主资产及页面采用位置。",
+      "caseEvidenceRefs": [
+        "E04",
+        "E05"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "A05",
+      "stage": "A",
+      "requirement": "Tripo任务冻结输入、参数、seed、预算与授权范围；保留task ID、raw下载、实耗、请求摘要和失败状态。未知POST结果先查已有任务，禁止盲目重复付费。model API和Tripo API独立配置、独立请求类型、独立日志及成本边界，不能把文本/概念图API成功算作3D任务成功。",
+      "caseEvidenceRefs": [
+        "E04",
+        "E21"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "A06",
+      "stage": "A",
+      "requirement": "参考质量不足时先拒绝角色候选，不能以放大图片或生成任务成功补足丢失结构。确认可读参考/概念形象，再做新的受控生成。失败raw与审核保留。",
+      "caseEvidenceRefs": [
+        "E06"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "human",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "B01",
+      "stage": "B",
+      "requirement": "raw不可改写；归一化另存派生GLB、可编辑工程和真实多向图。重导入实测比例、前轴、落地、mesh/材质、嵌入图像、UV及PBR通道。prompt数字不能当作实际尺寸。",
+      "caseEvidenceRefs": [
+        "E04",
+        "E07"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "B02",
+      "stage": "B",
+      "requirement": "页面必须实际请求、校验并导入被采用的GLB；将生成原件、派生件、匿名复用、A/B与拒绝件区分。禁止用数据标签或看板文件存在代替当前场景采用证据。",
+      "caseEvidenceRefs": [
+        "E05",
+        "E08",
+        "E16"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "B03",
+      "stage": "B",
+      "requirement": "人物辨识采用独立形象、体型与轮廓，明确艺术设定。附件独立，避免融合武器/行囊/长杖破坏骨骼选区。复用资产允许不同展示角色，但角色语义和史料边界必须分别标明。",
+      "caseEvidenceRefs": [
+        "E03",
+        "E04",
+        "E05",
+        "E09"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "human",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "B04",
+      "stage": "B",
+      "requirement": "步态依据真实位移/路程，测试实际模型的脚底、独立腿轨迹、接地、抬脚、袍摆连续性与材质/UV；不能仅让整个静态人物上下摆动。停步/seek应确定性重建。动作参考要记录来源与提取验证。",
+      "caseEvidenceRefs": [
+        "E10",
+        "E11"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "B05",
+      "stage": "B",
+      "requirement": "停臂/抓握检查须选取原模型上已实看位置的真实手指/前臂顶点，独立于现有skin weights；不能以骨骼旋转固定或“已分配手权重”的选区自证。保持同一坐标系、更新祖先world matrix，地面用真实场景平面。",
+      "caseEvidenceRefs": [
+        "E09",
+        "E11",
+        "E17",
+        "E18"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "B06",
+      "stage": "B",
+      "requirement": "拦截、停步、转身、护送分别编排；转向朝真实路径切线，避免倒退、整圈旋转、站立滑步。支撑脚在pivot期间固定，起停位置、yaw、步态权重和膝角连续；营地路径用真实障碍网格核查。",
+      "caseEvidenceRefs": [
+        "E11",
+        "E19"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "B07",
+      "stage": "B",
+      "requirement": "场景过渡键应包含实际场景身份，不能只比较spatial/map模式。旧场景冻结到遮罩完全覆盖后再切；连续接见/市场句保留终态，ambient clock不按每句归零；拖动/重播重建状态。",
+      "caseEvidenceRefs": [
+        "E13"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "B08",
+      "stage": "B",
+      "requirement": "地图按叙事段落连续前进，句子切换不能重新播放扣留→月氏。大小地图使用同一cue时钟；国家区域与现代参考路线都需示意边界。",
+      "caseEvidenceRefs": [
+        "E05",
+        "E12",
+        "E13"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "B09",
+      "stage": "B",
+      "requirement": "先完成该句对应视觉动作再开始完整旁白。时间线用实测clip时长，加换句余量，并保持阅读下限；真实音频尚未播完不能因固定cue时钟截句。换声音只重算音轨与时间线，不擅改已确认故事或3D。",
+      "caseEvidenceRefs": [
+        "E01",
+        "E22",
+        "E23"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "B10",
+      "stage": "B",
+      "requirement": "先选有来源和使用权的公开音色短试听，再制作完整音轨；用户当前音色选择优先于旧阶段认可。manifest记录真实模型/preset或参考来源、实测时长、文本、SHA/bytes和实际克隆方式；禁止使用未授权私人音声。用户可明确授权公开合成样本做本地参考推理，此时应标 `privateReferenceUsed=false`、`voiceCloningUsed=true`、`referenceKind=synthetic_public`，保留授权与参考SHA，不能沿用“无克隆”。不把试听认可扩为全篇认可，不交付权重；发音元数据不能代替人耳校对专名。",
+      "caseEvidenceRefs": [
+        "E24",
+        "E25"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "human",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "B11",
+      "stage": "B",
+      "requirement": "在线TTS把provider错误、明确配额错误、网络中断和未知提交分开；保存原始request、event ID、append-only receipt、原始SSE及已下载文件SHA。未知提交先查询，不盲重发。允许复用已核验部分轨，但全部cue成功、文本/音色/解码/时长/权利验证通过后才生成新manifest、切runtime，禁止混新旧音色充数。fallback保留已确认原稿及授权声音范围，分别记录模型/参考、隐私、费用与恢复边界；未经实跑不能声称fallback成功。",
+      "caseEvidenceRefs": [
+        "E30"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "C01",
+      "stage": "C",
+      "requirement": "字幕在画布下方独立区域，中文/英文与cue绑定；要有阅读面积、滚动/高度调节，按Unicode字符显示。动作期与旁白期同步，讲图像方位时显示对应原画，缺失3D时使用匹配地图。",
+      "caseEvidenceRefs": [
+        "E12",
+        "E23",
+        "E26"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "human",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "C02",
+      "stage": "C",
+      "requirement": "控件提供开始、暂停/继续、章节跳转、拖动重建与明确错误。加载时校验实际将播放的音频和模型字节；来源按钮从当前manifest显示真实音色/版本，避免旧文案。前台/后台状态须记录，不能伪造。",
+      "caseEvidenceRefs": [
+        "E05",
+        "E16",
+        "E22"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "C03",
+      "stage": "C",
+      "requirement": "model API与Tripo API分别接入；浏览器和交付包只读已落地资产及有权使用的公开/获授权音轨，不携带服务密钥。运行构建不得顺带重新生成收费资产、下载权重或训练。日志仅保留安全请求/结果摘要。",
+      "caseEvidenceRefs": [
+        "E21",
+        "E25",
+        "E27"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "C04",
+      "stage": "C",
+      "requirement": "交接必须是完整源码工程：锁文件、实际资产/音轨、许可证、入口命令、修改清单、待办和版本化验证。核心GLB小包或4份源码不能替代完整工程。排除.env/密钥、私人音声、权重、venv和缓存；ZIP载荷清单记录bytes/SHA，并验证安全解包。",
+      "caseEvidenceRefs": [
+        "E28",
+        "E29"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "D01",
+      "stage": "D",
+      "requirement": "分开验收工程、资产、动作数值、浏览器画面、听感、用户确认、录屏和封包；每次结论绑定版本、命令、原始日志/文件SHA及验收范围。禁止把模型“完成”或agent报告作为结果证据。",
+      "caseEvidenceRefs": [
+        "E08",
+        "E11",
+        "E14",
+        "E15",
+        "E16"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "D02",
+      "stage": "D",
+      "requirement": "浏览器必须实际可见且故事time自然推进。记录只读hidden=false/visible、URL、当前assets/version、至少3个带真实时钟的自然播放采样；期间不seek或改状态。同步实看动作、路线、字幕和音轨。",
+      "caseEvidenceRefs": [
+        "E15",
+        "E16"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "D03",
+      "stage": "D",
+      "requirement": "录屏必须解码核查帧时间戳覆盖目标窗口和实际画面变化，完整自然播放单独验收；传输版短视频、截图组或seek片段不能替代完整播放。保留原视频/人的项目动机录音，新剪辑采用独立文件。ASR候选不直接作为正式字幕。",
+      "caseEvidenceRefs": [
+        "E15",
+        "E20"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "D04",
+      "stage": "D",
+      "requirement": "最终ZIP须在独立新目录安全解包后执行锁文件安装、check、build和真实浏览器走读，并核对采用资产/音轨。旧包、旧日志和旧人工认可不得验收新版本；遇隐藏、冻结、错版本、缺文件或秘密则拒绝交付。",
+      "caseEvidenceRefs": [
+        "E14",
+        "E29"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending"
+    },
+    {
+      "id": "D05",
+      "stage": "D",
+      "requirement": "失败证据使用独占新路径/时间戳，保存失败→最小补丁→新运行结果；不得覆盖原始诊断、降低阈值或删失败来制造通过。复盘区分事实、根因假设、已作废假设、残余风险和回退条件。",
+      "caseEvidenceRefs": [
+        "E15",
+        "E17",
+        "E18",
+        "E19"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending"
+    }
+  ]
+}

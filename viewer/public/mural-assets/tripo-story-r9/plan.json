@@ -1,0 +1,67 @@
+{
+  "experimentId": "tripo-story-r9",
+  "status": "generated_normalized_static_assets",
+  "purpose": "独立张骞、甘父与邛竹杖，服务出发、西行和大夏市场的故事辨认",
+  "createdDate": "2026-10-03",
+  "cost": { "estimatedPerTaskCredits": 50, "estimatedTotalCredits": 150, "maximumTasks": 3, "interpretation": "预估额度；实际消耗以官方任务记录为准" },
+  "sources": [
+    "https://developers.tripo3d.ai/en/models/v3-1",
+    "https://developers.tripo3d.ai/en/docs/generation-text-to-model/standard",
+    "https://zh.wikisource.org/wiki/史記/卷123#張騫",
+    "https://ctext.org/han-shu/zhang-qian-li-guang-li-zhuan/zh"
+  ],
+  "localEvidence": ["docs/historical/story-first-r8.md", "docs/historical/mural-narrative-audit.md", "viewer/src/yuezhi/book-content.ts"],
+  "cases": [
+    {
+      "id": "zhangqian",
+      "asset": "character",
+      "title": "张骞 · 汉使艺术示意",
+      "source": "《史记》卷123、《汉书》张骞李广利传；汉使身份有记载，具体面容、年龄与服装颜色为制作设定",
+      "request": {
+        "model": "v3.1-20260211", "texture": true, "pbr": true,
+        "texture_version": "v3.0-20250812", "texture_quality": "detailed", "geometry_quality": "detailed",
+        "face_limit": 60000, "model_seed": 202610031, "image_seed": 202610041, "texture_seed": 202610051,
+        "prompt": "One full-body man, an artistic depiction of Zhang Qian, a Western Han envoy. Mature about 42, tall lean build, elongated oval face, narrow jaw, high cheekbones, calm thoughtful eyes, neat short moustache and pointed short beard. Plain close black cloth cap. Muted iron-red overlapping robe with a dark narrow collar, cloth waist sash, knee-length split hem; separate dark trousers and simple flat cloth boots. Distinct slender upright silhouette, no royal costume. Detailed cloth seams, restrained woven texture and natural folds, subtle worn edges; modeled eyelids, lips and beard depth. Matte earth pigments, realistic PBR roughness. Stand squarely facing forward, feet apart with clear separate legs. Neutral low A pose: both straight arms fixed down only 10 degrees from torso, relaxed empty open hands separated from hips. One isolated complete coherent character, no props or background. Costume and face are interpretive illustration, not an attested portrait or uniform.",
+        "negative_prompt": "weapon, bow, staff, bag, held object, armor, crown, modern clothing, zipper, buttons, Qing braid, fantasy, magic, anime, platform, background, crossed legs, fused legs, raised arms, T pose, multiple people, text"
+      },
+      "normalization": { "targetHeightMeters": 1.75, "rawFrontAxis": "review_required", "frontAxis": "+Z", "ground": "lowest mesh point at Y=0", "pose": "neutral arms down; locally correct provider T-pose only after inspecting raw" },
+      "historicalBoundary": "史书支持出使、持汉节与经历，不支持精确肖像、身高、统一使者制服。脸、年龄、红袍和帽为清楚辨认的艺术设定。",
+      "integration": "替换使团 party index 0 的 envoy；保留 index 1 匿名持汉节侍从，汉节独立接入。",
+      "criteria": ["面容和体型可与甘父明确区分", "低垂空手、两腿分离，适合现有运行时骨骼", "近景衣纹与脸部可读、背面完整", "无现代或幻想服装", "地面、身高、前轴校准并保留PBR/UV"]
+    },
+    {
+      "id": "ganfu",
+      "asset": "character",
+      "title": "甘父 · 远行伙伴艺术示意",
+      "source": "《史记》卷123、《汉书》张骞李广利传；胡人、善射及同行有记载，本项不认定其具体族属或肖像",
+      "request": {
+        "model": "v3.1-20260211", "texture": true, "pbr": true,
+        "texture_version": "v3.0-20250812", "texture_quality": "detailed", "geometry_quality": "detailed",
+        "face_limit": 60000, "model_seed": 202610032, "image_seed": 202610042, "texture_seed": 202610052,
+        "prompt": "One full-body man, an artistic depiction of Ganfu, Zhang Qian's companion on a second-century BCE journey. About 34, shorter sturdy build, broad shoulders, square face, broad jaw, rounded cheeks, direct calm eyes, short dark hair and short stubble. Natural individual face without ethnic caricature. Plain low soft brown cap. Muted ochre-brown narrow-sleeved overlapping travel tunic ending at mid-thigh clearly above both knees, plain dark leather belt; separate charcoal trousers, plain low flat boots. Strong compact practical silhouette. Detailed woven cloth, seams, believable folds, lightly worn cuffs, natural skin PBR. Stand exactly facing forward, feet apart, two legs visibly separate with no cloth bridge. Neutral low A pose: both straight arms fixed down only 10 degrees from torso, relaxed empty open hands away from hips. No bow, quiver, bag or held object. One isolated complete character. Face, age and costume are artistic interpretation, not a verified portrait or tribal uniform.",
+        "negative_prompt": "bow, quiver, weapon, staff, bag, held object, armor, tribal crown, modern clothing, zipper, fantasy, magic, anime, platform, background, long robe, fused legs, crossed legs, raised arms, T pose, multiple people, text"
+      },
+      "normalization": { "targetHeightMeters": 1.69, "rawFrontAxis": "review_required", "frontAxis": "+Z", "ground": "lowest mesh point at Y=0", "pose": "neutral arms down; locally correct provider T-pose only after inspecting raw" },
+      "historicalBoundary": "善射用旁白和独立动作/道具讲述；基础人物保持空手，避免弓与身体融合。胡人称谓不能直接作为匈奴族属或固定民族脸型。",
+      "integration": "只替换行进使团 party index 2 的携囊 attendant 为 Ganfu，携囊作为可拆附件。会议与市场中的其他 attendant 不全局改名或改模型。",
+      "criteria": ["方脸、短须、壮实体型和短袍轮廓独立于张骞", "衣摆不过膝，两腿正前分离", "无弓持物，双臂低垂便于绑定", "不靠族群刻板外观辨人", "地面、身高、前轴校准并保留PBR/UV"]
+    },
+    {
+      "id": "qiong-bamboo",
+      "asset": "prop",
+      "title": "邛竹杖 · 大夏市场货物示意",
+      "source": "《史记》卷123记大夏见邛竹杖、蜀布；商人从身毒购得。具体器形、尺寸、纹理为制作推定",
+      "request": {
+        "model": "v3.1-20260211", "texture": true, "pbr": true,
+        "texture_version": "v3.0-20250812", "texture_quality": "detailed", "geometry_quality": "detailed",
+        "face_limit": 30000, "model_seed": 202610033, "image_seed": 202610043, "texture_seed": 202610053,
+        "prompt": "One plain Qiong bamboo walking staff, an illustrative traded bamboo object for a Daxia market in Zhang Qian's story. A single nearly straight continuous slender bamboo cane, approximately 1.55 meters long and 2.8 centimeters wide, gently tapered at the lower end. Readable natural raised ring nodes spaced along its length, subtle internode ridges and fine longitudinal fibers, a few small realistic worn marks. Closed blunt ends with a modest cut end showing bamboo wall and pith, no blade or metal fitting. Muted warm yellow-brown aged bamboo, darker restrained nodes, matte natural PBR surface with fine tangible relief and subtle roughness variation. No curved handle, decoration, animal head, wrapping or branch. Clear uninterrupted silhouette from every angle. One isolated coherent upright object, no person, hands, ground or background. Historical traded-item illustration; exact dimensions and form are not archaeologically attested.",
+        "negative_prompt": "person, hands, weapon, spear, blade, snake, serpent, animal head, fantasy, magic, metal cap, leather grip, crook, curved handle, branches, leaves, multiple staffs, pedestal, ground, background, floating parts, text"
+      },
+      "normalization": { "targetHeightMeters": 1.55, "rawFrontAxis": "not_applicable_round_staff", "frontAxis": "+Z", "ground": "lower blunt end at Y=0", "pose": "upright staff" },
+      "historicalBoundary": "表现流通中的货物，不用使团汉节替代，不称武器、蛇杖或魔法杖；商路推想不等于张骞亲至身毒。",
+      "integration": "独立替换大夏市场展示的竹杖货物；同根模型可实例化为少量货品。不要替换使团汉节。",
+      "criteria": ["竹节和纵向纤维近景可读", "长杆连续无蛇头、弯钩或武器配件", "正背侧视结构一致", "与独立汉节清楚区分", "地面、长度校准并保留PBR/UV"]
+    }
+  ]
+}

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { annotations, chapters, compileChapters, duration, sources } from '../viewer/src/mural/story.ts'
 
 describe('mural narrative and evidence boundaries', () => {
-  it('keeps an eight-chapter image route with one readable subtitle at a time', () => {
+  it('keeps an eight-chapter story with one readable subtitle at a time', () => {
     expect(chapters).toHaveLength(8)
     const cues = chapters.flatMap(chapter => chapter.cues)
     expect(cues).toHaveLength(24)
@@ -30,16 +30,26 @@ describe('mural narrative and evidence boundaries', () => {
     expect(duration).toBeGreaterThan(112)
   })
 
-  it('uses a direct guide voice while retaining the distinction between painting and journey', () => {
+  it('finishes the diplomatic story before interpreting the later painting', () => {
     const spoken = chapters.flatMap(chapter => chapter.cues).map(cue => cue.text).join('')
     expect(spoken).not.toMatch(/《史记》|《汉书》|敦煌研究院|史书说/)
-    expect(chapters[1]!.text).toContain('在这幅画里')
-    expect(chapters[1]!.text).toContain('佛像')
-    expect(chapters[2]!.text).toContain('共同对抗匈奴')
-    expect(chapters[3]!.text).toContain('扣留十余年')
-    expect(chapters[3]!.text).toContain('营地场景')
-    expect(chapters[4]!.text).toContain('愿望却没有实现')
-    expect(chapters[6]!.text).toContain('后世的历史记忆')
+    expect(chapters.map(chapter => chapter.id)).toEqual([
+      'mission', 'first-captivity', 'escape-westward', 'alliance-refused',
+      'daxia-discovery', 'return-home', 'later-contacts', 'mural-memory',
+    ])
+    for (const cue of chapters.slice(0, 7).flatMap(chapter => chapter.cues)) {
+      expect(cue.sourceKind).toBe('history')
+      expect(cue.text).not.toMatch(/左上|右上|往下看|回到原画|金人|佛像/)
+    }
+    expect(chapters[0]!.text).toContain('共同对抗匈奴')
+    expect(chapters[1]!.text).toContain('十余年')
+    expect(chapters[3]!.text).toContain('汉朝太远')
+    expect(chapters[4]!.text).toContain('推想')
+    expect(chapters[5]!.text).toContain('再次被扣留')
+    expect(chapters[5]!.text).toContain('妻子和甘父')
+    expect(chapters[5]!.text).toContain('十三年')
+    expect(chapters[6]!.text).toContain('没有立即答应')
+    expect(chapters[7]!.text).toContain('后世佛教')
     expect(annotations.find(annotation => annotation.id === 'alliance-result')!.detail).toContain('没有明确的月氏接见场景')
   })
 
@@ -62,8 +72,7 @@ describe('mural narrative and evidence boundaries', () => {
       expect(y + height).toBeLessThanOrEqual(1)
       const chapterAnnotations = annotations.filter(annotation => annotation.chapterIndex === chapterIndex)
       expect(chapterAnnotations.length).toBeGreaterThan(0)
-      // The detention chapter adds two explanatory anchors to the two image anchors.
-      expect(chapterAnnotations.length).toBeLessThanOrEqual(chapterIndex === 3 ? 4 : 3)
+      expect(chapterAnnotations.length).toBeLessThanOrEqual(3)
       for (const annotation of chapterAnnotations) {
         expect(annotation.x).toBeGreaterThanOrEqual(x)
         expect(annotation.x).toBeLessThanOrEqual(x + width)

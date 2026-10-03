@@ -180,7 +180,7 @@ def main(args: argparse.Namespace) -> dict:
             assert wave.ndim == 1 and wave.size > 0 and np.isfinite(wave).all()
             assert float(np.mean(np.abs(wave) >= 1)) < 0.001, 'Raw synthesis clipped'
             if index:
-                gap = .24 if chunks[index - 1].endswith(('。', '！', '？')) else .16
+                gap = args.sentence_pause if chunks[index - 1].endswith(('。', '！', '？')) else args.clause_pause
                 waves.append(np.zeros(round(gap * RATE), dtype=np.float32))
             waves.append(wave)
             chunk_evidence.append({'text': chunk, 'phonemes': phones, 'phonemeLength': len(phones),
@@ -244,6 +244,7 @@ def main(args: argparse.Namespace) -> dict:
     manifest = {'formatVersion': f'{public_version}.0.0', 'voice': 'Kokoro-82M-v1.1-zh / zm_010 (official public preset)',
                 'synthesis': 'offline Kokoro; no reference recording or voice cloning',
                 'synthesisSpeed': SPEED, 'sampleRate': RATE, 'recordedAtUtc': recorded_at,
+                'pauseSeconds': {'sentence': args.sentence_pause, 'clause': args.clause_pause},
                 'normalBuildSynthesizes': False, 'privateReferenceUsed': False, 'voiceCloningUsed': False,
                 'textSource': 'viewer/src/mural/story.ts / chapterDefinitions', 'textUnchanged': True,
                 'textSourceSha256': story_sha, 'cuesSha256': digest(cues_bytes),
@@ -289,7 +290,9 @@ if __name__ == '__main__':
     parser.add_argument('--output-dir', type=Path, required=True)
     parser.add_argument('--model-dir', type=Path, required=True)
     parser.add_argument('--license-file', type=Path, required=True)
-    parser.add_argument('--public-version', type=int, default=3, help='Public narration version; default 3 preserves the original recipe, use 4 for the reviewed r5 text')
+    parser.add_argument('--public-version', type=int, default=3, help='Public narration version; use a new version when the text changes')
+    parser.add_argument('--sentence-pause', type=float, default=.24, help='Gap between sentence-ending synthesis chunks')
+    parser.add_argument('--clause-pause', type=float, default=.16, help='Gap between other synthesis chunks')
     parser.add_argument('--only-cues', nargs='+', choices=EXPECTED_IDS, help='Render only selected cues into a new staging directory; never overwrite delivered audio')
     parser.add_argument('--resume-empty-output', action='store_true', help='Only reuse a verified empty output directory after an interrupted attempt; never reuse existing audio')
     print(json.dumps(main(parser.parse_args()), ensure_ascii=False, indent=2), flush=True)

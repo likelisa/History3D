@@ -135,8 +135,14 @@ progress::-webkit-progress-bar{background:#3c4b36}progress::-webkit-progress-val
 #character-names{position:absolute;inset:0;z-index:4;pointer-events:none;overflow:hidden}
 .character-name{position:absolute;transform:translate(-50%,-100%);padding:4px 11px;border-radius:4px;background:#eee0c9ed;color:#34443d;font:14px/1.4 "SimSun",serif;box-shadow:0 2px 8px #17241d33;white-space:nowrap}
 
-#presentation{--caption-height:120px}
+#presentation{--caption-height:156px}
 #caption{padding-top:12px}
 #caption p{margin:3px 0;font-size:15px;line-height:1.5}
 #caption #narration-en{color:#c8d3c5;font-size:13px;line-height:1.45;max-width:100%}
 #caption-sizing{top:4px}
+
+/* A visible story anchor keeps the main narrative ahead of the evidence views. */
+#story-context{padding:14px 15px;background:#26382c;border-left:3px solid #d8ba7d}
+#story-location{font-size:11px;line-height:1.7;color:#b7c4a6}
+#story-title{font:23px/1.5 "Microsoft YaHei",sans-serif;color:#f2e2bf;margin:7px 0 10px}
+#story-takeaway{font-size:14px;line-height:1.9;color:#e4e4cd;margin:0}

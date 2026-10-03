@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0.0",
+  "startedAt": "2026-10-03T17:52:24.160Z",
+  "finishedAt": "2026-10-03T17:52:26.092Z",
+  "command": "node node_modules/vitest/vitest.mjs run tests/mural-agent-server.test.ts -t 38-rule r14|original frozen --reporter=default --reporter=json --outputFile=docs/agent/validation/policy-default-r14-final-vitest.json",
+  "exitCode": 0,
+  "success": true,
+  "passedTests": 3,
+  "failedTests": 0,
+  "pendingTests": 47,
+  "sourceSha256": {
+    "agent/quality-policy-r14.json": "ed6d4ff914b3af531135f2abd819f30c76225b889801498a21145fd6f7bb7773",
+    "agent/quality-policy-r13.json": "6d5d37bb211a1ee5d372a64992c1c5836a1982b72e68b036784200499420c557",
+    "docs/agent/workflow-lessons-r14.md": "1a3e33d0148a8ce182f697a3255e87aec50bfd973e706ca5a8d958d2f5774c76",
+    "tests/mural-agent-server.test.ts": "407bcde9b269aa3090faf2a7e0c73d048c5b3a880eba7bc576335274250446e0"
+  },
+  "scope": [
+    "final default r14 and source-document SHA",
+    "unchanged r10 and r13 frozen run recovery"
+  ],
+  "providerRequests": "offline fixtures only; local HTTP listeners",
+  "credentialsRead": false,
+  "globalMemoryOrSkillModified": false,
+  "broaderPriorReceipt": "docs/agent/validation/policy-default-r14-result.json",
+  "remaining": "root runs full project check/build after concurrent asset-candidate implementation"
+}

@@ -1,0 +1,167 @@
+{
+  "experimentId": "tripo-story-r9",
+  "updatedAt": "2026-10-03T01:54:12.571Z",
+  "endpoint": "/v3/generation/text-to-model",
+  "estimatedTotalCredits": 150,
+  "assets": [
+    {
+      "id": "zhangqian",
+      "source": {
+        "provider": "Tripo",
+        "generationType": "text-to-model",
+        "model": "v3.1-20260211",
+        "references": "《史记》卷123、《汉书》张骞李广利传；汉使身份有记载，具体面容、年龄与服装颜色为制作设定"
+      },
+      "status": "downloaded",
+      "taskId": "629b77f4-64b0-4aa7-b38d-33b3b6b21cd7",
+      "creditsConsumed": 50,
+      "requestHash": "78783da25509d25ed1c59a5301f22018f66fe1b1dce081bb61972ba07aae4ab7",
+      "path": "/mural-assets/tripo-story-r9/zhangqian-raw.glb",
+      "sha256": "5ebe1a28dac95ab5e3b0e51f117eeec8445d6b9cfd96c3800c135680d780a2fd",
+      "bytes": 10379972,
+      "stats": {
+        "meshes": 1,
+        "nodes": 1,
+        "triangles": 57432,
+        "vertices": 32984,
+        "materials": 1,
+        "embeddedImages": 3,
+        "externalResources": 0,
+        "pbrMaterials": 1,
+        "normalMappedMaterials": 1,
+        "metallicRoughnessMappedMaterials": 1,
+        "animations": 0,
+        "bounds": [
+          {
+            "min": [
+              -0.09404425323009491,
+              -0.4893115758895874,
+              -0.1787472814321518
+            ],
+            "max": [
+              0.09404851496219635,
+              0.48954522609710693,
+              0.17894892394542694
+            ]
+          }
+        ]
+      },
+      "preview": {
+        "path": "/mural-assets/tripo-story-r9/zhangqian-preview.png",
+        "sha256": "59cafd9175a54e5e0d29767d103553f726d58644f5f748402d95307a2f76a628",
+        "bytes": 114312,
+        "format": "png"
+      },
+      "previewStatus": "downloaded",
+      "progress": 100,
+      "submittedAt": "2026-10-03T01:50:13.221Z",
+      "checkedAt": "2026-10-03T01:52:30.866Z"
+    },
+    {
+      "id": "ganfu",
+      "source": {
+        "provider": "Tripo",
+        "generationType": "text-to-model",
+        "model": "v3.1-20260211",
+        "references": "《史记》卷123、《汉书》张骞李广利传；胡人、善射及同行有记载，本项不认定其具体族属或肖像"
+      },
+      "status": "downloaded",
+      "taskId": "c3c6a259-6e20-4811-8d87-dd6842442e46",
+      "creditsConsumed": 50,
+      "requestHash": "65751ec5b98e1503f5685252f3a7e040bfffcaaea5ba1fb274d0adc10f23da83",
+      "path": "/mural-assets/tripo-story-r9/ganfu-raw.glb",
+      "sha256": "d4c0b7deb1513119bd1042d33e414eeef961a70a2723918c6c62fd3c97951a82",
+      "bytes": 9715504,
+      "stats": {
+        "meshes": 1,
+        "nodes": 1,
+        "triangles": 59736,
+        "vertices": 33785,
+        "materials": 1,
+        "embeddedImages": 3,
+        "externalResources": 0,
+        "pbrMaterials": 1,
+        "normalMappedMaterials": 1,
+        "metallicRoughnessMappedMaterials": 1,
+        "animations": 0,
+        "bounds": [
+          {
+            "min": [
+              -0.14631611108779907,
+              -0.4896787405014038,
+              -0.3276652991771698
+            ],
+            "max": [
+              0.1462925672531128,
+              0.4896906614303589,
+              0.32795342803001404
+            ]
+          }
+        ]
+      },
+      "preview": {
+        "path": "/mural-assets/tripo-story-r9/ganfu-preview.png",
+        "sha256": "a8de5ceb19c20289e82f2f83612ae96bd6b26bbe5cf6792027abf883fc9d496d",
+        "bytes": 180812,
+        "format": "png"
+      },
+      "previewStatus": "downloaded",
+      "progress": 100,
+      "submittedAt": "2026-10-03T01:51:42.173Z",
+      "checkedAt": "2026-10-03T01:54:06.548Z"
+    },
+    {
+      "id": "qiong-bamboo",
+      "source": {
+        "provider": "Tripo",
+        "generationType": "text-to-model",
+        "model": "v3.1-20260211",
+        "references": "《史记》卷123记大夏见邛竹杖、蜀布；商人从身毒购得。具体器形、尺寸、纹理为制作推定"
+      },
+      "status": "downloaded",
+      "taskId": "f6942558-b7ee-480f-9f77-b32467a9972b",
+      "creditsConsumed": 50,
+      "requestHash": "11b6d95621a65c9de2a9f87487fbd2f20ed0fab738ad73fdc73df5cbf4ecc942",
+      "path": "/mural-assets/tripo-story-r9/qiong-bamboo-raw.glb",
+      "sha256": "b1360b2098aade7adbc8153613b698138025e5b788812dafba2de0430bd490f2",
+      "bytes": 10933852,
+      "stats": {
+        "meshes": 1,
+        "nodes": 1,
+        "triangles": 28206,
+        "vertices": 17716,
+        "materials": 1,
+        "embeddedImages": 3,
+        "externalResources": 0,
+        "pbrMaterials": 1,
+        "normalMappedMaterials": 1,
+        "metallicRoughnessMappedMaterials": 1,
+        "animations": 0,
+        "bounds": [
+          {
+            "min": [
+              -0.03566334769129753,
+              -0.49011409282684326,
+              -0.032094866037368774
+            ],
+            "max": [
+              0.035911332815885544,
+              0.48994314670562744,
+              0.03180738538503647
+            ]
+          }
+        ]
+      },
+      "preview": {
+        "path": "/mural-assets/tripo-story-r9/qiong-bamboo-preview.png",
+        "sha256": "0ce3b934b235aefd1ea9480a3d89abdcfb711f2ded6a148bbcf32f76ec3d9769",
+        "bytes": 40486,
+        "format": "png"
+      },
+      "previewStatus": "downloaded",
+      "progress": 100,
+      "submittedAt": "2026-10-03T01:51:52.234Z",
+      "checkedAt": "2026-10-03T01:54:10.358Z"
+    }
+  ]
+}

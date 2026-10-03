@@ -1,0 +1,9 @@
+{
+  "at": "2026-10-03T17:48:51.753Z",
+  "scope": "project-record-integrity",
+  "failureRecords": 5,
+  "evidencePointersMissing": [],
+  "sourceShaMatches": true,
+  "r13Unchanged": true,
+  "globalMemoryOrSkillModified": false
+}

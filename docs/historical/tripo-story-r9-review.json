@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-03",
+  "completion": "three static normalized GLBs, raw+normalized five-view renders, editable blend and 16-current board delivered",
+  "evidence": [
+    "viewer/public/mural-assets/tripo-story-r9/manifest.json",
+    "viewer/public/mural-assets/tripo-story-r9/normalized-manifest.json",
+    "viewer/public/mural-assets/tripo-story-r9/raw-inspection.json",
+    "docs/handoff/2026-10-03/asset-board-r9-file-verification.json"
+  ],
+  "creditsConsumed": 150,
+  "correctDecisions": [
+    "independent character identities and historically bounded artistic appearance",
+    "source face direction reviewed from actual PNGs before explicit yaw",
+    "raw assets immutable; exported PBR/UV/height/ground rechecked",
+    "only three new board thumbnails rendered; prior evidence preserved"
+  ],
+  "supersededAssumptions": [
+    "prompt numeric dimensions imply measured provider output dimensions"
+  ],
+  "failure_record": {
+    "category": "generated_geometry_proportion_constraint_not_met",
+    "asset": "qiong-bamboo",
+    "evidence": [
+      "review/raw/qiong-bamboo-front-plus-z.png",
+      "normalized-manifest.json: qiong-bamboo conversion.diameterCorrection"
+    ],
+    "observed": {
+      "requestedDiameterMeters": 0.028,
+      "rawHeightScaledWidthMeters": 0.11319823563098907
+    },
+    "rootCause": "provider output did not follow the slender numeric proportion; underlying model mechanism is not established",
+    "minimalPatch": {
+      "heightMeters": 1.55,
+      "targetDiameterMeters": 0.032,
+      "transverseScale": 0.2826899184569949,
+      "method": "local transverse scaling with UV/PBR preserved"
+    },
+    "validation": {
+      "reimportMeasuredDiameterMeters": 0.03200000338256359,
+      "normalizedFrontPngReviewed": true,
+      "rawHashPreserved": true,
+      "heightGroundAndPbrChecksPassed": true
+    },
+    "rollbackCondition": "any later angle shows unacceptable node distortion; retain raw and recalibrate derived output"
+  },
+  "remaining": [
+    "runtime foot neutralization and actual gait/robe motion",
+    "browser board interactions and HTTP/download links"
+  ],
+  "routing": {
+    "taskType": "historically bounded prompts, file authoring, Blender calibration and artifact verification",
+    "riskFlags": [
+      "historical claim boundary",
+      "file writes",
+      "source immutability",
+      "geometry/UV/PBR integrity"
+    ],
+    "selectedModel": "Codex strong agent",
+    "cheapModelUsed": false,
+    "selectionReason": "Judgment and local file/geometry authority require strong-model review; no paid text worker was necessary",
+    "verification": "file hashes, Blender export/reimport, actual PNG review and audited board counts",
+    "outcome": "static assets and board passed; runtime/browser acceptance delegated to root"
+  },
+  "classification": [
+    "no_persist",
+    "failure_record"
+  ],
+  "persistence": "project evidence/candidate only; no global memory, active skill or bottom-rule change"
+}

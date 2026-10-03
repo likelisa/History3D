@@ -1,0 +1,4620 @@
+{
+  "formatVersion": "1.0.0",
+  "provenance": {
+    "formatVersion": "1.0.0",
+    "status": "candidate-awaiting-gui-and-human-word-timing-review",
+    "sourceManifestSha256": "1b861e03fb33e516bf0765b9872adc30ebeeed8f17eee6642bda1fe3dab65d69",
+    "alignmentSha256": "368ded93571daf022ce7a3d53f21d48de92c5b2b58e4fd84251a9dff6e3f6a58",
+    "auditSha256": "80fa1feb193a33c5aa663e847dfeaf6def9813fe61e3f8f3f388631f36c50679",
+    "auditSourceManifestSha256": "cf2c5a7e549e61d5b067ddce8bf15a5f78454a8306df72efb49160fa95400f78",
+    "auditBinding": "frozen v11 automaticAudioAudit.reportSha256; audit predates manifest annotation",
+    "method": "local CPU Whisper word timestamps with per-word character interpolation; original display text retained; audited long silence adjustment",
+    "model": "existing local faster-whisper-large-v3 / cpu / int8",
+    "units": "seconds",
+    "unicodeOffsets": "Unicode code points, including punctuation; matches JavaScript Array.from",
+    "coverage": {
+      "expectedTracks": 24,
+      "alignedTracks": 24,
+      "completeTracks": 24
+    },
+    "coverage24": true,
+    "humanWordTimingReviewed": false,
+    "guiSynchronized": false,
+    "audioUnchanged": true,
+    "pointAdjustmentsCount": 30,
+    "originalAlignmentFile": "subtitle-alignment.json",
+    "publishedAlignmentFile": "subtitle-alignment-adjustments.json",
+    "auditFile": "subtitle-silence-audit.json",
+    "alignerSource": {
+      "file": "subtitle-aligner-source.py",
+      "sha256": "70bca54939552c51b92b2f540ad33a5121126ae4e575369d55dd671f18acd884",
+      "included": true
+    },
+    "publisherSource": {
+      "file": "subtitle-publisher-source.py",
+      "sha256": "660463dc85b8dfb1997ef87ae54dc05ceb42b314d00c4b43bc234100536998d9"
+    },
+    "supportFiles": [
+      {
+        "file": "reference-uncle-fu.wav",
+        "sha256": "f47d4c2e50cdbc2dee165d7cd2415c5e667c9af68863127701344c20b6f73e37",
+        "bytes": 413654
+      },
+      {
+        "file": "voice-acceptance.json",
+        "sha256": "34a16c9dc5e1f0e54c3f1f6e49a2d8aae7872c345613950b903dd6cc8a6dba4a",
+        "bytes": 586
+      },
+      {
+        "file": "GPT-SoVITS-LICENSE",
+        "sha256": "8a064eada186601fc602e45feef61c6abb62246d5ae9c3764dd1fc92d946c3c6",
+        "bytes": 1065
+      },
+      {
+        "file": "SOURCE.md",
+        "sha256": "4d68bfdbee1382cb9e947aac58a7916f56cc649a927f7da85e0fd357589b3090",
+        "bytes": 2082
+      }
+    ]
+  },
+  "adjustments": [
+    {
+      "id": "c0-0",
+      "pointIndex": 19,
+      "textEnd": 23,
+      "originalSeconds": 4.82,
+      "seconds": 5.225125,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 4.626313,
+        "end": 5.225125,
+        "duration": 0.598812,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c0-1",
+      "pointIndex": 24,
+      "textEnd": 29,
+      "originalSeconds": 6.62,
+      "seconds": 7.080938,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 6.475719,
+        "end": 7.080938,
+        "duration": 0.605219,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c0-2",
+      "pointIndex": 18,
+      "textEnd": 22,
+      "originalSeconds": 5.42,
+      "seconds": 5.717062,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 4.987531,
+        "end": 5.717062,
+        "duration": 0.729531,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c0-2",
+      "pointIndex": 19,
+      "textEnd": 23,
+      "originalSeconds": 5.64,
+      "seconds": 5.717062,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 4.987531,
+        "end": 5.717062,
+        "duration": 0.729531,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c1-1",
+      "pointIndex": 14,
+      "textEnd": 17,
+      "originalSeconds": 3.42,
+      "seconds": 3.653906,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 3.118688,
+        "end": 3.653906,
+        "duration": 0.535219,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c1-2",
+      "pointIndex": 14,
+      "textEnd": 17,
+      "originalSeconds": 4.18,
+      "seconds": 4.523844,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 3.689594,
+        "end": 4.523844,
+        "duration": 0.83425,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c2-0",
+      "pointIndex": 19,
+      "textEnd": 23,
+      "originalSeconds": 5.1,
+      "seconds": 5.5965,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 5.083969,
+        "end": 5.5965,
+        "duration": 0.512531,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c2-1",
+      "pointIndex": 22,
+      "textEnd": 26,
+      "originalSeconds": 5.96,
+      "seconds": 6.307344,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 5.738406,
+        "end": 6.307344,
+        "duration": 0.568937,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c2-2",
+      "pointIndex": 17,
+      "textEnd": 20,
+      "originalSeconds": 4.18,
+      "seconds": 4.563281,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 4.046031,
+        "end": 4.563281,
+        "duration": 0.51725,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c3-0",
+      "pointIndex": 14,
+      "textEnd": 16,
+      "originalSeconds": 3.26,
+      "seconds": 3.676531,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 2.826594,
+        "end": 3.676531,
+        "duration": 0.849938,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c3-0",
+      "pointIndex": 26,
+      "textEnd": 30,
+      "originalSeconds": 6.36,
+      "seconds": 6.60175,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 6.078281,
+        "end": 6.60175,
+        "duration": 0.523469,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c3-1",
+      "pointIndex": 29,
+      "textEnd": 33,
+      "originalSeconds": 6.42,
+      "seconds": 6.955563,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 6.356094,
+        "end": 6.955563,
+        "duration": 0.599469,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c4-0",
+      "pointIndex": 6,
+      "textEnd": 8,
+      "originalSeconds": 1.3,
+      "seconds": 1.878031,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 1.275688,
+        "end": 1.878031,
+        "duration": 0.602344,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c4-0",
+      "pointIndex": 19,
+      "textEnd": 22,
+      "originalSeconds": 4.28,
+      "seconds": 4.878969,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 4.198219,
+        "end": 4.878969,
+        "duration": 0.68075,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c4-1",
+      "pointIndex": 14,
+      "textEnd": 17,
+      "originalSeconds": 3.62,
+      "seconds": 4.152687,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 3.608281,
+        "end": 4.152687,
+        "duration": 0.544406,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c4-1",
+      "pointIndex": 24,
+      "textEnd": 28,
+      "originalSeconds": 6.12,
+      "seconds": 6.606031,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 6.060156,
+        "end": 6.606031,
+        "duration": 0.545875,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c4-2",
+      "pointIndex": 15,
+      "textEnd": 18,
+      "originalSeconds": 3.52,
+      "seconds": 4.030062,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 3.44675,
+        "end": 4.030062,
+        "duration": 0.583313,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c4-2",
+      "pointIndex": 22,
+      "textEnd": 26,
+      "originalSeconds": 5.38,
+      "seconds": 5.906656,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 5.349156,
+        "end": 5.906656,
+        "duration": 0.5575,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c5-0",
+      "pointIndex": 26,
+      "textEnd": 31,
+      "originalSeconds": 6.98,
+      "seconds": 7.464406,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 6.896781,
+        "end": 7.464406,
+        "duration": 0.567625,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c5-1",
+      "pointIndex": 24,
+      "textEnd": 28,
+      "originalSeconds": 5.77,
+      "seconds": 6.087156,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 5.546469,
+        "end": 6.087156,
+        "duration": 0.540687,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c5-2",
+      "pointIndex": 26,
+      "textEnd": 30,
+      "originalSeconds": 6.32,
+      "seconds": 6.728906,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 6.067844,
+        "end": 6.728906,
+        "duration": 0.661062,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c5-2",
+      "pointIndex": 27,
+      "textEnd": 31,
+      "originalSeconds": 6.72,
+      "seconds": 6.728906,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 6.067844,
+        "end": 6.728906,
+        "duration": 0.661062,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c6-1",
+      "pointIndex": 32,
+      "textEnd": 38,
+      "originalSeconds": 8.66,
+      "seconds": 9.16075,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 8.599594,
+        "end": 9.16075,
+        "duration": 0.561156,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c6-2",
+      "pointIndex": 6,
+      "textEnd": 8,
+      "originalSeconds": 1.36,
+      "seconds": 1.9945,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 1.350906,
+        "end": 1.9945,
+        "duration": 0.643594,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c6-2",
+      "pointIndex": 21,
+      "textEnd": 24,
+      "originalSeconds": 5.32,
+      "seconds": 5.755187,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 5.176219,
+        "end": 5.755187,
+        "duration": 0.578969,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c6-2",
+      "pointIndex": 22,
+      "textEnd": 25,
+      "originalSeconds": 5.59,
+      "seconds": 5.755187,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 5.176219,
+        "end": 5.755187,
+        "duration": 0.578969,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c7-0",
+      "pointIndex": 15,
+      "textEnd": 18,
+      "originalSeconds": 4.0,
+      "seconds": 4.61375,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 3.998312,
+        "end": 4.61375,
+        "duration": 0.615437,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c7-1",
+      "pointIndex": 31,
+      "textEnd": 36,
+      "originalSeconds": 8.54,
+      "seconds": 8.912,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 8.086875,
+        "end": 8.912,
+        "duration": 0.825125,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c7-1",
+      "pointIndex": 32,
+      "textEnd": 37,
+      "originalSeconds": 8.76,
+      "seconds": 8.912,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 8.086875,
+        "end": 8.912,
+        "duration": 0.825125,
+        "units": "seconds"
+      }
+    },
+    {
+      "id": "c7-2",
+      "pointIndex": 20,
+      "textEnd": 23,
+      "originalSeconds": 4.72,
+      "seconds": 5.461156,
+      "reason": [
+        "point_inside_audited_long_silence_moved_to_silence_end"
+      ],
+      "silenceSpan": {
+        "start": 4.71075,
+        "end": 5.461156,
+        "duration": 0.750406,
+        "units": "seconds"
+      }
+    }
+  ],
+  "alignments": [
+    {
+      "id": "c0-0",
+      "text": "西汉时，汉武帝想找到一个盟友，共同对抗匈奴。张骞的故事，就从这项任务开始。",
+      "audioSha256": "38afa6512b6d93e9fbed9b275c58ae782cb9d6eeba929f7eab164c767ed5add6",
+      "audioSeconds": 8.38,
+      "method": "local Whisper word timestamps; character interpolation within words; original text retained",
+      "points": [
+        {
+          "seconds": 0.0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.16,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.44,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.78,
+          "textEnd": 5
+        },
+        {
+          "seconds": 1.26,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.4,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.64,
+          "textEnd": 8
+        },
+        {
+          "seconds": 1.8,
+          "textEnd": 9
+        },
+        {
+          "seconds": 2.04,
+          "textEnd": 10
+        },
+        {
+          "seconds": 2.22,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.3,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.38,
+          "textEnd": 13
+        },
+        {
+          "seconds": 2.6,
+          "textEnd": 15
+        },
+        {
+          "seconds": 2.96,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.28,
+          "textEnd": 17
+        },
+        {
+          "seconds": 3.64,
+          "textEnd": 18
+        },
+        {
+          "seconds": 3.82,
+          "textEnd": 19
+        },
+        {
+          "seconds": 4.1,
+          "textEnd": 20
+        },
+        {
+          "seconds": 4.28,
+          "textEnd": 22
+        },
+        {
+          "seconds": 5.225125,
+          "textEnd": 23
+        },
+        {
+          "seconds": 5.24,
+          "textEnd": 24
+        },
+        {
+          "seconds": 5.62,
+          "textEnd": 25
+        },
+        {
+          "seconds": 5.72,
+          "textEnd": 26
+        },
+        {
+          "seconds": 5.82,
+          "textEnd": 28
+        },
+        {
+          "seconds": 6.08,
+          "textEnd": 29
+        },
+        {
+          "seconds": 6.5,
+          "textEnd": 30
+        },
+        {
+          "seconds": 6.72,
+          "textEnd": 31
+        },
+        {
+          "seconds": 6.92,
+          "textEnd": 32
+        },
+        {
+          "seconds": 7.22,
+          "textEnd": 33
+        },
+        {
+          "seconds": 7.34,
+          "textEnd": 34
+        },
+        {
+          "seconds": 7.5,
+          "textEnd": 35
+        },
+        {
+          "seconds": 7.59,
+          "textEnd": 37
+        }
+      ],
+      "unicodeCharacters": 37,
+      "fullTextCovered": true,
+      "humanWordTimingReviewed": false
+    },
+    {
+      "id": "c0-1",
+      "text": "这个盟友是月氏。它曾被匈奴击败，国王被杀，部众向西迁走；汉武帝希望双方能一起对付共同的敌人。",
+      "audioSha256": "1ac5da8b8b3de191a04b729d604ef7a74e0d0ce6e3314e476144aaac8ca6423f",
+      "audioSeconds": 10.98,
+      "method": "local Whisper word timestamps; character interpolation within words; original text retained",
+      "points": [
+        {
+          "seconds": 0.0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.16,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.32,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.54,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.74,
+          "textEnd": 5
+        },
+        {
+          "seconds": 0.88,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.1,
+          "textEnd": 8
+        },
+        {
+          "seconds": 1.44,
+          "textEnd": 9
+        },
+        {
+          "seconds": 2.18,
+          "textEnd": 10
+        },
+        {
+          "seconds": 2.42,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.64,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.88,
+          "textEnd": 13
+        },
+        {
+          "seconds": 3.08,
+          "textEnd": 14
+        },
+        {
+          "seconds": 3.3,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.62,
+          "textEnd": 17
+        },
+        {
+          "seconds": 4.0,
+          "textEnd": 18
+        },
+        {
+          "seconds": 4.36,
+          "textEnd": 19
+        },
+        {
+          "seconds": 4.5,
+          "textEnd": 21
+        },
+        {
+          "seconds": 4.94,
+          "textEnd": 22
+        },
+        {
+          "seconds": 5.24,
+          "textEnd": 23
+        },
+        {
+          "seconds": 5.56,
+          "textEnd": 24
+        },
+        {
+          "seconds": 5.68,
+          "textEnd": 25
+        },
+        {
+          "seconds": 5.94,
+          "textEnd": 26
+        },
+        {
+          "seconds": 6.22,
+          "textEnd": 28
+        },
+        {
+          "seconds": 7.080938,
+          "textEnd": 29
+        },
+        {
+          "seconds": 7.26,
+          "textEnd": 30
+        },
+        {
+          "seconds": 7.42,
+          "textEnd": 31
+        },
+        {
+          "seconds": 7.68,
+          "textEnd": 32
+        },
+        {
+          "seconds": 7.93,
+          "textEnd": 33
+        },
+        {
+          "seconds": 8.18,
+          "textEnd": 34
+        },
+        {
+          "seconds": 8.56,
+          "textEnd": 35
+        },
+        {
+          "seconds": 8.72,
+          "textEnd": 36
+        },
+        {
+          "seconds": 8.84,
+          "textEnd": 37
+        },
+        {
+          "seconds": 8.98,
+          "textEnd": 38
+        },
+        {
+          "seconds": 9.12,
+          "textEnd": 39
+        },
+        {
+          "seconds": 9.4,
+          "textEnd": 40
+        },
+        {
+          "seconds": 9.6,
+          "textEnd": 41
+        },
+        {
+          "seconds": 9.74,
+          "textEnd": 42
+        },
+        {
+          "seconds": 10.04,
+          "textEnd": 43
+        },
+        {
+          "seconds": 10.18,
+          "textEnd": 44
+        },
+        {
+          "seconds": 10.38,
+          "textEnd": 46
+        }
+      ],
+      "unicodeCharacters": 46,
+      "fullTextCovered": true,
+      "humanWordTimingReviewed": false
+    },
+    {
+      "id": "c0-2",
+      "text": "可是，要找到月氏，先得穿过匈奴控制的地区。这是一趟前路不明的远行，张骞应募，接下了出使的使命。",
+      "audioSha256": "4d4cc5ae0739df501ebb47d362a55e29f3ebd537a19bdc3b144d15c21cbed7a7",
+      "audioSeconds": 11.7,
+      "method": "local Whisper word timestamps; character interpolation within words; original text retained",
+      "points": [
+        {
+          "seconds": 0.0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.21,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.64,
+          "textEnd": 4
+        },
+        {
+          "seconds": 1.5,
+          "textEnd": 5
+        },
+        {
+          "seconds": 1.74,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.96,
+          "textEnd": 7
+        },
+        {
+          "seconds": 2.16,
+          "textEnd": 9
+        },
+        {
+          "seconds": 2.34,
+          "textEnd": 10
+        },
+        {
+          "seconds": 2.86,
+          "textEnd": 11
+        },
+        {
+          "seconds": 3.06,
+          "textEnd": 12
+        },
+        {
+          "seconds": 3.36,
+          "textEnd": 13
+        },
+        {
+          "seconds": 3.54,
+          "textEnd": 14
+        },
+        {
+          "seconds": 3.78,
+          "textEnd": 15
+        },
+        {
+          "seconds": 4.04,
+          "textEnd": 16
+        },
+        {
+          "seconds": 4.2,
+          "textEnd": 17
+        },
+        {
+          "seconds": 4.42,
+          "textEnd": 18
+        },
+        {
+          "seconds": 4.52,
+          "textEnd": 19
+        },
+        {
+          "seconds": 4.64,
+          "textEnd": 21
+        },
+        {
+          "seconds": 5.717062,
+          "textEnd": 22
+        },
+        {
+          "seconds": 5.717062,
+          "textEnd": 23
+        },
+        {
+          "seconds": 5.86,
+          "textEnd": 24
+        },
+        {
+          "seconds": 6.14,
+          "textEnd": 25
+        },
+        {
+          "seconds": 6.36,
+          "textEnd": 26
+        },
+        {
+          "seconds": 6.54,
+          "textEnd": 27
+        },
+        {
+          "seconds": 6.78,
+          "textEnd": 28
+        },
+        {
+          "seconds": 6.94,
+          "textEnd": 29
+        },
+        {
+          "seconds": 7.16,
+          "textEnd": 30
+        },
+        {
+          "seconds": 7.36,
+          "textEnd": 31
+        },
+        {
+          "seconds": 7.54,
+          "textEnd": 33
+        },
+        {
+          "seconds": 7.76,
+          "textEnd": 34
+        },
+        {
+          "seconds": 8.54,
+          "textEnd": 35
+        },
+        {
+          "seconds": 8.92,
+          "textEnd": 36
+        },
+        {
+          "seconds": 9.16,
+          "textEnd": 38
+        },
+        {
+          "seconds": 9.34,
+          "textEnd": 39
+        },
+        {
+          "seconds": 9.8,
+          "textEnd": 40
+        },
+        {
+          "seconds": 10.06,
+          "textEnd": 41
+        },
+        {
+          "seconds": 10.24,
+          "textEnd": 42
+        },
+        {
+          "seconds": 10.36,
+          "textEnd": 43
+        },
+        {
+          "seconds": 10.66,
+          "textEnd": 44
+        },
+        {
+          "seconds": 10.82,
+          "textEnd": 45
+        },
+        {
+          "seconds": 10.88,
+          "textEnd": 47
+        }
+      ],
+      "unicodeCharacters": 47,
+      "fullTextCovered": true,
+      "humanWordTimingReviewed": false
+    },
+    {
+      "id": "c1-0",
+      "text": "张骞带着百余人，从陇西向西出发。同行的甘父是一位善射的胡人，也是这场远行的重要伙伴。",
+      "audioSha256": "878ab6de86cf54118dcfb31da9509f1c011cdee7e14bfd1f41029885df7fb669",
+      "audioSeconds": 9.74,
+      "method": "local Whisper word timestamps; character interpolation within words; original text retained",
+      "points": [
+        {
+          "seconds": 0.0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.2,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.54,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.8,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.88,
+          "textEnd": 5
+        },
+        {
+          "seconds": 1.06,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.3,
+          "textEnd": 8
+        },
+        {
+          "seconds": 1.48,
+          "textEnd": 9
+        },
+        {
+          "seconds": 1.9,
+          "textEnd": 10
+        },
+        {
+          "seconds": 2.22,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.46,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.72,
+          "textEnd": 13
+        },
+        {
+          "seconds": 2.94,
+          "textEnd": 14
+        },
+        {
+          "seconds": 3.08,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.36,
+          "textEnd": 17
+        },
+        {
+          "seconds": 4.2,
+          "textEnd": 18
+        },
+        {
+          "seconds": 4.56,
+          "textEnd": 19
+        },
+        {
+          "seconds": 4.72,
+          "textEnd": 20
+        },
+        {
+          "seconds": 4.84,
+          "textEnd": 21
+        },
+        {
+          "seconds": 5.14,
+          "textEnd": 22
+        },
+        {
+          "seconds": 5.56,
+          "textEnd": 23
+        },
+        {
+          "seconds": 5.72,
+          "textEnd": 24
+        },
+        {
+          "seconds": 5.86,
+          "textEnd": 25
+        },
+        {
+          "seconds": 6.12,
+          "textEnd": 26
+        },
+        {
+          "seconds": 6.36,
+          "textEnd": 27
+        },
+        {
+          "seconds": 6.46,
+          "textEnd": 28
+        },
+        {
+          "seconds": 6.6,
+          "textEnd": 30
+        },
+        {
+          "seconds": 6.86,
+          "textEnd": 31
+        },
+        {
+          "seconds": 7.16,
+          "textEnd": 32
+        },
+        {
+          "seconds": 7.46,
+          "textEnd": 33
+        },
+        {
+          "seconds": 7.7,
+          "textEnd": 34
+        },
+        {
+          "seconds": 7.9,
+          "textEnd": 35
+        },
+        {
+          "seconds": 8.16,
+          "textEnd": 36
+        },
+        {
+          "seconds": 8.34,
+          "textEnd": 37
+        },
+        {
+          "seconds": 8.44,
+          "textEnd": 38
+        },
+        {
+          "seconds": 8.57,
+          "textEnd": 39
+        },
+        {
+          "seconds": 8.7,
+          "textEnd": 40
+        },
+        {
+          "seconds": 9.12,
+          "textEnd": 42
+        }
+      ],
+      "unicodeCharacters": 42,
+      "fullTextCovered": true,
+      "humanWordTimingReviewed": false
+    },
+    {
+      "id": "c1-1",
+      "text": "使团还没见到月氏，就被匈奴截住。匈奴不肯放行，张骞被带到单于面前，求盟的任务就此中断。",
+      "audioSha256": "fa56b75331a269ad0757f4910f2509e9b81667742b02a331d1dc335dba263eac",
+      "audioSeconds": 9.62,
+      "method": "local Whisper word timestamps; character interpolation within words; original text retained",
+      "points": [
+        {
+          "seconds": 0.0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.12,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.46,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.58,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.78,
+          "textEnd": 5
+        },
+        {
+          "seconds": 0.96,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.14,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.3,
+          "textEnd": 9
+        },
+        {
+          "seconds": 1.6,
+          "textEnd": 10
+        },
+        {
+          "seconds": 1.96,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.08,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.36,
+          "textEnd": 13
+        },
+        {
+          "seconds": 2.62,
+          "textEnd": 14
+        },
+        {
+          "seconds": 2.86,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.653906,
+          "textEnd": 17
+        },
+        {
+          "seconds": 3.82,
+          "textEnd": 18
+        },
+        {
+          "seconds": 4.04,
+          "textEnd": 19
+        },
+        {
+          "seconds": 4.2,
+          "textEnd": 20
+        },
+        {
+          "seconds": 4.4,
+          "textEnd": 21
+        },
+        {
+          "seconds": 4.54,
+          "textEnd": 23
+        },
+        {
+          "seconds": 4.98,
+          "textEnd": 24
+        },
+        {
+          "seconds": 5.3,
+          "textEnd": 25
+        },
+        {
+          "seconds": 5.64,
+          "textEnd": 26
+        },
+        {
+          "seconds": 5.76,
+          "textEnd": 27
+        },
+        {
+          "seconds": 5.98,
+          "textEnd": 28
+        },
+        {
+          "seconds": 6.1,
+          "textEnd": 29
+        },
+        {
+          "seconds": 6.28,
+          "textEnd": 30
+        },
+        {
+          "seconds": 6.46,
+          "textEnd": 31
+        },
+        {
+          "seconds": 6.56,
+          "textEnd": 33
+        },
+        {
+          "seconds": 7.02,
+          "textEnd": 34
+        },
+        {
+          "seconds": 7.36,
+          "textEnd": 35
+        },
+        {
+          "seconds": 7.68,
+          "textEnd": 36
+        },
+        {
+          "seconds": 7.72,
+          "textEnd": 37
+        },
+        {
+          "seconds": 7.92,
+          "textEnd": 38
+        },
+        {
+          "seconds": 8.22,
+          "textEnd": 39
+        },
+        {
+          "seconds": 8.48,
+          "textEnd": 40
+        },
+        {
+          "seconds": 8.7,
+          "textEnd": 41
+        },
+        {
+          "seconds": 8.94,
+          "textEnd": 43
+        }
+      ],
+      "unicodeCharacters": 43,
+      "fullTextCovered": true,
+      "humanWordTimingReviewed": false
+    },
+    {
+      "id": "c1-2",
+      "text": "张骞被留在匈奴十余年，娶妻生子。远行变成漫长的等待，但他一直保留汉节，没有放下使者的使命。",
+      "audioSha256": "0c7e6c99240651bee4d99771eaf6237b15fd55ae1a902c1148eea6cf35cc4db5",
+      "audioSeconds": 11.14,
+      "method": "local Whisper word timestamps; character interpolation within words; original text retained",
+      "points": [
+        {
+          "seconds": 0.0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.22,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.64,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.84,
+          "textEnd": 4
+        },
+        {
+          "seconds": 1.06,
+          "textEnd": 5
+        },
+        {
+          "seconds": 1.28,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.5,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.74,
+          "textEnd": 8
+        },
+        {
+          "seconds": 1.94,
+          "textEnd": 9
+        },
+        {
+          "seconds": 2.24,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.44,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.84,
+          "textEnd": 13
+        },
+        {
+          "seconds": 3.06,
+          "textEnd": 14
+        },
+        {
+          "seconds": 3.22,
+          "textEnd": 16
+        },
+        {
+          "seconds": 4.523844,
+          "textEnd": 17
+        },
+        {
+          "seconds": 4.66,
+          "textEnd": 18
+        },
+        {
+          "seconds": 4.94,
+          "textEnd": 19
+        },
+        {
+          "seconds": 5.24,
+          "textEnd": 20
+        },
+        {
+          "seconds": 5.34,
+          "textEnd": 21
+        },
+        {
+          "seconds": 5.6,
+          "textEnd": 22
+        },
+        {
+          "seconds": 5.84,
+          "textEnd": 23
+        },
+        {
+          "seconds": 5.96,
+          "textEnd": 24
+        },
+        {
+          "seconds": 6.1,
+          "textEnd": 26
+        },
+        {
+          "seconds": 6.34,
+          "textEnd": 27
+        },
+        {
+          "seconds": 6.96,
+          "textEnd": 28
+        },
+        {
+          "seconds": 7.12,
+          "textEnd": 29
+        },
+        {
+          "seconds": 7.3,
+          "textEnd": 30
+        },
+        {
+          "seconds": 7.48,
+          "textEnd": 31
+        },
+        {
+          "seconds": 7.76,
+          "textEnd": 32
+        },
+        {
+          "seconds": 8.0,
+          "textEnd": 33
+        },
+        {
+          "seconds": 8.24,
+          "textEnd": 35
+        },
+        {
+          "seconds": 8.48,
+          "textEnd": 36
+        },
+        {
+          "seconds": 8.71,
+          "textEnd": 37
+        },
+        {
+          "seconds": 8.94,
+          "textEnd": 38
+        },
+        {
+          "seconds": 9.42,
+          "textEnd": 39
+        },
+        {
+          "seconds": 9.68,
+          "textEnd": 40
+        },
+        {
+          "seconds": 9.9,
+          "textEnd": 41
+        },
+        {
+          "seconds": 10.22,
+          "textEnd": 42
+        },
+        {
+          "seconds": 10.3,
+          "textEnd": 43
+        },
+        {
+          "seconds": 10.46,
+          "textEnd": 45
+        }
+      ],
+      "unicodeCharacters": 45,
+      "fullTextCovered": true,
+      "humanWordTimingReviewed": false
+    },
+    {
+      "id": "c2-0",
+      "text": "十余年后，监守渐渐松弛，张骞与同伴终于逃出。他没有就此回汉朝，而是继续向西寻找月氏。",
+      "audioSha256": "05404ba5300be9033817a252f958ab6c0364bfff290cd84e6025a3488a96cf9c",
+      "audioSeconds": 10.02,
+      "method": "local Whisper word timestamps; character interpolation within words; original text retained",
+      "points": [
+        {
+          "seconds": 0.0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.22,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.48,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.64,
+          "textEnd": 5
+        },
+        {
+          "seconds": 1.02,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.48,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.72,
+          "textEnd": 8
+        },
+        {
+          "seconds": 2.0,
+          "textEnd": 9
+        },
+        {
+          "seconds": 2.2,
+          "textEnd": 10
+        },
+        {
+          "seconds": 2.34,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.78,
+          "textEnd": 13
+        },
+        {
+          "seconds": 3.08,
+          "textEnd": 14
+        },
+        {
+          "seconds": 3.44,
+          "textEnd": 15
+        },
+        {
+          "seconds": 3.6,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.74,
+          "textEnd": 17
+        },
+        {
+          "seconds": 4.0,
+          "textEnd": 18
+        },
+        {
+          "seconds": 4.36,
+          "textEnd": 19
+        },
+        {
+          "seconds": 4.54,
+          "textEnd": 20
+        },
+        {
+          "seconds": 4.76,
+          "textEnd": 22
+        },
+        {
+          "seconds": 5.5965,
+          "textEnd": 23
+        },
+        {
+          "seconds": 5.62,
+          "textEnd": 24
+        },
+        {
+          "seconds": 5.78,
+          "textEnd": 25
+        },
+        {
+          "seconds": 5.94,
+          "textEnd": 26
+        },
+        {
+          "seconds": 6.14,
+          "textEnd": 27
+        },
+        {
+          "seconds": 6.36,
+          "textEnd": 28
+        },
+        {
+          "seconds": 6.52,
+          "textEnd": 29
+        },
+        {
+          "seconds": 6.8,
+          "textEnd": 31
+        },
+        {
+          "seconds": 7.14,
+          "textEnd": 32
+        },
+        {
+          "seconds": 7.5,
+          "textEnd": 33
+        },
+        {
+          "seconds": 7.62,
+          "textEnd": 34
+        },
+        {
+          "seconds": 7.94,
+          "textEnd": 35
+        },
+        {
+          "seconds": 8.2,
+          "textEnd": 36
+        },
+        {
+          "seconds": 8.34,
+          "textEnd": 37
+        },
+        {
+          "seconds": 8.6,
+          "textEnd": 38
+        },
+        {
+          "seconds": 8.98,
+          "textEnd": 39
+        },
+        {
+          "seconds": 9.16,
+          "textEnd": 40
+        },
+        {
+          "seconds": 9.32,
+          "textEnd": 42
+        }
+      ],
+      "unicodeCharacters": 42,
+      "fullTextCovered": true,
+      "humanWordTimingReviewed": false
+    },
+    {
+      "id": "c2-1",
+      "text": "旅途困乏时，善射的甘父猎取禽兽，帮助众人解决食物。向西赶路，还要设法跨过不同国家的边界。",
+      "audioSha256": "29a2dd4a107f1c57c380b7384987f888afee8eb5b7800ffd3acaeb412a20baee",
+      "audioSeconds": 10.62,
+      "method": "local Whisper word timestamps; character interpolation within words; original text retained",
+      "points": [
+        {
+          "seconds": 0.0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.2,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.4,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.7,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.9,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.26,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.82,
+          "textEnd": 8
+        },
+        {
+          "seconds": 2.08,
+          "textEnd": 9
+        },
+        {
+          "seconds": 2.2,
+          "textEnd": 10
+        },
+        {
+          "seconds": 2.3,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.6,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.82,
+          "textEnd": 13
+        },
+        {
+          "seconds": 3.02,
+          "textEnd": 14
+        },
+        {
+          "seconds": 3.2,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.58,
+          "textEnd": 17
+        },
+        {
+          "seconds": 4.08,
+          "textEnd": 18
+        },
+        {
+          "seconds": 4.26,
+          "textEnd": 19
+        },
+        {
+          "seconds": 4.5,
+          "textEnd": 20
+        },
+        {
+          "seconds": 4.66,
+          "textEnd": 21
+        },
+        {
+          "seconds": 4.88,
+          "textEnd": 22
+        },
+        {
+          "seconds": 5.2,
+          "textEnd": 23
+        },
+        {
+          "seconds": 5.38,
+          "textEnd": 25
+        },
+        {
+          "seconds": 6.307344,
+          "textEnd": 26
+        },
+        {
+          "seconds": 6.4,
+          "textEnd": 27
+        },
+        {
+          "seconds": 6.76,
+          "textEnd": 28
+        },
+        {
+          "seconds": 7.0,
+          "textEnd": 30
+        },
+        {
+          "seconds": 7.28,
+          "textEnd": 31
+        },
+        {
+          "seconds": 7.68,
+          "textEnd": 32
+        },
+        {
+          "seconds": 7.88,
+          "textEnd": 33
+        },
+        {
+          "seconds": 8.1,
+          "textEnd": 34
+        },
+        {
+          "seconds": 8.28,
+          "textEnd": 35
+        },
+        {
+          "seconds": 8.54,
+          "textEnd": 36
+        },
+        {
+          "seconds": 8.7,
+          "textEnd": 37
+        },
+        {
+          "seconds": 8.84,
+          "textEnd": 38
+        },
+        {
+          "seconds": 8.98,
+          "textEnd": 39
+        },
+        {
+          "seconds": 9.2,
+          "textEnd": 40
+        },
+        {
+          "seconds": 9.46,
+          "textEnd": 41
+        },
+        {
+          "seconds": 9.56,
+          "textEnd": 42
+        },
+        {
+          "seconds": 9.72,
+          "textEnd": 44
+        }
+      ],
+      "unicodeCharacters": 44,
+      "fullTextCovered": true,
+      "humanWordTimingReviewed": false
+    },
+    {
+      "id": "c2-2",
+      "text": "大宛人希望与汉朝交往，便送他们到康居。经康居转送，张骞终于见到了他找寻多年的大月氏。",
+      "audioSha256": "91ee102055b524aa6d369fdc7668551d0ae5de78582b692bb49474822e84de07",
+      "audioSeconds": 9.18,
+      "method": "local Whisper word timestamps; character interpolation within words; original text retained",
+      "points": [
+        {
+          "seconds": 0.0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.18,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.42,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.58,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.86,
+          "textEnd": 5
+        },
+        {
+          "seconds": 1.14,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.54,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.74,
+          "textEnd": 8
+        },
+        {
+          "seconds": 1.92,
+          "textEnd": 9
+        },
+        {
+          "seconds": 2.1,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.5,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.8,
+          "textEnd": 13
+        },
+        {
+          "seconds": 3.06,
+          "textEnd": 14
+        },
+        {
+          "seconds": 3.15,
+          "textEnd": 15
+        },
+        {
+          "seconds": 3.24,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.46,
+          "textEnd": 17
+        },
+        {
+          "seconds": 3.68,
+          "textEnd": 19
+        },
+        {
+          "seconds": 4.563281,
+          "textEnd": 20
+        },
+        {
+          "seconds": 4.58,
+          "textEnd": 21
+        },
+        {
+          "seconds": 4.92,
+          "textEnd": 22
+        },
+        {
+          "seconds": 5.18,
+          "textEnd": 23
+        },
+        {
+          "seconds": 5.38,
+          "textEnd": 25
+        },
+        {
+          "seconds": 5.7,
+          "textEnd": 26
+        },
+        {
+          "seconds": 6.1,
+          "textEnd": 27
+        },
+        {
+          "seconds": 6.32,
+          "textEnd": 28
+        },
+        {
+          "seconds": 6.56,
+          "textEnd": 29
+        },
+        {
+          "seconds": 6.76,
+          "textEnd": 30
+        },
+        {
+          "seconds": 6.9,
+          "textEnd": 31
+        },
+        {
+          "seconds": 7.03,
+          "textEnd": 32
+        },
+        {
+          "seconds": 7.16,
+          "textEnd": 33
+        },
+        {
+          "seconds": 7.32,
+          "textEnd": 34
+        },
+        {
+          "seconds": 7.5,
+          "textEnd": 35
+        },
+        {
+          "seconds": 7.7,
+          "textEnd": 36
+        },
+        {
+          "seconds": 7.84,
+          "textEnd": 37
+        },
+        {
+          "seconds": 7.97,
+          "textEnd": 38
+        },
+        {
+          "seconds": 8.1,
+          "textEnd": 39
+        },
+        {
+          "seconds": 8.28,
+          "textEnd": 40
+        },
+        {
+          "seconds": 8.54,
+          "textEnd": 42
+        }
+      ],
+      "unicodeCharacters": 42,
+      "fullTextCovered": true,
+      "humanWordTimingReviewed": false
+    },
+    {
+      "id": "c3-0",
+      "text": "可大月氏已经在新的土地上安居。那里土地肥沃，也少受侵扰；他们不愿再为旧仇，重新与匈奴开战。",
+      "audioSha256": "8402105cf0e75313114e915126caf24abde4a8ab58a88a954842832cfe8c0b0e",
+      "audioSeconds": 10.38,
+      "method": "local Whisper word timestamps; character interpolation within words; original text retained",
+      "points": [
+        {
+          "seconds": 0.0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.18,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.38,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.6,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.76,
+          "textEnd": 5
+        },
+        {
+          "seconds": 0.91,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.06,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.3,
+          "textEnd": 8
+        },
+        {
+          "seconds": 1.58,
+          "textEnd": 9
+        },
+        {
+          "seconds": 1.78,
+          "textEnd": 10
+        },
+        {
+          "seconds": 1.92,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.12,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.28,
+          "textEnd": 13
+        },
+        {
+          "seconds": 2.46,
+          "textEnd": 15
+        },
+        {
+          "seconds": 3.676531,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.7,
+          "textEnd": 17
+        },
+        {
+          "seconds": 3.86,
+          "textEnd": 18
+        },
+        {
+          "seconds": 4.02,
+          "textEnd": 19
+        },
+        {
+          "seconds": 4.26,
+          "textEnd": 20
+        },
+        {
+          "seconds": 4.44,
+          "textEnd": 22
+        },
+        {
+          "seconds": 4.68,
+          "textEnd": 23
+        },
+        {
+          "seconds": 5.06,
+          "textEnd": 24
+        },
+        {
+          "seconds": 5.3,
+          "textEnd": 25
+        },
+        {
+          "seconds": 5.52,
+          "textEnd": 26
+        },
+        {
+          "seconds": 5.8,
+          "textEnd": 28
+        },
+        {
+          "seconds": 6.04,
+          "textEnd": 29
+        },
+        {
+          "seconds": 6.60175,
+          "textEnd": 30
+        },
+        {
+          "seconds": 6.68,
+          "textEnd": 31
+        },
+        {
+          "seconds": 6.96,
+          "textEnd": 32
+        },
+        {
+          "seconds": 7.16,
+          "textEnd": 33
+        },
+        {
+          "seconds": 7.26,
+          "textEnd": 34
+        },
+        {
+          "seconds": 7.44,
+          "textEnd": 35
+        },
+        {
+          "seconds": 7.66,
+          "textEnd": 37
+        },
+        {
+          "seconds": 7.92,
+          "textEnd": 38
+        },
+        {
+          "seconds": 8.44,
+          "textEnd": 39
+        },
+        {
+          "seconds": 8.92,
+          "textEnd": 40
+        },
+        {
+          "seconds": 9.14,
+          "textEnd": 41
+        },
+        {
+          "seconds": 9.32,
+          "textEnd": 42
+        },
+        {
+          "seconds": 9.54,
+          "textEnd": 43
+        },
+        {
+          "seconds": 9.64,
+          "textEnd": 45
+        }
+      ],
+      "unicodeCharacters": 45,
+      "fullTextCovered": true,
+      "humanWordTimingReviewed": false
+    },
+    {
+      "id": "c3-1",
+      "text": "汉朝盼着两面夹击匈奴，月氏却觉得汉朝太远，开战会打破眼前的安稳。双方的处境，早已不同。",
+      "audioSha256": "de9b3976e7572a7e773a39c1daa7570fb5b4317b6c74f375959404f41ceb3473",
+      "audioSeconds": 9.46,
+      "method": "local Whisper word timestamps; character interpolation within words; original text retained",
+      "points": [
+        {
+          "seconds": 0.0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.2,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.44,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.7,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.84,
+          "textEnd": 5
+        },
+        {
+          "seconds": 0.98,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.24,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.44,
+          "textEnd": 8
+        },
+        {
+          "seconds": 1.64,
+          "textEnd": 9
+        },
+        {
+          "seconds": 1.84,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.16,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.52,
+          "textEnd": 13
+        },
+        {
+          "seconds": 2.74,
+          "textEnd": 14
+        },
+        {
+          "seconds": 3.04,
+          "textEnd": 15
+        },
+        {
+          "seconds": 3.1,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.16,
+          "textEnd": 17
+        },
+        {
+          "seconds": 3.42,
+          "textEnd": 18
+        },
+        {
+          "seconds": 3.56,
+          "textEnd": 19
+        },
+        {
+          "seconds": 3.74,
+          "textEnd": 21
+        },
+        {
+          "seconds": 4.14,
+          "textEnd": 22
+        },
+        {
+          "seconds": 4.5,
+          "textEnd": 23
+        },
+        {
+          "seconds": 4.86,
+          "textEnd": 24
+        },
+        {
+          "seconds": 4.94,
+          "textEnd": 25
+        },
+        {
+          "seconds": 5.14,
+          "textEnd": 26
+        },
+        {
+          "seconds": 5.36,
+          "textEnd": 27
+        },
+        {
+          "seconds": 5.54,
+          "textEnd": 28
+        },
+        {
+          "seconds": 5.84,
+          "textEnd": 29
+        },
+        {
+          "seconds": 6.0,
+          "textEnd": 30
+        },
+        {
+          "seconds": 6.1,
+          "textEnd": 32
+        },
+        {
+          "seconds": 6.955563,
+          "textEnd": 33
+        },
+        {
+          "seconds": 7.16,
+          "textEnd": 34
+        },
+        {
+          "seconds": 7.4,
+          "textEnd": 35
+        },
+        {
+          "seconds": 7.56,
+          "textEnd": 36
+        },
+        {
+          "seconds": 7.74,
+          "textEnd": 38
+        },
+        {
+          "seconds": 7.96,
+          "textEnd": 39
+        },
+        {
+          "seconds": 8.34,
+          "textEnd": 40
+        },
+        {
+          "seconds": 8.66,
+          "textEnd": 41
+        },
+        {
+          "seconds": 8.77,
+          "textEnd": 43
+        }
+      ],
+      "unicodeCharacters": 43,
+      "fullTextCovered": true,
+      "humanWordTimingReviewed": false
+    },
+    {
+      "id": "c3-2",
+      "text": "张骞从月氏来到大夏，停留一年多，仍没能促成结盟。他准备返回，把一路的见闻带给汉武帝。",
+      "audioSha256": "61c50c3e4dd8bfc454be71bf6152dfd9fd0004552f984cd81c8b69f73268d71b",
+      "audioSeconds": 9.66,
+      "method": "local Whisper word timestamps; character interpolation within words; original text retained",
+      "points": [
+        {
+          "seconds": 0.0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.2,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.58,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.78,
+          "textEnd": 4
+        },
+        {
+          "seconds": 1.02,
+          "textEnd": 5
+        },
+        {
+          "seconds": 1.18,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.36,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.46,
+          "textEnd": 8
+        },
+        {
+          "seconds": 1.62,
+          "textEnd": 10
+        },
+        {
+          "seconds": 2.06,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.48,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.72,
+          "textEnd": 13
+        },
+        {
+          "seconds": 2.84,
+          "textEnd": 14
+        },
+        {
+          "seconds": 3.06,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.42,
+          "textEnd": 17
+        },
+        {
+          "seconds": 3.96,
+          "textEnd": 18
+        },
+        {
+          "seconds": 4.2,
+          "textEnd": 19
+        },
+        {
+          "seconds": 4.38,
+          "textEnd": 20
+        },
+        {
+          "seconds": 4.64,
+          "textEnd": 21
+        },
+        {
+          "seconds": 4.82,
+          "textEnd": 22
+        },
+        {
+          "seconds": 4.98,
+          "textEnd": 24
+        },
+        {
+          "seconds": 5.34,
+          "textEnd": 25
+        },
+        {
+          "seconds": 5.78,
+          "textEnd": 26
+        },
+        {
+          "seconds": 6.08,
+          "textEnd": 27
+        },
+        {
+          "seconds": 6.22,
+          "textEnd": 28
+        },
+        {
+          "seconds": 6.42,
+          "textEnd": 30
+        },
+        {
+          "seconds": 6.72,
+          "textEnd": 31
+        },
+        {
+          "seconds": 7.12,
+          "textEnd": 32
+        },
+        {
+          "seconds": 7.38,
+          "textEnd": 33
+        },
+        {
+          "seconds": 7.58,
+          "textEnd": 34
+        },
+        {
+          "seconds": 7.72,
+          "textEnd": 35
+        },
+        {
+          "seconds": 7.9,
+          "textEnd": 36
+        },
+        {
+          "seconds": 8.1,
+          "textEnd": 37
+        },
+        {
+          "seconds": 8.44,
+          "textEnd": 38
+        },
+        {
+          "seconds": 8.62,
+          "textEnd": 39
+        },
+        {
+          "seconds": 8.9,
+          "textEnd": 40
+        },
+        {
+          "seconds": 9.06,
+          "textEnd": 42
+        }
+      ],
+      "unicodeCharacters": 42,
+      "fullTextCovered": true,
+      "humanWordTimingReviewed": false
+    },
+    {
+      "id": "c4-0",
+      "text": "求盟没有成功，远行却让他看见了另一个世界。大夏有城邑和市场，各方商人在这里交换货物。",
+      "audioSha256": "fab3654bd20c332a6f2d2f3b2c8b747b83669813b41c3539732d0fe7504644fc",
+      "audioSeconds": 9.94,
+      "method": "local Whisper word timestamps; character interpolation within words; original text retained",
+      "points": [
+        {
+          "seconds": 0.0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.16,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.4,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.5,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.6,
+          "textEnd": 5
+        },
+        {
+          "seconds": 0.82,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.878031,
+          "textEnd": 8
+        },
+        {
+          "seconds": 1.98,
+          "textEnd": 9
+        },
+        {
+          "seconds": 2.18,
+          "textEnd": 10
+        },
+        {
+          "seconds": 2.46,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.56,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.66,
+          "textEnd": 13
+        },
+        {
+          "seconds": 2.86,
+          "textEnd": 14
+        },
+        {
+          "seconds": 3.12,
+          "textEnd": 15
+        },
+        {
+          "seconds": 3.24,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.38,
+          "textEnd": 17
+        },
+        {
+          "seconds": 3.49,
+          "textEnd": 18
+        },
+        {
+          "seconds": 3.6,
+          "textEnd": 19
+        },
+        {
+          "seconds": 3.77,
+          "textEnd": 21
+        },
+        {
+          "seconds": 4.878969,
+          "textEnd": 22
+        },
+        {
+          "seconds": 4.9,
+          "textEnd": 23
+        },
+        {
+          "seconds": 5.24,
+          "textEnd": 24
+        },
+        {
+          "seconds": 5.38,
+          "textEnd": 25
+        },
+        {
+          "seconds": 5.64,
+          "textEnd": 26
+        },
+        {
+          "seconds": 5.82,
+          "textEnd": 27
+        },
+        {
+          "seconds": 5.94,
+          "textEnd": 28
+        },
+        {
+          "seconds": 6.2,
+          "textEnd": 30
+        },
+        {
+          "seconds": 6.64,
+          "textEnd": 31
+        },
+        {
+          "seconds": 7.14,
+          "textEnd": 32
+        },
+        {
+          "seconds": 7.44,
+          "textEnd": 33
+        },
+        {
+          "seconds": 7.62,
+          "textEnd": 34
+        },
+        {
+          "seconds": 7.9,
+          "textEnd": 35
+        },
+        {
+          "seconds": 8.26,
+          "textEnd": 36
+        },
+        {
+          "seconds": 8.41,
+          "textEnd": 37
+        },
+        {
+          "seconds": 8.56,
+          "textEnd": 38
+        },
+        {
+          "seconds": 8.78,
+          "textEnd": 39
+        },
+        {
+          "seconds": 9.04,
+          "textEnd": 40
+        },
+        {
+          "seconds": 9.26,
+          "textEnd": 42
+        }
+      ],
+      "unicodeCharacters": 42,
+      "fullTextCovered": true,
+      "humanWordTimingReviewed": false
+    },
+    {
+      "id": "c4-1",
+      "text": "市场里，张骞竟认出蜀布和邛竹杖，也就是四川的布和竹杖：熟悉的东西，怎么会出现在这么远的地方？",
+      "audioSha256": "7deffb00b31cc4d7cb876cf13aeed8f3e3fa95f811c0a9bf3e60ccc5a383d8c1",
+      "audioSeconds": 10.18,
+      "method": "local Whisper word timestamps; character interpolation within words; original text retained",
+      "points": [
+        {
+          "seconds": 0.0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.12,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.46,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.8,
+          "textEnd": 5
+        },
+        {
+          "seconds": 1.2,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.56,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.78,
+          "textEnd": 8
+        },
+        {
+          "seconds": 1.96,
+          "textEnd": 9
+        },
+        {
+          "seconds": 2.14,
+          "textEnd": 10
+        },
+        {
+          "seconds": 2.4,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.6,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.76,
+          "textEnd": 13
+        },
+        {
+          "seconds": 3.08,
+          "textEnd": 14
+        },
+        {
+          "seconds": 3.3,
+          "textEnd": 16
+        },
+        {
+          "seconds": 4.152687,
+          "textEnd": 17
+        },
+        {
+          "seconds": 4.22,
+          "textEnd": 18
+        },
+        {
+          "seconds": 4.32,
+          "textEnd": 19
+        },
+        {
+          "seconds": 4.42,
+          "textEnd": 20
+        },
+        {
+          "seconds": 4.64,
+          "textEnd": 21
+        },
+        {
+          "seconds": 4.98,
+          "textEnd": 22
+        },
+        {
+          "seconds": 5.16,
+          "textEnd": 23
+        },
+        {
+          "seconds": 5.32,
+          "textEnd": 24
+        },
+        {
+          "seconds": 5.52,
+          "textEnd": 25
+        },
+        {
+          "seconds": 5.78,
+          "textEnd": 27
+        },
+        {
+          "seconds": 6.606031,
+          "textEnd": 28
+        },
+        {
+          "seconds": 6.86,
+          "textEnd": 29
+        },
+        {
+          "seconds": 7.0,
+          "textEnd": 30
+        },
+        {
+          "seconds": 7.12,
+          "textEnd": 31
+        },
+        {
+          "seconds": 7.24,
+          "textEnd": 33
+        },
+        {
+          "seconds": 7.48,
+          "textEnd": 34
+        },
+        {
+          "seconds": 7.72,
+          "textEnd": 35
+        },
+        {
+          "seconds": 7.96,
+          "textEnd": 36
+        },
+        {
+          "seconds": 8.18,
+          "textEnd": 37
+        },
+        {
+          "seconds": 8.32,
+          "textEnd": 38
+        },
+        {
+          "seconds": 8.47,
+          "textEnd": 39
+        },
+        {
+          "seconds": 8.62,
+          "textEnd": 40
+        },
+        {
+          "seconds": 8.79,
+          "textEnd": 41
+        },
+        {
+          "seconds": 8.96,
+          "textEnd": 42
+        },
+        {
+          "seconds": 9.24,
+          "textEnd": 43
+        },
+        {
+          "seconds": 9.3,
+          "textEnd": 44
+        },
+        {
+          "seconds": 9.46,
+          "textEnd": 46
+        }
+      ],
+      "unicodeCharacters": 46,
+      "fullTextCovered": true,
+      "humanWordTimingReviewed": false
+    },
+    {
+      "id": "c4-2",
+      "text": "大夏人说，商人从身毒买来这些货物。身毒指印度地区；张骞由此推想，四川也许另有通向西方的路。",
+      "audioSha256": "b68cb58fd3b3b9fd0ba0ba94fc7ffe815f0ef428e26591115d0f6b80a6791a19",
+      "audioSeconds": 10.26,
+      "method": "local Whisper word timestamps; character interpolation within words; original text retained",
+      "points": [
+        {
+          "seconds": 0.0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.18,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.46,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.64,
+          "textEnd": 5
+        },
+        {
+          "seconds": 1.0,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.42,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.68,
+          "textEnd": 8
+        },
+        {
+          "seconds": 1.86,
+          "textEnd": 9
+        },
+        {
+          "seconds": 2.16,
+          "textEnd": 10
+        },
+        {
+          "seconds": 2.36,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.6,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.72,
+          "textEnd": 13
+        },
+        {
+          "seconds": 2.84,
+          "textEnd": 14
+        },
+        {
+          "seconds": 3.02,
+          "textEnd": 15
+        },
+        {
+          "seconds": 3.24,
+          "textEnd": 17
+        },
+        {
+          "seconds": 4.030062,
+          "textEnd": 18
+        },
+        {
+          "seconds": 4.24,
+          "textEnd": 19
+        },
+        {
+          "seconds": 4.38,
+          "textEnd": 20
+        },
+        {
+          "seconds": 4.52,
+          "textEnd": 21
+        },
+        {
+          "seconds": 4.68,
+          "textEnd": 22
+        },
+        {
+          "seconds": 4.92,
+          "textEnd": 23
+        },
+        {
+          "seconds": 5.02,
+          "textEnd": 25
+        },
+        {
+          "seconds": 5.906656,
+          "textEnd": 26
+        },
+        {
+          "seconds": 6.0,
+          "textEnd": 27
+        },
+        {
+          "seconds": 6.28,
+          "textEnd": 28
+        },
+        {
+          "seconds": 6.38,
+          "textEnd": 29
+        },
+        {
+          "seconds": 6.56,
+          "textEnd": 30
+        },
+        {
+          "seconds": 6.74,
+          "textEnd": 32
+        },
+        {
+          "seconds": 7.14,
+          "textEnd": 33
+        },
+        {
+          "seconds": 7.52,
+          "textEnd": 34
+        },
+        {
+          "seconds": 7.88,
+          "textEnd": 35
+        },
+        {
+          "seconds": 8.02,
+          "textEnd": 36
+        },
+        {
+          "seconds": 8.26,
+          "textEnd": 37
+        },
+        {
+          "seconds": 8.4,
+          "textEnd": 38
+        },
+        {
+          "seconds": 8.62,
+          "textEnd": 39
+        },
+        {
+          "seconds": 8.84,
+          "textEnd": 40
+        },
+        {
+          "seconds": 9.1,
+          "textEnd": 41
+        },
+        {
+          "seconds": 9.3,
+          "textEnd": 42
+        },
+        {
+          "seconds": 9.56,
+          "textEnd": 43
+        },
+        {
+          "seconds": 9.66,
+          "textEnd": 45
+        }
+      ],
+      "unicodeCharacters": 45,
+      "fullTextCovered": true,
+      "humanWordTimingReviewed": false
+    },
+    {
+      "id": "c5-0",
+      "text": "返程时，张骞想沿南山、经羌人地区避开匈奴，却还是再次被扣留。回家的路，又停了一年多。",
+      "audioSha256": "ab7e5fcf08aec6a87411e7a2080f51006d987cc615d998531ff7b6814e5939d3",
+      "audioSeconds": 10.18,
+      "method": "local Whisper word timestamps; character interpolation within words; original text retained",
+      "points": [
+        {
+          "seconds": 0.0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.24,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.42,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.84,
+          "textEnd": 5
+        },
+        {
+          "seconds": 1.22,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.56,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.7,
+          "textEnd": 8
+        },
+        {
+          "seconds": 1.92,
+          "textEnd": 9
+        },
+        {
+          "seconds": 2.1,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.42,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.86,
+          "textEnd": 13
+        },
+        {
+          "seconds": 3.24,
+          "textEnd": 14
+        },
+        {
+          "seconds": 3.44,
+          "textEnd": 15
+        },
+        {
+          "seconds": 3.52,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.86,
+          "textEnd": 17
+        },
+        {
+          "seconds": 4.06,
+          "textEnd": 18
+        },
+        {
+          "seconds": 4.22,
+          "textEnd": 19
+        },
+        {
+          "seconds": 4.4,
+          "textEnd": 21
+        },
+        {
+          "seconds": 4.72,
+          "textEnd": 22
+        },
+        {
+          "seconds": 5.44,
+          "textEnd": 23
+        },
+        {
+          "seconds": 5.54,
+          "textEnd": 24
+        },
+        {
+          "seconds": 5.64,
+          "textEnd": 25
+        },
+        {
+          "seconds": 5.92,
+          "textEnd": 26
+        },
+        {
+          "seconds": 6.18,
+          "textEnd": 27
+        },
+        {
+          "seconds": 6.34,
+          "textEnd": 28
+        },
+        {
+          "seconds": 6.6,
+          "textEnd": 30
+        },
+        {
+          "seconds": 7.464406,
+          "textEnd": 31
+        },
+        {
+          "seconds": 7.5,
+          "textEnd": 32
+        },
+        {
+          "seconds": 7.84,
+          "textEnd": 33
+        },
+        {
+          "seconds": 7.9,
+          "textEnd": 35
+        },
+        {
+          "seconds": 8.12,
+          "textEnd": 36
+        },
+        {
+          "seconds": 8.68,
+          "textEnd": 37
+        },
+        {
+          "seconds": 8.98,
+          "textEnd": 38
+        },
+        {
+          "seconds": 9.16,
+          "textEnd": 39
+        },
+        {
+          "seconds": 9.26,
+          "textEnd": 40
+        },
+        {
+          "seconds": 9.46,
+          "textEnd": 42
+        }
+      ],
+      "unicodeCharacters": 42,
+      "fullTextCovered": true,
+      "humanWordTimingReviewed": false
+    },
+    {
+      "id": "c5-1",
+      "text": "趁匈奴发生内乱，他才再次脱身，与妻子和甘父回到汉朝。第一次出使，前后已经过去十三年。",
+      "audioSha256": "e3ac0cc6b3072aa1e4de157d3beeef219c473c57d2cee2bd0e533c607b765613",
+      "audioSeconds": 9.3,
+      "method": "local Whisper word timestamps; character interpolation within words; original text retained",
+      "points": [
+        {
+          "seconds": 0.0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.3,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.56,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.78,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.92,
+          "textEnd": 5
+        },
+        {
+          "seconds": 1.22,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.36,
+          "textEnd": 8
+        },
+        {
+          "seconds": 1.58,
+          "textEnd": 9
+        },
+        {
+          "seconds": 2.08,
+          "textEnd": 10
+        },
+        {
+          "seconds": 2.3,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.48,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.74,
+          "textEnd": 13
+        },
+        {
+          "seconds": 2.98,
+          "textEnd": 15
+        },
+        {
+          "seconds": 3.16,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.64,
+          "textEnd": 17
+        },
+        {
+          "seconds": 3.9,
+          "textEnd": 18
+        },
+        {
+          "seconds": 4.1,
+          "textEnd": 19
+        },
+        {
+          "seconds": 4.22,
+          "textEnd": 20
+        },
+        {
+          "seconds": 4.42,
+          "textEnd": 21
+        },
+        {
+          "seconds": 4.68,
+          "textEnd": 22
+        },
+        {
+          "seconds": 4.8,
+          "textEnd": 23
+        },
+        {
+          "seconds": 5.0,
+          "textEnd": 24
+        },
+        {
+          "seconds": 5.2,
+          "textEnd": 26
+        },
+        {
+          "seconds": 5.4,
+          "textEnd": 27
+        },
+        {
+          "seconds": 6.087156,
+          "textEnd": 28
+        },
+        {
+          "seconds": 6.14,
+          "textEnd": 29
+        },
+        {
+          "seconds": 6.4,
+          "textEnd": 30
+        },
+        {
+          "seconds": 6.56,
+          "textEnd": 32
+        },
+        {
+          "seconds": 6.8,
+          "textEnd": 33
+        },
+        {
+          "seconds": 7.26,
+          "textEnd": 34
+        },
+        {
+          "seconds": 7.54,
+          "textEnd": 35
+        },
+        {
+          "seconds": 7.64,
+          "textEnd": 36
+        },
+        {
+          "seconds": 7.74,
+          "textEnd": 37
+        },
+        {
+          "seconds": 8.0,
+          "textEnd": 38
+        },
+        {
+          "seconds": 8.18,
+          "textEnd": 39
+        },
+        {
+          "seconds": 8.34,
+          "textEnd": 40
+        },
+        {
+          "seconds": 8.64,
+          "textEnd": 42
+        }
+      ],
+      "unicodeCharacters": 42,
+      "fullTextCovered": true,
+      "humanWordTimingReviewed": false
+    },
+    {
+      "id": "c5-2",
+      "text": "原来出发的百余人中，只有张骞和甘父回到汉朝。没有带回盟约，他带回的西域见闻，却让朝廷有了新的判断。",
+      "audioSha256": "cdcf530c034990d2282b065f153ecefd5b20af0ed8bca1f8c10c6d93dc131c64",
+      "audioSeconds": 10.98,
+      "method": "local Whisper word timestamps; character interpolation within words; original text retained",
+      "points": [
+        {
+          "seconds": 0.0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.14,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.32,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.44,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.72,
+          "textEnd": 5
+        },
+        {
+          "seconds": 0.82,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.0,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.22,
+          "textEnd": 8
+        },
+        {
+          "seconds": 1.34,
+          "textEnd": 10
+        },
+        {
+          "seconds": 1.72,
+          "textEnd": 11
+        },
+        {
+          "seconds": 1.99,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.26,
+          "textEnd": 13
+        },
+        {
+          "seconds": 2.52,
+          "textEnd": 14
+        },
+        {
+          "seconds": 2.8,
+          "textEnd": 15
+        },
+        {
+          "seconds": 2.94,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.2,
+          "textEnd": 17
+        },
+        {
+          "seconds": 3.42,
+          "textEnd": 18
+        },
+        {
+          "seconds": 3.6,
+          "textEnd": 19
+        },
+        {
+          "seconds": 3.8,
+          "textEnd": 20
+        },
+        {
+          "seconds": 4.02,
+          "textEnd": 22
+        },
+        {
+          "seconds": 4.4,
+          "textEnd": 23
+        },
+        {
+          "seconds": 4.72,
+          "textEnd": 24
+        },
+        {
+          "seconds": 5.04,
+          "textEnd": 25
+        },
+        {
+          "seconds": 5.32,
+          "textEnd": 26
+        },
+        {
+          "seconds": 5.5,
+          "textEnd": 27
+        },
+        {
+          "seconds": 5.7,
+          "textEnd": 29
+        },
+        {
+          "seconds": 6.728906,
+          "textEnd": 30
+        },
+        {
+          "seconds": 6.728906,
+          "textEnd": 31
+        },
+        {
+          "seconds": 7.04,
+          "textEnd": 32
+        },
+        {
+          "seconds": 7.24,
+          "textEnd": 33
+        },
+        {
+          "seconds": 7.36,
+          "textEnd": 34
+        },
+        {
+          "seconds": 7.54,
+          "textEnd": 35
+        },
+        {
+          "seconds": 7.8,
+          "textEnd": 36
+        },
+        {
+          "seconds": 8.0,
+          "textEnd": 38
+        },
+        {
+          "seconds": 8.24,
+          "textEnd": 39
+        },
+        {
+          "seconds": 8.8,
+          "textEnd": 40
+        },
+        {
+          "seconds": 8.9,
+          "textEnd": 41
+        },
+        {
+          "seconds": 9.06,
+          "textEnd": 42
+        },
+        {
+          "seconds": 9.44,
+          "textEnd": 43
+        },
+        {
+          "seconds": 9.6,
+          "textEnd": 44
+        },
+        {
+          "seconds": 9.76,
+          "textEnd": 45
+        },
+        {
+          "seconds": 9.92,
+          "textEnd": 46
+        },
+        {
+          "seconds": 10.06,
+          "textEnd": 47
+        },
+        {
+          "seconds": 10.34,
+          "textEnd": 49
+        }
+      ],
+      "unicodeCharacters": 49,
+      "fullTextCovered": true,
+      "humanWordTimingReviewed": false
+    },
+    {
+      "id": "c6-0",
+      "text": "汉武帝由此了解大宛、康居、大月氏和大夏。匈奴以西，还有许多国家；汉朝可以设法与它们直接往来。",
+      "audioSha256": "26b22dffa8bc2db01168170583e3d4eb89559eb0b3cae1c3bb251942924c749a",
+      "audioSeconds": 10.76,
+      "method": "local Whisper word timestamps; character interpolation within words; original text retained",
+      "points": [
+        {
+          "seconds": 0.0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.2,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.36,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.66,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.94,
+          "textEnd": 5
+        },
+        {
+          "seconds": 1.16,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.24,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.54,
+          "textEnd": 8
+        },
+        {
+          "seconds": 1.7,
+          "textEnd": 10
+        },
+        {
+          "seconds": 2.08,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.52,
+          "textEnd": 13
+        },
+        {
+          "seconds": 2.9,
+          "textEnd": 14
+        },
+        {
+          "seconds": 3.18,
+          "textEnd": 15
+        },
+        {
+          "seconds": 3.52,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.7,
+          "textEnd": 17
+        },
+        {
+          "seconds": 4.12,
+          "textEnd": 18
+        },
+        {
+          "seconds": 4.38,
+          "textEnd": 20
+        },
+        {
+          "seconds": 4.68,
+          "textEnd": 21
+        },
+        {
+          "seconds": 5.36,
+          "textEnd": 22
+        },
+        {
+          "seconds": 5.64,
+          "textEnd": 23
+        },
+        {
+          "seconds": 5.74,
+          "textEnd": 25
+        },
+        {
+          "seconds": 5.98,
+          "textEnd": 26
+        },
+        {
+          "seconds": 6.19,
+          "textEnd": 27
+        },
+        {
+          "seconds": 6.4,
+          "textEnd": 28
+        },
+        {
+          "seconds": 6.76,
+          "textEnd": 29
+        },
+        {
+          "seconds": 6.92,
+          "textEnd": 30
+        },
+        {
+          "seconds": 7.1,
+          "textEnd": 32
+        },
+        {
+          "seconds": 7.38,
+          "textEnd": 33
+        },
+        {
+          "seconds": 8.06,
+          "textEnd": 34
+        },
+        {
+          "seconds": 8.28,
+          "textEnd": 35
+        },
+        {
+          "seconds": 8.4,
+          "textEnd": 36
+        },
+        {
+          "seconds": 8.52,
+          "textEnd": 37
+        },
+        {
+          "seconds": 8.84,
+          "textEnd": 38
+        },
+        {
+          "seconds": 9.04,
+          "textEnd": 39
+        },
+        {
+          "seconds": 9.26,
+          "textEnd": 40
+        },
+        {
+          "seconds": 9.34,
+          "textEnd": 41
+        },
+        {
+          "seconds": 9.42,
+          "textEnd": 42
+        },
+        {
+          "seconds": 9.61,
+          "textEnd": 43
+        },
+        {
+          "seconds": 9.8,
+          "textEnd": 44
+        },
+        {
+          "seconds": 10.06,
+          "textEnd": 46
+        }
+      ],
+      "unicodeCharacters": 46,
+      "fullTextCovered": true,
+      "humanWordTimingReviewed": false
+    },
+    {
+      "id": "c6-1",
+      "text": "后来，张骞再次出使，联络乌孙，并派副使前往各国。乌孙没有立即答应联汉行动，各地的使者往来却逐步增多。",
+      "audioSha256": "d62ee9ef5134a4fd0f50fd9d7f4d70ab8849cbaab613d997083a9e6bdb6e6436",
+      "audioSeconds": 11.76,
+      "method": "local Whisper word timestamps; character interpolation within words; original text retained",
+      "points": [
+        {
+          "seconds": 0.0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.18,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.52,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.92,
+          "textEnd": 5
+        },
+        {
+          "seconds": 1.24,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.4,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.72,
+          "textEnd": 8
+        },
+        {
+          "seconds": 1.86,
+          "textEnd": 10
+        },
+        {
+          "seconds": 2.2,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.68,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.9,
+          "textEnd": 13
+        },
+        {
+          "seconds": 3.1,
+          "textEnd": 15
+        },
+        {
+          "seconds": 3.42,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.94,
+          "textEnd": 17
+        },
+        {
+          "seconds": 4.2,
+          "textEnd": 18
+        },
+        {
+          "seconds": 4.38,
+          "textEnd": 19
+        },
+        {
+          "seconds": 4.64,
+          "textEnd": 20
+        },
+        {
+          "seconds": 5.08,
+          "textEnd": 21
+        },
+        {
+          "seconds": 5.34,
+          "textEnd": 22
+        },
+        {
+          "seconds": 5.54,
+          "textEnd": 24
+        },
+        {
+          "seconds": 6.1,
+          "textEnd": 25
+        },
+        {
+          "seconds": 6.5,
+          "textEnd": 26
+        },
+        {
+          "seconds": 6.7,
+          "textEnd": 27
+        },
+        {
+          "seconds": 6.81,
+          "textEnd": 28
+        },
+        {
+          "seconds": 6.92,
+          "textEnd": 29
+        },
+        {
+          "seconds": 7.08,
+          "textEnd": 30
+        },
+        {
+          "seconds": 7.38,
+          "textEnd": 31
+        },
+        {
+          "seconds": 7.52,
+          "textEnd": 32
+        },
+        {
+          "seconds": 7.72,
+          "textEnd": 33
+        },
+        {
+          "seconds": 7.9,
+          "textEnd": 34
+        },
+        {
+          "seconds": 8.12,
+          "textEnd": 35
+        },
+        {
+          "seconds": 8.26,
+          "textEnd": 37
+        },
+        {
+          "seconds": 9.16075,
+          "textEnd": 38
+        },
+        {
+          "seconds": 9.18,
+          "textEnd": 39
+        },
+        {
+          "seconds": 9.46,
+          "textEnd": 40
+        },
+        {
+          "seconds": 9.6,
+          "textEnd": 41
+        },
+        {
+          "seconds": 9.74,
+          "textEnd": 42
+        },
+        {
+          "seconds": 9.98,
+          "textEnd": 43
+        },
+        {
+          "seconds": 10.1,
+          "textEnd": 44
+        },
+        {
+          "seconds": 10.32,
+          "textEnd": 45
+        },
+        {
+          "seconds": 10.52,
+          "textEnd": 46
+        },
+        {
+          "seconds": 10.68,
+          "textEnd": 47
+        },
+        {
+          "seconds": 10.86,
+          "textEnd": 48
+        },
+        {
+          "seconds": 11.08,
+          "textEnd": 50
+        }
+      ],
+      "unicodeCharacters": 50,
+      "fullTextCovered": true,
+      "humanWordTimingReviewed": false
+    },
+    {
+      "id": "c6-2",
+      "text": "商路早已存在。张骞没有凭一人走出整条丝绸之路；他的远行，帮助汉朝与西方诸国建立了更直接的联系。",
+      "audioSha256": "fae6a5eb29c540a5430e6be24edad59ac92439525593a51b18529be37cad46cb",
+      "audioSeconds": 10.82,
+      "method": "local Whisper word timestamps; character interpolation within words; original text retained",
+      "points": [
+        {
+          "seconds": 0.0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.14,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.42,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.6,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.82,
+          "textEnd": 5
+        },
+        {
+          "seconds": 0.98,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.9945,
+          "textEnd": 8
+        },
+        {
+          "seconds": 2.0,
+          "textEnd": 9
+        },
+        {
+          "seconds": 2.4,
+          "textEnd": 10
+        },
+        {
+          "seconds": 2.62,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.84,
+          "textEnd": 12
+        },
+        {
+          "seconds": 3.18,
+          "textEnd": 13
+        },
+        {
+          "seconds": 3.34,
+          "textEnd": 14
+        },
+        {
+          "seconds": 3.6,
+          "textEnd": 15
+        },
+        {
+          "seconds": 3.78,
+          "textEnd": 16
+        },
+        {
+          "seconds": 4.0,
+          "textEnd": 17
+        },
+        {
+          "seconds": 4.14,
+          "textEnd": 18
+        },
+        {
+          "seconds": 4.4,
+          "textEnd": 19
+        },
+        {
+          "seconds": 4.58,
+          "textEnd": 20
+        },
+        {
+          "seconds": 4.82,
+          "textEnd": 21
+        },
+        {
+          "seconds": 4.96,
+          "textEnd": 23
+        },
+        {
+          "seconds": 5.755187,
+          "textEnd": 24
+        },
+        {
+          "seconds": 5.755187,
+          "textEnd": 25
+        },
+        {
+          "seconds": 5.86,
+          "textEnd": 26
+        },
+        {
+          "seconds": 6.26,
+          "textEnd": 28
+        },
+        {
+          "seconds": 6.42,
+          "textEnd": 29
+        },
+        {
+          "seconds": 6.92,
+          "textEnd": 30
+        },
+        {
+          "seconds": 7.08,
+          "textEnd": 31
+        },
+        {
+          "seconds": 7.32,
+          "textEnd": 32
+        },
+        {
+          "seconds": 7.5,
+          "textEnd": 33
+        },
+        {
+          "seconds": 7.72,
+          "textEnd": 34
+        },
+        {
+          "seconds": 7.82,
+          "textEnd": 35
+        },
+        {
+          "seconds": 8.14,
+          "textEnd": 36
+        },
+        {
+          "seconds": 8.3,
+          "textEnd": 37
+        },
+        {
+          "seconds": 8.5,
+          "textEnd": 38
+        },
+        {
+          "seconds": 8.88,
+          "textEnd": 39
+        },
+        {
+          "seconds": 9.12,
+          "textEnd": 40
+        },
+        {
+          "seconds": 9.28,
+          "textEnd": 41
+        },
+        {
+          "seconds": 9.44,
+          "textEnd": 42
+        },
+        {
+          "seconds": 9.65,
+          "textEnd": 43
+        },
+        {
+          "seconds": 9.86,
+          "textEnd": 44
+        },
+        {
+          "seconds": 10.06,
+          "textEnd": 45
+        },
+        {
+          "seconds": 10.24,
+          "textEnd": 47
+        }
+      ],
+      "unicodeCharacters": 47,
+      "fullTextCovered": true,
+      "humanWordTimingReviewed": false
+    },
+    {
+      "id": "c7-0",
+      "text": "到了初唐，敦煌画家把张骞画进壁画。下方辞行、山间赶路和城门迎接，让我们看见后人记住的远行。",
+      "audioSha256": "5828dae776209647e81b4fc5dbf60df9e1394b09932204e297065c9d0528883b",
+      "audioSeconds": 11.46,
+      "method": "local Whisper word timestamps; character interpolation within words; original text retained",
+      "points": [
+        {
+          "seconds": 0.0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.17,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.34,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.54,
+          "textEnd": 5
+        },
+        {
+          "seconds": 1.06,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.58,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.8,
+          "textEnd": 8
+        },
+        {
+          "seconds": 2.0,
+          "textEnd": 9
+        },
+        {
+          "seconds": 2.26,
+          "textEnd": 10
+        },
+        {
+          "seconds": 2.46,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.66,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.94,
+          "textEnd": 13
+        },
+        {
+          "seconds": 3.14,
+          "textEnd": 14
+        },
+        {
+          "seconds": 3.34,
+          "textEnd": 15
+        },
+        {
+          "seconds": 3.6,
+          "textEnd": 17
+        },
+        {
+          "seconds": 4.61375,
+          "textEnd": 18
+        },
+        {
+          "seconds": 4.72,
+          "textEnd": 19
+        },
+        {
+          "seconds": 5.1,
+          "textEnd": 20
+        },
+        {
+          "seconds": 5.32,
+          "textEnd": 22
+        },
+        {
+          "seconds": 5.68,
+          "textEnd": 23
+        },
+        {
+          "seconds": 5.98,
+          "textEnd": 24
+        },
+        {
+          "seconds": 6.28,
+          "textEnd": 25
+        },
+        {
+          "seconds": 6.52,
+          "textEnd": 26
+        },
+        {
+          "seconds": 6.74,
+          "textEnd": 27
+        },
+        {
+          "seconds": 7.1,
+          "textEnd": 28
+        },
+        {
+          "seconds": 7.36,
+          "textEnd": 29
+        },
+        {
+          "seconds": 7.62,
+          "textEnd": 30
+        },
+        {
+          "seconds": 7.76,
+          "textEnd": 32
+        },
+        {
+          "seconds": 8.16,
+          "textEnd": 33
+        },
+        {
+          "seconds": 8.58,
+          "textEnd": 34
+        },
+        {
+          "seconds": 8.71,
+          "textEnd": 35
+        },
+        {
+          "seconds": 8.84,
+          "textEnd": 36
+        },
+        {
+          "seconds": 9.06,
+          "textEnd": 37
+        },
+        {
+          "seconds": 9.34,
+          "textEnd": 38
+        },
+        {
+          "seconds": 9.64,
+          "textEnd": 39
+        },
+        {
+          "seconds": 9.94,
+          "textEnd": 40
+        },
+        {
+          "seconds": 10.06,
+          "textEnd": 41
+        },
+        {
+          "seconds": 10.4,
+          "textEnd": 42
+        },
+        {
+          "seconds": 10.54,
+          "textEnd": 43
+        },
+        {
+          "seconds": 10.74,
+          "textEnd": 45
+        }
+      ],
+      "unicodeCharacters": 45,
+      "fullTextCovered": true,
+      "humanWordTimingReviewed": false
+    },
+    {
+      "id": "c7-1",
+      "text": "但画里的缘由变了：皇帝礼拜金人，派张骞西去问名号，僧人与佛塔成了答案。这是后世佛教对远行的讲述。",
+      "audioSha256": "4a08d8d3b852fad0d60b4fe03e550ea4d85c90628124e669aa10799d024954be",
+      "audioSeconds": 11.66,
+      "method": "local Whisper word timestamps; character interpolation within words; original text retained",
+      "points": [
+        {
+          "seconds": 0.0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.22,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.4,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.66,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.8,
+          "textEnd": 5
+        },
+        {
+          "seconds": 0.98,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.18,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.44,
+          "textEnd": 9
+        },
+        {
+          "seconds": 1.64,
+          "textEnd": 10
+        },
+        {
+          "seconds": 2.38,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.74,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.92,
+          "textEnd": 13
+        },
+        {
+          "seconds": 3.06,
+          "textEnd": 14
+        },
+        {
+          "seconds": 3.32,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.5,
+          "textEnd": 17
+        },
+        {
+          "seconds": 4.04,
+          "textEnd": 18
+        },
+        {
+          "seconds": 4.24,
+          "textEnd": 19
+        },
+        {
+          "seconds": 4.52,
+          "textEnd": 20
+        },
+        {
+          "seconds": 4.66,
+          "textEnd": 21
+        },
+        {
+          "seconds": 4.9,
+          "textEnd": 22
+        },
+        {
+          "seconds": 5.12,
+          "textEnd": 23
+        },
+        {
+          "seconds": 5.3,
+          "textEnd": 25
+        },
+        {
+          "seconds": 5.56,
+          "textEnd": 26
+        },
+        {
+          "seconds": 6.42,
+          "textEnd": 27
+        },
+        {
+          "seconds": 6.64,
+          "textEnd": 28
+        },
+        {
+          "seconds": 6.86,
+          "textEnd": 29
+        },
+        {
+          "seconds": 7.1,
+          "textEnd": 30
+        },
+        {
+          "seconds": 7.32,
+          "textEnd": 31
+        },
+        {
+          "seconds": 7.52,
+          "textEnd": 32
+        },
+        {
+          "seconds": 7.64,
+          "textEnd": 33
+        },
+        {
+          "seconds": 7.8,
+          "textEnd": 35
+        },
+        {
+          "seconds": 8.912,
+          "textEnd": 36
+        },
+        {
+          "seconds": 8.912,
+          "textEnd": 37
+        },
+        {
+          "seconds": 8.98,
+          "textEnd": 38
+        },
+        {
+          "seconds": 9.3,
+          "textEnd": 39
+        },
+        {
+          "seconds": 9.56,
+          "textEnd": 40
+        },
+        {
+          "seconds": 9.82,
+          "textEnd": 41
+        },
+        {
+          "seconds": 10.02,
+          "textEnd": 42
+        },
+        {
+          "seconds": 10.14,
+          "textEnd": 43
+        },
+        {
+          "seconds": 10.5,
+          "textEnd": 44
+        },
+        {
+          "seconds": 10.6,
+          "textEnd": 45
+        },
+        {
+          "seconds": 10.7,
+          "textEnd": 46
+        },
+        {
+          "seconds": 10.9,
+          "textEnd": 48
+        }
+      ],
+      "unicodeCharacters": 48,
+      "fullTextCovered": true,
+      "humanWordTimingReviewed": false
+    },
+    {
+      "id": "c7-2",
+      "text": "张骞为求盟出发，后人又借他的远行讲佛教来历。读过这段经历，再看壁画，就能分清历史与后世的记忆。",
+      "audioSha256": "d0d6a975bc56204e4a4bb71465ab98c2365f4a806b6b5f494b74a0c0efd26511",
+      "audioSeconds": 10.54,
+      "method": "local Whisper word timestamps; character interpolation within words; original text retained",
+      "points": [
+        {
+          "seconds": 0.0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.2,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.56,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.7,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.94,
+          "textEnd": 5
+        },
+        {
+          "seconds": 1.22,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.38,
+          "textEnd": 8
+        },
+        {
+          "seconds": 1.8,
+          "textEnd": 9
+        },
+        {
+          "seconds": 2.18,
+          "textEnd": 10
+        },
+        {
+          "seconds": 2.46,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.6,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.82,
+          "textEnd": 13
+        },
+        {
+          "seconds": 2.89,
+          "textEnd": 14
+        },
+        {
+          "seconds": 2.96,
+          "textEnd": 15
+        },
+        {
+          "seconds": 3.28,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.48,
+          "textEnd": 17
+        },
+        {
+          "seconds": 3.72,
+          "textEnd": 18
+        },
+        {
+          "seconds": 4.04,
+          "textEnd": 19
+        },
+        {
+          "seconds": 4.24,
+          "textEnd": 20
+        },
+        {
+          "seconds": 4.4,
+          "textEnd": 22
+        },
+        {
+          "seconds": 5.461156,
+          "textEnd": 23
+        },
+        {
+          "seconds": 5.54,
+          "textEnd": 24
+        },
+        {
+          "seconds": 5.64,
+          "textEnd": 25
+        },
+        {
+          "seconds": 5.78,
+          "textEnd": 26
+        },
+        {
+          "seconds": 5.9,
+          "textEnd": 27
+        },
+        {
+          "seconds": 6.08,
+          "textEnd": 29
+        },
+        {
+          "seconds": 6.42,
+          "textEnd": 30
+        },
+        {
+          "seconds": 6.76,
+          "textEnd": 31
+        },
+        {
+          "seconds": 7.0,
+          "textEnd": 32
+        },
+        {
+          "seconds": 7.24,
+          "textEnd": 34
+        },
+        {
+          "seconds": 7.52,
+          "textEnd": 35
+        },
+        {
+          "seconds": 7.98,
+          "textEnd": 36
+        },
+        {
+          "seconds": 8.12,
+          "textEnd": 37
+        },
+        {
+          "seconds": 8.32,
+          "textEnd": 38
+        },
+        {
+          "seconds": 8.56,
+          "textEnd": 39
+        },
+        {
+          "seconds": 8.8,
+          "textEnd": 40
+        },
+        {
+          "seconds": 9.04,
+          "textEnd": 41
+        },
+        {
+          "seconds": 9.28,
+          "textEnd": 42
+        },
+        {
+          "seconds": 9.4,
+          "textEnd": 43
+        },
+        {
+          "seconds": 9.6,
+          "textEnd": 44
+        },
+        {
+          "seconds": 9.68,
+          "textEnd": 45
+        },
+        {
+          "seconds": 9.88,
+          "textEnd": 47
+        }
+      ],
+      "unicodeCharacters": 47,
+      "fullTextCovered": true,
+      "humanWordTimingReviewed": false
+    }
+  ]
+}

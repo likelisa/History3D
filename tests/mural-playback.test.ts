@@ -27,7 +27,7 @@ describe('readable and spoken mural timeline', () => {
   })
   it('finishes each 3D beat before its narration, then preserves the whole recorded sentence',()=>{
     const result=buildPlaybackTimeline(chapters,tracks())
-    const chapter=result.chapters[4]!,cue=chapter.cues[1]!
+    const chapter=result.chapters[1]!,cue=chapter.cues[2]!
     expect(cue.beat?.id).toBe('retained-credential')
     expect(locateMoment(result,chapter.start+cue.start).phase).toBe('visual')
     expect(locateMoment(result,chapter.start+cue.audioStart-.001).phase).toBe('visual')
@@ -43,14 +43,36 @@ describe('readable and spoken mural timeline', () => {
     const duplicate = tracks(); duplicate[1] = duplicate[0]!
     expect(() => buildPlaybackTimeline(chapters, duplicate)).toThrow('重复')
   })
+  it('supports complete later narration releases while rejecting obsolete and external clip paths', () => {
+    const later = tracks().map(track => ({ ...track, file: track.file.replace('narration-v2/', 'narration-v11/') }))
+    expect(buildPlaybackTimeline(chapters, later).chapters[0]!.cues[0]!.audioFile).toContain('narration-v11/')
+    for (const file of ['/mural-assets/narration-v1/c0-0.mp3', '/mural-assets/narration-v01/c0-0.mp3', 'https://example.com/c0-0.mp3', '/mural-assets/narration-v11/../c0-0.mp3']) {
+      const invalid = tracks(); invalid[0]!.file = file
+      expect(() => buildPlaybackTimeline(chapters, invalid)).toThrow('不匹配')
+    }
+  })
+  it('rejects timestamps belonging to a different audio recording even when the spoken text is identical', () => {
+    const recordings = tracks()
+    recordings[0]!.subtitlePoints = [{ seconds: 1, textEnd: Array.from(recordings[0]!.text).length }]
+    recordings[0]!.subtitleAudioSha256 = 'b'.repeat(64)
+    expect(() => buildPlaybackTimeline(chapters, recordings)).toThrow('字幕时间戳与音轨指纹不匹配')
+    recordings[0]!.subtitleAudioSha256 = recordings[0]!.sha256
+    expect(buildPlaybackTimeline(chapters, recordings).chapters[0]!.cues[0]!.subtitlePoints).toEqual(recordings[0]!.subtitlePoints)
+  })
   it('plays the 24 delivered recordings with exact current text, measured durations and verified bytes', () => {
-    const manifest = JSON.parse(readFileSync('viewer/public/mural-assets/narration-v7/manifest.json', 'utf8')) as { tracks: NarrationTrack[]; voice: string; privateReferenceUsed: boolean; voiceCloningUsed: boolean; model: { weightsIncludedInDelivery: boolean } }
+    const manifest = JSON.parse(readFileSync('viewer/public/mural-assets/narration-v12/manifest.json', 'utf8')) as { tracks: NarrationTrack[]; voice: string; privateReferenceUsed: boolean; voiceCloningUsed: boolean; model: { weightsIncludedInDelivery: boolean }; reference: { type: string; sha256: string; file: string }; automaticAudioAudit: { count: number; flaggedIds: string[] }; humanListening: { previewAccepted: boolean; fullNarrationReviewed: boolean } }
     const result = buildPlaybackTimeline(chapters, manifest.tracks)
     expect(manifest.tracks).toHaveLength(24)
-    expect(manifest.voice).toContain('zm_010')
+    expect(manifest.voice).toContain('GPT-SoVITS v2ProPlus')
+    expect(manifest.voice).toContain('Qwen Uncle_fu')
     expect(manifest.privateReferenceUsed).toBe(false)
-    expect(manifest.voiceCloningUsed).toBe(false)
+    expect(manifest.voiceCloningUsed).toBe(true)
     expect(manifest.model.weightsIncludedInDelivery).toBe(false)
+    expect(manifest.reference.type).toBe('publicSyntheticReference')
+    const reference = readFileSync('viewer/public/mural-assets/narration-v12/' + manifest.reference.file)
+    expect(createHash('sha256').update(reference).digest('hex')).toBe(manifest.reference.sha256)
+    expect(manifest.automaticAudioAudit).toMatchObject({ count: 24, flaggedIds: [] })
+    expect(manifest.humanListening.previewAccepted).toBe(true)
     // Real measured clip durations include fractions; clicking a cue must select
     // that exact sentence even while paused, rather than its preceding sentence.
     for (const [chapterIndex, chapter] of result.chapters.entries()) {
@@ -65,6 +87,8 @@ describe('readable and spoken mural timeline', () => {
       expect(bytes.length).toBe(track.bytes)
       expect(createHash('sha256').update(bytes).digest('hex')).toBe(track.sha256)
       expect(track.seconds).toBeGreaterThan(5)
+      expect(track.subtitlePoints?.length).toBeGreaterThan(0)
+      expect(track.subtitleAudioSha256).toBe(track.sha256)
     }
     expect(result.duration).toBeGreaterThan(240)
   })

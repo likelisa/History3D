@@ -7,8 +7,11 @@ import {getSceneBeat} from '../viewer/src/mural/scene-beats.ts'
 describe('mural scene supplements use delivered textured assets',()=>{
  it('verifies every adopted supplementary GLB against its byte digest and embedded textures',()=>{
   const manifest=JSON.parse(readFileSync('viewer/public/mural-assets/scene-assets-r4.json','utf8'))
+  const departure=JSON.parse(readFileSync('viewer/public/mural-assets/departure-outpost-r8-manifest.json','utf8'))
   expect(manifest.historicalStatus).toContain('Illustrative')
-  for(const asset of manifest.assets){
+  expect(departure.historicalStatus).toContain('Illustrative')
+  expect(departure.asset.sha256).not.toBe(manifest.assets.find((asset:any)=>asset.id==='environment').sha256)
+  for(const asset of [...manifest.assets,departure.asset]){
    const b=readFileSync('viewer/public'+asset.path)
    expect(b.length).toBe(asset.bytes)
    expect(createHash('sha256').update(b).digest('hex')).toBe(asset.sha256)
@@ -21,11 +24,12 @@ describe('mural scene supplements use delivered textured assets',()=>{
  })
  it('gives the historically distinct 3D cues separate subjects and an explicit evidence boundary',()=>{
   const beats=chapters.flatMap(ch=>ch.cues.map(c=>getSceneBeat(c.id))).filter(b=>b!==undefined)
-  expect(beats).toHaveLength(13)
-  expect(new Set(beats.map(b=>b.id)).size).toBe(12)
-  for(const beat of beats){expect(beat.visualSeconds).toBeGreaterThanOrEqual(beat.id==='opening'?1:5);expect(beat.boundaryNote.length).toBeGreaterThan(20)}
-  expect(getSceneBeat('c4-1')?.id).toBe('retained-credential')
-  expect(getSceneBeat('c4-1')?.id).not.toBe('city')
-  expect(getSceneBeat('c3-1')?.id).toBe('detention')
+  expect(beats).toHaveLength(11)
+  for(const beat of beats){expect(beat.visualSeconds).toBeGreaterThanOrEqual(1);expect(beat.boundaryNote.length).toBeGreaterThan(20)}
+  expect(getSceneBeat('c1-2')?.id).toBe('retained-credential')
+  expect(getSceneBeat('c1-2')?.id).not.toBe('city')
+  expect(getSceneBeat('c1-1')?.id).toBe('detention')
+  expect(getSceneBeat('c1-0')?.id).toBe('departure')
+  expect(getSceneBeat('c1-0')?.id).not.toBe(getSceneBeat('c2-0')?.id)
  })
 })

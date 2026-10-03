@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "category": "project-validation",
+  "startedAt": "2026-10-03T17:46:12.629Z",
+  "finishedAt": "2026-10-03T17:46:18.395Z",
+  "command": "node node_modules/vitest/vitest.mjs run tests/mural-agent-server.test.ts tests/heritage-agent-web.test.ts tests/artifact-agent-contracts.test.ts --reporter=default --reporter=json --outputFile=docs/agent/validation/policy-default-r14-vitest.json",
+  "nodeVersion": "v24.16.0",
+  "exitCode": 0,
+  "signal": null,
+  "providerRequests": "offline fixtures only; local HTTP listeners",
+  "credentialsRead": false,
+  "globalMemoryOrSkillWritten": false,
+  "defaultPolicyRules": 38,
+  "legacyPolicyRuleCounts": {
+    "r10": 26,
+    "r13": 33
+  },
+  "success": true,
+  "totalTests": 79,
+  "passedTests": 79,
+  "failedTests": 0,
+  "pendingTests": 0,
+  "sourceSha256": {
+    "agent/server.ts": "bc2490a7ded316e2777c3fedd658180564a964f93cfa5f642734757b108f6e4e",
+    "agent/quality-policy-r14.json": "b213363bfb664a5eca1b6b5302d1bd1da8c23b5aa77db0c18df29c48348fce1a",
+    "agent/quality-policy-r13.json": "6d5d37bb211a1ee5d372a64992c1c5836a1982b72e68b036784200499420c557",
+    "agent/quality-policy.json": "408031a0165f632cfea5656dd3ec32c21b066b1ae62047b10da166920905b9a7",
+    "docs/agent/workflow-lessons-r14.md": "a880bb726d7a07d1304a3e28718ad1dc8263519a63d95ba153cc8d4d8ab9bb03",
+    "tests/mural-agent-server.test.ts": "407bcde9b269aa3090faf2a7e0c73d048c5b3a880eba7bc576335274250446e0",
+    "tests/heritage-agent-web.test.ts": "7f0bd102bab39259ae570d5bdbf9da5006c6f472780e9f1c68c235fd77ca5318",
+    "tests/artifact-agent-contracts.test.ts": "b01eedd6590c6edce7aaf77bcdc551abbe36d67085abd9a68bef63151367fbac"
+  },
+  "resultsFile": "docs/agent/validation/policy-default-r14-vitest.json",
+  "logFile": "docs/agent/validation/policy-default-r14-tests.log",
+  "scope": [
+    "new r14 default and actual frozen policy prompt binding",
+    "unchanged legacy r10/r13 run recovery",
+    "plan repair and no duplicate unknown submission",
+    "web state ordering and narration media clock",
+    "artifact input contract"
+  ],
+  "notCertified": [
+    "full project build",
+    "live asset quality",
+    "historical reasoning",
+    "whole-story listening",
+    "recording",
+    "ZIP delivery"
+  ]
+}
