@@ -1,0 +1,55 @@
+{
+  "checkedAt": "2026-10-02T12:13:59.292983+00:00",
+  "passed": true,
+  "sampleCount": 241,
+  "nativeFramesUsed": [
+    55,
+    186
+  ],
+  "nativeTposeExcluded": true,
+  "noArmTracksExported": true,
+  "finiteNumbers": true,
+  "pelvisLoopClosure": 0.0,
+  "legLoopClosureAndReach": {
+    "left": {
+      "down": 0.0,
+      "forward": 0.0,
+      "lateral": 0.0,
+      "kneeFlexion": 0.0,
+      "hipPitch": 0.0,
+      "footPitch": 0.0,
+      "footYaw": 0.0,
+      "ankleWorldHeight": 0.0,
+      "toeWorldHeight": 0.0,
+      "hip": 0.0,
+      "knee": 0.0,
+      "ankle": 0.0,
+      "toe": 0.0,
+      "ankleLift": 0.0,
+      "toeLift": 0.0,
+      "maximumSagittalReachInLegLengths": 0.9956351800029898
+    },
+    "right": {
+      "down": 0.0,
+      "forward": 0.0,
+      "lateral": 0.0,
+      "kneeFlexion": 0.0,
+      "hipPitch": 0.0,
+      "footPitch": 0.0,
+      "footYaw": 0.0,
+      "ankleWorldHeight": 0.0,
+      "toeWorldHeight": 0.0,
+      "hip": 0.0,
+      "knee": 0.0,
+      "ankle": 0.0,
+      "toe": 0.0,
+      "ankleLift": 0.0,
+      "toeLift": 0.0,
+      "maximumSagittalReachInLegLengths": 1.0007699683365798
+    }
+  },
+  "sourceBvhSha256": "f8d82ea6ed1aab0cb7d9ee680f476b65471e2322e1da84add8a8527a2cb0b9a2",
+  "cycleJsonSha256": "7f269da31232508e2caa8eef1bbf91d0393be7cdd7a4c2ba13eb086a2809fa28",
+  "cycleBytes": 1014448,
+  "motionTypeEvidence": "Pinned conversion index explicitly labels 07_01 as walk; READMEFIRST documents all frames after 0 are original motion-capture data."
+}

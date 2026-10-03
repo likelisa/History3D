@@ -30,7 +30,7 @@ describe('formal viewer frame evidence', () => {
     expect((await readFile(path.join(release.path, 'release.json'))).length).toBeGreaterThan(0)
   })
 
-  it.skipIf(!existsSync(DEFAULT_BLENDER_PATH))('keeps formal frame paths when offline views are staged', async () => {
+  it.skipIf(!existsSync(process.env.BLENDER_BIN ?? DEFAULT_BLENDER_PATH))('keeps formal frame paths when offline views are staged', async () => {
     const data = await mkdtemp(path.join(os.tmpdir(), 'history3d-world-evidence-'))
     dirs.push(data)
     const imported = await importCollection(path.resolve('contracts/fixtures/handoff/collection'), data, 'fu-world-evidence')
@@ -39,8 +39,11 @@ describe('formal viewer frame evidence', () => {
     await captureBrowserFrame(release.storyId, release.releaseId, 'beat-1', png, { viewerBuild: 'test', timeSeconds: 0, viewport: [320, 240], dpr: 1, userAgent: 'test' }, data)
     const fakeFetch = (async () => ({ ok: true, json: async () => ({ id: 'test-review', model: 'deepseek-flash', choices: [{ finish_reason: 'stop', message: { content: JSON.stringify({ decision: 'inconclusive', findings: [], unassessed: ['motion continuity'], suggestedStrategies: [] }) } }], usage: { prompt_tokens: 1, completion_tokens: 1 } }) })) as unknown as typeof fetch
     const result = await runWorldReview(release.storyId, release.releaseId, null, data, { apiKey: 'test', fetchImpl: fakeFetch })
-    expect(result.status).toBe('inconclusive')
+    expect(result.status, result.error ?? undefined).toBe('inconclusive')
     const evidence = JSON.parse(await readFile(path.join(data, 'world-reviews', release.storyId, release.releaseId, result.reviewId, 'evidence.json'), 'utf8'))
-    expect(evidence.images.find((item: { viewId: string }) => item.viewId === 'beat-1').path).toContain('/browser-evidence/')
-  }, 20000)
+    const framePath = evidence.images.find((item: { viewId: string }) => item.viewId === 'beat-1').path as string
+    expect(framePath.split(path.sep).join('/')).toContain('/browser-evidence/')
+    expect(await readFile(framePath)).toEqual(png)
+    // Real Blender rendering includes GPU/shader initialization on a cold run.
+  }, 60000)
 })

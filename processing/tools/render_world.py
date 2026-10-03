@@ -99,7 +99,8 @@ def main():
     camera_data.type = "PERSP"
     camera_data.lens = 30
     scene = bpy.context.scene
-    scene.render.engine = "BLENDER_EEVEE"
+    engines = {item.identifier for item in scene.render.bl_rna.properties["engine"].enum_items}
+    scene.render.engine = "BLENDER_EEVEE_NEXT" if "BLENDER_EEVEE_NEXT" in engines else "BLENDER_EEVEE"
     scene.render.resolution_x = 960
     scene.render.resolution_y = 600
     scene.render.resolution_percentage = 100

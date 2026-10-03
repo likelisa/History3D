@@ -1,0 +1,205 @@
+{
+  "formatVersion": "2.0.0",
+  "voice": "Microsoft Huihui Desktop - Chinese (Simplified)",
+  "synthesis": "local Windows SAPI",
+  "synthesisRate": -2,
+  "recordedAtUtc": "2026-10-02T03:48:02.687446+00:00",
+  "normalBuildSynthesizes": false,
+  "textSource": "viewer/src/mural/story.ts / chapterDefinitions",
+  "sourceScriptSha256": "99d76704104dc376167ca40d7b8e83bdaea0911d832584c65d54192ddd7a57d5",
+  "timing": "max(reading floor, measured audio seconds + 1.5 second pause); playback speed affects voice and timeline together",
+  "tracks": [
+    {
+      "id": "c0-0",
+      "file": "/mural-assets/narration-v2/c0-0.mp3",
+      "seconds": 9.71415,
+      "text": "先看右上宫殿、下方辞行、左上城池：一幅画串起三个环节。",
+      "bytes": 78411,
+      "sha256": "a1bda66e98093ed3025196ffee4a849082abe66220ac7fe662485b57af3ae80e"
+    },
+    {
+      "id": "c0-1",
+      "file": "/mural-assets/narration-v2/c0-1.mp3",
+      "seconds": 8.398367,
+      "text": "这是初唐画家讲述的汉使西行，已经距张骞的时代数百年。",
+      "bytes": 67962,
+      "sha256": "e88dd14520bb0ae6bb8d33a6b1a3b010b15c242ae21dbf47d9e60da4dcc25eb5"
+    },
+    {
+      "id": "c0-2",
+      "file": "/mural-assets/narration-v2/c0-2.mp3",
+      "seconds": 8.91093,
+      "text": "先跟着画面走，再用史书追问：他为何出发，又带回了什么？",
+      "bytes": 72141,
+      "sha256": "933bd01b98dc76386fe50d639e084370dac35f38c5eea54e094f34efadaac489"
+    },
+    {
+      "id": "c1-0",
+      "file": "/mural-assets/narration-v2/c1-0.mp3",
+      "seconds": 9.771927,
+      "text": "右上宫殿里，帝王与群臣向两尊金人礼拜；画家把金人画成了佛像。",
+      "bytes": 79038,
+      "sha256": "176c042eac0ce1f60a51cb1d535256ad427b7f0c9b9b35e2138e29d556d78f94"
+    },
+    {
+      "id": "c1-1",
+      "file": "/mural-assets/narration-v2/c1-1.mp3",
+      "seconds": 12.548299,
+      "text": "画旁题记说，皇帝不知金人名号，便派张骞到大夏询问。这是壁画给出的出发理由。",
+      "bytes": 101190,
+      "sha256": "dbc239accd658d6e79dad310ecb9f0376f002b4a2ef3bdc24ca5cada79a93c6c"
+    },
+    {
+      "id": "c1-2",
+      "file": "/mural-assets/narration-v2/c1-2.mp3",
+      "seconds": 11.150658,
+      "text": "《史记》记有匈奴祭天金人，却未说它是佛像；把两者相连，是后来的佛教讲述。",
+      "bytes": 89905,
+      "sha256": "82771afc55a299f6a3f548a924db5dcafe1504f72e872d04a30f43f5ab81bf1d"
+    },
+    {
+      "id": "c2-0",
+      "file": "/mural-assets/narration-v2/c2-0.mp3",
+      "seconds": 10.83034,
+      "text": "下方，张骞向骑马的帝王跪拜辞行。壁画把这次出发接在礼拜金人之后。",
+      "bytes": 87397,
+      "sha256": "73645986a5520ceabf142338fea4e5e24f38ebf5e4098a3873de375de0eafb9a"
+    },
+    {
+      "id": "c2-1",
+      "file": "/mural-assets/narration-v2/c2-1.mp3",
+      "seconds": 10.726667,
+      "text": "史书中的首次出使有另一个起点：汉武帝想联合西方的月氏，一同对抗匈奴。",
+      "bytes": 86561,
+      "sha256": "3f9cfec42b23b1b562792938c6fd1aceedf99d1064c3f58903f448a819382e19"
+    },
+    {
+      "id": "c2-2",
+      "file": "/mural-assets/narration-v2/c2-2.mp3",
+      "seconds": 10.773424,
+      "text": "月氏曾被匈奴击败、王被杀害。汉朝以为这份旧仇，能换来一个盟友。",
+      "bytes": 86979,
+      "sha256": "bd3b36e2f285f94f6892a444d12fd4d77b1ce4b5b9dfce3a3c8f4ad9cabbe973"
+    },
+    {
+      "id": "c3-0",
+      "file": "/mural-assets/narration-v2/c3-0.mp3",
+      "seconds": 12.011701,
+      "text": "目光转向左侧，汉使走进山间。画家用山路，把辞行与远方城池连接起来。",
+      "bytes": 96801,
+      "sha256": "ad44892699a6a6de72d91ca46d102311defd2270ac1986ef3286049f0bd29fe5"
+    },
+    {
+      "id": "c3-1",
+      "file": "/mural-assets/narration-v2/c3-1.mp3",
+      "seconds": 10.918503,
+      "text": "首次出使必须经过匈奴控制的地带。张骞还没见到月氏，就被扣留十余年。",
+      "bytes": 88024,
+      "sha256": "a9a75486c5c10d8073d03b2fe3c3e5865d8ba48377dacfe280ecb5f78d93dd8e"
+    },
+    {
+      "id": "c3-2",
+      "file": "/mural-assets/narration-v2/c3-2.mp3",
+      "seconds": 12.769796,
+      "text": "逃出后，他继续向西，经大宛、康居到达大月氏。路走通了，联盟却仍没有着落。",
+      "bytes": 102861,
+      "sha256": "4016a2fd56da74cb5b01b3ed78c6b8b8fa343d1883eba60d8e97dd50252e1e38"
+    },
+    {
+      "id": "c4-0",
+      "file": "/mural-assets/narration-v2/c4-0.mp3",
+      "seconds": 9.505215,
+      "text": "再看左侧的长杆旌节：它提示观者，这是一支代表汉朝出行的使团。",
+      "bytes": 76739,
+      "sha256": "02365576f5d9b97eadd21e083e870d0a008711a3225910c38429265307000424"
+    },
+    {
+      "id": "c4-1",
+      "file": "/mural-assets/narration-v2/c4-1.mp3",
+      "seconds": 11.025805,
+      "text": "《史记》说，张骞被扣多年仍未丢失汉节。他没有放下使者身份与出使任务。",
+      "bytes": 89069,
+      "sha256": "5fef8c1c655a29a7d07098f4374e8a6577570cffff7d2c2be19bab9fb430bdb0"
+    },
+    {
+      "id": "c4-2",
+      "file": "/mural-assets/narration-v2/c4-2.mp3",
+      "seconds": 13.232562,
+      "text": "但月氏已在西方安居，既少战乱，又离汉朝太远；他们不愿为旧仇再开战，联合没有达成。",
+      "bytes": 106623,
+      "sha256": "688f351e53a42154abe86b8987a9353d40599d9deffdc638d84137c5481d3976"
+    },
+    {
+      "id": "c5-0",
+      "file": "/mural-assets/narration-v2/c5-0.mp3",
+      "seconds": 10.007029,
+      "text": "山道尽头是左上城池。使者朝城门走去，壁画把这里题作大夏。",
+      "bytes": 80919,
+      "sha256": "820756c839425ca5c26dd7d14113266551baeccd6c6f4bf2064bf23b88a56d94"
+    },
+    {
+      "id": "c5-1",
+      "file": "/mural-assets/narration-v2/c5-1.mp3",
+      "seconds": 10.529478,
+      "text": "张骞确曾到过大夏。《史记》写那里有城屋与市场，商人贩卖各方货物。",
+      "bytes": 85098,
+      "sha256": "8a97a9339772ddae42c2b12249e2efbfe83567e4189ed705ecd0168a0351f62a"
+    },
+    {
+      "id": "c5-2",
+      "file": "/mural-assets/narration-v2/c5-2.mp3",
+      "seconds": 11.74644,
+      "text": "他看见蜀布和邛竹杖，得知商人从身毒买来：联盟未成，却带回了新的远方信息。",
+      "bytes": 94711,
+      "sha256": "eefb153c8f7807fe7b4d0fedf7e708c628c97fe848f975c226d235e2dd908314"
+    },
+    {
+      "id": "c6-0",
+      "file": "/mural-assets/narration-v2/c6-0.mp3",
+      "seconds": 12.615238,
+      "text": "城门边有两位僧人，城里有佛塔。它们回答了画家前面的问题：金人被解释为佛像。",
+      "bytes": 101608,
+      "sha256": "d9c2c20cd8edbf4246153ac363c6fc24560cb883a5682d7493826222378da9a1"
+    },
+    {
+      "id": "c6-1",
+      "file": "/mural-assets/narration-v2/c6-1.mp3",
+      "seconds": 9.395646,
+      "text": "《史记》写张骞见蜀物、听说身毒，却没有记他在大夏问佛像名号。",
+      "bytes": 75903,
+      "sha256": "e841bf56a83f7cfc4b4eaff0d269ca8c78e4826824dc93417187d686bd7f583e"
+    },
+    {
+      "id": "c6-2",
+      "file": "/mural-assets/narration-v2/c6-2.mp3",
+      "seconds": 11.723991,
+      "text": "后来佛教叙事把西行接到佛教传入的故事里；壁画画上僧人与塔，也给远行换了含义。",
+      "bytes": 94502,
+      "sha256": "07bb36fe492cd1cdd0cd08136e5967b473e90819255985820312e54ed12fdd2b"
+    },
+    {
+      "id": "c7-0",
+      "file": "/mural-assets/narration-v2/c7-0.mp3",
+      "seconds": 13.10195,
+      "text": "回看全画：宫殿礼拜、使者辞行、抵达城池，三个画面组成一次有起因、有终点的西行。",
+      "bytes": 105578,
+      "sha256": "ca26175319206f283564e210ada9375cfd9f6d465e072f356fa630b8157a2595"
+    },
+    {
+      "id": "c7-1",
+      "file": "/mural-assets/narration-v2/c7-1.mp3",
+      "seconds": 12.191882,
+      "text": "史书的结局是未能联合月氏，却把西域见闻带回汉朝；往后的使者沿这些联系继续往来。",
+      "bytes": 98264,
+      "sha256": "61d807a1f21748e1965259bd5da586177ec535dd2760efd067f72bdd79da766b"
+    },
+    {
+      "id": "c7-2",
+      "file": "/mural-assets/narration-v2/c7-2.mp3",
+      "seconds": 12.99229,
+      "text": "唐代画家又用同一位使者讲佛教传播。我们读懂了画中故事，也认出了它与汉代史实的距离。",
+      "bytes": 104742,
+      "sha256": "d779d670c13b8aa2ca6beb20ef8ff9eec11bf202c26c3d9824430cfd065d556f"
+    }
+  ]
+}

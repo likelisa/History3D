@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>张骞壁画形象 · 3D试作</title></head>
+<body>
+<header><a href="/mural.html">← 张骞出使西域图</a><span>History3D · 独立资产试作</span></header>
+<main>
+  <h1>张骞壁画形象的3D试作</h1>
+  <p class="intro">以辞行处持笏跪拜的形象，进行一次真实图生3D。左侧保留原画局部，右侧展示下载后的原始模型。</p>
+  <div class="comparison">
+    <section class="reference"><h2>壁画中的形象</h2><img src="/mural-assets/zhangqian-mural-trial/reference-input.png" alt="第323窟壁画左下方，张骞跪拜辞行的局部"><p>原画局部只有62 × 147像素；放大未增加原始细节。人物边缘仍有相邻形象和壁画残损。</p></section>
+    <section class="model"><h2>Tripo原始3D</h2><div class="toolbar"><button id="front">参考正面</button><button id="back">背面</button><button id="reset">重置</button><select id="mode" aria-label="模型查看方式"><option value="material">原始材质</option><option value="normal">法线</option><option value="wireframe">线框</option></select></div><div id="viewport"></div><p id="status" role="status">读取结果…</p></section>
+  </div>
+  <p class="boundary">这是初唐壁画形象的立体转译。背面、深度和遮挡处由模型推断；不作为汉代服饰或张骞容貌的考古复原。原画人物为跪拜姿态，暂不替换故事里行走的人物。</p>
+  <p class="verdict">本次结果暂不采用：原画人物很小且残损，模型把衣纹、黑点和相邻轮廓生成了浮雕状薄片，未形成清楚的完整人物。保留真实结果供查看。</p>
+  <dl id="facts"></dl>
+  <div class="links"><a id="download" hidden download href="/mural-assets/zhangqian-mural-trial/zhangqian-raw.glb">下载原始GLB</a><a href="/mural-assets/zhangqian-mural-trial/provenance.json">查看任务与来源记录</a><a href="https://www.dha.ac.cn/info/1266/2524.htm" target="_blank" rel="noopener noreferrer">敦煌研究院 · 图像解读</a></div>
+</main><script type="module" src="/src/zhangqian-mural-trial/main.ts"></script>
+</body></html>

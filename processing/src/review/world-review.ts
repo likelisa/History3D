@@ -152,7 +152,7 @@ export async function runWorldReview(storyId: string, releaseId: string, planPat
 async function renderWorld(blenderPath: string, releaseDir: string, imageDir: string): Promise<void> {
   const script = path.resolve('processing/tools/render_world.py')
   await new Promise<void>((resolve, reject) => {
-    const child = spawn(blenderPath, ['-b', '-t', '2', '--python', script, '--', releaseDir, imageDir], { stdio: 'ignore' })
+    const child = spawn(blenderPath, ['-b', '-t', '2', '--python-exit-code', '1', '--python', script, '--', releaseDir, imageDir], { stdio: 'ignore' })
     child.on('error', reject)
     child.on('exit', (code) => code === 0 ? resolve() : reject(new Error(`REVIEW_RENDER_FAILED: Blender exit ${code}`)))
   })

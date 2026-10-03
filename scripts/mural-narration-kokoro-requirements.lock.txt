@@ -1,0 +1,61 @@
+# Public Kokoro narration inference additions; official PyPI artifacts.
+# Provision separately from the application; never invoked by npm build.
+# Validated base: Python 3.10.20, torch 2.1.2+cpu, numpy 1.26.4, soundfile 0.14.0.
+# CPU torch/numpy/soundfile and their base dependencies are inherited, not upgraded by this lock.
+# In the prepared inference venv use pip install --no-deps --require-hashes -r this-file.
+# Chinese G2P only; no English language model or transformer G2P is downloaded.
+# Exact artifacts from official PyPI; inherited base versions are separately recorded.
+addict==2.4.0 --hash=sha256:249bb56bbfd3cdc2a004ea0ff4c2b6ddc84d53bc2194761636eb314d5cfa5dfc
+annotated-types==0.8.0 --hash=sha256:f072f4d804ea359e4eaf198b1af7a8b0943881a87f31bb764f8bf219bb9419e0
+babel==2.18.0 --hash=sha256:e2b422b277c2b9a9630c1d7903c2a00d0830c409c59ac8cae9081c92f1aeba35
+blis==0.7.11 --hash=sha256:a73945a9d635eea528bccfdfcaa59dd35bd5f82a4a40d5ca31f08f507f3a6f81
+catalogue==2.0.10 --hash=sha256:58c2de0020aa90f4a2da7dfad161bf7b3b054c86a5f09fcedc0b2b740c109a9f
+cloudpathlib==0.26.0 --hash=sha256:abcd7f54bcbb2fbb79c0e96b79241f08866760aee6276586882b3558672d571b
+cn2an==0.5.24 --hash=sha256:3d57d862a56133070ba6a737b8095bfc94716b41b7684e7a98d2d5b049495db7
+confection==0.1.5 --hash=sha256:e29d3c3f8eac06b3f77eb9dfb4bf2fc6bcc9622a98ca00a698e3d019c6430b14
+csvw==4.1.0 --hash=sha256:d432d4cccd8dcdf31ccb2272d6d7ad40a9ebde7de3c7d6ced9033afb23bb76dd
+cymem==2.0.13 --hash=sha256:7700b116524b087e0169f10f267539223b48240ef2734c3a727a9e6b4db9a671
+dlinfo==2.0.0 --hash=sha256:b32cc18e3ea67c0ca9ca409e5b41eed863bd1363dbc9dd3de90fedf11b61e7bc
+espeakng-loader==0.2.4 --hash=sha256:41f1e08ac9deda2efd1ea9de0b81dab9f5ae3c4b24284f76533d0a7b1dd7abd7
+huggingface-hub==0.29.1 --hash=sha256:352f69caf16566c7b6de84b54a822f6238e17ddd8ae3da4f8f2272aea5b198d5
+isodate==0.7.2 --hash=sha256:28009937d8031054830160fce6d409ed342816b543597cece116d966c6d99e15
+jieba==0.42.1 --hash=sha256:055ca12f62674fafed09427f176506079bc135638a14e23e25be909131928db2
+jsonschema-specifications==2025.9.1 --hash=sha256:98802fee3a11ee76ecaca44429fda8a41bff98b00a0f2838151b113f210cc6fe
+jsonschema==4.26.0 --hash=sha256:d489f15263b8d200f8387e64b4c3a75f06629559fb73deb8fdfb525f2dab50ce
+kokoro==0.9.4 --hash=sha256:a129dc6364a286bd6a92c396e9862459d3d3e45f2c15596ed5a94dcee5789efd
+langcodes==3.5.1 --hash=sha256:b6a9c25c603804e2d169165091d0cdb23934610524a21d226e4f463e8e958a72
+language-tags==1.3.1 --hash=sha256:f7db7ef8879523019603e09644a86d95ba60595ce5e5ea82d46e8971b0f68f7b
+loguru==0.7.3 --hash=sha256:31a33c10c8e1e10422bfd431aeb5d351c7cf7fa671e3c4df004162264b28220c
+misaki==0.9.4 --hash=sha256:90e2eeb169786c014c429e5058d2ea6bcd02d651f2a24450ba6c9ffc0f8da15a
+murmurhash==1.0.15 --hash=sha256:2224f30f7729717644745a6f513ea7662517dfe7b1867cf1588177f64c61df3c
+num2words==0.5.14 --hash=sha256:1c8e5b00142fc2966fd8d685001e36c4a9911e070d1b120e1beb721fa1edb33d
+ordered-set==4.1.0 --hash=sha256:046e1132c71fcf3330438a539928932caf51ddbc582496833e23de611de14562
+phonemizer-fork==3.3.2 --hash=sha256:97305c76f4183b3825dae8f4c032265fe78c9946ce58c47d4b62161349264b74
+preshed==3.0.13 --hash=sha256:867aa73abbf4ee3b4d7662148091c33a8c039271269e3a7f1e0ca995f91995c8
+proces==0.1.7 --hash=sha256:308325bbc96877263f06e57e5e9c760c4b42cc722887ad60be6b18fc37d68762
+pydantic==2.13.5 --hash=sha256:346a034f080da3755d8e9cb5e00e8b07de1d39e4f6e2c87d8ab7cafa0b269a73
+pydantic_core==2.46.5 --hash=sha256:1e5aad1220a1192c42341c8fd4a8686657e73ab2a920c970bdc4de334fe3193d
+pypinyin-dict==0.9.0 --hash=sha256:10cfbe40af87d704b867533177be8cd72837da9e224755dd275798e88097067a
+pypinyin==0.55.0 --hash=sha256:d53b1e8ad2cdb815fb2cb604ed3123372f5a28c6f447571244aca36fc62a286f
+rdflib==7.6.0 --hash=sha256:30c0a3ebf4c0e09215f066be7246794b6492e054e782d7ac2a34c9f70a15e0dd
+referencing==0.37.0 --hash=sha256:381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231
+regex==2026.9.29 --hash=sha256:23ae6fdad9e63e54038f5ef78aba2933faca61e24d432786589e737bc5522ebb
+rfc3986==1.5.0 --hash=sha256:a86d6e1f5b1dc238b218b012df0aa79409667bb209e58da56d0b94704e712a97
+rpds-py==0.30.0 --hash=sha256:1726859cd0de969f88dc8673bdd954185b9104e05806be64bcd87badbe313169
+segments==2.4.0 --hash=sha256:4021dc67f201cc03c864c74c618bdb163b1af629da3040babbaa37d8813f3db0
+smart_open==7.7.1 --hash=sha256:cb62dc45f519bf39b612564d326d2a17556f3a6056e3c3a86a07215d670d45bc
+spacy-legacy==3.0.12 --hash=sha256:476e3bd0d05f8c339ed60f40986c07387c0a71479245d6d0f4298dbd52cda55f
+spacy-loggers==1.0.5 --hash=sha256:196284c9c446cc0cdb944005384270d775fdeaf4f494d8e269466cfa497ef645
+spacy==3.7.5 --hash=sha256:2a21b2a1e1e5d10d15c6f75990b7341d0fc9b454083dfd4222fdd75b9164831c
+srsly==2.5.4 --hash=sha256:f12d104ab2e75ff51056e0eac3d18ea67de13b2e52dc91d1ef58a4be7b4b357c
+termcolor==3.3.0 --hash=sha256:cf642efadaf0a8ebbbf4bc7a31cec2f9b5f21a9f726f4ccbb08192c9c26f43a5
+thinc==8.2.5 --hash=sha256:399260197ef3f8d9600315fc5b5a1d5940400fceb0361de642e9fe3506d82385
+tokenizers==0.19.1 --hash=sha256:bea6f9947e9419c2fda21ae6c32871e3d398cba549b93f4a65a2d369662d9403
+transformers==4.43.0 --hash=sha256:0158b430c3bab1abde3232598e250916edd906680b9ffe9d4e1b0b3fafbfc0ed
+typer-slim==0.24.0 --hash=sha256:d5d7ee1ee2834d5020c7c616ed5e0d0f29b9a4b1dd283bdebae198ec09778d0e
+typing-inspection==0.4.4 --hash=sha256:65b8397ba37ccbce054456aaccddfc91e6e3083c92824df348d96ca832f3f147
+uritemplate==4.2.0 --hash=sha256:962201ba1c4edcab02e60f9a0d3821e82dfc5d2d6662a21abd533879bdb8a686
+wasabi==1.1.3 --hash=sha256:f76e16e8f7e79f8c4c8be49b4024ac725713ab10cd7f19350ad18a8e3f71728c
+weasel==0.4.3 --hash=sha256:08f65b5d0dbded4879e08a64882de9b9514753d9eaa4c4e2a576e33666ac12cf
+win32_setctime==1.2.0 --hash=sha256:95d644c4e708aba81dc3704a116d8cbc974d70b3bdb8be1d150e36be6e9d1390
+wrapt==2.5.0 --hash=sha256:513dd1f4a1f91030d5656d9f4b3af8aa490d4db1eb53481e6846b8a5ee7acfcd

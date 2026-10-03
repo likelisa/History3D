@@ -1,0 +1,186 @@
+{
+  "id": "reception-court",
+  "file": "reception-court.glb",
+  "bytes": 5566684,
+  "sha256": "051822ecb55da21953d80dc7c3b2d190fedff674d73b9cd1f14c027d7d74186a",
+  "tool": "Blender 4.5.14 LTS",
+  "unit": "metre",
+  "upAxis": "Y",
+  "triangles": 19100,
+  "embeddedPBR": {
+    "nodes": 9,
+    "meshes": 9,
+    "embeddedImages": 19,
+    "refinedMaterials": [
+      {
+        "name": "Refined illustrative reception earth - embedded PBR",
+        "baseColorTexture": {
+          "index": 1
+        },
+        "normalTexture": {
+          "index": 0,
+          "scale": 0.6499999761581421
+        },
+        "metallicRoughnessTexture": {
+          "index": 2
+        }
+      },
+      {
+        "name": "Refined illustrative reception plaster - embedded PBR",
+        "baseColorTexture": {
+          "index": 4
+        },
+        "normalTexture": {
+          "index": 3,
+          "scale": 0.6499999761581421
+        },
+        "metallicRoughnessTexture": {
+          "index": 5
+        }
+      },
+      {
+        "name": "Refined illustrative reception brick - embedded PBR",
+        "baseColorTexture": {
+          "index": 7
+        },
+        "normalTexture": {
+          "index": 6,
+          "scale": 0.6499999761581421
+        },
+        "metallicRoughnessTexture": {
+          "index": 8
+        }
+      },
+      {
+        "name": "Refined illustrative reception wood - embedded PBR",
+        "baseColorTexture": {
+          "index": 10
+        },
+        "normalTexture": {
+          "index": 9,
+          "scale": 0.6499999761581421
+        },
+        "metallicRoughnessTexture": {
+          "index": 11
+        }
+      },
+      {
+        "name": "Refined illustrative reception rug - embedded PBR",
+        "baseColorTexture": {
+          "index": 13
+        },
+        "normalTexture": {
+          "index": 12,
+          "scale": 0.6499999761581421
+        },
+        "metallicRoughnessTexture": {
+          "index": 14
+        }
+      },
+      {
+        "name": "Refined illustrative reception border - embedded PBR",
+        "baseColorTexture": {
+          "index": 16
+        },
+        "normalTexture": {
+          "index": 15,
+          "scale": 0.6499999761581421
+        },
+        "metallicRoughnessTexture": {
+          "index": 17
+        }
+      },
+      {
+        "name": "Refined illustrative reception rope - embedded PBR",
+        "baseColorTexture": {
+          "index": 19
+        },
+        "normalTexture": {
+          "index": 18,
+          "scale": 0.6499999761581421
+        },
+        "metallicRoughnessTexture": {
+          "index": 20
+        }
+      },
+      {
+        "name": "Refined illustrative reception felt - embedded PBR",
+        "baseColorTexture": {
+          "index": 22
+        },
+        "normalTexture": {
+          "index": 21,
+          "scale": 0.6499999761581421
+        },
+        "metallicRoughnessTexture": {
+          "index": 23
+        }
+      },
+      {
+        "name": "Refined illustrative reception clay - embedded PBR",
+        "baseColorTexture": {
+          "index": 25
+        },
+        "normalTexture": {
+          "index": 24,
+          "scale": 0.6499999761581421
+        },
+        "metallicRoughnessTexture": {
+          "index": 26
+        }
+      }
+    ]
+  },
+  "components": {
+    "buttress": 10,
+    "timber_post": 6,
+    "plain_hollow_vessel": 4,
+    "courtyard": 1,
+    "receiving_platform": 1,
+    "principal_rug": 1,
+    "guest_mats": 2,
+    "canopy": 1,
+    "plain_receiving_bench": 1
+  },
+  "textureDimensions": [
+    512,
+    512
+  ],
+  "builder": {
+    "script": "scripts/build-mural-reception-set.py",
+    "sha256": "ad218998b779cea9d5a6eaed9378601198728e4ff9bc2c962f29934eea7029ad"
+  },
+  "historicalStatus": "Illustrative royal-court reception. Neither a treaty ceremony nor an identified excavated building.",
+  "historicalNoteZh": "史书记载月氏王庭在妫水北及张骞求盟未成；未载具体接见建筑和礼仪。院落、毡织顶棚、主客位置、器物均为展示推演，不等同阿伊哈努姆宫殿，不确定统治者肖像或性别。",
+  "sourceDocument": "docs/historical/yuezhi-reception-r4.md",
+  "noNewProviderGeneration": true,
+  "characterPositions": {
+    "host": [
+      0,
+      0.225,
+      -3.8
+    ],
+    "envoy": [
+      -1.55,
+      0.04,
+      0.55
+    ],
+    "translator": [
+      1.5,
+      0.04,
+      0.85
+    ],
+    "attendants": [
+      [
+        -3.1,
+        0.2,
+        -4.8
+      ],
+      [
+        3.1,
+        0.2,
+        -4.6
+      ]
+    ]
+  }
+}

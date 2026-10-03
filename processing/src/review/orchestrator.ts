@@ -71,7 +71,7 @@ export async function runInputReview(importId: string, dataDir: string, options:
 export async function renderAsset(blenderPath: string, glbPath: string, outputDir: string): Promise<void> {
   const script = path.resolve('processing/tools/render_asset.py')
   await new Promise<void>((resolve, reject) => {
-    const child = spawn(blenderPath, ['-b', '-t', '2', '--python', script, '--', glbPath, outputDir], { stdio: 'ignore' })
+    const child = spawn(blenderPath, ['-b', '-t', '2', '--python-exit-code', '1', '--python', script, '--', glbPath, outputDir], { stdio: 'ignore' })
     child.on('error', reject)
     child.on('exit', (code) => code === 0 ? resolve() : reject(new Error(`REVIEW_RENDER_FAILED: Blender exit ${code}`)))
   })
