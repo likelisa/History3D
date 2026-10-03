@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "at": "2026-10-03T18:08:14.9360839Z",
+  "testCommand": "npx vitest run tests/mural-agent-server.test.ts tests/artifact-agent-contracts.test.ts --reporter=json --outputFile=docs/agent/validation/asset-candidates-r14-vitest.json",
+  "testExit": 0,
+  "totalTests": 68,
+  "passedTests": 68,
+  "failedTests": 0,
+  "typecheckCommand": "npm run typecheck",
+  "typecheckExit": 0,
+  "paidCandidateCalls": 0,
+  "scope": "offline lifecycle and contracts; no live candidate quality certification",
+  "files": [
+    {
+      "path": "agent/server.ts",
+      "sha256": "e8457a828b9c62f94648bf88f04708e60d4c6820e411fe1d8ee7cddf0dcfcfa5"
+    },
+    {
+      "path": "agent/contracts.ts",
+      "sha256": "104968e023ba89d93ccdb8a7d969cb80a9598ddef6446816724fdaaa6bab1215"
+    },
+    {
+      "path": "tests/mural-agent-server.test.ts",
+      "sha256": "0892b3731b9285cea233eeb942f113d7af391bec0eb787c793fc8fae84c57d3b"
+    }
+  ]
+}

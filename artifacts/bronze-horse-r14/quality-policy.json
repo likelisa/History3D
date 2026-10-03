@@ -1,0 +1,603 @@
+{
+  "schemaVersion": "1.0.0",
+  "policyId": "heritage-story-quality-r13",
+  "status": "fixed-project-standard",
+  "authority": "user-requested project quality rules; root-reviewed on 2026-10-03",
+  "scope": "project-only; no global skills, memory or safety policy modification",
+  "goal": "故事优先：壁画事件与文物用途、工艺、纹饰及历史，均由原图与真实3D辅助解释。",
+  "sourceDocument": "../docs/agent/heritage-quality-r13.md",
+  "sourceSha256": "b01e86c2c5a0c486b7d1674c7c7531e5acad36ca56330f262fc6e36eae109914",
+  "desktopOnly": true,
+  "maxConcurrentAgentsIncludingRoot": 3,
+  "pipeline": [
+    {
+      "stage": "A",
+      "name": "采集与真实初版资产",
+      "requiredOutputs": [
+        "provided-source-excerpts",
+        "causal-story-plan",
+        "reference-provenance",
+        "real-tripo-task-receipts",
+        "raw-pbr-glb"
+      ]
+    },
+    {
+      "stage": "B",
+      "name": "审核与整合",
+      "requiredOutputs": [
+        "story-review",
+        "asset-calibration",
+        "scene-cue-binding",
+        "complete-narration-manifest",
+        "timeline"
+      ]
+    },
+    {
+      "stage": "C",
+      "name": "桌面讲解网页",
+      "requiredOutputs": [
+        "source-code",
+        "real-runtime-asset-loading",
+        "caption-below-canvas",
+        "playback-controls",
+        "errors-with-recovery-boundaries"
+      ]
+    },
+    {
+      "stage": "D",
+      "name": "真实效果与交付验证",
+      "requiredOutputs": [
+        "current-build-and-tests",
+        "visible-natural-playback-evidence",
+        "human-story-and-audio-review",
+        "complete-recording",
+        "full-source-zip-clean-extraction-check"
+      ]
+    }
+  ],
+  "publicVoicePolicy": {
+    "voiceId": "history3d-public-uncle-fu-r13",
+    "privateVoiceForbidden": true,
+    "publicSyntheticReferenceCloningAllowedWithUserAuthorization": true,
+    "referenceSha256": "f47d4c2e50cdbc2dee165d7cd2415c5e667c9af68863127701344c20b6f73e37",
+    "noTrainingInNormalBuild": true,
+    "noPrivateModelWeightsInDelivery": true,
+    "publicWeightsAllowedOnlyInSeparateWhitelistedVoiceEnvironment": true
+  },
+  "evidencePolicy": {
+    "modelClaimsAreEvidence": false,
+    "providedExcerptMeansIndependentlyVerified": false,
+    "structuralPassMeansVisualPass": false,
+    "previewMeansFinalDelivery": false,
+    "oldRunEvidenceCertifiesNewVersion": false,
+    "defaultState": "pending"
+  },
+  "rules": [
+    {
+      "id": "A01",
+      "stage": "A",
+      "requirement": "先冻结观众应理解的人物、目的、事件、原因与结果，再安排图像。外交故事按因果与时间展开，壁画作为辅助和后记；不能要求观众先学会读画才能听懂故事。",
+      "caseEvidenceRefs": [
+        "E01",
+        "E20"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "human",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    },
+    {
+      "id": "A02",
+      "stage": "A",
+      "requirement": "每个叙事claim与图像解释保留source ID、原文/机构解读、稳定来源指针及具体边界；区分 `history`、`mural`、`interpretation`。来源列表和模型意见不能代替回读原文。",
+      "caseEvidenceRefs": [
+        "E01",
+        "E02"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    },
+    {
+      "id": "A03",
+      "stage": "A",
+      "requirement": "区分史料支持的事实、他人转述、争议、未知与艺术补全。不能把后来事件并入当事人的经历，也不能用精确肖像、统一服装或猜测器物内部填空；张骞专用反例见保留的r10证据。",
+      "caseEvidenceRefs": [
+        "E01",
+        "E02",
+        "E03",
+        "E12"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "human",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    },
+    {
+      "id": "A04",
+      "stage": "A",
+      "requirement": "A层必须交付真实主资产初版GLB及task/request/费用/原始文件证据。2D概念图可作为参考，不能登记为3D完成。要事先列明人物、关键道具、建筑等主资产及页面采用位置。",
+      "caseEvidenceRefs": [
+        "E04",
+        "E05"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    },
+    {
+      "id": "A05",
+      "stage": "A",
+      "requirement": "Tripo任务冻结输入、参数、seed、预算与授权范围；保留task ID、raw下载、实耗、请求摘要和失败状态。未知POST结果先查已有任务，禁止盲目重复付费。model API和Tripo API独立配置、独立请求类型、独立日志及成本边界，不能把文本/概念图API成功算作3D任务成功。",
+      "caseEvidenceRefs": [
+        "E04",
+        "E21"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    },
+    {
+      "id": "A06",
+      "stage": "A",
+      "requirement": "参考质量不足时先拒绝角色候选，不能以放大图片或生成任务成功补足丢失结构。确认可读参考/概念形象，再做新的受控生成。失败raw与审核保留。",
+      "caseEvidenceRefs": [
+        "E06"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "human",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    },
+    {
+      "id": "B01",
+      "stage": "B",
+      "requirement": "raw不可改写；归一化另存派生GLB、可编辑工程和真实多向图。重导入实测比例、前轴、落地、mesh/材质、嵌入图像、UV及PBR通道。prompt数字不能当作实际尺寸。",
+      "caseEvidenceRefs": [
+        "E04",
+        "E07"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    },
+    {
+      "id": "B02",
+      "stage": "B",
+      "requirement": "页面必须实际请求、校验并导入被采用的GLB；将生成原件、派生件、匿名复用、A/B与拒绝件区分。禁止用数据标签或看板文件存在代替当前场景采用证据。",
+      "caseEvidenceRefs": [
+        "E05",
+        "E08",
+        "E16"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    },
+    {
+      "id": "B03",
+      "stage": "B",
+      "requirement": "人物辨识采用独立形象、体型与轮廓，明确艺术设定。附件独立，避免融合武器/行囊/长杖破坏骨骼选区。复用资产允许不同展示角色，但角色语义和史料边界必须分别标明。",
+      "caseEvidenceRefs": [
+        "E03",
+        "E04",
+        "E05",
+        "E09"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "human",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ],
+      "condition": "only when the generated plan includes corresponding human animation; absence means not applicable, never fabricated pass"
+    },
+    {
+      "id": "B04",
+      "stage": "B",
+      "requirement": "步态依据真实位移/路程，测试实际模型的脚底、独立腿轨迹、接地、抬脚、袍摆连续性与材质/UV；不能仅让整个静态人物上下摆动。停步/seek应确定性重建。动作参考要记录来源与提取验证。",
+      "caseEvidenceRefs": [
+        "E10",
+        "E11"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ],
+      "condition": "only when the generated plan includes corresponding human animation; absence means not applicable, never fabricated pass"
+    },
+    {
+      "id": "B05",
+      "stage": "B",
+      "requirement": "停臂/抓握检查须选取原模型上已实看位置的真实手指/前臂顶点，独立于现有skin weights；不能以骨骼旋转固定或“已分配手权重”的选区自证。保持同一坐标系、更新祖先world matrix，地面用真实场景平面。",
+      "caseEvidenceRefs": [
+        "E09",
+        "E11",
+        "E17",
+        "E18"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ],
+      "condition": "only when the generated plan includes corresponding human animation; absence means not applicable, never fabricated pass"
+    },
+    {
+      "id": "B06",
+      "stage": "B",
+      "requirement": "拦截、停步、转身、护送分别编排；转向朝真实路径切线，避免倒退、整圈旋转、站立滑步。支撑脚在pivot期间固定，起停位置、yaw、步态权重和膝角连续；营地路径用真实障碍网格核查。",
+      "caseEvidenceRefs": [
+        "E11",
+        "E19"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ],
+      "condition": "only when the generated plan includes corresponding human animation; absence means not applicable, never fabricated pass"
+    },
+    {
+      "id": "B07",
+      "stage": "B",
+      "requirement": "场景过渡键应包含实际场景身份，不能只比较spatial/map模式。旧场景冻结到遮罩完全覆盖后再切；连续接见/市场句保留终态，ambient clock不按每句归零；拖动/重播重建状态。",
+      "caseEvidenceRefs": [
+        "E13"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    },
+    {
+      "id": "B08",
+      "stage": "B",
+      "requirement": "地图与叙事段落连续对应，不因换句重播同一路线；大小地图共用时钟，现代参考路线与历史未知边界明确标为示意。无旅行情节时不强制使用地图。",
+      "caseEvidenceRefs": [
+        "E05",
+        "E12",
+        "E13"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    },
+    {
+      "id": "B09",
+      "stage": "B",
+      "requirement": "先完成该句对应视觉动作再开始完整旁白。时间线用实测clip时长，加换句余量，并保持阅读下限；真实音频尚未播完不能因固定cue时钟截句。换声音只重算音轨与时间线，不擅改已确认故事或3D。",
+      "caseEvidenceRefs": [
+        "E01",
+        "E22",
+        "E23"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    },
+    {
+      "id": "B10",
+      "stage": "B",
+      "requirement": "固定用户认可的公开合成参考与官方基模，只接受正文的本地声音接口。记录真实克隆方式、模型、参考SHA、正文、字节与时长；禁止私人录音或权重进入公共环境。短试听不替代全篇和专名审核。",
+      "caseEvidenceRefs": [
+        "E24",
+        "E25"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "human",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    },
+    {
+      "id": "B11",
+      "stage": "B",
+      "requirement": "在线TTS把provider错误、明确配额错误、网络中断和未知提交分开；保存原始request、event ID、append-only receipt、原始SSE及已下载文件SHA。未知提交先查询，不盲重发。允许复用已核验部分轨，但全部cue成功、文本/音色/解码/时长/权利验证通过后才生成新manifest、切runtime，禁止混新旧音色充数。fallback保留已确认原稿及授权声音范围，分别记录模型/参考、隐私、费用与恢复边界；未经实跑不能声称fallback成功。",
+      "caseEvidenceRefs": [
+        "E30"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    },
+    {
+      "id": "C01",
+      "stage": "C",
+      "requirement": "字幕在画布下方独立区域，中文/英文与cue绑定；要有阅读面积、滚动/高度调节，按Unicode字符显示。动作期与旁白期同步，讲图像方位时显示对应原画，缺失3D时使用匹配地图。",
+      "caseEvidenceRefs": [
+        "E12",
+        "E23",
+        "E26"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "human",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    },
+    {
+      "id": "C02",
+      "stage": "C",
+      "requirement": "控件提供开始、暂停/继续、章节跳转、拖动重建与明确错误。加载时校验实际将播放的音频和模型字节；来源按钮从当前manifest显示真实音色/版本，避免旧文案。前台/后台状态须记录，不能伪造。",
+      "caseEvidenceRefs": [
+        "E05",
+        "E16",
+        "E22"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    },
+    {
+      "id": "C03",
+      "stage": "C",
+      "requirement": "model API与Tripo API分别接入；浏览器和交付包只读已落地资产及有权使用的公开/获授权音轨，不携带服务密钥。运行构建不得顺带重新生成收费资产、下载权重或训练。日志仅保留安全请求/结果摘要。",
+      "caseEvidenceRefs": [
+        "E21",
+        "E25",
+        "E27"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    },
+    {
+      "id": "C04",
+      "stage": "C",
+      "requirement": "交接包含完整源码、锁文件、实际资产/音轨、许可证、入口、修改与待办、当前验证。源码包排除凭据、私人音声/权重、缓存和venv；用户明确要求的公开声音环境另以白名单打包，含公开基模及运行时。每包记录bytes/SHA并验证安全解压。",
+      "caseEvidenceRefs": [
+        "E28",
+        "E29"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    },
+    {
+      "id": "D01",
+      "stage": "D",
+      "requirement": "分开验收工程、资产、动作数值、浏览器画面、听感、用户确认、录屏和封包；每次结论绑定版本、命令、原始日志/文件SHA及验收范围。禁止把模型“完成”或agent报告作为结果证据。",
+      "caseEvidenceRefs": [
+        "E08",
+        "E11",
+        "E14",
+        "E15",
+        "E16"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    },
+    {
+      "id": "D02",
+      "stage": "D",
+      "requirement": "浏览器必须实际可见且故事time自然推进。记录只读hidden=false/visible、URL、当前assets/version、至少3个带真实时钟的自然播放采样；期间不seek或改状态。同步实看动作、路线、字幕和音轨。",
+      "caseEvidenceRefs": [
+        "E15",
+        "E16"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    },
+    {
+      "id": "D03",
+      "stage": "D",
+      "requirement": "录屏必须解码核查帧时间戳覆盖目标窗口和实际画面变化，完整自然播放单独验收；传输版短视频、截图组或seek片段不能替代完整播放。保留原视频/人的项目动机录音，新剪辑采用独立文件。ASR候选不直接作为正式字幕。",
+      "caseEvidenceRefs": [
+        "E15",
+        "E20"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    },
+    {
+      "id": "D04",
+      "stage": "D",
+      "requirement": "最终ZIP须在独立新目录安全解包后执行锁文件安装、check、build和真实浏览器走读，并核对采用资产/音轨。旧包、旧日志和旧人工认可不得验收新版本；遇隐藏、冻结、错版本、缺文件或秘密则拒绝交付。",
+      "caseEvidenceRefs": [
+        "E14",
+        "E29"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    },
+    {
+      "id": "D05",
+      "stage": "D",
+      "requirement": "失败证据使用独占新路径/时间戳，保存失败→最小补丁→新运行结果；不得覆盖原始诊断、降低阈值或删失败来制造通过。复盘区分事实、根因假设、已作废假设、残余风险和回退条件。",
+      "caseEvidenceRefs": [
+        "E15",
+        "E17",
+        "E18",
+        "E19"
+      ],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    },
+    {
+      "id": "A07",
+      "stage": "A",
+      "requirement": "文物信息是provided context；身份、年代、材质、尺寸与馆藏的断言必须有对应原文，未知类别不强行凑齐。",
+      "caseEvidenceRefs": [],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "artifact"
+      ]
+    },
+    {
+      "id": "A08",
+      "stage": "A",
+      "requirement": "文物主资产使用本次原照片的图生任务，原图、上传、意图、任务、原始GLB可回查；失败不得以文本生成相似器物替代。",
+      "caseEvidenceRefs": [],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "artifact"
+      ]
+    },
+    {
+      "id": "B12",
+      "stage": "B",
+      "requirement": "照片未覆盖的背面、内部、原色与残损补全明确为生成推断；模型不得标为扫描原件或考古复原定论。",
+      "caseEvidenceRefs": [],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "artifact"
+      ]
+    },
+    {
+      "id": "B13",
+      "stage": "B",
+      "requirement": "细节讲解绑定真实原图位置和来源；二维锚点不可伪称精确三维热点，展示比例与实测尺寸分开。",
+      "caseEvidenceRefs": [],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "artifact"
+      ]
+    },
+    {
+      "id": "B14",
+      "stage": "B",
+      "requirement": "逐词字幕与音轨SHA、正文及真实媒体时钟绑定；切句、暂停、倍速、拖动和阅读尾段要实际验证。",
+      "caseEvidenceRefs": [],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    },
+    {
+      "id": "C05",
+      "stage": "C",
+      "requirement": "新声音环境只含官方源码、干净运行时、公开模型白名单与唯一认可参考；入口拒绝参考/权重/文件路径参数，绑定loopback，不自动复制旧私人环境。",
+      "caseEvidenceRefs": [],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    },
+    {
+      "id": "D06",
+      "stage": "D",
+      "requirement": "壁画和文物分别实跑并人工核对故事、图生身份与细节；离线fixture只能证明代码路径，不能认证真实历史或生成质量。",
+      "caseEvidenceRefs": [],
+      "releaseBlocking": true,
+      "verificationMode": "mixed",
+      "defaultRunState": "pending",
+      "appliesTo": [
+        "mural",
+        "artifact"
+      ]
+    }
+  ],
+  "subjectTypes": [
+    "mural",
+    "artifact"
+  ],
+  "supersedes": "mural-story-quality-r10 for new runs only"
+}

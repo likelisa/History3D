@@ -1,0 +1,780 @@
+{
+  "schema": "history3d.asset-board.v1",
+  "date": "2026-10-03",
+  "counts": {
+    "current": 15,
+    "experiments": 4,
+    "rejected": 1,
+    "uniqueGLBs": 19
+  },
+  "scope": "现用以cinema-world.ts的15个GLB定义为准；张骞、甘父、细竹杖是本轮三个独立Tripo资产，旧envoy复用为匿名visitor。细竹杖用于市场货物，并按用户最新选择作为持节道具杖身的艺术载体；不表示汉节与大夏邛竹杖器制相同。A/B仅gate-b与故事共用原文件，staff-b对照保留；运行时服色、器物与动画不重复计为独立GLB。",
+  "sources": [
+    {
+      "path": "viewer/src/mural/cinema-world.ts",
+      "sha256": "357216384442dfd3827513c8dd7709e7f543bb33b59029578d8e71dffc3e1e11"
+    },
+    {
+      "path": "viewer/src/mural/attendant-variants.ts",
+      "sha256": "bf538deff35eb9648a4f7b1ebe1e98ff9573b85d37b4a4ac226a35865f1d4d31"
+    },
+    {
+      "path": "viewer/public/mural-assets/manifest.json",
+      "sha256": "3f508be9652fcc0d2ae02ce4167b940f990fff3d2ea1f9d9bd5b1d39916298cb"
+    },
+    {
+      "path": "viewer/public/mural-assets/scene-assets-r4.json",
+      "sha256": "97a1fb94b0b126ab78503fe04e139b92a6c59488f9affc5bd6e1b28eefda41bb"
+    },
+    {
+      "path": "viewer/public/mural-assets/departure-outpost-r8-manifest.json",
+      "sha256": "6252e95708ff55916690dc4f41ad2f46ee069048d4304e6d1b0c6409813927eb"
+    },
+    {
+      "path": "viewer/public/tripo-prompt-lab/results.json",
+      "sha256": "d8c0400310a24239d62c5a27e44fdc7e05cc974b5ba127133150b4559c4dd3c3"
+    },
+    {
+      "path": "viewer/public/tripo-prompt-lab/experiment.json",
+      "sha256": "4af42fa85616fd3b4117a7e7ac45ce19dc9bf11e525e7af652b83616dbf2d100"
+    },
+    {
+      "path": "viewer/public/mural-assets/zhangqian-mural-trial/provenance.json",
+      "sha256": "1382a5e1795437a8a171da05570b375e2bc109d16294a76400111d37699eb63c"
+    },
+    {
+      "path": "viewer/public/mural-assets/zhangqian-mural-trial/visual-review.json",
+      "sha256": "d0bb5da1ca2c8db6f26a8d62403e504bf256271c0c5f81d796ef60c5c13ae553"
+    },
+    {
+      "path": "viewer/public/mural-assets/tripo-story-r9/manifest.json",
+      "sha256": "41e35e86fdeb7d887cea91fd1fb8e963cacc93b462bfc68783ced95172e68678"
+    },
+    {
+      "path": "viewer/public/mural-assets/tripo-story-r9/normalized-manifest.json",
+      "sha256": "c54618e14503e3c15d907bdfe70a2e476a0b1500ea09ebf678156aae85e01057"
+    },
+    {
+      "path": "viewer/public/mural-assets/tripo-story-r9/plan.json",
+      "sha256": "018a376a8b882afe73f6f25557c6dd57ade9d22aa0c0176fbe014fa2cf673571"
+    }
+  ],
+  "thumbnailMethod": "本地Blender导入同一GLB，仅居中、显示归一化、设置正交相机与柔和灯光后渲染；不改GLB。每资产独立取景，不用于A/B同比例结论。",
+  "assets": [
+    {
+      "id": "envoy",
+      "title": "张骞 · 独立汉使人物",
+      "group": "current",
+      "path": "/mural-assets/tripo-story-r9/zhangqian.glb",
+      "bytes": 10035388,
+      "sha256": "2427845d0729d8c2fae1f518567d59e4d19db9610a636247952a0c37c590cd80",
+      "stats": {
+        "triangles": 57432,
+        "meshes": 1,
+        "materials": 1,
+        "images": 3,
+        "normalMappedMaterials": 1,
+        "animations": 0
+      },
+      "thumbnail": "/asset-board-r8/thumbs/envoy.png",
+      "source": "Tripo v3.1详细文字生成 / Blender比例与前轴校准",
+      "sourceRecord": "/mural-assets/tripo-story-r9/normalized-manifest.json",
+      "use": "1.75米张骞，汉使出发、扣留、西行、接见与贸易见闻",
+      "boundary": "汉使身份与经历有记载；约42岁、瘦高长脸、红袍和帽为辨人艺术设定，不是确证肖像或统一汉使制服。",
+      "priority": "P1 · 实看人物步态、袍摆与手脚；静态模型通过不等于动作验收。",
+      "origin": "tripo",
+      "viewer": "/mural.html",
+      "integrity": "文件大小与SHA-256已核对",
+      "status": "现用 / 已整合",
+      "thumbnailSha256": "4ad586d3c245879610597b051323772f018c7102dd1ada815fc6023276d95e79",
+      "taskId": "629b77f4-64b0-4aa7-b38d-33b3b6b21cd7",
+      "generationRecord": "/mural-assets/tripo-story-r9/manifest.json",
+      "planRecord": "/mural-assets/tripo-story-r9/plan.json",
+      "rawPath": "/mural-assets/tripo-story-r9/zhangqian-raw.glb",
+      "rawSha256": "5ebe1a28dac95ab5e3b0e51f117eeec8445d6b9cfd96c3800c135680d780a2fd",
+      "creditsConsumed": 50,
+      "heightMeters": 1.75,
+      "frontAxis": "+Z",
+      "editableBlend": "/mural-assets/tripo-story-r9/zhangqian-normalized.blend",
+      "reviewBlend": "/mural-assets/tripo-story-r9/review/normalized/zhangqian-normalized.blend",
+      "reviewViews": [
+        {
+          "view": "front-plus-z",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/zhangqian-front-plus-z.png",
+          "sha256": "65a013b5588b7728f6d0051a0d778809757d69b6dfd44544b4760346c643c0e5",
+          "bytes": 737583
+        },
+        {
+          "view": "back-minus-z",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/zhangqian-back-minus-z.png",
+          "sha256": "fba272845342f7259288d71e0404f10dc4cd84d0bed90077c1f596b62c50a8d9",
+          "bytes": 721211
+        },
+        {
+          "view": "right-plus-x",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/zhangqian-right-plus-x.png",
+          "sha256": "63907659bab9293a373fcc17c8c6cd61fb86d1aa20149598b4aea1deba044480",
+          "bytes": 693876
+        },
+        {
+          "view": "left-minus-x",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/zhangqian-left-minus-x.png",
+          "sha256": "9dda8d7ce4bb16a825a1b3c9706cd508f56684bf428a0468d6b20b8f67662f6c",
+          "bytes": 699392
+        },
+        {
+          "view": "three-quarter",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/zhangqian-three-quarter.png",
+          "sha256": "029459ddc9ddff20ed7463dd5292b7586783b4c8c057f2e5c96416fdf736a3cd",
+          "bytes": 738548
+        }
+      ],
+      "animationStatus": "not evaluated; static GLB is not animation acceptance"
+    },
+    {
+      "id": "attendant",
+      "title": "匿名持节随从 · 灰蓝袍",
+      "group": "current",
+      "path": "/yuezhi/figures/yuezhi.glb",
+      "bytes": 1939608,
+      "sha256": "5051979679573bec5b1c4805480698de04654dea3d2ba221c708223e795411fa",
+      "stats": {
+        "triangles": 38030,
+        "meshes": 1,
+        "materials": 1,
+        "images": 3,
+        "normalMappedMaterials": 1,
+        "animations": 0
+      },
+      "thumbnail": "/asset-board-r8/thumbs/attendant.png",
+      "source": "Tripo文字生成 / 运行时灰蓝袍与独立持节道具",
+      "sourceRecord": "/yuezhi/figures/manifest.json",
+      "use": "行进使团中1.72米灰蓝袍持节者；接见与市场中的匿名人物保持匿名",
+      "boundary": "缩略图展示基础GLB；灰蓝袍色与持节道具在运行时添加。按用户最新选择，细竹杖作为持节道具杖身的艺术载体，不据此认定汉节材质或器制。匿名身份、服色和配件为叙事示意，不是考证的汉使制服。甘父已有独立资产，不再描述同模双随从。",
+      "priority": "P1 · 保持持节语义、细杖握持与手臂固定；其他接见者和市场人物不全局认定为甘父。",
+      "origin": "tripo",
+      "viewer": "/mural.html",
+      "integrity": "文件大小与SHA-256已核对",
+      "status": "现用 / 已整合",
+      "thumbnailSha256": "23107eab849423911cbcfc31f24f911ba03645702f0c4b38418d656c17ca37d9"
+    },
+    {
+      "id": "ganfu",
+      "title": "甘父 · 独立远行伙伴",
+      "group": "current",
+      "path": "/mural-assets/tripo-story-r9/ganfu.glb",
+      "bytes": 9357096,
+      "sha256": "8aad47d0da6781e77ba488ae3ac12042dfb09ac3256caba97bbce240a79234ae",
+      "stats": {
+        "triangles": 59736,
+        "meshes": 1,
+        "materials": 1,
+        "images": 3,
+        "normalMappedMaterials": 1,
+        "animations": 0
+      },
+      "thumbnail": "/asset-board-r8/thumbs/ganfu.png",
+      "source": "Tripo v3.1详细文字生成 / Blender比例与前轴校准",
+      "sourceRecord": "/mural-assets/tripo-story-r9/normalized-manifest.json",
+      "use": "1.69米甘父，同行、帮助西行、十三年后归汉；携囊是可拆运行时附件",
+      "boundary": "史书记胡人、善射和同行，不据此认定匈奴族属。方脸、壮实体型、短赭袍与年龄为艺术设定；善射不以人物融合弓箭表示。",
+      "priority": "P1 · 实看脚尖中和与两腿步态，保留短袍、空手和清楚轮廓。",
+      "origin": "tripo",
+      "viewer": "/mural.html",
+      "integrity": "文件大小与SHA-256已核对",
+      "status": "现用 / 已整合",
+      "thumbnailSha256": "139b5578e3cac144a823079b2a9fc9693b2a0de3f822135470d100c797cce272",
+      "taskId": "c3c6a259-6e20-4811-8d87-dd6842442e46",
+      "generationRecord": "/mural-assets/tripo-story-r9/manifest.json",
+      "planRecord": "/mural-assets/tripo-story-r9/plan.json",
+      "rawPath": "/mural-assets/tripo-story-r9/ganfu-raw.glb",
+      "rawSha256": "d4c0b7deb1513119bd1042d33e414eeef961a70a2723918c6c62fd3c97951a82",
+      "creditsConsumed": 50,
+      "heightMeters": 1.69,
+      "frontAxis": "+Z",
+      "editableBlend": "/mural-assets/tripo-story-r9/ganfu-normalized.blend",
+      "reviewBlend": "/mural-assets/tripo-story-r9/review/normalized/ganfu-normalized.blend",
+      "reviewViews": [
+        {
+          "view": "front-plus-z",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/ganfu-front-plus-z.png",
+          "sha256": "f5e56a61e70b9f15fe74fae42db6a9e03a90c2c59d3efce4dfa91b8a2ded41fc",
+          "bytes": 798177
+        },
+        {
+          "view": "back-minus-z",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/ganfu-back-minus-z.png",
+          "sha256": "dd8560cf958950f4bf397740c7bb03f1d79a578cf977b4aa4c6a9886c58c0e5b",
+          "bytes": 767460
+        },
+        {
+          "view": "right-plus-x",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/ganfu-right-plus-x.png",
+          "sha256": "9a6c1a27768600d16d8e31a3250c36578fe8d76949405a6040f04d1b110c41b8",
+          "bytes": 722833
+        },
+        {
+          "view": "left-minus-x",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/ganfu-left-minus-x.png",
+          "sha256": "4db262295244f995004a0f4803b2c6640d7581fa3f2038f5e6d321b862bdbad6",
+          "bytes": 724401
+        },
+        {
+          "view": "three-quarter",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/ganfu-three-quarter.png",
+          "sha256": "21b09779dc9fa9ac0abac2a95a65aadbb37b75045add14196bbdaff5e505f037",
+          "bytes": 796722
+        }
+      ],
+      "animationStatus": "not evaluated; static GLB is not animation acceptance"
+    },
+    {
+      "id": "visitor",
+      "title": "大夏商旅 · 保留旧人物",
+      "group": "current",
+      "path": "/yuezhi/figures/envoy.glb",
+      "bytes": 1959504,
+      "sha256": "74277e7f5b769f92a608fec1b77ad928415155b37d08d07a1c843382a0f8ea26",
+      "stats": {
+        "triangles": 37860,
+        "meshes": 1,
+        "materials": 1,
+        "images": 3,
+        "normalMappedMaterials": 1,
+        "animations": 0
+      },
+      "thumbnail": "/asset-board-r8/thumbs/visitor.png",
+      "source": "既有Tripo文字生成 / 匿名配角再利用",
+      "sourceRecord": "/yuezhi/figures/manifest.json",
+      "use": "市场中的匿名商旅，复用先前envoy基础GLB，不作为本轮新生成张骞",
+      "boundary": "面貌与服装为示意；不认定具体商人、民族或服装实制。缩略图保留原人物渲染，旧张骞卡片作为过程证据归档。",
+      "priority": "P2 · 配角服务市场交流，避免与新的张骞、甘父混淆。",
+      "origin": "tripo",
+      "viewer": "/mural.html",
+      "integrity": "文件大小与SHA-256已核对",
+      "status": "现用 / 已整合",
+      "thumbnailSha256": "2a19944e8e5717daa7927c6a860a89374f4b352054a91cbea55b94cf0d963318"
+    },
+    {
+      "id": "qiong-bamboo",
+      "title": "细竹杖 · 市场货物与持节道具杖身",
+      "group": "current",
+      "path": "/mural-assets/tripo-story-r9/qiong-bamboo.glb",
+      "bytes": 10764692,
+      "sha256": "0b08f01e76410e412d2b8a5aabcb653452507ef7d9646b1a5c7dd13494bff6f4",
+      "stats": {
+        "triangles": 28206,
+        "meshes": 1,
+        "materials": 1,
+        "images": 3,
+        "normalMappedMaterials": 1,
+        "animations": 0
+      },
+      "thumbnail": "/asset-board-r8/thumbs/qiong-bamboo.png",
+      "source": "Tripo v3.1详细文字生成 / Blender竹杖比例校准",
+      "sourceRecord": "/mural-assets/tripo-story-r9/normalized-manifest.json",
+      "use": "大夏市场中来自蜀地的货物；同一GLB按用户最新选择复用为行进与接见中的持节道具杖身",
+      "boundary": "《史记》记邛竹杖、蜀布及从身毒购得的转述，也记持汉节；这两项记载不证明两者器制相同。竹质杖身作为持节道具的艺术载体，不是汉节考古复原。1.55米、3.2厘米横径和具体竹节为本地校准的艺术示意，不称武器或蛇杖。",
+      "priority": "P1 · 保留竹节、纤维和连续细杆；实看握持与货物近景，不表示张骞亲至身毒。",
+      "origin": "tripo",
+      "viewer": "/mural.html",
+      "integrity": "文件大小与SHA-256已核对",
+      "status": "现用 / 已整合",
+      "thumbnailSha256": "6d9219e7916d76797b6f31a4d33b56db7378c5d26ec379749fecd62455dd0032",
+      "taskId": "f6942558-b7ee-480f-9f77-b32467a9972b",
+      "generationRecord": "/mural-assets/tripo-story-r9/manifest.json",
+      "planRecord": "/mural-assets/tripo-story-r9/plan.json",
+      "rawPath": "/mural-assets/tripo-story-r9/qiong-bamboo-raw.glb",
+      "rawSha256": "b1360b2098aade7adbc8153613b698138025e5b788812dafba2de0430bd490f2",
+      "creditsConsumed": 50,
+      "heightMeters": 1.55,
+      "frontAxis": "+Z",
+      "editableBlend": "/mural-assets/tripo-story-r9/qiong-bamboo-normalized.blend",
+      "reviewBlend": "/mural-assets/tripo-story-r9/review/normalized/qiong-bamboo-normalized.blend",
+      "reviewViews": [
+        {
+          "view": "front-plus-z",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/qiong-bamboo-front-plus-z.png",
+          "sha256": "c597f5a1b025927bbb72a56da5323679a5b856dfe897224413a17eff71ee089a",
+          "bytes": 617145
+        },
+        {
+          "view": "back-minus-z",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/qiong-bamboo-back-minus-z.png",
+          "sha256": "313d58c737270a3f736587a66fc798f30d3256cd77b29377c46d102199185b4a",
+          "bytes": 616614
+        },
+        {
+          "view": "right-plus-x",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/qiong-bamboo-right-plus-x.png",
+          "sha256": "0b0c4d4b249e86c13fbfc97454c58c58efb087f53ff31f65b1fa32e53278abaa",
+          "bytes": 614499
+        },
+        {
+          "view": "left-minus-x",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/qiong-bamboo-left-minus-x.png",
+          "sha256": "68c6bd2c68fb7eb9320e146fa2b5f7aa46ee68ad4bb8e01a66925bac6e0b73e9",
+          "bytes": 616517
+        },
+        {
+          "view": "three-quarter",
+          "path": "/mural-assets/tripo-story-r9/review/normalized/qiong-bamboo-three-quarter.png",
+          "sha256": "95e5b9f3f013651f598dab3d49ef37b37e3812b52efc0071c5c288fb286c371c",
+          "bytes": 625226
+        }
+      ],
+      "animationStatus": "not evaluated; static GLB is not animation acceptance",
+      "diameterMeters": 0.03200000338256359
+    },
+    {
+      "id": "horse",
+      "title": "壁画马匹",
+      "group": "current",
+      "path": "/yuezhi/murals/mural-horse.glb",
+      "bytes": 5612424,
+      "sha256": "638f54e5d1016617d48871c295a7719706f4f0c8aac1600d6bc816a8bb167f35",
+      "stats": {
+        "triangles": 28678,
+        "meshes": 1,
+        "materials": 1,
+        "images": 3,
+        "normalMappedMaterials": 1,
+        "animations": 0
+      },
+      "thumbnail": "/asset-board-r8/thumbs/horse.png",
+      "source": "Tripo文字生成 / 第323窟马形与矿物色意象",
+      "sourceRecord": "/mural-assets/manifest.json",
+      "use": "辞行、西行与资产展示",
+      "boundary": "艺术化转译初唐壁画，不是汉代马具的考古复原。",
+      "priority": "P1 · 镜头里避开马遮住主角与汉节；补马具近景。",
+      "origin": "tripo",
+      "viewer": "/mural.html",
+      "integrity": "文件大小与SHA-256已核对",
+      "status": "现用 / 已整合",
+      "thumbnailSha256": "8407f61ae40c0fd0798dc5a69ccd5596669939293d17015f162ce17953b8f81f"
+    },
+    {
+      "id": "gate",
+      "title": "现用城门 · Tripo B",
+      "group": "current",
+      "path": "/tripo-prompt-lab/gate-b.glb",
+      "bytes": 4631592,
+      "sha256": "e112e16edec6cf428b28a99e4e42fc901cf8921f80861a4a8a1c7f4c535f76aa",
+      "stats": {
+        "triangles": 37181,
+        "meshes": 1,
+        "materials": 1,
+        "images": 3,
+        "normalMappedMaterials": 1,
+        "animations": 0
+      },
+      "thumbnail": "/asset-board-r8/thumbs/gate.png",
+      "source": "Tripo提示词A/B试验，精细提示词B",
+      "sourceRecord": "/tripo-prompt-lab/results.json",
+      "use": "后世壁画的抵城转译",
+      "boundary": "参考第323窟的小城轮廓；不是已确认的汉代大夏城门复原。",
+      "priority": "P2 · 看通道和前后厚度，再处理城门与地面的衔接。",
+      "origin": "tripo",
+      "viewer": "/tripo-lab.html",
+      "integrity": "文件大小与SHA-256已核对",
+      "status": "现用 / 已整合",
+      "thumbnailSha256": "e6ca009b7b562fce0456e632e823dae398163db980e3e72ad336b9e9b1b81611",
+      "taskId": "6e663572-c341-481e-ab89-1635dba4bf3a"
+    },
+    {
+      "id": "monk",
+      "title": "壁画僧人",
+      "group": "current",
+      "path": "/mural-assets/monk.glb",
+      "bytes": 5341784,
+      "sha256": "0ae41c1b2f48e0da1effbd992d00cacb60e62bb2f897a7c83e987feb4aa1445d",
+      "stats": {
+        "triangles": 38342,
+        "meshes": 1,
+        "materials": 1,
+        "images": 3,
+        "normalMappedMaterials": 1,
+        "animations": 0
+      },
+      "thumbnail": "/asset-board-r8/thumbs/monk.png",
+      "source": "Tripo文字生成 / 第323窟人物解读",
+      "sourceRecord": "/mural-assets/monk-provenance.json",
+      "use": "故事结束后的初唐壁画改写说明",
+      "boundary": "用于解释初唐画中情节；不证明首次出使时张骞见僧问佛。",
+      "priority": "P2 · 接迎全身朝向自然；服装细节服务原画的理解。",
+      "origin": "tripo",
+      "viewer": "/mural.html",
+      "integrity": "文件大小与SHA-256已核对",
+      "status": "现用 / 已整合",
+      "thumbnailSha256": "493ca07f3d58f57060e9f0d4d9c2cf74b541608acd11620d62b4a41b22fba362"
+    },
+    {
+      "id": "tower",
+      "title": "壁画佛塔",
+      "group": "current",
+      "path": "/mural-assets/tower.glb",
+      "bytes": 4223208,
+      "sha256": "f31d7c936590c6074a1f3c637377698845236e4cd7b3f4f55a070b6984af5969",
+      "stats": {
+        "triangles": 37038,
+        "meshes": 1,
+        "materials": 1,
+        "images": 3,
+        "normalMappedMaterials": 1,
+        "animations": 0
+      },
+      "thumbnail": "/asset-board-r8/thumbs/tower.png",
+      "source": "Tripo文字生成 / 第323窟建筑解读",
+      "sourceRecord": "/mural-assets/tower-provenance.json",
+      "use": "后世壁画中的佛教叙事",
+      "boundary": "仅作初唐壁画空间转译；塔的隐蔽面和尺度属于推演。",
+      "priority": "P1 · 优先细化塔层、基座、邻近建筑与空间比例。",
+      "origin": "tripo",
+      "viewer": "/mural.html",
+      "integrity": "文件大小与SHA-256已核对",
+      "status": "现用 / 已整合",
+      "thumbnailSha256": "9e187a1e5a1e38dce940db5aa9daf98549995d7f8aa46f9f53c298e327dcd9fc"
+    },
+    {
+      "id": "xiongnu",
+      "title": "匈奴看守 · 基础人物",
+      "group": "current",
+      "path": "/yuezhi/figures/xiongnu.glb",
+      "bytes": 4198512,
+      "sha256": "1802a80083cd118295717f6e405a5bc98b99a48406dd2074c1a580c7a591f47f",
+      "stats": {
+        "triangles": 49256,
+        "meshes": 1,
+        "materials": 1,
+        "images": 3,
+        "normalMappedMaterials": 1,
+        "animations": 0
+      },
+      "thumbnail": "/asset-board-r8/thumbs/xiongnu.png",
+      "source": "Tripo文字生成 / 多源服饰参考 / 项目变体",
+      "sourceRecord": "/yuezhi/figures/xiongnu-manifest.json",
+      "use": "扣留场景的匿名看守",
+      "boundary": "参考帽、袍、靴、带饰等跨时地材料；不是统一军服、真实肖像或确定穿搭。",
+      "priority": "P1 · 对比两个看守变体与使团身份，修正近景遮挡。",
+      "origin": "tripo",
+      "viewer": "/yuezhi.html",
+      "integrity": "文件大小与SHA-256已核对",
+      "status": "现用 / 已整合",
+      "thumbnailSha256": "6e360456509432d0cbadb63790672cfd44327d08af99ffdb0e4f89bcc1d448ca"
+    },
+    {
+      "id": "reception-court",
+      "title": "月氏接见前院",
+      "group": "current",
+      "path": "/mural-assets/reception-court.glb",
+      "bytes": 5566684,
+      "sha256": "051822ecb55da21953d80dc7c3b2d190fedff674d73b9cd1f14c027d7d74186a",
+      "stats": {
+        "triangles": 19100,
+        "meshes": 9,
+        "materials": 9,
+        "images": 19,
+        "normalMappedMaterials": 9,
+        "animations": 0
+      },
+      "thumbnail": "/asset-board-r8/thumbs/reception-court.png",
+      "source": "Blender程序搭建 / 内嵌PBR细化",
+      "sourceRecord": "/mural-assets/reception-court-manifest.json",
+      "use": "主客交涉、求盟未成",
+      "boundary": "史书未详载接见建筑和礼仪；围合院落与棚毯是空间示意，不是成功会盟场。",
+      "priority": "P1 · 接见补光与主客中景；人物表意比增加装饰优先。",
+      "origin": "authored",
+      "viewer": "/mural.html",
+      "integrity": "文件大小与SHA-256已核对",
+      "status": "现用 / 已整合",
+      "thumbnailSha256": "c12e05550d610c49a4ded5a8dacb34d04a515d15e7b8ee789d44c594f537655f"
+    },
+    {
+      "id": "market",
+      "title": "大夏市场场景",
+      "group": "current",
+      "path": "/yuezhi/sets/market-refined.glb",
+      "bytes": 3364120,
+      "sha256": "3690fdef841e35d5370bc74a333092a9a875a89b60521be861fe017423cff542",
+      "stats": {
+        "triangles": 9680,
+        "meshes": 47,
+        "materials": 6,
+        "images": 12,
+        "normalMappedMaterials": 4,
+        "animations": 0
+      },
+      "thumbnail": "/asset-board-r8/thumbs/market.png",
+      "source": "Blender程序搭建 / 材质细化 / 运行时货物补充",
+      "sourceRecord": "/yuezhi/sets/refined-manifest.json",
+      "use": "贸易见闻与蜀物问题",
+      "boundary": "史书提供城邑、市场和物产线索；摊位具体形状、交易动作属于展示推演。",
+      "priority": "P1 · 蜀布与邛竹杖可辨，配角动作围绕交换。",
+      "origin": "authored",
+      "viewer": "/mural.html",
+      "integrity": "文件大小与SHA-256已核对",
+      "status": "现用 / 已整合",
+      "thumbnailSha256": "9e43e35761c2edfc1788a7ab2e1d5865dfdef250fc61234d5875c6882c937be9"
+    },
+    {
+      "id": "environment",
+      "title": "河谷环境与植被",
+      "group": "current",
+      "path": "/yuezhi/environment-refined.glb",
+      "bytes": 11547972,
+      "sha256": "2956955061a5278a293320c598719c175e74c28133aa8a2785e4652760db2832",
+      "stats": {
+        "triangles": 59108,
+        "meshes": 66,
+        "materials": 7,
+        "images": 15,
+        "normalMappedMaterials": 5,
+        "animations": 0
+      },
+      "thumbnail": "/asset-board-r8/thumbs/environment.png",
+      "source": "Blender地形组合 / 内嵌PBR / 既有植被资产",
+      "sourceRecord": "/yuezhi/environment-refined-manifest.json",
+      "use": "行路、扣留和月氏/大夏的展示底景",
+      "boundary": "地形、河流与植被为情境示意，不是张骞路线实测地貌。",
+      "priority": "P2 · 降低重复地面纹理、改善远山比例与空天占比。",
+      "origin": "authored",
+      "viewer": "/mural.html",
+      "integrity": "文件大小与SHA-256已核对",
+      "status": "现用 / 已整合",
+      "thumbnailSha256": "ce332c016bfbd67ca606c0da40624c4e1673bc228ab02ae3245155669d696920"
+    },
+    {
+      "id": "detention-camp",
+      "title": "匈奴扣留营地",
+      "group": "current",
+      "path": "/mural-assets/detention-camp.glb",
+      "bytes": 5459324,
+      "sha256": "b6466afe31affc00faf8b689f3a08d300b819a9c86a8541d6c4b9298106d4001",
+      "stats": {
+        "triangles": 36737,
+        "meshes": 8,
+        "materials": 8,
+        "images": 18,
+        "normalMappedMaterials": 8,
+        "animations": 0
+      },
+      "thumbnail": "/asset-board-r8/thumbs/detention-camp.png",
+      "source": "Blender程序搭建 / 内嵌PBR / 帐绳器物细化",
+      "sourceRecord": "/mural-assets/detention-camp-manifest.json",
+      "use": "扣留十余年，使命未忘",
+      "boundary": "张骞被留的史实有记载；营地布局、帐篷及守卫站位未经考古确认。",
+      "priority": "P1 · 用张骞与看守中景讲清受阻；不以随机路人制造热闹。",
+      "origin": "authored",
+      "viewer": "/mural.html",
+      "integrity": "文件大小与SHA-256已核对",
+      "status": "现用 / 已整合",
+      "thumbnailSha256": "c0380420ee51391510dd237b448c930ad4e8ab2891b89fff056d704d6e830c0c"
+    },
+    {
+      "id": "departure-outpost",
+      "title": "汉使出发关口",
+      "group": "current",
+      "path": "/mural-assets/departure-outpost-r8.glb",
+      "bytes": 6094372,
+      "sha256": "c90e502b3fac2f1c4c98c77571214a238db9239d6e3b53aa1ffb1f22e3cc302d",
+      "stats": {
+        "triangles": 35275,
+        "meshes": 10,
+        "materials": 10,
+        "images": 20,
+        "normalMappedMaterials": 10,
+        "animations": 0
+      },
+      "thumbnail": "/asset-board-r8/thumbs/departure-outpost.png",
+      "source": "Blender程序搭建 / 出发空间与道路细化",
+      "sourceRecord": "/mural-assets/departure-outpost-r8-manifest.json",
+      "use": "求盟出发，为西行故事建立汉使身份与任务",
+      "boundary": "史书提供出使使命；关口、道路和建筑具体形态为叙事空间示意，不是汉代遗址实测复原。",
+      "priority": "P1 · 出发镜头讲清张骞、持节随从和西行方向，保留人物腿脚与装备可见。",
+      "origin": "authored",
+      "viewer": "/mural.html",
+      "integrity": "文件大小与SHA-256已核对",
+      "status": "现用 / 已整合",
+      "thumbnailSha256": "89177846aec5a9c4cdf3835b89a732529553ab3bd6b4a26507ce7e4807f295da"
+    },
+    {
+      "id": "staff-a",
+      "title": "长杖 · A / 基础提示词",
+      "group": "experiment",
+      "path": "/tripo-prompt-lab/staff-a.glb",
+      "bytes": 3944472,
+      "sha256": "96d5ed7b043ab9a3123aa1d7c06fc3dfeacc254b839f2c6e071574ed65f6d7cc",
+      "stats": {
+        "triangles": 18816,
+        "meshes": 1,
+        "materials": 1,
+        "images": 3,
+        "normalMappedMaterials": 1,
+        "animations": 0
+      },
+      "thumbnail": "/asset-board-r8/thumbs/staff-a.png",
+      "source": "Tripo提示词A/B / 保留真实生成结果",
+      "sourceRecord": "/tripo-prompt-lab/results.json",
+      "use": "独立对照试验",
+      "boundary": "艺术化示意。单seed试验不能证明提示词稳定优越，也不证明历史真实性。",
+      "priority": "P2 · 在同灯光与比例下查看几何、PBR和结构，再决定是否替换。",
+      "origin": "tripo",
+      "viewer": "/tripo-lab.html",
+      "integrity": "文件大小与SHA-256已核对",
+      "status": "已生成 / 对照保留",
+      "prompt": "One straight slender wooden travel staff, about 1.8 meters long and 3 centimeters thick, with one plain dark leather grip band near the upper third. Matte brown wood. A single isolated 3D object for an illustrative historical scene, no person or background.",
+      "criteria": [
+        "长轴连续，比例纤细，无断裂、弯曲或多根混合",
+        "握柄、包裹接缝在近景可辨，未把木杖变成武器",
+        "木纹沿杆身且端面合理，侧光下能区分凹凸和纯贴图",
+        "转动后细节仍成立；远景轮廓清楚",
+        "握持空间可用，资产大小与面数可用于网页"
+      ],
+      "currentUseId": null,
+      "thumbnailSha256": "89e38a7b3fdd67008ad450d353dbc8e04575366bfc2ef699a628e714e55df692",
+      "taskId": "e5bf4680-f290-4606-903d-e4926b7404e0"
+    },
+    {
+      "id": "staff-b",
+      "title": "长杖 · B / 精细提示词",
+      "group": "experiment",
+      "path": "/tripo-prompt-lab/staff-b.glb",
+      "bytes": 3776036,
+      "sha256": "3c4af0837b8fa85bc9a03adf956e2ebfbd16d51c5bace824076c4ca99c75e2a5",
+      "stats": {
+        "triangles": 19138,
+        "meshes": 1,
+        "materials": 1,
+        "images": 3,
+        "normalMappedMaterials": 1,
+        "animations": 0
+      },
+      "thumbnail": "/asset-board-r8/thumbs/staff.png",
+      "source": "Tripo提示词A/B / 保留真实生成结果",
+      "sourceRecord": "/tripo-prompt-lab/results.json",
+      "use": "独立A/B对照保留；现用持节道具杖身已按用户选择改用r9细竹杖",
+      "boundary": "普通木杖艺术示意，现已停用于故事；原GLB和缩略图保留供A/B比较。史书可证持汉节，不能以该生成外观认定具体形制。",
+      "priority": "P2 · 在同灯光与比例下查看几何、PBR和结构，再决定是否替换。",
+      "origin": "tripo",
+      "viewer": "/tripo-lab.html",
+      "integrity": "文件大小与SHA-256已核对",
+      "status": "已生成 / 对照保留",
+      "prompt": "One straight slender wooden travel staff, about 1.8 meters long and 3 centimeters thick. A single continuous shaft with a subtly tapered lower end and softly rounded ends. One plain dark leather grip band near the upper third: overlapping leather edges, a fine seam and visible thickness. Fine shallow wood grain follows the shaft length; faint growth rings at the rounded ends; small wear marks where the hand grips and the tip meets the ground. Tangible surface relief, not just a painted pattern. Matte dark-brown aged wood, restrained roughness variation, no glossy varnish. Clear silhouette in close-up and from every angle, no broken or floating parts. Quiet earth colors compatible with a Dunhuang mural-inspired scene. A single isolated coherent object; artistic illustration, not an archaeological reconstruction.",
+      "criteria": [
+        "长轴连续，比例纤细，无断裂、弯曲或多根混合",
+        "握柄、包裹接缝在近景可辨，未把木杖变成武器",
+        "木纹沿杆身且端面合理，侧光下能区分凹凸和纯贴图",
+        "转动后细节仍成立；远景轮廓清楚",
+        "握持空间可用，资产大小与面数可用于网页"
+      ],
+      "currentUseId": null,
+      "thumbnailSha256": "b66d5d0c740d826864882c7b88acaa6397b5e9a383af67f18ac12559d97f3726",
+      "taskId": "c84e08ce-70d9-4638-b6d5-610fe61a5cd6"
+    },
+    {
+      "id": "gate-a",
+      "title": "城门与相连墙体 · A / 基础提示词",
+      "group": "experiment",
+      "path": "/tripo-prompt-lab/gate-a.glb",
+      "bytes": 4108168,
+      "sha256": "9b73ef9a420decbf9c7efc89fe98d48d4888b870d3a19a8e0dec8b6600435bc3",
+      "stats": {
+        "triangles": 36627,
+        "meshes": 1,
+        "materials": 1,
+        "images": 3,
+        "normalMappedMaterials": 1,
+        "animations": 0
+      },
+      "thumbnail": "/asset-board-r8/thumbs/gate-a.png",
+      "source": "Tripo提示词A/B / 保留真实生成结果",
+      "sourceRecord": "/tripo-prompt-lab/results.json",
+      "use": "独立对照试验",
+      "boundary": "艺术化示意。单seed试验不能证明提示词稳定优越，也不证明历史真实性。",
+      "priority": "P2 · 在同灯光与比例下查看几何、PBR和结构，再决定是否替换。",
+      "origin": "tripo",
+      "viewer": "/tripo-lab.html",
+      "integrity": "文件大小与SHA-256已核对",
+      "status": "已生成 / 对照保留",
+      "prompt": "One ancient city gate frontage with two short flanking walls, about 8 meters wide and 4 meters tall. A clear rectangular passage through a thick wall, a plain timber lintel, dark indigo-gray plaster and an earth-colored stone base. An isolated coherent mural-inspired architectural object, no whole city or background. Artistic illustration, not archaeological reconstruction.",
+      "criteria": [
+        "门洞贯通、墙有厚度、正背侧三面结构完整",
+        "门楣、门框、墙脚层次可辨，无悬浮构件",
+        "砌缝、缺口、抹灰层在侧光下可辨真实几何与贴图",
+        "近景细节与远景轮廓兼顾，不靠夸张装饰",
+        "没有欧洲城堡、飞檐宫殿等跑题造型；网页加载可接受"
+      ],
+      "currentUseId": null,
+      "thumbnailSha256": "69db8222d522e53a1905bf1360e74f795ac871b8e31546b07fc06b87fd07d9aa",
+      "taskId": "31dd6975-a14c-4734-9047-9e0cfd4e7bc9"
+    },
+    {
+      "id": "gate-b",
+      "title": "城门与相连墙体 · B / 精细提示词",
+      "group": "experiment",
+      "path": "/tripo-prompt-lab/gate-b.glb",
+      "bytes": 4631592,
+      "sha256": "e112e16edec6cf428b28a99e4e42fc901cf8921f80861a4a8a1c7f4c535f76aa",
+      "stats": {
+        "triangles": 37181,
+        "meshes": 1,
+        "materials": 1,
+        "images": 3,
+        "normalMappedMaterials": 1,
+        "animations": 0
+      },
+      "thumbnail": "/asset-board-r8/thumbs/gate.png",
+      "source": "Tripo提示词A/B / 保留真实生成结果",
+      "sourceRecord": "/tripo-prompt-lab/results.json",
+      "use": "独立对照试验",
+      "boundary": "艺术化示意。单seed试验不能证明提示词稳定优越，也不证明历史真实性。",
+      "priority": "P2 · 在同灯光与比例下查看几何、PBR和结构，再决定是否替换。",
+      "origin": "tripo",
+      "viewer": "/tripo-lab.html",
+      "integrity": "文件大小与SHA-256已核对",
+      "status": "已生成 / 同文件已用于故事",
+      "prompt": "One ancient city gate frontage inspired by the small walled-city silhouette in Dunhuang Mogao cave 323. About 8 meters wide and 4 meters tall, with two short connected flanking walls and a rectangular walk-through opening about 2.4 meters wide and 3 meters tall. Real wall thickness, recessed inner jambs, a clear timber lintel and a visible passage continuing through the rear; no door sealing the opening. A stone footing with restrained horizontal courses supports weathered indigo-gray plastered wall surfaces. Shallow joints, chipped plaster edges exposing the underlying material, rounded worn corners and small restrained cracks have coherent depth and scale. Thick connected top edges, readable front and rear, no thin facade sheet or floating ornaments. Matte mineral-pigment colors, subtle roughness variation, no glossy surface. One isolated coherent architectural object, no ground or surrounding city. Artistic mural adaptation, not a verified Han-era city reconstruction.",
+      "criteria": [
+        "门洞贯通、墙有厚度、正背侧三面结构完整",
+        "门楣、门框、墙脚层次可辨，无悬浮构件",
+        "砌缝、缺口、抹灰层在侧光下可辨真实几何与贴图",
+        "近景细节与远景轮廓兼顾，不靠夸张装饰",
+        "没有欧洲城堡、飞檐宫殿等跑题造型；网页加载可接受"
+      ],
+      "currentUseId": "gate",
+      "thumbnailSha256": "e6ca009b7b562fce0456e632e823dae398163db980e3e72ad336b9e9b1b81611",
+      "taskId": "6e663572-c341-481e-ab89-1635dba4bf3a"
+    },
+    {
+      "id": "zhangqian-trial",
+      "title": "壁画张骞 · 未通过的人物试验",
+      "group": "rejected",
+      "path": "/mural-assets/zhangqian-mural-trial/zhangqian-raw.glb",
+      "bytes": 3929756,
+      "sha256": "8be9da657767a6b90c180509457611871f999138b6834c4cebca9d2b13dbe1bd",
+      "stats": {
+        "triangles": 37210,
+        "meshes": 1,
+        "materials": 1,
+        "images": 3,
+        "normalMappedMaterials": 1,
+        "animations": 0
+      },
+      "thumbnail": "/asset-board-r8/thumbs/zhangqian-trial.png",
+      "source": "Tripo图生3D / 初唐壁画62×147原生像素局部",
+      "sourceRecord": "/mural-assets/zhangqian-mural-trial/provenance.json",
+      "use": "保留独立试验；未替换现用张骞",
+      "boundary": "壁画残损与相邻人物被带入薄浮雕形体，面部、手臂和跪姿不完整。图源放大没有补回细节。",
+      "priority": "P1 · 先审清晰参照或概念形象，再评估新试验；当前不提交收费任务。",
+      "origin": "tripo",
+      "viewer": "/zhangqian-mural-trial.html",
+      "integrity": "文件大小与SHA-256已核对",
+      "status": "生成成功 / 人物验收未通过",
+      "reviewRecord": "/mural-assets/zhangqian-mural-trial/visual-review.json",
+      "reference": "/mural-assets/zhangqian-mural-trial/reference-native.png",
+      "sourceUrl": "https://www.dha.ac.cn/info/1266/2524.htm",
+      "rejectionStatus": "not_accepted_for_story_character",
+      "thumbnailSha256": "64c4d753f6405b1c99e39232ff1098daa986656afe058720509374851a1b3357",
+      "taskId": "a44a3a5c-c677-4f10-97e8-fdf5b0b890ca"
+    }
+  ]
+}

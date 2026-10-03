@@ -11,6 +11,7 @@
     "processing:server": "node --import tsx processing/src/server-main.ts",
     "collector:dev": "node --import tsx scripts/collector-server.ts --demo",
     "collector:publish": "node --import tsx scripts/collector-publish.ts",
+    "agent:dev": "node --import tsx agent/server.ts",
     "validate:package": "node --import tsx scripts/validate-package.ts",
     "validate:yuezhi": "node --import tsx scripts/validate-yuezhi-package.ts",
     "yuezhi:prepare": "node --import tsx scripts/build-yuezhi-package.ts",

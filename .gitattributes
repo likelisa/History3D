@@ -23,3 +23,8 @@ viewer/public/mural-assets/** -text
 
 # Validation payloads carry their original byte digests.
 docs/handoff/mural-clarity/validation/** -text
+
+# Frozen agent policies and exported web packages retain their original bytes.
+agent/quality-policy*.json -text
+agent/public-voice/public-voice-manifest.json -text
+artifacts/bronze-horse-r14/** -text

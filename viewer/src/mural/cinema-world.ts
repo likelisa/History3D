@@ -4,7 +4,11 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
 import { bindWalkRig, type WalkRig } from './walking.ts'
 import type {SceneBeatId} from './scene-beats.ts'
 import { addMarketDetails } from './market-details.ts'
-import {createGuardVariant} from './guard-variants.ts'
+import {createGuardVariant, updateGuardMotion} from './guard-variants.ts'
+import {sampleDetentionMotion} from './detention-motion.ts'
+import {prepareAttendantVariant, attachAttendantEquipment} from './attendant-variants.ts'
+import {verifiedStoryTripoAssets} from './tripo-story-assets.ts'
+import {attachSlenderCredential} from './held-credential.ts'
 type Shot = {position:THREE.Vector3;target:THREE.Vector3}
 export type CinemaWorld = {group:THREE.Group; update:(progress:number)=>void; camera:(progress:number)=>Shot; present:(beat:SceneBeatId,progress:number,ambientSeconds?:number)=>Shot; anchors:(progress:number)=>Record<string,THREE.Vector3>; focusBounds:(ids:string[])=>THREE.Box3[]; characterNames:()=>{name:string;point:THREE.Vector3}[]; motion:()=>ReturnType<WalkRig['state']>[]; assetCount:number}
 
@@ -15,8 +19,8 @@ export function greetingYaw(host:THREE.Vector3,guest:THREE.Vector3){return Math.
 // A composed interpretation of the mural's mountain passage and city threshold.
 export async function createCinemaWorld():Promise<CinemaWorld>{
  const group=new THREE.Group();group.visible=false
- const landscape=new THREE.Group(),meeting=new THREE.Group(),market=new THREE.Group(),camp=new THREE.Group(),background=new THREE.Group()
- group.add(background,landscape,meeting,market,camp)
+ const landscape=new THREE.Group(),departure=new THREE.Group(),meeting=new THREE.Group(),market=new THREE.Group(),camp=new THREE.Group(),background=new THREE.Group()
+ group.add(background,landscape,departure,meeting,market,camp)
  const pigments={earth:'#b5a07a',road:'#dbc8a0',green:'#768d80',blue:'#536f6e',wall:'#465156',line:'#d8cba7'}
  function paint(base:string,seed:number){
   const canvas=document.createElement('canvas');canvas.width=canvas.height=512;const c=canvas.getContext('2d')!;c.fillStyle=base;c.fillRect(0,0,512,512)
@@ -83,10 +87,12 @@ export async function createCinemaWorld():Promise<CinemaWorld>{
  const threshold=landscape.children.slice(thresholdStart)
  const loader=new GLTFLoader()
  const definitions=[
-  {id:'envoy',url:'/yuezhi/figures/envoy.glb',height:1.75},
+  {id:'envoy',url:'/mural-assets/tripo-story-r9/zhangqian.glb',height:1.75},
   {id:'attendant',url:'/yuezhi/figures/yuezhi.glb',height:1.72},
+  {id:'ganfu',url:'/mural-assets/tripo-story-r9/ganfu.glb',height:1.69},
+  {id:'visitor',url:'/yuezhi/figures/envoy.glb',height:1.75},
+  {id:'qiong-bamboo',url:'/mural-assets/tripo-story-r9/qiong-bamboo.glb',height:1.55},
   {id:'horse',url:'/yuezhi/murals/mural-horse.glb',height:1.9},
-  {id:'staff',url:'/tripo-prompt-lab/staff-b.glb',height:1.8},
   {id:'gate',url:'/tripo-prompt-lab/gate-b.glb',height:3.7},
   {id:'monk',url:'/mural-assets/monk.glb',height:1.75},
   {id:'tower',url:'/mural-assets/tower.glb',height:7.4},
@@ -95,14 +101,29 @@ export async function createCinemaWorld():Promise<CinemaWorld>{
   {id:'market',url:'/yuezhi/sets/market-refined.glb',height:0},
   {id:'environment',url:'/yuezhi/environment-refined.glb',height:0},
   {id:'detention-camp',url:'/mural-assets/detention-camp.glb',height:0},
+  {id:'departure-outpost',url:'/mural-assets/departure-outpost-r8.glb',height:0},
  ]
  const manifestResponse=await fetch('/mural-assets/manifest.json');if(!manifestResponse.ok)throw new Error('场景资产清单无法读取');const manifest=await manifestResponse.json() as {assets:{id:string;bytes:number;sha256:string}[]}
  const supplementResponse=await fetch('/mural-assets/scene-assets-r4.json');if(!supplementResponse.ok)throw new Error('补充场景清单无法读取');const supplement=await supplementResponse.json() as typeof manifest
  manifest.assets.push(...supplement.assets)
+ const departureResponse=await fetch('/mural-assets/departure-outpost-r8-manifest.json')
+ if(!departureResponse.ok)throw new Error('陇西出发场景清单无法读取')
+ const departureManifest=await departureResponse.json() as {asset:{id:string;path:string;bytes:number;sha256:string}}
+ if(departureManifest.asset.id!=='departure-outpost'||departureManifest.asset.path!=='/mural-assets/departure-outpost-r8.glb')throw new Error('陇西出发场景记录不匹配')
+ manifest.assets.push(departureManifest.asset)
+ const storyNormalizedResponse=await fetch('/mural-assets/tripo-story-r9/normalized-manifest.json')
+ const storyGeneratedResponse=await fetch('/mural-assets/tripo-story-r9/manifest.json')
+ if(!storyNormalizedResponse.ok||!storyGeneratedResponse.ok)throw new Error('Tripo故事人物与货物清单无法读取')
+ const storyAssets=verifiedStoryTripoAssets(await storyNormalizedResponse.json(),await storyGeneratedResponse.json())
+ const preservedEnvoy=manifest.assets.find(asset=>asset.id==='envoy')
+ if(!preservedEnvoy)throw new Error('原始人物来源清单缺失')
+ manifest.assets=manifest.assets.filter(asset=>asset.id!=='envoy')
+ manifest.assets.push({...preservedEnvoy,id:'visitor'})
+ for(const asset of storyAssets)manifest.assets.push({...asset,id:asset.id==='zhangqian'?'envoy':asset.id})
  const generatedResponse=await fetch('/tripo-prompt-lab/results.json')
  if(!generatedResponse.ok)throw new Error('Tripo生成资产清单无法读取')
  const generated=await generatedResponse.json() as {cases:{id:string;path:string;status:string;bytes:number;sha256:string}[]}
- for(const [id,caseId] of [['staff','staff-b'],['gate','gate-b']] as const){
+ for(const [id,caseId] of [['gate','gate-b']] as const){
   const record=generated.cases.find(item=>item.id===caseId&&item.status==='downloaded')
   if(!record||record.path!==`/tripo-prompt-lab/${caseId}.glb`)throw new Error('Tripo生成资产记录不匹配：'+caseId)
   manifest.assets=manifest.assets.filter(item=>item.id!==id)
@@ -117,17 +138,21 @@ export async function createCinemaWorld():Promise<CinemaWorld>{
  const party=new THREE.Group();landscape.add(party)
  const walkers:WalkRig[]=[]
  let carriedStaff:THREE.Group|undefined
- for(const [id,x,z,height] of [['envoy',0,0,1.75],['attendant',-1.0,1.8,1.72],['attendant',1.05,2.6,1.72],['horse',-1.8,3.5,1.9]] as const){
+ for(const [id,x,z,height] of [['envoy',0,0,1.75],['attendant',-1.0,1.8,1.72],['ganfu',1.05,2.6,1.69],['horse',-1.8,3.5,1.9]] as const){
   const o=models.get(id)!.clone(true)
   const carries=id==='attendant'&&x<0
+  const role=carries?'staff-bearer':'pack-carrier'
+  if(id==='attendant'){
+   const ratio=height/1.72
+   o.children.forEach(child=>{child.scale.multiplyScalar(ratio);child.position.multiplyScalar(ratio)})
+   prepareAttendantVariant(o,role)
+  }
   // Textured 15-degree front views and six chest/waist bands establish that
   // the attendant's whole body faces +60 degrees, including its face.
   const rig=bindWalkRig(o,height,id==='horse'?'horse':'human',carries,id==='attendant'?-Math.PI/3:0);walkers.push(rig)
+  if(id==='attendant')attachAttendantEquipment(o,rig,role)
   o.position.set(x,.03,z);o.rotation.y=Math.PI;party.add(o)
-  if(carries&&rig.rightHand){
-   carriedStaff=models.get('staff')!.clone(true);carriedStaff.position.set(.025,-height*.445,.06)
-   rig.rightHand.add(carriedStaff)
-  }
+  if(carries)carriedStaff=attachSlenderCredential(o,rig,models.get('qiong-bamboo')!)
  }
  const route=new THREE.LineCurve3(new THREE.Vector3(0,0,16),new THREE.Vector3(0,0,-8))
  const routeLength=route.getLength()
@@ -147,11 +172,14 @@ export async function createCinemaWorld():Promise<CinemaWorld>{
  }
  function characterNames():{name:string;point:THREE.Vector3}[]{
   group.updateMatrixWorld(true)
-  // Only the lead envoy has an identified role; attendants stay anonymous.
+  // The two independently generated story leads have names; other figures stay anonymous.
   const envoy=currentBeat==='audience'?guests[0]!:currentBeat==='market'||currentBeat==='goods'?marketPeople[0]!:party.children[0]!
   for(let ancestor:THREE.Object3D|null=envoy;ancestor;ancestor=ancestor.parent)if(!ancestor.visible)return []
   const box=new THREE.Box3().setFromObject(envoy)
-  return [{name:'张骞',point:new THREE.Vector3((box.min.x+box.max.x)/2,box.max.y+.12,(box.min.z+box.max.z)/2)}]
+  const companion=currentBeat==='audience'?guests[2]!:currentBeat==='market'||currentBeat==='goods'?marketPeople[1]!:party.children[2]!
+  const companionBox=new THREE.Box3().setFromObject(companion)
+  return [{name:'张骞',point:new THREE.Vector3((box.min.x+box.max.x)/2,box.max.y+.12,(box.min.z+box.max.z)/2)},
+   {name:'甘父',point:new THREE.Vector3((companionBox.min.x+companionBox.max.x)/2,companionBox.max.y+.12,(companionBox.min.z+companionBox.max.z)/2)}]
  }
  function focusBounds(ids:string[]):THREE.Box3[]{
   if(!group.visible)return []
@@ -192,47 +220,34 @@ export async function createCinemaWorld():Promise<CinemaWorld>{
  // The variants are already skinned. Rebinding their tiny accessory meshes
  // would run the foot sampler on meshes without soles; animate their existing
  // leg bones instead and leave the accessory/hand bindings untouched.
- const guardSteps=blockers.map(guard=>{
-  const pelvis=guard.getObjectByName('walk-pelvis')!
-  const restY=pelvis.position.y
-  const legs=['left','right'].map(side=>({
-   thigh:guard.getObjectByName(side+'-thigh')!,
-   shin:guard.getObjectByName(side+'-shin')!,
-   foot:guard.getObjectByName(side+'-foot')!,
-  }))
-  const skeletons=new Set<THREE.Skeleton>()
-  guard.traverse(o=>{if(o instanceof THREE.SkinnedMesh)skeletons.add(o.skeleton)})
-  return (distance:number,offset:number,stopped:boolean)=>{
-   const weight=stopped?0:THREE.MathUtils.smoothstep(distance,0,.2)
-   const phase=distance/.55*Math.PI*2+offset*Math.PI*2
-   pelvis.position.y=restY+(1-Math.cos(phase*2))*.003*weight
-   for(const [index,leg] of legs.entries()){
-    const swing=Math.sin(phase+index*Math.PI)
-    leg.thigh.rotation.x=swing*.17*weight
-    leg.shin.rotation.x=Math.max(0,swing)*.24*weight
-    leg.foot.rotation.x=-leg.thigh.rotation.x-leg.shin.rotation.x
-   }
-   guard.updateMatrixWorld(true);skeletons.forEach(skeleton=>skeleton.update())
-  }
- })
  camp.add(...blockers)
  actor('detention-camp',0,0,0,camp)
+ actor('departure-outpost',0,0,0,departure)
  for(const o of landform)o.visible=false
  // One existing environment supplies the horizon for every scene. Local sets
  // keep their own authored ground at Y0, above this slightly lowered background.
  const environment=actor('environment',0,0,0,background)
- actor('reception-court',0,0,0,meeting);actor('market',0,0,0,market);addMarketDetails(market)
+ actor('reception-court',0,0,0,meeting)
+ const marketSet=actor('market',0,0,0,market)
+ // Preserve the original set, while replacing its simple bamboo geometry with
+ // the independently generated traded object. The carried credential stays separate.
+ marketSet.traverse(object=>{
+  if(object instanceof THREE.Mesh){const materials=Array.isArray(object.material)?object.material:[object.material]
+   if(materials.some(material=>material.name.toLowerCase().includes('qiong bamboo')))object.visible=false}
+ })
+ for(const z of [-.14,.10]){const bamboo=actor('qiong-bamboo',-.77,z,0,market);bamboo.rotation.z=-Math.PI/2;bamboo.position.y=.716;bamboo.name='Tripo Qiong bamboo traded staff'}
+ addMarketDetails(market)
  let receptionStaff:THREE.Group
  const standing=(id:string,x:number,z:number,yaw:number,parent:THREE.Group,carries=false)=>{
   const o=actor(id,x,z,yaw,parent)
-  if(id==='envoy'||id==='attendant'){
-   const height=id==='envoy'?1.75:1.72
+  if(id==='envoy'||id==='attendant'||id==='ganfu'||id==='visitor'){
+   const height=id==='ganfu'?1.69:id==='attendant'?1.72:1.75
    const rig=bindWalkRig(o,height,'human',carries,id==='attendant'?-Math.PI/3:0);rig.update(0,0,true)
-   if(carries&&rig.rightHand){receptionStaff=models.get('staff')!.clone(true);receptionStaff.position.set(.025,-height*.445,.06);rig.rightHand.add(receptionStaff)}
+   if(carries)receptionStaff=attachSlenderCredential(o,rig,models.get('qiong-bamboo')!)
   }
   return o
  }
- const guests=[standing('envoy',-1.55,.55,Math.PI,meeting),standing('attendant',1.5,.85,Math.PI,meeting,true)]
+ const guests=[standing('envoy',-1.55,.55,Math.PI,meeting),standing('attendant',1.5,.85,Math.PI,meeting,true),standing('ganfu',-.15,1.0,Math.PI,meeting)]
  guests.forEach(o=>o.position.y=.04)
  // An anonymous representative occupies the principal position. Source texts
  // disagree on the ruler's succession; this figure is not a ruler's portrait.
@@ -241,12 +256,12 @@ export async function createCinemaWorld():Promise<CinemaWorld>{
  courtAttendants.forEach((o,index)=>{o.position.y=.20;o.scale.setScalar(index===0?.95:1.03)})
  const marketPeople=[
   standing('envoy',-2,1.7,.8,market),
-  standing('attendant',2.1,-1.4,-.8,market),
+  standing('ganfu',-.2,1.7,-.3,market),
   standing('attendant',-4.4,-3,0,market),
   standing('attendant',4.5,-2.9,0,market),
   standing('attendant',-4.8,-.2,Math.PI,market),
   standing('attendant',4.9,-.2,Math.PI,market),
-  standing('envoy',6.8,-2.0,-.6,market),
+  standing('visitor',6.8,-2.0,-.6,market),
  ]
  marketPeople.forEach((person,index)=>{
   person.name=index===2||index===3?'Market stall keeper - illustrative':'Market visitor - illustrative'
@@ -257,7 +272,7 @@ export async function createCinemaWorld():Promise<CinemaWorld>{
  // Two slow loops occupy the clear forecourt, never crossing these objects.
  const marketPassers=[[-4,2.8,1.6,.7,0],[4.6,2.0,1.4,.8,Math.PI]] as const
  const marketWalkers=marketPassers.map(([x,z,rx,rz,phase],index)=>{
-  const id=index===0?'attendant':'envoy',height=id==='attendant'?1.72:1.75
+  const id=index===0?'attendant':'visitor',height=id==='attendant'?1.72:1.75
   const person=models.get(id)!.clone(true)
   const rig=bindWalkRig(person,height,'human',false,id==='attendant'?-Math.PI/3:0)
   person.name='Market moving visitor - illustrative';market.add(person)
@@ -292,11 +307,13 @@ export async function createCinemaWorld():Promise<CinemaWorld>{
  const lerpShot=(a:Shot,b:Shot,t:number):Shot=>({position:a.position.clone().lerp(b.position,t),target:a.target.clone().lerp(b.target,t)})
  function present(beat:SceneBeatId,t:number,ambientSeconds=0):Shot{
   currentBeat=beat;const u=THREE.MathUtils.clamp(t,0,1),ease=u*u*(3-2*u)
-  const inMeeting=beat==='audience',inMarket=beat==='market'||beat==='goods',inCamp=beat==='detention'||beat==='retained-credential'
-  landscape.visible=!inMeeting&&!inMarket&&!inCamp;meeting.visible=inMeeting;market.visible=inMarket;camp.visible=inCamp
+  const inMeeting=beat==='audience',inMarket=beat==='market'||beat==='goods',inCamp=beat==='detention'||beat==='retained-credential',inDeparture=beat==='departure'
+  landscape.visible=!inMeeting&&!inMarket&&!inCamp&&!inDeparture;departure.visible=inDeparture;meeting.visible=inMeeting;market.visible=inMarket;camp.visible=inCamp
+  environment.visible=!inDeparture
   environment.position.y=inMeeting||inMarket||inCamp?-.14:0
   // Move the existing skinned party, preserving bone bindings and held credential.
-  if(party.parent!==(inCamp?camp:landscape))(inCamp?camp:landscape).add(party)
+  const partySet=inCamp?camp:inDeparture?departure:landscape
+  if(party.parent!==partySet)partySet.add(party)
   const city=beat==='city'||beat==='greeting'||beat==='tower'
   for(const o of threshold)o.visible=city&&o.name.startsWith('Mural city wall')
   generatedGate.visible=city
@@ -320,27 +337,14 @@ export async function createCinemaWorld():Promise<CinemaWorld>{
    // before guards, then escorted movement into a restricted camp space.
    // The actual camp asset has a clear central square (X/Z ±4) and its first
    // shelter begins at Z -4.25. All four trajectories stay clear of these props.
-   const approach=THREE.MathUtils.smoothstep(u,0,.28)
-   const interception=THREE.MathUtils.smoothstep(u,.16,.34)
-   const escort=THREE.MathUtils.smoothstep(u,.48,.9)
    const retained=beat==='retained-credential'
-   const partyZ=retained?-.8:8-3.5*approach-5.3*escort
-   const distance=8-partyZ
-   party.position.set(0,0,partyZ);party.rotation.y=0
-   const paused=retained||(u>=.28&&u<=.48)||u>=.9
-   const weight=u<.28?1-THREE.MathUtils.smoothstep(u,.23,.28):1-THREE.MathUtils.smoothstep(u,.85,.9)
-   walkers.forEach((rig,index)=>rig.update(distance,[0,.31,.68,.13][index]!,paused,weight))
+   const motion=sampleDetentionMotion(u,retained)
+   party.position.set(0,0,motion.partyZ);party.rotation.y=0
+   walkers.forEach((rig,index)=>rig.update(motion.partyDistance,[0,.31,.68,.13][index]!,motion.partyWeight===0,motion.partyWeight))
    for(const [index,guard] of blockers.entries()){
-    const side=index===0?-1:1
-    const x=retained?side*2.3:side*(2.65-1.55*interception+1.2*escort)
-    const z=retained?3.8:3.4+.4*escort
-    guard.position.set(x,.008,z)
-    // Face the approaching party, turn to accompany it, then face its exit.
-    guard.rotation.y=retained?Math.PI:THREE.MathUtils.lerp(-side*.24,Math.PI,escort)
-    const guardDistance=1.55*interception+Math.hypot(1.2,.4)*escort
-    guardSteps[index]!(guardDistance,index*.31,retained||u<=.16||(u>=.34&&u<=.48)||u>=.9)
+    updateGuardMotion(guard,motion.guards[index]!,index*.31)
    }
-   camp.userData.detentionPhase=retained||u>=.9?'restricted':u>=.48?'escorted':u>=.28?'intercepted':'approaching'
+   camp.userData.detentionPhase=motion.phase
    if(retained)return lerpShot(shot(-5.3,3.2,5.4,-.4,1.5,-.4),shot(-3.8,2.3,4.5,-.5,1.6,-.3),ease)
    // Start with the route and guards together, finish with the party enclosed
    // by the camp and the two guards between it and the outward route.
@@ -350,6 +354,7 @@ export async function createCinemaWorld():Promise<CinemaWorld>{
   party.position.set(0,0,from-distance);party.rotation.y=0
   walkers.forEach((rig,index)=>rig.update(distance,[0,.31,.68,.13][index]!,u>=1||from===to,1-THREE.MathUtils.smoothstep(u,.86,1)))
   for(const monk of monks)monk.rotation.y=greetingYaw(monk.position,party.position)
+  if(beat==='departure')return lerpShot(shot(7.4,3.9,6.5,0,1.35,9),shot(6.2,3.1,2,0,1.2,5.6),ease)
   if(beat==='opening')return shot(-5.5,3.2,3.5,-.3,1.5,9)
   if(beat==='credential')return lerpShot(shot(-4.3,2.8,11.6,-.7,1.9,9.2),shot(-4.6,2.8,12,-.7,1.5,9.2),ease)
   if(beat==='greeting')return shot(4.7,2.7,-6.6,0,1.3,-10.8)

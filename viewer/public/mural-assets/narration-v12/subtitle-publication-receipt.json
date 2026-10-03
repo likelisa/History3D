@@ -1,0 +1,162 @@
+{
+  "formatVersion": "1.0.0",
+  "createdAtUtc": "2026-10-03T10:45:59.280584+00:00",
+  "targetVersion": "12.0.0",
+  "manifestSha256": "2e853216e5cb312cd7c7a7722a5e303d96aa682538238585e26eb302d03d8ad5",
+  "sourceManifestSha256": "1b861e03fb33e516bf0765b9872adc30ebeeed8f17eee6642bda1fe3dab65d69",
+  "alignmentSha256": "368ded93571daf022ce7a3d53f21d48de92c5b2b58e4fd84251a9dff6e3f6a58",
+  "auditSha256": "80fa1feb193a33c5aa663e847dfeaf6def9813fe61e3f8f3f388631f36c50679",
+  "publisherSha256": "660463dc85b8dfb1997ef87ae54dc05ceb42b314d00c4b43bc234100536998d9",
+  "tracks": [
+    {
+      "id": "c0-0",
+      "sha256": "38afa6512b6d93e9fbed9b275c58ae782cb9d6eeba929f7eab164c767ed5add6",
+      "bytes": 135405,
+      "audioUnchanged": true
+    },
+    {
+      "id": "c0-1",
+      "sha256": "1ac5da8b8b3de191a04b729d604ef7a74e0d0ce6e3314e476144aaac8ca6423f",
+      "bytes": 176877,
+      "audioUnchanged": true
+    },
+    {
+      "id": "c0-2",
+      "sha256": "4d4cc5ae0739df501ebb47d362a55e29f3ebd537a19bdc3b144d15c21cbed7a7",
+      "bytes": 188397,
+      "audioUnchanged": true
+    },
+    {
+      "id": "c1-0",
+      "sha256": "878ab6de86cf54118dcfb31da9509f1c011cdee7e14bfd1f41029885df7fb669",
+      "bytes": 157293,
+      "audioUnchanged": true
+    },
+    {
+      "id": "c1-1",
+      "sha256": "fa56b75331a269ad0757f4910f2509e9b81667742b02a331d1dc335dba263eac",
+      "bytes": 155565,
+      "audioUnchanged": true
+    },
+    {
+      "id": "c1-2",
+      "sha256": "0c7e6c99240651bee4d99771eaf6237b15fd55ae1a902c1148eea6cf35cc4db5",
+      "bytes": 179757,
+      "audioUnchanged": true
+    },
+    {
+      "id": "c2-0",
+      "sha256": "05404ba5300be9033817a252f958ab6c0364bfff290cd84e6025a3488a96cf9c",
+      "bytes": 161901,
+      "audioUnchanged": true
+    },
+    {
+      "id": "c2-1",
+      "sha256": "29a2dd4a107f1c57c380b7384987f888afee8eb5b7800ffd3acaeb412a20baee",
+      "bytes": 171117,
+      "audioUnchanged": true
+    },
+    {
+      "id": "c2-2",
+      "sha256": "91ee102055b524aa6d369fdc7668551d0ae5de78582b692bb49474822e84de07",
+      "bytes": 148077,
+      "audioUnchanged": true
+    },
+    {
+      "id": "c3-0",
+      "sha256": "8402105cf0e75313114e915126caf24abde4a8ab58a88a954842832cfe8c0b0e",
+      "bytes": 167661,
+      "audioUnchanged": true
+    },
+    {
+      "id": "c3-1",
+      "sha256": "de9b3976e7572a7e773a39c1daa7570fb5b4317b6c74f375959404f41ceb3473",
+      "bytes": 152685,
+      "audioUnchanged": true
+    },
+    {
+      "id": "c3-2",
+      "sha256": "61c50c3e4dd8bfc454be71bf6152dfd9fd0004552f984cd81c8b69f73268d71b",
+      "bytes": 156141,
+      "audioUnchanged": true
+    },
+    {
+      "id": "c4-0",
+      "sha256": "fab3654bd20c332a6f2d2f3b2c8b747b83669813b41c3539732d0fe7504644fc",
+      "bytes": 160749,
+      "audioUnchanged": true
+    },
+    {
+      "id": "c4-1",
+      "sha256": "7deffb00b31cc4d7cb876cf13aeed8f3e3fa95f811c0a9bf3e60ccc5a383d8c1",
+      "bytes": 164205,
+      "audioUnchanged": true
+    },
+    {
+      "id": "c4-2",
+      "sha256": "b68cb58fd3b3b9fd0ba0ba94fc7ffe815f0ef428e26591115d0f6b80a6791a19",
+      "bytes": 165357,
+      "audioUnchanged": true
+    },
+    {
+      "id": "c5-0",
+      "sha256": "ab7e5fcf08aec6a87411e7a2080f51006d987cc615d998531ff7b6814e5939d3",
+      "bytes": 164205,
+      "audioUnchanged": true
+    },
+    {
+      "id": "c5-1",
+      "sha256": "e3ac0cc6b3072aa1e4de157d3beeef219c473c57d2cee2bd0e533c607b765613",
+      "bytes": 150381,
+      "audioUnchanged": true
+    },
+    {
+      "id": "c5-2",
+      "sha256": "cdcf530c034990d2282b065f153ecefd5b20af0ed8bca1f8c10c6d93dc131c64",
+      "bytes": 176877,
+      "audioUnchanged": true
+    },
+    {
+      "id": "c6-0",
+      "sha256": "26b22dffa8bc2db01168170583e3d4eb89559eb0b3cae1c3bb251942924c749a",
+      "bytes": 173421,
+      "audioUnchanged": true
+    },
+    {
+      "id": "c6-1",
+      "sha256": "d62ee9ef5134a4fd0f50fd9d7f4d70ab8849cbaab613d997083a9e6bdb6e6436",
+      "bytes": 189549,
+      "audioUnchanged": true
+    },
+    {
+      "id": "c6-2",
+      "sha256": "fae6a5eb29c540a5430e6be24edad59ac92439525593a51b18529be37cad46cb",
+      "bytes": 174573,
+      "audioUnchanged": true
+    },
+    {
+      "id": "c7-0",
+      "sha256": "5828dae776209647e81b4fc5dbf60df9e1394b09932204e297065c9d0528883b",
+      "bytes": 184941,
+      "audioUnchanged": true
+    },
+    {
+      "id": "c7-1",
+      "sha256": "4a08d8d3b852fad0d60b4fe03e550ea4d85c90628124e669aa10799d024954be",
+      "bytes": 187821,
+      "audioUnchanged": true
+    },
+    {
+      "id": "c7-2",
+      "sha256": "d0d6a975bc56204e4a4bb71465ab98c2365f4a806b6b5f494b74a0c0efd26511",
+      "bytes": 169965,
+      "audioUnchanged": true
+    }
+  ],
+  "count": 24,
+  "adjustmentCount": 30,
+  "audioUnchanged": true,
+  "runtimeSwitched": false,
+  "guiVerified": false,
+  "humanWordTimingReviewed": false
+}

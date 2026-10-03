@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 // 把仓库 packages/ 完整复制到查看器静态资源目录 viewer/public/packages/。
 // 复制目录是生成物，不手工维护；资源改动后重启开发入口即可。
-import { cp, mkdir, rename, stat } from 'node:fs/promises'
-import { randomUUID } from 'node:crypto'
+import { cp, mkdir, rename, stat, readdir } from 'node:fs/promises'
+import { createReadStream } from 'node:fs'
+import { randomUUID, createHash } from 'node:crypto'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
@@ -30,6 +31,12 @@ async function assertDirectory(target, label) {
 async function main() {
   await assertDirectory(source, 'packages/')
   await mkdir(path.dirname(destination), { recursive: true })
+  // Windows may lock the served directory against rename. If all names and bytes
+  // already match, preparation is complete; avoid replacing that same snapshot.
+  if (await matchingSnapshots(source, destination)) {
+    process.stdout.write('packages/ 静态快照名称和字节一致，复用当前资源。\n')
+    return
+  }
   // Preserve the previous generated copy, then publish an exact new snapshot.
   // No recursive deletion: local edits in an old generated copy stay recoverable.
   const token = randomUUID()
@@ -54,6 +61,28 @@ async function main() {
   const relativeSource = path.relative(repoRoot, source)
   const relativeDestination = path.relative(repoRoot, destination)
   process.stdout.write(`已复制 ${relativeSource}/ → ${relativeDestination}/\n`)
+}
+
+async function matchingSnapshots(left, right) {
+  try {
+    const [a, b] = await Promise.all([readdir(left, { withFileTypes: true }), readdir(right, { withFileTypes: true })])
+    a.sort((x, y) => x.name.localeCompare(y.name)); b.sort((x, y) => x.name.localeCompare(y.name))
+    if (a.length !== b.length) return false
+    for (let i = 0; i < a.length; i++) {
+      if (a[i].name !== b[i].name || a[i].isSymbolicLink() || b[i].isSymbolicLink() || a[i].isDirectory() !== b[i].isDirectory() || a[i].isFile() !== b[i].isFile()) return false
+      const x = path.join(left, a[i].name), y = path.join(right, b[i].name)
+      if (a[i].isDirectory()) { if (!await matchingSnapshots(x, y)) return false }
+      else if (a[i].isFile()) {
+        const digest = async file => { const hash = createHash('sha256'); for await (const chunk of createReadStream(file)) hash.update(chunk); return hash.digest('hex') }
+        const [hx, hy] = await Promise.all([digest(x), digest(y)])
+        if (hx !== hy) return false
+      } else return false
+    }
+    return true
+  } catch (error) {
+    if (error.code === 'ENOENT') return false
+    throw error
+  }
 }
 
 await main()

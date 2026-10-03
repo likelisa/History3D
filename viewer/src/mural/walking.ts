@@ -161,12 +161,21 @@ export function bindWalkRig(model: THREE.Group, height: number, kind: 'human' | 
       const x = positions.getX(i), y = positions.getY(i), z = positions.getZ(i)
       const w = new Map<number, number>()
       const add = (index: number, value: number) => { if (value > .00001) w.set(index, (w.get(index) ?? 0) + value) }
-      const body = kind === 'human' ? smooth(y, height * .45, height * .60) : smooth(y, height * .42, height * .58)
+      const armRegion = kind === 'human' ? smooth(Math.abs(x), height * .105, height * .14) *
+        smooth(y, height * .30, height * .34) * (1 - smooth(y, height * .77, height * .88)) : 0
+      // A lowered hand can sit below the waist. Lateral hand/forearm vertices
+      // must belong to the fixed upper body even when their Y matches a thigh.
+      // Blend the region edge into cloth, then exclude leg weights throughout
+      // the arm region; multiplying arm weights by waist height left real hands
+      // following the opposite walking leg on the new independently generated bodies.
+      // Use the observed low fingertips (down to .35h), rather than the waist,
+      // to set the lower edge. Boots remain below this fixed upper-body region.
+      const body = kind === 'human' ? Math.max(smooth(y, height * .45, height * .60), smooth(armRegion, .15, .45)) : smooth(y, height * .42, height * .58)
       // Boots belong to one leg; connected cloth blends smoothly across the
       // midline so its inner edge is not torn by the opposite leg.
       const clothWidth = height * .10 * smooth(y, height * .10, height * .14)
       const side = kind === 'human' ? (clothWidth > 0 ? smooth(x, -clothWidth, clothWidth) : x < 0 ? 0 : 1) : smooth(x, -height * .025, height * .025)
-      const arm = kind === 'human' ? body * smooth(Math.abs(x), height * .105, height * .175) * smooth(y, height * .40, height * .50) * (1 - smooth(y, height * .77, height * .88)) : 0
+      const arm = armRegion
       const headWeight = smooth(y, height * .84, height * .92)
       const torsoWeight = smooth(y, height * .60, height * .73)
       add(0, (body - arm) * (1 - torsoWeight)); add(1, (body - arm) * torsoWeight * (1 - headWeight)); add(2, (body - arm) * torsoWeight * headWeight)

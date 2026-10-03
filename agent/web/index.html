@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>文物与壁画讲解工坊</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="文物与壁画讲解工坊首页"><span class="brand-mark" aria-hidden="true">物</span><span>文物与壁画讲解工坊<small>从原件与史料，讲清背后的故事</small></span></a>
+    <span id="connection" class="connection" role="status">正在连接本地服务</span>
+  </header>
+  <main class="workbench">
+    <aside class="setup-pane">
+      <div class="pane-heading"><span class="eyebrow">新建项目</span><h1>准备讲解素材</h1><p>填写素材和 API 后，自动制作故事、真实 3D、旁白与讲解网页。</p></div>
+      <form id="project-form" autocomplete="off">
+        <fieldset>
+          <legend><span class="step-number">1</span>主题与原图</legend>
+          <label for="subject-type">素材类型</label>
+          <select id="subject-type" name="subjectType"><option value="mural">壁画</option><option value="artifact">文物</option></select>
+          <label for="topic">希望讲清什么</label>
+          <textarea id="topic" name="topic" rows="3" maxlength="800" required placeholder="人物为何出发，遇到什么阻碍，最后带来什么改变？"></textarea>
+          <label id="image-label" for="mural-file">壁画图片</label>
+          <input id="mural-file" type="file" accept="image/png,image/jpeg" required>
+          <p id="image-note" class="field-note">PNG / JPG，最大 8 MB。保留原图，按句说明哪些内容确实见于画中。</p>
+          <figure id="image-preview" class="image-preview" hidden><img id="mural-preview" alt="已选择的壁画原图"><figcaption id="image-name"></figcaption></figure>
+          <details id="subject-metadata" hidden><summary>文物信息（可选）</summary><p class="field-note">只填已知信息。以下信息由你提供，尚未独立核实；留空不会由工具补成史实。</p><label for="subject-name">名称</label><input id="subject-name" type="text" maxlength="200"><div class="field-pair"><div><label for="subject-period">年代</label><input id="subject-period" type="text" maxlength="200"></div><div><label for="subject-material">材质</label><input id="subject-material" type="text" maxlength="200"></div></div><label for="subject-dimensions">尺寸</label><input id="subject-dimensions" type="text" maxlength="200" placeholder="有记录的实测尺寸及单位"><label for="subject-collection">收藏或出土信息</label><input id="subject-collection" type="text" maxlength="300"></details>
+        </fieldset>
+        <fieldset>
+          <legend><span class="step-number">2</span>可回查的史料</legend>
+          <p class="field-note">至少一条原文摘录。链接用于回查；本工具不会把链接当作已经核实的史实。</p>
+          <div id="source-list"></div>
+          <button id="add-source" class="button subtle" type="button">＋ 添加史料</button>
+        </fieldset>
+        <fieldset>
+          <legend><span class="step-number">3</span>模型与生成服务</legend>
+          <details open>
+            <summary>故事模型 API <span>规划与结构检查</span></summary>
+            <label for="model-base">API 地址</label><input id="model-base" type="url" placeholder="https://api.example.com/v1" required maxlength="2000">
+            <label for="model-name">模型名称</label><input id="model-name" type="text" placeholder="填写服务提供商的模型名称" required maxlength="160">
+            <label for="model-key">模型 API Key</label><input id="model-key" type="password" autocomplete="off" spellcheck="false" required minlength="8" maxlength="4096">
+          </details>
+          <details open>
+            <summary>Tripo API <span>真实 3D 资产</span></summary>
+            <label for="tripo-key">Tripo API Key</label><input id="tripo-key" type="password" autocomplete="off" spellcheck="false" required minlength="8" maxlength="4096">
+          </details>
+          <div id="fixed-voice-note" class="field-note"><strong>固定公开男声旁白</strong><p>无需额外填写声音 API。旁白使用独立的公开音色环境，声音选择固定；服务状态与实际音轨以项目生成结果为准。尚未配置音轨的项目会保留阅读模式。</p></div>
+          <p class="field-note">密钥仅供本次本地进程使用，不写入项目、日志或浏览器存储。服务重启后需重新填写。</p>
+          <button id="clear-keys" type="button" class="text-button">清空本页密钥</button>
+        </fieldset>
+        <fieldset>
+          <legend><span class="step-number">4</span>制作范围</legend>
+          <label class="check-label"><input id="limit-credits" type="checkbox"><span>设置 credits 停止上限（可选）</span></label>
+          <div class="field-pair"><div><label for="max-assets">最多资产数</label><input id="max-assets" type="number" min="1" max="8" step="1" value="3" required></div><div><label for="max-credits">credits 停止上限</label><input id="max-credits" type="number" min="50" max="9007199254740991" step="1" value="150"></div></div>
+          <p class="field-note">提交后按本次配置自动生成，不逐件请示。优先采用详细几何与 PBR 纹理；质量检查仍按实际结果进行。</p>
+        </fieldset>
+        <button id="plan-button" class="button primary full" type="submit">开始自动制作 <span aria-hidden="true">→</span></button>
+      </form>
+      <details class="restore-box"><summary>继续已有项目</summary><label for="restore-id">项目 ID</label><div class="inline-field"><input id="restore-id" type="text" maxlength="80" placeholder="填写之前保存的项目 ID"><button id="restore-button" class="button secondary" type="button">读取</button></div><p class="field-note">读取不会重新提交生成；若凭据已失效，使用上方密钥恢复。</p></details>
+    </aside>
+    <section class="review-pane" aria-label="项目进度与审核">
+      <div id="notice" class="notice" hidden role="status" aria-live="polite"></div>
+      <section class="run-heading"><div><span class="eyebrow">工作区</span><h2 id="project-title">等待你的第一幅原图</h2><p id="project-summary">故事有出处，资产能回查，完成状态有实际证据。</p><p id="run-subject" class="field-note" hidden></p></div><button id="refresh-button" class="button subtle" type="button" disabled>刷新状态</button></section>
+      <ol class="pipeline" aria-label="制作阶段">
+        <li data-stage="planning"><span>A</span><div>采集与规划<small>史料、故事、资产计划</small></div></li>
+        <li data-stage="story_review"><span>审</span><div>故事检查<small>依据、引用与资产计划</small></div></li>
+        <li data-stage="generating"><span>A</span><div>主资产生成<small>Tripo 真实 GLB</small></div></li>
+        <li data-stage="assembling"><span>B/C</span><div>整合与网页<small>场景、旁白、原图与字幕</small></div></li>
+        <li data-stage="preview_ready"><span>D</span><div>人工验收<small>真实浏览器与交付</small></div></li>
+      </ol>
+      <div id="run-meta" class="run-meta" hidden><span>项目 <code id="run-id"></code></span><span id="run-status" class="tag"></span><span id="last-update"></span></div>
+      <div id="empty-state" class="empty-state"><div class="empty-art" aria-hidden="true"><span id="empty-image-label">原图</span><i></i><span>故事</span><i></i><span>场景</span></div><h3>把故事的来龙去脉放在前面</h3><p id="empty-description">上传壁画，提供史料摘录。你会先看到每句讲解、对应证据和拟生成资产，审核通过后再开始 3D 生成。</p><div class="empty-principles"><span>事实与艺术补充分开</span><span>原件与派生资产分开</span><span>结构检查与视觉验收分开</span></div></div>
+      <section id="quality-panel" class="quality-panel" hidden aria-label="当前验证范围"></section>
+      <section id="story-panel" class="panel" hidden><div class="section-heading"><div><span class="eyebrow">先读故事</span><h3>逐句讲解与依据</h3></div><span id="cue-count" class="tag"></span></div><div id="story-list"></div></section>
+      <section id="asset-panel" class="panel" hidden><div class="section-heading"><div><span class="eyebrow">真实主资产</span><h3>资产计划与生成记录</h3></div><span id="asset-count" class="tag"></span></div><div id="asset-list" class="asset-list"></div></section>
+      <section id="candidate-panel" class="panel" hidden><h3>继续打磨 3D 资产</h3><p class="field-note">生成新候选后可对比并选用，故事与旁白继续复用。旧版资产保留，当前网页在新候选完成前仍可查看。</p><label for="candidate-asset">需要打磨的资产</label><select id="candidate-asset"></select><label for="candidate-reason">本次需要改善的地方</label><textarea id="candidate-reason" rows="2" maxlength="2000" placeholder="例如：腿部轮廓、踏鸟支撑和纹理细节。"></textarea><label for="candidate-prompt">资产描述</label><textarea id="candidate-prompt" rows="3" maxlength="2000"></textarea><p id="candidate-input-note" class="field-note"></p><label for="candidate-faces">网格面数目标</label><select id="candidate-faces"><option value="60000">60,000 面</option><option value="100000">100,000 面</option></select><button id="candidate-generate" class="button primary" type="button">生成更好的候选</button><p id="candidate-status" class="field-note"></p><div id="candidate-list" class="asset-list"></div></section>
+      <section id="approval-panel" class="approval-panel" hidden><h3>故事计划已通过合同检查</h3><p id="approval-cost"></p><p class="field-note">旧项目或中断恢复可以从这里继续。新项目自动进入生成；检查通过不等于史实或视觉已最终验收。</p><input id="approve-checkbox" type="checkbox" hidden><button id="generate-button" class="button primary" type="button" disabled>继续生成 3D</button><details><summary>查看计划指纹</summary><code id="plan-hash" class="hash"></code></details></section>
+      <section id="repair-panel" class="panel" hidden><h3>修正被拦下的故事计划</h3><ul id="repair-diagnostics" class="evidence-list"></ul><p id="repair-limit" class="field-note"></p><label for="repair-feedback">本次修正要求（可选）</label><textarea id="repair-feedback" rows="4" maxlength="2000" placeholder="例如：引文逐字复制原文，旁白自然讲清故事，来源放在证据栏。"></textarea><button id="repair-button" class="button primary" type="button">提交一次计划修正</button><p class="field-note">会再次调用故事模型，不提交 Tripo；原候选和错误记录保留。修正后的计划仍需重新审核。提交结果未知时不能重发。</p></section>
+      <section id="recovery-panel" class="recovery-panel" hidden><h3 id="recovery-title">项目需要处理</h3><p id="recovery-message"></p><button id="resume-button" class="button secondary" type="button">恢复当前凭据并刷新状态</button><button id="continue-button" class="button primary" type="button" hidden disabled>继续已有任务</button><p class="field-note">恢复凭据不会提交任务；后续操作按页面可用入口进行。未知提交不会重新收费提交。</p></section>
+      <section id="preview-panel" class="panel" hidden><div class="section-heading"><div><span class="eyebrow">网页预览</span><h3>检查原图、场景与字幕</h3></div><a id="preview-link" class="button primary" target="_blank" rel="noopener" href="#">打开讲解网页</a></div><p class="field-note">可加载的网页不等于最终验收。请检查所有句子的资产、比例、场景、原图关系与文字；音轨与人物动作的完成范围见预览说明。</p><label class="check-label"><input id="visual-checkbox" type="checkbox"><span>我已在真实浏览器逐句检查当前预览，认可其视觉呈现。</span></label><button id="visual-button" class="button secondary" type="button" disabled>记录本次视觉审核</button><div class="export-row"><p id="export-note" class="field-note">服务端已整理网页文件与本地依赖；当前仅提供 HTTP 预览。ZIP 下载、独立解包和完整源码交付尚未实现与验收。</p></div></section>
+      <details id="activity-panel" class="panel activity-panel" hidden><summary>任务记录 <span id="event-count"></span></summary><ol id="activity-list"></ol></details>
+    </section>
+  </main>
+</body>
+</html>

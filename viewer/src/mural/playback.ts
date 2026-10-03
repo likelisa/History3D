@@ -1,8 +1,9 @@
 import { annotations, type StoryChapter, type StoryCue } from './story.ts'
 import {getSceneBeat,type SceneBeat} from './scene-beats.ts'
+import { validateSubtitlePoints, type SubtitlePoint } from './presentation.ts'
 
-export type NarrationTrack = { id: string; file: string; seconds: number; text: string; bytes: number; sha256: string }
-export type PlaybackCue = StoryCue & { audioFile: string; audioSeconds: number;visualSeconds:number;audioStart:number;beat?:SceneBeat }
+export type NarrationTrack = { id: string; file: string; seconds: number; text: string; bytes: number; sha256: string; subtitlePoints?: SubtitlePoint[]; subtitleAudioSha256?: string }
+export type PlaybackCue = StoryCue & { audioFile: string; audioSeconds: number;visualSeconds:number;audioStart:number;beat?:SceneBeat;subtitlePoints?:SubtitlePoint[] }
 export type PlaybackChapter = Omit<StoryChapter, 'cues'> & { cues: PlaybackCue[]; annotationIds: string[] }
 export type PlaybackTimeline = { chapters: PlaybackChapter[]; duration: number }
 
@@ -17,10 +18,14 @@ export function buildPlaybackTimeline(definitions: readonly StoryChapter[], trac
     let chapterTime = 0
     const cues = definition.cues.map(cue => {
       const track = audio.get(cue.id)
-      if (track && (track.text !== cue.text || !Number.isFinite(track.seconds) || track.seconds <= 0 || !/^\/mural-assets\/narration-v[2-9][0-9]*\/[\w-]+\.mp3$/.test(track.file))) throw new Error(`旁白与正文不匹配：${cue.id}`)
+      if (track && (track.text !== cue.text || !Number.isFinite(track.seconds) || track.seconds <= 0 || !/^\/mural-assets\/narration-v(?:[2-9]|[1-9][0-9]+)\/[\w-]+\.mp3$/.test(track.file))) throw new Error(`旁白与正文不匹配：${cue.id}`)
+      if (track?.subtitlePoints !== undefined) {
+        if (track.subtitleAudioSha256 !== track.sha256) throw new Error(`字幕时间戳与音轨指纹不匹配：${cue.id}`)
+        validateSubtitlePoints(cue.text, track.subtitlePoints, track.seconds)
+      }
       const beat=getSceneBeat(cue.id),visualSeconds=beat?.visualSeconds??0
       const seconds = visualSeconds+Math.max(cue.readingSeconds, track ? track.seconds + 1.5 : cue.end - cue.start)
-      const result = { ...cue, start: chapterTime, end: chapterTime + seconds, audioFile: track?.file ?? '', audioSeconds: track?.seconds ?? 0,visualSeconds,audioStart:chapterTime+visualSeconds,beat }
+      const result = { ...cue, start: chapterTime, end: chapterTime + seconds, audioFile: track?.file ?? '', audioSeconds: track?.seconds ?? 0,visualSeconds,audioStart:chapterTime+visualSeconds,beat,subtitlePoints:track?.subtitlePoints }
       chapterTime += seconds
       return result
     })

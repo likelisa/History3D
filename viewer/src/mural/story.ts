@@ -40,89 +40,346 @@ export const sources = [
   { id: 'hanshu-96', title: '《汉书》· 西域传', url: 'https://ctext.org/han-shu/xi-yu-zhuan/zh', description: '月氏迁徙后在妫水北设王庭的背景；未载本次接见的具体建筑与礼仪，3D空间作示意。' },
 ]
 
-// These are chapters of the image, not eight reconstructed stops of a first embassy.
-// The picture supplies neither a Yuezhi audience nor a detention scene.
+// Tell the embassy in chronological order; image interpretation is the epilogue.
 export const chapterDefinitions: ChapterDefinition[] = [
   {
-    id: 'whole-picture', title: '一幅壁画，两层故事', location: '莫高窟第323窟 · 初唐壁画',
-    mode: 'overview', focus: { x: 0, y: 0, width: 1, height: 1 },
-    takeaway: '沿礼拜、辞行和抵达读画，再追问这段西行的来历。',
-    cues: [
-      { id: 'c0-0', text: '跟我走近这幅画。先认识张骞和他的使团，再沿着他们的脚步，看看这段远行。', sourceKind: 'interpretation', sourceIds: ['dha-323', 'dha-cave-323'] },
-      { id: 'c0-1', text: '你看，右上角是宫殿，下方是辞行，左上角是城池。三个画面，把一次西行串了起来。', sourceKind: 'mural', sourceIds: ['dha-323', 'dha-cave-323'] },
-      { id: 'c0-2', text: '我们先从宫殿里的两尊金人看起：皇帝为什么礼拜它们，又为什么派张骞去西域？', sourceKind: 'interpretation', sourceIds: ['dha-323', 'shiji-123'] },
-    ],
+    "id": "mission",
+    "title": "为什么向西出发",
+    "location": "汉朝 · 寻找盟友",
+    "mode": "overview",
+    "focus": {
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    },
+    "takeaway": "汉武帝希望联合月氏对抗匈奴，张骞接下了寻找盟友的任务。",
+    "cues": [
+      {
+        "id": "c0-0",
+        "text": "西汉时，汉武帝想找到一个盟友，共同对抗匈奴。张骞的故事，就从这项任务开始。",
+        "sourceKind": "history",
+        "sourceIds": [
+          "shiji-123",
+          "hanshu-61"
+        ]
+      },
+      {
+        "id": "c0-1",
+        "text": "这个盟友是月氏。它曾被匈奴击败，国王被杀，部众向西迁走；汉武帝希望双方能一起对付共同的敌人。",
+        "sourceKind": "history",
+        "sourceIds": [
+          "shiji-123",
+          "hanshu-61"
+        ]
+      },
+      {
+        "id": "c0-2",
+        "text": "可是，要找到月氏，先得穿过匈奴控制的地区。这是一趟前路不明的远行，张骞应募，接下了出使的使命。",
+        "sourceKind": "history",
+        "sourceIds": [
+          "shiji-123",
+          "hanshu-61"
+        ]
+      }
+    ]
   },
   {
-    id: 'golden-figures', title: '宫殿中的金人之谜', location: '壁画右上 · 宫殿与礼拜',
-    mode: 'mural', focus: { x: 0.635, y: 0.035, width: 0.355, height: 0.375 },
-    takeaway: '画家把金人画成佛像，用“问名号”引出张骞西行。',
-    cues: [
-      { id: 'c1-0', text: '请看右上角的甘泉宫。殿里站着两尊金人，汉武帝带着群臣，正在向它们礼拜。', sourceKind: 'mural', sourceIds: ['dha-323'] },
-      { id: 'c1-1', text: '在这幅画里，金人被画成了佛像。皇帝还不知道它们的名号，便想派人到远方打听。', sourceKind: 'mural', sourceIds: ['dha-323'] },
-      { id: 'c1-2', text: '于是，宫殿里的这个疑问，成了张骞西行的开端。请记住：这是壁画讲述的出使缘由。', sourceKind: 'interpretation', sourceIds: ['shiji-111', 'weishu-114', 'dha-323'] },
-    ],
+    "id": "first-captivity",
+    "title": "出发后，却被扣留",
+    "location": "西行途中 · 匈奴控制区",
+    "mode": "spatial",
+    "focus": {
+      "x": 0.005,
+      "y": 0.2,
+      "width": 0.29,
+      "height": 0.35
+    },
+    "takeaway": "使团被匈奴拦截，任务中断；十余年的扣留没有让张骞放弃使命。",
+    "cues": [
+      {
+        "id": "c1-0",
+        "text": "张骞带着百余人，从陇西向西出发。同行的甘父是一位善射的胡人，也是这场远行的重要伙伴。",
+        "sourceKind": "history",
+        "sourceIds": [
+          "shiji-123",
+          "hanshu-61"
+        ]
+      },
+      {
+        "id": "c1-1",
+        "text": "使团还没见到月氏，就被匈奴截住。匈奴不肯放行，张骞被带到单于面前，求盟的任务就此中断。",
+        "sourceKind": "history",
+        "sourceIds": [
+          "shiji-123",
+          "hanshu-61"
+        ]
+      },
+      {
+        "id": "c1-2",
+        "text": "张骞被留在匈奴十余年，娶妻生子。远行变成漫长的等待，但他一直保留汉节，没有放下使者的使命。",
+        "sourceKind": "history",
+        "sourceIds": [
+          "shiji-123",
+          "hanshu-61"
+        ]
+      }
+    ]
   },
   {
-    id: 'farewell', title: '张骞为何出发', location: '壁画下方 · 使者辞行',
-    mode: 'mural', focus: { x: 0.04, y: 0.615, width: 0.79, height: 0.375 },
-    takeaway: '汉武帝希望联合与匈奴有旧仇的月氏，改变北方的局势。',
-    cues: [
-      { id: 'c2-0', text: '往下看，骑马的是皇帝，对面持笏跪拜的是张骞。这一刻，他正准备领命出发。', sourceKind: 'mural', sourceIds: ['dha-323'] },
-      { id: 'c2-1', text: '张骞最初的任务，是寻找月氏，共同对抗匈奴。你眼前的壁画，却把西行讲成了寻问佛像。', sourceKind: 'history', sourceIds: ['shiji-123'] },
-      { id: 'c2-2', text: '月氏曾被匈奴击败，国王也被杀。张骞带着求盟的任务出发；但画中，故事从金人的疑问开始。', sourceKind: 'history', sourceIds: ['shiji-123'] },
-    ],
+    "id": "escape-westward",
+    "title": "脱身后，仍然向西",
+    "location": "匈奴 → 大宛 → 康居 → 大月氏",
+    "mode": "spatial",
+    "focus": {
+      "x": 0.005,
+      "y": 0.2,
+      "width": 0.29,
+      "height": 0.35
+    },
+    "takeaway": "张骞脱身后继续执行任务，经大宛和康居抵达大月氏。",
+    "cues": [
+      {
+        "id": "c2-0",
+        "text": "十余年后，监守渐渐松弛，张骞与同伴终于逃出。他没有就此回汉朝，而是继续向西寻找月氏。",
+        "sourceKind": "history",
+        "sourceIds": [
+          "shiji-123",
+          "hanshu-61"
+        ]
+      },
+      {
+        "id": "c2-1",
+        "text": "旅途困乏时，善射的甘父猎取禽兽，帮助众人解决食物。向西赶路，还要设法跨过不同国家的边界。",
+        "sourceKind": "history",
+        "sourceIds": [
+          "shiji-123",
+          "hanshu-61"
+        ]
+      },
+      {
+        "id": "c2-2",
+        "text": "大宛人希望与汉朝交往，便送他们到康居。经康居转送，张骞终于见到了他找寻多年的大月氏。",
+        "sourceKind": "history",
+        "sourceIds": [
+          "shiji-123",
+          "hanshu-61"
+        ]
+      }
+    ]
   },
   {
-    id: 'westward', title: '受阻十余年，仍然向西', location: '壁画左侧 · 汉使在山间前行',
-    mode: 'spatial', focus: { x: 0.005, y: 0.265, width: 0.29, height: 0.285 },
-    takeaway: '被扣十余年耽误了行程，却没有让张骞放弃寻找月氏。',
-    cues: [
-      { id: 'c3-0', text: '现在回到原画左侧。山石间露出一队人马，这条曲折的山路，把辞行和抵达连在一起。', sourceKind: 'mural', sourceIds: ['dha-323', 'dha-cave-323'] },
-      { id: 'c3-1', text: '不过，张骞的路并不顺利。途中他被匈奴拦下，扣留十余年；我们用营地场景看看这段受阻。', sourceKind: 'history', sourceIds: ['shiji-123'] },
-      { id: 'c3-2', text: '终于脱身后，他没有就此回家，而是继续向西，经大宛、康居，去寻找大月氏。', sourceKind: 'history', sourceIds: ['shiji-123'] },
-    ],
+    "id": "alliance-refused",
+    "title": "找到月氏，为何没能结盟",
+    "location": "大月氏 · 求盟未成",
+    "mode": "spatial",
+    "focus": {
+      "x": 0.005,
+      "y": 0.2,
+      "width": 0.29,
+      "height": 0.35
+    },
+    "takeaway": "汉朝需要盟友，月氏却已安居；共同的旧仇没有变成共同的行动。",
+    "cues": [
+      {
+        "id": "c3-0",
+        "text": "可大月氏已经在新的土地上安居。那里土地肥沃，也少受侵扰；他们不愿再为旧仇，重新与匈奴开战。",
+        "sourceKind": "history",
+        "sourceIds": [
+          "shiji-123",
+          "hanshu-61"
+        ]
+      },
+      {
+        "id": "c3-1",
+        "text": "汉朝盼着两面夹击匈奴，月氏却觉得汉朝太远，开战会打破眼前的安稳。双方的处境，早已不同。",
+        "sourceKind": "history",
+        "sourceIds": [
+          "shiji-123",
+          "hanshu-61"
+        ]
+      },
+      {
+        "id": "c3-2",
+        "text": "张骞从月氏来到大夏，停留一年多，仍没能促成结盟。他准备返回，把一路的见闻带给汉武帝。",
+        "sourceKind": "history",
+        "sourceIds": [
+          "shiji-123",
+          "hanshu-61"
+        ]
+      }
+    ]
   },
   {
-    id: 'credential-and-purpose', title: '汉节未失，求盟未成', location: '壁画左中 · 旌节与使团',
-    mode: 'spatial', focus: { x: 0.015, y: 0.20, width: 0.28, height: 0.285 },
-    takeaway: '张骞守住了使命，但月氏已有安定生活，不愿重启战争。',
-    cues: [
-      { id: 'c4-0', text: '看随从手中的旌节。这根长杆代表汉朝使者的身份，也代表张骞一直没有放下的使命。', sourceKind: 'mural', sourceIds: ['dha-323'] },
-      { id: 'c4-1', text: '被扣留十余年，这根汉节仍在。时间过去了，张骞心里惦记的，还是当年交给他的任务。', sourceKind: 'history', sourceIds: ['shiji-123'] },
-      { id: 'c4-2', text: '可月氏已经在西方安居，不愿再为旧仇开战。张骞走到了这里，求盟的愿望却没有实现。', sourceKind: 'history', sourceIds: ['shiji-123'] },
-    ],
+    "id": "daxia-discovery",
+    "title": "没带回盟约，却有新发现",
+    "location": "大夏 · 城市与市场",
+    "mode": "spatial",
+    "focus": {
+      "x": 0.005,
+      "y": 0.005,
+      "width": 0.28,
+      "height": 0.285
+    },
+    "takeaway": "大夏市场中的四川货物，让张骞发现远方已有贸易联系。",
+    "cues": [
+      {
+        "id": "c4-0",
+        "text": "求盟没有成功，远行却让他看见了另一个世界。大夏有城邑和市场，各方商人在这里交换货物。",
+        "sourceKind": "history",
+        "sourceIds": [
+          "shiji-123",
+          "hanshu-61"
+        ]
+      },
+      {
+        "id": "c4-1",
+        "text": "市场里，张骞竟认出蜀布和邛竹杖，也就是四川的布和竹杖：熟悉的东西，怎么会出现在这么远的地方？",
+        "sourceKind": "history",
+        "sourceIds": [
+          "shiji-123",
+          "hanshu-61"
+        ]
+      },
+      {
+        "id": "c4-2",
+        "text": "大夏人说，商人从身毒买来这些货物。身毒指印度地区；张骞由此推想，四川也许另有通向西方的路。",
+        "sourceKind": "history",
+        "sourceIds": [
+          "shiji-123",
+          "hanshu-61"
+        ]
+      }
+    ]
   },
   {
-    id: 'daxia', title: '在大夏看见远方的联系', location: '壁画左上 · 大夏城池',
-    mode: 'spatial', focus: { x: 0.005, y: 0.005, width: 0.28, height: 0.285 },
-    takeaway: '大夏市场里的蜀布与邛竹杖，揭示了远方已有的贸易联系。',
-    cues: [
-      { id: 'c5-0', text: '再看原画左上方。使者正走向大夏城门，门外有僧人，城内有佛塔；这就是画中的终点。', sourceKind: 'mural', sourceIds: ['dha-323'] },
-      { id: 'c5-1', text: '走进大夏的见闻场景，看看城屋和市场。商人来往、货物交换，远方的世界在这里变得具体。', sourceKind: 'history', sourceIds: ['shiji-123'] },
-      { id: 'c5-2', text: '桌上是蜀布和邛竹杖，也就是四川的布和竹杖。它们经身毒转手，竟来到了遥远的大夏。', sourceKind: 'history', sourceIds: ['shiji-123'] },
-    ],
+    "id": "return-home",
+    "title": "回家的路，又被截断",
+    "location": "归途 · 再次扣留与归汉",
+    "mode": "overview",
+    "focus": {
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    },
+    "takeaway": "回程再次被扣留，脱身后终于归汉；第一次出使前后十三年。",
+    "cues": [
+      {
+        "id": "c5-0",
+        "text": "返程时，张骞想沿南山、经羌人地区避开匈奴，却还是再次被扣留。回家的路，又停了一年多。",
+        "sourceKind": "history",
+        "sourceIds": [
+          "shiji-123",
+          "hanshu-61"
+        ]
+      },
+      {
+        "id": "c5-1",
+        "text": "趁匈奴发生内乱，他才再次脱身，与妻子和甘父回到汉朝。第一次出使，前后已经过去十三年。",
+        "sourceKind": "history",
+        "sourceIds": [
+          "shiji-123",
+          "hanshu-61"
+        ]
+      },
+      {
+        "id": "c5-2",
+        "text": "原来出发的百余人中，只有张骞和甘父回到汉朝。没有带回盟约，他带回的西域见闻，却让朝廷有了新的判断。",
+        "sourceKind": "history",
+        "sourceIds": [
+          "shiji-123",
+          "hanshu-61"
+        ]
+      }
+    ]
   },
   {
-    id: 'monks-and-tower', title: '僧人与佛塔从何而来', location: '壁画左上 · 城门与佛塔',
-    mode: 'spatial', focus: { x: 0.01, y: 0.01, width: 0.26, height: 0.225 },
-    takeaway: '僧塔呼应宫殿中的金人，讲出初唐佛教徒对这段远行的理解。',
-    cues: [
-      { id: 'c6-0', text: '请回到城门旁，看看这两位僧人，再看城里的佛塔。它们正回应着甘泉宫中金人的疑问。', sourceKind: 'mural', sourceIds: ['dha-323'] },
-      { id: 'c6-1', text: '这样一来，金人的身份便揭晓了：在这幅画的故事里，它们是佛像，远行也成了寻问佛教的旅程。', sourceKind: 'interpretation', sourceIds: ['shiji-123', 'dha-323'] },
-      { id: 'c6-2', text: '初唐画家借张骞的名声，把佛教的来历讲得更早。眼前的僧人与塔，留下的是后世的历史记忆。', sourceKind: 'interpretation', sourceIds: ['weishu-114', 'dha-323', 'dha-cave-323'] },
-    ],
+    "id": "later-contacts",
+    "title": "一趟未成的求盟，改变了什么",
+    "location": "汉朝与西域 · 后续出使",
+    "mode": "overview",
+    "focus": {
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    },
+    "takeaway": "张骞的报告和后续出使，推动了汉朝与西方诸国更直接的往来。",
+    "cues": [
+      {
+        "id": "c6-0",
+        "text": "汉武帝由此了解大宛、康居、大月氏和大夏。匈奴以西，还有许多国家；汉朝可以设法与它们直接往来。",
+        "sourceKind": "history",
+        "sourceIds": [
+          "shiji-123",
+          "hanshu-61"
+        ]
+      },
+      {
+        "id": "c6-1",
+        "text": "后来，张骞再次出使，联络乌孙，并派副使前往各国。乌孙没有立即答应联汉行动，各地的使者往来却逐步增多。",
+        "sourceKind": "history",
+        "sourceIds": [
+          "shiji-123",
+          "hanshu-61"
+        ]
+      },
+      {
+        "id": "c6-2",
+        "text": "商路早已存在。张骞没有凭一人走出整条丝绸之路；他的远行，帮助汉朝与西方诸国建立了更直接的联系。",
+        "sourceKind": "history",
+        "sourceIds": [
+          "shiji-123",
+          "hanshu-61"
+        ]
+      }
+    ]
   },
   {
-    id: 'return-to-picture', title: '远行留下了什么', location: '回到完整壁画',
-    mode: 'overview', focus: { x: 0, y: 0, width: 1, height: 1 },
-    takeaway: '求盟虽未成功，交往由此扩展；唐代壁画又留下了佛教的历史记忆。',
-    cues: [
-      { id: 'c7-0', text: '最后，让我们退回全画。宫殿、辞行、山路和城门，你现在能把这条故事线连起来了吗？', sourceKind: 'interpretation', sourceIds: ['dha-323'] },
-      { id: 'c7-1', text: '张骞十三年后回到汉朝，带回了西域见闻。求盟虽未成功，这段远行却为后来的往来铺了路。', sourceKind: 'history', sourceIds: ['shiji-123'] },
-      { id: 'c7-2', text: '再看一眼这幅壁画：它既记住了一位远行的使者，也让我们看见，后人怎样重新讲述他的故事。', sourceKind: 'interpretation', sourceIds: ['dha-323', 'weishu-114', 'shiji-123'] },
-    ],
-  },
+    "id": "mural-memory",
+    "title": "后人怎样记住这段远行",
+    "location": "初唐敦煌 · 壁画中的历史记忆",
+    "mode": "overview",
+    "focus": {
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    },
+    "takeaway": "史书中的求盟经历，与初唐壁画中的佛教讲述，需要分清。",
+    "cues": [
+      {
+        "id": "c7-0",
+        "text": "到了初唐，敦煌画家把张骞画进壁画。下方辞行、山间赶路和城门迎接，让我们看见后人记住的远行。",
+        "sourceKind": "mural",
+        "sourceIds": [
+          "dha-323",
+          "dha-cave-323"
+        ]
+      },
+      {
+        "id": "c7-1",
+        "text": "但画里的缘由变了：皇帝礼拜金人，派张骞西去问名号，僧人与佛塔成了答案。这是后世佛教对远行的讲述。",
+        "sourceKind": "mural",
+        "sourceIds": [
+          "dha-323",
+          "dha-cave-323"
+        ]
+      },
+      {
+        "id": "c7-2",
+        "text": "张骞为求盟出发，后人又借他的远行讲佛教来历。读过这段经历，再看壁画，就能分清历史与后世的记忆。",
+        "sourceKind": "interpretation",
+        "sourceIds": [
+          "dha-323",
+          "dha-cave-323",
+          "shiji-123",
+          "weishu-114"
+        ]
+      }
+    ]
+  }
 ]
 
 // A cue has its own reading floor. Recorded audio can extend it, never shorten it.
@@ -160,23 +417,221 @@ export const duration = chapters[chapters.length - 1]!.end
 // full.jpg coordinates: x/y in [0, 1], origin at the image's top left.
 // A history label anchors an explanation; it does not assert that the event was painted.
 export const annotations: MuralAnnotation[] = [
-  { id: 'overview-palace', label: '① 宫殿礼拜', x: 0.813, y: 0.167, chapterIndex: 0, detail: '先看右上角：宫殿内的金人与殿外的礼拜，提出了故事最初的疑问——这些金人究竟是谁？画旁题记把它们与皇帝派遣张骞西行联系起来。', sourceKind: 'mural', sourceIds: ['dha-323'] },
-  { id: 'overview-farewell', label: '② 使者辞行', x: 0.514, y: 0.778, chapterIndex: 0, detail: '再看下方：皇帝骑马，张骞持笏跪拜。人物的朝向与礼仪把“领命出发”表现出来。画家把这次辞行接在拜金人之后，讲的是他理解的出使来由。', sourceKind: 'mural', sourceIds: ['dha-323'] },
-  { id: 'overview-city', label: '③ 抵达城池', x: 0.102, y: 0.092, chapterIndex: 0, detail: '最后看左上：山路通向城门，门外有僧人，城内有佛塔。它们让西行有了终点，也回应了右上角金人身份的疑问。画面的顺序，需要沿人物和山路来寻找。', sourceKind: 'mural', sourceIds: ['dha-323'] },
-  { id: 'palace', label: '甘泉宫', x: 0.808, y: 0.144, chapterIndex: 1, detail: '宫殿的匾额写着“甘泉宫”。殿内金人居中，皇帝和臣属在下方礼拜，把金人放在了故事的中心。随后派遣使者打听名号的情节，正是从这里展开。', sourceKind: 'mural', sourceIds: ['dha-323'] },
-  { id: 'golden-figures', label: '金人被画成佛像', x: 0.805, y: 0.249, chapterIndex: 1, detail: '金人为何是佛像？《史记》记霍去病取得匈奴祭天金人，没有确认它们为佛像；后出的《魏书·释老志》把金人与佛教传播联系起来。初唐画家沿用这层解释，于是金人有了佛像的样貌。', sourceKind: 'interpretation', sourceIds: ['dha-323', 'shiji-111', 'weishu-114'] },
-  { id: 'emperor', label: '骑马的帝王', x: 0.482, y: 0.739, chapterIndex: 2, detail: '骑马的人物按敦煌研究院解读为汉武帝，身旁有侍从和华盖。张骞在他面前持笏跪拜，画家借朝廷礼仪，把“奉命辞行”这一刻表现出来。', sourceKind: 'mural', sourceIds: ['dha-323'] },
-  { id: 'envoy-farewell', label: '张骞辞行', x: 0.218, y: 0.892, chapterIndex: 2, detail: '请顺着骑马帝王的朝向，找到他面前左下方跪拜、持笏的使者。画旁题记说，皇帝获得金人却不知名号，便派张骞到大夏询问。这是画中的任务，不等同于史书所记的首次求盟。', sourceKind: 'mural', sourceIds: ['dha-323'] },
-  { id: 'first-embassy', label: '史书背景：联络月氏', x: 0.34, y: 0.83, chapterIndex: 2, detail: '首次出使为何选月氏？《史记》说月氏曾遭匈奴攻击，国王被杀，部众西迁；汉武帝想利用这份共同的敌意寻找盟友。壁画却从获金人讲起；若依获金人的先后对应，敦煌研究院认为应涉及第二次出使。不能把画中的问名号直接当作首次出使的目的。', sourceKind: 'history', sourceIds: ['shiji-123', 'dha-323'] },
-  { id: 'westward-party', label: '汉使一行', x: 0.099, y: 0.395, chapterIndex: 3, detail: '一位使者、两名持节随从，沿山间向城池前进。部分人马藏在山后，让行进显得曲折而遥远。3D借这一组形象表现走路，原画本身没有逐段画出他被扣留、逃出和求盟的经历。', sourceKind: 'mural', sourceIds: ['dha-323'] },
-  { id: 'detention', label: '扣留营地 · 史书补充', x: 0.12, y: 0.42, chapterIndex: 3, detail: '《史记》记载张骞经匈奴被扣留十余年。动画用拦截、进入营地、出入受限解释任务为何中断；具体营地、守卫动作和路线均为展示示意，原壁画没有画出这一过程。', sourceKind: 'history', sourceIds: ['shiji-123'] },
-  { id: 'guard', label: '匈奴守卫 · 出入受限', x: 0.15, y: 0.40, chapterIndex: 3, detail: '守卫使用已有Tripo人物模型及项目制作的装束变化。史书记载扣留，没有描述这一守卫的外貌、站位与动作；不据此虚构铁牢、刑罚或逃脱细节。', sourceKind: 'interpretation', sourceIds: ['shiji-123'] },
-  { id: 'mountain-road', label: '连起两个画面的山路', x: 0.127, y: 0.507, chapterIndex: 3, detail: '山石把下方辞行与左上到达连接起来，又遮住部分人马，表现跋涉的艰辛。这里的山路是画家组织故事的办法，并非按实际里程绘制的西域地图。', sourceKind: 'interpretation', sourceIds: ['dha-323'] },
-  { id: 'credential', label: '旌节：汉使的身份', x: 0.244, y: 0.244, chapterIndex: 4, detail: '旌节是使者身份的标志。画中随从持着长杆，让观者辨认出汉朝使团；《史记》另记张骞在匈奴十余年仍“持汉节不失”。多年受阻后继续西行，正说明他没有放弃受命的任务。', sourceKind: 'mural', sourceIds: ['dha-323', 'shiji-123'] },
-  { id: 'alliance-result', label: '月氏为何不愿结盟', x: 0.197, y: 0.345, chapterIndex: 4, detail: '旧仇为何没能换来盟友？月氏西迁后土地肥沃、生活较安定，又认为汉朝太远，已不愿重新与匈奴开战。张骞带来的是汉朝的战争需要，月氏考虑的是眼前的安居；双方的处境已经不同。这来自史书，原画没有明确的月氏接见场景；3D王庭建筑与礼仪为示意。', sourceKind: 'history', sourceIds: ['shiji-123'] },
-  { id: 'daxia-city', label: '画中的大夏城池', x: 0.087, y: 0.092, chapterIndex: 5, detail: '画旁残存榜题与敦煌研究院的解读，将左上城池认作大夏。《史记》记大夏有城屋和市场，却没有给出这座城的具体平面。城门与佛塔依画转译，不能视为大夏某座古城的实测复原。', sourceKind: 'mural', sourceIds: ['dha-323', 'shiji-123'] },
-  { id: 'market-information', label: '蜀物为何出现在大夏', x: 0.175, y: 0.151, chapterIndex: 5, detail: '为什么蜀物值得留意？张骞在大夏见到蜀布与邛竹杖，当地人说商人从身毒买来。蜀指今四川一带，邛竹杖是当地竹材制成的手杖；身毒是古代对印度地区的称呼，读作“捐毒”。这些物品让张骞得知远方已有贸易联系。市场和货物是史书补充，原画没有画出这些摊位。', sourceKind: 'history', sourceIds: ['shiji-123'] },
-  { id: 'monks', label: '城门旁的两位僧人', x: 0.208, y: 0.174, chapterIndex: 6, detail: '城门外的两个人，敦煌研究院解释为僧人。他们与城内佛塔共同回应甘泉宫的金人，把远行接到佛教故事中。原画没有交代他们的姓名；3D的迎接朝向帮助读画，并非张骞在汉代见僧的现场证据。', sourceKind: 'mural', sourceIds: ['dha-323'] },
-  { id: 'buddhist-tower', label: '城内佛塔', x: 0.067, y: 0.088, chapterIndex: 6, detail: '佛塔为何会出现在张骞的故事里？敦煌研究院指出，初唐佛道之争中，佛教徒借张骞西行，把佛教传入汉地的时间讲得更早。塔与僧人表现的是这层历史记忆；《史记》没有记载张骞在大夏询问佛像名号。', sourceKind: 'interpretation', sourceIds: ['dha-323', 'weishu-114', 'shiji-123'] },
-  { id: 'remembered-journey', label: '远行与后世的讲述', x: 0.456, y: 0.519, chapterIndex: 7, detail: '把宫殿、辞行、山路和城池连起来，就能看清画家的故事：从金人的疑问出发，以僧人与佛塔作回答。再读《史记》，另一条线索出现了——外交求盟虽未成，西域见闻却推动了后续往来。一幅壁画，同时容纳了远行的历史与后人对它的理解。', sourceKind: 'interpretation', sourceIds: ['dha-323', 'weishu-114', 'shiji-123'] },
+  {
+    "id": "first-embassy",
+    "label": "为何联络月氏",
+    "x": 0.34,
+    "y": 0.83,
+    "chapterIndex": 0,
+    "detail": "匈奴击败月氏，月氏西迁，汉武帝希望利用双方与匈奴的敌对关系寻找盟友。这是首次出使的政治目的。标注借辞行画面定位，不表示画中也讲求盟；壁画另有问金人名号的叙事。",
+    "sourceKind": "history",
+    "sourceIds": [
+      "shiji-123",
+      "hanshu-61"
+    ]
+  },
+  {
+    "id": "emperor",
+    "label": "汉武帝",
+    "x": 0.482,
+    "y": 0.739,
+    "chapterIndex": 0,
+    "detail": "汉武帝派张骞寻找月氏。画中骑马的帝王按敦煌研究院解读为汉武帝，侍从与华盖表现朝廷礼仪；初唐画面的具体装束不能作为汉代现场实录。",
+    "sourceKind": "mural",
+    "sourceIds": [
+      "dha-323",
+      "dha-cave-323"
+    ]
+  },
+  {
+    "id": "envoy-farewell",
+    "label": "张骞领命",
+    "x": 0.218,
+    "y": 0.892,
+    "chapterIndex": 0,
+    "detail": "画中持笏跪拜的使者被解释为张骞。画旁题记以问金人名号解释出使，史书以联络月氏解释首次出使。这里借辞行的形象帮助认识人物，不把两种缘由混为一谈。",
+    "sourceKind": "mural",
+    "sourceIds": [
+      "dha-323",
+      "dha-cave-323",
+      "shiji-123"
+    ]
+  },
+  {
+    "id": "detention",
+    "label": "首次扣留十余年",
+    "x": 0.12,
+    "y": 0.42,
+    "chapterIndex": 1,
+    "detail": "张骞经匈奴被扣留十余年，娶妻生子，仍持汉节不失。动画表现拦截与出入受限；营地布局、守卫、具体动作均为展示补全，原画没有画出这个事件。十余年是首次扣留，十三年是整个首次往返。",
+    "sourceKind": "history",
+    "sourceIds": [
+      "shiji-123",
+      "hanshu-61"
+    ]
+  },
+  {
+    "id": "guard",
+    "label": "匈奴为何不放行",
+    "x": 0.15,
+    "y": 0.4,
+    "chapterIndex": 1,
+    "detail": "汉朝使者要穿过匈奴控制区，联络匈奴的敌人。单于以匈奴若借汉地出使南方，汉朝是否同意作反问，拒绝放行。守卫不具名，装束和站位为示意；史书没有描述这两个守卫。",
+    "sourceKind": "history",
+    "sourceIds": [
+      "shiji-123",
+      "hanshu-61"
+    ]
+  },
+  {
+    "id": "credential",
+    "label": "汉节：使者身份",
+    "x": 0.244,
+    "y": 0.244,
+    "chapterIndex": 2,
+    "detail": "汉节是受命出使的身份凭证。《史记》记张骞在匈奴中持汉节不失。壁画使团与3D长杖帮助观众辨认使者；现用Tripo艺术长杖，不宣称精确还原汉节材质和形制。",
+    "sourceKind": "history",
+    "sourceIds": [
+      "shiji-123",
+      "hanshu-61",
+      "dha-323"
+    ]
+  },
+  {
+    "id": "westward-party",
+    "label": "脱身后继续西行",
+    "x": 0.099,
+    "y": 0.395,
+    "chapterIndex": 2,
+    "detail": "张骞没有在脱身后就回汉朝，而是继续完成寻找月氏的任务。大宛送其至康居，康居转送至大月氏。3D小队以少量人物代表使团，不表示史书中的使团只有三人。",
+    "sourceKind": "history",
+    "sourceIds": [
+      "shiji-123",
+      "hanshu-61"
+    ]
+  },
+  {
+    "id": "mountain-road",
+    "label": "甘父帮助渡过困境",
+    "x": 0.127,
+    "y": 0.507,
+    "chapterIndex": 2,
+    "detail": "史书称甘父为胡人，善射，困乏时射取禽兽供食，帮助张骞等人渡过饥饿；此处不把胡人直接等同某个具体族属。山道用于表现艰难远行，不是实际路线的地形测绘；没有虚构逃亡对白和具体追逐。",
+    "sourceKind": "history",
+    "sourceIds": [
+      "shiji-123",
+      "hanshu-61"
+    ]
+  },
+  {
+    "id": "alliance-result",
+    "label": "月氏为何拒绝结盟",
+    "x": 0.197,
+    "y": 0.345,
+    "chapterIndex": 3,
+    "detail": "月氏迁居后土地肥沃、生活较安定，又认为汉朝太远，不再愿为旧仇开战。共同敌人不等于共同利益。张骞从月氏至大夏，留一年多，仍未能促成盟约。原画没有明确的月氏接见场景；3D空间和礼仪为示意，接待方匿名，不认定统治者性别。",
+    "sourceKind": "history",
+    "sourceIds": [
+      "shiji-123",
+      "hanshu-61",
+      "hanshu-96"
+    ]
+  },
+  {
+    "id": "daxia-city",
+    "label": "大夏的城邑与市场",
+    "x": 0.087,
+    "y": 0.092,
+    "chapterIndex": 4,
+    "detail": "史书记大夏有城屋与市场，商人贩卖各方货物。城门取自壁画并转译为3D，市场按记载补充；这不是某座大夏城市的实测复原。壁画中的僧塔属于后世图像叙事，历史市场镜头不混入迎僧情节。",
+    "sourceKind": "history",
+    "sourceIds": [
+      "shiji-123",
+      "hanshu-61",
+      "dha-323"
+    ]
+  },
+  {
+    "id": "market-information",
+    "label": "四川货物为何在这里",
+    "x": 0.175,
+    "y": 0.151,
+    "chapterIndex": 4,
+    "detail": "张骞在大夏见到蜀布与邛竹杖。大夏人说商人从身毒买来；身毒指印度地区，读作捐毒。由此张骞推想蜀地可能另有通路。这是当地人的转述和他的推测，不表示他亲自到过印度，或已经验证了一条完整新路线。",
+    "sourceKind": "history",
+    "sourceIds": [
+      "shiji-123",
+      "hanshu-61"
+    ]
+  },
+  {
+    "id": "return-journey",
+    "label": "十三年后，终于归汉",
+    "x": 0.456,
+    "y": 0.519,
+    "chapterIndex": 5,
+    "detail": "张骞想并南山、从羌人地区归汉，途中再次被匈奴扣留，一年多后趁内乱脱身，带妻与甘父归汉。原百余人使团中仅张骞、甘父得还；妻子同行，不能理解为整个归国队伍总共只有两人。地图线仅示意，未确定具体归途。",
+    "sourceKind": "history",
+    "sourceIds": [
+      "shiji-123",
+      "hanshu-61"
+    ]
+  },
+  {
+    "id": "later-envoys",
+    "label": "后续出使与使者往来",
+    "x": 0.456,
+    "y": 0.519,
+    "chapterIndex": 6,
+    "detail": "首次求盟未成，报告却使朝廷了解西域。后来张骞出使乌孙，另遣副使到大宛、康居、大月氏、大夏等国；乌孙没有立即作出联汉行动的承诺，后续使节往来逐渐增多。地图还包含副使与其他时期路线，不能全算作张骞本人走过的路。",
+    "sourceKind": "history",
+    "sourceIds": [
+      "shiji-123",
+      "hanshu-61"
+    ]
+  },
+  {
+    "id": "golden-figures",
+    "label": "壁画为何画金人",
+    "x": 0.805,
+    "y": 0.249,
+    "chapterIndex": 7,
+    "detail": "壁画把皇帝礼拜金人与派遣张骞问名号联系起来，属于后世佛教叙事。《史记》所记霍去病获得祭天金人发生在首次出使之后；不能把获金人或问佛写成首次求盟的原因。《魏书·释老志》提供后世将金人与佛教联系的叙述。",
+    "sourceKind": "interpretation",
+    "sourceIds": [
+      "dha-323",
+      "dha-cave-323",
+      "shiji-111",
+      "weishu-114",
+      "shiji-123"
+    ]
+  },
+  {
+    "id": "monks",
+    "label": "城门外的两位僧人",
+    "x": 0.208,
+    "y": 0.174,
+    "chapterIndex": 7,
+    "detail": "两个人物按敦煌研究院解读为僧人。画家以迎接使者的形象把远行接入佛教故事。原画没有姓名，3D迎接动作是图像转译；它不能独立证明张骞在汉代曾见僧问佛。",
+    "sourceKind": "mural",
+    "sourceIds": [
+      "dha-323",
+      "dha-cave-323"
+    ]
+  },
+  {
+    "id": "buddhist-tower",
+    "label": "佛塔与后世的记忆",
+    "x": 0.067,
+    "y": 0.088,
+    "chapterIndex": 7,
+    "detail": "僧人与佛塔呼应宫殿金人。敦煌研究院结合初唐佛道之争解释，佛教徒借张骞西行把佛教来历讲得更早。《史记》未记这次问佛；缺载不能推成对所有佛教接触的绝对否定。故事主体是外交经历，壁画是后人对远行的讲述。",
+    "sourceKind": "interpretation",
+    "sourceIds": [
+      "dha-323",
+      "dha-cave-323",
+      "shiji-123",
+      "weishu-114"
+    ]
+  }
 ]

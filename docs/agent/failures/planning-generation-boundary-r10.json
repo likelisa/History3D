@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0.0",
+  "category": "failure_record",
+  "status": "project-candidate-verified-fix",
+  "scope": "project-only; no active skill, memory, safety or global harness changes",
+  "failureId": "planning-generation-boundary-r10",
+  "observedDate": "2026-10-03",
+  "summary": "story_review 在规划快照收尾前对 GET 可见，紧接的 generate 被 active 幂等分支接受但未启动生成。",
+  "evidence": [
+    {
+      "sourcePointer": "Codex task /root/tripo_generation_r9 tool output chunk 301a9e, target vitest started 2026-10-03 18:06:52",
+      "command": "npx vitest run tests/mural-agent-server.test.ts",
+      "result": "11 passed, 2 timed out",
+      "affectedTests": [
+        "reconciles an intent written before a torn snapshot as unknown",
+        "does not export a gray-box or incomplete package for invalid delivered GLB"
+      ]
+    },
+    {
+      "sourcePointer": "agent/server.ts: POST /api/runs/:id/generate active job boundary and planRun story_review update",
+      "kind": "code-root-cause"
+    },
+    {
+      "sourcePointer": "Codex task /root/tripo_generation_r9 tool output chunk 462d14 and chunk 46624a, 2026-10-03 18:09:40",
+      "commands": ["npm run typecheck", "npx vitest run tests/mural-agent-server.test.ts"],
+      "result": "typecheck exit 0; 14/14 tests passed after minimal fix and POST HTTP failure regression"
+    }
+  ],
+  "rootCause": "规划任务先把运行对象设为 story_review，再 await 事件/快照保存；HTTP GET 读取同一对象。generate 见 active.has(run.id) 后直接返回202，从而丢失人工接受故事的动作。",
+  "supersededAssumption": "story_review 可见就等于规划任务已完全离开 active map。",
+  "minimalPatch": "generate 在 story_review 且规划 active 时等待同一规划 promise 完成，再检查当前状态并在首个 await 前安装生成锁。",
+  "expectedGain": "立即接受刚生成的故事也能启动生成，同时保留并发/重复 generate 的单次提交保证。",
+  "regressionRisks": ["规划失败时等待者必须读取最终失败状态", "多个等待者不得各自创建新生成任务"],
+  "validation": {
+    "checks": ["完整目标HTTP状态机回归", "并发与重复generate仅一次Tripo POST", "未知POST不可恢复重投", "TypeScript入口检查"],
+    "remaining": "定时竞态原失败是实测证据，但没有人为延迟快照的确定性单例夹具；父代理冻结源码后需与全项目检查共同复验。"
+  },
+  "rollbackCondition": "若等待引入死锁或造成重复提交，应冻结生成入口，保留intent/receipt并回退最小补丁后重新设计单次锁；不得通过自动重POST处理。",
+  "approvalState": "父代理授权保留项目failure_record候选；全局规则未申请也未修改",
+  "persistenceDecision": ["failure_record", "no-global-persist"]
+}

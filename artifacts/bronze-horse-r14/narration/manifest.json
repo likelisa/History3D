@@ -1,0 +1,1401 @@
+{
+  "formatVersion": "1.0.0",
+  "voiceId": "history3d-public-uncle-fu-r13",
+  "referenceSha256": "f47d4c2e50cdbc2dee165d7cd2415c5e667c9af68863127701344c20b6f73e37",
+  "sourceCommit": "d7c2210da8c013e81a94bfc7b811a477c99fd506",
+  "complete": true,
+  "humanAudioReviewed": false,
+  "tracks": [
+    {
+      "id": "cue-1",
+      "text": "眼前这匹不到半米长的青铜马，记录为汉代武威市雷台汉墓出土，通高34.5厘米、长45厘米。",
+      "file": "narration/cue-1.wav",
+      "sha256": "0e6a06399ba7e3e1c56aa07146db0377214c135f188602728fe4c1830274071d",
+      "bytes": 679724,
+      "seconds": 10.62,
+      "subtitleAudioSha256": "0e6a06399ba7e3e1c56aa07146db0377214c135f188602728fe4c1830274071d",
+      "subtitlePoints": [
+        {
+          "seconds": 0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.18,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.42,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.56,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.8,
+          "textEnd": 5
+        },
+        {
+          "seconds": 0.88,
+          "textEnd": 6
+        },
+        {
+          "seconds": 0.96,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.22,
+          "textEnd": 8
+        },
+        {
+          "seconds": 1.42,
+          "textEnd": 9
+        },
+        {
+          "seconds": 1.62,
+          "textEnd": 10
+        },
+        {
+          "seconds": 1.74,
+          "textEnd": 11
+        },
+        {
+          "seconds": 1.92,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.06,
+          "textEnd": 14
+        },
+        {
+          "seconds": 2.32,
+          "textEnd": 15
+        },
+        {
+          "seconds": 2.86,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.1,
+          "textEnd": 17
+        },
+        {
+          "seconds": 3.26,
+          "textEnd": 18
+        },
+        {
+          "seconds": 3.52,
+          "textEnd": 19
+        },
+        {
+          "seconds": 3.7,
+          "textEnd": 20
+        },
+        {
+          "seconds": 3.92,
+          "textEnd": 21
+        },
+        {
+          "seconds": 4.14,
+          "textEnd": 22
+        },
+        {
+          "seconds": 4.24,
+          "textEnd": 23
+        },
+        {
+          "seconds": 4.82,
+          "textEnd": 24
+        },
+        {
+          "seconds": 5.02,
+          "textEnd": 25
+        },
+        {
+          "seconds": 5.32,
+          "textEnd": 26
+        },
+        {
+          "seconds": 5.46,
+          "textEnd": 27
+        },
+        {
+          "seconds": 5.66,
+          "textEnd": 29
+        },
+        {
+          "seconds": 6.66,
+          "textEnd": 30
+        },
+        {
+          "seconds": 6.66,
+          "textEnd": 31
+        },
+        {
+          "seconds": 6.94,
+          "textEnd": 32
+        },
+        {
+          "seconds": 7.12,
+          "textEnd": 34
+        },
+        {
+          "seconds": 7.62,
+          "textEnd": 35
+        },
+        {
+          "seconds": 8.02,
+          "textEnd": 36
+        },
+        {
+          "seconds": 8.36,
+          "textEnd": 38
+        },
+        {
+          "seconds": 8.54,
+          "textEnd": 39
+        },
+        {
+          "seconds": 9.08,
+          "textEnd": 40
+        },
+        {
+          "seconds": 9.33,
+          "textEnd": 41
+        },
+        {
+          "seconds": 9.58,
+          "textEnd": 42
+        },
+        {
+          "seconds": 10.12,
+          "textEnd": 44
+        }
+      ]
+    },
+    {
+      "id": "cue-2",
+      "text": "它重新进入人们视野，始于1969年雷台发现一座出土许多珍贵的有特色文物的汉代洞室墓葬。",
+      "file": "narration/cue-2.wav",
+      "sha256": "c32e05b81e9c7cc323579cb830a8c7e7fba88e826b75cb22c3d95a24830d0965",
+      "bytes": 602924,
+      "seconds": 9.42,
+      "subtitleAudioSha256": "c32e05b81e9c7cc323579cb830a8c7e7fba88e826b75cb22c3d95a24830d0965",
+      "subtitlePoints": [
+        {
+          "seconds": 0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.08,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.24,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.6,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.82,
+          "textEnd": 5
+        },
+        {
+          "seconds": 1,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.12,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.28,
+          "textEnd": 8
+        },
+        {
+          "seconds": 1.4,
+          "textEnd": 10
+        },
+        {
+          "seconds": 1.84,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.22,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.42,
+          "textEnd": 13
+        },
+        {
+          "seconds": 2.57,
+          "textEnd": 14
+        },
+        {
+          "seconds": 2.72,
+          "textEnd": 15
+        },
+        {
+          "seconds": 2.88,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.04,
+          "textEnd": 17
+        },
+        {
+          "seconds": 3.48,
+          "textEnd": 18
+        },
+        {
+          "seconds": 3.74,
+          "textEnd": 19
+        },
+        {
+          "seconds": 3.84,
+          "textEnd": 20
+        },
+        {
+          "seconds": 4,
+          "textEnd": 21
+        },
+        {
+          "seconds": 4.3,
+          "textEnd": 22
+        },
+        {
+          "seconds": 4.46,
+          "textEnd": 23
+        },
+        {
+          "seconds": 4.66,
+          "textEnd": 24
+        },
+        {
+          "seconds": 4.8,
+          "textEnd": 25
+        },
+        {
+          "seconds": 5,
+          "textEnd": 26
+        },
+        {
+          "seconds": 5.24,
+          "textEnd": 27
+        },
+        {
+          "seconds": 5.44,
+          "textEnd": 28
+        },
+        {
+          "seconds": 5.66,
+          "textEnd": 29
+        },
+        {
+          "seconds": 5.92,
+          "textEnd": 30
+        },
+        {
+          "seconds": 6.12,
+          "textEnd": 31
+        },
+        {
+          "seconds": 6.44,
+          "textEnd": 32
+        },
+        {
+          "seconds": 6.68,
+          "textEnd": 33
+        },
+        {
+          "seconds": 7.04,
+          "textEnd": 34
+        },
+        {
+          "seconds": 7.22,
+          "textEnd": 35
+        },
+        {
+          "seconds": 7.44,
+          "textEnd": 36
+        },
+        {
+          "seconds": 7.58,
+          "textEnd": 37
+        },
+        {
+          "seconds": 7.86,
+          "textEnd": 38
+        },
+        {
+          "seconds": 8.08,
+          "textEnd": 39
+        },
+        {
+          "seconds": 8.32,
+          "textEnd": 40
+        },
+        {
+          "seconds": 8.6,
+          "textEnd": 41
+        },
+        {
+          "seconds": 8.8,
+          "textEnd": 43
+        }
+      ]
+    },
+    {
+      "id": "cue-3",
+      "text": "雷台汉墓的主人到底是谁，至今仍是个谜，研究者只能尊称他为“张君”。",
+      "file": "narration/cue-3.wav",
+      "sha256": "20f41d8808cc8ce2f3de092b2828a36531cf57b9001d546cd93352d2df240a32",
+      "bytes": 480044,
+      "seconds": 7.5,
+      "subtitleAudioSha256": "20f41d8808cc8ce2f3de092b2828a36531cf57b9001d546cd93352d2df240a32",
+      "subtitlePoints": [
+        {
+          "seconds": 0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.16,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.44,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.74,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.9,
+          "textEnd": 5
+        },
+        {
+          "seconds": 1.02,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.12,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.32,
+          "textEnd": 8
+        },
+        {
+          "seconds": 1.49,
+          "textEnd": 9
+        },
+        {
+          "seconds": 1.66,
+          "textEnd": 10
+        },
+        {
+          "seconds": 1.9,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.18,
+          "textEnd": 13
+        },
+        {
+          "seconds": 2.58,
+          "textEnd": 14
+        },
+        {
+          "seconds": 2.9,
+          "textEnd": 15
+        },
+        {
+          "seconds": 3.18,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.36,
+          "textEnd": 17
+        },
+        {
+          "seconds": 3.5,
+          "textEnd": 19
+        },
+        {
+          "seconds": 4.58,
+          "textEnd": 20
+        },
+        {
+          "seconds": 4.7,
+          "textEnd": 21
+        },
+        {
+          "seconds": 4.92,
+          "textEnd": 22
+        },
+        {
+          "seconds": 5.1,
+          "textEnd": 23
+        },
+        {
+          "seconds": 5.64,
+          "textEnd": 24
+        },
+        {
+          "seconds": 5.82,
+          "textEnd": 25
+        },
+        {
+          "seconds": 6.06,
+          "textEnd": 26
+        },
+        {
+          "seconds": 6.28,
+          "textEnd": 27
+        },
+        {
+          "seconds": 6.4,
+          "textEnd": 29
+        },
+        {
+          "seconds": 6.58,
+          "textEnd": 30
+        },
+        {
+          "seconds": 6.76,
+          "textEnd": 33
+        }
+      ]
+    },
+    {
+      "id": "cue-4",
+      "text": "它的造型矫健精美，作昂首嘶鸣、疾足奔驰状，这正是匠人想凝固的瞬间。",
+      "file": "narration/cue-4.wav",
+      "sha256": "f70633bb5646358989782102260b6dd609fd0d2b46690fc68de3ae67b76f6cfb",
+      "bytes": 541484,
+      "seconds": 8.46,
+      "subtitleAudioSha256": "f70633bb5646358989782102260b6dd609fd0d2b46690fc68de3ae67b76f6cfb",
+      "subtitlePoints": [
+        {
+          "seconds": 0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.07,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.14,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.38,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.7,
+          "textEnd": 5
+        },
+        {
+          "seconds": 1.02,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.24,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.48,
+          "textEnd": 9
+        },
+        {
+          "seconds": 1.88,
+          "textEnd": 10
+        },
+        {
+          "seconds": 2.18,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.62,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.86,
+          "textEnd": 13
+        },
+        {
+          "seconds": 3.12,
+          "textEnd": 15
+        },
+        {
+          "seconds": 3.42,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.72,
+          "textEnd": 17
+        },
+        {
+          "seconds": 4.04,
+          "textEnd": 18
+        },
+        {
+          "seconds": 4.24,
+          "textEnd": 19
+        },
+        {
+          "seconds": 4.52,
+          "textEnd": 21
+        },
+        {
+          "seconds": 5.54,
+          "textEnd": 22
+        },
+        {
+          "seconds": 5.58,
+          "textEnd": 23
+        },
+        {
+          "seconds": 5.84,
+          "textEnd": 24
+        },
+        {
+          "seconds": 6.04,
+          "textEnd": 25
+        },
+        {
+          "seconds": 6.24,
+          "textEnd": 26
+        },
+        {
+          "seconds": 6.46,
+          "textEnd": 27
+        },
+        {
+          "seconds": 6.86,
+          "textEnd": 28
+        },
+        {
+          "seconds": 7.2,
+          "textEnd": 29
+        },
+        {
+          "seconds": 7.48,
+          "textEnd": 30
+        },
+        {
+          "seconds": 7.6,
+          "textEnd": 31
+        },
+        {
+          "seconds": 7.8,
+          "textEnd": 33
+        }
+      ]
+    },
+    {
+      "id": "cue-5",
+      "text": "照片还直接可见：三条腿离开鸟形底座，另一足与鸟形支撑相接，形成腾空而立的姿态。",
+      "file": "narration/cue-5.wav",
+      "sha256": "ce45b420cdb60a491aadba2180e229e01706cef1a2f401bead25d37ebb535429",
+      "bytes": 590124,
+      "seconds": 9.22,
+      "subtitleAudioSha256": "ce45b420cdb60a491aadba2180e229e01706cef1a2f401bead25d37ebb535429",
+      "subtitlePoints": [
+        {
+          "seconds": 0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.2,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.46,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.64,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.82,
+          "textEnd": 5
+        },
+        {
+          "seconds": 1,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.26,
+          "textEnd": 8
+        },
+        {
+          "seconds": 1.52,
+          "textEnd": 9
+        },
+        {
+          "seconds": 1.98,
+          "textEnd": 10
+        },
+        {
+          "seconds": 2.24,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.54,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.76,
+          "textEnd": 13
+        },
+        {
+          "seconds": 2.96,
+          "textEnd": 14
+        },
+        {
+          "seconds": 3.16,
+          "textEnd": 15
+        },
+        {
+          "seconds": 3.36,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.56,
+          "textEnd": 18
+        },
+        {
+          "seconds": 3.78,
+          "textEnd": 19
+        },
+        {
+          "seconds": 4.32,
+          "textEnd": 20
+        },
+        {
+          "seconds": 4.54,
+          "textEnd": 21
+        },
+        {
+          "seconds": 4.74,
+          "textEnd": 22
+        },
+        {
+          "seconds": 5.2,
+          "textEnd": 23
+        },
+        {
+          "seconds": 5.44,
+          "textEnd": 24
+        },
+        {
+          "seconds": 5.7,
+          "textEnd": 25
+        },
+        {
+          "seconds": 5.94,
+          "textEnd": 26
+        },
+        {
+          "seconds": 6.16,
+          "textEnd": 27
+        },
+        {
+          "seconds": 6.34,
+          "textEnd": 29
+        },
+        {
+          "seconds": 6.62,
+          "textEnd": 30
+        },
+        {
+          "seconds": 7.12,
+          "textEnd": 31
+        },
+        {
+          "seconds": 7.42,
+          "textEnd": 32
+        },
+        {
+          "seconds": 7.66,
+          "textEnd": 33
+        },
+        {
+          "seconds": 7.9,
+          "textEnd": 34
+        },
+        {
+          "seconds": 8.02,
+          "textEnd": 35
+        },
+        {
+          "seconds": 8.32,
+          "textEnd": 36
+        },
+        {
+          "seconds": 8.44,
+          "textEnd": 37
+        },
+        {
+          "seconds": 8.64,
+          "textEnd": 39
+        }
+      ]
+    },
+    {
+      "id": "cue-6",
+      "text": "这种“三足腾空、一足踏鸟”的造型，让单足支撑暗藏精妙的力学平衡，也显出匠人的审美与巧思。",
+      "file": "narration/cue-6.wav",
+      "sha256": "1b143c33eecc5973ac84f76f43f59687d7fd80c9172b542ea8cf3917751b9080",
+      "bytes": 641324,
+      "seconds": 10.02,
+      "subtitleAudioSha256": "1b143c33eecc5973ac84f76f43f59687d7fd80c9172b542ea8cf3917751b9080",
+      "subtitlePoints": [
+        {
+          "seconds": 0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.24,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.46,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.66,
+          "textEnd": 5
+        },
+        {
+          "seconds": 0.98,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.18,
+          "textEnd": 8
+        },
+        {
+          "seconds": 1.52,
+          "textEnd": 9
+        },
+        {
+          "seconds": 1.86,
+          "textEnd": 10
+        },
+        {
+          "seconds": 2.18,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.46,
+          "textEnd": 13
+        },
+        {
+          "seconds": 2.68,
+          "textEnd": 14
+        },
+        {
+          "seconds": 2.78,
+          "textEnd": 15
+        },
+        {
+          "seconds": 2.92,
+          "textEnd": 17
+        },
+        {
+          "seconds": 3.34,
+          "textEnd": 18
+        },
+        {
+          "seconds": 3.66,
+          "textEnd": 19
+        },
+        {
+          "seconds": 3.9,
+          "textEnd": 20
+        },
+        {
+          "seconds": 4.18,
+          "textEnd": 21
+        },
+        {
+          "seconds": 4.32,
+          "textEnd": 22
+        },
+        {
+          "seconds": 4.62,
+          "textEnd": 23
+        },
+        {
+          "seconds": 5.06,
+          "textEnd": 24
+        },
+        {
+          "seconds": 5.3,
+          "textEnd": 25
+        },
+        {
+          "seconds": 5.5,
+          "textEnd": 26
+        },
+        {
+          "seconds": 5.76,
+          "textEnd": 27
+        },
+        {
+          "seconds": 5.94,
+          "textEnd": 28
+        },
+        {
+          "seconds": 6.04,
+          "textEnd": 29
+        },
+        {
+          "seconds": 6.26,
+          "textEnd": 30
+        },
+        {
+          "seconds": 6.42,
+          "textEnd": 32
+        },
+        {
+          "seconds": 6.82,
+          "textEnd": 33
+        },
+        {
+          "seconds": 7.36,
+          "textEnd": 34
+        },
+        {
+          "seconds": 7.64,
+          "textEnd": 35
+        },
+        {
+          "seconds": 7.82,
+          "textEnd": 36
+        },
+        {
+          "seconds": 8.04,
+          "textEnd": 37
+        },
+        {
+          "seconds": 8.28,
+          "textEnd": 38
+        },
+        {
+          "seconds": 8.38,
+          "textEnd": 39
+        },
+        {
+          "seconds": 8.66,
+          "textEnd": 40
+        },
+        {
+          "seconds": 8.9,
+          "textEnd": 41
+        },
+        {
+          "seconds": 9.08,
+          "textEnd": 42
+        },
+        {
+          "seconds": 9.24,
+          "textEnd": 44
+        }
+      ]
+    },
+    {
+      "id": "cue-7",
+      "text": "雷台汉墓出土的铜车马俑仪仗队，和汉代其他仪仗俑车马阵一样，都是陪葬冥器。",
+      "file": "narration/cue-7.wav",
+      "sha256": "73bbda6ff081c19eaa3ee49917135f6a698668d09626cb349329bd1d10402926",
+      "bytes": 480044,
+      "seconds": 7.5,
+      "subtitleAudioSha256": "73bbda6ff081c19eaa3ee49917135f6a698668d09626cb349329bd1d10402926",
+      "subtitlePoints": [
+        {
+          "seconds": 0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.14,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.36,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.6,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.74,
+          "textEnd": 5
+        },
+        {
+          "seconds": 0.92,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.1,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.24,
+          "textEnd": 8
+        },
+        {
+          "seconds": 1.42,
+          "textEnd": 9
+        },
+        {
+          "seconds": 1.68,
+          "textEnd": 10
+        },
+        {
+          "seconds": 1.76,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.02,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.14,
+          "textEnd": 13
+        },
+        {
+          "seconds": 2.36,
+          "textEnd": 15
+        },
+        {
+          "seconds": 2.6,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3,
+          "textEnd": 17
+        },
+        {
+          "seconds": 3.32,
+          "textEnd": 18
+        },
+        {
+          "seconds": 3.44,
+          "textEnd": 19
+        },
+        {
+          "seconds": 3.58,
+          "textEnd": 20
+        },
+        {
+          "seconds": 3.9,
+          "textEnd": 21
+        },
+        {
+          "seconds": 4.12,
+          "textEnd": 22
+        },
+        {
+          "seconds": 4.28,
+          "textEnd": 23
+        },
+        {
+          "seconds": 4.46,
+          "textEnd": 24
+        },
+        {
+          "seconds": 4.72,
+          "textEnd": 25
+        },
+        {
+          "seconds": 4.88,
+          "textEnd": 26
+        },
+        {
+          "seconds": 5.08,
+          "textEnd": 27
+        },
+        {
+          "seconds": 5.18,
+          "textEnd": 29
+        },
+        {
+          "seconds": 5.44,
+          "textEnd": 30
+        },
+        {
+          "seconds": 5.77,
+          "textEnd": 31
+        },
+        {
+          "seconds": 6.1,
+          "textEnd": 32
+        },
+        {
+          "seconds": 6.46,
+          "textEnd": 33
+        },
+        {
+          "seconds": 6.7,
+          "textEnd": 34
+        },
+        {
+          "seconds": 6.82,
+          "textEnd": 36
+        }
+      ]
+    },
+    {
+      "id": "cue-8",
+      "text": "1983年，它的侧面剪影被定为中国旅游图形标志，从墓葬文物走进大众生活。",
+      "file": "narration/cue-8.wav",
+      "sha256": "000a7dc3bb3c808bba2982990d47fdcc34ebdcb3dcc237933160f176e53a077b",
+      "bytes": 523564,
+      "seconds": 8.18,
+      "subtitleAudioSha256": "000a7dc3bb3c808bba2982990d47fdcc34ebdcb3dcc237933160f176e53a077b",
+      "subtitlePoints": [
+        {
+          "seconds": 0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.14,
+          "textEnd": 2
+        },
+        {
+          "seconds": 0.28,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.45,
+          "textEnd": 4
+        },
+        {
+          "seconds": 0.62,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.14,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.36,
+          "textEnd": 8
+        },
+        {
+          "seconds": 1.58,
+          "textEnd": 9
+        },
+        {
+          "seconds": 1.88,
+          "textEnd": 10
+        },
+        {
+          "seconds": 2.1,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.3,
+          "textEnd": 12
+        },
+        {
+          "seconds": 2.5,
+          "textEnd": 13
+        },
+        {
+          "seconds": 2.74,
+          "textEnd": 14
+        },
+        {
+          "seconds": 2.94,
+          "textEnd": 15
+        },
+        {
+          "seconds": 3.14,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.31,
+          "textEnd": 17
+        },
+        {
+          "seconds": 3.48,
+          "textEnd": 18
+        },
+        {
+          "seconds": 3.94,
+          "textEnd": 19
+        },
+        {
+          "seconds": 4.12,
+          "textEnd": 20
+        },
+        {
+          "seconds": 4.3,
+          "textEnd": 21
+        },
+        {
+          "seconds": 4.46,
+          "textEnd": 22
+        },
+        {
+          "seconds": 4.68,
+          "textEnd": 24
+        },
+        {
+          "seconds": 4.96,
+          "textEnd": 25
+        },
+        {
+          "seconds": 5.46,
+          "textEnd": 26
+        },
+        {
+          "seconds": 5.76,
+          "textEnd": 27
+        },
+        {
+          "seconds": 5.96,
+          "textEnd": 28
+        },
+        {
+          "seconds": 6.1,
+          "textEnd": 29
+        },
+        {
+          "seconds": 6.3,
+          "textEnd": 30
+        },
+        {
+          "seconds": 6.62,
+          "textEnd": 31
+        },
+        {
+          "seconds": 6.84,
+          "textEnd": 32
+        },
+        {
+          "seconds": 7.04,
+          "textEnd": 33
+        },
+        {
+          "seconds": 7.34,
+          "textEnd": 34
+        },
+        {
+          "seconds": 7.51,
+          "textEnd": 36
+        }
+      ]
+    },
+    {
+      "id": "cue-9",
+      "text": "不过，鸟形支撑的鸟种、原始颜色、内部结构和不可见背面，这张照片都不能确认；图生3D补出的部分只是艺术推断。",
+      "file": "narration/cue-9.wav",
+      "sha256": "922f6c9afdf557d93aac6fc43e717202b5b21a7ca6d6b80643fdb0a9b8f63544",
+      "bytes": 794924,
+      "seconds": 12.42,
+      "subtitleAudioSha256": "922f6c9afdf557d93aac6fc43e717202b5b21a7ca6d6b80643fdb0a9b8f63544",
+      "subtitlePoints": [
+        {
+          "seconds": 0,
+          "textEnd": 1
+        },
+        {
+          "seconds": 0.2,
+          "textEnd": 3
+        },
+        {
+          "seconds": 0.54,
+          "textEnd": 4
+        },
+        {
+          "seconds": 1.22,
+          "textEnd": 5
+        },
+        {
+          "seconds": 1.48,
+          "textEnd": 6
+        },
+        {
+          "seconds": 1.64,
+          "textEnd": 7
+        },
+        {
+          "seconds": 1.94,
+          "textEnd": 8
+        },
+        {
+          "seconds": 2.04,
+          "textEnd": 9
+        },
+        {
+          "seconds": 2.3,
+          "textEnd": 11
+        },
+        {
+          "seconds": 2.64,
+          "textEnd": 12
+        },
+        {
+          "seconds": 3.02,
+          "textEnd": 13
+        },
+        {
+          "seconds": 3.32,
+          "textEnd": 14
+        },
+        {
+          "seconds": 3.56,
+          "textEnd": 16
+        },
+        {
+          "seconds": 3.9,
+          "textEnd": 17
+        },
+        {
+          "seconds": 4.28,
+          "textEnd": 18
+        },
+        {
+          "seconds": 4.5,
+          "textEnd": 19
+        },
+        {
+          "seconds": 4.7,
+          "textEnd": 20
+        },
+        {
+          "seconds": 4.92,
+          "textEnd": 21
+        },
+        {
+          "seconds": 5.06,
+          "textEnd": 22
+        },
+        {
+          "seconds": 5.2,
+          "textEnd": 23
+        },
+        {
+          "seconds": 5.38,
+          "textEnd": 24
+        },
+        {
+          "seconds": 5.62,
+          "textEnd": 25
+        },
+        {
+          "seconds": 5.78,
+          "textEnd": 27
+        },
+        {
+          "seconds": 6.72,
+          "textEnd": 28
+        },
+        {
+          "seconds": 6.72,
+          "textEnd": 29
+        },
+        {
+          "seconds": 6.96,
+          "textEnd": 30
+        },
+        {
+          "seconds": 7.14,
+          "textEnd": 31
+        },
+        {
+          "seconds": 7.4,
+          "textEnd": 32
+        },
+        {
+          "seconds": 7.64,
+          "textEnd": 33
+        },
+        {
+          "seconds": 7.77,
+          "textEnd": 34
+        },
+        {
+          "seconds": 7.9,
+          "textEnd": 35
+        },
+        {
+          "seconds": 8.2,
+          "textEnd": 37
+        },
+        {
+          "seconds": 8.54,
+          "textEnd": 38
+        },
+        {
+          "seconds": 9,
+          "textEnd": 39
+        },
+        {
+          "seconds": 9.12,
+          "textEnd": 40
+        },
+        {
+          "seconds": 9.36,
+          "textEnd": 41
+        },
+        {
+          "seconds": 9.9,
+          "textEnd": 42
+        },
+        {
+          "seconds": 10.1,
+          "textEnd": 43
+        },
+        {
+          "seconds": 10.26,
+          "textEnd": 44
+        },
+        {
+          "seconds": 10.36,
+          "textEnd": 45
+        },
+        {
+          "seconds": 10.47,
+          "textEnd": 46
+        },
+        {
+          "seconds": 10.58,
+          "textEnd": 47
+        },
+        {
+          "seconds": 10.84,
+          "textEnd": 48
+        },
+        {
+          "seconds": 11.1,
+          "textEnd": 49
+        },
+        {
+          "seconds": 11.46,
+          "textEnd": 50
+        },
+        {
+          "seconds": 11.68,
+          "textEnd": 51
+        },
+        {
+          "seconds": 11.82,
+          "textEnd": 53
+        }
+      ]
+    }
+  ]
+}

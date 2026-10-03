@@ -1,0 +1,114 @@
+{
+  "formatVersion": "1.0.0",
+  "runId": "run-4382d4f9-c5fc-49a3-9b5e-1e464d935ccd",
+  "subjectType": "artifact",
+  "primaryAssetId": "artifact-1",
+  "coordinateSystem": "Y-up",
+  "assets": [
+    {
+      "id": "artifact-1",
+      "url": "./assets/artifact-1.glb",
+      "heightM": 0.345,
+      "generationMode": "image-to-model",
+      "frontYawRadians": 0,
+      "normalization": {
+        "runtimeScaleToHeight": true,
+        "centerXZ": true,
+        "groundAtYZero": true,
+        "frontReviewed": false,
+        "heightStatus": "display-scale-not-measured"
+      }
+    }
+  ],
+  "scenes": [
+    {
+      "id": "scene-1",
+      "title": "侧面全貌与比例",
+      "visualSeconds": 7,
+      "placements": [
+        {
+          "assetId": "artifact-1",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "heading": 0
+        }
+      ],
+      "camera": [
+        1.6,
+        0.8,
+        1.8
+      ]
+    },
+    {
+      "id": "scene-2",
+      "title": "昂首与口部近观",
+      "visualSeconds": 6,
+      "placements": [
+        {
+          "assetId": "artifact-1",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "heading": 0
+        }
+      ],
+      "camera": [
+        0.9,
+        0.7,
+        1.5
+      ]
+    },
+    {
+      "id": "scene-3",
+      "title": "三足腾空与鸟形支撑",
+      "visualSeconds": 8,
+      "placements": [
+        {
+          "assetId": "artifact-1",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "heading": 0
+        }
+      ],
+      "camera": [
+        0.4,
+        0.35,
+        1.8
+      ]
+    },
+    {
+      "id": "scene-4",
+      "title": "支撑点与底座近观",
+      "visualSeconds": 6,
+      "placements": [
+        {
+          "assetId": "artifact-1",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "heading": 0
+        }
+      ],
+      "camera": [
+        0.5,
+        0.25,
+        1.2
+      ]
+    }
+  ],
+  "animation": {
+    "status": "not_configured",
+    "complete": false,
+    "movementMode": "static-placement"
+  }
+}

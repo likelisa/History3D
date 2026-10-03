@@ -1,0 +1,11 @@
+{
+  "userAnswer": "接近，可以用它继续制作旁白",
+  "question": "听过上面的原音和 GPT-SoVITS 试听后，你觉得复刻音色和自然度如何？",
+  "previewSha256": "97c0666a09c85fe4c4401571a2b4117b271ad9ed13a69f0fde498898d9409743",
+  "referenceSha256": "f47d4c2e50cdbc2dee165d7cd2415c5e667c9af68863127701344c20b6f73e37",
+  "acceptedScope": "preview-timbre-and-full-narration-production",
+  "fullNarrationListeningAcceptance": false,
+  "privateReferenceUsed": false,
+  "voiceCloningUsed": true,
+  "source": "current user message request_user_input_async reply"
+}

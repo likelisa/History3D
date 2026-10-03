@@ -1,0 +1,167 @@
+{
+  "experimentId": "tripo-story-r9",
+  "assets": [
+    {
+      "id": "zhangqian",
+      "rawSha256": "5ebe1a28dac95ab5e3b0e51f117eeec8445d6b9cfd96c3800c135680d780a2fd",
+      "rawBoundsBlenderZUp": {
+        "min": [
+          -0.09404425323009491,
+          -0.17894892394542694,
+          -0.4893115758895874
+        ],
+        "max": [
+          0.09404851496219635,
+          0.1787472814321518,
+          0.48954522609710693
+        ]
+      },
+      "displayScale": 1.787799805291426,
+      "yawDegrees": 0,
+      "views": [
+        {
+          "view": "front-plus-z",
+          "path": "/mural-assets/tripo-story-r9/review/raw/zhangqian-front-plus-z.png",
+          "sha256": "86d30ba7aba55da9efc31d32ba6c6fa7e654650769b62658748602212719dcad",
+          "bytes": 697392
+        },
+        {
+          "view": "back-minus-z",
+          "path": "/mural-assets/tripo-story-r9/review/raw/zhangqian-back-minus-z.png",
+          "sha256": "9e3fe8de514f7510815e2f761ce30ee8905703a1c62d5f2b38128f9f9849464b",
+          "bytes": 695192
+        },
+        {
+          "view": "right-plus-x",
+          "path": "/mural-assets/tripo-story-r9/review/raw/zhangqian-right-plus-x.png",
+          "sha256": "a3a15b9687c61314f17f569b5ba203efbc646d4e73ee937e0c570ff6cec5ab29",
+          "bytes": 738926
+        },
+        {
+          "view": "left-minus-x",
+          "path": "/mural-assets/tripo-story-r9/review/raw/zhangqian-left-minus-x.png",
+          "sha256": "5559a3e2b9363bf658bad65efc584a91c7899d756b34ea63ef589a17e0128005",
+          "bytes": 719783
+        },
+        {
+          "view": "three-quarter",
+          "path": "/mural-assets/tripo-story-r9/review/raw/zhangqian-three-quarter.png",
+          "sha256": "6b4eb32433ce81f74780f058134aa44970377738b7b9098fec24a0f221da9ed2",
+          "bytes": 730446
+        }
+      ],
+      "blend": "/mural-assets/tripo-story-r9/review/raw/zhangqian-raw.blend",
+      "orientationStatus": "raw coordinate views only; face direction requires visual review",
+      "animationStatus": "not evaluated",
+      "blenderVersion": "4.5.14 LTS"
+    },
+    {
+      "id": "ganfu",
+      "rawSha256": "d4c0b7deb1513119bd1042d33e414eeef961a70a2723918c6c62fd3c97951a82",
+      "rawBoundsBlenderZUp": {
+        "min": [
+          -0.14631611108779907,
+          -0.32795342803001404,
+          -0.4896787405014038
+        ],
+        "max": [
+          0.1462925672531128,
+          0.3276652991771698,
+          0.4896906614303589
+        ]
+      },
+      "displayScale": 1.7256001633975393,
+      "yawDegrees": 0,
+      "views": [
+        {
+          "view": "front-plus-z",
+          "path": "/mural-assets/tripo-story-r9/review/raw/ganfu-front-plus-z.png",
+          "sha256": "e4a69e28f060f13edcd08bdb3edfdc24e6da6401c072d7f777ee1dd8a01c97dd",
+          "bytes": 722050
+        },
+        {
+          "view": "back-minus-z",
+          "path": "/mural-assets/tripo-story-r9/review/raw/ganfu-back-minus-z.png",
+          "sha256": "929c8298bda8e38f7a00bf0e18d96f682e48b9fd0454dd501b791490285de935",
+          "bytes": 728153
+        },
+        {
+          "view": "right-plus-x",
+          "path": "/mural-assets/tripo-story-r9/review/raw/ganfu-right-plus-x.png",
+          "sha256": "f74810dac1f4033b376ffa22a07a127578c1339ebba429bfcb7dd155422c5d52",
+          "bytes": 800451
+        },
+        {
+          "view": "left-minus-x",
+          "path": "/mural-assets/tripo-story-r9/review/raw/ganfu-left-minus-x.png",
+          "sha256": "4450452825f6277020e9fb8d547f738587b8946010af68fa29a3bfd2b5a94fd7",
+          "bytes": 767942
+        },
+        {
+          "view": "three-quarter",
+          "path": "/mural-assets/tripo-story-r9/review/raw/ganfu-three-quarter.png",
+          "sha256": "4673747463edc08ec08c2f8beaac9ad0e66f552df47172f340846582b8ca7706",
+          "bytes": 771998
+        }
+      ],
+      "blend": "/mural-assets/tripo-story-r9/review/raw/ganfu-raw.blend",
+      "orientationStatus": "raw coordinate views only; face direction requires visual review",
+      "animationStatus": "not evaluated",
+      "blenderVersion": "4.5.14 LTS"
+    },
+    {
+      "id": "qiong-bamboo",
+      "rawSha256": "b1360b2098aade7adbc8153613b698138025e5b788812dafba2de0430bd490f2",
+      "rawBoundsBlenderZUp": {
+        "min": [
+          -0.03566334769129753,
+          -0.03180738538503647,
+          -0.49011409282684326
+        ],
+        "max": [
+          0.035911332815885544,
+          0.032094866037368774,
+          0.48994314670562744
+        ]
+      },
+      "displayScale": 1.5815402789529074,
+      "yawDegrees": 0,
+      "views": [
+        {
+          "view": "front-plus-z",
+          "path": "/mural-assets/tripo-story-r9/review/raw/qiong-bamboo-front-plus-z.png",
+          "sha256": "ebca7a6696dcd9a13db5a66e2df4a7dcdfe2162ffbe67a293ffbd827450a87bc",
+          "bytes": 662738
+        },
+        {
+          "view": "back-minus-z",
+          "path": "/mural-assets/tripo-story-r9/review/raw/qiong-bamboo-back-minus-z.png",
+          "sha256": "8751a823cf2a145985480a1c1b767a5b1fe80281daccf0c4ffce4e48e467bddc",
+          "bytes": 660514
+        },
+        {
+          "view": "right-plus-x",
+          "path": "/mural-assets/tripo-story-r9/review/raw/qiong-bamboo-right-plus-x.png",
+          "sha256": "1fabed83214a12a11efc69acc3a2a4902dd5493ac84aee21ff1fd6b9280b288f",
+          "bytes": 655327
+        },
+        {
+          "view": "left-minus-x",
+          "path": "/mural-assets/tripo-story-r9/review/raw/qiong-bamboo-left-minus-x.png",
+          "sha256": "60bcaefe0d9947ccd82d163529e23046bb0491ebea3ce7d2f52787b9db31f6a8",
+          "bytes": 661994
+        },
+        {
+          "view": "three-quarter",
+          "path": "/mural-assets/tripo-story-r9/review/raw/qiong-bamboo-three-quarter.png",
+          "sha256": "8072796cf5b23cb86e46cdda25f7ee6cb22bc64a64759c59f53702e25d54ac7f",
+          "bytes": 667067
+        }
+      ],
+      "blend": "/mural-assets/tripo-story-r9/review/raw/qiong-bamboo-raw.blend",
+      "orientationStatus": "raw coordinate views only; face direction requires visual review",
+      "animationStatus": "not evaluated",
+      "blenderVersion": "4.5.14 LTS"
+    }
+  ]
+}
