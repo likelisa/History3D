@@ -990,7 +990,7 @@ export async function createMuralAgentServer(options: ServerOptions = {}) {
     if (request.method === 'GET' && (['/mural.html', '/yuezhi.html'].includes(pathname) || /^\/(?:assets|mural-assets|yuezhi|packages|tripo-prompt-lab)\//.test(pathname))) {
       await serveFile(response, demoDir, pathname.slice(1)); return
     }
-    if (request.method === 'GET' && ['/', '/index.html', '/experience.html', '/guide.html', '/app.js', '/style.css'].includes(pathname)) { await serveFile(response, webDir, pathname === '/' ? 'index.html' : pathname.slice(1)); return }
+    if (request.method === 'GET' && ['/', '/index.html', '/experience.html', '/guide.html', '/demo.html', '/demo.js', '/app.js', '/style.css'].includes(pathname)) { await serveFile(response, webDir, pathname === '/' ? 'index.html' : pathname.slice(1)); return }
     fail('NOT_FOUND')
   }
   return {

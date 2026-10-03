@@ -26,7 +26,7 @@ describe('saved demo entry routes', () => {
     await app.listen(0); apps.push(app)
     const address = app.server.address(); if (!address || typeof address === 'string') throw new Error('No listener')
     const base = `http://127.0.0.1:${address.port}`
-    for (const route of ['/experience.html', '/guide.html', '/', '/mural.html', '/examples/bronze-horse/viewer.html']) {
+    for (const route of ['/experience.html', '/guide.html', '/demo.html', '/', '/mural.html', '/examples/bronze-horse/viewer.html']) {
       const response = await fetch(base + route); expect(response.status, route).toBe(200)
       expect(response.headers.get('content-type')).toContain('text/html')
     }
