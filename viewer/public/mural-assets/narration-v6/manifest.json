@@ -1,0 +1,490 @@
+{
+  "formatVersion": "6.0.0",
+  "voice": "Kokoro-82M-v1.1-zh / zm_010 (official public preset)",
+  "complete": true,
+  "emotionModelUsed": false,
+  "providerCalls": 0,
+  "synthesis": "offline Kokoro; no reference recording or voice cloning",
+  "synthesisSpeed": 1.0,
+  "sampleRate": 24000,
+  "recordedAtUtc": "2026-10-02T22:20:34.541893+00:00",
+  "normalBuildSynthesizes": false,
+  "privateReferenceUsed": false,
+  "voiceCloningUsed": false,
+  "textSource": "viewer/src/mural/story.ts / chapterDefinitions",
+  "textUnchanged": true,
+  "textSourceSha256": "7e2e055978276a204ef705e4e9fd0953eb9d67f314b3e9c75de3af11aea6f2bb",
+  "cuesSha256": "4d91883d0cd749bc4313baffe86d5ee3de60c634de574df8520e2be00c9d565f",
+  "sourceScriptSha256": "d14e3936e798ca2d4a232c7f9a8aa86f15ccce10196450432b7e63e21b66746a",
+  "legacyRecipeLockSha256": "9f94b88d13f2c94186ba502b4847995d855509c15170828122ceb7b177656122",
+  "runtimeVersions": {
+    "kokoro": "0.9.4",
+    "misaki": "0.9.4",
+    "torch": "2.5.1",
+    "numpy": "1.26.4",
+    "soundfile": "0.13.1",
+    "transformers": "4.51.3",
+    "huggingface-hub": "0.36.2",
+    "pypinyin": "0.55.0",
+    "pypinyin-dict": "0.9.0"
+  },
+  "runtimeNote": "Mac PyTorch 2.5.1; actual installed versions recorded; legacy lock is source lineage, not this environment lock",
+  "deliveryStyle": "guide-oriented reviewed wording and original punctuation with short clause pauses; no emotion-model claim",
+  "model": {
+    "repo": "hexgrad/Kokoro-82M-v1.1-zh",
+    "revision": "01e7505bd6a7a2ac4975463114c3a7650a9f7218",
+    "checkpointSha256": "b1d8410fa44dfb5c15471fd6c4225ea6b4e9ac7fa03c98e8bea47a9928476e2b",
+    "configSha256": "bc333efa5ce4ceff433c8c8e5d027a1eca0166001e4e4a62bea2d26ff7a46890",
+    "voiceFile": "voices/zm_010.pt",
+    "voiceSha256": "d2eeba86192eee269f600ca6821038034abd017532a1fe68ff7b0e86c2983b2a",
+    "license": "Apache-2.0",
+    "source": "https://huggingface.co/hexgrad/Kokoro-82M-v1.1-zh/tree/01e7505bd6a7a2ac4975463114c3a7650a9f7218",
+    "modelCard": "https://huggingface.co/hexgrad/Kokoro-82M-v1.1-zh/blob/01e7505bd6a7a2ac4975463114c3a7650a9f7218/README.md",
+    "weightsIncludedInDelivery": false,
+    "trainedTensorsVerified": 548,
+    "identityAffineDefaultsVerified": 140,
+    "weightsOnly": true
+  },
+  "pronunciation": {
+    "张骞": [
+      "zhang1",
+      "qian1"
+    ],
+    "月氏": [
+      "yue4",
+      "zhi1"
+    ],
+    "大月氏": [
+      "da4",
+      "yue4",
+      "zhi1"
+    ],
+    "邛": [
+      "qiong2"
+    ],
+    "邛竹杖": [
+      "qiong2",
+      "zhu2",
+      "zhang4"
+    ],
+    "身毒": [
+      "juan1",
+      "du2"
+    ],
+    "旌节": [
+      "jing1",
+      "jie2"
+    ],
+    "大宛": [
+      "da4",
+      "yuan1"
+    ]
+  },
+  "pronunciationSources": {
+    "身毒": "https://dict.revised.moe.edu.tw/dictView.jsp?ID=97511"
+  },
+  "selectedCueIds": [
+    "c0-0",
+    "c0-1",
+    "c0-2",
+    "c1-0",
+    "c1-1",
+    "c1-2",
+    "c2-0",
+    "c2-1",
+    "c2-2",
+    "c3-0",
+    "c3-1",
+    "c3-2",
+    "c4-0",
+    "c4-1",
+    "c4-2",
+    "c5-0",
+    "c5-1",
+    "c5-2",
+    "c6-0",
+    "c6-1",
+    "c6-2",
+    "c7-0",
+    "c7-1",
+    "c7-2"
+  ],
+  "chunking": {
+    "boundary": "original punctuation",
+    "maxPhonemes": 100,
+    "textJoinedExactly": true,
+    "truncationAllowed": false
+  },
+  "encoding": {
+    "recipe": "two-pass loudnorm -18 LUFS / -1.5 dBTP / LRA 7; mono 24kHz libmp3lame 96k; metadata stripped; existing outputs refused",
+    "tools": {
+      "ffmpeg": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+      "ffprobe": "ffprobe version 8.1.1 Copyright (c) 2007-2026 the FFmpeg developers"
+    },
+    "sourceWavs": [
+      {
+        "id": "c0-0",
+        "file": "c0-0.wav",
+        "bytes": 425084,
+        "sha256": "648c810d722144f9ead54637b510cb13ea47e60d62b67442804810253283c4e3",
+        "seconds": 8.855
+      },
+      {
+        "id": "c0-1",
+        "file": "c0-1.wav",
+        "bytes": 450284,
+        "sha256": "fb2e6cadfcbbafa6487fa74367d9e58f4e2286ebb231ad71d95abb2da4cd2bd9",
+        "seconds": 9.38
+      },
+      {
+        "id": "c0-2",
+        "file": "c0-2.wav",
+        "bytes": 433484,
+        "sha256": "0b049c733e8f9c1756dfd5ae674174aa7f63e5b076bcbece7e716f648949c642",
+        "seconds": 9.03
+      },
+      {
+        "id": "c1-0",
+        "file": "c1-0.wav",
+        "bytes": 423884,
+        "sha256": "7da978bda1f9cd4320f484d098d05f5f2a4a76ddf0046985168b90565ea26b79",
+        "seconds": 8.83
+      },
+      {
+        "id": "c1-1",
+        "file": "c1-1.wav",
+        "bytes": 457484,
+        "sha256": "75a36b909398d717903456e53ae3f4645f3fc0d5a5e89bf98ed70756d6e3ca79",
+        "seconds": 9.53
+      },
+      {
+        "id": "c1-2",
+        "file": "c1-2.wav",
+        "bytes": 451484,
+        "sha256": "224ec1ae13dca767b6a19065a05c279c13f52d92baf7d1bd19795d7bc31e4e03",
+        "seconds": 9.405
+      },
+      {
+        "id": "c2-0",
+        "file": "c2-0.wav",
+        "bytes": 423884,
+        "sha256": "1457734d087b5f0ed46b7cf81b59f4f0bc6f89e9b693d8fadc2a9cd72aaf574a",
+        "seconds": 8.83
+      },
+      {
+        "id": "c2-1",
+        "file": "c2-1.wav",
+        "bytes": 487484,
+        "sha256": "484bbfb262347ddbf173e753241c68088671e941b850babf60af6df898d45668",
+        "seconds": 10.155
+      },
+      {
+        "id": "c2-2",
+        "file": "c2-2.wav",
+        "bytes": 487484,
+        "sha256": "7256bda7ba42c488a2a8583efd93eccb0d8e454283c00ab18a53831dbcc2aec0",
+        "seconds": 10.155
+      },
+      {
+        "id": "c3-0",
+        "file": "c3-0.wav",
+        "bytes": 486284,
+        "sha256": "740d61e6ed32d45e2fd4c56e7a259b7867a8e4cc654d116763c0883eae371aa8",
+        "seconds": 10.13
+      },
+      {
+        "id": "c3-1",
+        "file": "c3-1.wav",
+        "bytes": 486284,
+        "sha256": "062f878751aa91e115da2b641f8fdf4a58e686934312a74861eb73a37f2ad003",
+        "seconds": 10.13
+      },
+      {
+        "id": "c3-2",
+        "file": "c3-2.wav",
+        "bytes": 421484,
+        "sha256": "155f36df66991df9db42e8f34fea957fe9e2e1e8d274e23ffa5fe06aeedbcadf",
+        "seconds": 8.78
+      },
+      {
+        "id": "c4-0",
+        "file": "c4-0.wav",
+        "bytes": 482684,
+        "sha256": "e5b829091b33f95213b17059322b823553bb403653b17f33e807975579ca01e7",
+        "seconds": 10.055
+      },
+      {
+        "id": "c4-1",
+        "file": "c4-1.wav",
+        "bytes": 452684,
+        "sha256": "40212af7c13f9fd8caa1a14a354009372aaa62da5029942930ca6b0492c5b606",
+        "seconds": 9.43
+      },
+      {
+        "id": "c4-2",
+        "file": "c4-2.wav",
+        "bytes": 458684,
+        "sha256": "5da9312d8531842d61f1dcc01b65a3b98c516cc3c8690b0d29ae433b1c275db7",
+        "seconds": 9.555
+      },
+      {
+        "id": "c5-0",
+        "file": "c5-0.wav",
+        "bytes": 459884,
+        "sha256": "d957380931413fd328d8ea42b3469e3933bd0b407d910643faf2115748cdc0b3",
+        "seconds": 9.58
+      },
+      {
+        "id": "c5-1",
+        "file": "c5-1.wav",
+        "bytes": 491084,
+        "sha256": "9910a3e7978f482a487e6891ec9616ad62cf886663e4f153eb5ad3238e6b6c5a",
+        "seconds": 10.23
+      },
+      {
+        "id": "c5-2",
+        "file": "c5-2.wav",
+        "bytes": 474284,
+        "sha256": "6cdbec144ed5454044aa56ddd508a7df91e2bf0d895a5a721deef4498aeda9f6",
+        "seconds": 9.88
+      },
+      {
+        "id": "c6-0",
+        "file": "c6-0.wav",
+        "bytes": 481244,
+        "sha256": "36772bedd5bb1722477d37cab656bb36973d19bf2f62221838a28c2751a32c74",
+        "seconds": 10.025
+      },
+      {
+        "id": "c6-1",
+        "file": "c6-1.wav",
+        "bytes": 482684,
+        "sha256": "62f14cdf668d45d4177d0b3ea226c545c97750aa812e97c22efddc6cc6a3b756",
+        "seconds": 10.055
+      },
+      {
+        "id": "c6-2",
+        "file": "c6-2.wav",
+        "bytes": 493484,
+        "sha256": "61239536d4aeaef3ea69e7d696b865eb3351251cd9d4a7a6393cb26ba2add60c",
+        "seconds": 10.28
+      },
+      {
+        "id": "c7-0",
+        "file": "c7-0.wav",
+        "bytes": 463484,
+        "sha256": "e7428bd489c0e70d5c45e218e5585d3caa0fbec48f568a08c54288e200eebc11",
+        "seconds": 9.655
+      },
+      {
+        "id": "c7-1",
+        "file": "c7-1.wav",
+        "bytes": 492284,
+        "sha256": "70c329c0c9e630967b5eb12ec250416a4219304b3bb68f9a481f5e5ed13f7e05",
+        "seconds": 10.255
+      },
+      {
+        "id": "c7-2",
+        "file": "c7-2.wav",
+        "bytes": 485084,
+        "sha256": "fb717aac5c2fca70da9f1c403b00008ad0bc0402763b952157497c94e01dcc53",
+        "seconds": 10.105
+      }
+    ]
+  },
+  "timing": "visual beat, then complete measured narration and reading floor; UI playback speed adjusts voice and timeline together",
+  "tracks": [
+    {
+      "id": "c0-0",
+      "file": "/mural-assets/narration-v6/c0-0.mp3",
+      "seconds": 8.855,
+      "text": "跟我走近这幅画。先认识张骞和他的使团，再沿着他们的脚步，看看这段远行。",
+      "bytes": 107181,
+      "sha256": "c06878ff7c27c5c8550c8f324f6f7f044cb56e8f97310a3ea337a2249444a9a6"
+    },
+    {
+      "id": "c0-1",
+      "file": "/mural-assets/narration-v6/c0-1.mp3",
+      "seconds": 9.38,
+      "text": "你看，右上角是宫殿，下方是辞行，左上角是城池。三个画面，把一次西行串了起来。",
+      "bytes": 113517,
+      "sha256": "6896c1468ee677a77a49f7e14267c9969f309bf2eca3102a225a23ed80827111"
+    },
+    {
+      "id": "c0-2",
+      "file": "/mural-assets/narration-v6/c0-2.mp3",
+      "seconds": 9.03,
+      "text": "我们先从宫殿里的两尊金人看起：皇帝为什么礼拜它们，又为什么派张骞去西域？",
+      "bytes": 109485,
+      "sha256": "911c4d67e2f69f035dac6ced74158711b52a598861e2927bb189fb17de689afb"
+    },
+    {
+      "id": "c1-0",
+      "file": "/mural-assets/narration-v6/c1-0.mp3",
+      "seconds": 8.83,
+      "text": "请看右上角的甘泉宫。殿里站着两尊金人，汉武帝带着群臣，正在向它们礼拜。",
+      "bytes": 106893,
+      "sha256": "1432ee8124dc51b299996c2f1660125dde9c235d0abb0ddfb14271b88a2bf651"
+    },
+    {
+      "id": "c1-1",
+      "file": "/mural-assets/narration-v6/c1-1.mp3",
+      "seconds": 9.53,
+      "text": "在这幅画里，金人被画成了佛像。皇帝还不知道它们的名号，便想派人到远方打听。",
+      "bytes": 115533,
+      "sha256": "31aaf346969144eb60165c206729c41c4e0325ca6f00943082d0ba1f852b0771"
+    },
+    {
+      "id": "c1-2",
+      "file": "/mural-assets/narration-v6/c1-2.mp3",
+      "seconds": 9.405,
+      "text": "于是，宫殿里的这个疑问，成了张骞西行的开端。请记住：这是壁画讲述的出使缘由。",
+      "bytes": 113805,
+      "sha256": "0c983923af6cbba55ca4f3056154c6e09c0e9a85cb7451163f028170ac0d6ec2"
+    },
+    {
+      "id": "c2-0",
+      "file": "/mural-assets/narration-v6/c2-0.mp3",
+      "seconds": 8.83,
+      "text": "往下看，骑马的是皇帝，对面持笏跪拜的是张骞。这一刻，他正准备领命出发。",
+      "bytes": 106893,
+      "sha256": "a4cc129125ef9bd8fcf8fc9959d36df6fac04a3baf745b5f6c69f7525e1e0532"
+    },
+    {
+      "id": "c2-1",
+      "file": "/mural-assets/narration-v6/c2-1.mp3",
+      "seconds": 10.155,
+      "text": "张骞最初的任务，是寻找月氏，共同对抗匈奴。你眼前的壁画，却把西行讲成了寻问佛像。",
+      "bytes": 123021,
+      "sha256": "ad8130eeab7c5f734be7d64cbc0fd6fce0e70a04f2243bb20da3534c0fac3879"
+    },
+    {
+      "id": "c2-2",
+      "file": "/mural-assets/narration-v6/c2-2.mp3",
+      "seconds": 10.155,
+      "text": "月氏曾被匈奴击败，国王也被杀。张骞带着求盟的任务出发；但画中，故事从金人的疑问开始。",
+      "bytes": 123021,
+      "sha256": "062f5b499dc8324df6c1168537a1b7e7653e5e482b49a021dd2c09e80ef3f81f"
+    },
+    {
+      "id": "c3-0",
+      "file": "/mural-assets/narration-v6/c3-0.mp3",
+      "seconds": 10.13,
+      "text": "现在回到原画左侧。山石间露出一队人马，这条曲折的山路，把辞行和抵达连在一起。",
+      "bytes": 122733,
+      "sha256": "8e4b667f026c9bba9f6aa1af151714af55c71a5c248b84db842fd7ed349ee748"
+    },
+    {
+      "id": "c3-1",
+      "file": "/mural-assets/narration-v6/c3-1.mp3",
+      "seconds": 10.13,
+      "text": "不过，张骞的路并不顺利。途中他被匈奴拦下，扣留十余年；我们用营地场景看看这段受阻。",
+      "bytes": 122733,
+      "sha256": "e59b0bd740b4bbbe196b56c0ca81ac8709856c1024b7d416b41f5bb0ac95a928"
+    },
+    {
+      "id": "c3-2",
+      "file": "/mural-assets/narration-v6/c3-2.mp3",
+      "seconds": 8.78,
+      "text": "终于脱身后，他没有就此回家，而是继续向西，经大宛、康居，去寻找大月氏。",
+      "bytes": 106317,
+      "sha256": "43e8539ddd346dab3f1577aa9aab1988a711ebea47312c2612d1c9f98bae938c"
+    },
+    {
+      "id": "c4-0",
+      "file": "/mural-assets/narration-v6/c4-0.mp3",
+      "seconds": 10.055,
+      "text": "看随从手中的旌节。这根长杆代表汉朝使者的身份，也代表张骞一直没有放下的使命。",
+      "bytes": 121581,
+      "sha256": "9825d0a62c9ef1736e6a116da0920003d0272f5b345d9c933834fec58247d08d"
+    },
+    {
+      "id": "c4-1",
+      "file": "/mural-assets/narration-v6/c4-1.mp3",
+      "seconds": 9.43,
+      "text": "被扣留十余年，这根汉节仍在。时间过去了，张骞心里惦记的，还是当年交给他的任务。",
+      "bytes": 114093,
+      "sha256": "0027db05781524c9e271295ace3b514b098aa0afd4842fba2668ffb02a7f04d4"
+    },
+    {
+      "id": "c4-2",
+      "file": "/mural-assets/narration-v6/c4-2.mp3",
+      "seconds": 9.555,
+      "text": "可月氏已经在西方安居，不愿再为旧仇开战。张骞走到了这里，求盟的愿望却没有实现。",
+      "bytes": 115821,
+      "sha256": "9f6ba96cc51f6dedbd384caf6aa96ffb6a5f054be397fb2bbd23dd4e39e56c15"
+    },
+    {
+      "id": "c5-0",
+      "file": "/mural-assets/narration-v6/c5-0.mp3",
+      "seconds": 9.58,
+      "text": "再看原画左上方。使者正走向大夏城门，门外有僧人，城内有佛塔；这就是画中的终点。",
+      "bytes": 116109,
+      "sha256": "a28ea970b460c604d5a94261beea176fa987e8790b48b0189b635e04e08c9705"
+    },
+    {
+      "id": "c5-1",
+      "file": "/mural-assets/narration-v6/c5-1.mp3",
+      "seconds": 10.23,
+      "text": "走进大夏的见闻场景，看看城屋和市场。商人来往、货物交换，远方的世界在这里变得具体。",
+      "bytes": 123885,
+      "sha256": "c28233592d9204ae0ca319ea1f418357fb210d08edeb91ab44c0c0f62c879ac5"
+    },
+    {
+      "id": "c5-2",
+      "file": "/mural-assets/narration-v6/c5-2.mp3",
+      "seconds": 9.88,
+      "text": "桌上是蜀布和邛竹杖，也就是四川的布和竹杖。它们经身毒转手，竟来到了遥远的大夏。",
+      "bytes": 119565,
+      "sha256": "6ea0445f1b83e41d5cee80db134f81d967971c1f2a196b711525dd68d5be4c20"
+    },
+    {
+      "id": "c6-0",
+      "file": "/mural-assets/narration-v6/c6-0.mp3",
+      "seconds": 10.025,
+      "text": "请回到城门旁，看看这两位僧人，再看城里的佛塔。它们正回应着甘泉宫中金人的疑问。",
+      "bytes": 121293,
+      "sha256": "b2e9a88bbe1025b4984838a27ee9ca0af8876133c57f7b534905c92b9221b962"
+    },
+    {
+      "id": "c6-1",
+      "file": "/mural-assets/narration-v6/c6-1.mp3",
+      "seconds": 10.055,
+      "text": "这样一来，金人的身份便揭晓了：在这幅画的故事里，它们是佛像，远行也成了寻问佛教的旅程。",
+      "bytes": 121581,
+      "sha256": "4c00449af9c4564dc0bb14cc2258523be6511263d45336d48685ae8050aab0d0"
+    },
+    {
+      "id": "c6-2",
+      "file": "/mural-assets/narration-v6/c6-2.mp3",
+      "seconds": 10.28,
+      "text": "初唐画家借张骞的名声，把佛教的来历讲得更早。眼前的僧人与塔，留下的是后世的历史记忆。",
+      "bytes": 124461,
+      "sha256": "96a8bc52dfc58b460e49c5197eadc59d2c625b60e69385f99246eeaeb877c800"
+    },
+    {
+      "id": "c7-0",
+      "file": "/mural-assets/narration-v6/c7-0.mp3",
+      "seconds": 9.655,
+      "text": "最后，让我们退回全画。宫殿、辞行、山路和城门，你现在能把这条故事线连起来了吗？",
+      "bytes": 116973,
+      "sha256": "bcc730d15b3b2ce35bcbf11c08260162188a7c03ba117af696c4b1175c3c86be"
+    },
+    {
+      "id": "c7-1",
+      "file": "/mural-assets/narration-v6/c7-1.mp3",
+      "seconds": 10.255,
+      "text": "张骞十三年后回到汉朝，带回了西域见闻。求盟虽未成功，这段远行却为后来的往来铺了路。",
+      "bytes": 124173,
+      "sha256": "bf196d0f8e1d8fcd3e99f4d265a64ea113d42b65abc8c371c55a57cd46058d99"
+    },
+    {
+      "id": "c7-2",
+      "file": "/mural-assets/narration-v6/c7-2.mp3",
+      "seconds": 10.105958,
+      "text": "再看一眼这幅壁画：它既记住了一位远行的使者，也让我们看见，后人怎样重新讲述他的故事。",
+      "bytes": 122445,
+      "sha256": "62cb11fd8bdb90a8c1c0e34b27a974fe7c135d757375b3f412ddbdef536100da"
+    }
+  ]
+}

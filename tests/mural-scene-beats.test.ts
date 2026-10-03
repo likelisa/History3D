@@ -5,7 +5,7 @@ import { getSceneBeat, isNarrationReady, sceneBeatProgress } from '../viewer/src
 const spatialCues = chapterDefinitions.filter(chapter => chapter.mode === 'spatial').flatMap(chapter => chapter.cues)
 
 describe('cue-specific 3D scenes before their narration', () => {
-  it('gives all 12 spatial cues a visual beat and keeps other cues on the mural', () => {
+  it('gives all 12 spatial cues a visual beat and opens with a 3D introduction', () => {
     expect(spatialCues).toHaveLength(12)
     for (const cue of spatialCues) {
       const beat = getSceneBeat(cue.id)
@@ -16,7 +16,10 @@ describe('cue-specific 3D scenes before their narration', () => {
       expect(isNarrationReady(0, beat!)).toBe(false)
     }
     for (const chapter of chapterDefinitions.filter(chapter => chapter.mode !== 'spatial')) {
-      for (const cue of chapter.cues) expect(getSceneBeat(cue.id)).toBeUndefined()
+      for (const cue of chapter.cues) {
+        if (cue.id === 'c0-0') expect(getSceneBeat(cue.id)?.id).toBe('opening')
+        else expect(getSceneBeat(cue.id)).toBeUndefined()
+      }
     }
     for (const unknown of ['c8-0', 'c3-9', '', 'constructor', '__proto__']) expect(getSceneBeat(unknown)).toBeUndefined()
   })
@@ -41,9 +44,9 @@ describe('cue-specific 3D scenes before their narration', () => {
       expect(beat.boundaryNote, cue.id).toContain('史书补充')
       expect(beat.boundaryNote, cue.id).toContain('非原画直接画出')
     }
-    expect(getSceneBeat('c6-1')!.id).toBe(getSceneBeat('c5-2')!.id)
-    expect(getSceneBeat('c6-1')!.boundaryNote).toContain('未载')
-    expect(getSceneBeat('c6-1')!.boundaryNote).toContain('不能当作问佛现场')
+    expect(getSceneBeat('c6-1')!.id).toBe('tower')
+    expect(getSceneBeat('c6-1')!.boundaryNote).toContain('壁画叙事')
+    expect(getSceneBeat('c6-1')!.boundaryNote).toContain('不能当作汉代问佛现场')
     expect(getSceneBeat('c6-0')!.boundaryNote).toContain('不是汉代现场实录')
     expect(getSceneBeat('c6-2')!.boundaryNote).toContain('后世佛教叙事')
   })

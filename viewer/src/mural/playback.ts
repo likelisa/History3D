@@ -17,7 +17,7 @@ export function buildPlaybackTimeline(definitions: readonly StoryChapter[], trac
     let chapterTime = 0
     const cues = definition.cues.map(cue => {
       const track = audio.get(cue.id)
-      if (track && (track.text !== cue.text || !Number.isFinite(track.seconds) || track.seconds <= 0 || !/^\/mural-assets\/narration-v[234]\/[\w-]+\.mp3$/.test(track.file))) throw new Error(`旁白与正文不匹配：${cue.id}`)
+      if (track && (track.text !== cue.text || !Number.isFinite(track.seconds) || track.seconds <= 0 || !/^\/mural-assets\/narration-v[2-9][0-9]*\/[\w-]+\.mp3$/.test(track.file))) throw new Error(`旁白与正文不匹配：${cue.id}`)
       const beat=getSceneBeat(cue.id),visualSeconds=beat?.visualSeconds??0
       const seconds = visualSeconds+Math.max(cue.readingSeconds, track ? track.seconds + 1.5 : cue.end - cue.start)
       const result = { ...cue, start: chapterTime, end: chapterTime + seconds, audioFile: track?.file ?? '', audioSeconds: track?.seconds ?? 0,visualSeconds,audioStart:chapterTime+visualSeconds,beat }

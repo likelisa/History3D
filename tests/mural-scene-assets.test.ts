@@ -21,9 +21,9 @@ describe('mural scene supplements use delivered textured assets',()=>{
  })
  it('gives the historically distinct 3D cues separate subjects and an explicit evidence boundary',()=>{
   const beats=chapters.flatMap(ch=>ch.cues.map(c=>getSceneBeat(c.id))).filter(b=>b!==undefined)
-  expect(beats).toHaveLength(12)
-  expect(new Set(beats.map(b=>b.id)).size).toBe(11)
-  for(const beat of beats){expect(beat.visualSeconds).toBeGreaterThanOrEqual(5);expect(beat.boundaryNote.length).toBeGreaterThan(20)}
+  expect(beats).toHaveLength(13)
+  expect(new Set(beats.map(b=>b.id)).size).toBe(12)
+  for(const beat of beats){expect(beat.visualSeconds).toBeGreaterThanOrEqual(beat.id==='opening'?1:5);expect(beat.boundaryNote.length).toBeGreaterThan(20)}
   expect(getSceneBeat('c4-1')?.id).toBe('retained-credential')
   expect(getSceneBeat('c4-1')?.id).not.toBe('city')
   expect(getSceneBeat('c3-1')?.id).toBe('detention')

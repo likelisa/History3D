@@ -1,0 +1,136 @@
+{
+  "experimentId": "prompt-detail-r1-2026-10-03",
+  "status": "generated_review_pending",
+  "purpose": "比较提示词细化对Tripo原始几何和PBR细节的影响",
+  "currentReference": {
+    "staff": "现有han-staff为Blender程序示意",
+    "gate": "现有城墙由Three.js组合，不是Tripo生成城池"
+  },
+  "controls": "同一资产A/B固定模型、几何/纹理质量、面数上限及三类seed；仅prompt不同",
+  "interpretation": "每组只有一个固定seed，属于探索性试验，不构成稳定优越性的证明。细节请求不等于真实生成或历史真实性。",
+  "cost": {
+    "estimatedCreditsPerTask": 20,
+    "maximumTasks": 4,
+    "estimatedTotalCredits": 80,
+    "source": "https://developers.tripo3d.ai/en/models/v3-1",
+    "checkedDate": "2026-10-03"
+  },
+  "sources": [
+    "https://developers.tripo3d.ai/en/docs/generation-text-to-model/standard",
+    "https://developers.tripo3d.ai/en/models/v3-1"
+  ],
+  "cases": [
+    {
+      "id": "staff-a",
+      "asset": "staff",
+      "title": "长杖",
+      "variant": "A",
+      "label": "基础提示词",
+      "request": {
+        "model": "v3.1-20260211",
+        "texture": true,
+        "pbr": true,
+        "texture_version": "v3.0-20250812",
+        "texture_quality": "standard",
+        "geometry_quality": "standard",
+        "model_seed": 20261003,
+        "image_seed": 20261003,
+        "texture_seed": 20261003,
+        "face_limit": 20000,
+        "negative_prompt": "people, hand, pedestal, background, ground plane, weapon, blade, magic glow, fantasy ornament, text, bent shaft, disconnected parts",
+        "prompt": "One straight slender wooden travel staff, about 1.8 meters long and 3 centimeters thick, with one plain dark leather grip band near the upper third. Matte brown wood. A single isolated 3D object for an illustrative historical scene, no person or background."
+      },
+      "criteria": [
+        "长轴连续，比例纤细，无断裂、弯曲或多根混合",
+        "握柄、包裹接缝在近景可辨，未把木杖变成武器",
+        "木纹沿杆身且端面合理，侧光下能区分凹凸和纯贴图",
+        "转动后细节仍成立；远景轮廓清楚",
+        "握持空间可用，资产大小与面数可用于网页"
+      ]
+    },
+    {
+      "id": "staff-b",
+      "asset": "staff",
+      "title": "长杖",
+      "variant": "B",
+      "label": "精细提示词",
+      "request": {
+        "model": "v3.1-20260211",
+        "texture": true,
+        "pbr": true,
+        "texture_version": "v3.0-20250812",
+        "texture_quality": "standard",
+        "geometry_quality": "standard",
+        "model_seed": 20261003,
+        "image_seed": 20261003,
+        "texture_seed": 20261003,
+        "face_limit": 20000,
+        "negative_prompt": "people, hand, pedestal, background, ground plane, weapon, blade, magic glow, fantasy ornament, text, bent shaft, disconnected parts",
+        "prompt": "One straight slender wooden travel staff, about 1.8 meters long and 3 centimeters thick. A single continuous shaft with a subtly tapered lower end and softly rounded ends. One plain dark leather grip band near the upper third: overlapping leather edges, a fine seam and visible thickness. Fine shallow wood grain follows the shaft length; faint growth rings at the rounded ends; small wear marks where the hand grips and the tip meets the ground. Tangible surface relief, not just a painted pattern. Matte dark-brown aged wood, restrained roughness variation, no glossy varnish. Clear silhouette in close-up and from every angle, no broken or floating parts. Quiet earth colors compatible with a Dunhuang mural-inspired scene. A single isolated coherent object; artistic illustration, not an archaeological reconstruction."
+      },
+      "criteria": [
+        "长轴连续，比例纤细，无断裂、弯曲或多根混合",
+        "握柄、包裹接缝在近景可辨，未把木杖变成武器",
+        "木纹沿杆身且端面合理，侧光下能区分凹凸和纯贴图",
+        "转动后细节仍成立；远景轮廓清楚",
+        "握持空间可用，资产大小与面数可用于网页"
+      ]
+    },
+    {
+      "id": "gate-a",
+      "asset": "gate",
+      "title": "城门与相连墙体",
+      "variant": "A",
+      "label": "基础提示词",
+      "request": {
+        "model": "v3.1-20260211",
+        "texture": true,
+        "pbr": true,
+        "texture_version": "v3.0-20250812",
+        "texture_quality": "standard",
+        "geometry_quality": "standard",
+        "model_seed": 20261003,
+        "image_seed": 20261003,
+        "texture_seed": 20261003,
+        "face_limit": 40000,
+        "negative_prompt": "people, whole city, landscape, ground plane, diorama base, medieval castle, flying eaves, clock tower, glass, golden ornament, text, blocked doorway, floating details",
+        "prompt": "One ancient city gate frontage with two short flanking walls, about 8 meters wide and 4 meters tall. A clear rectangular passage through a thick wall, a plain timber lintel, dark indigo-gray plaster and an earth-colored stone base. An isolated coherent mural-inspired architectural object, no whole city or background. Artistic illustration, not archaeological reconstruction."
+      },
+      "criteria": [
+        "门洞贯通、墙有厚度、正背侧三面结构完整",
+        "门楣、门框、墙脚层次可辨，无悬浮构件",
+        "砌缝、缺口、抹灰层在侧光下可辨真实几何与贴图",
+        "近景细节与远景轮廓兼顾，不靠夸张装饰",
+        "没有欧洲城堡、飞檐宫殿等跑题造型；网页加载可接受"
+      ]
+    },
+    {
+      "id": "gate-b",
+      "asset": "gate",
+      "title": "城门与相连墙体",
+      "variant": "B",
+      "label": "精细提示词",
+      "request": {
+        "model": "v3.1-20260211",
+        "texture": true,
+        "pbr": true,
+        "texture_version": "v3.0-20250812",
+        "texture_quality": "standard",
+        "geometry_quality": "standard",
+        "model_seed": 20261003,
+        "image_seed": 20261003,
+        "texture_seed": 20261003,
+        "face_limit": 40000,
+        "negative_prompt": "people, whole city, landscape, ground plane, diorama base, medieval castle, flying eaves, clock tower, glass, golden ornament, text, blocked doorway, floating details",
+        "prompt": "One ancient city gate frontage inspired by the small walled-city silhouette in Dunhuang Mogao cave 323. About 8 meters wide and 4 meters tall, with two short connected flanking walls and a rectangular walk-through opening about 2.4 meters wide and 3 meters tall. Real wall thickness, recessed inner jambs, a clear timber lintel and a visible passage continuing through the rear; no door sealing the opening. A stone footing with restrained horizontal courses supports weathered indigo-gray plastered wall surfaces. Shallow joints, chipped plaster edges exposing the underlying material, rounded worn corners and small restrained cracks have coherent depth and scale. Thick connected top edges, readable front and rear, no thin facade sheet or floating ornaments. Matte mineral-pigment colors, subtle roughness variation, no glossy surface. One isolated coherent architectural object, no ground or surrounding city. Artistic mural adaptation, not a verified Han-era city reconstruction."
+      },
+      "criteria": [
+        "门洞贯通、墙有厚度、正背侧三面结构完整",
+        "门楣、门框、墙脚层次可辨，无悬浮构件",
+        "砌缝、缺口、抹灰层在侧光下可辨真实几何与贴图",
+        "近景细节与远景轮廓兼顾，不靠夸张装饰",
+        "没有欧洲城堡、飞檐宫殿等跑题造型；网页加载可接受"
+      ]
+    }
+  ]
+}

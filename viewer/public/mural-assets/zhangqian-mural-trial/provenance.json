@@ -1,0 +1,91 @@
+{
+  "taskId": "a44a3a5c-c677-4f10-97e8-fdf5b0b890ca",
+  "status": "downloaded",
+  "submittedAt": "2026-10-02T23:53:44.006Z",
+  "requestHash": "0933c1bf0e31f70c3924a28ad92bb6102c2f3fefd8e9c3e929351ae6c1f27b00",
+  "inputSha256": "6ada16390e3f84214554264dab6f53debfdf2f99efa5e2714b35a09d6d768388",
+  "sourceSha256": "0d74b143c0efcc89a7d1c97727823e4850abf50b82c8edd1ebc2d415980e2c35",
+  "nativeReferenceSha256": "9ef9105df4bed6c676ce2a59782ab5ce237f5ec4ca2fe1d77cb2ae0678d0bea4",
+  "progress": 100,
+  "creditsConsumed": 30,
+  "checkedAt": "2026-10-02T23:56:48.029Z",
+  "path": "/mural-assets/zhangqian-mural-trial/zhangqian-raw.glb",
+  "bytes": 3929756,
+  "sha256": "8be9da657767a6b90c180509457611871f999138b6834c4cebca9d2b13dbe1bd",
+  "stats": {
+    "meshes": 1,
+    "nodes": 1,
+    "triangles": 37210,
+    "vertices": 21846,
+    "materials": 1,
+    "embeddedImages": 3,
+    "externalImages": 0,
+    "normalMappedMaterials": 1,
+    "animations": 0,
+    "bounds": [
+      {
+        "min": [
+          -0.07452508062124252,
+          -0.5,
+          -0.18945811688899994
+        ],
+        "max": [
+          0.07452508062124252,
+          0.5,
+          0.18945811688899994
+        ]
+      }
+    ]
+  },
+  "preview": {
+    "path": "/mural-assets/zhangqian-mural-trial/provider-preview.png",
+    "sha256": "8737a73cbf52e5850c5b580ec20b212119d71ff0f8710b5eb63498cfbbea27cc",
+    "bytes": 130435
+  },
+  "source": {
+    "title": "莫高窟第323窟《张骞出使西域图》",
+    "institution": "敦煌研究院",
+    "url": "https://www.dha.ac.cn/info/1266/2524.htm",
+    "localImage": "viewer/public/yuezhi/murals/full.jpg",
+    "dimensions": [
+      1080,
+      895
+    ],
+    "crop": {
+      "x": 255,
+      "y": 716,
+      "width": 62,
+      "height": 147
+    },
+    "inputDimensions": [
+      310,
+      735
+    ],
+    "operation": "Exact rectangular crop and 5x resample; no AI enhancement or repainting",
+    "identification": "Lower-left kneeling envoy identified as Zhang Qian in the project mural-source reading",
+    "observed": "Kneeling, facing right; muted purple-brown flowing robe with pale contour lines; dark indigo collar and lower hem; reddish dark headwear; arms forward in a court salutation",
+    "limitations": [
+      "The original figure is small, damaged and partly overlaps an adjacent standing figure.",
+      "Upsampling adds no source detail.",
+      "Depth, back view and hidden anatomy are generated interpretation.",
+      "This depicts an Early Tang mural form and is not an archaeological reconstruction of Han dress."
+    ]
+  },
+  "endpoint": "/v3/generation/image-to-model",
+  "generationType": "image-to-model",
+  "modelSettings": {
+    "model": "v3.1-20260211",
+    "texture": true,
+    "pbr": true,
+    "texture_version": "v3.0-20250812",
+    "texture_quality": "standard",
+    "geometry_quality": "standard",
+    "face_limit": 40000,
+    "enable_image_autofix": false,
+    "texture_alignment": "original_image",
+    "orientation": "align_image",
+    "model_seed": 20261003,
+    "texture_seed": 20261003
+  },
+  "review": "Raw trial asset; scene integration is a separate decision."
+}
