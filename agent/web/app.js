@@ -129,10 +129,10 @@ function setupSubject() {
   $('image-label').textContent = artifact ? '文物图片' : '壁画图片';
   $('mural-preview').alt = artifact ? '已选择的文物原图' : '已选择的壁画原图';
   $('topic').placeholder = artifact ? '这件文物为何被制作、怎样使用，纹饰与工艺透露了什么故事？' : '人物为何出发，遇到什么阻碍，最后带来什么改变？';
-  $('image-note').textContent = artifact ? 'PNG / JPG，最大 8 MB。保留文物原图，主资产由原图生成 3D；未见背面、内部和补全纹饰须标为艺术补全。' : 'PNG / JPG，最大 8 MB。保留原图，按句说明哪些内容确实见于画中。';
+  $('image-note').textContent = 'PNG / JPG，最大 8 MB。';
   $('subject-metadata').hidden = !artifact;
   $('empty-image-label').textContent = artifact ? '文物' : '壁画';
-  $('empty-description').textContent = artifact ? '上传文物原图与史料摘录，自动制作有依据的故事、文物 3D 与讲解网页。可旋转观察，并放大原图对照细节。' : '上传壁画与史料摘录，自动制作有依据的故事、真实 3D 场景与讲解网页。';
+  $('empty-description').textContent = '上传原图和史料，填写 API Key。';
   if (!state.run) $('project-title').textContent = artifact ? '等待你的第一件文物' : '等待你的第一幅壁画';
   if (!budgetEdited) { $('max-assets').value = artifact ? '1' : '3'; $('max-credits').value = artifact ? '60' : '150'; }
 }
@@ -359,7 +359,7 @@ $('candidate-generate').addEventListener('click', () => action(async () => {
   notice('已开始生成新候选；旧网页继续保留，完成后可对比选用。'); await refresh();
 }));
 $('add-source').addEventListener('click', () => addSource());
-$('clear-keys').addEventListener('click', () => { $('model-key').value = ''; $('tripo-key').value = ''; notice('已清空本页密钥。服务端已有项目凭据的生命周期由本地进程管理。'); });
+$('clear-keys').addEventListener('click', () => { $('model-key').value = ''; $('tripo-key').value = ''; notice('已清空本页密钥。'); });
 $('mural-file').addEventListener('change', async () => {
   const sequence = ++state.imageSequence;
   state.imageDataUrl = ''; $('image-preview').hidden = true;

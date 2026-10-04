@@ -161,8 +161,8 @@ describe('heritage agent web behavior without paid services', () => {
   it('explains the fixed public voice without a readiness claim or an additional voice API field', async () => {
     const html = await readFile(new URL('../agent/web/index.html', import.meta.url), 'utf8')
     const note = html.match(/<div id="fixed-voice-note"[^>]*>([\s\S]*?)<\/div>/)?.[1] || ''
-    expect(note).toContain('固定公开男声'); expect(note).toContain('无需额外填写声音 API'); expect(note).toContain('独立的公开音色环境')
-    expect(note).toContain('以项目生成结果为准'); expect(note).toContain('尚未配置音轨'); expect(note).not.toContain('已就绪')
+    expect(note).toContain('固定公开男声'); expect(note).toContain('未配置独立声音环境');
+    expect(note).toContain('阅读模式'); expect(note).not.toContain('已就绪');
     expect(html).toContain('场景、旁白、原图与字幕'); expect(html).not.toMatch(/<input[^>]+id="(?:voice|tts)[^"]*key"/)
   })
   it('switches modes without clearing author inputs and preserves edited budgets', async () => {
